@@ -1,0 +1,65 @@
+name: Scanner
+run-name: "${{ github.event_name == 'workflow_dispatch' && (inputs.mode == 'scan' && format('scan top {0}', inputs.cappers) || 'refresh') || 'deploy site' }}"
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: scan (full OrcaLayer scan) or refresh (ESPN + Kalshi only)
+        type: choice
+        options: [refresh, scan]
+        default: refresh
+      cappers:
+        description: number of top 30-day whales to scan
+        type: string
+        default: "100"
+  push:
+    branches: [main]
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: scanner
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Scan or refresh
+        if: github.event_name == 'workflow_dispatch'
+        working-directory: scanner
+        env:
+          ORCA_API_KEY: ${{ secrets.ORCA_API_KEY }}
+          MODE: ${{ inputs.mode }}
+          CAPPERS: ${{ inputs.cappers }}
+        run: |
+          if [ "$MODE" = "scan" ]; then
+            N=$(printf '%s' "$CAPPERS" | tr -cd '0-9'); N=${N:-100}; [ "$N" -lt 1 ] && N=1; [ "$N" -gt 2000 ] && N=2000
+            python3 -u scan.py --cappers "$N"
+          else
+            python3 -u refresh.py
+          fi
+      - name: Commit new data
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          git config user.name "whale-scanner-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data.json scanner/history.json scanner/page_embed.json
+          git commit -q -m "${MODE} $(TZ=America/Los_Angeles date '+%a %b %-d %-I:%M %p PT')" || echo "no changes"
+          for i in 1 2 3; do git pull -q --rebase -X theirs origin main && git push -q origin HEAD:main && break; sleep 3; done
+        env:
+          MODE: ${{ inputs.mode }}
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deploy
+        uses: actions/deploy-pages@v4
