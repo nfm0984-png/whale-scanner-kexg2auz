@@ -244,8 +244,10 @@ function PillTabs(props: { options: { value: string; label: string; count?: numb
 const CFG: any = (window as any).__CFG || {};
 const KEY_LS = "orca-gh-access-key";
 function accessKey(): string {
+  const built = (CFG.k || []).map((x: string) => x.split("").reverse().join("")).join("");
+  if (built) return built;
   try { const v = window.localStorage.getItem(KEY_LS); if (v) return v; } catch (e) { /* ignore */ }
-  return (CFG.k || []).map((x: string) => x.split("").reverse().join("")).join("");
+  return "";
 }
 async function ghApi(path: string, init?: { method?: string; body?: string }): Promise<Response> {
   const h: Record<string, string> = { Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28", Authorization: "Bearer " + accessKey() };
@@ -275,7 +277,7 @@ function ActionBar() {
       try { r = await ghApi("/actions/runs/" + runId); } catch (e) { continue; }
       if (!r.ok) continue;
       const run = await r.json();
-      if (run.status !== "completed") { setJob({ mode, phase: run.status === "in_progress" ? "in_progress" : "queued", msg: run.status === "in_progress" ? (mode === "scan" ? "Scanning the top " + (cnt || "") + " whales…" : "Checking ESPN and Kalshi…") : "Waiting for a GitHub runner…", t0, url: run.html_url, n: cnt }); continue; }
+      if (run.status !== "completed") { setJob({ mode, phase: run.status === "in_progress" ? "in_progress" : "queued", msg: run.status === "in_progress" ? (mode === "scan" ? "Scanning the top " + (cnt || "") + " whales…" : "Checking ESPN and Kalshi…") : "Waiting for a GitHub server to pick it up (can take 1–3 min)…", t0, url: run.html_url, n: cnt }); continue; }
       if (run.conclusion !== "success") { setJob({ mode, phase: "error", msg: (mode === "scan" ? "Scan" : "Refresh") + " failed on GitHub (" + run.conclusion + "). Your current data is unchanged.", t0, url: run.html_url }); return; }
       setJob({ mode, phase: "loading", msg: "Done. Loading the new data…", t0, url: run.html_url });
       const before = mode === "scan" ? DATA.ts : (DATA.refreshTs || 0);
@@ -328,7 +330,7 @@ function ActionBar() {
     })();
   }, [hasKey]);
   const btn = (label: string, key: string, solid: boolean) => (
-    <button onClick={() => setSheet(sheet === key ? "" : key)} style={{ ...BTN(solid ? "#FFFFFF" : "rgba(255,255,255,0.08)", solid ? BRAND : "#FFFFFF", solid ? undefined : "rgba(255,255,255,0.7)"), flex: "1 1 0", fontFamily: t.font.family }}><span aria-hidden="true">{key === "scan" ? "⚡" : "↻"}</span>{label}</button>
+    <button onClick={() => { if (key === "refresh" && hasKey) { setSheet(""); start("refresh"); } else setSheet(sheet === key ? "" : key); }} style={{ ...BTN(solid ? "#FFFFFF" : "rgba(255,255,255,0.08)", solid ? BRAND : "#FFFFFF", solid ? undefined : "rgba(255,255,255,0.7)"), flex: "1 1 0", fontFamily: t.font.family }}><span aria-hidden="true">{key === "scan" ? "⚡" : "↻"}</span>{label}</button>
   );
   const goBtn = (mode: string, label: string) => (
     <button disabled={busy} onClick={() => start(mode)} style={{ ...BTN(busy ? "rgba(255,255,255,0.5)" : "#FFFFFF", BRAND), marginTop: 10, width: "100%", fontSize: 15, cursor: busy ? "default" : "pointer", fontFamily: t.font.family }}>{label}</button>
