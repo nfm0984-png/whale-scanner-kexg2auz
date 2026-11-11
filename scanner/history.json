@@ -1443,7 +1443,11 @@
    "first_seen": 1794431554,
    "scans": 1,
    "first_score": 53,
-   "result": null
+   "result": "W",
+   "graded": 1794438853,
+   "ended": 1794438853,
+   "finalScore": "",
+   "active": false
   },
   "0x2c3688131291b7146db4bcf2b905baa6b0e93f7850ef4a01a38bf0bde18c0120:no": {
    "tier": "fun",
@@ -1539,6 +1543,38 @@
    "scans": 1,
    "first_score": 52,
    "result": null
+  },
+  "0x9210e965950f1a9f67f35d385fb2a188478a11185b3965a97bd3c3a50754579f:no": {
+   "q": "Nets vs. Pelicans: O/U 228.5",
+   "label": "UNDER",
+   "side": "no",
+   "score": 62,
+   "whales": 2,
+   "invested": 10044,
+   "start": "Wed Nov 11, 5:00 PM PT",
+   "kalshi": "BUY NO Over 228.5 points @ 51\u00a2",
+   "kprice": 0.51,
+   "first_seen": 1794431554,
+   "last_seen": 1794431554,
+   "scans": 1,
+   "result": null,
+   "tier": "top"
+  },
+  "0x358be13f6cbba7f89f0c06238efb55312e7bfdad0e09e412044963ab713e3ce6:yes": {
+   "q": "Spread: Rockets (-6.5)",
+   "label": "Rockets -6.5",
+   "side": "yes",
+   "score": 67,
+   "whales": 2,
+   "invested": 7775,
+   "start": "Wed Nov 11, 6:30 PM PT",
+   "kalshi": "BUY YES Houston wins by over 6.5 points @ 51\u00a2",
+   "kprice": 0.51,
+   "first_seen": 1794431554,
+   "last_seen": 1794431554,
+   "scans": 1,
+   "result": null,
+   "tier": "top"
   }
  }
 }
