@@ -7,10 +7,10 @@
 <style>html,body{margin:0;background:#fff;-webkit-text-size-adjust:100%}*{-webkit-tap-highlight-color:transparent}button{touch-action:manipulation}::-webkit-scrollbar{display:none}#boot{font:15px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;color:#6b6b76;text-align:center;padding:80px 20px}</style>
 </head><body>
 <div id="root"><div id="boot">Loading whale picks…</div></div>
-<script src="config.js?v=56a7b53eca"></script>
+<script src="config.js?v=d2926fd209"></script>
 <script>
 fetch('data.json?t=' + Date.now(), {cache: 'no-store'}).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }).then(function (d) {
-  window.__DATA = d; var s = document.createElement('script'); s.src = 'app.js?v=56a7b53eca'; s.onerror = function () { document.getElementById('boot').textContent = 'Could not load the app. Pull to reload.'; }; document.body.appendChild(s);
+  window.__DATA = d; var s = document.createElement('script'); s.src = 'app.js?v=d2926fd209'; s.onerror = function () { document.getElementById('boot').textContent = 'Could not load the app. Pull to reload.'; }; document.body.appendChild(s);
 }).catch(function (e) { document.getElementById('boot').textContent = 'Could not load data (' + e.message + '). Pull to reload.'; });
 </script>
 </body></html>

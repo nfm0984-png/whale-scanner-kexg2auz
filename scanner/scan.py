@@ -464,7 +464,7 @@ for r_ in BETS + BUYS:
     r_['phase'] = phase(r_['game'], r_.get('startTs'))
 # ---------- 16. Picks: group the whales' open $500+ positions by market side ----------
 # Rank (Noel): most proven $500+ whales first, then most money behind the side net of opposing whale money; score parts only break ties.
-# A pick must have a verified Kalshi contract (BUY YES/NO with a price). Top 5 needs 2+ whales; Fun needs 1+.
+# A pick must have a verified Kalshi contract (BUY YES/NO with a price). Top 20 needs 2+ whales; Fun needs 1+.
 def score(s):
     n = len(s['backers']); wr = (sum(b['wr'] or 0 for b in s['backers']) / n) if n else 0
     parts = {
@@ -539,7 +539,7 @@ for s in CONS[:3]:
 HP = os.path.join(HERE, 'history.json')
 hist = json.load(open(HP)) if os.path.exists(HP) else {'scans': [], 'picks': {}}
 cur_ids = set()
-for s in CONS[:25] + FUN[:20]:
+for s in CONS[:20] + FUN[:20]:
     cur_ids.add(s['id']); p = hist['picks'].get(s['id'])
     k = s['kalshi']
     rec = dict(tier='fun' if s in FUN else 'top', q=s['question'], label=s['label'], slug=s['slug'], market_id=s['market_id'], side=s['side'], score=s['score'], whales=len(s['backers']),
@@ -596,14 +596,14 @@ out = dict(scannedAt=pt(NOW), ts=NOW, secs=round(time.time() - T0), settings=dic
                   walletsLoaded=len(POS), positionsLoaded=sum(len(v) for v in POS.values()), bets=len(BETS), buysRaw=len(RAW_BUYS), buys=len(BUYS),
                   orcaCalls=CALLS['n'], orcaErrors=CALLS['errors'][:10], kalshiSeries=len(KM), kalshiMatched=len(ONK),
                   espnLeagues=len({k[0] for k in ESPN})),
-    signals=[slim(s) for s in CONS[:30]], totalSignals=len(CONS), fun=[slim(s) for s in FUN[:20]], totalFun=len(FUN),
+    signals=[slim(s) for s in CONS[:20]], totalSignals=len(CONS), fun=[slim(s) for s in FUN[:20]], totalFun=len(FUN),
     bets=BETS[:220], buys=BUYS[:160], traders=TRADERS,
     history=sorted([dict(id=k, **{kk: v[kk] for kk in ('tier', 'q', 'label', 'score', 'whales', 'invested', 'start', 'kalshi', 'kprice', 'first_seen', 'last_seen', 'scans', 'result', 'graded') if kk in v},
                          active=k in cur_ids) for k, v in hist['picks'].items()], key=lambda x: -x['last_seen'])[:80],
     scans=hist['scans'][-20:])
 json.dump(out, open(os.path.join(HERE, 'page_data.json'), 'w'), separators=(',', ':'))
 print(f"consensus={len(CONS)} fun={len(FUN)} all={len(signals)} groups={len(signals)} onKalshi={len(ONK)} cappers={len(cappers)} orca_calls={CALLS['n']} errors={len(CALLS['errors'])} secs={out['secs']} kalshi_ok={out['coverage']['kalshiMatched']}")
-for s in CONS[:5] + FUN[:3]: print(len(s['backers']), s['net'], s['score'], s['question'], '|', s['label'], '|', len(s['backers']), s['invested'], '|', s['kalshi'].get('action'), s['kalshi'].get('contract'), s['kalshi'].get('price'), s['kalshi'].get('why'))
+for s in CONS[:8] + FUN[:3]: print(len(s['backers']), s['net'], s['score'], s['question'], '|', s['label'], '|', len(s['backers']), s['invested'], '|', s['kalshi'].get('action'), s['kalshi'].get('contract'), s['kalshi'].get('price'), s['kalshi'].get('why'))
 # ---------- 13. Page embed (wallets kept for Polymarket profile links) ----------
 for b_ in BETS: b_.pop('_info', None)
 emb = json.loads(json.dumps(out))
