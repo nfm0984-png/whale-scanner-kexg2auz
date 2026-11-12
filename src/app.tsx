@@ -1342,7 +1342,14 @@ export default function App() {
     </Section>
   );
   return (
-    <Page title="Orca Whale Scanner" summary={"Whale picks from your OrcaLayer data, matched to Kalshi contracts. Snapshot from " + DATA.scannedAt + " · tap Scan for fresh data."}>
+    <Page title="Orca Whale Scanner" summary={{
+      top: "The strongest picks, where 2 or more top whales agree, ranked best to worst. #1 is the one to go biggest on.",
+      fun: "Picks backed by just one top whale. Riskier, so bet smaller.",
+      buys: "The latest big whale buys, strongest first. Shows what the money is jumping on right now.",
+      bets: "Every game in the next 12 hours with whale money on it, showing both sides and which side has more money.",
+      cappers: "The top whales from the last 30 days, with their record and what they're betting today.",
+      more: "Your win/loss results, scan details and how the rankings work.",
+    }[tab] || ""}>
       <Hero top={top.length} fun={fun.length} buys={BUY_LINES.length} bets={BET_LINES.length} active={activeTraders.length} value={openValue} />
 
       <Section heading="Bankroll and pick rules" caption={"Bankroll " + money(bankroll) + " · " + money(minP) + "+ positions · Top 20 needs " + minW + "+ whales" + (followed.length ? " · " + followed.length + " followed" : "") + (hidden.length ? " · " + hidden.length + " hidden" : "")} collapsible defaultOpen={false}>
