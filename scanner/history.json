@@ -1305,7 +1305,11 @@
    "first_seen": 1794431554,
    "scans": 1,
    "first_score": 52,
-   "result": null
+   "result": "L",
+   "graded": 1794452149,
+   "ended": 1794452149,
+   "finalScore": "",
+   "active": false
   },
   "0xb28a59022569bfec91bb01f152fe16f097c2e859d31895dc04e25081804a8d86:yes": {
    "tier": "fun",
@@ -1590,7 +1594,11 @@
    "first_seen": 1794431554,
    "scans": 1,
    "first_score": 16,
-   "result": null
+   "result": "W",
+   "graded": 1794452149,
+   "ended": 1794452149,
+   "finalScore": "BUF 3 \u2013 TB 8",
+   "active": false
   },
   "0x4ab45459a518361a3abaa95ff6b57df998fa22a9cb485f6ae96284cfd6a39d7e:no": {
    "tier": "fun",
