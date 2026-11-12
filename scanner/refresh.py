@@ -15,9 +15,18 @@ def pub(url):
     return None
 EP = {'NBA': 'basketball/nba', 'NFL': 'football/nfl', 'NHL': 'hockey/nhl', 'MLB': 'baseball/mlb', 'CFB': 'football/college-football', 'CBB': 'basketball/mens-college-basketball',
       'CWBB': 'basketball/womens-college-basketball', 'WNBA': 'basketball/wnba', 'EPL': 'soccer/eng.1', 'UCL': 'soccer/uefa.champions', 'UEL': 'soccer/uefa.europa', 'UECL': 'soccer/uefa.europa.conf',
-      'LAL': 'soccer/esp.1', 'BUN': 'soccer/ger.1', 'SEA': 'soccer/ita.1', 'FL1': 'soccer/fra.1', 'ERE': 'soccer/ned.1', 'POR': 'soccer/por.1', 'MEX': 'soccer/mex.1', 'MLS': 'soccer/usa.1',
+      'LAL': 'soccer/esp.1', 'BUN': 'soccer/ger.1', 'BL2': 'soccer/ger.2', 'SEA': 'soccer/ita.1', 'ITB': 'soccer/ita.2', 'FL1': 'soccer/fra.1', 'FL2': 'soccer/fra.2',
+      'ERE': 'soccer/ned.1', 'POR': 'soccer/por.1', 'MEX': 'soccer/mex.1', 'BRA': 'soccer/bra.1', 'ARG': 'soccer/arg.1', 'MLS': 'soccer/usa.1',
       'UNL': 'soccer/uefa.nations', 'UWCL': 'soccer/uefa.wchampions', 'CDR': 'soccer/esp.copa_del_rey', 'FIF': 'soccer/fifa.friendly', 'EFL': 'soccer/eng.2', 'ELC': 'soccer/eng.2',
-      'ATP': 'tennis/atp', 'WTA': 'tennis/wta', 'UFC': 'mma/ufc'}
+      'EFA': 'soccer/eng.fa', 'FACUP': 'soccer/eng.fa', 'LCUP': 'soccer/eng.league_cup', 'TUR': 'soccer/tur.1', 'SCO': 'soccer/sco.1',
+      'BEL': 'soccer/bel.1', 'DEN': 'soccer/den.1', 'NOR': 'soccer/nor.1', 'SWE': 'soccer/swe.1', 'JAP': 'soccer/jpn.1', 'AUS': 'soccer/aus.1',
+      'LIB': 'soccer/conmebol.libertadores', 'SUD': 'soccer/conmebol.sudamericana', 'COF': 'soccer/fra.coupe_de_france',
+      'DFB': 'soccer/ger.dfb_pokal', 'ITC': 'soccer/ita.coppa_italia', 'NWSL': 'soccer/usa.nwsl', 'SPL': 'soccer/ksa.1',
+      'EUROLEAGUE': 'basketball/euroleague', 'EURO': 'basketball/euroleague',
+      'ATP': 'tennis/atp', 'WTA': 'tennis/wta', 'UFC': 'mma/ufc',
+      'PGA': 'golf/pga', 'GOLF': 'golf/pga', 'LPGA': 'golf/lpga',
+      'F1': 'racing/f1', 'NASCAR': 'racing/nascar-premier', 'INDYCAR': 'racing/irl', 'INDY': 'racing/irl',
+      'CFL': 'football/cfl'}
 def norm(x): return re.sub(r'[^a-z0-9 ]', '', (x or '').lower()).strip()
 def teams_of(q):
     for part in (re.sub(r'^[^:]*:\s*', '', q), re.sub(r':.*$', '', q)):
@@ -77,7 +86,13 @@ def kalshi_now(tk):
 emb = json.load(open(os.path.join(HERE, 'page_embed.json')))
 HP = os.path.join(HERE, 'history.json'); hist = json.load(open(HP)) if os.path.exists(HP) else {'scans': [], 'picks': {}}
 n_espn = n_k = 0
-for p in emb['signals'] + emb['fun']:
+emb.setdefault('poly', [])
+def pick_lists(): return emb['signals'] + emb['fun'] + emb['poly']
+def pick_tier(p):
+    if p in emb['poly']: return 'poly'
+    if p in emb['fun']: return 'fun'
+    return 'top'
+for p in pick_lists():
     e, why = find_game(p)
     r = dict(at=NOW)
     if e:
@@ -106,18 +121,19 @@ for p in emb['signals'] + emb['fun']:
     h = hist['picks'].get(p['id'])
     if h is None:  # make sure every pick is in the journal before it can be removed
         h = hist['picks'][p['id']] = dict(q=p['q'], label=p['label'], side=p['id'].split(':')[-1], score=p.get('score'), whales=p.get('whales'), invested=p.get('invested'),
-                                          start=p['game'].get('start'), kalshi=f"{k.get('action')} {k.get('contract')} @ {round(100*k['price'])}¢" if k.get('price') else 'No Kalshi match',
-                                          kprice=k.get('price'), first_seen=emb.get('ts'), last_seen=emb.get('ts'), scans=1, result=None, tier='top' if p in emb['signals'] else 'fun')
+                                          start=p['game'].get('start'), kalshi=f"{k.get('action')} {k.get('contract')} @ {round(100*k['price'])}¢" if k.get('price') else ('Polymarket only' if pick_tier(p) == 'poly' else 'No Kalshi match'),
+                                          kprice=k.get('price'), first_seen=emb.get('ts'), last_seen=emb.get('ts'), scans=1, result=None, tier=pick_tier(p))
     if r.get('final') in ('W', 'L') and not h.get('result'): h['result'] = r['final']; h['graded'] = NOW
     if r.get('ended'): h['ended'] = NOW; h['finalScore'] = r.get('score') or ''; h['active'] = False
 # Noel's rule: ended games are REMOVED from the lists (W/L already written to the journal above)
-ENDED = {p['id'].rsplit(':', 1)[0] for p in emb['signals'] + emb['fun'] if (p.get('refresh') or {}).get('ended')}
-before = (len(emb['signals']), len(emb['fun']), len(emb['bets']), len(emb['buys']))
+ENDED = {p['id'].rsplit(':', 1)[0] for p in pick_lists() if (p.get('refresh') or {}).get('ended')}
+before = (len(emb['signals']), len(emb['fun']), len(emb['poly']), len(emb['bets']), len(emb['buys']))
 emb['signals'] = [p for p in emb['signals'] if not p['refresh'].get('ended')]
 emb['fun'] = [p for p in emb['fun'] if not p['refresh'].get('ended')]
+emb['poly'] = [p for p in emb['poly'] if not (p.get('refresh') or {}).get('ended')]
 emb['bets'] = [b for b in emb['bets'] if b.get('cid') not in ENDED and (b.get('game') or {}).get('state') != 'post']
 emb['buys'] = [b for b in emb['buys'] if b.get('cid') not in ENDED and (b.get('game') or {}).get('state') != 'post']
-removed = [a - len(x) for a, x in zip(before, (emb['signals'], emb['fun'], emb['bets'], emb['buys']))]
+removed = [a - len(x) for a, x in zip(before, (emb['signals'], emb['fun'], emb['poly'], emb['bets'], emb['buys']))]
 known = {h['id'] for h in emb.get('history', [])}
 for pid, hp in hist['picks'].items():
     if pid not in known and hp.get('ended'):
@@ -131,4 +147,4 @@ emb.setdefault('refreshes', []).append(dict(ts=NOW, espnGames=n_espn, kalshiChec
 json.dump(hist, open(HP, 'w'), indent=1)
 json.dump(emb, open(os.path.join(HERE, 'page_embed.json'), 'w'), separators=(',', ':'))
 subprocess.run([sys.executable, os.path.join(HERE, 'compact.py')])
-print(f"refreshed {pt(NOW)}: {len(emb['signals'])} top + {len(emb['fun'])} fun picks, ESPN games matched {n_espn}, Kalshi checks {n_k}, ended games removed (top/fun/bets/buys) {removed}, OrcaLayer calls 0")
+print(f"refreshed {pt(NOW)}: {len(emb['signals'])} top + {len(emb['fun'])} fun + {len(emb['poly'])} poly picks, ESPN games matched {n_espn}, Kalshi checks {n_k}, ended games removed (top/fun/poly/bets/buys) {removed}, OrcaLayer calls 0")

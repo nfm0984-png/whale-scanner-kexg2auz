@@ -149,28 +149,45 @@ for r in RAW_ALL: FLOW[(r['wallet'], r['condition_id'], r['side'])][1 if r['acti
 # ---------- 9. Kalshi: contract match + price only ----------
 KSER = {'nba': ('KXNBAGAME', 'KXNBATOTAL', 'KXNBASPREAD'), 'nfl': ('KXNFLGAME', 'KXNFLTOTAL', 'KXNFLSPREAD'),
         'nhl': ('KXNHLGAME', 'KXNHLTOTAL', 'KXNHLSPREAD'), 'cfb': ('KXNCAAFGAME', 'KXNCAAFTOTAL', 'KXNCAAFSPREAD'),
-        'cbb': ('KXNCAAMBGAME', 'KXNCAAMBTOTAL', 'KXNCAAMBSPREAD'), 'cwbb': ('KXNCAAWBGAME', None, None), 'epl': ('KXEPLGAME', 'KXEPLTOTAL', 'KXEPLSPREAD'),
-        'ucl': ('KXUCLGAME', 'KXUCLTOTAL', 'KXUCLSPREAD'), 'uel': ('KXUELGAME', None, None), 'uecl': ('KXUECLGAME', None, None), 'lal': ('KXLALIGAGAME', 'KXLALIGATOTAL', 'KXLALIGASPREAD'),
+        'cbb': ('KXNCAAMBGAME', 'KXNCAAMBTOTAL', 'KXNCAAMBSPREAD'), 'cwbb': ('KXNCAAWBGAME', 'KXNCAAWBTOTAL', 'KXNCAAWBSPREAD'),
+        'epl': ('KXEPLGAME', 'KXEPLTOTAL', 'KXEPLSPREAD'),
+        'ucl': ('KXUCLGAME', 'KXUCLTOTAL', 'KXUCLSPREAD'), 'uel': ('KXUELGAME', 'KXUELTOTAL', 'KXUELSPREAD'), 'uecl': ('KXUECLGAME', 'KXUECLTOTAL', 'KXUECLSPREAD'),
+        'lal': ('KXLALIGAGAME', 'KXLALIGATOTAL', 'KXLALIGASPREAD'),
         'unl': ('KXUEFANLGAME', 'KXUEFANLTOTAL', 'KXUEFANLSPREAD'), 'fif': ('KXFIFAGAME', 'KXFIFATOTAL', 'KXFIFASPREAD'), 'ifr': ('KXINTLFRIENDLYGAME', None, None),
         'cdr': ('KXCOPADELREYGAME', 'KXCOPADELREYTOTAL', 'KXCOPADELREYSPREAD'), 'uwcl': ('KXUCLWGAME', None, None),
-        'bun': ('KXBUNDESLIGAGAME', None, None), 'bl2': ('KXBUNDESLIGA2GAME', None, None), 'sea': ('KXSERIEAGAME', None, None), 'itb': ('KXSERIEBGAME', None, None),
-        'fl1': ('KXLIGUE1GAME', None, None), 'fl2': ('KXLIGUE2GAME', None, None), 'ere': ('KXEREDIVISIEGAME', None, None), 'por': ('KXLIGAPORTUGALGAME', None, None),
-        'mex': ('KXLIGAMXGAME', None, None), 'bra': ('KXBRASILEIROGAME', None, None), 'arg': ('KXARGPREMDIVGAME', None, None), 'spl': ('KXSAUDIPLGAME', None, None),
-        'efl': ('KXEFLCHAMPIONSHIPGAME', None, None), 'elc': ('KXEFLCHAMPIONSHIPGAME', None, None), 'efa': ('KXFACUPGAME', None, None), 'facup': ('KXFACUPGAME', None, None),
-        'lcup': ('KXEFLCUPGAME', None, None), 'tur': ('KXSUPERLIGGAME', None, None), 'sco': ('KXSCOTTISHPREMGAME', None, None), 'bel': ('KXBELGIANPLGAME', None, None),
-        'den': ('KXDENSUPERLIGAGAME', None, None), 'nor': ('KXELITESERIENGAME', None, None), 'swe': ('KXALLSVENSKANGAME', None, None), 'jap': ('KXJLEAGUEGAME', None, None),
-        'kor': ('KXKLEAGUEGAME', None, None), 'aus': ('KXALEAGUEGAME', None, None), 'lib': ('KXCONMEBOLLIBGAME', None, None), 'sud': ('KXCONMEBOLSUDGAME', None, None),
-        'cof': ('KXCOUPEDEFRANCEGAME', None, None), 'dfb': ('KXDFBPOKALGAME', None, None), 'itc': ('KXCOPPAITALIAGAME', None, None), 'nwsl': ('KXNWSLGAME', None, None),
+        'bun': ('KXBUNDESLIGAGAME', 'KXBUNDESLIGATOTAL', 'KXBUNDESLIGASPREAD'), 'bl2': ('KXBUNDESLIGA2GAME', 'KXBUNDESLIGA2TOTAL', 'KXBUNDESLIGA2SPREAD'),
+        'sea': ('KXSERIEAGAME', 'KXSERIEATOTAL', 'KXSERIEASPREAD'), 'itb': ('KXSERIEBGAME', 'KXSERIEBTOTAL', 'KXSERIEBSPREAD'),
+        'fl1': ('KXLIGUE1GAME', 'KXLIGUE1TOTAL', 'KXLIGUE1SPREAD'), 'fl2': ('KXLIGUE2GAME', 'KXLIGUE2TOTAL', 'KXLIGUE2SPREAD'),
+        'ere': ('KXEREDIVISIEGAME', 'KXEREDIVISIETOTAL', 'KXEREDIVISIESPREAD'), 'por': ('KXLIGAPORTUGALGAME', 'KXLIGAPORTUGALTOTAL', 'KXLIGAPORTUGALSPREAD'),
+        'mex': ('KXLIGAMXGAME', 'KXLIGAMXTOTAL', 'KXLIGAMXSPREAD'), 'bra': ('KXBRASILEIROGAME', 'KXBRASILEIROTOTAL', 'KXBRASILEIROSPREAD'),
+        'arg': ('KXARGPREMDIVGAME', 'KXARGPREMDIVTOTAL', 'KXARGPREMDIVSPREAD'), 'spl': ('KXSAUDIPLGAME', 'KXSAUDIPLTOTAL', 'KXSAUDIPLSPREAD'),
+        'efl': ('KXEFLCHAMPIONSHIPGAME', 'KXEFLCHAMPIONSHIPTOTAL', 'KXEFLCHAMPIONSHIPSPREAD'), 'elc': ('KXEFLCHAMPIONSHIPGAME', 'KXEFLCHAMPIONSHIPTOTAL', 'KXEFLCHAMPIONSHIPSPREAD'),
+        'efa': ('KXFACUPGAME', 'KXFACUPTOTAL', 'KXFACUPSPREAD'), 'facup': ('KXFACUPGAME', 'KXFACUPTOTAL', 'KXFACUPSPREAD'),
+        'lcup': ('KXEFLCUPGAME', 'KXEFLCUPTOTAL', 'KXEFLCUPSPREAD'), 'tur': ('KXSUPERLIGGAME', 'KXSUPERLIGTOTAL', 'KXSUPERLIGSPREAD'),
+        'sco': ('KXSCOTTISHPREMGAME', 'KXSCOTTISHPREMTOTAL', 'KXSCOTTISHPREMSPREAD'), 'bel': ('KXBELGIANPLGAME', 'KXBELGIANPLTOTAL', 'KXBELGIANPLSPREAD'),
+        'den': ('KXDENSUPERLIGAGAME', 'KXDENSUPERLIGATOTAL', 'KXDENSUPERLIGASPREAD'), 'nor': ('KXELITESERIENGAME', 'KXELITESERIENTOTAL', 'KXELITESERIENSPREAD'),
+        'swe': ('KXALLSVENSKANGAME', 'KXALLSVENSKANTOTAL', 'KXALLSVENSKANSPREAD'), 'jap': ('KXJLEAGUEGAME', 'KXJLEAGUETOTAL', 'KXJLEAGUESPREAD'),
+        'kor': ('KXKLEAGUEGAME', 'KXKLEAGUETOTAL', 'KXKLEAGUESPREAD'), 'aus': ('KXALEAGUEGAME', 'KXALEAGUETOTAL', 'KXALEAGUESPREAD'),
+        'lib': ('KXCONMEBOLLIBGAME', 'KXCONMEBOLLIBTOTAL', 'KXCONMEBOLLIBSPREAD'), 'sud': ('KXCONMEBOLSUDGAME', 'KXCONMEBOLSUDTOTAL', 'KXCONMEBOLSUDSPREAD'),
+        'cof': ('KXCOUPEDEFRANCEGAME', 'KXCOUPEDEFRANCETOTAL', 'KXCOUPEDEFRANCESPREAD'), 'dfb': ('KXDFBPOKALGAME', 'KXDFBPOKALTOTAL', 'KXDFBPOKALSPREAD'),
+        'itc': ('KXCOPPAITALIAGAME', 'KXCOPPAITALIATOTAL', 'KXCOPPAITALIASPREAD'), 'nwsl': ('KXNWSLGAME', 'KXNWSLTOTAL', 'KXNWSLSPREAD'),
         'mls': ('KXMLSGAME', 'KXMLSTOTAL', 'KXMLSSPREAD'), 'wnba': ('KXWNBAGAME', 'KXWNBATOTAL', 'KXWNBASPREAD'), 'mlb': ('KXMLBGAME', 'KXMLBTOTAL', 'KXMLBSPREAD'),
-        'kbo': ('KXKBOGAME', None, None), 'npb': ('KXNPBGAME', None, None), 'khl': ('KXKHLGAME', None, None), 'shl': ('KXSHLGAME', None, None), 'ahl': ('KXAHLGAME', None, None),
-        'euroleague': ('KXEUROLEAGUEGAME', None, None), 'euro': ('KXEUROLEAGUEGAME', None, None), 'acb': ('KXACBGAME', None, None), 'nbl': ('KXNBLGAME', None, None), 'cba': ('KXCBAGAME', None, None),
+        'kbo': ('KXKBOGAME', 'KXKBOTOTAL', 'KXKBOSPREAD'), 'npb': ('KXNPBGAME', 'KXNPBTOTAL', 'KXNPBSPREAD'), 'khl': ('KXKHLGAME', None, None), 'shl': ('KXSHLGAME', None, None), 'ahl': ('KXAHLGAME', None, None),
+        'euroleague': ('KXEUROLEAGUEGAME', 'KXEUROLEAGUETOTAL', 'KXEUROLEAGUESPREAD'), 'euro': ('KXEUROLEAGUEGAME', 'KXEUROLEAGUETOTAL', 'KXEUROLEAGUESPREAD'),
+        'acb': ('KXACBGAME', 'KXACBTOTAL', 'KXACBSPREAD'), 'nbl': ('KXNBLGAME', 'KXNBLTOTAL', 'KXNBLSPREAD'), 'cba': ('KXCBAGAME', 'KXCBATOTAL', 'KXCBASPREAD'),
         'atp': ('KXATPMATCH', None, None), 'wta': ('KXWTAMATCH', None, None), 'ufc': ('KXUFCFIGHT', None, None), 'mma': ('KXMMAFIGHT', None, None), 'box': ('KXBOXINGFIGHT', None, None),
         'cs2': ('KXCS2GAME', None, None), 'dota2': ('KXDOTA2GAME', None, None), 'lol': ('KXLOLGAME', None, None), 'val': ('KXVALORANTGAME', None, None),
         'r6siege': ('KXR6GAME', None, None), 'cod': ('KXCODGAME', None, None), 'ow': ('KXOWGAME', None, None), 'rl': ('KXROCKETLEAGUEGAME', None, None),
-        'cricipl': ('KXIPLGAME', None, None), 'afl': ('KXAFLGAME', None, None), 'cfl': ('KXCFLGAME', None, None), 'nrl': ('KXRUGBYNRLMATCH', None, None)}
+        'cricipl': ('KXIPLGAME', None, None), 'afl': ('KXAFLGAME', None, None), 'cfl': ('KXCFLGAME', 'KXCFLTOTAL', 'KXCFLSPREAD'), 'nrl': ('KXRUGBYNRLMATCH', None, None),
+        # golf / racing / darts: verified series (open or real past tickers). Player/driver markets use NAME_ONLY.
+        'pga': ('KXGOLFTOURN', None, None), 'golf': ('KXGOLFTOURN', None, None), 'lpga': ('KXLPGATOUR', None, None),
+        'f1': ('KXF1H2H', None, None), 'nascar': ('KXNASCARRACE', None, None), 'indycar': ('KXINDYCARRACE', None, None), 'indy': ('KXINDYCARRACE', None, None),
+        'darts': ('KXDARTSMATCH', None, None), 'motogp': ('KXMOTOGPRACE', None, None)}
 # tennis / MMA / boxing: Kalshi lists both singles and fights under one series; extra series tried in order when the first has no event
-KALT = {'atp': ('KXATPCHALLENGERMATCH',), 'wta': ('KXWTACHALLENGERMATCH',), 'ufc': ('KXMMAFIGHT',), 'cs2': ('KXCSGOGAME',), 'lol': ('KXLOLLONGGAME', 'KXLOLSHORTGAME'), 'rl': ('KXRLGAME',)}
-NAME_ONLY = ('atp', 'wta', 'ufc', 'mma', 'box')  # player/fighter markets: match by name, not slug code
+# F1: H2H first for two-driver markets; KXF1RACE (multi-runner) is only used for "will X win" teamwin
+KALT = {'atp': ('KXATPCHALLENGERMATCH',), 'wta': ('KXWTACHALLENGERMATCH',), 'ufc': ('KXMMAFIGHT',), 'cs2': ('KXCSGOGAME',), 'lol': ('KXLOLLONGGAME', 'KXLOLSHORTGAME'), 'rl': ('KXRLGAME',),
+        'f1': ('KXF1RACE',), 'pga': ('KXGOLFTOURN',), 'golf': ('KXGOLFTOURN',), 'lpga': ('KXLPGATOUR',)}
+NAME_ONLY = ('atp', 'wta', 'ufc', 'mma', 'box', 'pga', 'golf', 'lpga', 'f1', 'nascar', 'indycar', 'indy', 'darts', 'motogp')  # player/fighter/driver markets: match by name, not slug code
 KM = {}
 def kmarkets(series):
     if not series: return []
@@ -187,21 +204,36 @@ MON = {m: i + 1 for i, m in enumerate(['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN',
 def kdate(evt):
     mm = re.search(r'-(\d\d)([A-Z]{3})(\d\d)', evt)
     return dt.date(2000 + int(mm.group(1)), MON[mm.group(2)], int(mm.group(3))) if mm else None
-def find_event(series, info):
+def occ_date(ms):
+    for m in ms:
+        occ = m.get('occurrence_datetime')
+        if not occ: continue
+        try: return dt.datetime.fromisoformat(occ.replace('Z', '+00:00')).date()
+        except Exception: pass
+    return None
+def find_event(series, info, kind=None):
+    if not series: return None
     pd = dt.date.fromisoformat(info['date']); codes = [c.upper() for c in info['codes']]
     ev = collections.defaultdict(list)
     for m in kmarkets(series): ev[m['event_ticker']].append(m)
     best = None
+    names = list(info.get('teams') or [])
+    if info.get('team') and info['team'] not in names: names.append(info['team'])
+    kind = kind or info.get('kind')
+    esp = info['league'] in ESPORTS or info['league'] in NAME_ONLY
+    window = 4 if esp else 1  # golf tournaments / race weekends can span a few days vs the Polymarket slug date
     for e, ms in ev.items():
-        kd = kdate(e)
-        if not kd or abs((kd - pd).days) > 1: continue
-        teampart = e.split('-')[1][7:]
-        esp = info['league'] in ESPORTS or info['league'] in NAME_ONLY
+        kd = kdate(e) or occ_date(ms)
+        if not kd or abs((kd - pd).days) > window: continue
+        # Two-player moneyline (X vs Y) must not match a multi-runner field (F1 race with 20 drivers, golf tournament, etc.)
+        if kind == 'moneyline' and esp and len(ms) > 3: continue
+        teampart = e.split('-')[1][7:] if len(e.split('-')) > 1 and len(e.split('-')[1]) > 7 else ''
         hits = 0 if esp else sum(1 for c in codes if teampart.startswith(c) or teampart.endswith(c) or any(m['ticker'].endswith('-' + c) for m in ms))
-        if not hits and info.get('teams'):
+        if not hits and names:
             subs = [norm(m.get('yes_sub_title') or '') for m in ms]
-            hits = sum(1 for t in info['teams'] if any(namematch(t, x) for x in subs))
-            if hits < 2: hits = 0
+            hits = sum(1 for t in names if any(namematch(t, x) for x in subs))
+            need = 2 if len(info.get('teams') or []) >= 2 else 1
+            if hits < need: hits = 0
         if hits and (not best or hits > best[0]): best = (hits, e, ms)
     return best
 def norm(x): return re.sub(r'[^a-z0-9 ]', '', (x or '').lower()).strip()
@@ -217,10 +249,10 @@ def kalshi(s):
     if not ser: return dict(status='none', why=f"Kalshi doesn't list {info['league'].upper()}")
     gm, tot, spr = ser
     if info['kind'] in ('moneyline', 'teamwin', 'draw'):
-        ev = find_event(gm, info)
+        ev = find_event(gm, info, info['kind'])
         for alt in KALT.get(info['league'], ()):
             if ev: break
-            ev = find_event(alt, info)
+            ev = find_event(alt, info, info['kind'])
         if not ev: return dict(status='none', why='No open Kalshi game market found for this matchup')
         hits, e, ms = ev
         codes = [c.upper() for c in info['codes']]
@@ -249,6 +281,8 @@ def kalshi(s):
             act, m, p = min(opts, key=lambda o: o[2])
         elif info['kind'] == 'teamwin':
             m = mfor(info['code'].upper())
+            if not m and info.get('team'):
+                m = next((x for x in ms if namematch(info['team'], x.get('yes_sub_title'))), None)
             if not m: return dict(status='none', why='Kalshi event found but team contract not matched')
             act = 'BUY YES' if s['side'] == 'yes' else 'BUY NO'; p = fp(m['yes_ask_dollars' if act == 'BUY YES' else 'no_ask_dollars'])
         else:
@@ -282,9 +316,22 @@ def kalshi(s):
                 light='green' if edge is not None and edge >= 0 else ('yellow' if edge is not None and edge >= -5 else 'red'))
 
 # ---------- 10. ESPN schedule / scores ----------
-EP = {'nba': 'basketball/nba', 'nfl': 'football/nfl', 'nhl': 'hockey/nhl', 'cfb': 'football/college-football', 'cbb': 'basketball/mens-college-basketball',
-      'epl': 'soccer/eng.1', 'ucl': 'soccer/uefa.champions', 'lal': 'soccer/esp.1', 'unl': 'soccer/uefa.nations', 'uwcl': 'soccer/uefa.wchampions',
-      'cdr': 'soccer/esp.copa_del_rey', 'mls': 'soccer/usa.1', 'wnba': 'basketball/wnba', 'fif': 'soccer/fifa.friendly'}
+EP = {'nba': 'basketball/nba', 'nfl': 'football/nfl', 'nhl': 'hockey/nhl', 'mlb': 'baseball/mlb', 'cfb': 'football/college-football',
+      'cbb': 'basketball/mens-college-basketball', 'cwbb': 'basketball/womens-college-basketball', 'wnba': 'basketball/wnba',
+      'epl': 'soccer/eng.1', 'ucl': 'soccer/uefa.champions', 'uel': 'soccer/uefa.europa', 'uecl': 'soccer/uefa.europa.conf',
+      'lal': 'soccer/esp.1', 'bun': 'soccer/ger.1', 'bl2': 'soccer/ger.2', 'sea': 'soccer/ita.1', 'itb': 'soccer/ita.2',
+      'fl1': 'soccer/fra.1', 'fl2': 'soccer/fra.2', 'ere': 'soccer/ned.1', 'por': 'soccer/por.1', 'mex': 'soccer/mex.1',
+      'bra': 'soccer/bra.1', 'arg': 'soccer/arg.1', 'mls': 'soccer/usa.1', 'unl': 'soccer/uefa.nations', 'uwcl': 'soccer/uefa.wchampions',
+      'cdr': 'soccer/esp.copa_del_rey', 'fif': 'soccer/fifa.friendly', 'efl': 'soccer/eng.2', 'elc': 'soccer/eng.2',
+      'efa': 'soccer/eng.fa', 'facup': 'soccer/eng.fa', 'lcup': 'soccer/eng.league_cup', 'tur': 'soccer/tur.1', 'sco': 'soccer/sco.1',
+      'bel': 'soccer/bel.1', 'den': 'soccer/den.1', 'nor': 'soccer/nor.1', 'swe': 'soccer/swe.1', 'jap': 'soccer/jpn.1', 'aus': 'soccer/aus.1',
+      'lib': 'soccer/conmebol.libertadores', 'sud': 'soccer/conmebol.sudamericana', 'cof': 'soccer/fra.coupe_de_france',
+      'dfb': 'soccer/ger.dfb_pokal', 'itc': 'soccer/ita.coppa_italia', 'nwsl': 'soccer/usa.nwsl', 'spl': 'soccer/ksa.1',
+      'euroleague': 'basketball/euroleague', 'euro': 'basketball/euroleague',
+      'atp': 'tennis/atp', 'wta': 'tennis/wta', 'ufc': 'mma/ufc',
+      'pga': 'golf/pga', 'golf': 'golf/pga', 'lpga': 'golf/lpga',
+      'f1': 'racing/f1', 'nascar': 'racing/nascar-premier', 'indycar': 'racing/irl', 'indy': 'racing/irl',
+      'cfl': 'football/cfl'}
 ESPN = {}
 def espn(lg, date):
     k = (lg, date)
@@ -463,8 +510,9 @@ for r_ in BETS + BUYS:
         g0, t0 = _ev[evkey(r_['slug'])]; r_['game'] = dict(g0, src=(g0.get('src') or '') + ' (same match)'); r_['startTs'] = t0
     r_['phase'] = phase(r_['game'], r_.get('startTs'))
 # ---------- 16. Picks: group the whales' open $500+ positions by market side ----------
-# Rank (Noel): most proven $500+ whales first, then most money behind the side net of opposing whale money; score parts only break ties.
-# A pick must have a verified Kalshi contract (BUY YES/NO with a price). Top 20 needs 2+ whales; Fun needs 1+.
+# Rank (Noel): most proven $500+ whales first, then most money, then less money against, then better 30-day rank; score parts only break remaining ties.
+# Kalshi tabs (Top 20, Fun): a pick must have a verified Kalshi contract. Top 20 needs 2+ whales; Fun needs 1+.
+# Polymarket tab: the same rules ($500+, 12h window, no hedgers) but NO Kalshi contract. Never duplicates a Kalshi-tab pick.
 def score(s):
     n = len(s['backers']); wr = (sum(b['wr'] or 0 for b in s['backers']) / n) if n else 0
     parts = {
@@ -499,9 +547,12 @@ for s in signals:
         s['kalshi'] = dict(s['kalshi'], edge_vs_whales=round((s['avg_entry'] - s['kalshi']['price']) * 100, 1)); e_ = s['kalshi']['edge_vs_whales']
         s['kalshi']['light'] = 'green' if e_ >= 0 else ('yellow' if e_ >= -5 else 'red')
     score(s)
-def rank_key(s): return (-len(s['backers']), -s['net'], -s['score'])
+def best_rank(s):
+    return min((b.get('rank30') or b.get('rank') or 999) for b in s['backers']) if s['backers'] else 999
+def rank_key(s): return (-len(s['backers']), -s['invested'], s['opp_money'], best_rank(s), -s['score'])
 signals.sort(key=rank_key)
 ONK = [s for s in signals if s['kalshi'].get('status') == 'ok']
+OFFK = [s for s in signals if s['kalshi'].get('status') != 'ok']
 # market detail (crowd size: all wallets any size, total $ per side) for the pick candidates only
 for s in ONK[:30]:
     d = orca('/api/v2/market/' + s['market_id'])
@@ -521,7 +572,14 @@ FUN = []
 for s in ONK:
     if s in CONS or s['market_id'] in _mk or not s['backers']: continue
     FUN.append(s); _mk.add(s['market_id'])
-NOT_ON_KALSHI = [s for s in signals if s['kalshi'].get('status') != 'ok' and len(s['backers']) >= A.wallets]
+# Polymarket-only tab: every unmatched pick that passed the shared rules. 2+ whale picks already sort first.
+# A pick with a verified Kalshi contract is NEVER placed here (ONK / CONS / FUN only).
+POLY, _pmk = [], set()
+for s in OFFK:
+    if not s['backers']: continue
+    if s['market_id'] in _mk or s['market_id'] in _pmk: continue  # already on a Kalshi tab, or weaker side of a poly market
+    POLY.append(s); _pmk.add(s['market_id'])
+NOT_ON_KALSHI = OFFK
 # names may have been learned from market detail: refresh
 for r_ in BETS + BUYS: r_['name'] = wname(r_['wallet'])
 for s in signals:
@@ -539,11 +597,15 @@ for s in CONS[:3]:
 HP = os.path.join(HERE, 'history.json')
 hist = json.load(open(HP)) if os.path.exists(HP) else {'scans': [], 'picks': {}}
 cur_ids = set()
-for s in CONS[:20] + FUN[:20]:
+for s in CONS[:20] + FUN[:20] + POLY[:20]:
     cur_ids.add(s['id']); p = hist['picks'].get(s['id'])
     k = s['kalshi']
-    rec = dict(tier='fun' if s in FUN else 'top', q=s['question'], label=s['label'], slug=s['slug'], market_id=s['market_id'], side=s['side'], score=s['score'], whales=len(s['backers']),
-               invested=s['invested'], start=s['game']['start'], kalshi=(f"{k['action']} {k['contract']} @ {round(k['price']*100)}¢" if k['status'] == 'ok' else 'No Kalshi match'),
+    if s in POLY: tier = 'poly'
+    elif s in FUN: tier = 'fun'
+    else: tier = 'top'
+    ktxt = (f"{k['action']} {k['contract']} @ {round(k['price']*100)}¢" if k.get('status') == 'ok' else ('Polymarket only' if tier == 'poly' else 'No Kalshi match'))
+    rec = dict(tier=tier, q=s['question'], label=s['label'], slug=s['slug'], market_id=s['market_id'], side=s['side'], score=s['score'], whales=len(s['backers']),
+               invested=s['invested'], start=s['game']['start'], kalshi=ktxt,
                kprice=k.get('price'), last_seen=NOW)
     if p: p.update(rec); p['scans'] = p.get('scans', 1) + 1
     else: rec.update(first_seen=NOW, scans=1, first_score=s['score'], result=None); hist['picks'][s['id']] = rec
@@ -556,7 +618,7 @@ for pid, p in hist['picks'].items():
         py = m.get('price_yes')
         if py is not None and py in (0, 1) or (py is not None and (py >= 0.99 or py <= 0.01)):
             won = (py >= 0.99) == (p['side'] == 'yes'); p['result'] = 'W' if won else 'L'; p['graded'] = NOW
-hist['scans'].append(dict(ts=NOW, signals=len(CONS), fun=len(FUN), calls=CALLS['n'], cappers=len(cappers), bets=len(BETS), buys=len(BUYS), wallets=len(POS)))
+hist['scans'].append(dict(ts=NOW, signals=len(CONS), fun=len(FUN), poly=len(POLY), calls=CALLS['n'], cappers=len(cappers), bets=len(BETS), buys=len(BUYS), wallets=len(POS)))
 hist['scans'] = hist['scans'][-50:]
 json.dump(hist, open(HP, 'w'), indent=1)
 # ---------- 12. Output ----------
@@ -589,7 +651,7 @@ def risks(s_):
     if any((b.get('resolved') or 0) < 10 for b in s_['backers'] if b.get('resolved') is not None): r.append('At least one backer has fewer than 10 markets resolved in the last 30 days.')
     if (s_.get('game') or {}).get('src') != 'ESPN': r.append('Start time not confirmed by ESPN (' + (s_.get('game') or {}).get('src', 'unknown') + ').')
     return r
-for s_ in CONS + FUN: s_['risks'] = risks(s_)
+for s_ in CONS + FUN + POLY: s_['risks'] = risks(s_)
 out = dict(scannedAt=pt(NOW), ts=NOW, secs=round(time.time() - T0), settings=dict(cappers=A.cappers, min=A.min, wallets=A.wallets, markets=A.markets, windowH=12),
     coverage=dict(cappers=len(cappers), qualified=sum(qualifies(c) for c in cappers.values()), golden=sum(golden(c) for c in cappers.values()),
                   marketsFound=found_markets, marketsInWindow=in_window, marketsScanned=min(30, len(ONK)), hedgedExcluded=two_sided, twoSidedExcluded=two_sided, lb30=LB30, notOnKalshi=len(NOT_ON_KALSHI), picksOnKalshi=len(ONK), sideGroups=len(signals),
@@ -597,13 +659,14 @@ out = dict(scannedAt=pt(NOW), ts=NOW, secs=round(time.time() - T0), settings=dic
                   orcaCalls=CALLS['n'], orcaErrors=CALLS['errors'][:10], kalshiSeries=len(KM), kalshiMatched=len(ONK),
                   espnLeagues=len({k[0] for k in ESPN})),
     signals=[slim(s) for s in CONS[:20]], totalSignals=len(CONS), fun=[slim(s) for s in FUN[:20]], totalFun=len(FUN),
+    poly=[slim(s) for s in POLY[:20]], totalPoly=len(POLY),
     bets=BETS[:220], buys=BUYS[:160], traders=TRADERS,
     history=sorted([dict(id=k, **{kk: v[kk] for kk in ('tier', 'q', 'label', 'score', 'whales', 'invested', 'start', 'kalshi', 'kprice', 'first_seen', 'last_seen', 'scans', 'result', 'graded') if kk in v},
                          active=k in cur_ids) for k, v in hist['picks'].items()], key=lambda x: -x['last_seen'])[:80],
     scans=hist['scans'][-20:])
 json.dump(out, open(os.path.join(HERE, 'page_data.json'), 'w'), separators=(',', ':'))
-print(f"consensus={len(CONS)} fun={len(FUN)} all={len(signals)} groups={len(signals)} onKalshi={len(ONK)} cappers={len(cappers)} orca_calls={CALLS['n']} errors={len(CALLS['errors'])} secs={out['secs']} kalshi_ok={out['coverage']['kalshiMatched']}")
-for s in CONS[:8] + FUN[:3]: print(len(s['backers']), s['net'], s['score'], s['question'], '|', s['label'], '|', len(s['backers']), s['invested'], '|', s['kalshi'].get('action'), s['kalshi'].get('contract'), s['kalshi'].get('price'), s['kalshi'].get('why'))
+print(f"consensus={len(CONS)} fun={len(FUN)} poly={len(POLY)} all={len(signals)} groups={len(signals)} onKalshi={len(ONK)} offKalshi={len(OFFK)} cappers={len(cappers)} orca_calls={CALLS['n']} errors={len(CALLS['errors'])} secs={out['secs']} kalshi_ok={out['coverage']['kalshiMatched']}")
+for s in CONS[:8] + FUN[:3] + POLY[:3]: print(len(s['backers']), s['net'], s['score'], s['question'], '|', s['label'], '|', len(s['backers']), s['invested'], '|', s['kalshi'].get('action'), s['kalshi'].get('contract'), s['kalshi'].get('price'), s['kalshi'].get('why'), 'poly' if s in POLY else ('fun' if s in FUN else 'top'))
 # ---------- 13. Page embed (wallets kept for Polymarket profile links) ----------
 for b_ in BETS: b_.pop('_info', None)
 emb = json.loads(json.dumps(out))
