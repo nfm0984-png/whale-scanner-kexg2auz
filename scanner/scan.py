@@ -158,6 +158,10 @@ def parse(m):
     elif re.fullmatch(r'[a-z0-9]+', tail or '') and q.lower().startswith('will '):
         tm = re.match(r'Will (.+?) win', q); info.update(kind='teamwin', team=tm.group(1) if tm else tail, code=tail,
                                                           yes=(tm.group(1) if tm else tail) + ' WIN', no=(tm.group(1) if tm else tail) + ' NOT TO WIN')
+    if info.get('kind') == 'other':
+        prop = parse_prop(q, tail, teams)
+        if prop:
+            info.update(kind='prop', **prop)
     if 'yes' not in info and len(teams) == 2 and not q.lower().startswith('will '):
         info.update(yes=teams[0], no=teams[1])
     return info
@@ -223,11 +227,127 @@ KALT = {'atp': ('KXATPCHALLENGERMATCH',), 'wta': ('KXWTACHALLENGERMATCH',), 'ufc
         'f1': ('KXF1RACE',), 'pga': ('KXGOLFTOURN',), 'golf': ('KXGOLFTOURN',), 'lpga': ('KXLPGATOUR',)}
 NAME_ONLY = ('atp', 'wta', 'ufc', 'mma', 'box', 'pga', 'golf', 'lpga', 'f1', 'nascar', 'indycar', 'indy', 'darts', 'motogp')  # player/fighter/driver markets: match by name, not slug code
 KM = {}
+
+# Per-game player-prop series (title like "Ryan Rollins: 20+ points"). Not awards, season leaders, or protected/ladder variants.
+KPROP = {
+    'nba': {'points': 'KXNBAPTS', 'rebounds': 'KXNBAREB', 'assists': 'KXNBAAST', 'pra': 'KXNBAPRA', 'pr': 'KXNBAPR', 'pa': 'KXNBAPA', 'ra': 'KXNBARA', 'threes': 'KXNBA3PT', 'blocks': 'KXNBABLK', 'steals': 'KXNBASTL', 'stocks': 'KXNBASTOCK'},
+    'wnba': {'points': 'KXWNBAPTS', 'rebounds': 'KXWNBAREB', 'assists': 'KXWNBAAST', 'threes': 'KXWNBA3PT'},
+    'nfl': {'passing_yards': 'KXNFLPASSYDS', 'rushing_yards': 'KXNFLRSHYDS', 'receiving_yards': 'KXNFLRECYDS', 'rush_rec_yards': 'KXNFLRRYDS', 'passing_tds': 'KXNFLPASSTDS', 'touchdowns': 'KXNFLTD', 'receptions': 'KXNFLREC', 'first_td': 'KXNFLFIRSTTD'},
+    'nhl': {'points': 'KXNHLPTS', 'assists': 'KXNHLAST', 'goals': 'KXNHLGOAL', 'anytime_goal': 'KXNHLANYGOAL', 'first_goal': 'KXNHLFIRSTGOAL'},
+    'mlb': {'hits': 'KXMLBHIT', 'home_runs': 'KXMLBHR', 'strikeouts': 'KXMLBKS'},
+    'epl': {'anytime_goal': 'KXEPLANYGOAL', 'goals': 'KXEPLGOAL', 'first_goal': 'KXEPLFIRSTGOAL', 'assists': 'KXEPLAST'},
+    'ucl': {'anytime_goal': 'KXUCLGOAL', 'goals': 'KXUCLGOAL', 'first_goal': 'KXUCLFIRSTGOAL', 'assists': 'KXUCLAST', 'shots': 'KXUCLSHOT'},
+}
+STAT_PAT = [
+    ('pra', r'points?\s*\+\s*rebounds?\s*\+\s*assists?|pts\s*\+\s*reb(?:ounds?)?\s*\+\s*ast|\bpra\b'),
+    ('pr', r'points?\s*\+\s*rebounds?|pts\s*\+\s*reb'),
+    ('pa', r'points?\s*\+\s*assists?|pts\s*\+\s*ast'),
+    ('ra', r'rebounds?\s*\+\s*assists?|reb\s*\+\s*ast'),
+    ('rush_rec_yards', r'rush(?:ing)?\s*(?:and|&|\+)\s*receiv(?:ing)?\s*yards'),
+    ('passing_yards', r'passing yards|pass(?:ing)? yds'),
+    ('rushing_yards', r'rushing yards|rush(?:es|ing)? yds|rushes for'),
+    ('receiving_yards', r'receiving yards|rec(?:eiving)? yds'),
+    ('passing_tds', r'passing touchdowns?|pass(?:ing)? tds?'),
+    ('rushing_tds', r'rushing touchdowns?|rush(?:ing)? tds?'),
+    ('receiving_tds', r'receiving touchdowns?|rec(?:eiving)? tds?'),
+    ('receptions', r'\breceptions?\b'),
+    ('anytime_td', r'anytime\s+(?:td|touchdown)|to score a touchdown'),
+    ('first_td', r'first touchdown|first td'),
+    ('first_goal', r'first goal(?:scorer)?'),
+    ('anytime_goal', r'anytime goal(?:scorer)?'),
+    ('touchdowns', r'\btouchdowns?\b|\btds?\b'),
+    ('threes', r'three[-\s]?pointers?|\bthrees?\b|\b3[-\s]?pt(?:s|ers?)?\b'),
+    ('points', r'\bpoints?\b|\bpts\b'),
+    ('rebounds', r'\brebounds?\b|\brebs?\b'),
+    ('assists', r'\bassists?\b|\basts?\b'),
+    ('steals', r'\bsteals?\b'),
+    ('blocks', r'\bblocks?\b'),
+    ('stocks', r'steals?\s*(?:and|&|\+)\s*blocks?|\bstocks?\b'),
+    ('hits', r'\bhits\b'),
+    ('home_runs', r'home runs?|\bhrs?\b'),
+    ('strikeouts', r'strikeouts?|\bks\b'),
+    ('goals', r'\bgoals?\b'),
+    ('shots', r'shots on goal|\bshots\b'),
+]
+STAT_WORDS = {k: k.replace('_', ' ') for k, _pat in STAT_PAT}
+STAT_WORDS.update(pra='points + rebounds + assists', pr='points + rebounds', pa='points + assists', ra='rebounds + assists',
+                  rush_rec_yards='rushing and receiving yards', passing_yards='passing yards', rushing_yards='rushing yards',
+                  receiving_yards='receiving yards', passing_tds='passing touchdowns', rushing_tds='rushing touchdowns',
+                  receiving_tds='receiving touchdowns', anytime_td='a touchdown', first_td='first touchdown',
+                  first_goal='first goal', anytime_goal='a goal', threes='threes', home_runs='home runs', stocks='steals + blocks')
+
+def is_btts(q):
+    return bool(re.search(r'(?i)both teams to score', q or ''))
+
+def match_stat(text):
+    t = text or ''
+    for key, pat in STAT_PAT:
+        if re.search(pat, t, re.I):
+            return key
+    return None
+
+def parse_prop(q, tail, teams):
+    if is_btts(q):
+        return None
+    if re.search(r'(?i)\b(o/?u|over/under|total)\b', q or '') and not re.search(r'(?i)points|rebounds|assists|yards|touchdown|receptions|threes|strikeouts|home runs|hits|steals|blocks', q or ''):
+        return None
+    stat = match_stat(q) or match_stat((tail or '').replace('-', ' '))
+    if not stat:
+        return None
+    line = None
+    m = re.search(r'(\d+(?:\.\d+)?)\s*\+', q or '') or re.search(r'(?i)(?:o/?u|over/under|over|under)\s*(\d+(?:\.\d+)?)', q or '')
+    if m:
+        line = float(m.group(1))
+    if line is None and tail:
+        tm = re.search(r'(\d+)pt(\d+)', tail)
+        if tm:
+            line = float(tm.group(1) + '.' + tm.group(2))
+        else:
+            tm = re.search(r'(\d+(?:\.\d+)?)$', tail)
+            if tm:
+                line = float(tm.group(1))
+    player = None
+    qm = re.match(r'^(.+?)\s*:\s*', q or '')
+    if qm:
+        head = qm.group(1).strip()
+        if re.search(r'\svs\.?\s', head) and teams:
+            rest = (q or '')[qm.end():]
+            pm = re.match(r'(.+?)\s+(?:o/?u|over|under|\d)', rest, re.I) or re.match(r'(.+?)\s*$', rest)
+            if pm and not match_stat(pm.group(1)):
+                player = pm.group(1).strip()
+        elif not re.search(r'\svs\.?\s', head):
+            player = head
+    if not player:
+        pm = re.match(r'^(.+?)\s+(?:\d+\+?|over|under|o/?u|rushes|rushing|receiving|passing|records)', q or '', re.I)
+        if pm and not re.search(r'\svs\.?\s', pm.group(1)):
+            player = pm.group(1).strip()
+    if not player and tail:
+        parts = re.split(r'-(?:points?|pts|rebounds?|reb|assists?|ast|pra|threes?|3pt|yards?|yds|rushing|receiving|passing|touchdowns?|tds?|receptions?|hits|hrs?|ks|goals?|shots?)-', tail, maxsplit=1)
+        if parts and parts[0] and not parts[0].startswith('total') and not parts[0].startswith('spread'):
+            player = parts[0].replace('-', ' ').strip()
+    if not player:
+        return None
+    if teams and any(player.lower() == t.lower() or player.lower() in t.lower() or t.lower() in player.lower() for t in teams) and stat in ('points', 'goals') and re.search(r'(?i)o/?u|over/under|total', q or ''):
+        return None
+    word = STAT_WORDS.get(stat, stat.replace('_', ' '))
+    if line is not None and float(line) == int(line):
+        ln = f"{int(line)}+"
+        yes = f"{player} {ln} {word}"
+        no = f"{player} under {int(line)} {word}"
+    elif line is not None:
+        yes = f"{player} over {line:g} {word}"
+        no = f"{player} under {line:g} {word}"
+    else:
+        yes = f"{player} {word}"
+        no = f"{player} not {word}"
+    return dict(stat=stat, line=line, player=player, yes=yes, no=no)
+
 def kmarkets(series):
+
     if not series: return []
     if series not in KM:
         out, cur = [], None
-        for _ in range(5):
+        for _ in range(8):
             d = pub(f"https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker={series}&status=open&limit=1000" + (f"&cursor={cur}" if cur else ''))
             if not d: break
             out += d.get('markets', []); cur = d.get('cursor')
@@ -339,11 +459,42 @@ def kalshi(s):
         cand = [x for x in ms if fp(x.get('floor_strike')) == info['line'] and suffix(x).rstrip('0123456789') == fc]
         if not cand: return dict(status='none', why=f"No Kalshi line for {info['fav']} by over {info['line']:g}")
         m = cand[0]; act = 'BUY YES' if s['side'] == 'yes' else 'BUY NO'; p = fp(m['yes_ask_dollars' if act == 'BUY YES' else 'no_ask_dollars'])
+    elif info['kind'] == 'prop':
+        series = (KPROP.get(info['league']) or {}).get(info.get('stat'))
+        if not series:
+            return dict(status='none', why="No Kalshi " + (info.get('stat') or 'player') + " prop series for " + info['league'].upper())
+        ev = find_event(series, info, 'prop')
+        if not ev:
+            return dict(status='none', why="No open Kalshi " + STAT_WORDS.get(info.get('stat'), 'player prop') + " market for this game")
+        ms = ev[2]
+        player = info.get('player') or ''
+        def mtitle(m):
+            return m.get('title') or m.get('yes_sub_title') or ''
+        cands = [m for m in ms if namematch(player, re.sub(r':\s*.*$', '', mtitle(m))) or namematch(player, mtitle(m))]
+        if not cands:
+            return dict(status='none', why="No Kalshi line for " + player)
+        def mline(m):
+            tm = re.search(r'(\d+(?:\.\d+)?)\s*\+', mtitle(m))
+            if tm: return float(tm.group(1))
+            fs = fp(m.get('floor_strike'))
+            if fs is None: return None
+            return fs + 0.5 if (m.get('strike_type') == 'greater' and abs(fs - int(fs) - 0.5) < 0.01) else fs
+        line = info.get('line')
+        if line is not None:
+            exact = [m for m in cands if mline(m) is not None and min(abs(mline(m) - line), abs(mline(m) - 0.5 - line), abs(mline(m) + 0.5 - line)) < 0.06]
+            if exact:
+                cands = exact
+            else:
+                near = min((mline(m) for m in cands if mline(m) is not None), default=None, key=lambda l: abs(l - line))
+                return dict(status='none', why="No Kalshi " + STAT_WORDS.get(info.get('stat'), 'prop') + " line at " + f"{line:g}" + " for " + player + ((" (nearest " + f"{near:g}" + ")") if near is not None else ''))
+        m = cands[0]
+        act = 'BUY YES' if s['side'] == 'yes' else 'BUY NO'
+        p = fp(m['yes_ask_dollars' if act == 'BUY YES' else 'no_ask_dollars'])
     else:
         return dict(status='none', why='Market type has no Kalshi equivalent')
     if not p: return dict(status='none', why='Kalshi market matched but has no ask right now')
     rule = m.get('rules_primary') or ''
-    sel = m.get('yes_sub_title') or ''
+    sel = (m.get('title') if info.get('kind') == 'prop' else None) or m.get('yes_sub_title') or ''
     edge = round((s['avg_entry'] - p) * 100, 1) if s['avg_entry'] else None
     return dict(status='ok', occ=m.get('occurrence_datetime'), action=act, price=p, ticker=m['ticker'], contract=sel, rule=rule[:260], url=f"https://kalshi.com/markets/{m['event_ticker'].split('-')[0].lower()}",
                 edge_vs_whales=edge, edge_vs_poly=round((s['price'] - p) * 100, 1),
@@ -417,12 +568,14 @@ def slug_date(slug):
     except Exception: return None
 def bet_kind(info, q):
     k = info.get('kind')
+    if k == 'prop': return 'prop'
     if k in ('moneyline', 'teamwin', 'draw'): return 'moneyline'
     if k in ('spread', 'total'): return k
+    if is_btts(q): return 'other'
     if re.search(r'(?i)spread|handicap', q): return 'spread'
     if re.search(r'(?i)o/u|over/under|total', q):
-        return 'prop' if re.search(r'(?i)points|rebounds|assists|yards|goals scored by|strikeouts|hits|shots|kills|touchdowns', q) and ':' in q else 'total'
-    if re.search(r'(?i)points|rebounds|assists|yards|strikeouts|touchdown|to score', q): return 'prop'
+        return 'prop' if info.get('player') or (match_stat(q) and ':' in (q or '') and not re.search(r'(?i)^.+vs.+?:\s*(1st half |first half )?o/?u', q or '')) else 'total'
+    if match_stat(q) and not re.search(r'(?i)^spread:|^will ', q or ''): return 'prop'
     return 'other'
 KCACHE, LCACHE = {}, {}
 def kal_for(info, side, avg, cp, key):
@@ -657,16 +810,36 @@ for s in ONK[:30]:
 # Glue (shown on Top 20 page, not singles): Kalshi ok, 2+ whales, 95¢+, not started.
 # Fun: remaining Kalshi-ok, 1+, not started (includes under-45 as Small, Split <55%, Pricier, 1-whale, 95¢+ 1-whale as glue).
 # Poly: Kalshi-free only, hide started; never duplicates a Kalshi-tab pick.
+def is_prop_sig(s):
+    info = s.get('info') or {}
+    q = s.get('question') or ''
+    if is_btts(q): return False
+    return info.get('kind') == 'prop' or bet_kind(info, q) == 'prop'
+def is_long_sig(s):
+    px = s.get('used_price')
+    if px is None or px < 0.10 or px > 0.20: return False
+    if len(s.get('backers') or []) < 2: return False
+    if is_started(s): return False
+    if (s.get('one_sided_share') or 0) < 0.55: return False
+    return True
+PROPS, LONGSHOTS, _pl = [], [], set()
+for s in signals:
+    if is_started(s) or not s['backers']: continue
+    if is_long_sig(s):
+        LONGSHOTS.append(s); _pl.add(s['id'])
+    if is_prop_sig(s):
+        PROPS.append(s); _pl.add(s['id'])
+PROPS.sort(key=rank_key); LONGSHOTS.sort(key=rank_key)
 CONS, GLUE, FUN, _mk = [], [], [], set()
 for s in ONK:
-    if is_started(s) or not s['backers'] or s['market_id'] in _mk: continue
+    if is_started(s) or not s['backers'] or s['market_id'] in _mk or s['id'] in _pl or is_prop_sig(s): continue
     n = len(s['backers']); band = s['price_band']; share = s['one_sided_share']
     if n >= A.wallets and band == 'glue':
         GLUE.append(s); _mk.add(s['market_id']); continue
     if n >= A.wallets and band not in ('longshot', 'glue') and share >= 0.55 and not s['pricier']:
         CONS.append(s); _mk.add(s['market_id']); continue
 for s in ONK:
-    if is_started(s) or s in CONS or s in GLUE or s['market_id'] in _mk or not s['backers']: continue
+    if is_started(s) or s in CONS or s in GLUE or s['market_id'] in _mk or not s['backers'] or s['id'] in _pl or is_prop_sig(s) or is_long_sig(s): continue
     FUN.append(s); _mk.add(s['market_id'])
 # Keep only the top 20 on the Top 20 list; overflow eligible picks still show on Fun.
 if len(CONS) > 20:
@@ -678,6 +851,7 @@ POLY, _pmk = [], set()
 for s in OFFK:
     if is_started(s) or not s['backers']: continue
     if s['market_id'] in _mk or s['market_id'] in _pmk: continue  # already on a Kalshi tab, or weaker side of a poly market
+    if s['id'] in _pl or is_prop_sig(s) or is_long_sig(s): continue  # Props / Longshots tabs own these
     POLY.append(s); _pmk.add(s['market_id'])
 NOT_ON_KALSHI = OFFK
 # names may have been learned from market detail: refresh
@@ -697,10 +871,12 @@ for s in CONS[:3]:
 HP = os.path.join(HERE, 'history.json')
 hist = json.load(open(HP)) if os.path.exists(HP) else {'scans': [], 'picks': {}}
 cur_ids = set()
-for s in CONS[:20] + GLUE[:12] + FUN[:20] + POLY[:20]:
+for s in CONS[:20] + GLUE[:12] + FUN[:20] + POLY[:20] + PROPS[:20] + LONGSHOTS[:20]:
     cur_ids.add(s['id']); p = hist['picks'].get(s['id'])
     k = s['kalshi']
-    if s in POLY: tier = 'poly'
+    if s in LONGSHOTS: tier = 'longshots'
+    elif s in PROPS: tier = 'props'
+    elif s in POLY: tier = 'poly'
     elif s in FUN: tier = 'fun'
     elif s in GLUE: tier = 'glue'
     else: tier = 'top'
@@ -719,7 +895,7 @@ for pid, p in hist['picks'].items():
         py = m.get('price_yes')
         if py is not None and py in (0, 1) or (py is not None and (py >= 0.99 or py <= 0.01)):
             won = (py >= 0.99) == (p['side'] == 'yes'); p['result'] = 'W' if won else 'L'; p['graded'] = NOW
-hist['scans'].append(dict(ts=NOW, signals=len(CONS), fun=len(FUN), poly=len(POLY), glue=len(GLUE), calls=CALLS['n'], cappers=len(cappers), bets=len(BETS), buys=len(BUYS), wallets=len(POS)))
+hist['scans'].append(dict(ts=NOW, signals=len(CONS), fun=len(FUN), poly=len(POLY), glue=len(GLUE), props=len(PROPS), longshots=len(LONGSHOTS), calls=CALLS['n'], cappers=len(cappers), bets=len(BETS), buys=len(BUYS), wallets=len(POS)))
 hist['scans'] = hist['scans'][-50:]
 json.dump(hist, open(HP, 'w'), indent=1)
 # ---------- 12. Output ----------
@@ -758,7 +934,7 @@ def risks(s_):
     if s_.get('pricier') and s_.get('over_cents') is not None: r.append(f"Pricier: current price is {s_['over_cents']}¢ above the whales' average entry.")
     if (s_.get('game') or {}).get('src') != 'ESPN': r.append('Start time not confirmed by ESPN (' + (s_.get('game') or {}).get('src', 'unknown') + ').')
     return r
-for s_ in CONS + FUN + POLY + GLUE: s_['risks'] = risks(s_)
+for s_ in CONS + FUN + POLY + GLUE + PROPS + LONGSHOTS: s_['risks'] = risks(s_)
 out = dict(scannedAt=pt(NOW), ts=NOW, secs=round(time.time() - T0), settings=dict(cappers=A.cappers, min=A.min, wallets=A.wallets, markets=A.markets, windowH=12),
     coverage=dict(cappers=len(cappers), qualified=sum(qualifies(c) for c in cappers.values()), golden=sum(golden(c) for c in cappers.values()),
                   marketsFound=found_markets, marketsInWindow=in_window, marketsScanned=min(30, len(ONK)), hedgedExcluded=two_sided, twoSidedExcluded=two_sided, lbAll=LB, lb30=LB, notOnKalshi=len(NOT_ON_KALSHI), picksOnKalshi=len(ONK), sideGroups=len(signals),
@@ -767,13 +943,14 @@ out = dict(scannedAt=pt(NOW), ts=NOW, secs=round(time.time() - T0), settings=dic
                   espnLeagues=len({k[0] for k in ESPN})),
     signals=[slim(s) for s in CONS[:20]], totalSignals=len(CONS), fun=[slim(s) for s in FUN[:20]], totalFun=len(FUN),
     poly=[slim(s) for s in POLY[:20]], totalPoly=len(POLY), glue=[slim(s) for s in GLUE[:12]], totalGlue=len(GLUE),
+    props=[slim(s) for s in PROPS[:20]], totalProps=len(PROPS), longshots=[slim(s) for s in LONGSHOTS[:20]], totalLongshots=len(LONGSHOTS),
     bets=BETS[:220], buys=BUYS[:160], traders=TRADERS,
     history=sorted([dict(id=k, **{kk: v[kk] for kk in ('tier', 'q', 'label', 'score', 'whales', 'invested', 'start', 'kalshi', 'kprice', 'first_seen', 'last_seen', 'scans', 'result', 'graded') if kk in v},
                          active=k in cur_ids) for k, v in hist['picks'].items()], key=lambda x: -x['last_seen'])[:80],
     scans=hist['scans'][-20:])
 json.dump(out, open(os.path.join(HERE, 'page_data.json'), 'w'), separators=(',', ':'))
-print(f"consensus={len(CONS)} fun={len(FUN)} poly={len(POLY)} glue={len(GLUE)} all={len(signals)} groups={len(signals)} onKalshi={len(ONK)} offKalshi={len(OFFK)} cappers={len(cappers)} orca_calls={CALLS['n']} errors={len(CALLS['errors'])} secs={out['secs']} kalshi_ok={out['coverage']['kalshiMatched']}")
-for s in CONS[:8] + GLUE[:2] + FUN[:3] + POLY[:3]: print(len(s['backers']), s['net'], s.get('one_sided_share'), s.get('price_band'), s.get('strength'), s['question'], '|', s['label'], '|', s['invested'], '|', s['kalshi'].get('action'), s['kalshi'].get('contract'), s['kalshi'].get('price'), 'poly' if s in POLY else ('glue' if s in GLUE else ('fun' if s in FUN else 'top')))
+print(f"consensus={len(CONS)} fun={len(FUN)} poly={len(POLY)} glue={len(GLUE)} props={len(PROPS)} longshots={len(LONGSHOTS)} all={len(signals)} groups={len(signals)} onKalshi={len(ONK)} offKalshi={len(OFFK)} cappers={len(cappers)} orca_calls={CALLS['n']} errors={len(CALLS['errors'])} secs={out['secs']} kalshi_ok={out['coverage']['kalshiMatched']}")
+for s in CONS[:8] + GLUE[:2] + FUN[:3] + POLY[:3] + PROPS[:3] + LONGSHOTS[:3]: print(len(s['backers']), s['net'], s.get('one_sided_share'), s.get('price_band'), s.get('strength'), s['question'], '|', s['label'], '|', s['invested'], '|', s['kalshi'].get('action'), s['kalshi'].get('contract'), s['kalshi'].get('price'), 'longshot' if s in LONGSHOTS else ('prop' if s in PROPS else ('poly' if s in POLY else ('glue' if s in GLUE else ('fun' if s in FUN else 'top')))))
 # ---------- 13. Page embed (wallets kept for Polymarket profile links) ----------
 for b_ in BETS: b_.pop('_info', None)
 emb = json.loads(json.dumps(out))
