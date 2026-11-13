@@ -87,11 +87,21 @@ emb = json.load(open(os.path.join(HERE, 'page_embed.json')))
 HP = os.path.join(HERE, 'history.json'); hist = json.load(open(HP)) if os.path.exists(HP) else {'scans': [], 'picks': {}}
 n_espn = n_k = 0
 emb.setdefault('poly', [])
-def pick_lists(): return emb['signals'] + emb['fun'] + emb['poly']
+emb.setdefault('glue', [])
+def pick_lists(): return emb['signals'] + emb['fun'] + emb['poly'] + emb['glue']
 def pick_tier(p):
     if p in emb['poly']: return 'poly'
     if p in emb['fun']: return 'fun'
+    if p in emb['glue']: return 'glue'
     return 'top'
+def has_started(p):
+    r = p.get('refresh') or {}
+    g = p.get('game') or {}
+    if r.get('state') in ('in', 'post') or g.get('state') in ('in', 'post'): return True
+    if r.get('ended') or r.get('final'): return True
+    ts = p.get('startTs')
+    if ts and ts <= NOW: return True
+    return False
 for p in pick_lists():
     e, why = find_game(p)
     r = dict(at=NOW)
@@ -125,15 +135,17 @@ for p in pick_lists():
                                           kprice=k.get('price'), first_seen=emb.get('ts'), last_seen=emb.get('ts'), scans=1, result=None, tier=pick_tier(p))
     if r.get('final') in ('W', 'L') and not h.get('result'): h['result'] = r['final']; h['graded'] = NOW
     if r.get('ended'): h['ended'] = NOW; h['finalScore'] = r.get('score') or ''; h['active'] = False
-# Noel's rule: ended games are REMOVED from the lists (W/L already written to the journal above)
+# Ended games: W/L already written to the journal above; drop from every list including Bets/Buys.
+# Started (live) games: drop from Top 20, Fun, Polymarket, and Glue; keep on Bets with a Live tag.
 ENDED = {p['id'].rsplit(':', 1)[0] for p in pick_lists() if (p.get('refresh') or {}).get('ended')}
-before = (len(emb['signals']), len(emb['fun']), len(emb['poly']), len(emb['bets']), len(emb['buys']))
-emb['signals'] = [p for p in emb['signals'] if not p['refresh'].get('ended')]
-emb['fun'] = [p for p in emb['fun'] if not p['refresh'].get('ended')]
-emb['poly'] = [p for p in emb['poly'] if not (p.get('refresh') or {}).get('ended')]
+before = (len(emb['signals']), len(emb['fun']), len(emb['poly']), len(emb.get('glue') or []), len(emb['bets']), len(emb['buys']))
+emb['signals'] = [p for p in emb['signals'] if not has_started(p)]
+emb['fun'] = [p for p in emb['fun'] if not has_started(p)]
+emb['poly'] = [p for p in emb['poly'] if not has_started(p)]
+emb['glue'] = [p for p in emb['glue'] if not has_started(p)]
 emb['bets'] = [b for b in emb['bets'] if b.get('cid') not in ENDED and (b.get('game') or {}).get('state') != 'post']
 emb['buys'] = [b for b in emb['buys'] if b.get('cid') not in ENDED and (b.get('game') or {}).get('state') != 'post']
-removed = [a - len(x) for a, x in zip(before, (emb['signals'], emb['fun'], emb['poly'], emb['bets'], emb['buys']))]
+removed = [a - len(x) for a, x in zip(before, (emb['signals'], emb['fun'], emb['poly'], emb['glue'], emb['bets'], emb['buys']))]
 known = {h['id'] for h in emb.get('history', [])}
 for pid, hp in hist['picks'].items():
     if pid not in known and hp.get('ended'):
@@ -143,8 +155,8 @@ for h in emb.get('history', []):
     if hp.get('result'): h['result'] = hp['result']; h['graded'] = hp.get('graded')
     if hp.get('ended'): h['active'] = False
 emb['refreshedAt'] = pt(NOW); emb['refreshTs'] = NOW
-emb.setdefault('refreshes', []).append(dict(ts=NOW, espnGames=n_espn, kalshiChecks=n_k, removedEnded=removed))
+emb.setdefault('refreshes', []).append(dict(ts=NOW, espnGames=n_espn, kalshiChecks=n_k, removedStartedOrEnded=removed))
 json.dump(hist, open(HP, 'w'), indent=1)
 json.dump(emb, open(os.path.join(HERE, 'page_embed.json'), 'w'), separators=(',', ':'))
 subprocess.run([sys.executable, os.path.join(HERE, 'compact.py')])
-print(f"refreshed {pt(NOW)}: {len(emb['signals'])} top + {len(emb['fun'])} fun + {len(emb['poly'])} poly picks, ESPN games matched {n_espn}, Kalshi checks {n_k}, ended games removed (top/fun/poly/bets/buys) {removed}, OrcaLayer calls 0")
+print(f"refreshed {pt(NOW)}: {len(emb['signals'])} top + {len(emb['fun'])} fun + {len(emb['poly'])} poly + {len(emb.get('glue') or [])} glue picks, ESPN games matched {n_espn}, Kalshi checks {n_k}, started/ended removed (top/fun/poly/glue/bets/buys) {removed}, OrcaLayer calls 0")

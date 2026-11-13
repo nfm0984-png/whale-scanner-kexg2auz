@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """OrcaLayer whale scanner (snapshot). Whale data: OrcaLayer API only. Kalshi: contract match + price. ESPN: schedule/scores.
 Usage: python3 scan.py [--cappers 100 (any positive integer)] [--min 500]
-Whales = top N sports whales by 30-day P&L (OrcaLayer /api/v2/business/pnl-leaderboard?window=30), processed #1 first."""
-import json, time, math, re, sys, os, argparse, urllib.request, collections, datetime as dt
+Whales = top N sports whales by all-time P&L (OrcaLayer /api/v2/whales/leaderboard?sort=pnl; pnl-leaderboard only supports window=7|30), processed #1 first."""
+import json, time, math, re, sys, os, argparse, urllib.request, collections, datetime as dt, hashlib
 from concurrent.futures import ThreadPoolExecutor
 from orca import orca, CALLS
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -19,60 +19,94 @@ def pub(url):
             with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'orca-scanner/1.0'}), timeout=30) as r: return json.load(r)
         except Exception: time.sleep(2 * (i + 1))
     return None
-# ---------- 1. Whale universe: top N SPORTS whales ranked by 30-day P&L, processed in rank order (#1 first) ----------
-# OrcaLayer GET /api/v2/business/pnl-leaderboard?window=30&order=desc (30 Polymarket days, realized P&L). Walk the list from rank 1 down;
-# open positions are loaded 20 wallets at a time in that same order (POST /api/v2/wallets/positions), so the biggest whales are always covered first.
+# ---------- 1. Whale universe: top N SPORTS whales ranked by ALL-TIME P&L, processed in rank order (#1 first) ----------
+# Verified 2026-11-12: /api/v2/business/pnl-leaderboard only accepts window=7 or 30 (window=all/0/90/365/9999 -> 400/422; omit window defaults to 7).
+# All-time realized P&L is GET /api/v2/whales/leaderboard?sort=pnl&filter=all (same ranking as /api/leaderboard?period=All Time).
+# Walk from all-time #1 down; open positions are loaded 20 wallets at a time in that order.
 # A wallet counts as a sports whale when >= 50% of its open position cost is in SPORTS markets.
+# 30-day P&L is fetched once afterwards (cheap: pnl-leaderboard window=30) as secondary info only.
 cappers, POS = {}, {}
-LB30 = dict(endpoint='/api/v2/business/pnl-leaderboard', params='window=30, order=desc', asOf=None, start=None, end=None, scanned=0, skippedNonSports=0, skippedNoPositions=0, deepestRank=0, pendingRetried=0, unavailable=0)
+LB = dict(endpoint='/api/v2/whales/leaderboard', params='sort=pnl, filter=all (all-time P&L)', asOf=None, start=None, end='all-time', scanned=0, skippedNonSports=0, skippedNoPositions=0, deepestRank=0, pendingRetried=0, unavailable=0)
 def fetch_pos(ws, wait):
     d = orca('/api/v2/wallets/positions', body={'wallets': ws}, tries=2 if wait else 1, timeout=60, wait202=wait)
     if d is None or d.get('_pending'): return None
     return {(x.get('wallet') or '').lower(): ((x.get('data') or {}).get('positions') or []) for x in d.get('results', []) if x.get('status') == 'ok'}
+def lb_rows(raw, offset):
+    out = []
+    for i, r in enumerate(raw):
+        res = r.get('resolved_markets') or 0; won = r.get('wins') or r.get('resolved_won') or 0
+        wr = r.get('win_rate')
+        if wr is None and res: wr = round(100 * won / res, 1)
+        out.append(dict(rank=offset + i + 1, wallet=r['wallet'], name=r.get('name') or r.get('display_name'),
+                        pnl_usd=r.get('total_pnl') if r.get('total_pnl') is not None else r.get('pnl_usd'),
+                        volume_usd=r.get('total_volume') if r.get('total_volume') is not None else r.get('volume_usd'),
+                        trades=r.get('total_trades') or r.get('trades'), resolved_markets=res, resolved_won=won,
+                        win_rate=wr, profit_factor=r.get('profit_factor'), skill_badge=r.get('skill_badge'),
+                        skill_edge_cents=r.get('skill_edge_cents'), market_win_rate=r.get('market_win_rate'),
+                        last_trade_ts=r.get('last_trade_ts'), avg_entry_price=r.get('avg_entry_price')))
+    return out
 CAND, PENDING = [], []
 def classify(r, ps):
-    LB30['scanned'] += 1
+    LB['scanned'] += 1
     ps = [p for p in ps if not p.get('closed')]
     tot = sum(p.get('cost') or p.get('initial_value') or 0 for p in ps)
     sp = sum(p.get('cost') or p.get('initial_value') or 0 for p in ps if p.get('category') == 'SPORTS')
-    if not ps or tot <= 0: LB30['skippedNoPositions'] += 1; return
-    if sp / tot < 0.5: LB30['skippedNonSports'] += 1; return
+    if not ps or tot <= 0: LB['skippedNoPositions'] += 1; return
+    if sp / tot < 0.5: LB['skippedNonSports'] += 1; return
     CAND.append((r, ps, round(100 * sp / tot, 1)))
 _off = 0
 while len(CAND) < A.cappers and _off < 5000:
-    d = orca('/api/v2/business/pnl-leaderboard', {'window': 30, 'order': 'desc', 'limit': 500, 'offset': _off})
-    rows = sorted((d or {}).get('rows') or [], key=lambda r: r['rank'])
-    if not rows: break
-    if not LB30['asOf']: LB30.update(asOf=d.get('as_of'), start=d.get('window_start'), end=d.get('window_end'))
-    _off += len(rows)
+    d = orca('/api/v2/whales/leaderboard', {'sort': 'pnl', 'filter': 'all', 'limit': 100, 'offset': _off, 'min_markets': 0})
+    raw = (d or {}).get('whales') or []
+    if not raw: break
+    rows = lb_rows(raw, _off)
+    _off += len(raw)
     for i in range(0, len(rows), 20):
         if len(CAND) >= A.cappers: break
-        chunk = rows[i:i + 20]; LB30['deepestRank'] = chunk[-1]['rank']
+        chunk = rows[i:i + 20]; LB['deepestRank'] = chunk[-1]['rank']
         _t = time.time(); got = fetch_pos([r['wallet'] for r in chunk], False)
-        if got is None: PENDING.append(chunk); print(f"  30d ranks {chunk[0]['rank']}-{chunk[-1]['rank']}: OrcaLayer still computing, will retry", flush=True); continue
+        if got is None: PENDING.append(chunk); print(f"  all-time ranks {chunk[0]['rank']}-{chunk[-1]['rank']}: OrcaLayer still computing, will retry", flush=True); continue
         for r in chunk: classify(r, got.get(r['wallet'].lower(), []))
-        print(f"  30d ranks {chunk[0]['rank']}-{chunk[-1]['rank']}: positions in {time.time()-_t:.0f}s, sports whales so far {len(CAND)}", flush=True)
-    if len(rows) < 500: break
+        print(f"  all-time ranks {chunk[0]['rank']}-{chunk[-1]['rank']}: positions in {time.time()-_t:.0f}s, sports whales so far {len(CAND)}", flush=True)
+    if len(raw) < 100: break
 for chunk in PENDING:  # higher-ranked wallets that were still being computed: retry (waiting this time), split if needed
-    LB30['pendingRetried'] += len(chunk)
+    LB['pendingRetried'] += len(chunk)
     got = fetch_pos([r['wallet'] for r in chunk], True)
     if got is None:
         got = {}
         for j in range(0, len(chunk), 5):
             g2 = fetch_pos([r['wallet'] for r in chunk[j:j + 5]], True)
-            if g2 is None: LB30['unavailable'] += len(chunk[j:j + 5])
+            if g2 is None: LB['unavailable'] += len(chunk[j:j + 5])
             else: got.update(g2)
     for r in chunk:
         if r['wallet'].lower() in got: classify(r, got[r['wallet'].lower()])
-    print(f"  retried 30d ranks {chunk[0]['rank']}-{chunk[-1]['rank']}: sports whales so far {len(CAND)}", flush=True)
+    print(f"  retried all-time ranks {chunk[0]['rank']}-{chunk[-1]['rank']}: sports whales so far {len(CAND)}", flush=True)
 CAND.sort(key=lambda c_: c_[0]['rank'])
-for r, ps, spct in CAND[:A.cappers]:  # rank order: #1 of the 30-day leaderboard first
+for r, ps, spct in CAND[:A.cappers]:  # rank order: all-time #1 first
     w = r['wallet'].lower(); res = r.get('resolved_markets') or 0; won = r.get('resolved_won') or 0
-    cappers[w] = dict(wallet=w, name=None, rank=len(cappers) + 1, rank30=r['rank'], total_pnl=r.get('pnl_usd'), total_volume=r.get('volume_usd'),
-                      win_rate=round(100 * won / res, 1) if res else None, resolved_markets=res, wins=won, losses=res - won, sports_pct=spct, trades=r.get('trades'))
+    cappers[w] = dict(wallet=w, name=r.get('name'), rank=len(cappers) + 1, rankAll=r['rank'], rank30=None, pnl30=None,
+                      total_pnl=r.get('pnl_usd'), total_volume=r.get('volume_usd'),
+                      win_rate=r.get('win_rate') if r.get('win_rate') is not None else (round(100 * won / res, 1) if res else None),
+                      resolved_markets=res, wins=won, losses=(res - won) if res else None, sports_pct=spct, trades=r.get('trades'),
+                      profit_factor=r.get('profit_factor'), skill_badge=r.get('skill_badge'), skill_edge_cents=r.get('skill_edge_cents'),
+                      market_win_rate=r.get('market_win_rate'), last_trade_ts=r.get('last_trade_ts'), avg_entry_price=r.get('avg_entry_price'))
     POS[w] = ps
-print(f"whales: {len(cappers)} sports whales from 30d ranks 1-{LB30['deepestRank']} (skipped {LB30['skippedNonSports']} non-sports, {LB30['skippedNoPositions']} with no open positions)")
-def qualifies(c): return bool(c)  # only the top-N 30-day whales count
+# Cheap secondary: 30-day PnL/rank for wallets that appear on the 30-day leaderboard (a few calls, not per-wallet).
+PNL30 = {}
+for off in range(0, 2000, 500):
+    d30 = orca('/api/v2/business/pnl-leaderboard', {'window': 30, 'order': 'desc', 'limit': 500, 'offset': off})
+    rows30 = (d30 or {}).get('rows') or []
+    if not rows30: break
+    for r in rows30:
+        PNL30[(r.get('wallet') or '').lower()] = dict(rank=r.get('rank'), pnl=r.get('pnl_usd'),
+                                                      resolved=r.get('resolved_markets'), won=r.get('resolved_won'))
+    if len(rows30) < 500: break
+for w, c in cappers.items():
+    x = PNL30.get(w)
+    if x:
+        c['rank30'] = x.get('rank'); c['pnl30'] = x.get('pnl')
+print(f"whales: {len(cappers)} sports whales from all-time ranks 1-{LB['deepestRank']} (skipped {LB['skippedNonSports']} non-sports, {LB['skippedNoPositions']} with no open positions); 30d PnL attached for {sum(1 for c in cappers.values() if c.get('pnl30') is not None)}")
+def qualifies(c): return bool(c)  # only the top-N all-time sports whales count
 def golden(c): return bool(c) and ((c.get('rank') or 999) <= 10 or ((c.get('win_rate') or 0) >= 60 and (c.get('resolved_markets') or 0) >= 20))
 def qual_h(wallet, wr=None, pnl=None, known=True): return (wallet or '').lower() in cappers
 def gold_h(wallet, wr=None, pnl=None, skill=False): return golden(cappers.get((wallet or '').lower()))
@@ -437,7 +471,7 @@ for w, ps in POS.items():
         g, ts = loc_for(info, mrow.get('end_date'), kal, p.get('condition_id'))
         if not in_win2(g, ts, sd): continue
         st['bets'] += 1; st['value'] += p.get('current_value') or 0
-        BETS.append(dict(wallet=w, name=wname(w), rank=c.get('rank'), rank30=c.get('rank30'), _info=info, lastTs=p.get('last_trade_ts'), wr=c.get('win_rate'), resolved=c.get('resolved_markets'), cpnl=round(c.get('total_pnl') or 0),
+        BETS.append(dict(wallet=w, name=wname(w), rank=c.get('rank'), rankAll=c.get('rankAll'), rank30=c.get('rank30'), _info=info, lastTs=p.get('last_trade_ts'), wr=c.get('win_rate'), resolved=c.get('resolved_markets'), cpnl=round(c.get('total_pnl') or 0),
                          qualified=qualifies(c), golden=golden(c), skill=bool(c.get('skill_badge')),
                          q=p.get('question'), slug=slug, market_id=str(p.get('market_id')), cid=p.get('condition_id'), side=side,
                          label=info.get(side) or p.get('outcome'), outcome=p.get('outcome'), kind=bet_kind(info, p.get('question') or ''), league=info['league'].upper(),
@@ -459,7 +493,7 @@ for r in RAW_BUYS:
     g, ts = loc_for(info, mrow.get('end_date'), kal, r['condition_id'])
     if not in_win2(g, ts, sd): continue
     c = cappers.get((r['wallet'] or '').lower())
-    BUYS.append(dict(ts=r['ts'], wallet=r['wallet'], name=wname(r['wallet']), rank30=(c or {}).get('rank30'), wr=r['wr'], wpnl=round(r['wpnl'] or 0), top100=bool(c), rank=(c or {}).get('rank'),
+    BUYS.append(dict(ts=r['ts'], wallet=r['wallet'], name=wname(r['wallet']), rankAll=(c or {}).get('rankAll'), rank30=(c or {}).get('rank30'), wr=r['wr'], wpnl=round(r['wpnl'] or 0), top100=bool(c), rank=(c or {}).get('rank'),
                      golden=gold_h(r['wallet'], r['wr'], r['wpnl']), q=r['q'], slug=r['slug'], market_id=r['market_id'], cid=r['condition_id'], side=r['side'],
                      label=info.get(r['side']) or r['side'].upper(), kind=bet_kind(info, r['q'] or ''), league=info['league'].upper(), price=r['price'], now=r['now'],
                      usd=r['usd'], shares=round(r['shares'] or 0, 1), posCost=round(pc), hedged=bool(pc and oc > 0.25 * pc), kalshi=kal, game=g, startTs=int(ts) if ts else None, phase=phase(g, ts)))
@@ -510,7 +544,7 @@ for r_ in BETS + BUYS:
         g0, t0 = _ev[evkey(r_['slug'])]; r_['game'] = dict(g0, src=(g0.get('src') or '') + ' (same match)'); r_['startTs'] = t0
     r_['phase'] = phase(r_['game'], r_.get('startTs'))
 # ---------- 16. Picks: group the whales' open $500+ positions by market side ----------
-# Rank (Noel): most proven $500+ whales first, then most money, then less money against, then better 30-day rank; score parts only break remaining ties.
+# Rank (Noel): price band first (65-84¢ best), then totals over spreads, then net money / one-sided share, then whale count, then all-time rank.
 # Kalshi tabs (Top 20, Fun): a pick must have a verified Kalshi contract. Top 20 needs 2+ whales; Fun needs 1+.
 # Polymarket tab: the same rules ($500+, 12h window, no hedgers) but NO Kalshi contract. Never duplicates a Kalshi-tab pick.
 def score(s):
@@ -533,12 +567,12 @@ for (cid, side), bs in grp.items():
     inv = sum(b['cost'] for b in bs); oppm = sum(b['cost'] for b in opp)
     avg = sum(b['cost'] * (b['avg'] or 0) for b in bs) / inv if inv else None
     f24 = sum(FLOW[(b['wallet'], cid, side)][0] for b in bs); f24o = sum(FLOW[(b['wallet'], cid, oside(side))][0] for b in opp)
-    backers = [dict(wallet=b['wallet'], name=b['name'], cost=b['cost'], avg=b['avg'], wr=b['wr'], resolved=b['resolved'], pnl=b['cpnl'], rank=b['rank'], rank30=b.get('rank30'),
+    backers = [dict(wallet=b['wallet'], name=b['name'], cost=b['cost'], avg=b['avg'], wr=b['wr'], resolved=b['resolved'], pnl=b['cpnl'], rank=b['rank'], rankAll=b.get('rankAll') or (cappers.get(b['wallet']) or {}).get('rankAll'), rank30=b.get('rank30'),
                     golden=b['golden'], skill=False, top100=True, first_ts=b['firstTs'], last_ts=b.get('lastTs'), trades=None,
                     buy24=round(FLOW[(b['wallet'], cid, side)][0]), sell24=round(FLOW[(b['wallet'], cid, side)][1]),
                     flow=('Buying more' if FLOW[(b['wallet'], cid, side)][0] > FLOW[(b['wallet'], cid, side)][1] else ('Trimming' if FLOW[(b['wallet'], cid, side)][1] > 0 else 'Holding'))) for b in sorted(bs, key=lambda x: (x.get('rank') or 999))]
     signals.append(dict(id=f"{cid}:{side}", market_id=b0['market_id'], condition_id=cid, question=b0['q'], slug=b0['slug'], side=side, label=b0['label'], info=b0['_info'],
-        price=b0['now'], backers=backers, opposing=[dict(name=o['name'], wallet=o['wallet'], cost=o['cost'], avg=o['avg'], wr=o['wr'], qualified=True, golden=o['golden'], rank=o['rank'], rank30=(cappers.get(o['wallet']) or {}).get('rank30')) for o in opp],
+        price=b0['now'], backers=backers, opposing=[dict(name=o['name'], wallet=o['wallet'], cost=o['cost'], avg=o['avg'], wr=o['wr'], qualified=True, golden=o['golden'], rank=o['rank'], rankAll=(cappers.get(o['wallet']) or {}).get('rankAll'), rank30=(cappers.get(o['wallet']) or {}).get('rank30')) for o in opp],
         invested=inv, avg_entry=avg, opp_money=oppm, opp_count=len(opp), opp_qualified=len(opp), golden=sum(b['golden'] for b in bs), net=inv - oppm,
         fresh24=round(f24), fresh24_opp=round(f24o), side_total_all=None, side_count_all=None, opp_total_all=None, opp_count_all=None, hedge_all=None,
         kalshi=b0['kalshi'], game=b0['game'], start_ts=b0['startTs'], risks=[]))
@@ -547,9 +581,62 @@ for s in signals:
         s['kalshi'] = dict(s['kalshi'], edge_vs_whales=round((s['avg_entry'] - s['kalshi']['price']) * 100, 1)); e_ = s['kalshi']['edge_vs_whales']
         s['kalshi']['light'] = 'green' if e_ >= 0 else ('yellow' if e_ >= -5 else 'red')
     score(s)
+def used_price(s):
+    k = s['kalshi']
+    if k.get('status') == 'ok' and k.get('price') is not None: return k['price']
+    return s.get('price')
+def price_band(px):
+    if px is None: return 'mid'
+    c = px * 100
+    if c < 45: return 'longshot'
+    if c >= 95: return 'glue'
+    if 65 <= c <= 84: return 'best'
+    return 'mid'
+def is_started(s):
+    g = s.get('game') or {}
+    if g.get('state') in ('in', 'post'): return True
+    ts = s.get('start_ts')
+    if ts and ts <= NOW: return True
+    return False
+def one_share(s):
+    tot = (s['invested'] or 0) + (s['opp_money'] or 0)
+    return (s['invested'] / tot) if tot > 0 else 1.0
+def over_cents(s):
+    px, avg = used_price(s), s.get('avg_entry')
+    if px is None or not avg: return None
+    return round((px - avg) * 100, 1)
+def pick_id(s):
+    return hashlib.sha1(s['id'].encode()).hexdigest()[:6].upper()
+def strength_of(s):
+    n = len(s['backers']); share = s['one_sided_share']; band = s['price_band']; kind = (s.get('info') or {}).get('kind')
+    # caps first: under 45, 95+, Split (share < 65%) never Go big
+    if band == 'longshot' or band == 'glue' or share < 0.65:
+        return 'Small'
+    word = 'Go big' if (n >= 3 or (s['invested'] >= 10000 and (not s['opp_money'] or s['opp_money'] < s['invested'] * 0.15))) else ('Normal' if n >= 2 else 'Small')
+    # spreads cap at Normal unless 3+ whales and share >= 65%
+    if kind == 'spread' and not (n >= 3 and share >= 0.65) and word == 'Go big':
+        word = 'Normal'
+    return word
+def annotate(s):
+    s['used_price'] = used_price(s)
+    s['price_band'] = price_band(s['used_price'])
+    s['one_sided_share'] = one_share(s)
+    s['split'] = s['one_sided_share'] < 0.65
+    s['over_cents'] = over_cents(s)
+    s['pricier'] = s['over_cents'] is not None and s['over_cents'] > 3
+    s['too_pricier'] = s['over_cents'] is not None and s['over_cents'] > 5
+    s['started'] = is_started(s)
+    s['pick_id'] = pick_id(s)
+    s['strength'] = strength_of(s)
+    s['glue'] = s['price_band'] == 'glue'
 def best_rank(s):
-    return min((b.get('rank30') or b.get('rank') or 999) for b in s['backers']) if s['backers'] else 999
-def rank_key(s): return (-len(s['backers']), -s['invested'], s['opp_money'], best_rank(s), -s['score'])
+    return min((b.get('rankAll') or b.get('rank') or b.get('rank30') or 999) for b in s['backers']) if s['backers'] else 999
+# New Top 20 order: price band (best 65-84 first, then mid), totals boost, then net money, one-sided share, whale count, all-time rank.
+def rank_key(s):
+    band = 0 if s.get('price_band') == 'best' else (1 if s.get('price_band') == 'mid' else 2)
+    total = 0 if (s.get('info') or {}).get('kind') == 'total' else 1
+    return (band, total, -(s.get('net') or 0), -(s.get('one_sided_share') or 0), -len(s['backers']), best_rank(s), -(s.get('score') or 0))
+for s in signals: annotate(s)
 signals.sort(key=rank_key)
 ONK = [s for s in signals if s['kalshi'].get('status') == 'ok']
 OFFK = [s for s in signals if s['kalshi'].get('status') != 'ok']
@@ -565,18 +652,31 @@ for s in ONK[:30]:
         for h in d.get(key) or []:
             w = (h.get('wallet') or '').lower()
             if w in cappers and h.get('name') and not cappers[w].get('name'): cappers[w]['name'] = h['name']
-CONS, _mk = [], set()
+# Eligibility:
+# Top 20: Kalshi ok, 2+ whales, not started, not under 45¢, not 95¢+, one-sided share >= 55%, not overpriced >3¢ vs whale avg entry.
+# Glue (shown on Top 20 page, not singles): Kalshi ok, 2+ whales, 95¢+, not started.
+# Fun: remaining Kalshi-ok, 1+, not started (includes under-45 as Small, Split <55%, Pricier, 1-whale, 95¢+ 1-whale as glue).
+# Poly: Kalshi-free only, hide started; never duplicates a Kalshi-tab pick.
+CONS, GLUE, FUN, _mk = [], [], [], set()
 for s in ONK:
-    if len(s['backers']) >= A.wallets and s['market_id'] not in _mk: CONS.append(s); _mk.add(s['market_id'])
-FUN = []
+    if is_started(s) or not s['backers'] or s['market_id'] in _mk: continue
+    n = len(s['backers']); band = s['price_band']; share = s['one_sided_share']
+    if n >= A.wallets and band == 'glue':
+        GLUE.append(s); _mk.add(s['market_id']); continue
+    if n >= A.wallets and band not in ('longshot', 'glue') and share >= 0.55 and not s['pricier']:
+        CONS.append(s); _mk.add(s['market_id']); continue
 for s in ONK:
-    if s in CONS or s['market_id'] in _mk or not s['backers']: continue
+    if is_started(s) or s in CONS or s in GLUE or s['market_id'] in _mk or not s['backers']: continue
     FUN.append(s); _mk.add(s['market_id'])
-# Polymarket-only tab: every unmatched pick that passed the shared rules. 2+ whale picks already sort first.
-# A pick with a verified Kalshi contract is NEVER placed here (ONK / CONS / FUN only).
+# Keep only the top 20 on the Top 20 list; overflow eligible picks still show on Fun.
+if len(CONS) > 20:
+    FUN = CONS[20:] + FUN
+    CONS = CONS[:20]
+# Polymarket-only tab: every unmatched pick that passed the shared rules, excluding started games.
+# A pick with a verified Kalshi contract is NEVER placed here (ONK / CONS / FUN / GLUE only).
 POLY, _pmk = [], set()
 for s in OFFK:
-    if not s['backers']: continue
+    if is_started(s) or not s['backers']: continue
     if s['market_id'] in _mk or s['market_id'] in _pmk: continue  # already on a Kalshi tab, or weaker side of a poly market
     POLY.append(s); _pmk.add(s['market_id'])
 NOT_ON_KALSHI = OFFK
@@ -597,11 +697,12 @@ for s in CONS[:3]:
 HP = os.path.join(HERE, 'history.json')
 hist = json.load(open(HP)) if os.path.exists(HP) else {'scans': [], 'picks': {}}
 cur_ids = set()
-for s in CONS[:20] + FUN[:20] + POLY[:20]:
+for s in CONS[:20] + GLUE[:12] + FUN[:20] + POLY[:20]:
     cur_ids.add(s['id']); p = hist['picks'].get(s['id'])
     k = s['kalshi']
     if s in POLY: tier = 'poly'
     elif s in FUN: tier = 'fun'
+    elif s in GLUE: tier = 'glue'
     else: tier = 'top'
     ktxt = (f"{k['action']} {k['contract']} @ {round(k['price']*100)}¢" if k.get('status') == 'ok' else ('Polymarket only' if tier == 'poly' else 'No Kalshi match'))
     rec = dict(tier=tier, q=s['question'], label=s['label'], slug=s['slug'], market_id=s['market_id'], side=s['side'], score=s['score'], whales=len(s['backers']),
@@ -618,26 +719,30 @@ for pid, p in hist['picks'].items():
         py = m.get('price_yes')
         if py is not None and py in (0, 1) or (py is not None and (py >= 0.99 or py <= 0.01)):
             won = (py >= 0.99) == (p['side'] == 'yes'); p['result'] = 'W' if won else 'L'; p['graded'] = NOW
-hist['scans'].append(dict(ts=NOW, signals=len(CONS), fun=len(FUN), poly=len(POLY), calls=CALLS['n'], cappers=len(cappers), bets=len(BETS), buys=len(BUYS), wallets=len(POS)))
+hist['scans'].append(dict(ts=NOW, signals=len(CONS), fun=len(FUN), poly=len(POLY), glue=len(GLUE), calls=CALLS['n'], cappers=len(cappers), bets=len(BETS), buys=len(BUYS), wallets=len(POS)))
 hist['scans'] = hist['scans'][-50:]
 json.dump(hist, open(HP, 'w'), indent=1)
 # ---------- 12. Output ----------
 def slim(s):
     k = s['kalshi']
+    share = s.get('one_sided_share')
     return dict(id=s['id'], q=s['question'], label=s['label'], kind=s['info']['kind'], league=s['info']['league'].upper(), slug=s['slug'],
         score=s['score'], parts=s['parts'], price=round(s['price'], 3), avgEntry=round(s['avg_entry'], 3) if s['avg_entry'] else None,
-        whales=len(s['backers']), invested=s['invested'], net=s['net'], totalBackers=(s['side_count_all'] or None), golden=s['golden'], oppMoney=s['opp_money'], oppCount=s['opp_count'], oppQualified=s['opp_qualified'],
+        whales=len(s['backers']), invested=s['invested'], net=s['net'], oneSidedShare=round(share, 4) if share is not None else None,
+        priceBand=s.get('price_band'), split=bool(s.get('split')), glue=bool(s.get('glue')), pricier=bool(s.get('pricier')),
+        overCents=s.get('over_cents'), pickId=s.get('pick_id'), strength=s.get('strength'), started=bool(s.get('started')),
+        totalBackers=(s['side_count_all'] or None), golden=s['golden'], oppMoney=s['opp_money'], oppCount=s['opp_count'], oppQualified=s['opp_qualified'],
         fresh24=s['fresh24'], fresh24Opp=s['fresh24_opp'], sideAll=s['side_total_all'], sideCountAll=s['side_count_all'], oppAll=s['opp_total_all'], oppCountAll=s['opp_count_all'],
         hedgeAll=s['hedge_all'], game=s['game'], startTs=int(s.get('start_ts') or 0),
         backers=[dict(name=b['name'], cost=b['cost'], avg=round(b['avg'], 3) if b['avg'] else None, wr=b['wr'], resolved=b['resolved'], pnl=round(b['pnl'] or 0), rank=b['rank'],
                       golden=b['golden'], skill=b['skill'], flow=b.get('flow'), buy24=b.get('buy24'), sell24=b.get('sell24'),
-                      sport=b.get('sport'), wallet=b['wallet'], top100=b.get('top100'), rank30=b.get('rank30'), firstTs=b.get('first_ts'), lastTs=b.get('last_ts'), trades=b.get('trades')) for b in s['backers'][:10]],
-        opposing=[dict(name=o['name'], wallet=o['wallet'], cost=o['cost'], avg=round(o['avg'], 3) if o.get('avg') else None, wr=o.get('wr'), qualified=o['qualified'], golden=o['golden'], rank=o.get('rank'), rank30=o.get('rank30')) for o in sorted(s['opposing'], key=lambda o: -o['cost'])[:6]],
+                      sport=b.get('sport'), wallet=b['wallet'], top100=b.get('top100'), rankAll=b.get('rankAll'), rank30=b.get('rank30'), firstTs=b.get('first_ts'), lastTs=b.get('last_ts'), trades=b.get('trades')) for b in s['backers'][:10]],
+        opposing=[dict(name=o['name'], wallet=o['wallet'], cost=o['cost'], avg=round(o['avg'], 3) if o.get('avg') else None, wr=o.get('wr'), qualified=o['qualified'], golden=o['golden'], rank=o.get('rank'), rankAll=o.get('rankAll'), rank30=o.get('rank30')) for o in sorted(s['opposing'], key=lambda o: -o['cost'])[:6]],
         kalshi={kk: vv for kk, vv in k.items()}, risks=s.get('risks', []))
 TRADERS = []
 for w, c in cappers.items():
     st = TSTAT.get(w) or {}
-    TRADERS.append(dict(wallet=w, name=wname(w), rank=c['rank'], rank30=c.get('rank30'), sportsPct=c.get('sports_pct'), pnl=round(c.get('total_pnl') or 0), wr=c.get('win_rate'), resolved=c.get('resolved_markets'),
+    TRADERS.append(dict(wallet=w, name=wname(w), rank=c['rank'], rankAll=c.get('rankAll'), rank30=c.get('rank30'), pnl30=round(c['pnl30']) if c.get('pnl30') is not None else None, sportsPct=c.get('sports_pct'), pnl=round(c.get('total_pnl') or 0), wr=c.get('win_rate'), resolved=c.get('resolved_markets'),
                         wins=c.get('wins'), losses=c.get('losses'), pf=c.get('profit_factor'), mwr=c.get('market_win_rate'), avgEntry=c.get('avg_entry_price'), vol=round(c.get('total_volume') or 0),
                         lastTs=c.get('last_trade_ts'), skill=bool(c.get('skill_badge')), skillEdge=c.get('skill_edge_cents'), qualified=qualifies(c), golden=golden(c),
                         loaded=st.get('loaded'), bets=st.get('bets', 0), value=round(st.get('value', 0)), hedged=st.get('hedged', 0)))
@@ -648,25 +753,27 @@ def risks(s_):
     if s_['kalshi'].get('status') != 'ok': r.append('No verified Kalshi contract: ' + (s_['kalshi'].get('why') or '') + '.')
     elif (s_['kalshi'].get('edge_vs_whales') or 0) < 0: r.append(f"Kalshi price is {abs(s_['kalshi']['edge_vs_whales'])}¢ above the whales' average entry.")
     if s_['fresh24_opp'] > s_['fresh24']: r.append('More fresh 24h money went to the other side.')
-    if any((b.get('resolved') or 0) < 10 for b in s_['backers'] if b.get('resolved') is not None): r.append('At least one backer has fewer than 10 markets resolved in the last 30 days.')
+    if any((b.get('resolved') or 0) < 10 for b in s_['backers'] if b.get('resolved') is not None): r.append('At least one backer has fewer than 10 markets resolved all-time.')
+    if s_.get('split'): r.append(f"Split: only {round((s_.get('one_sided_share') or 0)*100)}% of qualified-whale money is on this side.")
+    if s_.get('pricier') and s_.get('over_cents') is not None: r.append(f"Pricier: current price is {s_['over_cents']}¢ above the whales' average entry.")
     if (s_.get('game') or {}).get('src') != 'ESPN': r.append('Start time not confirmed by ESPN (' + (s_.get('game') or {}).get('src', 'unknown') + ').')
     return r
-for s_ in CONS + FUN + POLY: s_['risks'] = risks(s_)
+for s_ in CONS + FUN + POLY + GLUE: s_['risks'] = risks(s_)
 out = dict(scannedAt=pt(NOW), ts=NOW, secs=round(time.time() - T0), settings=dict(cappers=A.cappers, min=A.min, wallets=A.wallets, markets=A.markets, windowH=12),
     coverage=dict(cappers=len(cappers), qualified=sum(qualifies(c) for c in cappers.values()), golden=sum(golden(c) for c in cappers.values()),
-                  marketsFound=found_markets, marketsInWindow=in_window, marketsScanned=min(30, len(ONK)), hedgedExcluded=two_sided, twoSidedExcluded=two_sided, lb30=LB30, notOnKalshi=len(NOT_ON_KALSHI), picksOnKalshi=len(ONK), sideGroups=len(signals),
+                  marketsFound=found_markets, marketsInWindow=in_window, marketsScanned=min(30, len(ONK)), hedgedExcluded=two_sided, twoSidedExcluded=two_sided, lbAll=LB, lb30=LB, notOnKalshi=len(NOT_ON_KALSHI), picksOnKalshi=len(ONK), sideGroups=len(signals),
                   walletsLoaded=len(POS), positionsLoaded=sum(len(v) for v in POS.values()), bets=len(BETS), buysRaw=len(RAW_BUYS), buys=len(BUYS),
                   orcaCalls=CALLS['n'], orcaErrors=CALLS['errors'][:10], kalshiSeries=len(KM), kalshiMatched=len(ONK),
                   espnLeagues=len({k[0] for k in ESPN})),
     signals=[slim(s) for s in CONS[:20]], totalSignals=len(CONS), fun=[slim(s) for s in FUN[:20]], totalFun=len(FUN),
-    poly=[slim(s) for s in POLY[:20]], totalPoly=len(POLY),
+    poly=[slim(s) for s in POLY[:20]], totalPoly=len(POLY), glue=[slim(s) for s in GLUE[:12]], totalGlue=len(GLUE),
     bets=BETS[:220], buys=BUYS[:160], traders=TRADERS,
     history=sorted([dict(id=k, **{kk: v[kk] for kk in ('tier', 'q', 'label', 'score', 'whales', 'invested', 'start', 'kalshi', 'kprice', 'first_seen', 'last_seen', 'scans', 'result', 'graded') if kk in v},
                          active=k in cur_ids) for k, v in hist['picks'].items()], key=lambda x: -x['last_seen'])[:80],
     scans=hist['scans'][-20:])
 json.dump(out, open(os.path.join(HERE, 'page_data.json'), 'w'), separators=(',', ':'))
-print(f"consensus={len(CONS)} fun={len(FUN)} poly={len(POLY)} all={len(signals)} groups={len(signals)} onKalshi={len(ONK)} offKalshi={len(OFFK)} cappers={len(cappers)} orca_calls={CALLS['n']} errors={len(CALLS['errors'])} secs={out['secs']} kalshi_ok={out['coverage']['kalshiMatched']}")
-for s in CONS[:8] + FUN[:3] + POLY[:3]: print(len(s['backers']), s['net'], s['score'], s['question'], '|', s['label'], '|', len(s['backers']), s['invested'], '|', s['kalshi'].get('action'), s['kalshi'].get('contract'), s['kalshi'].get('price'), s['kalshi'].get('why'), 'poly' if s in POLY else ('fun' if s in FUN else 'top'))
+print(f"consensus={len(CONS)} fun={len(FUN)} poly={len(POLY)} glue={len(GLUE)} all={len(signals)} groups={len(signals)} onKalshi={len(ONK)} offKalshi={len(OFFK)} cappers={len(cappers)} orca_calls={CALLS['n']} errors={len(CALLS['errors'])} secs={out['secs']} kalshi_ok={out['coverage']['kalshiMatched']}")
+for s in CONS[:8] + GLUE[:2] + FUN[:3] + POLY[:3]: print(len(s['backers']), s['net'], s.get('one_sided_share'), s.get('price_band'), s.get('strength'), s['question'], '|', s['label'], '|', s['invested'], '|', s['kalshi'].get('action'), s['kalshi'].get('contract'), s['kalshi'].get('price'), 'poly' if s in POLY else ('glue' if s in GLUE else ('fun' if s in FUN else 'top')))
 # ---------- 13. Page embed (wallets kept for Polymarket profile links) ----------
 for b_ in BETS: b_.pop('_info', None)
 emb = json.loads(json.dumps(out))

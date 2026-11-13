@@ -1,20 +1,20 @@
 import { Page, Section, Rows, Properties, Segmented, Select, Input, Toggle, Grid, NumberedList, Floating, Text, Button, Fragment, useState, useEffect, useGrokTheme } from "./kit";
 import type { ReactNode } from "./kit";
 
-interface Backer { name: string; cost: number; avg: number | null; wr: number | null; resolved: number | null; pnl: number; rank: number | null; golden: boolean; skill: boolean; flow: string | null; buy24: number | null; sell24: number | null; sport: { n: number; wr: number; pnl: number } | null; wallet: string; top100?: boolean | null; rank30?: number | null; firstTs: number | null; lastTs: number | null; trades: number | null }
+interface Backer { name: string; cost: number; avg: number | null; wr: number | null; resolved: number | null; pnl: number; rank: number | null; golden: boolean; skill: boolean; flow: string | null; buy24: number | null; sell24: number | null; sport: { n: number; wr: number; pnl: number } | null; wallet: string; top100?: boolean | null; rank30?: number | null; rankAll?: number | null; firstTs: number | null; lastTs: number | null; trades: number | null }
 interface Kalshi { status: string; why?: string; action?: string; price?: number; ticker?: string; contract?: string; rule?: string; edge_vs_whales?: number | null; edge_vs_poly?: number; light?: string }
 interface Game { name: string | null; start: string; src: string; state: string | null; detail: string; score: string; venue?: string | null; records?: string[]; url?: string | null }
-interface Opp { name: string; wallet: string; cost: number; avg: number | null; wr: number | null; qualified: boolean; golden: boolean; rank?: number | null; rank30?: number | null }
+interface Opp { name: string; wallet: string; cost: number; avg: number | null; wr: number | null; qualified: boolean; golden: boolean; rank?: number | null; rank30?: number | null; rankAll?: number | null }
 interface Refresh { at: number; state?: string | null; detail?: string; score?: string; pct?: number | null; src?: string; team?: string; kNow?: number; final?: string; ended?: boolean; why?: string }
-interface Pick { id: string; q: string; label: string; kind: string; league: string; slug: string; score: number; parts: Record<string, number>; price: number; avgEntry: number | null; whales: number; invested: number; golden: number; oppMoney: number; oppCount: number; oppQualified: number; fresh24: number; fresh24Opp: number; sideAll: number; sideCountAll: number | null; oppAll: number; oppCountAll: number | null; hedgeAll: number; game: Game; startTs: number; backers: Backer[]; opposing: Opp[]; kalshi: Kalshi; risks: string[]; net?: number; totalBackers?: number | null; refresh?: Refresh }
+interface Pick { id: string; q: string; label: string; kind: string; league: string; slug: string; score: number; parts: Record<string, number>; price: number; avgEntry: number | null; whales: number; invested: number; golden: number; oppMoney: number; oppCount: number; oppQualified: number; fresh24: number; fresh24Opp: number; sideAll: number; sideCountAll: number | null; oppAll: number; oppCountAll: number | null; hedgeAll: number; game: Game; startTs: number; backers: Backer[]; opposing: Opp[]; kalshi: Kalshi; risks: string[]; net?: number; totalBackers?: number | null; refresh?: Refresh; oneSidedShare?: number | null; priceBand?: string; split?: boolean; glue?: boolean; pricier?: boolean; overCents?: number | null; pickId?: string; strength?: string; started?: boolean }
 interface Hist { id: string; tier?: string; q: string; label: string; score: number; whales: number; invested: number; start: string; kalshi: string; kprice?: number | null; first_seen: number; last_seen: number; scans: number; result: string | null; graded?: number; active: boolean }
 interface Scan { ts: number; signals: number; fun: number; poly?: number; calls: number; cappers?: number; bets?: number; buys?: number; wallets?: number }
 interface Cols { f: string[]; r: unknown[][] }
-interface ScanData { scannedAt: string; ts: number; secs: number; settings: { cappers: number; min: number; wallets: number; markets: number; windowH: number }; coverage: { cappers: number; qualified: number; golden: number; marketsFound: number; marketsInWindow: number; marketsScanned: number; hedgedExcluded: number; twoSidedExcluded: number; walletsLoaded: number; positionsLoaded: number; bets: number; buysRaw: number; buys: number; orcaCalls: number; orcaErrors: string[]; kalshiSeries: number; kalshiMatched: number; espnLeagues: number; lb30?: { asOf: string | null; start: string | null; end: string | null; scanned: number; deepestRank: number; skippedNonSports: number; skippedNoPositions: number }; notOnKalshi?: number }; signals: Pick[]; totalSignals: number; fun: Pick[]; totalFun: number; poly?: Pick[]; totalPoly?: number; history: Hist[]; scans: Scan[]; buysC: Cols; betsC: Cols; tradersC: Cols; partNames: string[]; refreshedAt?: string; refreshTs?: number }
-interface BuyRaw { ts: number; firstTs: number; fills: number; wallet: string; name: string; wr: number | null; wpnl: number; top100: boolean; rank: number | null; golden: boolean; q: string; side: string; label: string; kind: string; league: string; price: number | null; now: number | null; usd: number; shares: number | null; posCost: number; hedged: boolean; agree60: number; agreeAll: number; score: number; parts: number[]; kAct: string | null; kPrice: number | null; kContract: string | null; kEdge: number | null; kWhy: string | null; start: string; src: string; startTs: number | null; phase: string; gDetail: string; gScore: string; rank30?: number | null }
-interface BetRaw { firstTs: number | null; lastBuyTs: number | null; wallet: string; name: string; wr: number | null; resolved: number | null; cpnl: number; rank: number | null; golden: boolean; skill: boolean; top100: boolean; src: string; q: string; side: string; label: string; outcome: string; kind: string; league: string; shares: number | null; avg: number | null; now: number | null; cost: number; value: number | null; upnl: number | null; upct: number | null; consYes: number | null; consNo: number | null; agree60: number; agreeAll: number; score: number; parts: number[]; kAct: string | null; kPrice: number | null; kContract: string | null; kEdge: number | null; kWhy: string | null; start: string; src2: string; startTs: number | null; phase: string; gDetail: string; gScore: string; rank30?: number | null }
-interface Trader { wallet: string; name: string; rank: number; pnl: number; wr: number | null; resolved: number | null; wins: number | null; losses: number | null; pf: number | null; skill: boolean; golden: boolean; qualified: boolean; bets: number; value: number; lastTs: number | null; skillEdge: number | null; rank30?: number | null; sportsPct?: number | null }
-interface Line { key: string; type: string; ts: number | null; firstTs: number | null; fills: number; wallet: string; name: string; wr: number | null; resolved: number | null; pnl: number; top100: boolean; rank: number | null; golden: boolean; q: string; side: string; label: string; kind: string; league: string; entry: number | null; now: number | null; amount: number; shares: number | null; value: number | null; upnl: number | null; upct: number | null; hedged: boolean; agree60: number; agreeAll: number; score: number; parts: number[]; kAct: string | null; kPrice: number | null; kContract: string | null; kEdge: number | null; kWhy: string | null; start: string; src: string; startTs: number | null; phase: string; gDetail: string; gScore: string; source: string; rank30?: number | null }
+interface ScanData { scannedAt: string; ts: number; secs: number; settings: { cappers: number; min: number; wallets: number; markets: number; windowH: number }; coverage: { cappers: number; qualified: number; golden: number; marketsFound: number; marketsInWindow: number; marketsScanned: number; hedgedExcluded: number; twoSidedExcluded: number; walletsLoaded: number; positionsLoaded: number; bets: number; buysRaw: number; buys: number; orcaCalls: number; orcaErrors: string[]; kalshiSeries: number; kalshiMatched: number; espnLeagues: number; lb30?: { asOf: string | null; start: string | null; end: string | null; scanned: number; deepestRank: number; skippedNonSports: number; skippedNoPositions: number; endpoint?: string; params?: string }; lbAll?: { asOf: string | null; start: string | null; end: string | null; scanned: number; deepestRank: number; skippedNonSports: number; skippedNoPositions: number; endpoint?: string; params?: string }; notOnKalshi?: number }; signals: Pick[]; totalSignals: number; fun: Pick[]; totalFun: number; poly?: Pick[]; totalPoly?: number; glue?: Pick[]; totalGlue?: number; history: Hist[]; scans: Scan[]; buysC: Cols; betsC: Cols; tradersC: Cols; partNames: string[]; refreshedAt?: string; refreshTs?: number }
+interface BuyRaw { ts: number; firstTs: number; fills: number; wallet: string; name: string; wr: number | null; wpnl: number; top100: boolean; rank: number | null; golden: boolean; q: string; side: string; label: string; kind: string; league: string; price: number | null; now: number | null; usd: number; shares: number | null; posCost: number; hedged: boolean; agree60: number; agreeAll: number; score: number; parts: number[]; kAct: string | null; kPrice: number | null; kContract: string | null; kEdge: number | null; kWhy: string | null; start: string; src: string; startTs: number | null; phase: string; gDetail: string; gScore: string; rank30?: number | null; rankAll?: number | null }
+interface BetRaw { firstTs: number | null; lastBuyTs: number | null; wallet: string; name: string; wr: number | null; resolved: number | null; cpnl: number; rank: number | null; golden: boolean; skill: boolean; top100: boolean; src: string; q: string; side: string; label: string; outcome: string; kind: string; league: string; shares: number | null; avg: number | null; now: number | null; cost: number; value: number | null; upnl: number | null; upct: number | null; consYes: number | null; consNo: number | null; agree60: number; agreeAll: number; score: number; parts: number[]; kAct: string | null; kPrice: number | null; kContract: string | null; kEdge: number | null; kWhy: string | null; start: string; src2: string; startTs: number | null; phase: string; gDetail: string; gScore: string; rank30?: number | null; rankAll?: number | null }
+interface Trader { wallet: string; name: string; rank: number; pnl: number; wr: number | null; resolved: number | null; wins: number | null; losses: number | null; pf: number | null; skill: boolean; golden: boolean; qualified: boolean; bets: number; value: number; lastTs: number | null; skillEdge: number | null; rank30?: number | null; sportsPct?: number | null; rankAll?: number | null; pnl30?: number | null }
+interface Line { key: string; type: string; ts: number | null; firstTs: number | null; fills: number; wallet: string; name: string; wr: number | null; resolved: number | null; pnl: number; top100: boolean; rank: number | null; golden: boolean; q: string; side: string; label: string; kind: string; league: string; entry: number | null; now: number | null; amount: number; shares: number | null; value: number | null; upnl: number | null; upct: number | null; hedged: boolean; agree60: number; agreeAll: number; score: number; parts: number[]; kAct: string | null; kPrice: number | null; kContract: string | null; kEdge: number | null; kWhy: string | null; start: string; src: string; startTs: number | null; phase: string; gDetail: string; gScore: string; source: string; rank30?: number | null; rankAll?: number | null }
 interface Filters { q: string; status: string; betType: string; evidence: string; sort: string; lineSort: string; side: string; capper: string; min: string; max: string; bought: string; kSide: string; kStatus: string; kText: string; platform: string; followedOnly: boolean; showHidden: boolean; hideHedgers: boolean; freshOnly: boolean; props: boolean }
 
 const DATA: ScanData = (window as any).__DATA;
@@ -28,6 +28,9 @@ const AVATARS = ["#7C3AED", "#0284C7", "#DB2777", "#059669", "#EA580C", "#4F46E5
 const PART_MAX: Record<string, number> = { "Consensus": 25, "Capper record": 25, "Money": 15, "One-sided": 15, "Golden": 10, "Fresh money": 10 };
 const EV_MAX = [25, 20, 20, 20, 10];
 const STORE_KEY = "orca-scanner-cappers-v1";
+const BANKROLL_KEY = "orca-scanner-bankroll-v1";
+const DEFAULT_BANKROLL = "225.06";
+const DAILY_CAP = "Daily cap $20, stop after a losing reload; don't re-bet a pick you already lost today.";
 
 function decode<T>(c: Cols): T[] {
   return c.r.map((row: unknown[]) => {
@@ -41,10 +44,10 @@ const BETS: BetRaw[] = decode<BetRaw>(DATA.betsC);
 const TRADERS: Trader[] = decode<Trader>(DATA.tradersC);
 
 function buyLine(b: BuyRaw, i: number): Line {
-  return { key: "b" + i, type: "buy", ts: b.ts, firstTs: b.firstTs, fills: b.fills, wallet: b.wallet, name: b.name, wr: b.wr, resolved: null, pnl: b.wpnl, top100: b.top100, rank: b.rank, golden: b.golden, q: b.q, side: b.side, label: b.label, kind: b.kind, league: b.league, entry: b.price, now: b.now, amount: b.usd, shares: b.shares, value: null, upnl: null, upct: null, hedged: b.hedged, agree60: b.agree60, agreeAll: b.agreeAll, score: b.score, parts: b.parts, kAct: b.kAct, kPrice: b.kPrice, kContract: b.kContract, kEdge: b.kEdge, kWhy: b.kWhy, start: b.start, src: b.src, startTs: b.startTs, phase: b.phase, gDetail: b.gDetail, gScore: b.gScore, source: "OrcaLayer whale alert", rank30: b.rank30 };
+  return { key: "b" + i, type: "buy", ts: b.ts, firstTs: b.firstTs, fills: b.fills, wallet: b.wallet, name: b.name, wr: b.wr, resolved: null, pnl: b.wpnl, top100: b.top100, rank: b.rank, golden: b.golden, q: b.q, side: b.side, label: b.label, kind: b.kind, league: b.league, entry: b.price, now: b.now, amount: b.usd, shares: b.shares, value: null, upnl: null, upct: null, hedged: b.hedged, agree60: b.agree60, agreeAll: b.agreeAll, score: b.score, parts: b.parts, kAct: b.kAct, kPrice: b.kPrice, kContract: b.kContract, kEdge: b.kEdge, kWhy: b.kWhy, start: b.start, src: b.src, startTs: b.startTs, phase: b.phase, gDetail: b.gDetail, gScore: b.gScore, source: "OrcaLayer whale alert", rank30: b.rank30, rankAll: b.rankAll };
 }
 function betLine(b: BetRaw, i: number): Line {
-  return { key: "p" + i, type: "bet", ts: b.lastBuyTs, firstTs: b.firstTs, fills: 1, wallet: b.wallet, name: b.name, wr: b.wr, resolved: b.resolved, pnl: b.cpnl, top100: b.top100, rank: b.rank, golden: b.golden, q: b.q, side: b.side, label: b.label, kind: b.kind, league: b.league, entry: b.avg, now: b.now, amount: b.cost, shares: b.shares, value: b.value, upnl: b.upnl, upct: b.upct, hedged: false, agree60: b.agree60, agreeAll: b.agreeAll, score: b.score, parts: b.parts, kAct: b.kAct, kPrice: b.kPrice, kContract: b.kContract, kEdge: b.kEdge, kWhy: b.kWhy, start: b.start, src: b.src2, startTs: b.startTs, phase: b.phase, gDetail: b.gDetail, gScore: b.gScore, source: "OrcaLayer whale open positions", rank30: b.rank30 };
+  return { key: "p" + i, type: "bet", ts: b.lastBuyTs, firstTs: b.firstTs, fills: 1, wallet: b.wallet, name: b.name, wr: b.wr, resolved: b.resolved, pnl: b.cpnl, top100: b.top100, rank: b.rank, golden: b.golden, q: b.q, side: b.side, label: b.label, kind: b.kind, league: b.league, entry: b.avg, now: b.now, amount: b.cost, shares: b.shares, value: b.value, upnl: b.upnl, upct: b.upct, hedged: false, agree60: b.agree60, agreeAll: b.agreeAll, score: b.score, parts: b.parts, kAct: b.kAct, kPrice: b.kPrice, kContract: b.kContract, kEdge: b.kEdge, kWhy: b.kWhy, start: b.start, src: b.src2, startTs: b.startTs, phase: b.phase, gDetail: b.gDetail, gScore: b.gScore, source: "OrcaLayer whale open positions", rank30: b.rank30, rankAll: b.rankAll };
 }
 const BUY_LINES: Line[] = BUYS.map(buyLine);
 const BET_LINES: Line[] = BETS.map(betLine);
@@ -83,13 +86,67 @@ const hue = (n: string): string => {
 };
 const conf = (score: number): { color: string; word: string } => (score >= 65 ? { color: GREEN, word: "Strong" } : score >= 45 ? { color: AMBER, word: "Moderate" } : { color: RED, word: "Low" });
 const kindWord = (k: string): string => (k === "moneyline" ? "Winner" : k === "draw" ? "Draw market" : k === "total" ? "Total" : k === "spread" ? "Spread" : k === "teamwin" ? "To win" : k === "prop" ? "Player prop" : "Market");
-function stakePct(p: Pick, fun: boolean, poly?: boolean): number {
-  if (!poly && p.kalshi.status !== "ok") return 0;
-  let pct = p.score >= 80 ? 0.05 : p.score >= 70 ? 0.04 : p.score >= 60 ? 0.03 : p.score >= 50 ? 0.02 : 0.01;
-  if (fun || (poly && (p.whales || 0) < 2)) pct = pct / 2;
-  if (!poly && p.kalshi.light !== "green") pct = pct / 2;
-  return pct;
+function usedPrice(p: Pick): number | null {
+  if (p.kalshi && p.kalshi.status === "ok" && p.kalshi.price != null) return p.kalshi.price;
+  return p.price != null ? p.price : null;
 }
+function priceBand(px: number | null): "best" | "mid" | "longshot" | "glue" {
+  if (px == null) return "mid";
+  const c = px * 100;
+  if (c < 45) return "longshot";
+  if (c >= 95) return "glue";
+  if (c >= 65 && c <= 84) return "best";
+  return "mid";
+}
+function oneSidedShare(p: Pick): number {
+  if (p.oneSidedShare != null) return p.oneSidedShare;
+  const tot = (p.invested || 0) + (p.oppMoney || 0);
+  return tot > 0 ? (p.invested || 0) / tot : 1;
+}
+function overCents(p: Pick): number | null {
+  if (p.overCents != null) return p.overCents;
+  const px = usedPrice(p), avg = p.avgEntry;
+  if (px == null || avg == null) return null;
+  return Math.round((px - avg) * 1000) / 10;
+}
+function isStarted(p: Pick, now: number): boolean {
+  if (p.started) return true;
+  if (p.game && (p.game.state === "in" || p.game.state === "post")) return true;
+  if (p.refresh && (p.refresh.state === "in" || p.refresh.state === "post" || !!p.refresh.ended || !!p.refresh.final)) return true;
+  if (p.startTs && p.startTs <= now) return true;
+  return false;
+}
+function pickIdOf(p: Pick): string {
+  if (p.pickId) return p.pickId;
+  const s = p.id || ((p.slug || "") + (p.label || ""));
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+  return (Math.abs(h).toString(36).toUpperCase() + "XXXXXX").slice(0, 6);
+}
+function dollarStake(word: "Go big" | "Normal" | "Small", bankroll: number, combo?: boolean): number {
+  if (bankroll <= 0) return 0;
+  if (combo) return Math.max(1, Math.round(bankroll * 0.01));
+  const pct = word === "Go big" ? 0.04 : word === "Normal" ? 0.02 : 0.01;
+  let s = Math.max(1, Math.round(bankroll * pct));
+  if (word === "Go big") s = Math.min(10, s);
+  return s;
+}
+function stakePctOf(word: "Go big" | "Normal" | "Small", combo?: boolean): number {
+  if (combo) return 0.01;
+  return word === "Go big" ? 0.04 : word === "Normal" ? 0.02 : 0.01;
+}
+function rankLabel(rankAll?: number | null, rank?: number | null, rank30?: number | null): string {
+  if (rankAll) return "all-time #" + rankAll;
+  if (rank30) return "#" + rank30 + " · 30d";
+  if (rank) return "#" + rank;
+  return "";
+}
+function gameKey(p: Pick): string {
+  const m = (p.slug || "").match(/(.+-20\d\d-\d\d-\d\d)/);
+  if (m) return m[1];
+  return String(p.startTs || 0) + "|" + (p.league || "") + "|" + matchup(p.q).toLowerCase();
+}
+
 function matchup(q: string): string {
   return q.replace(/^Will\s+/, "").replace(/\s+end in a draw\?$/, "").replace(/\?$/, "").replace(/\s*\(BO\d\)/, "").replace(/^[A-Za-z0-9 ]+:\s+(?=.+ vs)/, "").replace(/ vs\.? /, " vs ").replace(/^Spread:\s*(.+?)\s*\((-?[\d.]+)\).*$/, "$1 spread").replace(/^Map Handicap:\s*/i, "Map handicap: ");
 }
@@ -365,7 +422,7 @@ function ActionBar() {
         <div style={{ marginTop: 10, borderRadius: 14, padding: 12, background: "rgba(0,0,0,0.22)", fontSize: 13, lineHeight: "19px" }}>
           {sheet === "scan" ? (
             <div>
-              <div style={{ fontWeight: 800, fontSize: 14 }}>Full scan: top whales of the last 30 days</div>
+              <div style={{ fontWeight: 800, fontSize: 14 }}>Full scan: top all-time sports whales</div>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 8, marginTop: 8 }}>
                 {["20", "40", "60", "80", "100", "custom"].map((v: string) => (
                   <button key={v} onClick={() => setN(v)} style={{ ...BTN(n === v ? "#FFFFFF" : "transparent", n === v ? BRAND : "#FFFFFF", "rgba(255,255,255,0.7)"), height: 44, padding: "0 8px", borderRadius: 12, fontSize: 15, fontFamily: t.font.family }}>{v === "custom" ? "Custom" : "Top " + v}</button>
@@ -378,7 +435,7 @@ function ActionBar() {
           ) : (
             <div>
               <div style={{ fontWeight: 800, fontSize: 14 }}>Refresh: ESPN scores + Kalshi prices only</div>
-              <div style={{ marginTop: 4, color: "rgba(255,255,255,0.85)" }}>Checks live status, final results and ESPN win chances for the current picks, logs W/L to the Journal and removes ended games. No OrcaLayer calls.</div>
+              <div style={{ marginTop: 4, color: "rgba(255,255,255,0.85)" }}>Checks live status, final results and ESPN win chances, logs W/L to the Journal, and drops games that have already started from Top 20, Fun, Polymarket and combos (live games stay on Bets). Ended games are removed everywhere. No OrcaLayer calls.</div>
               {hasKey ? goBtn("refresh", busy ? "Working…" : "Run refresh") : keyBox}
               <div style={{ marginTop: 8, color: "rgba(255,255,255,0.85)" }}>Last refresh {DATA.refreshedAt || "not yet"}.</div>
             </div>
@@ -437,7 +494,7 @@ function Hero(props: { top: number; fun: number; buys: number; bets: number; act
         <span style={{ fontSize: 11, fontWeight: 700, padding: "4px 9px", borderRadius: 999, background: "rgba(255,255,255,0.16)" }}>Live · tap to scan</span>
       </div>
       <div style={{ fontSize: 26, lineHeight: "32px", fontWeight: 800, marginTop: 10 }}>Follow conviction. Verify everything.</div>
-      <div style={{ fontSize: 13, lineHeight: "18px", color: "rgba(255,255,255,0.82)", marginTop: 4 }}>Top {DATA.coverage.cappers} whales, last 30 days · live + next {DATA.settings.windowH} hours</div>
+      <div style={{ fontSize: 13, lineHeight: "18px", color: "rgba(255,255,255,0.82)", marginTop: 4 }}>Top {DATA.coverage.cappers} all-time sports whales · games that haven't started, next {DATA.settings.windowH} hours</div>
       <div style={{ fontSize: 12, lineHeight: "17px", color: "rgba(255,255,255,0.78)", marginTop: 2 }}>Scanned {DATA.scannedAt} · Refreshed {DATA.refreshedAt || "not yet"}</div>
       <ActionBar />
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 14 }}>
@@ -447,7 +504,7 @@ function Hero(props: { top: number; fun: number; buys: number; bets: number; act
         {stat(String(props.bets), "SPORTS BETS")}
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 12 }}>
-        {chip("Top " + DATA.coverage.cappers + " whales · last 30 days")}
+        {chip("Top " + DATA.coverage.cappers + " whales · all-time")}
         {chip(props.active + " with open bets")}
         {chip(kMoney(props.value) + " in open bets")}
         {chip((DATA.coverage.notOnKalshi || 0) + " not on Kalshi")}
@@ -683,8 +740,43 @@ function strengthWord(whales: number, money: number, opp: number): "Go big" | "N
   if (whales >= 2) return "Normal";
   return "Small";
 }
+function pickInfo(p: Pick, whales: number): { word: "Go big" | "Normal" | "Small"; glue: boolean; split: boolean; pricier: boolean; tooPricier: boolean; band: "best" | "mid" | "longshot" | "glue"; share: number; over: number | null; px: number | null } {
+  const share = oneSidedShare(p);
+  const px = usedPrice(p);
+  const band = priceBand(px);
+  const over = overCents(p);
+  const split = share < 0.65;
+  const glue = band === "glue";
+  const pricier = over != null && over > 3;
+  const tooPricier = over != null && over > 5;
+  let word: "Go big" | "Normal" | "Small" = strengthWord(whales, p.invested, p.oppMoney || 0);
+  if (band === "longshot" || glue || split) word = "Small";
+  else if (p.kind === "spread" && !(whales >= 3 && share >= 0.65) && word === "Go big") word = "Normal";
+  return { word, glue, split, pricier, tooPricier, band, share, over, px };
+}
+function rankKey(p: Pick, whales: number): [number, number, number, number, number, number] {
+  const info = pickInfo(p, whales);
+  const band = info.band === "best" ? 0 : info.band === "mid" ? 1 : 2;
+  const total = p.kind === "total" ? 0 : 1;
+  const net = p.net != null ? p.net : (p.invested - (p.oppMoney || 0));
+  const best = Math.min(...(p.backers.length ? p.backers.map((b: Backer) => b.rankAll || b.rank || 999) : [999]));
+  return [band, total, -net, -info.share, -whales, best];
+}
+function cmpRankKey(a: [number, number, number, number, number, number], b: [number, number, number, number, number, number]): number {
+  for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] - b[i];
+  return 0;
+}
+function topEligible(p: Pick, whales: number, now: number): boolean {
+  if (whales < 2 || isStarted(p, now)) return false;
+  if (p.kalshi.status !== "ok") return false;
+  const info = pickInfo(p, whales);
+  if (info.band === "longshot" || info.band === "glue") return false;
+  if (info.share < 0.55) return false;
+  if (info.pricier) return false;
+  return true;
+}
 function strengthColor(w: string): string { return w === "Go big" ? GREEN : w === "Normal" ? BRAND : AMBER; }
-function qualityOf(l: Line): number { return (l.golden ? 1000 : 0) - (l.rank30 || l.rank || 999); }
+function qualityOf(l: Line): number { return (l.golden ? 1000 : 0) - (l.rankAll || l.rank || 999); }
 function cmpStrength(wa: number, ma: number, oa: number, qa: number, wb: number, mb: number, ob: number, qb: number): number {
   return wb - wa || mb - ma || oa - ob || qb - qa;
 }
@@ -807,6 +899,78 @@ function CardShell(props: { accent: string; children: ReactNode }) {
 function StrengthChip(props: { word: "Go big" | "Normal" | "Small" }) {
   return <Chip bg={strengthColor(props.word)} color="#FFFFFF">{props.word}</Chip>;
 }
+function CopyId(props: { id: string }) {
+  const t = useGrokTheme();
+  const [ok, setOk] = useState<boolean>(false);
+  return (
+    <button type="button" onClick={() => { try { void navigator.clipboard.writeText(props.id); setOk(true); window.setTimeout(() => setOk(false), 1500); } catch (e) { /* ignore */ } }} style={{ border: "none", background: t.bg.subtle, color: t.text.primary, borderRadius: 999, padding: "4px 10px", fontSize: 12, fontWeight: 750, cursor: "pointer", fontFamily: t.font.family }} title="Copy this pick ID to note it when you place the bet">
+      ID {props.id}{ok ? " · copied" : " · copy"}
+    </button>
+  );
+}
+function ComboCard(props: { a: Pick; b: Pick; rank: number; bankroll: number; now: number }) {
+  const t = useGrokTheme();
+  const { a, b, rank, bankroll } = props;
+  const pa = usedPrice(a), pb = usedPrice(b);
+  const combined = (pa || 0) * (pb || 0);
+  const stake = dollarStake("Small", bankroll, true);
+  const payout = combined > 0 ? stake / combined : 0;
+  const exA = explainPick(a), exB = explainPick(b);
+  return (
+    <CardShell accent={"linear-gradient(90deg, " + GREEN + ", " + BRAND + ")"}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
+        <Chip bg={GREEN} color="#FFFFFF">Combo #{rank}</Chip>
+        <Chip bg={t.bg.subtle} color={t.text.primary}>{cents(combined)} combined</Chip>
+        <Chip bg={t.bg.subtle} color={t.text.secondary}>2 legs · 1% stake</Chip>
+      </div>
+      <div style={{ marginTop: 10, fontSize: 16, lineHeight: "22px", fontWeight: 800 }}>
+        {exA.headline} <span style={{ color: t.text.tertiary, fontWeight: 600 }}>and</span> {exB.headline}
+      </div>
+      <div style={{ fontSize: 14, lineHeight: "20px", color: t.text.primary, marginTop: 8 }}>
+        A {money(stake)} combo pays about {money(Math.round(payout) === payout ? payout : Math.round(payout * 100) / 100)} if both hit (combined price {cents(combined)}).
+      </div>
+      <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 6 }}>
+        {matchup(a.q)} at {cents(pa)} · {matchup(b.q)} at {cents(pb)}
+      </div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 8, marginTop: 10 }}>
+        <span style={{ fontSize: 13, color: t.text.secondary }}>Stake · 1% of {money(bankroll)}</span>
+        <span style={{ fontSize: 20, fontWeight: 800 }}>{money(stake)}</span>
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 8 }}>
+        <CopyId id={pickIdOf(a)} />
+        <CopyId id={pickIdOf(b)} />
+      </div>
+    </CardShell>
+  );
+}
+function buildCombos(top: Pick[]): [Pick, Pick][] {
+  const pool = top.filter((p: Pick) => {
+    const px = usedPrice(p);
+    return px != null && px >= 0.65 && px < 0.95;
+  });
+  const used: Record<string, boolean> = {}, usedGame: Record<string, boolean> = {};
+  const out: [Pick, Pick][] = [];
+  for (let i = 0; i < pool.length && out.length < 3; i++) {
+    if (used[pool[i].id]) continue;
+    const gi = gameKey(pool[i]);
+    if (usedGame[gi]) continue;
+    for (let j = i + 1; j < pool.length; j++) {
+      if (used[pool[j].id]) continue;
+      const gj = gameKey(pool[j]);
+      if (gi === gj || usedGame[gj]) continue;
+      out.push([pool[i], pool[j]]);
+      used[pool[i].id] = true; used[pool[j].id] = true;
+      usedGame[gi] = true; usedGame[gj] = true;
+      break;
+    }
+  }
+  return out;
+}
+function DailyCap() {
+  const t = useGrokTheme();
+  return <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, margin: "0 0 14px" }}>{DAILY_CAP}</div>;
+}
+
 function ActionBtn(props: { ex: Explained; compact?: boolean; href?: string }) {
   const t = useGrokTheme();
   const yes = props.ex.ok && ((props.ex.act || "").indexOf("YES") >= 0 || (props.ex.act || "") === "BUY");
@@ -888,8 +1052,8 @@ function BuyCard(props: { l: Line; now: number; rank: number; followed: string[]
         <Face name={l.name} size={30} />
         <NameLink name={l.name} wallet={l.wallet} bold={true} />
         {l.golden ? <Chip bg={AMBER} color="#FFFFFF">Golden</Chip> : null}
-        {l.top100 ? <Chip bg={t.bg.subtle} color={t.text.primary}>{l.rank30 ? "#" + l.rank30 + " · 30d" : "Top whale"}</Chip> : <Chip bg={t.bg.subtle} color={t.text.secondary}>Not a top whale</Chip>}
-        <span style={{ fontSize: 12, color: t.text.secondary }}>{l.wr !== null ? <Fragment><Pct v={l.wr} /> win rate (30d)</Fragment> : ""}</span>
+        {l.top100 ? <Chip bg={t.bg.subtle} color={t.text.primary}>{rankLabel(l.rankAll, l.rank, l.rank30) || "Top whale"}</Chip> : <Chip bg={t.bg.subtle} color={t.text.secondary}>Not a top whale</Chip>}
+        <span style={{ fontSize: 12, color: t.text.secondary }}>{l.wr !== null ? <Fragment><Pct v={l.wr} /> win rate (all-time)</Fragment> : ""}</span>
       </div>
       <ExpandBtn open={open} on={() => setOpen(!open)} label="Kalshi, value now & evidence" />
       {open ? (
@@ -1004,7 +1168,7 @@ function GameCard(props: { g: GamePack; now: number; rank: number; followed: str
                         <div key={l.key} style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap", marginTop: 8 }}>
                           <Face name={l.name} size={24} />
                           <NameLink name={l.name} wallet={l.wallet} bold={true} />
-                          {l.rank30 || l.rank ? <Chip bg={t.bg.subtle} color={t.text.primary}>#{l.rank30 || l.rank} · 30d</Chip> : null}
+                          {rankLabel(l.rankAll, l.rank, l.rank30) ? <Chip bg={t.bg.subtle} color={t.text.primary}>{rankLabel(l.rankAll, l.rank, l.rank30)}</Chip> : null}
                           {l.golden ? <Chip bg={AMBER} color="#FFFFFF">Golden</Chip> : null}
                           <span style={{ fontSize: 13, color: t.text.secondary }}>{money(l.amount)} at {cents(l.entry)} · bought {l.ts || l.firstTs ? ago((l.ts || l.firstTs) as number, now) : "n/a"}</span>
                           <CapperButtons wallet={l.wallet} followed={props.followed} hidden={props.hidden} toggle={props.toggle} />
@@ -1040,7 +1204,7 @@ function CapperCard(props: { x: Trader; now: number; holdings: Line[]; followed:
   return (
     <CardShell accent={"linear-gradient(90deg, " + BRAND + ", " + AMBER + ")"}>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
-        {x.rank > 0 ? <Chip bg={BRAND} color="#FFFFFF">#{x.rank30 || x.rank} · 30d</Chip> : <Chip bg={t.bg.subtle} color={t.text.secondary}>Not a top whale</Chip>}
+        {x.rank > 0 ? <Chip bg={BRAND} color="#FFFFFF">{rankLabel(x.rankAll, x.rank, x.rank30) || "Top whale"}</Chip> : <Chip bg={t.bg.subtle} color={t.text.secondary}>Not a top whale</Chip>}
         {x.golden ? <Chip bg={AMBER} color="#FFFFFF">Golden</Chip> : null}
         {x.skill ? <Chip bg={BRAND} color="#FFFFFF">Skill badge</Chip> : null}
         {x.sportsPct ? <Chip bg={t.bg.subtle} color={t.text.secondary}>{Math.round(x.sportsPct)}% sports</Chip> : null}
@@ -1054,8 +1218,8 @@ function CapperCard(props: { x: Trader; now: number; holdings: Line[]; followed:
         {wr !== null ? <Ring score={wr} label="WIN %" color={wr >= 55 ? GREEN : wr >= 50 ? AMBER : RED} size={64} track={t.border.default} text={t.text.primary} sub={t.text.tertiary} /> : null}
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 8, marginTop: 14 }}>
-        {tile("30-day P&L", kMoney(x.pnl), "Profit over the last 30 days")}
-        {tile("Win rate (30d)", wr !== null ? wr + "%" : "n/a", x.resolved ? x.resolved.toLocaleString("en-US") + " resolved" : "Resolved markets n/a")}
+        {tile("All-time P&L", kMoney(x.pnl), x.pnl30 != null ? "30d P&L " + kMoney(x.pnl30) + (x.rank30 ? " · 30d #" + x.rank30 : "") : "Profit all-time")}
+        {tile("Win rate (all-time)", wr !== null ? wr + "%" : "n/a", x.resolved ? x.resolved.toLocaleString("en-US") + " resolved" : "Resolved markets n/a")}
         {tile("Today's holdings", String(x.bets), x.bets > 0 ? money(x.value) + " open now" : "No $500+ bets in the next 12 hours")}
         {tile("Record", x.wins !== null && x.losses !== null ? x.wins.toLocaleString("en-US") + "–" + x.losses.toLocaleString("en-US") : "n/a", (x.pf ? "PF " + x.pf : "Profit factor n/a") + (x.skillEdge ? " · edge " + x.skillEdge + "¢" : ""))}
       </div>
@@ -1081,7 +1245,7 @@ function CapperCard(props: { x: Trader; now: number; holdings: Line[]; followed:
       <ExpandBtn open={open} on={() => setOpen(!open)} label="Full capper stats" />
       {open ? (
         <div style={{ marginTop: 10, fontSize: 13, lineHeight: "20px", color: t.text.secondary }}>
-          P&L {money(x.pnl)} · {x.wr !== null ? <Fragment><Pct v={x.wr} /> win rate (30d)</Fragment> : "win rate n/a"}{x.resolved ? " · " + x.resolved.toLocaleString("en-US") + " resolved" : ""}{x.wins !== null && x.losses !== null ? " · " + x.wins.toLocaleString("en-US") + "–" + x.losses.toLocaleString("en-US") : ""}{x.pf ? " · PF " + x.pf : ""}{x.skillEdge ? " · edge " + x.skillEdge + "¢" : ""}{x.sportsPct ? " · " + Math.round(x.sportsPct) + "% of volume in sports" : ""}
+          All-time P&L {money(x.pnl)} · {x.wr !== null ? <Fragment><Pct v={x.wr} /> win rate (all-time)</Fragment> : "win rate n/a"}{x.pnl30 != null ? " · 30d P&L " + money(x.pnl30) : ""}{x.resolved ? " · " + x.resolved.toLocaleString("en-US") + " resolved" : ""}{x.wins !== null && x.losses !== null ? " · " + x.wins.toLocaleString("en-US") + "–" + x.losses.toLocaleString("en-US") : ""}{x.pf ? " · PF " + x.pf : ""}{x.skillEdge ? " · edge " + x.skillEdge + "¢" : ""}{x.sportsPct ? " · " + Math.round(x.sportsPct) + "% of volume in sports" : ""}
         </div>
       ) : null}
     </CardShell>
@@ -1096,10 +1260,16 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; bankroll: numb
   const k = p.kalshi;
   const ok = k.status === "ok";
   const c = conf(p.score);
-  const pct = stakePct(p, fun, poly);
-  const stake = pct > 0 ? Math.max(1, Math.round(bankroll * pct)) : 0;
-  const live = p.game.state === "in" || p.startTs <= now;
-  const backers = p.backers.filter((b: Backer) => props.hidden.indexOf((b.wallet || "").toLowerCase()) < 0);
+  const backers0 = p.backers.filter((b: Backer) => props.hidden.indexOf((b.wallet || "").toLowerCase()) < 0);
+  const info = pickInfo(p, backers0.length);
+  const word = info.word;
+  const pct = (ok || poly) ? stakePctOf(word) : 0;
+  const stake = (ok || poly) ? dollarStake(word, bankroll) : 0;
+  const live = p.game.state === "in" || (p.startTs > 0 && p.startTs <= now);
+  const backers = backers0;
+  const netVal = p.net !== undefined ? p.net : p.invested - (p.oppMoney || 0);
+  const sharePct = Math.round(info.share * 100);
+  const idCode = pickIdOf(p);
   const label = (s: string) => <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: t.text.tertiary }}>{s}</div>;
   const tile = (icon: string, tint: string, l: string, v: string, sub: string) => (
     <div style={{ borderRadius: 16, padding: 12, background: t.bg.subtle, minWidth: 0 }}>
@@ -1115,18 +1285,22 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; bankroll: numb
   const freshShare = sideTotal > 0 ? p.fresh24 / sideTotal : 0;
   const lastBuy = Math.max(0, ...backers.map((b: Backer) => b.lastTs || 0));
   const ex = explainPick(p, poly);
-  const word = strengthWord(backers.length, p.invested, p.oppMoney || 0);
   const marketHref = p.slug ? eventUrl(p.slug) : undefined;
   return (
     <CardShell accent={fun ? ("linear-gradient(90deg, " + AMBER + ", #F472B6)") : ("linear-gradient(90deg, " + BRAND + ", " + BRAND2 + ")")}>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
           <Chip bg={BRAND} color="#FFFFFF">#{rank}</Chip>
           <StrengthChip word={word} />
+          {info.glue ? <Chip bg={AMBER} color="#FFFFFF">Small, glue leg only</Chip> : null}
+          {info.split ? <Chip bg={AMBER} color="#FFFFFF">Split</Chip> : null}
+          {info.pricier ? <Chip bg={AMBER} color="#FFFFFF">Pricier</Chip> : null}
+          {info.band === "best" ? <Chip bg={GREEN} color="#FFFFFF">65–84¢</Chip> : null}
           <Chip bg={t.bg.subtle} color={t.text.primary}>{p.league}</Chip>
           <Chip bg={t.bg.subtle} color={t.text.secondary}>{kindWord(p.kind)}</Chip>
           <Chip bg={live ? RED : t.bg.subtle} color={live ? "#FFFFFF" : t.text.primary}><Icon name="clock" color={live ? "#FFFFFF" : t.text.secondary} size={12} />{live ? "LIVE" : until(p.startTs, now)}</Chip>
           {fun ? <Chip bg={AMBER} color="#FFFFFF">Fun</Chip> : null}
           {poly ? <Chip bg={BRAND2} color="#FFFFFF">Polymarket</Chip> : null}
+          <CopyId id={idCode} />
         </div>
         <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 12 }}>
           <div style={{ flex: "1 1 auto", minWidth: 0 }}>
@@ -1146,8 +1320,8 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; bankroll: numb
         </div>
         <ActionBtn ex={ex} href={poly ? marketHref : undefined} />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 8, marginTop: 14 }}>
-          {tile("whales", BRAND, "Top whales on this bet", String(backers.length), "$500+ each · top " + DATA.coverage.cappers + " (30 days) · " + p.golden + " golden")}
-          {tile("money", GREEN, "Their money", kMoney(p.invested), "net " + kMoney(p.net !== undefined ? p.net : p.invested - p.oppMoney) + " after whales against")}
+          {tile("whales", BRAND, "Top whales on this bet", String(backers.length), "$500+ each · top " + DATA.coverage.cappers + " all-time · " + p.golden + " golden")}
+          {tile("money", GREEN, "Net money", kMoney(netVal), "Net " + money(netVal) + " (" + sharePct + "% one-sided)")}
           {tile("star", AMBER, "Total backers", p.totalBackers !== undefined && p.totalBackers !== null ? p.totalBackers.toLocaleString("en-US") : "n/a", "all wallets, any size" + (p.sideAll ? " · " + kMoney(p.sideAll) : ""))}
           {tile("against", RED, "Top whales against", String(p.oppCount), kMoney(p.oppMoney) + " on the other side")}
         </div>
@@ -1160,9 +1334,13 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; bankroll: numb
           ) : (
             <KalshiBox act={ok ? (k.action || null) : null} price={k.price === undefined ? null : k.price} contract={k.contract || null} edge={k.edge_vs_whales === undefined ? null : k.edge_vs_whales} why={k.why || null} label={ex.headline} entry={p.avgEntry} now={p.price} />
           )}
+          <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 8 }}>
+            Now {cents(info.px)} · whales entered at {cents(p.avgEntry)}{info.over != null ? (info.over > 0 ? " · +" + info.over.toFixed(1).replace(/\.0$/, "") + "¢ vs entry" : " · " + info.over.toFixed(1).replace(/\.0$/, "") + "¢ vs entry") : ""}
+          </div>
+          <div style={{ fontSize: 14, lineHeight: "20px", fontWeight: 700, color: t.text.primary, marginTop: 6 }}>Net {money(netVal)} ({sharePct}% one-sided)</div>
           {(ok || poly) && stake > 0 ? (
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 8, marginTop: 10 }}>
-              <span style={{ fontSize: 13, color: t.text.secondary }}>Suggested stake{poly ? " on Polymarket" : ""} · <Pct v={Number((pct * 100).toFixed(1))} /> of {money(bankroll)}</span>
+              <span style={{ fontSize: 13, color: t.text.secondary }}>Stake{poly ? " on Polymarket" : ""} · {word} · {Math.round(pct * 100)}% of {money(bankroll)}{word === "Go big" ? ", max $10" : ""}</span>
               <span style={{ fontSize: 20, fontWeight: 800 }}>{money(stake)}</span>
             </div>
           ) : null}
@@ -1190,7 +1368,7 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; bankroll: numb
                     <NameLink name={b.name} wallet={b.wallet} bold={true} />
                     {b.golden ? <Chip bg={AMBER} color="#FFFFFF">Golden</Chip> : null}
                     {b.skill ? <Chip bg={BRAND} color="#FFFFFF">Skill badge</Chip> : null}
-                    {b.top100 ? <Chip bg={t.bg.subtle} color={t.text.primary}>#{b.rank30 || b.rank} · 30d</Chip> : null}
+                    {rankLabel(b.rankAll, b.rank, b.rank30) ? <Chip bg={t.bg.subtle} color={t.text.primary}>{rankLabel(b.rankAll, b.rank, b.rank30)}</Chip> : null}
                   </div>
                   <div style={{ fontSize: 14, lineHeight: "20px", marginTop: 4 }}><b>{money(b.cost)}</b> at {cents(b.avg)} · now {cents(p.price)}</div>
                   <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 2 }}>
@@ -1198,7 +1376,7 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; bankroll: numb
                     {b.firstTs && b.lastTs && b.firstTs !== b.lastTs ? " · first buy " + ptTime(b.firstTs) : ""}
                     {b.trades ? " · " + b.trades + (b.trades === 1 ? " fill" : " fills") : ""}
                   </div>
-                  <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 2 }}><Pct v={b.wr} /> win rate (30d){b.resolved ? " · " + b.resolved.toLocaleString("en-US") + " resolved" : ""} · P&L {money(b.pnl)}{b.sport ? " · " + p.league + " record " + b.sport.wr + "% over " + b.sport.n : ""}</div>
+                  <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 2 }}><Pct v={b.wr} /> win rate (all-time){b.resolved ? " · " + b.resolved.toLocaleString("en-US") + " resolved" : ""} · P&L {money(b.pnl)}{b.sport ? " · " + p.league + " record " + b.sport.wr + "% over " + b.sport.n : ""}</div>
                   <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 2 }}>{b.flow ? "24h: " + b.flow + (b.buy24 ? " · bought " + money(b.buy24) : "") + (b.sell24 ? " · sold " + money(b.sell24) : "") : "24h flow not checked"}</div>
                   <div style={{ marginTop: 6 }}><CapperButtons wallet={b.wallet} followed={props.followed} hidden={props.hidden} toggle={props.toggle} /></div>
                 </div>
@@ -1208,7 +1386,7 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; bankroll: numb
             {p.opposing.length ? p.opposing.map((o: Opp, i: number) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 0", flexWrap: "wrap" }}>
                 <Face name={o.name} size={26} />
-                <span style={{ fontSize: 14, flex: "1 1 auto", minWidth: 0 }}><NameLink name={o.name} wallet={o.wallet} />{o.wr !== null ? <Fragment> · <Pct v={o.wr} /></Fragment> : null}{o.rank30 || o.rank ? " · #" + (o.rank30 || o.rank) + " · 30d" : ""}</span>
+                <span style={{ fontSize: 14, flex: "1 1 auto", minWidth: 0 }}><NameLink name={o.name} wallet={o.wallet} />{o.wr !== null ? <Fragment> · <Pct v={o.wr} /></Fragment> : null}{rankLabel(o.rankAll, o.rank, o.rank30) ? " · " + rankLabel(o.rankAll, o.rank, o.rank30) : ""}</span>
                 <span style={{ fontSize: 14, fontWeight: 700 }}>{money(o.cost)}{o.avg ? " @ " + cents(o.avg) : ""}</span>
               </div>
             )) : <div style={{ fontSize: 14, color: t.text.secondary, padding: "8px 0" }}>No $500+ whale on the other side.</div>}
@@ -1260,7 +1438,7 @@ function LeaguePills(props: { picks: Pick[]; value: string; onChange: (v: string
 export default function App() {
   const t = useGrokTheme();
   const [tab, setTab] = useState<string>("top");
-  const [bankrollText, setBankrollText] = useState<string>("74");
+  const [bankrollText, setBankrollText] = useState<string>(DEFAULT_BANKROLL);
   const [minPos, setMinPos] = useState<string>("500");
   const [minWallets, setMinWallets] = useState<string>("2");
   const [f, setF] = useState<Filters>(DEFAULT_FILTERS);
@@ -1289,10 +1467,16 @@ export default function App() {
         if (Array.isArray(v.hidden)) setHidden(v.hidden);
         setSaved("Your follow and hide choices were restored on this device.");
       }
+      const br = window.localStorage.getItem(BANKROLL_KEY);
+      if (br && Number(br) > 0) setBankrollText(br);
     } catch (e) {
       setSaved("");
     }
   }, []);
+  const setBankroll = (v: string) => {
+    setBankrollText(v);
+    try { if (v.trim()) window.localStorage.setItem(BANKROLL_KEY, v.trim()); } catch (e) { /* ignore */ }
+  };
   const persist = (fo: string[], hi: string[]) => {
     try { window.localStorage.setItem(STORE_KEY, JSON.stringify({ followed: fo, hidden: hi })); setSaved("Saved on this device."); } catch (e) { setSaved("This view can't save choices, so they reset when the page reloads. Allow site storage in your browser to keep them."); }
   };
@@ -1310,15 +1494,35 @@ export default function App() {
   const minW = Number(minWallets);
   const visibleBackers = (p: Pick): Backer[] => p.backers.filter((b: Backer) => b.cost >= minP && hidden.indexOf((b.wallet || "").toLowerCase()) < 0);
   const followOk = (p: Pick): boolean => !f.followedOnly || p.backers.some((b: Backer) => followed.indexOf((b.wallet || "").toLowerCase()) >= 0);
-  // Ended games are removed by refresh.py (W/L goes to the Journal first); this also drops any that ended since.
+  // Started and ended games are dropped from Top 20, Fun, Polymarket and combos. Live games stay on Bets.
   const finished = (p: Pick): boolean => (p.refresh && (p.refresh.state === "post" || !!p.refresh.final || !!p.refresh.ended)) || p.game.state === "post";
-  const pickQuality = (p: Pick): number => Math.max(0, ...p.backers.map((b: Backer) => (b.golden ? 1000 : 0) - (b.rank30 || b.rank || 999)));
-  const rankPicks = (arr: Pick[]): Pick[] => arr.slice().sort((a: Pick, b: Pick) => cmpStrength(visibleBackers(a).length, a.invested, a.oppMoney || 0, pickQuality(a), visibleBackers(b).length, b.invested, b.oppMoney || 0, pickQuality(b)));
+  const gone = (p: Pick): boolean => finished(p) || isStarted(p, now);
+  const pickQuality = (p: Pick): number => Math.max(0, ...p.backers.map((b: Backer) => (b.golden ? 1000 : 0) - (b.rankAll || b.rank || 999)));
+  const rankPicks = (arr: Pick[]): Pick[] => arr.slice().sort((a: Pick, b: Pick) => cmpRankKey(rankKey(a, visibleBackers(a).length), rankKey(b, visibleBackers(b).length)));
   const bySport = (arr: Pick[]): Pick[] => sportFilter ? arr.filter((p: Pick) => p.league === sportFilter) : arr;
-  const top = bySport(rankPicks(DATA.signals.filter((p: Pick) => visibleBackers(p).length >= minW && followOk(p) && !finished(p)))).slice(0, 20);
-  const fun = bySport(rankPicks(DATA.fun.filter((p: Pick) => visibleBackers(p).length >= 1 && followOk(p) && !finished(p))));
-  const polyAll = rankPicks((DATA.poly || []).filter((p: Pick) => visibleBackers(p).length >= 1 && followOk(p) && !finished(p) && p.kalshi.status !== "ok"));
+  const topPool = rankPicks((DATA.signals || []).filter((p: Pick) => topEligible(p, visibleBackers(p).length, now) && visibleBackers(p).length >= minW && followOk(p)));
+  const top = bySport(topPool).slice(0, 20);
+  const gluePool = rankPicks((DATA.glue || DATA.signals || []).concat(DATA.fun || []).filter((p: Pick) => {
+    const n = visibleBackers(p).length;
+    return n >= 2 && followOk(p) && !gone(p) && p.kalshi.status === "ok" && pickInfo(p, n).glue;
+  }));
+  // unique by id, not already in top
+  const glueIds: Record<string, boolean> = {};
+  top.forEach((p: Pick) => { glueIds[p.id] = true; });
+  const glueAll = gluePool.filter((p: Pick) => { if (glueIds[p.id]) return false; glueIds[p.id] = true; return true; });
+  const glue = bySport(glueAll).slice(0, 12);
+  const funPool = rankPicks((DATA.fun || []).concat(DATA.signals || []).filter((p: Pick) => {
+    const n = visibleBackers(p).length;
+    if (n < 1 || !followOk(p) || gone(p) || p.kalshi.status !== "ok") return false;
+    if (top.some((x: Pick) => x.id === p.id)) return false;
+    if (glueAll.some((x: Pick) => x.id === p.id) && n >= 2) return false; // 95¢+ 2-whale stays in Glue, not Fun
+    return !topEligible(p, n, now) || n < minW;
+  }));
+  const funSeen: Record<string, boolean> = {};
+  const fun = bySport(funPool.filter((p: Pick) => { if (funSeen[p.id]) return false; funSeen[p.id] = true; return true; }));
+  const polyAll = rankPicks((DATA.poly || []).filter((p: Pick) => visibleBackers(p).length >= 1 && followOk(p) && !gone(p) && p.kalshi.status !== "ok"));
   const poly = bySport(polyAll).slice(0, 20);
+  const combos = buildCombos(top);
   const capNum = capN === "custom" ? Math.max(1, Math.floor(Number(capCustom) || 0)) : Number(capN);
   const allPicks = DATA.signals.concat(DATA.fun);
 
@@ -1330,7 +1534,17 @@ export default function App() {
   const openValue = BET_LINES.reduce((a: number, l: Line) => a + l.amount, 0);
   const graded = DATA.history.filter((h: Hist) => h.result);
   const wins = graded.filter((h: Hist) => h.result === "W").length;
-  const journalRows = DATA.history.filter((h: Hist) => journal === "all" || (journal === "won" && h.result === "W") || (journal === "lost" && h.result === "L") || (journal === "pending" && !h.result) || (journal === "top" && (h.tier === "top" || !h.tier)) || (journal === "fun" && h.tier === "fun") || (journal === "poly" && h.tier === "poly"));
+  const wlOf = (tier: string): { w: number; l: number; text: string } => {
+    const rows = DATA.history.filter((h: Hist) => h.result && (tier === "top" ? (h.tier === "top" || !h.tier) : h.tier === tier));
+    const w = rows.filter((h: Hist) => h.result === "W").length;
+    const l = rows.filter((h: Hist) => h.result === "L").length;
+    return { w, l, text: w + "-" + l };
+  };
+  const wlTop = wlOf("top"), wlFun = wlOf("fun"), wlPoly = wlOf("poly"), wlGlue = wlOf("glue");
+  const tabRecord = tab === "top" ? "Top 20: " + wlTop.text : tab === "fun" ? "Fun: " + wlFun.text : tab === "poly" ? "Polymarket: " + wlPoly.text : tab === "more" ? "Top 20 " + wlTop.text + " · Fun " + wlFun.text + " · Polymarket " + wlPoly.text + (wlGlue.w + wlGlue.l ? " · Glue " + wlGlue.text : "") : "";
+  const tabCaution = tab === "poly" && wlPoly.l > wlPoly.w ? "Caution: the Polymarket tab is losing so far (" + wlPoly.text + "). Bet smaller or skip until the record turns around." : "";
+
+  const journalRows = DATA.history.filter((h: Hist) => journal === "all" || (journal === "won" && h.result === "W") || (journal === "lost" && h.result === "L") || (journal === "pending" && !h.result) || (journal === "top" && (h.tier === "top" || !h.tier)) || (journal === "fun" && h.tier === "fun") || (journal === "poly" && h.tier === "poly") || (journal === "glue" && h.tier === "glue"));
   const sportRows = allPicks.flatMap((p: Pick) => p.backers.filter((b: Backer) => b.sport).map((b: Backer) => ({ lead: p.league, title: b.name, detail: b.sport ? b.sport.wr + "% over " + b.sport.n + " resolved " + p.league + " markets, P&L " + money(b.sport.pnl) : "", meta: matchup(p.q) })));
   const activeFilterCount = Object.keys(DEFAULT_FILTERS).filter((k: string) => k !== "sort" && k !== "lineSort" && (f as unknown as Record<string, unknown>)[k] !== (DEFAULT_FILTERS as unknown as Record<string, unknown>)[k]).length;
   // capper directory: top 100 plus every other whale seen in this scan
@@ -1351,7 +1565,7 @@ export default function App() {
     if (capQ && (x.name + " " + x.wallet).toLowerCase().indexOf(capQ.trim().toLowerCase()) < 0) return false;
     return true;
   });
-  capRows = capRows.slice().sort((a: Trader, b: Trader) => capSort === "wr" ? (b.wr || 0) - (a.wr || 0) : capSort === "bets" ? b.bets - a.bets || b.value - a.value : capSort === "pnl" ? b.pnl - a.pnl : (a.rank || 999) - (b.rank || 999));
+  capRows = capRows.slice().sort((a: Trader, b: Trader) => capSort === "wr" ? (b.wr || 0) - (a.wr || 0) : capSort === "bets" ? b.bets - a.bets || b.value - a.value : capSort === "pnl" ? b.pnl - a.pnl : capSort === "pnl30" ? (b.pnl30 || 0) - (a.pnl30 || 0) : (a.rankAll || a.rank || 999) - (b.rankAll || b.rank || 999));
   const statusOpts = [{ value: "active", label: "Live + next 12 hours" }, { value: "live", label: "Live now" }, { value: "upcoming", label: "Upcoming · next 12 hours" }, { value: "hour", label: "Live + next hour" }, { value: "h3", label: "Live + next 3 hours" }, { value: "h6", label: "Live + next 6 hours" }];
   const filterBlock = (isBets: boolean) => (
     <Section heading={isBets ? "Filter and sort bets" : "Filter and sort buys"} caption={activeFilterCount ? activeFilterCount + " filters on · " + (isBets ? betRows.length + " positions" : buys.length + " buys") + " match" : "Defaults: live + next 12h, hedgers and 24h+ stale hidden"} collapsible defaultOpen={false}>
@@ -1387,19 +1601,19 @@ export default function App() {
   );
   return (
     <Page title="Orca Whale Scanner" summary={{
-      top: "The strongest picks, where 2 or more top whales agree, ranked best to worst. #1 is the one to go biggest on.",
-      fun: "Picks backed by just one top whale. Riskier, so bet smaller.",
-      poly: "Whale picks you can only bet on Polymarket (not on Kalshi), ranked best to least.",
+      top: "The strongest Kalshi picks from all-time sports whales, ranked by price band, net money and one-sided share. Singles are the default; up to 3 suggested 2-leg combos sit at the top. Games that have started are hidden.",
+      fun: "Kalshi picks that missed Top 20: one-whale, under 45¢, Split, or Pricier. All Small or Normal — never Go big if Split or under 45¢. Started games are hidden.",
+      poly: "Whale picks you can only bet on Polymarket (not on Kalshi), from all-time sports whales. Started games are hidden.",
       buys: "The latest big whale buys, strongest first. Shows what the money is jumping on right now.",
-      bets: "Every game in the next 12 hours with whale money on it, showing both sides and which side has more money.",
-      cappers: "The top whales from the last 30 days, with their record and what they're betting today.",
-      more: "Your win/loss results, scan details and how the rankings work.",
-    }[tab] || ""}>
+      bets: "Every game in the next 12 hours with whale money on it, showing both sides. Live games stay here with a Live tag.",
+      cappers: "The top all-time sports whales, with their all-time record and what they're betting today. 30-day P&L is shown as secondary info.",
+      more: "Bankroll, daily cap, your win/loss results, scan details and how the rankings work.",
+    }[tab] || ""} record={tabRecord || undefined} caution={tabCaution || undefined}>
       <Hero top={top.length} fun={fun.length} buys={BUY_LINES.length} bets={BET_LINES.length} active={activeTraders.length} value={openValue} />
 
       <Section heading="Bankroll and pick rules" caption={"Bankroll " + money(bankroll) + " · " + money(minP) + "+ positions · Top 20 needs " + minW + "+ whales" + (followed.length ? " · " + followed.length + " followed" : "") + (hidden.length ? " · " + hidden.length + " hidden" : "")} collapsible defaultOpen={false}>
         <Grid columns={3}>
-          <Input label="Bankroll ($)" type="number" value={bankrollText} onChange={(v: string) => setBankrollText(v)} />
+          <Input label="Bankroll ($)" type="number" value={bankrollText} onChange={(v: string) => setBankroll(v)} />
           <Select label="Min position" value={minPos} onChange={(v: string) => setMinPos(v)} options={[{ value: "500", label: "$500+" }, { value: "1000", label: "$1,000+" }, { value: "2500", label: "$2,500+" }, { value: "5000", label: "$5,000+" }]} />
           <Select label="Top 20 consensus" value={minWallets} onChange={(v: string) => setMinWallets(v)} options={[{ value: "2", label: "2+ whales" }, { value: "3", label: "3+ whales" }, { value: "4", label: "4+ whales" }]} />
         </Grid>
@@ -1408,19 +1622,36 @@ export default function App() {
 
       {tab === "top" ? (
         <Section heading="Top 20">
-          <LeaguePills picks={rankPicks(DATA.signals.filter((p: Pick) => visibleBackers(p).length >= minW && followOk(p) && !finished(p))).slice(0, 20)} value={sportFilter} onChange={setSportFilter} />
-          <Text>Up to 20 Kalshi-bettable picks, ranked best first: most top-{DATA.coverage.cappers} whales (last 30 days) with $500+ on the same side, then their money, then less whale money against. Each card is labeled Go big, Normal, or Small.</Text>
-          {top.length === 0 && f.followedOnly ? <Text>No pick clears the filter: none of the top picks is backed by a capper you follow. Turn off "Only picks a followed capper backs" to see them.</Text> : top.length === 0 ? <Text>No pick qualifies right now: none has {minW}+ top whales on a bet Kalshi lists. Fun Picks has {fun.length} with 1 whale.</Text> : top.length < 20 ? <Text>Only {top.length} of 20 qualify right now. The rest of the board has fewer than {minW} top whales on a Kalshi-listed bet. The next scan can fill more.</Text> : null}
+          <LeaguePills picks={topPool.slice(0, 20)} value={sportFilter} onChange={setSportFilter} />
+          <DailyCap />
+          <Text>Singles are the default. Ranked by price band (65–84¢ first), then totals over spreads, then net money and one-sided share, then whale count, then all-time rank. Under 45¢, 95¢+, Split under 55%, Pricier (current more than 3¢ above whale entry), and games that have started are out.</Text>
+          {combos.length ? (
+            <div style={{ marginBottom: 8 }}>
+              <div style={{ fontSize: 16, fontWeight: 800, margin: "8px 0 4px" }}>Suggested 2-leg combos</div>
+              <Text>Built only from Top 20 singles priced 65¢ or higher, never two legs from the same game, never Fun or Polymarket legs. No 3+ leg parlays (4-legs went 0-9).</Text>
+              {combos.map((pair: [Pick, Pick], i: number) => (<ComboCard key={pair[0].id + "+" + pair[1].id} a={pair[0]} b={pair[1]} rank={i + 1} bankroll={bankroll} now={now} />))}
+            </div>
+          ) : <Text>No 2-leg combo right now (need two Top 20 singles at 65¢+ from different games). No 3+ leg parlays (4-legs went 0-9).</Text>}
+          {top.length === 0 && f.followedOnly ? <Text>No pick clears the filter: none of the top picks is backed by a capper you follow. Turn off "Only picks a followed capper backs" to see them.</Text> : top.length === 0 ? <Text>No pick qualifies right now under the Top 20 rules. Fun Picks has {fun.length}.</Text> : top.length < 20 ? <Text>Only {top.length} of 20 qualify right now.</Text> : null}
+          <div style={{ fontSize: 16, fontWeight: 800, margin: "12px 0 8px" }}>Singles</div>
           {top.map((p: Pick, i: number) => (<PickCard key={p.id} p={p} fun={false} bankroll={bankroll} now={now} rank={i + 1} followed={followed} hidden={hidden} toggle={toggle} />))}
-          <Text>Top 20 rules: {minW}+ top whales (top {DATA.coverage.cappers} by 30-day P&L) with {money(minP)}+ each, verified Kalshi contract, no hedgers, game live or starting within 12 hours. Any sport counts.</Text>
+          {glue.length ? (
+            <div style={{ marginTop: 16 }}>
+              <div style={{ fontSize: 16, fontWeight: 800, margin: "8px 0 4px" }}>Glue legs</div>
+              <Text>95¢+ picks — labeled Small, glue leg only. Never Go big, and never a Top 20 single. Useful only as a cheap parlay glue, which this scanner does not recommend on its own.</Text>
+              {glue.map((p: Pick, i: number) => (<PickCard key={p.id} p={p} fun={false} bankroll={bankroll} now={now} rank={i + 1} followed={followed} hidden={hidden} toggle={toggle} />))}
+            </div>
+          ) : null}
+          <Text>Top 20 rules: {minW}+ all-time sports whales (top {DATA.coverage.cappers}) with {money(minP)}+ each, verified Kalshi contract, no hedgers, game has not started, price 45–94¢, one-sided share at least 55%, current price not more than 3¢ above the whales' average entry.</Text>
         </Section>
       ) : null}
 
       {tab === "fun" ? (
         <Section heading="Fun Picks">
-          <LeaguePills picks={rankPicks(DATA.fun.filter((p: Pick) => visibleBackers(p).length >= 1 && followOk(p) && !finished(p)))} value={sportFilter} onChange={setSportFilter} />
+          <LeaguePills picks={fun} value={sportFilter} onChange={setSportFilter} />
+          <DailyCap />
           <div style={{ borderRadius: 16, padding: "12px 14px", background: t.bg.subtle, fontFamily: t.font.family, fontSize: 14, lineHeight: "20px", color: t.text.secondary, marginBottom: 14 }}>
-            <span style={{ color: AMBER, fontWeight: 800 }}>Single-whale picks. </span>These have a verified Kalshi contract but not 2+ whale agreement. Stakes are halved. Ranked best first like Top 20.
+            <span style={{ color: AMBER, fontWeight: 800 }}>Not Top 20. </span>One-whale picks, prices under 45¢ (always Small), Split under 55%, and Pricier lines (current more than 3¢ above whale entry). Games that have started are hidden. Stakes follow the Small / Normal labels.
           </div>
           {fun.slice(0, funLimit).map((p: Pick, i: number) => (<PickCard key={p.id} p={p} fun={true} bankroll={bankroll} now={now} rank={i + 1} followed={followed} hidden={hidden} toggle={toggle} />))}
           {fun.length > funLimit ? <Button label={"Show more Fun Picks (" + (fun.length - funLimit) + " left)"} onClick={() => setFunLimit(funLimit + 10)} /> : null}
@@ -1430,8 +1661,9 @@ export default function App() {
       {tab === "poly" ? (
         <Section heading="Polymarket">
           <LeaguePills picks={polyAll} value={sportFilter} onChange={setSportFilter} />
+          <DailyCap />
           <div style={{ borderRadius: 16, padding: "12px 14px", background: t.bg.subtle, fontFamily: t.font.family, fontSize: 14, lineHeight: "20px", color: t.text.secondary, marginBottom: 14 }}>
-            <span style={{ color: BRAND2, fontWeight: 800 }}>Polymarket only. </span>These whale picks passed every rule — top 30-day whales, $500+ positions, game within 12 hours, no hedgers — but Kalshi has no matching contract. They never appear on Top 20, Fun, Buys or Bets as a Kalshi play. Ranked like Top 20: 2+ whale picks first, then single-whale picks. Tap the green button to open the market on Polymarket.
+            <span style={{ color: BRAND2, fontWeight: 800 }}>Polymarket only. </span>These whale picks passed every rule — all-time sports whales, $500+ positions, game within 12 hours and not yet started, no hedgers — but Kalshi has no matching contract. They never appear on Top 20, Fun, Buys or Bets as a Kalshi play. Ranked like Top 20. Tap the green button to open the market on Polymarket.
           </div>
           {poly.length === 0 && f.followedOnly ? <Text>No Polymarket-only pick is backed by a capper you follow. Turn off "Only picks a followed capper backs" to see them.</Text> : poly.length === 0 ? <Text>No Polymarket-only picks right now: every qualifying whale bet either has a Kalshi contract (see Top 20 and Fun) or is outside the 12-hour window.</Text> : poly.length < 20 && polyAll.length <= 20 ? <Text>{poly.length} Polymarket-only pick{poly.length === 1 ? "" : "s"} right now, ranked best first.</Text> : null}
           {poly.slice(0, polyLimit).map((p: Pick, i: number) => (<PickCard key={p.id} p={p} fun={false} poly={true} bankroll={bankroll} now={now} rank={i + 1} followed={followed} hidden={hidden} toggle={toggle} />))}
@@ -1465,7 +1697,7 @@ export default function App() {
 
       {tab === "cappers" ? (
         <Section heading={"Cappers · " + capRows.length}>
-          <Text>Top {DATA.coverage.cappers} sports whales by 30-day P&L, with profit, win rate and today's holdings on each card. Tap a name for their Polymarket profile. Follow to filter picks to them; hide to drop them from every count.</Text>
+          <Text>Top {DATA.coverage.cappers} sports whales by all-time P&L, with all-time profit, win rate and today's holdings on each card. 30-day P&L is shown as a secondary figure when available. Tap a name for their Polymarket profile. Follow to filter picks to them; hide to drop them from every count.</Text>
           <Grid columns={2}>
             <Select label="Whales to show" value={capN} onChange={(v: string) => { setCapN(v); setCapLimit(25); }} options={[{ value: "20", label: "Top 20" }, { value: "40", label: "Top 40" }, { value: "60", label: "Top 60" }, { value: "80", label: "Top 80" }, { value: "100", label: "Top 100" }, { value: "custom", label: "Custom number" }]} />
             {capN === "custom" ? <Input label="Custom number" type="number" value={capCustom} onChange={(v: string) => { setCapCustom(v); setCapLimit(25); }} placeholder="e.g. 50" /> : <Text>Showing top {capNum}</Text>}
@@ -1473,7 +1705,7 @@ export default function App() {
           <Segmented options={[{ value: "all", label: "All" }, { value: "following", label: "Following", count: followed.length }, { value: "hidden", label: "Hidden", count: hidden.length }, { value: "golden", label: "Golden" }, { value: "active", label: "Active" }, { value: "top100", label: "Top whales" }]} value={capView} onChange={(v: string) => { setCapView(v); setCapLimit(25); }} />
           <Grid columns={2}>
             <Input label="Search cappers" value={capQ} onChange={(v: string) => { setCapQ(v); setCapLimit(25); }} placeholder="Name or 0x wallet" />
-            <Select label="Sort" value={capSort} onChange={(v: string) => setCapSort(v)} options={[{ value: "rank", label: "30-day rank" }, { value: "wr", label: "Win rate (30d)" }, { value: "bets", label: "Open bets now" }, { value: "pnl", label: "30-day P&L" }]} />
+            <Select label="Sort" value={capSort} onChange={(v: string) => setCapSort(v)} options={[{ value: "rank", label: "All-time rank" }, { value: "wr", label: "Win rate (all-time)" }, { value: "bets", label: "Open bets now" }, { value: "pnl", label: "All-time P&L" }, { value: "pnl30", label: "30-day P&L" }]} />
           </Grid>
           {saved ? <Text>{saved}</Text> : null}
           {capRows.slice(0, capLimit).map((x: Trader) => (
@@ -1485,6 +1717,11 @@ export default function App() {
 
       {tab === "more" ? (
         <Section heading="More">
+          <Section heading="Bankroll" caption="Last read from Pikkit Nov 12. Saved on this device when you edit it." defaultOpen={true}>
+            <Input label="Bankroll ($)" type="number" value={bankrollText} onChange={(v: string) => setBankroll(v)} />
+            <Text>Stakes: Small = 1% · Normal = 2% · Go big = 4% (max $10), rounded to the nearest dollar, minimum $1. Combos = 1%.</Text>
+            <DailyCap />
+          </Section>
           <Section heading="Whale consensus" collapsible defaultOpen={false}>
             <Rows rows={allPicks.map((p: Pick) => ({ lead: p.league, title: matchup(p.q) + " — " + p.label, detail: p.whales + (p.whales === 1 ? " top whale, " : " top whales, ") + money(p.invested) + ". All wallets on this side: " + (p.totalBackers !== undefined && p.totalBackers !== null ? p.totalBackers.toLocaleString("en-US") : "n/a") + " with " + money(p.sideAll) + ".", meta: "Score " + p.score }))} />
           </Section>
@@ -1503,8 +1740,8 @@ export default function App() {
             </Section>
           ) : null}
           <Section heading="Outcome journal" collapsible defaultOpen={false} caption={"Record so far: " + wins + "–" + (graded.length - wins) + ". Picks are graded on a later scan once their games settle."}>
-            <Select label="Show" value={journal} onChange={(v: string) => setJournal(v)} options={[{ value: "all", label: "All saved picks" }, { value: "won", label: "Winning outcomes" }, { value: "lost", label: "Losing outcomes" }, { value: "pending", label: "Pending outcomes" }, { value: "top", label: "Top 20 picks" }, { value: "fun", label: "Fun Picks" }, { value: "poly", label: "Polymarket picks" }]} />
-            {journalRows.length ? <Rows rows={journalRows.map((h: Hist) => ({ lead: h.tier === "fun" ? "Fun" : h.tier === "poly" ? "Poly" : "Top", title: matchup(h.q) + " — " + h.label, detail: "Score " + h.score + ", " + h.whales + " whales, " + money(h.invested) + ". " + h.kalshi + ". Starts " + h.start + ".", meta: "First seen " + ptTime(h.first_seen) + " · " + h.scans + (h.scans === 1 ? " scan" : " scans"), status: h.result ? (h.result === "W" ? { label: "Won", tone: "success" as const } : { label: "Lost", tone: "danger" as const }) : { label: h.active ? "Active" : "Waiting for result" } }))} /> : <Text>No saved picks in this view yet.</Text>}
+            <Select label="Show" value={journal} onChange={(v: string) => setJournal(v)} options={[{ value: "all", label: "All saved picks" }, { value: "won", label: "Winning outcomes" }, { value: "lost", label: "Losing outcomes" }, { value: "pending", label: "Pending outcomes" }, { value: "top", label: "Top 20 picks" }, { value: "fun", label: "Fun Picks" }, { value: "poly", label: "Polymarket picks" }, { value: "glue", label: "Glue legs" }]} />
+            {journalRows.length ? <Rows rows={journalRows.map((h: Hist) => ({ lead: h.tier === "fun" ? "Fun" : h.tier === "poly" ? "Poly" : h.tier === "glue" ? "Glue" : "Top", title: matchup(h.q) + " — " + h.label, detail: "Score " + h.score + ", " + h.whales + " whales, " + money(h.invested) + ". " + h.kalshi + ". Starts " + h.start + ".", meta: "First seen " + ptTime(h.first_seen) + " · " + h.scans + (h.scans === 1 ? " scan" : " scans"), status: h.result ? (h.result === "W" ? { label: "Won", tone: "success" as const } : { label: "Lost", tone: "danger" as const }) : { label: h.active ? "Active" : "Waiting for result" } }))} /> : <Text>No saved picks in this view yet.</Text>}
           </Section>
           <Section heading="Scan history" collapsible defaultOpen={false}>
             <Rows rows={DATA.scans.slice().reverse().map((s: Scan) => ({ title: ptTime(s.ts), detail: s.signals + " Top picks · " + s.fun + " Fun picks" + (s.poly !== undefined ? " · " + s.poly + " Polymarket picks" : "") + (s.buys !== undefined ? " · " + s.buys + " buys · " + s.bets + " bets · " + s.wallets + " wallets checked" : ""), meta: (s.cappers ? s.cappers + " cappers · " : "") + s.calls + " OrcaLayer calls" }))} />
@@ -1512,7 +1749,7 @@ export default function App() {
           <Section heading="Scan details and coverage" collapsible defaultOpen={false}>
             <Properties items={[
               { label: "Scanned", value: DATA.scannedAt + " in " + DATA.secs + "s · manual scan only" },
-              { label: "Whales", value: "Top " + DATA.coverage.cappers + " sports whales by 30-day P&L (OrcaLayer business pnl-leaderboard, window 30" + (DATA.coverage.lb30 ? ", " + DATA.coverage.lb30.start + " to " + DATA.coverage.lb30.end + "; read ranks 1–" + DATA.coverage.lb30.deepestRank + " in order, skipped " + DATA.coverage.lb30.skippedNonSports + " non-sports and " + DATA.coverage.lb30.skippedNoPositions + " with no open positions" : "") + "), " + DATA.coverage.golden + " golden" },
+              { label: "Whales", value: "Top " + DATA.coverage.cappers + " sports whales by all-time P&L (OrcaLayer /api/v2/whales/leaderboard?sort=pnl; pnl-leaderboard only supports window 7 or 30, verified 2026-11-12" + ((DATA.coverage.lbAll || DATA.coverage.lb30) ? "; read all-time ranks 1–" + (DATA.coverage.lbAll || DATA.coverage.lb30)!.deepestRank + " in order, skipped " + (DATA.coverage.lbAll || DATA.coverage.lb30)!.skippedNonSports + " non-sports and " + (DATA.coverage.lbAll || DATA.coverage.lb30)!.skippedNoPositions + " with no open positions" : "") + "), " + DATA.coverage.golden + " golden. 30-day P&L is attached as secondary info when a whale also appears on the 30-day leaderboard." },
               { label: "Open positions read", value: DATA.coverage.positionsLoaded + " across " + DATA.coverage.walletsLoaded + " wallets; " + DATA.coverage.bets + " qualifying bets kept" },
               { label: "Recent buys", value: DATA.coverage.buysRaw + " whale buys in 24h, " + DATA.coverage.buys + " qualified and in the 12h window" },
               { label: "Sports markets with 2+ whales", value: DATA.coverage.marketsFound + " found, " + DATA.coverage.marketsInWindow + " in window, " + DATA.coverage.marketsScanned + " checked" },
@@ -1520,20 +1757,20 @@ export default function App() {
               { label: "OrcaLayer calls", value: DATA.coverage.orcaCalls + (DATA.coverage.orcaErrors.length ? ", errors: " + DATA.coverage.orcaErrors.join("; ") : ", no errors") },
               { label: "Kalshi", value: DATA.coverage.kalshiSeries + " series read, " + DATA.coverage.kalshiMatched + " pick contracts verified, " + (DATA.coverage.notOnKalshi || 0) + " side-groups with no Kalshi match (Polymarket tab)" },
               { label: "ESPN", value: DATA.coverage.espnLeagues + " league scoreboards checked" },
-              { label: "Times", value: "Pacific Time. Window: live + next 12 hours; completed games hidden." },
+              { label: "Times", value: "Pacific Time. Window: next 12 hours, games that have not started. Started games are dropped from Top 20, Fun, Polymarket and combos (they stay on Bets with a Live tag). Ended games are removed everywhere." },
             ]} />
           </Section>
           <Section heading="Methodology" collapsible defaultOpen={false} caption="Scores rank evidence; they are not win probabilities.">
             <Properties items={[
-              { label: "Guardrails", value: "Only the top " + DATA.coverage.cappers + " whales of the last 30 days count · $500 minimum position · 2+ of them for Top 20 · verified Kalshi contract required for Top 20 and Fun · the Polymarket tab is only for picks with no Kalshi contract (never a duplicate of a Kalshi tab)" },
-              { label: "Top 20 ranking", value: "Most top whales on the side first, then most money, then less whale money against, then better 30-day rank. Same ranking is the default on Fun, the Polymarket tab, Buys and Bets." },
-              { label: "Polymarket tab", value: "Up to 20 whale picks that passed every rule but have no matching Kalshi contract. 2+ whale picks first, then single-whale picks, ranked the same way. Each card says in plain words what to buy on Polymarket and links to the market. Results are tagged Polymarket in the journal. Refresh removes finished ones." },
-              { label: "Strength label", value: "Go big: 3+ top whales on the side, or $10,000+ with opposing whale money under 15% of that total (or none). Normal: exactly 2 top whales. Small: 1 top whale." },
+              { label: "Guardrails", value: "Only the top " + DATA.coverage.cappers + " all-time sports whales count (≥50% of open cost in sports) · $500 minimum position · 2+ of them for Top 20 · verified Kalshi contract required for Top 20 and Fun · the Polymarket tab is only for picks with no Kalshi contract (never a duplicate of a Kalshi tab) · games that have started are hidden from Top 20, Fun, Polymarket and combos" },
+              { label: "Top 20 ranking", value: "Price band first (65–84¢ best, then 45–64¢ and 85–94¢; under 45¢ and 95¢+ are out of Top 20), then whale-backed totals over spreads, then net money (for minus against) and one-sided share, then whale count, then all-time rank. Split (share under 65%) is capped at Small and dropped from Top 20 if under 55%. Pricier (current >3¢ above whale avg entry) is dropped from Top 20; >5¢ is hidden from Top 20 entirely." },
+              { label: "Polymarket tab", value: "Up to 20 whale picks that passed every rule but have no matching Kalshi contract. Ranked the same way as Top 20. Each card says in plain words what to buy on Polymarket and links to the market. Results are tagged Polymarket in the journal. Refresh drops started and finished ones. A caution is shown while the tab's graded record is losing." },
+              { label: "Strength label", value: "Go big: 3+ top whales, or $10,000+ with opposing whale money under 15% (or none) — never on under-45¢, 95¢+, or Split (share under 65%). Spreads cap at Normal unless 3+ whales and share of 65% or more. Normal: exactly 2. Small: 1, or any capped pick. 95¢+ is labeled Small, glue leg only." },
               { label: "Signal score (picks)", value: "Consensus 25 · Capper record 25 · Money 15 · One-sided 15 · Golden 10 · Fresh money 10" },
               { label: "Evidence score (buys, bets)", value: "Recency 25 · Capper record 20 · Independent agreement within 60 min 20 · Kalshi quote 20 · Kalshi price at or below the capper's 10" },
               { label: "Strong evidence only", value: "Golden capper, bought within 60 minutes, another whale agreeing within 60 minutes, verified Kalshi contract" },
               { label: "Confidence colors", value: "Green 65+, yellow 45–64, red under 45" },
-              { label: "Stake", value: "2–5% of bankroll by score, halved for Fun Picks, single-whale Polymarket picks, or pricier Kalshi lines. Polymarket-tab stakes are for betting on Polymarket. No Kalshi stake is suggested without a Kalshi match." },
+              { label: "Stake", value: "Small = 1% of bankroll, Normal = 2%, Go big = 4% (max $10), rounded to the nearest $1 with a $1 minimum. Combos = 1%. Bankroll defaults to $225.06 (last read from Pikkit Nov 12) and saves on this device. Daily cap $20, stop after a losing reload; don't re-bet a pick you already lost today. Each card has a short copyable pick ID for Pikkit grading." },
               { label: "Chance to hit", value: "Polymarket price of the held side; market-implied, not a prediction" },
             ]} />
           </Section>
@@ -1551,8 +1788,8 @@ export default function App() {
               "Follow and hide choices save on this device only.",
               "Whale positions come from each top whale's own open positions (up to 200 per wallet), so a whale with more open bets can be missed.",
               "Refresh uses ESPN and Kalshi only; esports and leagues ESPN doesn't cover show no ESPN win chance.",
-              "Ended games are removed from every list, including the Polymarket tab, on refresh after their W/L is written to the Journal.",
-              "Combos are not reported by OrcaLayer; ESPN player stats are not loaded.",
+              "Started games are dropped from Top 20, Fun, Polymarket and combos on refresh (they stay on Bets with a Live tag). Ended games are removed from every list after their W/L is written to the Journal.",
+              "Suggested 2-leg combos are built only from Top 20 singles priced 65¢+, never the same game, never Fun or Polymarket legs. No 3+ leg parlays (4-legs went 0-9). OrcaLayer itself does not report parlays. ESPN player stats are not loaded.",
               "Esports start times come from Kalshi contract wording or the same match's markets; some show the date only.",
             ]} />
           </Section>

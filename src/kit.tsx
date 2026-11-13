@@ -13,11 +13,13 @@ const theme = {
 export const useGrokTheme = () => theme;
 const TONE: Record<string, [string, string]> = { success: ["#DCFCE7", "#166534"], warning: ["#FEF3C7", "#92400E"], danger: ["#FEE2E2", "#991B1B"], info: ["#E0F2FE", "#075985"] };
 
-export function Page(p: { title?: string; summary?: string; children?: React.ReactNode }) {
+export function Page(p: { title?: string; summary?: string; record?: string; caution?: string; children?: React.ReactNode }) {
   return (
     <div style={{ maxWidth: 760, margin: "0 auto", padding: "68px 12px 48px", fontFamily: FONT, color: theme.text.primary }}>
       {p.title ? <h1 style={{ fontSize: 22, lineHeight: "28px", margin: "6px 2px 4px", fontWeight: 800, letterSpacing: "-0.01em" }}>{p.title}</h1> : null}
-      {p.summary ? <p style={{ fontSize: 13, lineHeight: "18px", color: theme.text.tertiary, margin: "0 2px 12px" }}>{p.summary}</p> : null}
+      {p.summary ? <p style={{ fontSize: 13, lineHeight: "18px", color: theme.text.tertiary, margin: "0 2px 8px" }}>{p.summary}</p> : null}
+      {p.record ? <p style={{ fontSize: 14, lineHeight: "18px", fontWeight: 800, color: theme.text.primary, margin: "0 2px 6px" }}>{p.record}</p> : null}
+      {p.caution ? <p style={{ fontSize: 13, lineHeight: "18px", fontWeight: 650, color: "#B45309", margin: "0 2px 12px" }}>{p.caution}</p> : null}
       {p.children}
     </div>
   );
