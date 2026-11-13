@@ -1092,6 +1092,11 @@ function linesToPicks(rows: Line[]): Pick[] {
     const kOk = !!(primary.kAct && primary.kContract && (primary.kPrice || primary.kPrice === 0));
     const startTs = primary.startTs || 0;
     const id = "bet|" + primary.q + "|" + primary.label;
+    let gameName = matchup(primary.q);
+    if (!/\svs\.?\s/i.test(gameName)) {
+      const sib = rows.find((l: Line) => l.league === primary.league && ((primary.startTs && l.startTs === primary.startTs) || (!!primary.start && l.start === primary.start)) && /\svs\.?\s/i.test(l.q || ""));
+      if (sib) gameName = matchup(sib.q);
+    }
     return {
       id,
       q: primary.q,
@@ -1116,7 +1121,7 @@ function linesToPicks(rows: Line[]): Pick[] {
       oppAll: oppMoney,
       oppCountAll: opposingLines.length,
       hedgeAll: 0,
-      game: { name: matchup(primary.q), start: primary.start, src: primary.src, state: live ? "in" : "pre", detail: primary.gDetail || "", score: primary.gScore || "" },
+      game: { name: gameName, start: primary.start, src: primary.src, state: live ? "in" : "pre", detail: primary.gDetail || "", score: primary.gScore || "" },
       startTs,
       backers: lines.slice().sort((a: Line, b: Line) => b.amount - a.amount).map(backerFromLine),
       opposing: opposingLines.map((l: Line) => ({ name: l.name, wallet: l.wallet, cost: l.amount, avg: l.entry, wr: l.wr, qualified: true, golden: l.golden, rank: l.rank, rank30: l.rank30, rankAll: l.rankAll })),
