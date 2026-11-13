@@ -67,6 +67,17 @@
    "bets": 228,
    "buys": 9,
    "wallets": 100
+  },
+  {
+   "ts": 1794550187,
+   "signals": 3,
+   "fun": 4,
+   "poly": 10,
+   "calls": 99,
+   "cappers": 100,
+   "bets": 37,
+   "buys": 3,
+   "wallets": 100
   }
  ],
  "picks": {
@@ -193,7 +204,8 @@
    "first_seen": 1794384085,
    "scans": 2,
    "first_score": 64,
-   "result": null
+   "result": "W",
+   "graded": 1794550187
   },
   "0x61ad0d64021e6b7cd496b7e9883c5125659d1d2f533edc449fc6adfc76056c63:yes": {
    "tier": "fun",
@@ -2297,7 +2309,8 @@
    "first_seen": 1794498725,
    "scans": 1,
    "first_score": 37,
-   "result": null
+   "result": "W",
+   "graded": 1794550187
   },
   "0x5d4e444674b75296b14fe072553ceea820afef50d8ab6759e278c879c78e4fde:yes": {
    "tier": "top",
@@ -2339,7 +2352,8 @@
    "first_seen": 1794498725,
    "scans": 1,
    "first_score": 38,
-   "result": null
+   "result": "W",
+   "graded": 1794550187
   },
   "0xc096d9590945f29434681ef1e972af587ff836fc2d0d5101ad652caecf7beb97:no": {
    "tier": "top",
@@ -2690,10 +2704,11 @@
    "first_seen": 1794498725,
    "scans": 2,
    "first_score": 59,
-   "result": null,
+   "result": "W",
    "ended": 1794546577,
    "finalScore": "USF 41 \u2013 MEM 52",
-   "active": false
+   "active": false,
+   "graded": 1794550187
   },
   "0xf0f481aa01cea41f23560c2e17ed5950869a289ae02d6fe906a364d5d398d9c2:no": {
    "tier": "poly",
@@ -2732,10 +2747,11 @@
    "first_seen": 1794498725,
    "scans": 2,
    "first_score": 44,
-   "result": null,
+   "result": "L",
    "ended": 1794543053,
    "finalScore": "WSH 140 \u2013 DET 144",
-   "active": false
+   "active": false,
+   "graded": 1794550187
   },
   "0x4c69cc4028ee6cecbbde3a35fc7056dce93c8ec8696ff0a16549ba24a025942a:yes": {
    "tier": "poly",
@@ -2774,7 +2790,8 @@
    "first_seen": 1794498725,
    "scans": 2,
    "first_score": 38,
-   "result": null
+   "result": "W",
+   "graded": 1794550187
   },
   "0xcf120771d415e0b9e1b5e7640b37c71b12c207db69f114f308721c8f6294a50b:no": {
    "tier": "poly",
@@ -2813,7 +2830,8 @@
    "first_seen": 1794498725,
    "scans": 1,
    "first_score": 62,
-   "result": null
+   "result": "W",
+   "graded": 1794550187
   },
   "0x9c7e1653439721a4c2f8501fc41e2b4fd9cd3a8a63d980f803e29472ec621c40:no": {
    "tier": "poly",
@@ -2912,7 +2930,8 @@
    "first_seen": 1794498725,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "L",
+   "graded": 1794550187
   },
   "0xd3866e95da11ebd5d6c80f3b13e5be6004bdd2be9399e09d103e48c20d5388e0:no": {
    "tier": "poly",
@@ -3141,7 +3160,8 @@
    "first_seen": 1794523850,
    "scans": 1,
    "first_score": 62,
-   "result": null
+   "result": "W",
+   "graded": 1794550187
   },
   "0x23f8d0e116256909e1cd0762a270440833fea1e45832d41a6bd4f0a71c619ce2:no": {
    "tier": "top",
@@ -3589,7 +3609,8 @@
    "first_seen": 1794523850,
    "scans": 1,
    "first_score": 51,
-   "result": null
+   "result": "W",
+   "graded": 1794550187
   },
   "0x8e959e6532e89dd6029f5375691f36e0c94e6a0e2726ddde808c7fddcfff58d4:no": {
    "tier": "fun",
@@ -3677,7 +3698,8 @@
    "first_seen": 1794523850,
    "scans": 1,
    "first_score": 85,
-   "result": null
+   "result": "L",
+   "graded": 1794550187
   },
   "0xe2b3fd3ee50fc33c5eebfd9340c5d312a3db15d08a86b88f82099f3352730ff0:no": {
    "tier": "poly",
@@ -3696,7 +3718,8 @@
    "first_seen": 1794523850,
    "scans": 1,
    "first_score": 67,
-   "result": null
+   "result": "W",
+   "graded": 1794550187
   },
   "0xa867a35213560e293f4ad77e5cd86e9fb90a53d417f2b465ea49218f3d5b1e9d:no": {
    "tier": "poly",
@@ -3715,10 +3738,11 @@
    "first_seen": 1794523850,
    "scans": 1,
    "first_score": 67,
-   "result": null,
+   "result": "L",
    "ended": 1794546577,
    "finalScore": "NYG 21 \u2013 WSH 24",
-   "active": false
+   "active": false,
+   "graded": 1794550187
   },
   "0xff2e016b5e2dbaeb806eb721a7e845899a96cf82e295882ad91e7936cfafec99:no": {
    "tier": "poly",
@@ -3737,7 +3761,8 @@
    "first_seen": 1794523850,
    "scans": 1,
    "first_score": 60,
-   "result": null
+   "result": "L",
+   "graded": 1794550187
   },
   "0xa90ce4d2e8ad396032c9cefc5d55eb13ab14226c732485617a25bd24cad8a30b:no": {
    "tier": "poly",
@@ -3756,7 +3781,8 @@
    "first_seen": 1794523850,
    "scans": 1,
    "first_score": 69,
-   "result": null
+   "result": "L",
+   "graded": 1794550187
   },
   "0xd5f194d33226513b6b8bbc9acfa72968f00f57a3ace587fb957ec048c4414d92:no": {
    "tier": "poly",
@@ -3775,7 +3801,8 @@
    "first_seen": 1794523850,
    "scans": 1,
    "first_score": 59,
-   "result": null
+   "result": "W",
+   "graded": 1794550187
   },
   "0xc338a77f4bad8f1ce22209e9c6bdb2481b76c85cbc0f822804d14db6318e8d16:no": {
    "tier": "poly",
@@ -3794,10 +3821,11 @@
    "first_seen": 1794523850,
    "scans": 1,
    "first_score": 59,
-   "result": null,
+   "result": "L",
    "ended": 1794546577,
    "finalScore": "USF 41 \u2013 MEM 52",
-   "active": false
+   "active": false,
+   "graded": 1794550187
   },
   "0xef8affc4f7479cbd3958f1d3cd2959a267755ec2ceb9d982d49e6f20a2ec2731:yes": {
    "tier": "poly",
@@ -3816,7 +3844,8 @@
    "first_seen": 1794523850,
    "scans": 1,
    "first_score": 43,
-   "result": null
+   "result": "L",
+   "graded": 1794550187
   },
   "0x42f22d5cf99daf506639bee4a06842fe3bf1e5da1e80e2447226e790b6b04b5e:no": {
    "tier": "poly",
@@ -3831,9 +3860,9 @@
    "start": "2026-11-13 (time not supplied)",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794523850,
+   "last_seen": 1794550187,
    "first_seen": 1794523850,
-   "scans": 1,
+   "scans": 2,
    "first_score": 58,
    "result": null
   },
@@ -3854,7 +3883,8 @@
    "first_seen": 1794523850,
    "scans": 1,
    "first_score": 35,
-   "result": null
+   "result": "L",
+   "graded": 1794550187
   },
   "0x6068374179bf522aa476f9b4c4399a4df3b1226fe9d43dff6ed5998b7c84d951:yes": {
    "tier": "poly",
@@ -3869,9 +3899,9 @@
    "start": "2026-11-13 (time not supplied)",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794523850,
+   "last_seen": 1794550187,
    "first_seen": 1794523850,
-   "scans": 1,
+   "scans": 2,
    "first_score": 62,
    "result": null
   },
@@ -3901,15 +3931,15 @@
    "slug": "cs2-g2-fal2-2026-11-13-map-handicap-home-1pt5",
    "market_id": "6988087",
    "side": "no",
-   "score": 46,
-   "whales": 1,
-   "invested": 6931,
+   "score": 42,
+   "whales": 2,
+   "invested": 25949,
    "start": "Fri Nov 13, 2:30 AM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794523850,
+   "last_seen": 1794550187,
    "first_seen": 1794523850,
-   "scans": 1,
+   "scans": 2,
    "first_score": 46,
    "result": null
   },
@@ -3953,7 +3983,8 @@
    "first_seen": 1794523850,
    "scans": 1,
    "first_score": 24,
-   "result": null
+   "result": "L",
+   "graded": 1794550187
   },
   "0x65c5a30525187286377aa1177f13a048112cf9065dfb0dab611b8371d5c324a4:yes": {
    "tier": "poly",
@@ -3972,10 +4003,11 @@
    "first_seen": 1794523850,
    "scans": 1,
    "first_score": 44,
-   "result": null,
+   "result": "W",
    "ended": 1794543053,
    "finalScore": "PHI 123 \u2013 TOR 112",
-   "active": false
+   "active": false,
+   "graded": 1794550187
   },
   "0x0a5baecf70b2f03f3dc8fbfc2dc034ca87d1ac7fb61cef6566df8b652ab1c39a:yes": {
    "tier": "poly",
@@ -3994,6 +4026,273 @@
    "first_seen": 1794523850,
    "scans": 1,
    "first_score": 53,
+   "result": "L",
+   "graded": 1794550187
+  },
+  "0x50d996e1f6d3688db3a25d675e10312d08fe9bca4877990661ce0abf61552741:yes": {
+   "tier": "top",
+   "q": "Counter-Strike: Vitality vs MOUZ (BO3) - BLAST Rivals Playoffs",
+   "label": "Vitality",
+   "slug": "cs2-vit-mouz-2026-11-13",
+   "market_id": "6987907",
+   "side": "yes",
+   "score": 54,
+   "whales": 5,
+   "invested": 54938,
+   "start": "Fri Nov 13, 12:00 AM PT",
+   "kalshi": "BUY YES Vitality @ 57\u00a2",
+   "kprice": 0.57,
+   "last_seen": 1794550187,
+   "first_seen": 1794550187,
+   "scans": 1,
+   "first_score": 54,
+   "result": null
+  },
+  "0xab6e8f5ee717b36c301f06c3a86820dc160120cfa7619671f6b51731d7e4e0a2:no": {
+   "tier": "top",
+   "q": "Counter-Strike: G2 vs Team Falcons (BO3) - BLAST Rivals Playoffs",
+   "label": "Team Falcons",
+   "slug": "cs2-g2-fal2-2026-11-13",
+   "market_id": "6987911",
+   "side": "no",
+   "score": 50,
+   "whales": 4,
+   "invested": 67397,
+   "start": "Fri Nov 13, 2:30 AM PT",
+   "kalshi": "BUY YES Team Falcons @ 68\u00a2",
+   "kprice": 0.68,
+   "last_seen": 1794550187,
+   "first_seen": 1794550187,
+   "scans": 1,
+   "first_score": 50,
+   "result": null
+  },
+  "0xb03cdf61dfad430e3cd6a36d34e3a4a9d05ddc0eedae394a37509701f0eee6e7:yes": {
+   "tier": "top",
+   "q": "LoL: DetonatioN FocusMe vs Saigon Warriors (BO5) - LCP Promotion Playoffs",
+   "label": "DetonatioN FocusMe",
+   "slug": "lol-dfm-sgw-2026-11-13",
+   "market_id": "6985256",
+   "side": "yes",
+   "score": 47,
+   "whales": 2,
+   "invested": 9419,
+   "start": "Fri Nov 13, 1:00 AM PT",
+   "kalshi": "BUY YES DetonatioN FocusMe @ 61\u00a2",
+   "kprice": 0.61,
+   "last_seen": 1794550187,
+   "first_seen": 1794550187,
+   "scans": 1,
+   "first_score": 47,
+   "result": null
+  },
+  "0x54e50779e9806f8779f5181888724b8bdd925ec36ba920f997bdbd372eae612d:no": {
+   "tier": "fun",
+   "q": "Counter-Strike: Metizport vs Nexus (BO3) - CCT Europe Playoffs",
+   "label": "Nexus",
+   "slug": "cs2-mzp-nxs1-2026-11-13",
+   "market_id": "6997424",
+   "side": "no",
+   "score": 44,
+   "whales": 1,
+   "invested": 2549,
+   "start": "Fri Nov 13, 1:00 AM PT",
+   "kalshi": "BUY NO Metizport @ 42\u00a2",
+   "kprice": 0.42,
+   "last_seen": 1794550187,
+   "first_seen": 1794550187,
+   "scans": 1,
+   "first_score": 44,
+   "result": null
+  },
+  "0x8f60c61519cef7ad305ca48311131a44fc1ecd7eae79a4ebb057d5f04cebe67f:no": {
+   "tier": "fun",
+   "q": "Counter-Strike: ex-Zero Tenacity vs BakS eSports (BO3) - CCT Europe Group Stage",
+   "label": "BakS eSports",
+   "slug": "cs2-zerote-baks-2026-11-13",
+   "market_id": "6976326",
+   "side": "no",
+   "score": 37,
+   "whales": 1,
+   "invested": 1380,
+   "start": "Fri Nov 13, 4:00 AM PT",
+   "kalshi": "BUY NO ex-Zero Tenacity @ 49\u00a2",
+   "kprice": 0.49,
+   "last_seen": 1794550187,
+   "first_seen": 1794550187,
+   "scans": 1,
+   "first_score": 37,
+   "result": null
+  },
+  "0x579af3df569c21f43b855cd9059242e1cfeef79b47dadeba9f0db08778713f71:no": {
+   "tier": "fun",
+   "q": "Counter-Strike: Butterfly vs Leo Team (BO3) - CCT Europe Group Stage",
+   "label": "Leo Team",
+   "slug": "cs2-btf-leo2-2026-11-13",
+   "market_id": "6976322",
+   "side": "no",
+   "score": 42,
+   "whales": 1,
+   "invested": 1030,
+   "start": "Fri Nov 13, 1:00 AM PT",
+   "kalshi": "BUY YES Leo Team @ 39\u00a2",
+   "kprice": 0.39,
+   "last_seen": 1794550187,
+   "first_seen": 1794550187,
+   "scans": 1,
+   "first_score": 42,
+   "result": null
+  },
+  "0x9ee47e80da5c0e9fa18e092546da5e2e3b14ae4119c35c47a9a0bff57520666a:no": {
+   "tier": "fun",
+   "q": "Will Kazakhstan win on 2026-11-13?",
+   "label": "Kazakhstan NOT TO WIN",
+   "slug": "unl-mol-kaz-2026-11-13-kaz",
+   "market_id": "6451794",
+   "side": "no",
+   "score": 51,
+   "whales": 1,
+   "invested": 590,
+   "start": "Fri Nov 13, 9:00 AM PT",
+   "kalshi": "BUY NO Kazakhstan @ 68\u00a2",
+   "kprice": 0.68,
+   "last_seen": 1794550187,
+   "first_seen": 1794550187,
+   "scans": 1,
+   "first_score": 51,
+   "result": null
+  },
+  "0x8f564472b211ba2b86a352521b92925b7f1a564d6ea3cb56a31e6e4cd6c880bf:yes": {
+   "tier": "poly",
+   "q": "Counter-Strike: G2 vs Team Falcons - Map 1 Winner",
+   "label": "G2",
+   "slug": "cs2-g2-fal2-2026-11-13-game1",
+   "market_id": "6987909",
+   "side": "yes",
+   "score": 41,
+   "whales": 1,
+   "invested": 8747,
+   "start": "Fri Nov 13, 2:30 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794550187,
+   "first_seen": 1794550187,
+   "scans": 1,
+   "first_score": 41,
+   "result": null
+  },
+  "0x46a908f8040b6825c435fb0412df2abee531369184ea01b0a8b75f7d74ffc5fd:yes": {
+   "tier": "poly",
+   "q": "Kuwait vs. Syria: O/U 1.5",
+   "label": "OVER",
+   "slug": "fif-kuw-syr-2026-11-13-total-1pt5",
+   "market_id": "6491213",
+   "side": "yes",
+   "score": 53,
+   "whales": 1,
+   "invested": 1797,
+   "start": "Fri Nov 13, 8:30 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794550187,
+   "first_seen": 1794550187,
+   "scans": 1,
+   "first_score": 53,
+   "result": null
+  },
+  "0x365dda8ff07b49a51d295e12ea6c5459de5ba12faffceb63d53a9eb2b694bd34:no": {
+   "tier": "poly",
+   "q": "Exact Score: Serbia 2 - 1 Germany?",
+   "label": "No",
+   "slug": "unl-ser-ger-2026-11-13-exact-score-2-1",
+   "market_id": "6452059",
+   "side": "no",
+   "score": 46,
+   "whales": 1,
+   "invested": 911,
+   "start": "2026-11-13 (time not supplied)",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794550187,
+   "first_seen": 1794550187,
+   "scans": 1,
+   "first_score": 46,
+   "result": null
+  },
+  "0xf7f52dd2828f6ac628d65dc78204ee909fdc0dde4b76cd1993730e94a4830643:no": {
+   "tier": "poly",
+   "q": "Will Korea Republic win on 2026-11-13?",
+   "label": "Korea Republic NOT TO WIN",
+   "slug": "fif-ksa-kr-2026-11-13-kr",
+   "market_id": "6459734",
+   "side": "no",
+   "score": 51,
+   "whales": 1,
+   "invested": 879,
+   "start": "Fri Nov 13, 6:30 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794550187,
+   "first_seen": 1794550187,
+   "scans": 1,
+   "first_score": 51,
+   "result": null
+  },
+  "0x98f2b1cf85720d0da180923b8395ad0faf2f0f06880304817125afe81a984777:no": {
+   "tier": "poly",
+   "q": "Map Handicap: VIT (-1.5) vs MOUZ (+1.5)",
+   "label": "MOUZ (+1.5)",
+   "slug": "cs2-vit-mouz-2026-11-13-map-handicap-away-1pt5",
+   "market_id": "6988094",
+   "side": "no",
+   "score": 34,
+   "whales": 1,
+   "invested": 878,
+   "start": "Fri Nov 13, 12:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794550187,
+   "first_seen": 1794550187,
+   "scans": 1,
+   "first_score": 34,
+   "result": null
+  },
+  "0x7158670577ba747079ad8ae112831eb2e47abc886cc02a7973b3c3b5589fe861:yes": {
+   "tier": "poly",
+   "q": "Will Paraguay win on 2026-11-13?",
+   "label": "Paraguay WIN",
+   "slug": "fif-sin-par-2026-11-13-par",
+   "market_id": "6418941",
+   "side": "yes",
+   "score": 29,
+   "whales": 1,
+   "invested": 596,
+   "start": "Fri Nov 13, 4:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794550187,
+   "first_seen": 1794550187,
+   "scans": 1,
+   "first_score": 29,
+   "result": null
+  },
+  "0xf536c75c4ad56b9c4590d1a51dc311a0ba366cd1b125f3f5c02627d4dbc8a3f0:no": {
+   "tier": "poly",
+   "q": "Exact Score: Serbia 0 - 0 Germany?",
+   "label": "No",
+   "slug": "unl-ser-ger-2026-11-13-exact-score-0-0",
+   "market_id": "6452051",
+   "side": "no",
+   "score": 51,
+   "whales": 1,
+   "invested": 569,
+   "start": "2026-11-13 (time not supplied)",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794550187,
+   "first_seen": 1794550187,
+   "scans": 1,
+   "first_score": 51,
    "result": null
   }
  }
