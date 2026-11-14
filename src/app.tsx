@@ -32,9 +32,9 @@ const PART_MAX: Record<string, number> = { "Consensus": 25, "Capper record": 25,
 const EV_MAX = [25, 20, 20, 20, 10];
 const STORE_KEY = "orca-scanner-cappers-v1";
 const BANKROLL_KEY = "orca-scanner-bankroll-v1";
-const DEFAULT_BANKROLL = "160";
-const STALE_BANKROLLS = ["225.06", "225"];
-const DAILY_CAP = "Daily cap $14, stop after a losing reload; don't re-bet a pick you already lost today.";
+const DEFAULT_BANKROLL = "166";
+const STALE_BANKROLLS = ["225.06", "225", "160"];
+const DAILY_CAP = "Daily cap $40, stop after a losing reload; don't re-bet a pick you already lost today.";
 
 function decode<T>(c: Cols): T[] {
   return c.r.map((row: unknown[]) => {
@@ -2220,7 +2220,7 @@ export default function App() {
   );
   return (
     <Page title="Orca Whale Scanner" summary={{
-      top: "The strongest Kalshi picks from all-time sports whales, ranked by price band, net money and one-sided share. Singles are the default; up to 3 suggested 2-leg combos sit at the top. Games that have started are hidden.",
+      top: "The strongest Kalshi picks from all-time sports whales, ranked by price band, then backing-whale quality (graded win rate and ROI on copyable bets), then net money and agreement. Singles are the default; up to 3 suggested 2-leg combos sit at the top. Games that have started are hidden.",
       fun: "Kalshi picks that missed Top 20: one-whale, under 10¢ or other cheap leftovers, Split, or Pricier. 10–20¢ picks backed by 2+ whales moved to Longshots; player props moved to Player Props. Started games are hidden.",
       poly: "Whale picks you can only bet on Polymarket (not on Kalshi), from all-time sports whales. Player props and 10–20¢ longshots have their own tabs. Started games are hidden.",
       props: "Individual player bets whales are backing — yards, points, TDs, rebounds and more, any sport. Kalshi contracts when they exist; otherwise the Polymarket bet. Started games are hidden.",
@@ -2392,7 +2392,7 @@ export default function App() {
 
       {tab === "more" ? (
         <Section heading="More">
-          <Section heading="Bankroll" caption="Default $160 (updated Nov 13). Saved on this device when you edit it. An old $225.06 default on this device is replaced automatically." defaultOpen={true}>
+          <Section heading="Bankroll" caption="Default $166 (from Pikkit). Saved on this device when you edit it. An old $160 or $225.06 default on this device is replaced automatically." defaultOpen={true}>
             <Input label="Bankroll ($)" type="number" value={bankrollText} onChange={(v: string) => setBankroll(v)} />
             <Text>Stakes: Small = 1% · Normal = 2% · Go big = 4% (max $10), rounded to the nearest dollar, minimum $1. Combos = 1%. Longshots are flat $1, or $2 for the strongest.</Text>
             <DailyCap />
@@ -2451,7 +2451,7 @@ export default function App() {
               { label: "Evidence score (buys, bets)", value: "Recency 25 · Capper record 20 · Independent agreement within 60 min 20 · Kalshi quote 20 · Kalshi price at or below the capper's 10" },
               { label: "Strong evidence only", value: "Golden capper, bought within 60 minutes, another whale agreeing within 60 minutes, verified Kalshi contract" },
               { label: "Confidence colors", value: "Green 65+, yellow 45–64, red under 45" },
-              { label: "Stake", value: "Small = 1% of bankroll, Normal = 2%, Go big = 4% (max $10), rounded to the nearest $1 with a $1 minimum. Combos = 1%. Longshots are flat $1, or $2 for the strongest, kept under the daily cap. Bankroll defaults to $160 and saves on this device. Daily cap $14, stop after a losing reload; don't re-bet a pick you already lost today. Each card has a short copyable pick ID for Pikkit grading." },
+              { label: "Stake", value: "Small = 1% of bankroll, Normal = 2%, Go big = 4% (max $10), rounded to the nearest $1 with a $1 minimum. Combos = 1%. Longshots are flat $1, or $2 for the strongest, kept under the daily cap. Bankroll defaults to $166 and saves on this device. Daily cap $40, stop after a losing reload; don't re-bet a pick you already lost today. Each card has a short copyable pick ID for Pikkit grading." },
               { label: "Chance to hit", value: "Polymarket price of the held side; market-implied, not a prediction" },
             ]} />
           </Section>
