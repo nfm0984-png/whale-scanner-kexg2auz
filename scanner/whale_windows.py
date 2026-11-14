@@ -98,6 +98,102 @@ def refresh(wallets, force=False, workers=6):
     print(f"whale_windows: {len(todo)} fetched, {ok} with all four windows, {len(ws)} cached")
     return store
 
+
+# ---- auto-discovery of new good cappers (Noel, Nov 13) ----
+TRACKED_PATH = os.path.join(HERE, 'tracked_cappers.json')
+MAX_TRACKED = 120       # keeps future OrcaLayer position calls small (20 wallets per call)
+NEW_DAYS = 3
+
+def load_tracked():
+    try:
+        d = json.load(open(TRACKED_PATH))
+        d.setdefault('wallets', {})
+        return d
+    except Exception:
+        return {'updatedTs': 0, 'wallets': {}, 'lastNew': []}
+
+def save_tracked(d):
+    d['updatedTs'] = int(time.time())
+    tmp = TRACKED_PATH + '.tmp'
+    json.dump(d, open(tmp, 'w'), indent=1)
+    os.replace(tmp, TRACKED_PATH)
+
+def board_wallets(period='month', category='sports', limit=100):
+    r = _get('/leaderboard', {'time_period': period, 'category': category, 'limit': limit})
+    rows = (r or {}).get('data') if isinstance(r, dict) else None
+    out = []
+    for x in rows or []:
+        w = (x.get('user_id') or x.get('proxy_wallet') or '').lower()
+        if w.startswith('0x'):
+            out.append((w, x.get('user_name') or ''))
+    return out
+
+def _badge(rec):
+    vals = [((rec or {}).get(k) or {}).get('pnl') for k in ('week', 'month', 'year', 'all')]
+    if any(v is None for v in vals):
+        return 'n/a'
+    if any(v < 0 for v in vals[1:]):
+        return 'Cold'
+    if vals[0] < 0:
+        return 'Cooling'
+    return 'Hot' if all(v > 0 for v in vals) else 'OK'
+
+def discover(seen_wallets, proven_wallets=(), names=None, seed=False):
+    """Fetch windows for every whale seen in this scan plus Polymarket's sports week/month boards;
+    add Hot or Proven whales to tracked_cappers.json (persistent). Returns (tracked_store, new_list)."""
+    names = dict(names or {})
+    cands = list(dict.fromkeys([w.lower() for w in seen_wallets if w]))
+    board = []
+    for per, lim in (('month', 100), ('week', 50)):
+        try:
+            board += board_wallets(per, 'sports', lim)
+        except Exception:
+            pass
+    for w, n in board:
+        if n and w not in names:
+            names[w] = n
+        if w not in cands:
+            cands.append(w)
+    tracked = load_tracked()
+    tw = tracked['wallets']
+    store = refresh(cands + list(tw.keys()))
+    ws = store.get('wallets') or {}
+    now = int(time.time())
+    proven = {w.lower() for w in proven_wallets}
+    seen_set = {w.lower() for w in seen_wallets if w}
+    new = []
+    # candidates ordered: proven first, then Hot by past-month P&L
+    def mo(w):
+        return ((ws.get(w) or {}).get('month') or {}).get('pnl') or 0
+    order = sorted(set(cands) | proven, key=lambda w: (0 if w in proven else 1, -mo(w)))
+    for w in order:
+        b = _badge(ws.get(w))
+        reason = 'Proven' if w in proven else ('Hot' if b == 'Hot' else None)
+        if w in tw:
+            tw[w]['badge'] = b
+            tw[w]['lastSeenTs'] = now
+            if reason == 'Proven':
+                tw[w]['reason'] = 'Proven'
+            continue
+        if not reason or len(tw) >= MAX_TRACKED:
+            continue
+        nm = names.get(w) or (ws.get(w) or {}).get('name') or ''
+        src = 'board' if w not in seen_set else 'scan'
+        if seed and src == 'scan':
+            # first run: whales we already tracked in capper_history are not "new"
+            tw[w] = {'wallet': w, 'name': nm, 'addedTs': None, 'seededTs': now, 'reason': reason, 'badge': b, 'lastSeenTs': now, 'source': src}
+            continue
+        tw[w] = {'wallet': w, 'name': nm, 'addedTs': now, 'reason': reason, 'badge': b, 'lastSeenTs': now, 'source': src}
+        new.append({'wallet': w, 'name': nm, 'reason': reason, 'source': src})
+    for w, r in tw.items():
+        if not r.get('name') and (ws.get(w) or {}).get('name'):
+            r['name'] = ws[w]['name']
+    tracked['lastNew'] = new
+    tracked['lastRunTs'] = now
+    save_tracked(tracked)
+    print(f"tracked_cappers: {len(new)} new this run ({', '.join((x['name'] or x['wallet'][:10]) + ' ' + x['reason'] for x in new[:12])}), {len(tw)} tracked")
+    return tracked, new
+
 if __name__ == '__main__':
     import sys
     sys.path.insert(0, HERE)

@@ -250,6 +250,12 @@ def summarize(store, traders=None, current_ids=None, windows=None):
                 current=is_current,
             ))
     tmap = {((t.get('wallet') or '').lower()): t for t in (traders or [])}
+    tracked = load_tracked_wallets()
+    for w, tr in tracked.items():
+        if w not in caps:  # tracked whale with no picks yet: show as Record building
+            caps[w] = {'wallet': w, 'name': tr.get('name') or '', 'rankAll': None, 'rank': None, 'golden': False,
+                       'w': 0, 'l': 0, 'push': 0, 'open': 0, 'n': 0, 'profit': 0.0, 'risked': 0.0, 'picks': [],
+                       'cw': 0, 'cl': 0, 'cprofit': 0.0, 'crisked': 0.0}
     out = []
     for w, c in caps.items():
         t = tmap.get(w) or {}
@@ -279,6 +285,12 @@ def summarize(store, traders=None, current_ids=None, windows=None):
         ))
         apply_conviction(c)
         attach_windows(c, windows)
+        tr = tracked.get(w)
+        if tr:
+            c['tracked'] = True
+            c['addedTs'] = tr.get('addedTs')
+            c['trackedReason'] = tr.get('reason')
+            c['isNew'] = bool(tr.get('addedTs') and time.time() - tr['addedTs'] <= NEW_DAYS * 86400)
         out.append(c)
     apply_quality(out)
     def sort_key(c):
@@ -358,10 +370,16 @@ def apply_quality(caps):
             c['demoted'] = False
             c['shrunkWr'] = None
             c['shrunkRoi'] = None
+            c['hotBoost'] = 0.0
             if badge == 'Cold':
                 c['quality'] = COLD_SMALL_PENALTY
                 c['demoted'] = True
                 c['coldDemoted'] = True
+            elif badge == 'Cooling':
+                c['quality'] = -COOLING_PENALTY
+            elif badge == 'Hot' and n >= HOT_SMALL_MIN and (c.get('cw') or 0) > (c.get('cl') or 0) and (roi is None or roi > 0):
+                c['hotBoost'] = HOT_SMALL_BOOST
+                c['quality'] = HOT_SMALL_BOOST
             continue
         swr = (n * wr + SHRINK_K * prior_wr) / (n + SHRINK_K)
         sroi = (n * roi + SHRINK_K * prior_roi) / (n + SHRINK_K) if roi is not None else prior_roi
@@ -396,6 +414,16 @@ def apply_quality(caps):
         c['proven'] = bool(n >= MIN_QUALITY_SAMPLE and (c.get('cw') or 0) > (c.get('cl') or 0)
                            and roi is not None and roi > 0 and pos('month') and pos('all')
                            and not (neg('week') and neg('year')) and badge != 'Cold' and not c.get('demoted'))
+        # Hot focus (Noel, Nov 13): all four P&L windows positive gets a strong boost.
+        c['hotBoost'] = 0.0
+        if badge == 'Hot' and not c.get('demoted'):
+            if c['proven']:
+                c['hotBoost'] = HOT_PROVEN_BOOST
+            elif n >= MIN_QUALITY_SAMPLE and roi is not None and roi > 0:
+                c['hotBoost'] = HOT_BOOST
+            elif n >= HOT_SMALL_MIN and (c.get('cw') or 0) > (c.get('cl') or 0):
+                c['hotBoost'] = HOT_SMALL_BOOST
+            c['quality'] = round(c['quality'] + c['hotBoost'], 2)
     return caps
 
 def quality_map(store=None, traders=None, current_ids=None):
@@ -437,6 +465,10 @@ def backer_quality(backers, qmap):
 COLD_PENALTY = 40.0
 COLD_SMALL_PENALTY = -10.0
 COOLING_PENALTY = 5.0
+HOT_PROVEN_BOOST = 40.0   # Hot + Proven: strongest
+HOT_BOOST = 20.0          # Hot, 10+ copyable picks, positive ROI, not proven
+HOT_SMALL_BOOST = 15.0    # Hot, fewer than 10 copyable picks but a winning record (e.g. MadridTime)
+HOT_SMALL_MIN = 3
 WINDOWS = ('week', 'month', 'year', 'all')
 
 def load_windows():
@@ -580,10 +612,32 @@ def conviction_net(backers, opposing, qmap):
 def conviction_count(backers, qmap):
     return sum(0 if conviction_of(qmap.get((b.get('wallet') or '').lower()) or {}, b.get('cost')) == 'T' else 1 for b in backers or [])
 
+NEW_DAYS = 3
+
+def load_tracked_wallets():
+    try:
+        return (json.load(open(os.path.join(HERE, 'tracked_cappers.json'))) or {}).get('wallets') or {}
+    except Exception:
+        return {}
+
 def page_payload(emb=None, hist=None, store=None):
     store = store or load()
     traders = (emb or {}).get('traders') or []
-    return slim_for_page(summarize(store, traders, current_ids_from_embed(emb)), store.get('updatedAt'))
+    out = slim_for_page(summarize(store, traders, current_ids_from_embed(emb)), store.get('updatedAt'))
+    try:
+        td = json.load(open(os.path.join(HERE, 'tracked_cappers.json')))
+    except Exception:
+        td = {}
+    byw = {c['wallet']: c for c in out['cappers']}
+    def info(x):
+        c = byw.get(x['wallet']) or {}
+        return {'wallet': x['wallet'], 'name': c.get('name') or x.get('name') or '', 'reason': x.get('reason'), 'badge': c.get('badge'),
+                'month': ((c.get('win') or {}).get('month') or {}).get('pnl')}
+    out['newThisScan'] = [info(x) for x in (td.get('lastNew') or [])]
+    out['newRecent'] = [info(r) for r in sorted((td.get('wallets') or {}).values(), key=lambda r: -(r.get('addedTs') or 0))
+                        if r.get('addedTs') and time.time() - r['addedTs'] <= NEW_DAYS * 86400]
+    out['trackedCount'] = len(td.get('wallets') or {})
+    return out
 
 if __name__ == '__main__':
     emb_path = os.path.join(HERE, 'page_embed.json')

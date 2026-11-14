@@ -91,6 +91,25 @@ for r, ps, spct in CAND[:A.cappers]:  # rank order: all-time #1 first
                       profit_factor=r.get('profit_factor'), skill_badge=r.get('skill_badge'), skill_edge_cents=r.get('skill_edge_cents'),
                       market_win_rate=r.get('market_win_rate'), last_trade_ts=r.get('last_trade_ts'), avg_entry_price=r.get('avg_entry_price'))
     POS[w] = ps
+# Tracked cappers (auto-discovered Hot/Proven whales) are always scanned, even off the top-N leaderboard.
+TRACKED_ADDED = 0
+try:
+    _trk = json.load(open(os.path.join(HERE, 'tracked_cappers.json'))).get('wallets') or {}
+except Exception:
+    _trk = {}
+_tw = [w for w in _trk if w not in cappers]
+for i in range(0, len(_tw), 20):
+    _chunk = _tw[i:i + 20]
+    _got = fetch_pos(_chunk, True) or {}
+    for w in _chunk:
+        ps = [p for p in (_got.get(w) or []) if not p.get('closed')]
+        if not ps: continue
+        tr = _trk[w]
+        cappers[w] = dict(wallet=w, name=tr.get('name'), rank=len(cappers) + 1, rankAll=None, rank30=None, pnl30=None, total_pnl=None, total_volume=None,
+                          win_rate=None, resolved_markets=0, wins=0, losses=None, sports_pct=None, trades=None, profit_factor=None, skill_badge=None,
+                          skill_edge_cents=None, market_win_rate=None, last_trade_ts=None, avg_entry_price=None, tracked=True)
+        POS[w] = ps; TRACKED_ADDED += 1
+if _tw: print(f"tracked cappers: {TRACKED_ADDED} of {len(_tw)} off-leaderboard tracked whales have open positions and were added", flush=True)
 # Cheap secondary: 30-day PnL/rank for wallets that appear on the 30-day leaderboard (a few calls, not per-wallet).
 PNL30 = {}
 for off in range(0, 2000, 500):
@@ -895,8 +914,11 @@ try:
     import capper_history as _ch_rank
     try:
         import whale_windows as _ww
-        _ww_known = {w for r in (_ch_rank.load().get('picks') or {}).values() for w in (r.get('backers') or {})}
+        _ww_store = _ch_rank.load()
+        _ww_known = {w for r in (_ww_store.get('picks') or {}).values() for w in (r.get('backers') or {})}
         _ww.refresh(list(cappers.keys()) + sorted(_ww_known))
+        _ww_proven = [c['wallet'] for c in _ch_rank.summarize(_ww_store, None, None) if c.get('proven')]
+        _ww.discover(list(cappers.keys()) + sorted(_ww_known), _ww_proven, {w: c.get('name') for w, c in cappers.items() if c.get('name')})
     except Exception as _e:
         print('whale_windows failed (using cached windows):', _e)
     _QMAP = _ch_rank.quality_map(_ch_rank.load())

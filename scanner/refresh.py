@@ -400,7 +400,9 @@ import capper_history as _ch
 _ch_store = _ch.update_store(emb, hist)
 try:
     import whale_windows as _ww
-    _ww.refresh([w for r in _ch_store['picks'].values() for w in (r.get('backers') or {})])
+    _ww_seen = sorted({w for r in _ch_store['picks'].values() for w in (r.get('backers') or {})} | {(t.get('wallet') or '').lower() for t in (emb.get('traders') or [])})
+    _ww.refresh(_ww_seen)
+    _ww.discover(_ww_seen, [c['wallet'] for c in _ch.summarize(_ch_store, emb.get('traders') or [], None) if c.get('proven')])
 except Exception as _e:
     print('whale_windows failed (using cached windows):', _e)
 emb['capperHistory'] = _ch.page_payload(emb, hist, _ch_store)
