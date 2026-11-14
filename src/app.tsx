@@ -111,7 +111,7 @@ function backerVerdict(wallet: string | null | undefined, cost: number | null | 
   const c = cost || 0;
   const cv = convOf(wallet, c, pid);
   let bet = "";
-  if (cv.tag === "T") bet = "throwaway bet" + (cv.mult != null ? " (" + cv.mult + "x usual)" : "");
+  if (cv.tag === "T") bet = "throwaway bet: " + (cv.mult != null && cv.mult <= 0.25 ? cv.mult + "x usual" : "tiny next to their biggest bets" + (cv.mult != null ? ", " + cv.mult + "x usual" : ""));
   else if (c < VET_MIN_BET) bet = "small bet (" + money(c) + ")";
   else if (cv.mult != null && cv.mult < VET_MIN_MULT) bet = "small bet (" + cv.mult + "x usual)";
   const n = rec ? (rec.cn || 0) : 0, w = rec ? (rec.cw || 0) : 0, l = rec ? (rec.cl || 0) : 0;
@@ -119,7 +119,7 @@ function backerVerdict(wallet: string | null | undefined, cost: number | null | 
   const wr = rec && rec.cwr != null ? rec.cwr : null;
   let why = "";
   if (!rec || n === 0) why = "ungraded";
-  else if (rec.badge === "Cold" || rec.coldDemoted) why = "Cold (P&L down past month/year/all-time)";
+  else if (rec.badge === "Cold" || rec.coldDemoted) why = "Cold: P&L down over past month, year or all time";
   else if (roi == null || roi <= 0) why = "negative ROI";
   else if (w <= l) why = "losing record";
   else if (n < VET_SMALL_N) why = "only " + n + " graded";
