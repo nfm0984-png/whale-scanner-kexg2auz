@@ -11,7 +11,7 @@ ap.add_argument('--markets', type=int, default=60); ap.add_argument('--wallets',
 if A.cappers < 1: sys.exit('--cappers must be a positive integer')  # presets 20/40/60/80/100 or any custom number; default 100
 T0 = time.time(); NOW = int(T0)
 PT = dt.timezone(dt.timedelta(hours=-8))
-def pt(ts): return dt.datetime.fromtimestamp(ts, PT).strftime('%a %b %-d, %-I:%M %p PT')
+def pt(ts): return dt.datetime.fromtimestamp(ts, PT).strftime('%a %b %-d · %-I:%M %p PT')
 ESPORTS = ('cs2', 'dota2', 'lol', 'val', 'r6siege', 'rl', 'cod', 'ow', 'mlbb', 'hok', 'kog', 'sc2', 'apex', 'pubg', 'fortnite')
 def pub(url):
     for i in range(4):
@@ -504,7 +504,7 @@ def kalshi(s):
 EP = {'nba': 'basketball/nba', 'nfl': 'football/nfl', 'nhl': 'hockey/nhl', 'mlb': 'baseball/mlb', 'cfb': 'football/college-football',
       'cbb': 'basketball/mens-college-basketball', 'cwbb': 'basketball/womens-college-basketball', 'wnba': 'basketball/wnba',
       'epl': 'soccer/eng.1', 'ucl': 'soccer/uefa.champions', 'uel': 'soccer/uefa.europa', 'uecl': 'soccer/uefa.europa.conf',
-      'lal': 'soccer/esp.1', 'bun': 'soccer/ger.1', 'bl2': 'soccer/ger.2', 'sea': 'soccer/ita.1', 'itb': 'soccer/ita.2',
+      'lal': 'soccer/esp.1', 'es2': 'soccer/esp.2', 'bun': 'soccer/ger.1', 'bl2': 'soccer/ger.2', 'sea': 'soccer/ita.1', 'itb': 'soccer/ita.2',
       'fl1': 'soccer/fra.1', 'fl2': 'soccer/fra.2', 'ere': 'soccer/ned.1', 'por': 'soccer/por.1', 'mex': 'soccer/mex.1',
       'bra': 'soccer/bra.1', 'arg': 'soccer/arg.1', 'mls': 'soccer/usa.1', 'unl': 'soccer/uefa.nations', 'uwcl': 'soccer/uefa.wchampions',
       'cdr': 'soccer/esp.copa_del_rey', 'fif': 'soccer/fifa.friendly', 'efl': 'soccer/eng.2', 'elc': 'soccer/eng.2',
@@ -516,48 +516,151 @@ EP = {'nba': 'basketball/nba', 'nfl': 'football/nfl', 'nhl': 'hockey/nhl', 'mlb'
       'atp': 'tennis/atp', 'wta': 'tennis/wta', 'ufc': 'mma/ufc',
       'pga': 'golf/pga', 'golf': 'golf/pga', 'lpga': 'golf/lpga',
       'f1': 'racing/f1', 'nascar': 'racing/nascar-premier', 'indycar': 'racing/irl', 'indy': 'racing/irl',
-      'cfl': 'football/cfl'}
+      'cfl': 'football/cfl', 'conl': 'soccer/concacaf.nations'}
 ESPN = {}
+TZOFF = {'EST': -5, 'EDT': -4, 'CST': -6, 'CDT': -5, 'MST': -7, 'MDT': -6, 'PST': -8, 'PDT': -7, 'ET': -5, 'PT': -8}
+def clean_name(n):
+    x = re.sub(r'\s*\((?:[^)]*(?:Prelims|Main Card|Early Prelims|[A-Za-z]*weight)[^)]*)\)\s*', ' ', n or '', flags=re.I)
+    x = re.sub(r'\s*\([A-Za-z]{1,3}\)\s*$', '', x)
+    return re.sub(r'\s+', ' ', x).strip()
 def espn(lg, date):
     k = (lg, date)
     if k not in ESPN:
-        extra = '&groups=50&limit=400' if lg == 'cbb' else ('&groups=80&limit=300' if lg == 'cfb' else '')
+        extra = '&groups=50&limit=400' if lg in ('cbb', 'cwbb') else ('&groups=80&limit=300' if lg == 'cfb' else '')
         d = pub(f"https://site.api.espn.com/apis/site/v2/sports/{EP[lg]}/scoreboard?dates={date.replace('-', '')}{extra}") if lg in EP else None
         ESPN[k] = (d or {}).get('events', [])
     return ESPN[k]
+def flatten_espn(events):
+    out = []
+    for e in events or []:
+        comps = e.get('competitions') or [c for g in e.get('groupings', []) for c in g.get('competitions', [])]
+        for c in comps or []:
+            out.append((e, c))
+    return out
+def iso_ts(raw):
+    if not raw: return None
+    try: return int(dt.datetime.fromisoformat(str(raw).replace('Z', '+00:00')).timestamp())
+    except Exception: return None
+def espn_ts(e, comp=None):
+    c = comp or ((e.get('competitions') or [None])[0]) or {}
+    detail = ((c.get('status') or e.get('status') or {}).get('type') or {}).get('shortDetail') or ''
+    raw = c.get('date') or e.get('date')
+    m = re.search(r'(?:(\d{1,2})/(\d{1,2})\s*[-–]\s*)?(\d{1,2}):(\d{2})\s*(AM|PM)\s*([A-Z]{2,3})', detail, re.I)
+    fb = iso_ts(raw)
+    if not m: return fb
+    month = day = None
+    if m.group(1):
+        month, day = int(m.group(1)), int(m.group(2))
+    elif raw:
+        try:
+            d0 = dt.datetime.fromisoformat(str(raw).replace('Z', '+00:00'))
+            month, day = d0.month, d0.day
+        except Exception:
+            pass
+    if not month: return fb
+    year = dt.datetime.fromtimestamp(fb or int(NOW), dt.timezone.utc).year
+    hh = int(m.group(3)) % 12 + (12 if m.group(5).upper() == 'PM' else 0)
+    off = TZOFF.get(m.group(6).upper())
+    if off is None: return fb
+    try: return int(dt.datetime(year, month, day, hh, int(m.group(4)), tzinfo=dt.timezone(dt.timedelta(hours=off))).timestamp())
+    except Exception: return fb
+def comp_blob(c):
+    if 'team' in c:
+        t = c['team']
+        return norm(' '.join(t.get(k, '') for k in ('displayName', 'shortDisplayName', 'abbreviation', 'name', 'location')))
+    a = c.get('athlete') or {}
+    return norm(' '.join(a.get(k, '') for k in ('displayName', 'shortName', 'fullName', 'lastName')))
+def name_hit(n, blob):
+    nn = norm(clean_name(n)); words = nn.split()
+    return bool(words) and (nn in blob or words[-1] in blob.split())
+def vs_from_comp(cs, short=None):
+    names = []
+    for c in cs or []:
+        if 'team' in c:
+            t = c['team']; names.append(t.get('displayName') or t.get('shortDisplayName') or t.get('abbreviation') or '')
+        else:
+            a = c.get('athlete') or {}; names.append(a.get('displayName') or a.get('shortName') or '')
+    names = [x for x in names if x]
+    if len(names) >= 2: return names[0] + ' vs ' + names[1], names
+    return ((short or '').replace(' @ ', ' vs ') or (names[0] if names else None)), names
+def game_from_espn(e, comp):
+    st = (comp.get('status') or e.get('status') or {}).get('type') or {}
+    ts = espn_ts(e, comp)
+    cs = comp.get('competitors') or []
+    title, teams = vs_from_comp(cs, e.get('shortName') or e.get('name'))
+    score = ''
+    if st.get('state') != 'pre':
+        bits = []
+        for c in cs:
+            ab = (c.get('team') or {}).get('abbreviation') or (c.get('athlete') or {}).get('shortName') or (c.get('athlete') or {}).get('displayName', '')
+            bits.append(f"{ab} {c.get('score', '')}")
+        score = ' – '.join(bits)
+    recs = []
+    for c in cs:
+        if c.get('records') and 'team' in c:
+            recs.append(f"{c['team'].get('abbreviation')} " + ', '.join(r.get('summary', '') for r in (c.get('records') or [])[:1]))
+    return dict(name=title, start=pt(ts) if ts else None, state=st.get('state'), detail=st.get('shortDetail'), src='ESPN',
+                score=score, teams=teams,
+                venue=((comp.get('venue') or {}).get('fullName')),
+                records=recs,
+                url=next((l.get('href') for l in e.get('links') or [] if 'gamecast' in (l.get('rel') or []) or 'summary' in (l.get('rel') or [])), None)), ts
 def locate(info, end, kal):
     """Game start/status: ESPN scoreboard first, then Kalshi contract wording, then market close time."""
-    names = info.get('teams') or ([info.get('team')] if info.get('team') else [])
+    names = [clean_name(n) for n in (info.get('teams') or []) if n]
+    if not names and info.get('fav'): names = [clean_name(info.get('fav'))]
+    if not names and info.get('team'): names = [clean_name(info.get('team'))]
+    cands = []
     if names and info['league'] in EP:
-        for date in (info['date'], (dt.date.fromisoformat(info['date']) - dt.timedelta(days=1)).isoformat()):
-            for e in espn(info['league'], date):
-                comp = e['competitions'][0]; tn = [norm(t['team'].get('displayName', '') + ' ' + t['team'].get('shortDisplayName', '') + ' ' + t['team'].get('abbreviation', '')) for t in comp['competitors']]
-                hit = sum(any(norm(n).split()[-1] in t.split() for t in tn) for n in names if norm(n) and norm(n).split())
-                if hit >= min(2, len(names)):
-                    st = e['status']['type']; ts = dt.datetime.fromisoformat(e['date'].replace('Z', '+00:00')).timestamp()
-                    return dict(name=e.get('shortName'), start=pt(ts), state=st.get('state'), detail=st.get('shortDetail'), src='ESPN',
-                                score=' – '.join(f"{c['team']['abbreviation']} {c.get('score', '')}" for c in comp['competitors']) if st.get('state') != 'pre' else '',
-                                venue=((comp.get('venue') or {}).get('fullName')),
-                                records=[f"{c['team'].get('abbreviation')} " + ', '.join(r.get('summary', '') for r in (c.get('records') or [])[:1]) for c in comp['competitors'] if c.get('records')],
-                                url=next((l.get('href') for l in e.get('links') or [] if 'gamecast' in (l.get('rel') or []) or 'summary' in (l.get('rel') or [])), None)), ts
+        d0 = info['date']
+        try:
+            base = dt.date.fromisoformat(d0)
+            dates = [d0, (base - dt.timedelta(days=1)).isoformat(), (base + dt.timedelta(days=1)).isoformat()]
+        except Exception:
+            dates = [d0]
+        for date in dates:
+            for e, comp in flatten_espn(espn(info['league'], date)):
+                cs = comp.get('competitors') or []
+                blobs = [comp_blob(c) for c in cs]
+                n_hit = sum(any(name_hit(n, b) for b in blobs) for n in names if n)
+                if n_hit >= min(2, len(names)):
+                    cands.append((n_hit, len({id(e)}), e, comp))
+        if cands:
+            cands.sort(key=lambda x: -x[0])
+            if len(names) >= 2 or len({(e.get('id'), c.get('id')) for _, _, e, c in cands}) == 1:
+                g, ts = game_from_espn(cands[0][2], cands[0][3])
+                if ts or g.get('name'):
+                    if not g.get('start'):
+                        g['start'] = info['date']
+                        g['src'] = 'ESPN (date only)'
+                    return g, ts
     codes = [c_.lower() for c_ in info.get('codes') or [] if c_]
     if not names and len(codes) >= 2 and info['league'] in EP:
-        for date in (info['date'], (dt.date.fromisoformat(info['date']) - dt.timedelta(days=1)).isoformat()):
-            for e in espn(info['league'], date):
-                comp = e['competitions'][0]; ab = [(t['team'].get('abbreviation') or '').lower() for t in comp['competitors']]
+        d0 = info['date']
+        try:
+            base = dt.date.fromisoformat(d0)
+            dates = [d0, (base - dt.timedelta(days=1)).isoformat(), (base + dt.timedelta(days=1)).isoformat()]
+        except Exception:
+            dates = [d0]
+        for date in dates:
+            for e, comp in flatten_espn(espn(info['league'], date)):
+                ab = [((t.get('team') or {}).get('abbreviation') or '').lower() for t in comp.get('competitors') or []]
                 if sum(1 for c_ in codes[:2] if any(a_ == c_ or a_.startswith(c_) or c_.startswith(a_) for a_ in ab if a_)) >= 2:
-                    st = e['status']['type']; ts = dt.datetime.fromisoformat(e['date'].replace('Z', '+00:00')).timestamp()
-                    return dict(name=e.get('shortName'), start=pt(ts), state=st.get('state'), detail=st.get('shortDetail'), src='ESPN',
-                                score=' – '.join(f"{c['team']['abbreviation']} {c.get('score', '')}" for c in comp['competitors']) if st.get('state') != 'pre' else '',
-                                venue=((comp.get('venue') or {}).get('fullName'))), ts
+                    g, ts = game_from_espn(e, comp)
+                    if ts or g.get('name'):
+                        if not g.get('start'):
+                            g['start'] = info['date']
+                            g['src'] = 'ESPN (date only)'
+                        return g, ts
     occ = (kal or {}).get('occ'); rule = (kal or {}).get('rule') or ''; src = 'market close time'
     rm_ = re.search(r'scheduled for (\w{3}) (\d{1,2}), (\d{4}) at (\d{1,2}):(\d\d) (AM|PM) E[SD]T', rule)
     if rm_:
         hh = int(rm_.group(4)) % 12 + (12 if rm_.group(6) == 'PM' else 0); off = -4 if 'EDT' in rule else -5
         ts = dt.datetime(int(rm_.group(3)), MON[rm_.group(1).upper()], int(rm_.group(2)), hh, int(rm_.group(5)), tzinfo=dt.timezone(dt.timedelta(hours=off))).timestamp(); src = 'Kalshi contract rules'
-    elif end: ts = ets(end)
-    else: return dict(name=None, start=info['date'] + ' (time not supplied)', src='market date only', state=None, detail='', score=''), None
-    return dict(name=None, start=pt(ts), src=src, state=None, detail='', score=''), ts
+        return dict(name=None, start=pt(ts), src=src, state=None, detail='', score=''), ts
+    if end:
+        ts = ets(end)
+        return dict(name=None, start=pt(ts), src=src, state=None, detail='', score=''), ts
+    return dict(name=None, start=info['date'], src='market date only', state=None, detail='', score=''), None
 # ---------- 14. Whale open positions in the window (loaded in step 1) ----------
 ET = dt.timezone(dt.timedelta(hours=-5))
 D_LO = (dt.datetime.fromtimestamp(NOW, ET) - dt.timedelta(days=1)).date(); D_HI = dt.datetime.fromtimestamp(WIN_END, ET).date()
@@ -691,10 +794,14 @@ _cand = [(r_['game'], r_['startTs'], r_['slug']) for r_ in BETS + BUYS if r_.get
 for g_, t_, sl_ in sorted(_cand, key=lambda c_: 0 if c_[0].get('src') in ('ESPN', 'Kalshi contract rules') else 1):
     if 'same match' not in (g_.get('src') or ''): _ev.setdefault(evkey(sl_), (g_, t_))
 for r_ in BETS + BUYS:
-    if not r_.get('startTs') and evkey(r_['slug']) in _ev:
-        g0, t0 = _ev[evkey(r_['slug'])]; r_['game'] = dict(g0, src=(g0.get('src') or '') + ' (same match)'); r_['startTs'] = t0
-    elif r_.get('startTs') and r_['game'].get('src') == 'market close time' and evkey(r_['slug']) in _ev and _ev[evkey(r_['slug'])][0].get('src') in ('ESPN', 'Kalshi contract rules'):
-        g0, t0 = _ev[evkey(r_['slug'])]; r_['game'] = dict(g0, src=(g0.get('src') or '') + ' (same match)'); r_['startTs'] = t0
+    ek = evkey(r_.get('slug'))
+    if ek in _ev:
+        g0, t0 = _ev[ek]
+        weak = (not r_.get('startTs')) or (r_['game'].get('src') in ('market close time', 'market date only', None, ''))
+        need_name = not (r_.get('game') or {}).get('name')
+        if weak or (need_name and g0.get('name') and g0.get('src') in ('ESPN', 'Kalshi contract rules')):
+            r_['game'] = dict(g0, src=(g0.get('src') or '') + ' (same match)')
+            if t0: r_['startTs'] = t0
     r_['phase'] = phase(r_['game'], r_.get('startTs'))
 # ---------- 16. Picks: group the whales' open $500+ positions by market side ----------
 # Rank (Noel): price band first (65-84¢ best), then totals over spreads, then net money / one-sided share, then whale count, then all-time rank.
@@ -832,6 +939,8 @@ for s in signals:
 PROPS.sort(key=rank_key); LONGSHOTS.sort(key=rank_key)
 BIGGEST = [x for x in signals if x.get('backers') and not is_started(x)]
 BIGGEST.sort(key=lambda x: (-max((b.get('cost') or 0) for b in x['backers']), -(x.get('invested') or 0)))
+UPCOMING = [x for x in signals if x.get('backers') and not is_started(x) and x.get('start_ts') and NOW < x['start_ts'] <= NOW + 24 * 3600]
+UPCOMING.sort(key=lambda x: (x.get('start_ts') or 10**12, -(x.get('invested') or 0)))
 CONS, GLUE, FUN, _mk = [], [], [], set()
 for s in ONK:
     if is_started(s) or not s['backers'] or s['market_id'] in _mk or s['id'] in _pl or is_prop_sig(s): continue
@@ -873,12 +982,13 @@ for s in CONS[:3]:
 HP = os.path.join(HERE, 'history.json')
 hist = json.load(open(HP)) if os.path.exists(HP) else {'scans': [], 'picks': {}}
 cur_ids = set()
-for s in CONS[:20] + GLUE[:12] + FUN[:20] + POLY[:20] + PROPS[:20] + LONGSHOTS[:20] + [x for x in BIGGEST[:30] if x['id'] not in {c['id'] for c in CONS[:20] + GLUE[:12] + FUN[:20] + POLY[:20] + PROPS[:20] + LONGSHOTS[:20]}]:
+for s in CONS[:20] + GLUE[:12] + FUN[:20] + POLY[:20] + PROPS[:20] + LONGSHOTS[:20] + [x for x in BIGGEST[:30] if x['id'] not in {c['id'] for c in CONS[:20] + GLUE[:12] + FUN[:20] + POLY[:20] + PROPS[:20] + LONGSHOTS[:20]}] + [x for x in UPCOMING[:30] if x['id'] not in {c['id'] for c in CONS[:20] + GLUE[:12] + FUN[:20] + POLY[:20] + PROPS[:20] + LONGSHOTS[:20] + BIGGEST[:30]}]:
     cur_ids.add(s['id']); p = hist['picks'].get(s['id'])
     k = s['kalshi']
     if s in LONGSHOTS: tier = 'longshots'
     elif s in PROPS: tier = 'props'
-    elif s in BIGGEST and s not in CONS and s not in GLUE and s not in FUN and s not in POLY: tier = 'biggest'
+    elif s in BIGGEST and s not in CONS and s not in GLUE and s not in FUN and s not in POLY and s not in UPCOMING: tier = 'biggest'
+    elif s in UPCOMING and s not in CONS and s not in GLUE and s not in FUN and s not in POLY and s not in BIGGEST: tier = 'upcoming'
     elif s in POLY: tier = 'poly'
     elif s in FUN: tier = 'fun'
     elif s in GLUE: tier = 'glue'
@@ -898,7 +1008,7 @@ for pid, p in hist['picks'].items():
         py = m.get('price_yes')
         if py is not None and py in (0, 1) or (py is not None and (py >= 0.99 or py <= 0.01)):
             won = (py >= 0.99) == (p['side'] == 'yes'); p['result'] = 'W' if won else 'L'; p['graded'] = NOW
-hist['scans'].append(dict(ts=NOW, signals=len(CONS), fun=len(FUN), poly=len(POLY), glue=len(GLUE), props=len(PROPS), longshots=len(LONGSHOTS), biggest=len(BIGGEST), calls=CALLS['n'], cappers=len(cappers), bets=len(BETS), buys=len(BUYS), wallets=len(POS)))
+hist['scans'].append(dict(ts=NOW, signals=len(CONS), fun=len(FUN), poly=len(POLY), glue=len(GLUE), props=len(PROPS), longshots=len(LONGSHOTS), biggest=len(BIGGEST), upcoming=len(UPCOMING), calls=CALLS['n'], cappers=len(cappers), bets=len(BETS), buys=len(BUYS), wallets=len(POS)))
 hist['scans'] = hist['scans'][-50:]
 json.dump(hist, open(HP, 'w'), indent=1)
 # ---------- 12. Output ----------
@@ -937,7 +1047,7 @@ def risks(s_):
     if s_.get('pricier') and s_.get('over_cents') is not None: r.append(f"Pricier: current price is {s_['over_cents']}¢ above the whales' average entry.")
     if (s_.get('game') or {}).get('src') != 'ESPN': r.append('Start time not confirmed by ESPN (' + (s_.get('game') or {}).get('src', 'unknown') + ').')
     return r
-for s_ in CONS + FUN + POLY + GLUE + PROPS + LONGSHOTS + BIGGEST: s_['risks'] = risks(s_)
+for s_ in CONS + FUN + POLY + GLUE + PROPS + LONGSHOTS + BIGGEST + UPCOMING: s_['risks'] = risks(s_)
 out = dict(scannedAt=pt(NOW), ts=NOW, secs=round(time.time() - T0), settings=dict(cappers=A.cappers, min=A.min, wallets=A.wallets, markets=A.markets, windowH=12),
     coverage=dict(cappers=len(cappers), qualified=sum(qualifies(c) for c in cappers.values()), golden=sum(golden(c) for c in cappers.values()),
                   marketsFound=found_markets, marketsInWindow=in_window, marketsScanned=min(30, len(ONK)), hedgedExcluded=two_sided, twoSidedExcluded=two_sided, lbAll=LB, lb30=LB, notOnKalshi=len(NOT_ON_KALSHI), picksOnKalshi=len(ONK), sideGroups=len(signals),
@@ -948,12 +1058,13 @@ out = dict(scannedAt=pt(NOW), ts=NOW, secs=round(time.time() - T0), settings=dic
     poly=[slim(s) for s in POLY[:20]], totalPoly=len(POLY), glue=[slim(s) for s in GLUE[:12]], totalGlue=len(GLUE),
     props=[slim(s) for s in PROPS[:20]], totalProps=len(PROPS), longshots=[slim(s) for s in LONGSHOTS[:20]], totalLongshots=len(LONGSHOTS),
     biggest=[slim(s) for s in BIGGEST[:30]], totalBiggest=len(BIGGEST),
+    upcoming=[slim(s) for s in UPCOMING[:30]], totalUpcoming=len(UPCOMING),
     bets=BETS[:220], buys=BUYS[:160], traders=TRADERS,
     history=sorted([dict(id=k, **{kk: v[kk] for kk in ('tier', 'q', 'label', 'score', 'whales', 'invested', 'start', 'kalshi', 'kprice', 'first_seen', 'last_seen', 'scans', 'result', 'graded') if kk in v},
                          active=k in cur_ids) for k, v in hist['picks'].items()], key=lambda x: -x['last_seen'])[:80],
     scans=hist['scans'][-20:])
 json.dump(out, open(os.path.join(HERE, 'page_data.json'), 'w'), separators=(',', ':'))
-print(f"consensus={len(CONS)} fun={len(FUN)} poly={len(POLY)} glue={len(GLUE)} props={len(PROPS)} longshots={len(LONGSHOTS)} biggest={len(BIGGEST)} all={len(signals)} groups={len(signals)} onKalshi={len(ONK)} offKalshi={len(OFFK)} cappers={len(cappers)} orca_calls={CALLS['n']} errors={len(CALLS['errors'])} secs={out['secs']} kalshi_ok={out['coverage']['kalshiMatched']}")
+print(f"consensus={len(CONS)} fun={len(FUN)} poly={len(POLY)} glue={len(GLUE)} props={len(PROPS)} longshots={len(LONGSHOTS)} biggest={len(BIGGEST)} upcoming={len(UPCOMING)} all={len(signals)} groups={len(signals)} onKalshi={len(ONK)} offKalshi={len(OFFK)} cappers={len(cappers)} orca_calls={CALLS['n']} errors={len(CALLS['errors'])} secs={out['secs']} kalshi_ok={out['coverage']['kalshiMatched']}")
 for s in CONS[:8] + GLUE[:2] + FUN[:3] + POLY[:3] + PROPS[:3] + LONGSHOTS[:3] + BIGGEST[:3]: print(len(s['backers']), s['net'], s.get('one_sided_share'), s.get('price_band'), s.get('strength'), s['question'], '|', s['label'], '|', s['invested'], '|', s['kalshi'].get('action'), s['kalshi'].get('contract'), s['kalshi'].get('price'), 'biggest' if s in BIGGEST and s not in CONS and s not in FUN and s not in POLY and s not in PROPS and s not in LONGSHOTS and s not in GLUE else ('longshot' if s in LONGSHOTS else ('prop' if s in PROPS else ('poly' if s in POLY else ('glue' if s in GLUE else ('fun' if s in FUN else 'top'))))))
 # ---------- 13. Page embed (wallets kept for Polymarket profile links) ----------
 for b_ in BETS: b_.pop('_info', None)
