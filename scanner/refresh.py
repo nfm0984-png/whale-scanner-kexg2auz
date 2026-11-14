@@ -396,6 +396,9 @@ for h in emb.get('history', []):
 emb['refreshedAt'] = pt(NOW); emb['refreshTs'] = NOW
 emb.setdefault('refreshes', []).append(dict(ts=NOW, espnGames=n_espn, kalshiChecks=n_k, timesFilled=n_filled, removedStartedOrEnded=removed))
 json.dump(hist, open(HP, 'w'), indent=1)
+import capper_history as _ch
+_ch_store = _ch.update_store(emb, hist)
+emb['capperHistory'] = _ch.page_payload(emb, hist, _ch_store)
 json.dump(emb, open(os.path.join(HERE, 'page_embed.json'), 'w'), separators=(',', ':'))
 subprocess.run([sys.executable, os.path.join(HERE, 'compact.py')])
 print(f"refreshed {pt(NOW)}: {len(emb['signals'])} top + {len(emb['fun'])} fun + {len(emb['poly'])} poly + {len(emb.get('glue') or [])} glue + {len(emb.get('props') or [])} props + {len(emb.get('longshots') or [])} longshots + {len(emb.get('biggest') or [])} biggest + {len(emb.get('upcoming') or [])} upcoming, ESPN games matched {n_espn}, times/opponents filled {n_filled}, Kalshi checks {n_k}, started/ended removed (top/fun/poly/glue/props/longshots/biggest/upcoming/bets/buys) {removed}, OrcaLayer calls 0")

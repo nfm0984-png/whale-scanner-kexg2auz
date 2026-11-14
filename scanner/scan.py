@@ -804,7 +804,7 @@ for r_ in BETS + BUYS:
             if t0: r_['startTs'] = t0
     r_['phase'] = phase(r_['game'], r_.get('startTs'))
 # ---------- 16. Picks: group the whales' open $500+ positions by market side ----------
-# Rank (Noel): price band first (65-84¢ best), then totals over spreads, then net money / one-sided share, then whale count, then all-time rank.
+# Rank (Noel): price band first (65-84¢ best), then backing-whale quality (copyable WR/ROI), then net money / one-sided share, then whale count.
 # Kalshi tabs (Top 20, Fun): a pick must have a verified Kalshi contract. Top 20 needs 2+ whales; Fun needs 1+.
 # Polymarket tab: the same rules ($500+, 12h window, no hedgers) but NO Kalshi contract. Never duplicates a Kalshi-tab pick.
 def score(s):
@@ -891,11 +891,20 @@ def annotate(s):
     s['glue'] = s['price_band'] == 'glue'
 def best_rank(s):
     return min((b.get('rankAll') or b.get('rank') or b.get('rank30') or 999) for b in s['backers']) if s['backers'] else 999
-# New Top 20 order: price band (best 65-84 first, then mid), totals boost, then net money, one-sided share, whale count, all-time rank.
+try:
+    import capper_history as _ch_rank
+    _QMAP = _ch_rank.quality_map(_ch_rank.load())
+except Exception:
+    _ch_rank = None
+    _QMAP = {}
+def backer_quality(s):
+    if not _QMAP or not _ch_rank:
+        return 0
+    return _ch_rank.backer_quality(s.get('backers') or [], _QMAP)['quality']
+# Price band first, then backing-whale quality, then net money, one-sided share, whale count.
 def rank_key(s):
     band = 0 if s.get('price_band') == 'best' else (1 if s.get('price_band') == 'mid' else 2)
-    total = 0 if (s.get('info') or {}).get('kind') == 'total' else 1
-    return (band, total, -(s.get('net') or 0), -(s.get('one_sided_share') or 0), -len(s['backers']), best_rank(s), -(s.get('score') or 0))
+    return (band, -backer_quality(s), -(s.get('net') or 0), -(s.get('one_sided_share') or 0), -len(s['backers']), best_rank(s), -(s.get('score') or 0))
 for s in signals: annotate(s)
 signals.sort(key=rank_key)
 ONK = [s for s in signals if s['kalshi'].get('status') == 'ok']
@@ -1079,6 +1088,9 @@ for r_ in emb['buys']:
     for kk in ('market_id', 'slug', 'qualified'): r_.pop(kk, None)
 for r_ in emb['bets']:
     for kk in ('market_id', 'slug', '_info'): r_.pop(kk, None)
+import capper_history as _ch
+_ch_store = _ch.update_store(emb, hist)
+emb['capperHistory'] = _ch.page_payload(emb, hist, _ch_store)
 json.dump(emb, open(os.path.join(HERE, 'page_embed.json'), 'w'), separators=(',', ':'))
 open(os.path.join(HERE, 'page_data_line.txt'), 'w').write('const DATA: ScanData = ' + json.dumps(emb, separators=(',', ':')) + ';')
 print('embed bytes', len(json.dumps(emb, separators=(',', ':'))))
