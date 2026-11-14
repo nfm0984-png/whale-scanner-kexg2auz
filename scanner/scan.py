@@ -938,7 +938,10 @@ def rank_key(s):
         cnt = _ch_rank.conviction_count(s.get('backers') or [], _QMAP)
     else:
         net, cnt = (s.get('net') or 0), len(s['backers'])
-    return (band, -backer_quality(s), -net, -(s.get('one_sided_share') or 0), -cnt, best_rank(s), -(s.get('score') or 0))
+    tier = _ch_rank.vet_tier(s.get('backers') or [], _QMAP) if (_QMAP and _ch_rank) else 1
+    s['vet_tier'] = tier
+    # Vetting first (Noel, Nov 14): picks with a vetted 10+ sample backer, then vetted small sample, then unvetted.
+    return (tier, band, -backer_quality(s), -net, -(s.get('one_sided_share') or 0), -cnt, best_rank(s), -(s.get('score') or 0))
 for s in signals: annotate(s)
 signals.sort(key=rank_key)
 ONK = [s for s in signals if s['kalshi'].get('status') == 'ok']
@@ -990,12 +993,12 @@ for s in ONK:
     n = len(s['backers']); band = s['price_band']; share = s['one_sided_share']
     if n >= A.wallets and band == 'glue':
         GLUE.append(s); _mk.add(s['market_id']); continue
-    if n >= A.wallets and band not in ('longshot', 'glue') and share >= 0.55 and not s['pricier']:
+    if n >= A.wallets and band not in ('longshot', 'glue') and share >= 0.55 and not s['pricier'] and s.get('vet_tier', 2) < 2:
         CONS.append(s); _mk.add(s['market_id']); continue
 for s in ONK:
     if is_started(s) or s in CONS or s in GLUE or s['market_id'] in _mk or not s['backers'] or s['id'] in _pl or is_prop_sig(s) or is_long_sig(s): continue
     FUN.append(s); _mk.add(s['market_id'])
-# Keep only the top 20 on the Top 20 list; overflow eligible picks still show on Fun.
+# Unvetted picks never make Top 20 (no padding). Keep only the top 20 on the Top 20 list; overflow eligible picks still show on Fun.
 if len(CONS) > 20:
     FUN = CONS[20:] + FUN
     CONS = CONS[:20]

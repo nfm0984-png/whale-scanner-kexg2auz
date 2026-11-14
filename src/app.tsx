@@ -89,7 +89,7 @@ function nameOf(n: string | null | undefined, w: string): string { const x = n |
 function isHot(wallet: string | null | undefined): boolean { const r = QMAP[(wallet || "").toLowerCase()]; return !!(r && r.badge === "Hot"); }
 // Hot backers who bet a real (High or Normal conviction) amount on this pick
 function hotBackers(bs: { wallet?: string | null; cost?: number | null }[], pid?: string): { wallet?: string | null; cost?: number | null }[] {
-  return bs.filter((b) => isHot(b.wallet) && convOf(b.wallet, b.cost, pid).tag !== "T");
+  return bs.filter((b) => isHot(b.wallet) && backerVerdict(b.wallet, b.cost, pid).counts);
 }
 function badgeColor(b: string | undefined): string { return b === "Hot" ? GREEN : b === "Cold" ? RED : b === "Cooling" ? AMBER : "#64748B"; }
 function convNet(backers: { wallet?: string | null; cost?: number | null }[], opp: number, pid?: string): number {
@@ -97,9 +97,48 @@ function convNet(backers: { wallet?: string | null; cost?: number | null }[], op
   backers.forEach((b) => { const c = b.cost || 0; s += c * (CONV_W[convOf(b.wallet, c, pid).tag] || 1); });
   return s - opp;
 }
-function backerStats(backers: { wallet?: string | null; cost?: number | null }[] | undefined, pid?: string): { quality: number; w: number; l: number; roi: number | null; text: string } {
+// Vetting (Noel, Nov 14): a backer only counts if the whale has a real winning, positive-ROI graded record AND bet real size.
+// Negative-ROI, Cold, ungraded, losing, low-edge whales and throwaway/small bets contribute nothing to any ranking.
+const VET_MIN_N = 10;          // full sample
+const VET_SMALL_N = 5;         // 5-9 allowed only when clearly positive
+const VET_SMALL_WR = 60;       // small sample: 60%+ copyable win rate
+const VET_SMALL_ROI = 10;      // small sample: +10%+ copyable ROI
+const VET_MIN_BET = 500;       // absolute bet floor ($)
+const VET_MIN_MULT = 0.5;      // and at least half the whale's usual bet
+interface Verdict { counts: boolean; tier: number; why: string; bet: string }
+function backerVerdict(wallet: string | null | undefined, cost: number | null | undefined, pid?: string): Verdict {
+  const rec = QMAP[(wallet || "").toLowerCase()];
+  const c = cost || 0;
+  const cv = convOf(wallet, c, pid);
+  let bet = "";
+  if (cv.tag === "T") bet = "throwaway bet" + (cv.mult != null ? " (" + cv.mult + "x usual)" : "");
+  else if (c < VET_MIN_BET) bet = "small bet (" + money(c) + ")";
+  else if (cv.mult != null && cv.mult < VET_MIN_MULT) bet = "small bet (" + cv.mult + "x usual)";
+  const n = rec ? (rec.cn || 0) : 0, w = rec ? (rec.cw || 0) : 0, l = rec ? (rec.cl || 0) : 0;
+  const roi = rec && rec.croi != null ? rec.croi : null;
+  const wr = rec && rec.cwr != null ? rec.cwr : null;
+  let why = "";
+  if (!rec || n === 0) why = "ungraded";
+  else if (rec.badge === "Cold" || rec.coldDemoted) why = "Cold (P&L down past month/year/all-time)";
+  else if (roi == null || roi <= 0) why = "negative ROI";
+  else if (w <= l) why = "losing record";
+  else if (n < VET_SMALL_N) why = "only " + n + " graded";
+  else if (n < VET_MIN_N && !((wr || 0) >= VET_SMALL_WR && roi >= VET_SMALL_ROI)) why = "small sample, not clearly positive";
+  else if (n >= VET_MIN_N && rec.demoted) why = "low-edge ROI";
+  const tier = why ? 2 : (n >= VET_MIN_N ? 0 : 1);
+  return { counts: !why && !bet, tier: why || bet ? 2 : tier, why, bet };
+}
+function countedBackers<T extends { wallet?: string | null; cost?: number | null }>(bs: T[] | undefined, pid?: string): T[] {
+  return (bs || []).filter((b: T) => backerVerdict(b.wallet, b.cost, pid).counts);
+}
+// 0 = backed by a vetted 10+ sample whale, 1 = vetted small sample (5-9) only, 2 = no vetted backer
+function vetTier(bs: { wallet?: string | null; cost?: number | null }[] | undefined, pid?: string): number {
+  return (bs || []).reduce((m: number, b) => Math.min(m, backerVerdict(b.wallet, b.cost, pid).tier), 2);
+}
+function backerStats(backers: { wallet?: string | null; cost?: number | null }[] | undefined, pid?: string): { quality: number; w: number; l: number; roi: number | null; text: string; counted: number; tier: number } {
   let tw = 0, tq = 0, w = 0, l = 0, rNum = 0, rDen = 0;
-  (backers || []).forEach((b) => {
+  const cb = countedBackers(backers, pid);
+  cb.forEach((b) => {
     const rec = QMAP[(b.wallet || "").toLowerCase()];
     const cost = (b.cost != null && b.cost > 0) ? b.cost : 0;
     const wt = (cost || 1) * (CONV_W[convOf(b.wallet, cost, pid).tag] || 1);
@@ -112,28 +151,45 @@ function backerStats(backers: { wallet?: string | null; cost?: number | null }[]
     }
   });
   const roi = rDen ? Math.round((rNum / rDen) * 10) / 10 : null;
-  const text = (w + l) ? ("Backers " + w + "–" + l + (roi != null ? ", " + (roi >= 0 ? "+" : "") + roi + "% ROI" : "")) : "Backers record building";
-  return { quality: tw ? tq / tw : 0, w, l, roi, text };
+  const tier = vetTier(backers, pid);
+  const text = cb.length ? ("Vetted backers " + w + "–" + l + (roi != null ? ", " + (roi >= 0 ? "+" : "") + roi + "% ROI" : "") + (tier === 1 ? " · small sample" : "")) : "⚠ No vetted backer";
+  // Quality only from vetted backers; no vetted backer sinks the pick (it is also filtered off ranked tabs).
+  return { quality: tw ? tq / tw : -999, w, l, roi, text, counted: cb.length, tier };
 }
 function BackersLine(props: { backers: { wallet?: string | null; cost?: number | null; name?: string | null }[] | undefined; pid?: string }) {
   const t = useGrokTheme();
   const s = backerStats(props.backers, props.pid);
-  const top = (props.backers || []).filter((b) => (b.cost || 0) > 0).slice().sort((a, b) => (b.cost || 0) - (a.cost || 0)).slice(0, 3);
+  const all = (props.backers || []).filter((b) => (b.cost || 0) > 0).slice().sort((a, b) => {
+    const va = backerVerdict(a.wallet, a.cost, props.pid).counts ? 0 : 1, vb = backerVerdict(b.wallet, b.cost, props.pid).counts ? 0 : 1;
+    return va - vb || (b.cost || 0) - (a.cost || 0);
+  });
+  const top = all.slice(0, 4);
+  const nameFor = (b: { wallet?: string | null; name?: string | null }) => { const rec = QMAP[(b.wallet || "").toLowerCase()]; return nameOf((rec && rec.name && rec.name.indexOf("0x") !== 0 ? rec.name : b.name), b.wallet || ""); };
+  const cautions = all.filter((b) => !backerVerdict(b.wallet, b.cost, props.pid).counts);
   return (
     <div data-backers-line="1" style={{ marginTop: 6 }}>
-      <div style={{ fontSize: 14, lineHeight: "20px", fontWeight: 750, color: t.text.primary }}>{s.text}</div>
+      <div data-vetted={s.counted ? (s.tier === 0 ? "full" : "small") : "none"} style={{ fontSize: 14, lineHeight: "20px", fontWeight: 800, color: !s.counted ? RED : (s.roi != null && s.roi < 0 ? RED : t.text.primary) }}>{s.text}</div>
       {top.map((b, i: number) => {
         const rec = QMAP[(b.wallet || "").toLowerCase()];
         const cv = convOf(b.wallet, b.cost, props.pid);
-        const nm = nameOf((rec && rec.name && rec.name.indexOf("0x") !== 0 ? rec.name : b.name), b.wallet || "");
+        const vd = backerVerdict(b.wallet, b.cost, props.pid);
+        const nm = nameFor(b);
+        const n = rec ? (rec.cw || 0) + (rec.cl || 0) : 0;
+        const roi = rec && rec.croi != null ? rec.croi : null;
+        const recTxt = n ? (rec!.cw || 0) + "–" + (rec!.cl || 0) + (roi != null ? " · " + (roi >= 0 ? "+" : "") + roi + "% ROI" : "") : "ungraded";
+        const bad = !n || roi == null || roi <= 0;
         return (
-          <div key={i} data-backer-conv={cv.tag} style={{ fontSize: 12, lineHeight: "17px", color: t.text.secondary, marginTop: 3 }}>
-            <span style={{ fontWeight: 750, color: cv.tag === "H" ? GREEN : cv.tag === "T" ? t.text.tertiary : t.text.primary }}>{nm} {money(b.cost || 0)}{cv.mult != null ? " = " + cv.mult + "x usual" : ""} · {CONV_LABEL[cv.tag]}</span>
+          <div key={i} data-backer-conv={cv.tag} data-backer-counts={vd.counts ? "1" : "0"} style={{ fontSize: 12, lineHeight: "18px", color: t.text.secondary, marginTop: 4, opacity: vd.counts ? 1 : 0.92 }}>
+            <span data-backer-rec="1" style={{ display: "inline-block", marginRight: 6, padding: "0 7px", borderRadius: 999, background: bad ? RED : (vd.counts ? GREEN : "#64748B"), color: "#FFFFFF", fontWeight: 800, fontSize: 12, lineHeight: "18px" }}>{(bad && n ? "⚠ " : "") + recTxt}</span>
+            <span style={{ fontWeight: 750, color: vd.counts ? (cv.tag === "H" ? GREEN : t.text.primary) : t.text.tertiary }}>{nm} {money(b.cost || 0)}{cv.mult != null ? " = " + cv.mult + "x usual" : ""} · {CONV_LABEL[cv.tag]}</span>
             {rec && rec.badge === "Hot" ? <span data-hot-badge="1" style={{ display: "inline-block", marginLeft: 6, padding: "0 7px", borderRadius: 999, background: "#EA580C", color: "#FFFFFF", fontWeight: 800, fontSize: 11, lineHeight: "17px" }}>🔥 Hot{rec.proven ? " · Proven" : ""}</span> : rec && rec.badge && rec.badge !== "n/a" ? <span style={{ fontWeight: 750, color: badgeColor(rec.badge) }}>{" · " + rec.badge}</span> : null}
+            {vd.counts && vd.tier === 1 ? <span style={{ fontWeight: 750, color: AMBER }}>{" · small sample"}</span> : null}
+            {!vd.counts ? <span style={{ fontWeight: 800, color: RED }}>{" · doesn't count: " + [vd.why, vd.bet].filter(Boolean).join(", ")}</span> : null}
             {rec && rec.win ? <span>{" · " + winShort(rec)}</span> : null}
           </div>
         );
       })}
+      {cautions.length ? <div data-caution="1" style={{ fontSize: 12, lineHeight: "17px", fontWeight: 750, color: RED, marginTop: 4 }}>{"⚠ Caution: " + cautions.slice(0, 4).map((b) => { const vd = backerVerdict(b.wallet, b.cost, props.pid); return nameFor(b) + " (" + [vd.why, vd.bet].filter(Boolean).join(", ") + ")"; }).join("; ") + (cautions.length > 4 ? " +" + (cautions.length - 4) + " more" : "") + " — on this bet but not counted in the ranking."}</div> : null}
     </div>
   );
 }
@@ -1138,21 +1194,23 @@ function pickInfo(p: Pick, whales: number): { word: "Go big" | "Normal" | "Small
   else if (p.kind === "spread" && !(whales >= 3 && share >= 0.65) && word === "Go big") word = "Normal";
   return { word, glue, split, pricier, tooPricier, band, share, over, px };
 }
-function rankKey(p: Pick, whales: number, backers?: Backer[]): [number, number, number, number, number, number] {
+function rankKey(p: Pick, whales: number, backers?: Backer[]): number[] {
   const info = pickInfo(p, whales);
   const band = info.band === "best" ? 0 : info.band === "mid" ? 1 : 2;
   const bs = backers && backers.length ? backers : p.backers;
-  const q = backerStats(bs, p.id).quality;
-  // Conviction: throwaway-size bets barely count toward net money or agreement; big bets are boosted.
-  const net = bs.length ? convNet(bs, p.oppMoney || 0, p.id) : (p.net != null ? p.net : (p.invested - (p.oppMoney || 0)));
-  const real = bs.length ? bs.filter((b: Backer) => convOf(b.wallet, b.cost, p.id).tag !== "T").length : whales;
-  const best = Math.min(...(bs.length ? bs.map((b: Backer) => b.rankAll || b.rank || 999) : [999]));
-  return [band, -q, -net, -info.share, -Math.min(whales, real), best];
+  const st = backerStats(bs, p.id);
+  // Only vetted backers (winning, positive-ROI, real-size bets) count toward quality, net money and agreement.
+  const cb = countedBackers(bs, p.id);
+  const net = convNet(cb, p.oppMoney || 0, p.id);
+  const best = Math.min(...(cb.length ? cb.map((b: Backer) => b.rankAll || b.rank || 999) : [999]));
+  return [st.tier, band, -st.quality, -net, -info.share, -cb.length, best];
 }
-function cmpRankKey(a: [number, number, number, number, number, number], b: [number, number, number, number, number, number]): number {
+function cmpRankKey(a: number[], b: number[]): number {
   for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] - b[i];
   return 0;
 }
+// Ranked tabs only list picks with at least one vetted backer (Upcoming keeps everything, with caution labels).
+function vetted(p: Pick, backers?: Backer[]): boolean { return backerStats(backers || p.backers, p.id).counted > 0; }
 function topEligible(p: Pick, whales: number, now: number): boolean {
   if (whales < 2 || isStarted(p, now) || isPlayerProp(p)) return false;
   if (p.kalshi.status !== "ok") return false;
@@ -1904,7 +1962,7 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; longshot?: boo
           {poly ? <Chip bg={BRAND2} color="#FFFFFF">Polymarket</Chip> : null}
           {props.resultTag ? <ResultChip result={props.resultTag === "LIVE" || props.resultTag === "OPEN" ? null : props.resultTag} live={props.resultTag === "LIVE"} /> : null}
           {hotBackers(backers, p.id).length ? <Chip bg="#EA580C" color="#FFFFFF">{"🔥 Hot-backed" + (hotBackers(backers, p.id).length > 1 ? " ×" + hotBackers(backers, p.id).length : "")}</Chip> : null}
-          <Chip bg={t.bg.subtle} color={t.text.primary}>{backerStats(backers, p.id).text}</Chip>
+          {(function () { const bs = backerStats(backers, p.id); return <span data-vet-chip="1"><Chip bg={!bs.counted ? RED : bs.roi != null && bs.roi > 0 ? GREEN : t.bg.subtle} color={!bs.counted || (bs.roi != null && bs.roi > 0) ? "#FFFFFF" : t.text.primary}>{bs.text}</Chip></span>; })()}
           <CopyId id={idCode} />
         </div>
         <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 12 }}>
@@ -2092,6 +2150,7 @@ export default function App() {
   const [capCustom, setCapCustom] = useState<string>("");
   const [saved, setSaved] = useState<string>("");
   const [now] = useState<number>(Math.floor(Date.now() / 1000));
+  const [allBets, setAllBets] = useState<boolean>(false);
   useEffect(() => {
     try {
       const raw = window.localStorage.getItem(STORE_KEY);
@@ -2137,12 +2196,12 @@ export default function App() {
   const pickQuality = (p: Pick): number => Math.max(0, ...p.backers.map((b: Backer) => (b.golden ? 1000 : 0) - (b.rankAll || b.rank || 999)));
   const rankPicks = (arr: Pick[]): Pick[] => arr.slice().sort((a: Pick, b: Pick) => cmpRankKey(rankKey(a, visibleBackers(a).length, visibleBackers(a)), rankKey(b, visibleBackers(b).length, visibleBackers(b))));
   const bySport = (arr: Pick[]): Pick[] => sportFilter ? arr.filter((p: Pick) => p.league === sportFilter) : arr;
-  const topPool = rankPicks((DATA.signals || []).concat(DATA.fun || []).filter((p: Pick) => topEligible(p, visibleBackers(p).length, now) && visibleBackers(p).length >= minW && followOk(p)));
+  const topPool = rankPicks((DATA.signals || []).concat(DATA.fun || []).filter((p: Pick) => topEligible(p, visibleBackers(p).length, now) && visibleBackers(p).length >= minW && followOk(p) && vetted(p, visibleBackers(p))));
   const topAll = topPool.slice(0, 20);
   const top = bySport(topAll);
   const gluePool = rankPicks((DATA.glue || DATA.signals || []).concat(DATA.fun || []).filter((p: Pick) => {
     const n = visibleBackers(p).length;
-    return n >= 2 && followOk(p) && !gone(p) && p.kalshi.status === "ok" && pickInfo(p, n).glue && !isPlayerProp(p);
+    return n >= 2 && followOk(p) && !gone(p) && p.kalshi.status === "ok" && pickInfo(p, n).glue && !isPlayerProp(p) && vetted(p, visibleBackers(p));
   }));
   // unique by id, not already in top
   const glueIds: Record<string, boolean> = {};
@@ -2152,6 +2211,7 @@ export default function App() {
   const funPool = rankPicks((DATA.fun || []).concat(DATA.signals || []).filter((p: Pick) => {
     const n = visibleBackers(p).length;
     if (n < 1 || !followOk(p) || gone(p) || p.kalshi.status !== "ok") return false;
+    if (!vetted(p, visibleBackers(p))) return false;
     if (isPlayerProp(p) || isLongshot(p, n, now)) return false;
     if (top.some((x: Pick) => x.id === p.id)) return false;
     if (glueAll.some((x: Pick) => x.id === p.id) && n >= 2) return false; // 95¢+ 2-whale stays in Glue, not Fun
@@ -2160,7 +2220,7 @@ export default function App() {
   const funSeen: Record<string, boolean> = {};
   const funAll = funPool.filter((p: Pick) => { if (funSeen[p.id]) return false; funSeen[p.id] = true; return true; });
   const fun = bySport(funAll);
-  const polyAll = rankPicks((DATA.poly || []).filter((p: Pick) => visibleBackers(p).length >= 1 && followOk(p) && !gone(p) && p.kalshi.status !== "ok" && !isPlayerProp(p) && !isLongshot(p, visibleBackers(p).length, now)));
+  const polyAll = rankPicks((DATA.poly || []).filter((p: Pick) => visibleBackers(p).length >= 1 && vetted(p, visibleBackers(p)) && followOk(p) && !gone(p) && p.kalshi.status !== "ok" && !isPlayerProp(p) && !isLongshot(p, visibleBackers(p).length, now)));
   const polyBase = polyAll.slice(0, 20);
   const poly = bySport(polyBase);
   const uniqueByKey = (arr: Pick[]): Pick[] => {
@@ -2168,24 +2228,25 @@ export default function App() {
     return arr.filter((p: Pick) => { const k = pickCatalogKey(p.q, p.label); if (seen[k]) return false; seen[k] = true; return true; });
   };
   const catalogPicks = uniqueByKey((DATA.props || []).concat(DATA.longshots || []).concat(DATA.biggest || []).concat(DATA.upcoming || []).concat(DATA.signals || []).concat(DATA.fun || []).concat(DATA.poly || []).concat(DATA.glue || []).concat(linesToPicks(BET_LINES)));
-  const propsPool = rankPicks(catalogPicks.filter((p: Pick) => isPlayerProp(p) && visibleBackers(p).length >= 1 && followOk(p) && !gone(p)));
+  const propsPool = rankPicks(catalogPicks.filter((p: Pick) => isPlayerProp(p) && visibleBackers(p).length >= 1 && vetted(p, visibleBackers(p)) && followOk(p) && !gone(p)));
   const propsBase = propsPool.slice(0, 20);
   const propsPicks = bySport(propsBase);
-  const longPool = rankPicks(catalogPicks.filter((p: Pick) => isLongshot(p, visibleBackers(p).length, now) && followOk(p) && !gone(p)));
+  const longPool = rankPicks(catalogPicks.filter((p: Pick) => isLongshot(p, visibleBackers(p).length, now) && vetted(p, visibleBackers(p)) && followOk(p) && !gone(p)));
   const longBase = longPool.slice(0, 20);
   const longPicks = bySport(longBase);
-  const biggestPool = catalogPicks.filter((p: Pick) => visibleBackers(p).length >= 1 && followOk(p) && !gone(p)).slice().sort((a: Pick, b: Pick) => {
-    const qa = backerStats(visibleBackers(a)).quality, qb = backerStats(visibleBackers(b)).quality;
-    const sa = Math.max(...visibleBackers(a).map((x: Backer) => x.cost));
-    const sb = Math.max(...visibleBackers(b).map((x: Backer) => x.cost));
-    return qb - qa || sb - sa || (b.invested - a.invested);
+  const biggestPool = catalogPicks.filter((p: Pick) => visibleBackers(p).length >= 1 && vetted(p, visibleBackers(p)) && followOk(p) && !gone(p)).slice().sort((a: Pick, b: Pick) => {
+    const ba = backerStats(visibleBackers(a), a.id), bb = backerStats(visibleBackers(b), b.id);
+    // biggest single VETTED position
+    const sa = Math.max(0, ...countedBackers(visibleBackers(a), a.id).map((x: Backer) => x.cost));
+    const sb = Math.max(0, ...countedBackers(visibleBackers(b), b.id).map((x: Backer) => x.cost));
+    return ba.tier - bb.tier || bb.quality - ba.quality || sb - sa || (b.invested - a.invested);
   });
   const biggestAll = biggestPool.slice(0, 30);
   const biggestPicks = bySport(biggestAll);
   const upcomingPool = uniqueByKey((DATA.upcoming || []).concat(catalogPicks)).filter((p: Pick) => visibleBackers(p).length >= 1 && followOk(p) && !gone(p) && p.startTs > now && p.startTs <= now + 24 * 3600).slice().sort((a: Pick, b: Pick) => (a.startTs || 9e12) - (b.startTs || 9e12) || backerStats(visibleBackers(b)).quality - backerStats(visibleBackers(a)).quality || (b.invested - a.invested));
   const upcomingAll = upcomingPool.slice(0, 30);
   // Hot Cappers: picks backed by at least one Hot whale (all four P&L windows up) with a High or Normal conviction bet.
-  const hotPool = uniqueByKey((DATA.signals || []).concat(DATA.fun || []).concat(catalogPicks)).filter((p: Pick) => !gone(p) && followOk(p) && hotBackers(visibleBackers(p), p.id).length > 0).slice().sort((a: Pick, b: Pick) => {
+  const hotPool = uniqueByKey((DATA.signals || []).concat(DATA.fun || []).concat(catalogPicks)).filter((p: Pick) => !gone(p) && followOk(p) && hotBackers(visibleBackers(p), p.id).length > 0 && vetted(p, visibleBackers(p))).slice().sort((a: Pick, b: Pick) => {
     const qa = backerStats(visibleBackers(a), a.id).quality, qb = backerStats(visibleBackers(b), b.id).quality;
     const ka = a.kalshi.status === "ok" ? 0 : 1, kb = b.kalshi.status === "ok" ? 0 : 1;
     return ka - kb || qb - qa || cmpRankKey(rankKey(a, visibleBackers(a).length, visibleBackers(a)), rankKey(b, visibleBackers(b).length, visibleBackers(b)));
@@ -2194,13 +2255,15 @@ export default function App() {
   const hotPicks = bySport(hotAll);
   const upcomingPicks = bySport(upcomingAll);
   const combos = buildCombos(top);
+  try { const dbg = (arr: Pick[]) => arr.map((p: Pick) => ({ id: p.id, q: p.q, label: p.label, ticker: p.kalshi && p.kalshi.ticker, act: p.kalshi && p.kalshi.action, contract: p.kalshi && p.kalshi.contract, price: usedPrice(p), startTs: p.startTs, backers: visibleBackers(p).map((b: Backer) => { const r = QMAP[(b.wallet || "").toLowerCase()]; const cv = convOf(b.wallet, b.cost, p.id); return { name: b.name, wallet: b.wallet, cost: b.cost, conv: cv.tag, mult: cv.mult, cw: r ? r.cw : null, cl: r ? r.cl : null, croi: r ? r.croi : null, badge: r ? r.badge : null, quality: r ? r.quality : null }; }), bq: backerStats(visibleBackers(p), p.id).quality })); (window as any).__RANK = { top: dbg(topAll), fun: dbg(funAll), poly: dbg(polyBase), props: dbg(propsBase), long: dbg(longBase), biggest: dbg(biggestAll), upcoming: dbg(upcomingAll), hot: dbg(hotAll) }; } catch (e) { /* debug only */ }
   const capNum = capN === "custom" ? Math.max(1, Math.floor(Number(capCustom) || 0)) : Number(capN);
   const allPicks = DATA.signals.concat(DATA.fun).concat(DATA.props || []).concat(DATA.longshots || []).concat(DATA.biggest || []);
 
   const buyAll = sortLines(BUY_LINES.filter((l: Line) => passLine(l, f, followed, hidden, DATA.ts)), f.sort);
   const buys = sportFilter ? buyAll.filter((l: Line) => l.league === sportFilter) : buyAll;
   const betRows = BET_LINES.filter((l: Line) => passLine(l, f, followed, hidden, DATA.ts));
-  const betPickAll = sortBetPicks(linesToPicks(betRows).filter((p: Pick) => !finished(p) && followOk(p)), f.lineSort);
+  const betPickAll = sortBetPicks(linesToPicks(betRows).filter((p: Pick) => !finished(p) && followOk(p) && (allBets || vetted(p))), f.lineSort);
+  const betUnvetted = allBets ? 0 : linesToPicks(betRows).filter((p: Pick) => !finished(p) && followOk(p) && !vetted(p)).length;
   const betAll = betPickAll;
   const betPicks = bySport(betAll);
   const holdingsOf = (w: string): Line[] => BET_LINES.filter((l: Line) => (l.wallet || "").toLowerCase() === (w || "").toLowerCase());
@@ -2321,7 +2384,7 @@ export default function App() {
   );
   return (
     <Page title="Orca Whale Scanner" summary={{
-      top: "The strongest Kalshi picks from all-time sports whales, ranked by price band, then backing-whale quality (graded win rate and ROI on copyable bets), then net money and agreement. Singles are the default; up to 3 suggested 2-leg combos sit at the top. Games that have started are hidden.",
+      top: "The strongest Kalshi picks from all-time sports whales, vetted only (a backer with a winning record, positive ROI and a real-size bet), ranked by vetted sample, price band, then backing-whale quality (graded win rate and ROI on copyable bets), then net money and agreement. Singles are the default; up to 3 suggested 2-leg combos sit at the top. Games that have started are hidden.",
       fun: "Kalshi picks that missed Top 20: one-whale, under 10¢ or other cheap leftovers, Split, or Pricier. 10–20¢ picks backed by 2+ whales moved to Longshots; player props moved to Player Props. Started games are hidden.",
       poly: "Whale picks you can only bet on Polymarket (not on Kalshi), from all-time sports whales. Player props and 10–20¢ longshots have their own tabs. Started games are hidden.",
       props: "Individual player bets whales are backing — yards, points, TDs, rebounds and more, any sport. Kalshi contracts when they exist; otherwise the Polymarket bet. Started games are hidden.",
@@ -2349,7 +2412,7 @@ export default function App() {
         <Section heading="Top 20">
           <LeaguePills picks={topAll} value={sportFilter} onChange={setSportFilter} />
           <DailyCap />
-          <Text>Singles are the default. Ranked by price band (65–84¢ first), then totals over spreads, then net money and one-sided share, then whale count, then all-time rank. Under 45¢, 95¢+, Split under 55%, Pricier (current more than 3¢ above whale entry), and games that have started are out.</Text>
+          <Text>Vetted picks only: every pick here has at least one backer with a winning graded record and positive copyable ROI (10+ graded picks, or 5–9 only if 60%+ wins and +10% ROI, labeled small sample) who bet real size ($500+, at least half their usual bet, not a throwaway). Negative-ROI, Cold, ungraded and small-bet backers count for nothing and are shown as a red caution. Ranked by vetted sample (10+ first), then price band (65–84¢ first), then vetted backers' quality, net money and one-sided share. Under 45¢, 95¢+, Split under 55%, Pricier, and started games are out. Fewer than 20 shows when fewer qualify.</Text>
           {combos.length ? (
             <div style={{ marginBottom: 8 }}>
               <div style={{ fontSize: 16, fontWeight: 800, margin: "8px 0 4px" }}>Suggested 2-leg combos</div>
@@ -2357,7 +2420,7 @@ export default function App() {
               {combos.map((pair: [Pick, Pick], i: number) => (<ComboCard key={pair[0].id + "+" + pair[1].id} a={pair[0]} b={pair[1]} rank={i + 1} bankroll={bankroll} now={now} />))}
             </div>
           ) : <Text>No 2-leg combo right now (need two Top 20 singles at 65¢+ from different games). No 3+ leg parlays (4-legs went 0-9).</Text>}
-          {top.length === 0 && f.followedOnly ? <Text>No pick clears the filter: none of the top picks is backed by a capper you follow. Turn off "Only picks a followed capper backs" to see them.</Text> : top.length === 0 ? <Text>No pick qualifies right now under the Top 20 rules. Fun Picks has {fun.length}.</Text> : top.length < 20 ? <Text>Only {top.length} of 20 qualify right now.</Text> : null}
+          {top.length === 0 && f.followedOnly ? <Text>No pick clears the filter: none of the top picks is backed by a capper you follow. Turn off "Only picks a followed capper backs" to see them.</Text> : top.length === 0 ? <Text>No pick qualifies right now under the Top 20 rules (vetted backer with a winning record, positive ROI and a real-size bet). Fun Picks has {fun.length}.</Text> : top.length < 20 ? <Text>Only {top.length} of 20 qualify right now. The list is not padded with unvetted picks.</Text> : null}
           <div style={{ fontSize: 16, fontWeight: 800, margin: "12px 0 8px" }}>Singles</div>
           {top.map((p: Pick, i: number) => (<PickCard key={p.id} p={p} fun={false} bankroll={bankroll} now={now} rank={i + 1} followed={followed} hidden={hidden} toggle={toggle} />))}
           {glue.length ? (
@@ -2367,7 +2430,7 @@ export default function App() {
               {glue.map((p: Pick, i: number) => (<PickCard key={p.id} p={p} fun={false} bankroll={bankroll} now={now} rank={i + 1} followed={followed} hidden={hidden} toggle={toggle} />))}
             </div>
           ) : null}
-          <Text>Top 20 rules: {minW}+ all-time sports whales (top {DATA.coverage.cappers}) with {money(minP)}+ each, verified Kalshi contract, no hedgers, game has not started, price 45–94¢, one-sided share at least 55%, current price not more than 3¢ above the whales' average entry.</Text>
+          <Text>Top 20 rules: at least one vetted backer (winning record, positive ROI, real-size bet), {minW}+ all-time sports whales (top {DATA.coverage.cappers}) with {money(minP)}+ each, verified Kalshi contract, no hedgers, game has not started, price 45–94¢, one-sided share at least 55%, current price not more than 3¢ above the whales' average entry.</Text>
         </Section>
       ) : null}
 
@@ -2479,6 +2542,8 @@ export default function App() {
           <Section heading={"Sports bets · " + betPicks.length + " picks"}>
             <LeaguePills picks={betAll} value={sportFilter} onChange={setSportFilter} />
             <DailyCap />
+            <Toggle label="Show unvetted whale bets too (negative ROI, Cold, ungraded or small bets)" value={allBets} onChange={(v: boolean) => setAllBets(v)} />
+            {betUnvetted ? <Text>{betUnvetted + " picks are hidden because no backer is vetted (winning record, positive ROI, real-size bet). Turn on the switch above to see them with caution labels."}</Text> : null}
             <Text>{betPicks.length ? betPicks.length + " picks from " + betRows.length + " open whale positions ($500+) in the next 12 hours, each shown like Top 20: what to buy on Kalshi in plain words, or the Polymarket bet if Kalshi has no contract. Live games stay here with a Live tag. Ranked strongest first." : "No open bets match these filters. Reset display filters to see all " + BET_LINES.length + " positions."}</Text>
             {betPicks.slice(0, lineLimit).map((p: Pick, i: number) => (<PickCard key={p.id} p={p} fun={false} poly={p.kalshi.status !== "ok"} bankroll={bankroll} now={now} rank={i + 1} followed={followed} hidden={hidden} toggle={toggle} />))}
             {betPicks.length > lineLimit ? <Button label={"Show more picks (" + (betPicks.length - lineLimit) + " left)"} onClick={() => setLineLimit(lineLimit + 20)} /> : null}
@@ -2564,7 +2629,7 @@ export default function App() {
               { label: "Upcoming tab", value: "Up to 30 unstarted games in the next 24 hours that $500+ proven whales have bet, any sport or market including player props, sorted by soonest start time, with backer quality as the tiebreak when start times match. Each card shows both teams, the PT date and start time with a countdown, the biggest whale bet (name and all-time rank), how many other whales are on the same bet and their money, the combined total, a split flag if whales are on the other side, and the backers' graded W-L and ROI. Strength rules still apply." },
               { label: "Biggest Bets tab", value: "Up to 30 open whale bets, ranked first by the backing whales' graded quality, then by the largest single $500+ position and total money on that side. Any sport or market type, including player props. Each card shows the biggest whale's bet size and all-time rank, how many other whales made the same bet, their money, the combined total, and the backers' graded W-L and ROI. Split markets are flagged. Strength rules still apply (under 45¢ never Go big, 95¢+ glue only, pricier-than-entry flag). Started and ended games are hidden. Duplicates with other tabs are expected." },
               { label: "Cappers tab", value: "One card per whale we have collected picks from, ranked by graded scanner record (5+ graded to lead; smaller samples labeled). Tap to see current live picks as PickCards and every tracked pick labeled HIT, MISSED, PUSH, or OPEN/LIVE. Records are stored in capper history, graded on refresh, and never wiped. The tab W-L is the sum of each capper's record (a shared pick can count more than once)." },
-              { label: "Whale-quality ranking", value: "Picks on Top 20, Fun, Polymarket, Player Props, Longshots, Biggest Bets, and Bets are ranked by price band first (existing 65–84¢ / mid / other bands; started and overpriced rules still apply), then by the backing whales' quality, then net money and agreement. Quality is each whale's win rate and ROI on Kalshi-copyable singles in the 10–94¢ bands. A whale needs 10+ graded copyable picks to get a non-neutral score; smaller samples shrink toward the average but are treated as neutral (not boosted). High-volume whales with ROI near zero or negative on those copyable bets are heavily demoted. Upcoming stays soonest-first, with quality as the tiebreak. Every card shows Backers W-L and ROI from those graded copyable records. Period P&L rule: whales whose Polymarket P&L is negative over the past month, past year or all time are Cold and demoted; past-week-only negative is Cooling (small penalty). Conviction: each backer's bet is compared with their usual (median) bet; High conviction (2x+ or a top-3 bet that day) weighs 1.5x, Throwaway (0.25x or less) weighs 0.1x in quality, net money and whale count. Cards list the top backers as e.g. 'name $587 = 3.1x usual · High conviction · Hot · Wk/Mo/Yr/All P&L'." },
+              { label: "Whale-quality ranking", value: "Vetting rule (Nov 14): a backer only counts if they have a winning graded record and positive copyable ROI on 10+ picks (5–9 allowed only at 60%+ wins and +10% ROI, labeled small sample), are not Cold, and bet real size ($500+, at least 0.5x their usual bet, not a throwaway). Negative-ROI, Cold, ungraded and small-bet backers add nothing to quality, net money or whale count, and are shown on cards as a red caution. Top 20, Fun, Polymarket, Player Props, Longshots, Biggest Bets, Hot Cappers and Bets (unless you switch on unvetted bets) only list picks with at least one vetted backer, and lists are not padded. The Hot boost only applies to positive-ROI whales. Picks on Top 20, Fun, Polymarket, Player Props, Longshots, Biggest Bets, and Bets are ranked by price band first (existing 65–84¢ / mid / other bands; started and overpriced rules still apply), then by the backing whales' quality, then net money and agreement. Quality is each whale's win rate and ROI on Kalshi-copyable singles in the 10–94¢ bands. A whale needs 10+ graded copyable picks to get a non-neutral score; smaller samples shrink toward the average but are treated as neutral (not boosted). High-volume whales with ROI near zero or negative on those copyable bets are heavily demoted. Upcoming stays soonest-first, with quality as the tiebreak. Every card shows Backers W-L and ROI from those graded copyable records. Period P&L rule: whales whose Polymarket P&L is negative over the past month, past year or all time are Cold and demoted; past-week-only negative is Cooling (small penalty). Conviction: each backer's bet is compared with their usual (median) bet; High conviction (2x+ or a top-3 bet that day) weighs 1.5x, Throwaway (0.25x or less) weighs 0.1x in quality, net money and whale count. Cards list the top backers as e.g. 'name $587 = 3.1x usual · High conviction · Hot · Wk/Mo/Yr/All P&L'." },
               { label: "Strength label", value: "Go big: 3+ top whales, or $10,000+ with opposing whale money under 15% (or none) — never on under-45¢, 95¢+, or Split (share under 65%). Spreads cap at Normal unless 3+ whales and share of 65% or more. Normal: exactly 2. Small: 1, or any capped pick. 95¢+ is labeled Small, glue leg only." },
               { label: "Signal score (picks)", value: "Consensus 25 · Capper record 25 · Money 15 · One-sided 15 · Golden 10 · Fresh money 10" },
               { label: "Evidence score (buys, bets)", value: "Recency 25 · Capper record 20 · Independent agreement within 60 min 20 · Kalshi quote 20 · Kalshi price at or below the capper's 10" },

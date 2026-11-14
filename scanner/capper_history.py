@@ -377,7 +377,7 @@ def apply_quality(caps):
                 c['coldDemoted'] = True
             elif badge == 'Cooling':
                 c['quality'] = -COOLING_PENALTY
-            elif badge == 'Hot' and n >= HOT_SMALL_MIN and (c.get('cw') or 0) > (c.get('cl') or 0) and (roi is None or roi > 0):
+            elif badge == 'Hot' and n >= HOT_SMALL_MIN and (c.get('cw') or 0) > (c.get('cl') or 0) and roi is not None and roi > 0:
                 c['hotBoost'] = HOT_SMALL_BOOST
                 c['quality'] = HOT_SMALL_BOOST
             continue
@@ -421,7 +421,7 @@ def apply_quality(caps):
                 c['hotBoost'] = HOT_PROVEN_BOOST
             elif n >= MIN_QUALITY_SAMPLE and roi is not None and roi > 0:
                 c['hotBoost'] = HOT_BOOST
-            elif n >= HOT_SMALL_MIN and (c.get('cw') or 0) > (c.get('cl') or 0):
+            elif n >= HOT_SMALL_MIN and (c.get('cw') or 0) > (c.get('cl') or 0) and roi is not None and roi > 0:
                 c['hotBoost'] = HOT_SMALL_BOOST
             c['quality'] = round(c['quality'] + c['hotBoost'], 2)
     return caps
@@ -431,7 +431,70 @@ def quality_map(store=None, traders=None, current_ids=None):
     caps = summarize(store, traders, current_ids)
     return {c['wallet']: c for c in caps}
 
+# ---- vetting (Noel, Nov 14): only winning, positive-ROI whales betting real size count toward any ranking ----
+VET_MIN_N = 10
+VET_SMALL_N = 5
+VET_SMALL_WR = 60.0
+VET_SMALL_ROI = 10.0
+VET_MIN_BET = 500.0
+VET_MIN_MULT = 0.5
+
+def vet_verdict(rec, cost):
+    """(counts, tier, why). tier 0 = vetted 10+ sample, 1 = vetted 5-9 clearly positive, 2 = does not count."""
+    rec = rec or {}
+    try:
+        cost = float(cost or 0)
+    except (TypeError, ValueError):
+        cost = 0.0
+    n = rec.get('cn') or 0
+    w, l = rec.get('cw') or 0, rec.get('cl') or 0
+    roi, wr = rec.get('croi'), rec.get('cwr')
+    why = ''
+    if not rec or n == 0:
+        why = 'ungraded'
+    elif rec.get('badge') == 'Cold' or rec.get('coldDemoted'):
+        why = 'cold'
+    elif roi is None or roi <= 0:
+        why = 'negative roi'
+    elif w <= l:
+        why = 'losing record'
+    elif n < VET_SMALL_N:
+        why = 'tiny sample'
+    elif n < VET_MIN_N and not ((wr or 0) >= VET_SMALL_WR and roi >= VET_SMALL_ROI):
+        why = 'small sample not clearly positive'
+    elif n >= VET_MIN_N and rec.get('demoted'):
+        why = 'low edge'
+    med = rec.get('medBet')
+    bet = ''
+    if conviction_of(rec, cost) == 'T':
+        bet = 'throwaway'
+    elif cost < VET_MIN_BET:
+        bet = 'small bet'
+    elif med and cost < VET_MIN_MULT * med:
+        bet = 'small bet'
+    if why or bet:
+        return False, 2, why or bet
+    return True, (0 if n >= VET_MIN_N else 1), ''
+
+def vetted_backers(backers, qmap):
+    out = []
+    for b in backers or []:
+        if not isinstance(b, dict):
+            continue
+        ok, _, _ = vet_verdict(qmap.get((b.get('wallet') or '').lower()), b.get('cost'))
+        if ok:
+            out.append(b)
+    return out
+
+def vet_tier(backers, qmap):
+    t = 2
+    for b in backers or []:
+        if isinstance(b, dict):
+            t = min(t, vet_verdict(qmap.get((b.get('wallet') or '').lower()), b.get('cost'))[1])
+    return t
+
 def backer_quality(backers, qmap):
+    backers = vetted_backers(backers, qmap)
     tw = 0.0
     tq = 0.0
     w = l = 0
@@ -455,7 +518,7 @@ def backer_quality(backers, qmap):
             r_num += (rec['crisked'] if cost <= 0 else wt) * rec['croi']
             r_den += rec['crisked'] if cost <= 0 else wt
     return {
-        'quality': round(tq / tw, 2) if tw else 0.0,
+        'quality': round(tq / tw, 2) if tw else -999.0,
         'w': w, 'l': l,
         'roi': round(r_num / r_den, 1) if r_den else None,
     }
@@ -607,10 +670,10 @@ def conviction_net(backers, opposing, qmap):
                 cost = 0.0
             s += cost * conv_factor(b.get('wallet'), cost, qmap)
         return s
-    return tot(backers) - tot(opposing)
+    return tot(vetted_backers(backers, qmap)) - tot(opposing)
 
 def conviction_count(backers, qmap):
-    return sum(0 if conviction_of(qmap.get((b.get('wallet') or '').lower()) or {}, b.get('cost')) == 'T' else 1 for b in backers or [])
+    return len(vetted_backers(backers, qmap))
 
 NEW_DAYS = 3
 
