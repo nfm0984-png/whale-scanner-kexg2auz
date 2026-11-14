@@ -893,6 +893,12 @@ def best_rank(s):
     return min((b.get('rankAll') or b.get('rank') or b.get('rank30') or 999) for b in s['backers']) if s['backers'] else 999
 try:
     import capper_history as _ch_rank
+    try:
+        import whale_windows as _ww
+        _ww_known = {w for r in (_ch_rank.load().get('picks') or {}).values() for w in (r.get('backers') or {})}
+        _ww.refresh(list(cappers.keys()) + sorted(_ww_known))
+    except Exception as _e:
+        print('whale_windows failed (using cached windows):', _e)
     _QMAP = _ch_rank.quality_map(_ch_rank.load())
 except Exception:
     _ch_rank = None
@@ -904,7 +910,13 @@ def backer_quality(s):
 # Price band first, then backing-whale quality, then net money, one-sided share, whale count.
 def rank_key(s):
     band = 0 if s.get('price_band') == 'best' else (1 if s.get('price_band') == 'mid' else 2)
-    return (band, -backer_quality(s), -(s.get('net') or 0), -(s.get('one_sided_share') or 0), -len(s['backers']), best_rank(s), -(s.get('score') or 0))
+    # Conviction (Noel, Nov 13): throwaway-size bets barely count toward net money / agreement; big bets are boosted.
+    if _QMAP and _ch_rank:
+        net = _ch_rank.conviction_net(s.get('backers') or [], s.get('opposing') or [], _QMAP)
+        cnt = _ch_rank.conviction_count(s.get('backers') or [], _QMAP)
+    else:
+        net, cnt = (s.get('net') or 0), len(s['backers'])
+    return (band, -backer_quality(s), -net, -(s.get('one_sided_share') or 0), -cnt, best_rank(s), -(s.get('score') or 0))
 for s in signals: annotate(s)
 signals.sort(key=rank_key)
 ONK = [s for s in signals if s['kalshi'].get('status') == 'ok']

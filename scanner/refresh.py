@@ -398,6 +398,11 @@ emb.setdefault('refreshes', []).append(dict(ts=NOW, espnGames=n_espn, kalshiChec
 json.dump(hist, open(HP, 'w'), indent=1)
 import capper_history as _ch
 _ch_store = _ch.update_store(emb, hist)
+try:
+    import whale_windows as _ww
+    _ww.refresh([w for r in _ch_store['picks'].values() for w in (r.get('backers') or {})])
+except Exception as _e:
+    print('whale_windows failed (using cached windows):', _e)
 emb['capperHistory'] = _ch.page_payload(emb, hist, _ch_store)
 json.dump(emb, open(os.path.join(HERE, 'page_embed.json'), 'w'), separators=(',', ':'))
 subprocess.run([sys.executable, os.path.join(HERE, 'compact.py')])

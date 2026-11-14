@@ -182,8 +182,10 @@ def current_ids_from_embed(emb):
             ids.add(str(cid) + ':' + side)
     return ids
 
-def summarize(store, traders=None, current_ids=None):
+def summarize(store, traders=None, current_ids=None, windows=None):
     current_ids = current_ids or set()
+    if windows is None:
+        windows = load_windows()
     caps = {}
     for pid, rec in (store.get('picks') or {}).items():
         backers = rec.get('backers') or {}
@@ -275,9 +277,14 @@ def summarize(store, traders=None, current_ids=None):
             p.get('startTs') or 10 ** 12,
             -(p.get('graded') or 0),
         ))
+        apply_conviction(c)
+        attach_windows(c, windows)
         out.append(c)
     apply_quality(out)
     def sort_key(c):
+        return (0 if c.get('proven') else (2 if c.get('coldDemoted') else 1), -(c.get('quality') or 0), -(c.get('cn') or 0),
+                -(c['wr'] or 0), -c['n'])
+    def _old_sort_key(c):
         if c['qualified']:
             band = 0
         elif c['n'] > 0:
@@ -343,12 +350,18 @@ def apply_quality(caps):
         roi = c.get('croi')
         c['priorWr'] = round(prior_wr, 1)
         c['priorRoi'] = round(prior_roi, 1)
+        badge = c.get('badge')
+        c['proven'] = False
         if n < MIN_QUALITY_SAMPLE or wr is None:
             c['quality'] = 0.0
             c['qQual'] = False
             c['demoted'] = False
             c['shrunkWr'] = None
             c['shrunkRoi'] = None
+            if badge == 'Cold':
+                c['quality'] = COLD_SMALL_PENALTY
+                c['demoted'] = True
+                c['coldDemoted'] = True
             continue
         swr = (n * wr + SHRINK_K * prior_wr) / (n + SHRINK_K)
         sroi = (n * roi + SHRINK_K * prior_roi) / (n + SHRINK_K) if roi is not None else prior_roi
@@ -365,6 +378,24 @@ def apply_quality(caps):
             c['quality'] = round((swr - prior_wr) + sroi, 2)
             c['qQual'] = True
             c['demoted'] = False
+        # Period P&L rule (Noel, Nov 13): Cold (past month or past year negative, or all-time negative) is demoted;
+        # Cooling (only past week negative) takes a small penalty.
+        if badge == 'Cold':
+            c['quality'] = round(min(c['quality'], 0) - COLD_PENALTY, 2)
+            c['demoted'] = True
+            c['coldDemoted'] = True
+        elif badge == 'Cooling':
+            c['quality'] = round(c['quality'] - COOLING_PENALTY, 2)
+        win = c.get('win') or {}
+        def pos(k):
+            v = (win.get(k) or {}).get('pnl')
+            return v is not None and v > 0
+        def neg(k):
+            v = (win.get(k) or {}).get('pnl')
+            return v is not None and v < 0
+        c['proven'] = bool(n >= MIN_QUALITY_SAMPLE and (c.get('cw') or 0) > (c.get('cl') or 0)
+                           and roi is not None and roi > 0 and pos('month') and pos('all')
+                           and not (neg('week') and neg('year')) and badge != 'Cold' and not c.get('demoted'))
     return caps
 
 def quality_map(store=None, traders=None, current_ids=None):
@@ -387,7 +418,7 @@ def backer_quality(backers, qmap):
                 cost = float(b.get('cost') or 0)
             except (TypeError, ValueError):
                 cost = 0.0
-        wt = cost if cost > 0 else 1.0
+        wt = (cost if cost > 0 else 1.0) * CONV_WEIGHT.get(conviction_of(rec, cost), 1.0)
         tw += wt
         tq += wt * float(rec.get('quality') or 0)
         w += rec.get('cw') or 0
@@ -400,6 +431,154 @@ def backer_quality(backers, qmap):
         'w': w, 'l': l,
         'roi': round(r_num / r_den, 1) if r_den else None,
     }
+
+
+# ---- period P&L windows (Polymarket Data API v2, cached by whale_windows.py) ----
+COLD_PENALTY = 40.0
+COLD_SMALL_PENALTY = -10.0
+COOLING_PENALTY = 5.0
+WINDOWS = ('week', 'month', 'year', 'all')
+
+def load_windows():
+    try:
+        return (json.load(open(os.path.join(HERE, 'whale_windows.json'))) or {}).get('wallets') or {}
+    except Exception:
+        return {}
+
+def badge_of(win):
+    vals = {k: (win.get(k) or {}).get('pnl') for k in WINDOWS}
+    if all(v is None for v in vals.values()):
+        return 'n/a'
+    if any(vals[k] is not None and vals[k] < 0 for k in ('month', 'year', 'all')):
+        return 'Cold'
+    if vals['week'] is not None and vals['week'] < 0:
+        return 'Cooling'
+    if all(v is not None and v > 0 for v in vals.values()):
+        return 'Hot'
+    return 'OK'
+
+def attach_windows(c, windows):
+    w = (windows or {}).get(c['wallet']) or {}
+    win = {}
+    for k in WINDOWS:
+        r = w.get(k)
+        if not r or r.get('pnl') is None:
+            continue
+        vol = r.get('vol')
+        win[k] = {'pnl': round(r['pnl']), 'roi': round(100.0 * r['pnl'] / vol, 1) if vol else None}
+    # our own graded record inside each window (graded time, falling back to start time)
+    now = time.time()
+    span = {'week': 7, 'month': 30, 'year': 365, 'all': 10 ** 6}
+    for k in WINDOWS:
+        ww = ll = 0
+        for p in c['picks']:
+            if p.get('result') not in ('W', 'L'):
+                continue
+            t = p.get('graded') or p.get('startTs') or 0
+            try:
+                t = float(t)
+            except (TypeError, ValueError):
+                t = 0
+            if k != 'all' and (not t or now - t > span[k] * 86400):
+                continue
+            if p['result'] == 'W':
+                ww += 1
+            else:
+                ll += 1
+        if ww or ll:
+            win.setdefault(k, {})['rec'] = [ww, ll]
+    c['win'] = win
+    c['winStale'] = w.get('stale') or []
+    if w.get('name') and (not c.get('name') or str(c.get('name')).startswith('0x')):
+        c['name'] = w['name']
+    c['badge'] = badge_of(win)
+
+# ---- conviction: big bets are the real ones ----
+CONV_HIGH_X = 2.0
+CONV_LOW_X = 0.25
+CONV_WEIGHT = {'H': 1.5, 'N': 1.0, 'T': 0.1}
+
+def _median(xs):
+    xs = sorted(xs)
+    if not xs:
+        return None
+    m = len(xs) // 2
+    return xs[m] if len(xs) % 2 else (xs[m - 1] + xs[m]) / 2.0
+
+def _day(p):
+    t = p.get('startTs')
+    try:
+        return dt.datetime.fromtimestamp(int(t), PT).strftime('%Y-%m-%d') if t else None
+    except Exception:
+        return None
+
+def conviction_of(rec, cost, top3=False):
+    med = (rec or {}).get('medBet')
+    try:
+        cost = float(cost or 0)
+    except (TypeError, ValueError):
+        cost = 0.0
+    if not med or cost <= 0:
+        return 'N'
+    mx = (rec or {}).get('maxBet') or 0
+    if cost >= CONV_HIGH_X * med or (top3 and cost >= med):
+        return 'H'
+    if cost <= CONV_LOW_X * med or (mx and cost <= 0.1 * mx):
+        return 'T'
+    return 'N'
+
+def apply_conviction(c):
+    costs = []
+    for p in c['picks']:
+        try:
+            v = float(p.get('cost') or 0)
+        except (TypeError, ValueError):
+            v = 0
+        if v > 0:
+            costs.append(v)
+    c['medBet'] = round(_median(costs), 2) if len(costs) >= 3 else None
+    c['maxBet'] = round(max(costs), 2) if costs else None
+    byday = {}
+    for p in c['picks']:
+        d = _day(p)
+        if d and (p.get('cost') or 0) > 0:
+            byday.setdefault(d, []).append(float(p['cost']))
+    tops = {d: sorted(v, reverse=True)[:3] for d, v in byday.items()}
+    buckets = {'H': [0, 0, 0.0, 0.0], 'N': [0, 0, 0.0, 0.0], 'T': [0, 0, 0.0, 0.0]}
+    for p in c['picks']:
+        cost = p.get('cost') or 0
+        d = _day(p)
+        top3 = bool(d and cost and len(byday.get(d, [])) >= 4 and float(cost) in tops.get(d, []))
+        tag = conviction_of(c, cost, top3)
+        p['conv'] = tag
+        p['mult'] = round(float(cost) / c['medBet'], 1) if c['medBet'] and cost else None
+        if p.get('result') in ('W', 'L'):
+            b = buckets[tag]
+            b[0 if p['result'] == 'W' else 1] += 1
+            if p.get('profit') is not None:
+                b[2] += p['profit']
+            if cost:
+                b[3] += float(cost)
+    c['convRec'] = {k: {'w': v[0], 'l': v[1], 'roi': round(100.0 * v[2] / v[3], 1) if v[3] else None} for k, v in buckets.items()}
+
+def conv_factor(wallet, cost, qmap):
+    return CONV_WEIGHT.get(conviction_of(qmap.get((wallet or '').lower()) or {}, cost), 1.0)
+
+def conviction_net(backers, opposing, qmap):
+    """Net money with throwaway bets nearly ignored and high-conviction bets boosted."""
+    def tot(xs):
+        s = 0.0
+        for b in xs or []:
+            try:
+                cost = float(b.get('cost') or 0)
+            except (TypeError, ValueError):
+                cost = 0.0
+            s += cost * conv_factor(b.get('wallet'), cost, qmap)
+        return s
+    return tot(backers) - tot(opposing)
+
+def conviction_count(backers, qmap):
+    return sum(0 if conviction_of(qmap.get((b.get('wallet') or '').lower()) or {}, b.get('cost')) == 'T' else 1 for b in backers or [])
 
 def page_payload(emb=None, hist=None, store=None):
     store = store or load()
