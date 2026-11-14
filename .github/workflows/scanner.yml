@@ -30,6 +30,8 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -49,14 +51,73 @@ jobs:
           fi
       - name: Commit new data
         if: github.event_name == 'workflow_dispatch'
-        run: |
-          git config user.name "whale-scanner-bot"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data.json scanner/history.json scanner/page_embed.json
-          git commit -q -m "${MODE} $(TZ=America/Los_Angeles date '+%a %b %-d %-I:%M %p PT')" || echo "no changes"
-          for i in 1 2 3; do git pull -q --rebase -X theirs origin main && git push -q origin HEAD:main && break; sleep 3; done
         env:
           MODE: ${{ inputs.mode }}
+        run: |
+          set -euo pipefail
+          git config user.name "whale-scanner-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Data/site outputs only. Never add .trigger_token or scanner/.orca_api_key.
+          outs=(data.json scanner/history.json scanner/page_embed.json scanner/capper_history.json)
+          save_outs() {
+            mkdir -p /tmp/scanner-out
+            for f in "${outs[@]}"; do
+              [ -f "$f" ] && cp -f "$f" "/tmp/scanner-out/$(basename "$f")"
+            done
+          }
+          restore_outs() {
+            [ -f /tmp/scanner-out/data.json ] && cp -f /tmp/scanner-out/data.json data.json
+            [ -f /tmp/scanner-out/history.json ] && cp -f /tmp/scanner-out/history.json scanner/history.json
+            [ -f /tmp/scanner-out/page_embed.json ] && cp -f /tmp/scanner-out/page_embed.json scanner/page_embed.json
+            [ -f /tmp/scanner-out/capper_history.json ] && cp -f /tmp/scanner-out/capper_history.json scanner/capper_history.json
+          }
+          commit_outs() {
+            git add -- "${outs[@]}"
+            if git diff --cached --quiet; then
+              echo "no changes to commit"
+              return 0
+            fi
+            git commit -m "${MODE} $(TZ=America/Los_Angeles date '+%a %b %-d %-I:%M %p PT')"
+          }
+
+          save_outs
+          commit_outs
+
+          # Leftover unstaged/untracked files (caches, generated line files) must not block rebase.
+          if ! git diff --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+            git stash push -u -m "scanner-uncommitted" || true
+          fi
+
+          pushed=0
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            if git rebase -X theirs origin/main && git push origin HEAD:main; then
+              pushed=1
+              break
+            fi
+            echo "rebase/push attempt $i failed, retrying"
+            git rebase --abort || true
+            sleep $((i * 3))
+          done
+
+          if [ "$pushed" -ne 1 ]; then
+            echo "rebase/push failed; resetting to origin/main and recommitting outputs"
+            git rebase --abort || true
+            git fetch origin main
+            git reset --hard origin/main
+            restore_outs
+            commit_outs
+            if git push origin HEAD:main; then
+              pushed=1
+            fi
+          fi
+
+          git stash pop || true
+          if [ "$pushed" -ne 1 ]; then
+            echo "ERROR: failed to push scan/refresh data to main after retries"
+            exit 1
+          fi
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

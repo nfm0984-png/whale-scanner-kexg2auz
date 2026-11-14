@@ -138,6 +138,22 @@
    "bets": 430,
    "buys": 48,
    "wallets": 200
+  },
+  {
+   "ts": 1794633488,
+   "signals": 0,
+   "fun": 12,
+   "poly": 31,
+   "glue": 0,
+   "props": 0,
+   "longshots": 0,
+   "biggest": 43,
+   "upcoming": 30,
+   "calls": 124,
+   "cappers": 20,
+   "bets": 134,
+   "buys": 4,
+   "wallets": 20
   }
  ],
  "picks": {
@@ -4895,7 +4911,8 @@
    "first_seen": 1794556304,
    "scans": 1,
    "first_score": 63,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0x5697078139353c712f83eb253c43eaef1db4b35c86caa243f5d14a6bdc0b295b:no": {
    "tier": "poly",
@@ -4914,7 +4931,8 @@
    "first_seen": 1794556304,
    "scans": 1,
    "first_score": 62,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0x51fcdf0a9ae9b9212290a3fc7c45cbc6070d15fa92f3c4be2b2da62c9398599b:yes": {
    "tier": "poly",
@@ -4972,7 +4990,8 @@
    "first_seen": 1794587229,
    "scans": 4,
    "first_score": 47,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0xa3467197947d863aa43b99d3bc7ba9f21b3b938cb7c891bf216883f2dd18723c:no": {
    "tier": "top",
@@ -4991,7 +5010,8 @@
    "first_seen": 1794587229,
    "scans": 4,
    "first_score": 36,
-   "result": null
+   "result": "L",
+   "graded": 1794633488
   },
   "0x2adf9914138f7313520ce509d6508fc887829ef9b9031ed47b5b5838ef1f76e1:no": {
    "tier": "top",
@@ -5010,7 +5030,8 @@
    "first_seen": 1794587229,
    "scans": 4,
    "first_score": 38,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0x7e03c6ca567bf7341a7700f086a37cecb9cf8cfe00df7089ce2dead3621ccde2:no": {
    "tier": "fun",
@@ -5029,7 +5050,8 @@
    "first_seen": 1794587229,
    "scans": 4,
    "first_score": 54,
-   "result": null
+   "result": "L",
+   "graded": 1794633488
   },
   "0x71d8dc47b0e07ed276d9aadc6aeb323d88ea03c882340b7e14ae81ab53a98c7b:yes": {
    "tier": "top",
@@ -5048,7 +5070,8 @@
    "first_seen": 1794587229,
    "scans": 2,
    "first_score": 53,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0xaacf4385774d51ee9f760bfca13e49dce8fb7a7f08b2a6ea2fcb9c666485cd45:no": {
    "tier": "fun",
@@ -5067,7 +5090,8 @@
    "first_seen": 1794587229,
    "scans": 4,
    "first_score": 63,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0xee33ac718f8b0d6021ed4ac41d52f82d49bf6d74b65313ae481a50b48cb8b6f0:no": {
    "tier": "top",
@@ -5144,7 +5168,8 @@
    "first_seen": 1794587229,
    "scans": 4,
    "first_score": 34,
-   "result": null
+   "result": "L",
+   "graded": 1794633488
   },
   "0x6f889ec6ff048a4a90213470b6c055e440f7841d722ce84f3ab57be3891a72fb:yes": {
    "tier": "top",
@@ -5202,7 +5227,8 @@
    "first_seen": 1794587229,
    "scans": 3,
    "first_score": 36,
-   "result": null
+   "result": "L",
+   "graded": 1794633488
   },
   "0x65e0678a32ad6ee64560f28eb141b54058cffede22abfb300c044e09e4370842:no": {
    "tier": "fun",
@@ -5259,7 +5285,8 @@
    "first_seen": 1794587229,
    "scans": 4,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0xb6069bb487027020d248865b8d2959c9a0b113f85c895f4f26787ec33604af9d:yes": {
    "tier": "top",
@@ -5278,7 +5305,8 @@
    "first_seen": 1794587229,
    "scans": 4,
    "first_score": 47,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0xa71aa3dead47ef73a5369286975b3ca30a4530a085a8219bb8fa3b5d36d10185:no": {
    "tier": "fun",
@@ -5317,7 +5345,8 @@
    "first_seen": 1794587229,
    "scans": 4,
    "first_score": 56,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0xed8abf7f78d531655c7be2fe9c2f6aa6785095fcfa7e128eb65e0974278a8336:no": {
    "tier": "fun",
@@ -5376,7 +5405,8 @@
    "first_seen": 1794587229,
    "scans": 3,
    "first_score": 40,
-   "result": null
+   "result": "L",
+   "graded": 1794633488
   },
   "0xb4492e6da71ddf5fd163b90fc6ca2d42f0885511ac7caf018b8166c9ce7fb433:yes": {
    "tier": "fun",
@@ -5415,7 +5445,8 @@
    "first_seen": 1794587229,
    "scans": 3,
    "first_score": 41,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0x4814503a715e3120c0e2955fcc7aa41008d44207dc8675cf1d096276d1cdee30:yes": {
    "tier": "poly",
@@ -5494,7 +5525,8 @@
    "first_seen": 1794587229,
    "scans": 4,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0x2f3579d97c8cabe4b8bc216c71db00a5b41208963e6f8bf3063e1c53bb824841:no": {
    "tier": "poly",
@@ -5553,7 +5585,8 @@
    "first_seen": 1794587229,
    "scans": 3,
    "first_score": 51,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0x9844feed0e062ac6b84fd556edec941088b58e5a5641f1d79cd94207097d9704:yes": {
    "tier": "poly",
@@ -5592,7 +5625,8 @@
    "first_seen": 1794587229,
    "scans": 3,
    "first_score": 55,
-   "result": null
+   "result": "L",
+   "graded": 1794633488
   },
   "0xf9426b42d6dd1132dd1ae2e27d818c0fe9dfc180cb5f8332588de71327a8b7c3:no": {
    "tier": "poly",
@@ -5650,7 +5684,8 @@
    "first_seen": 1794587229,
    "scans": 4,
    "first_score": 53,
-   "result": null
+   "result": "L",
+   "graded": 1794633488
   },
   "0xd103abdd5b6e77630df01612ebfe1b171a958face5a811cc6523a891150a1a8a:yes": {
    "tier": "poly",
@@ -5669,7 +5704,8 @@
    "first_seen": 1794587229,
    "scans": 4,
    "first_score": 41,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0x0549824ef22b461ac4fc159a056c8b22138a9c306071fc31262b4b0509b1c2f5:no": {
    "tier": "poly",
@@ -5728,7 +5764,8 @@
    "first_seen": 1794587229,
    "scans": 3,
    "first_score": 39,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0x669cdffab8c0ab5af11b248304744a4e7bce4523545d7e26d8026d0cc75b91d5:no": {
    "tier": "poly",
@@ -5785,7 +5822,8 @@
    "first_seen": 1794587532,
    "scans": 3,
    "first_score": 49,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0xf1cf6b5eca386089a41dc1a15e171dc6a98e590c88e747e6096e7a7e493f89db:no": {
    "tier": "fun",
@@ -5882,7 +5920,8 @@
    "first_seen": 1794587532,
    "scans": 1,
    "first_score": 36,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0xb379114340e1df612a0018da0c6a68f995dabbfe7b51f40cc23f7a7481acd8ef:no": {
    "tier": "top",
@@ -5921,7 +5960,8 @@
    "first_seen": 1794592933,
    "scans": 2,
    "first_score": 46,
-   "result": null
+   "result": "L",
+   "graded": 1794633488
   },
   "0x1360e0fe92b1eff1e59196db1461f0f4857bcd6e821eb941c38f23d88e2091e8:yes": {
    "tier": "top",
@@ -5940,7 +5980,8 @@
    "first_seen": 1794592933,
    "scans": 2,
    "first_score": 40,
-   "result": null
+   "result": "L",
+   "graded": 1794633488
   },
   "0x10b2dcbe27b6675ad83d4c0afca51934ab58520d5afebf0e3c71e62e11840e29:no": {
    "tier": "top",
@@ -5959,7 +6000,8 @@
    "first_seen": 1794592933,
    "scans": 2,
    "first_score": 57,
-   "result": null
+   "result": "L",
+   "graded": 1794633488
   },
   "0xcf769dd23f966f0c95f6c99b1b33026ecc5c3ac633e577f5f6d1f7b3b8e98b30:no": {
    "tier": "top",
@@ -6054,7 +6096,8 @@
    "first_seen": 1794592933,
    "scans": 1,
    "first_score": 37,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0x2d2dc06ce77d6ee74bec0c4b3ed6907f20a46650733807d2946db58e90fa8e30:no": {
    "tier": "top",
@@ -6113,7 +6156,8 @@
    "first_seen": 1794592933,
    "scans": 2,
    "first_score": 62,
-   "result": null
+   "result": "L",
+   "graded": 1794633488
   },
   "0x743b2d6ec53ea67e7ab35bc0747235d01f1c80d6cf2fba32d71a3a6f2c0f87f3:no": {
    "tier": "fun",
@@ -6197,7 +6241,8 @@
    "first_seen": 1794592933,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0xfe3a28bd208d8fb62f7264bb20bcff9cd689b9c54cda8599494fd27f57657a20:yes": {
    "tier": "fun",
@@ -6262,7 +6307,8 @@
    "first_seen": 1794592933,
    "scans": 2,
    "first_score": 13,
-   "result": null
+   "result": "L",
+   "graded": 1794633488
   },
   "0xc8cfc009e5ef7798f16727298e98712da56877f3c78d0bd1a69992c91371ef69:no": {
    "tier": "fun",
@@ -6475,7 +6521,8 @@
    "first_seen": 1794592933,
    "scans": 2,
    "first_score": 26,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0x34b943e0e102f73967ce12d39dcc689144d69a568ae860d956c8082f29e387f5:no": {
    "tier": "top",
@@ -6532,7 +6579,8 @@
    "first_seen": 1794610997,
    "scans": 1,
    "first_score": 63,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0x6cd1330980f778692947d0ef31f533b0375046b335c8845ca265c8c42d8db753:yes": {
    "tier": "top",
@@ -6589,7 +6637,8 @@
    "first_seen": 1794610997,
    "scans": 1,
    "first_score": 35,
-   "result": null
+   "result": "L",
+   "graded": 1794633488
   },
   "0x0e6ed2b5ccaeeb588fa2e35cd5ac32d2e9d086707ac47d1131c81215b82e1409:no": {
    "tier": "fun",
@@ -6669,7 +6718,8 @@
    "first_seen": 1794610997,
    "scans": 1,
    "first_score": 12,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0xc227cdb82590b0e7a46e396713b1a5c97a8c9c0b6145bea1febb689687ac4c1b:no": {
    "tier": "fun",
@@ -6681,12 +6731,12 @@
    "score": 41,
    "whales": 1,
    "invested": 5651,
-   "start": "2026-11-14 (time not supplied)",
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
    "kalshi": "BUY NO Over 57.5 points @ 57\u00a2",
    "kprice": 0.57,
-   "last_seen": 1794610997,
+   "last_seen": 1794633488,
    "first_seen": 1794610997,
-   "scans": 1,
+   "scans": 2,
    "first_score": 41,
    "result": null
   },
@@ -6726,7 +6776,8 @@
    "first_seen": 1794610997,
    "scans": 1,
    "first_score": 40,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0x22271923eb0edefc7b5a9e2b36e5336efd8bb03a3e3c1d4beb90988ff5f8128c:no": {
    "tier": "poly",
@@ -6840,7 +6891,8 @@
    "first_seen": 1794610997,
    "scans": 1,
    "first_score": 64,
-   "result": null
+   "result": "W",
+   "graded": 1794633488
   },
   "0xe2cee6330289997b7cbab283b62309abc617049a33704ac053c54194ce6080a1:no": {
    "tier": "poly",
@@ -6859,7 +6911,8 @@
    "first_seen": 1794610997,
    "scans": 1,
    "first_score": 23,
-   "result": null
+   "result": "L",
+   "graded": 1794633488
   },
   "0xe562dc9ecf0b6d3abbc224d68ddb9877e99a3be6fd2f7dd81868dbdd7787ec2e:no": {
    "tier": "poly",
@@ -6897,6 +6950,748 @@
    "first_seen": 1794610997,
    "scans": 1,
    "first_score": 26,
+   "result": "L",
+   "graded": 1794633488
+  },
+  "0x600c5ae80706dc7f9f95b94f08170e1c7694f55bfec9fcdf96cffaf3762a4d2f:no": {
+   "tier": "fun",
+   "q": "Will Kosovo win on 2026-11-14?",
+   "label": "Kosovo NOT TO WIN",
+   "slug": "unl-kvx-isr-2026-11-14-kvx",
+   "market_id": "6516777",
+   "side": "no",
+   "score": 28,
+   "whales": 1,
+   "invested": 1595,
+   "start": "Sat Nov 14 \u00b7 6:00 AM PT",
+   "kalshi": "BUY NO Kosovo @ 46\u00a2",
+   "kprice": 0.46,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 28,
+   "result": null
+  },
+  "0x556241e3987828bff0d62021b5bd76ecf968d5637c29953877dd7a92b96ce672:no": {
+   "tier": "fun",
+   "q": "Will Wales win on 2026-11-14?",
+   "label": "Wales NOT TO WIN",
+   "slug": "unl-nor-wal-2026-11-14-wal",
+   "market_id": "6516877",
+   "side": "no",
+   "score": 27,
+   "whales": 1,
+   "invested": 635,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "BUY NO Wales @ 93\u00a2",
+   "kprice": 0.93,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 27,
+   "result": null
+  },
+  "0x919c5bb27249eb8744d907e3060de2b2054e13543c73679493c09ea2126284a1:yes": {
+   "tier": "fun",
+   "q": "James Madison vs. UConn: O/U 55.5",
+   "label": "OVER",
+   "slug": "cfb-jmad-uconn-2026-11-14-total-55pt5",
+   "market_id": "6602932",
+   "side": "yes",
+   "score": 42,
+   "whales": 1,
+   "invested": 7974,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "BUY YES Over 55.5 points @ 53\u00a2",
+   "kprice": 0.53,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 42,
+   "result": null
+  },
+  "0xd05fb6353359de3e10e08d8a68a41cbbf69786682371237eae1279e7477a9871:no": {
+   "tier": "fun",
+   "q": "Cincinnati vs. Iowa State: O/U 61.5",
+   "label": "UNDER",
+   "slug": "cfb-cin-iowast-2026-11-14-total-61pt5",
+   "market_id": "6605116",
+   "side": "no",
+   "score": 39,
+   "whales": 1,
+   "invested": 3169,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "BUY NO Over 61.5 points @ 59\u00a2",
+   "kprice": 0.59,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 39,
+   "result": null
+  },
+  "0x1984bda2fabf7193ab2d64f56f0a991839c10b9322952fb3ff879baa9a1d3713:no": {
+   "tier": "fun",
+   "q": "Spread: Alabama (-16.5)",
+   "label": "Alabama +16.5 or better for the other side",
+   "slug": "cfb-ala-vand-2026-11-14-spread-away-16pt5",
+   "market_id": "6603481",
+   "side": "no",
+   "score": 38,
+   "whales": 1,
+   "invested": 2037,
+   "start": "2026-11-14",
+   "kalshi": "BUY NO Alabama wins by over 16.5 points @ 55\u00a2",
+   "kprice": 0.55,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 38,
+   "result": null
+  },
+  "0xf886d7210d201665b8932790037c0c3a594f2cefbcc2e465196ae3fd59d0182e:no": {
+   "tier": "fun",
+   "q": "Syracuse vs. NC State: O/U 55.5",
+   "label": "UNDER",
+   "slug": "cfb-syra-ncst-2026-11-14-total-55pt5",
+   "market_id": "6602615",
+   "side": "no",
+   "score": 37,
+   "whales": 1,
+   "invested": 1878,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "BUY NO Over 55.5 points @ 55\u00a2",
+   "kprice": 0.55,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 37,
+   "result": null
+  },
+  "0xfb6db6bdae40130fd8f20c694f38fc6b04e3cc40341c35775ed956fd17015dfe:no": {
+   "tier": "fun",
+   "q": "Wake Forest vs. SMU",
+   "label": "SMU",
+   "slug": "cfb-wake-smu-2026-11-14",
+   "market_id": "6602416",
+   "side": "no",
+   "score": 35,
+   "whales": 1,
+   "invested": 506,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "BUY YES SMU @ 52\u00a2",
+   "kprice": 0.52,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 35,
+   "result": null
+  },
+  "0xf2d9e94d6a7bb687707e61abf67d1d79f815d9681cde653a35a1e0989259bda7:no": {
+   "tier": "fun",
+   "q": "Wake Forest vs. SMU: O/U 59.5",
+   "label": "UNDER",
+   "slug": "cfb-wake-smu-2026-11-14-total-59pt5",
+   "market_id": "6602466",
+   "side": "no",
+   "score": 51,
+   "whales": 1,
+   "invested": 660,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "BUY NO Over 59.5 points @ 48\u00a2",
+   "kprice": 0.48,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 51,
+   "result": null
+  },
+  "0x5f30e05451a0dd5fe46f8c7b2da565cbbdb8921f1ef759907fe35c06f252ee45:yes": {
+   "tier": "fun",
+   "q": "Spread: Miami (FL) (-14.5)",
+   "label": "Miami (FL) -14.5",
+   "slug": "cfb-duke-mia-2026-11-14-spread-home-14pt5",
+   "market_id": "6602209",
+   "side": "yes",
+   "score": 51,
+   "whales": 1,
+   "invested": 540,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "BUY YES Miami (FL) wins by over 14.5 points @ 46\u00a2",
+   "kprice": 0.46,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 51,
+   "result": null
+  },
+  "0x7fd8a8e5e1170f8333b4fb7a6899186591319ebf9505164d2cafd4967323bc19:no": {
+   "tier": "fun",
+   "q": "Spread: Norway (-1.5)",
+   "label": "Norway +1.5 or better for the other side",
+   "slug": "unl-nor-wal-2026-11-14-spread-home-1pt5",
+   "market_id": "6517805",
+   "side": "no",
+   "score": 29,
+   "whales": 1,
+   "invested": 1931,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "BUY NO Wales wins by more than 1.5 goals @ 99\u00a2",
+   "kprice": 0.99,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 29,
+   "result": null
+  },
+  "0x2f0adf165c9d189a89944a079fa9b54837130b0f611ecaf67dc9f7e846b6c7af:no": {
+   "tier": "fun",
+   "q": "Syracuse vs. NC State",
+   "label": "NC State",
+   "slug": "cfb-syra-ncst-2026-11-14",
+   "market_id": "6602567",
+   "side": "no",
+   "score": 38,
+   "whales": 1,
+   "invested": 2165,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "BUY YES NC St. @ 44\u00a2",
+   "kprice": 0.44,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 38,
+   "result": null
+  },
+  "0x238f4971a7297bd79dd796f0d0dac34e5bc853939b0ee1c490b90115aca8fd03:no": {
+   "tier": "poly",
+   "q": "W50 Yokohama: Chia Yi Tsao vs Kyoka Okamura",
+   "label": "Kyoka Okamura",
+   "slug": "itf-tsao1-okamur1-2026-11-14",
+   "market_id": "7026525",
+   "side": "no",
+   "score": 37,
+   "whales": 1,
+   "invested": 778,
+   "start": "2026-11-14",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 37,
+   "result": null
+  },
+  "0x5ca264722b75907c559483b4099cec20e2e3aa14b31ab6caade2298c48d7becc:no": {
+   "tier": "poly",
+   "q": "Spread: Woking FC (-5.5)",
+   "label": "Woking FC +5.5 or better for the other side",
+   "slug": "enl-wok-fgr-2026-11-14-spread-home-5pt5",
+   "market_id": "6522901",
+   "side": "no",
+   "score": 30,
+   "whales": 1,
+   "invested": 2984,
+   "start": "Sat Nov 14 \u00b7 7:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 30,
+   "result": null
+  },
+  "0xfd2d30d822c88b410c790e0344059ed0b58d14b99e796072626a9d71a64bb0bf:no": {
+   "tier": "poly",
+   "q": "Wycombe Wanderers FC vs. Huddersfield Town AFC: O/U 8.5",
+   "label": "UNDER",
+   "slug": "el1-wyc-hud-2026-11-14-total-8pt5",
+   "market_id": "6513301",
+   "side": "no",
+   "score": 30,
+   "whales": 1,
+   "invested": 2713,
+   "start": "Sat Nov 14 \u00b7 7:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 30,
+   "result": null
+  },
+  "0x52f8dd88992b82b5279c712c8cf1772108ec4a3d4a1a12c57906ae6faeb23ba4:no": {
+   "tier": "poly",
+   "q": "Spread: Peterborough United FC (-5.5)",
+   "label": "Peterborough United FC +5.5 or better for the other side",
+   "slug": "el1-pet-oxf-2026-11-14-spread-home-5pt5",
+   "market_id": "6513755",
+   "side": "no",
+   "score": 29,
+   "whales": 1,
+   "invested": 2299,
+   "start": "Sat Nov 14 \u00b7 7:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 29,
+   "result": null
+  },
+  "0x5ede666d0bf6a50a8ceda9b7e40ba6864affc9d1a888b2c2e6ce01917046ea93:no": {
+   "tier": "poly",
+   "q": "Leicester City FC vs. Bradford City AFC: 1st Half O/U 4.5",
+   "label": "Bradford City AFC",
+   "slug": "el1-lei-bra-2026-11-14-first-half-total-4pt5",
+   "market_id": "6513450",
+   "side": "no",
+   "score": 28,
+   "whales": 1,
+   "invested": 1558,
+   "start": "Sat Nov 14 \u00b7 7:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 28,
+   "result": null
+  },
+  "0x9e34a965aff386e53ae5a9365407d7e991fe6bf576e378521fa9c5ee53998384:yes": {
+   "tier": "poly",
+   "q": "Will Tegevajaro Miyazaki win on 2026-11-14?",
+   "label": "Tegevajaro Miyazaki WIN",
+   "slug": "ja2-alb-teg-2026-11-14-teg",
+   "market_id": "6495411",
+   "side": "yes",
+   "score": 28,
+   "whales": 1,
+   "invested": 1261,
+   "start": "2026-11-14",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 28,
+   "result": null
+  },
+  "0xfe4f18a74ad6c3c196301041090846877a6878d6da07a74eca37400005661662:yes": {
+   "tier": "poly",
+   "q": "Petkim Spor vs. Turk Telekom",
+   "label": "Petkim Spor",
+   "slug": "bkbsl-pet-tur-2026-11-14",
+   "market_id": "6842926",
+   "side": "yes",
+   "score": 27,
+   "whales": 1,
+   "invested": 1103,
+   "start": "2026-11-14",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 27,
+   "result": null
+  },
+  "0x50a030db995b0d78332036dea1e1a61b9fab7452bda6c082bf31a857b936a76f:no": {
+   "tier": "poly",
+   "q": "Walsall FC vs. Barnet FC: Barnet FC O/U 5.5",
+   "label": "Barnet FC",
+   "slug": "el2-wal-bar-2026-11-14-team-total-away-5pt5",
+   "market_id": "6516173",
+   "side": "no",
+   "score": 27,
+   "whales": 1,
+   "invested": 1036,
+   "start": "Sat Nov 14 \u00b7 7:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 27,
+   "result": null
+  },
+  "0xd07e44f2ddc1fa5e68141c0bb5d37ad0fdf7c827ee1a264d6bc855c781676106:yes": {
+   "tier": "poly",
+   "q": "Carlisle United FC vs. Boston United FC: O/U 3.5",
+   "label": "OVER",
+   "slug": "enl-car-bos-2026-11-14-total-3pt5",
+   "market_id": "6522814",
+   "side": "yes",
+   "score": 27,
+   "whales": 1,
+   "invested": 919,
+   "start": "Sat Nov 14 \u00b7 7:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 27,
+   "result": null
+  },
+  "0xd775dfeef3a92a7f8bd9d4133a91942c377ad9403212980c247fced6b789e4c3:no": {
+   "tier": "poly",
+   "q": "Will Brazil win on 2026-11-14?",
+   "label": "Brazil NOT TO WIN",
+   "slug": "fif-jpn-bra-2026-11-14-bra",
+   "market_id": "6459996",
+   "side": "no",
+   "score": 27,
+   "whales": 1,
+   "invested": 807,
+   "start": "Sat Nov 14 \u00b7 2:15 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 27,
+   "result": null
+  },
+  "0x5c37f2a29e15d16c5868289dc409877bf4323c956083f435a6b7459538c2d18e:no": {
+   "tier": "poly",
+   "q": "Peterborough United FC vs. Oxford United FC: Oxford United FC O/U 4.5",
+   "label": "Oxford United FC",
+   "slug": "el1-pet-oxf-2026-11-14-team-total-away-4pt5",
+   "market_id": "6513783",
+   "side": "no",
+   "score": 27,
+   "whales": 1,
+   "invested": 758,
+   "start": "Sat Nov 14 \u00b7 7:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 27,
+   "result": null
+  },
+  "0x587e029d102b97850f3e84cead3065c054263ca8b8264c295b33628bbe23c873:no": {
+   "tier": "poly",
+   "q": "Leicester City FC vs. Bradford City AFC: O/U 8.5",
+   "label": "UNDER",
+   "slug": "el1-lei-bra-2026-11-14-total-8pt5",
+   "market_id": "6513443",
+   "side": "no",
+   "score": 27,
+   "whales": 1,
+   "invested": 693,
+   "start": "Sat Nov 14 \u00b7 7:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 27,
+   "result": null
+  },
+  "0x4799e2f74bdef9bc82d217084936ef01d84a443aee979dc54e3c4dd29f005159:no": {
+   "tier": "poly",
+   "q": "Norway vs. Wales: O/U 6.5",
+   "label": "UNDER",
+   "slug": "unl-nor-wal-2026-11-14-total-6pt5",
+   "market_id": "6517821",
+   "side": "no",
+   "score": 27,
+   "whales": 1,
+   "invested": 670,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 27,
+   "result": null
+  },
+  "0xa2f413155ddc83af4d1ccc546b0227566ee1c85251d10a57d0b16cab51a6bc56:no": {
+   "tier": "poly",
+   "q": "Spread: Georgia (-15.5)",
+   "label": "Georgia +15.5 or better for the other side",
+   "slug": "cfb-missr-ga-2026-11-14-spread-home-15pt5",
+   "market_id": "6884801",
+   "side": "no",
+   "score": 40,
+   "whales": 1,
+   "invested": 4638,
+   "start": "2026-11-14",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 40,
+   "result": null
+  },
+  "0x0636d3ae50c3b45664d04cc294778496ff6cc16f4a90003e1bf5c2fe718fe763:yes": {
+   "tier": "poly",
+   "q": "Utah State vs. San Diego State: O/U 41.5",
+   "label": "OVER",
+   "slug": "cfb-utahst-sdst-2026-11-14-total-41pt5",
+   "market_id": "6608959",
+   "side": "yes",
+   "score": 40,
+   "whales": 1,
+   "invested": 4078,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 40,
+   "result": null
+  },
+  "0x6d9d8d4324cd6007fd0f6b9da35ca6418938869a821d7852632026edad4ea910:no": {
+   "tier": "poly",
+   "q": "Spread: James Madison (-5.5)",
+   "label": "James Madison +5.5 or better for the other side",
+   "slug": "cfb-jmad-uconn-2026-11-14-spread-away-5pt5",
+   "market_id": "6602901",
+   "side": "no",
+   "score": 38,
+   "whales": 1,
+   "invested": 2448,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 38,
+   "result": null
+  },
+  "0x49af5887cc89c16c826291a2f4c088cca262b0307c21c16aaccbdac77bb9d92f:yes": {
+   "tier": "poly",
+   "q": "Wisconsin vs. Maryland: O/U 41.5",
+   "label": "OVER",
+   "slug": "cfb-wisc-mary-2026-11-14-total-41pt5",
+   "market_id": "6603089",
+   "side": "yes",
+   "score": 38,
+   "whales": 1,
+   "invested": 2174,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 38,
+   "result": null
+  },
+  "0xac051298b76835673680f962eab7f40148e67e69fa64256181e8edb977bfaa2e:no": {
+   "tier": "poly",
+   "q": "Spread: James Madison (-6.5)",
+   "label": "James Madison +6.5 or better for the other side",
+   "slug": "cfb-jmad-uconn-2026-11-14-spread-away-6pt5",
+   "market_id": "6602900",
+   "side": "no",
+   "score": 38,
+   "whales": 1,
+   "invested": 2123,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 38,
+   "result": null
+  },
+  "0x0099068195afb7de1ecc9ed141fdb9a91ef40564fc883d5fb7173bf5e0da1ad8:yes": {
+   "tier": "poly",
+   "q": "Spread: New Mexico (-14.5)",
+   "label": "New Mexico -14.5",
+   "slug": "cfb-unlv-nmx-2026-11-14-spread-home-14pt5",
+   "market_id": "6608632",
+   "side": "yes",
+   "score": 36,
+   "whales": 1,
+   "invested": 1290,
+   "start": "2026-11-14",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 36,
+   "result": null
+  },
+  "0xeea61e234a75b2b14fe4bcf4d8be03fbc85750e03228a5162fee3f11bb7acde3:yes": {
+   "tier": "poly",
+   "q": "Utah State vs. San Diego State: O/U 39.5",
+   "label": "OVER",
+   "slug": "cfb-utahst-sdst-2026-11-14-total-39pt5",
+   "market_id": "6608958",
+   "side": "yes",
+   "score": 35,
+   "whales": 1,
+   "invested": 718,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 35,
+   "result": null
+  },
+  "0xfafb7e9e8391e405c8bbc4f2a8d0ee06e628b6220df1a959d99afefeda61c1fe:no": {
+   "tier": "poly",
+   "q": "O/U 2.5 Rounds",
+   "label": "No",
+   "slug": "ufc-mac-bia1-2026-11-14-totals-2pt5",
+   "market_id": "6496584",
+   "side": "no",
+   "score": 58,
+   "whales": 1,
+   "invested": 7621,
+   "start": "2026-11-14",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 58,
+   "result": null
+  },
+  "0x28e757e159249b6b51c4b307a4aed00f55308a6ab43a60afce5089dfc53d766e:no": {
+   "tier": "poly",
+   "q": "Exact Score: Wigan Athletic FC 0 - 0 Barnsley FC?",
+   "label": "No",
+   "slug": "el1-wig-bar-2026-11-14-exact-score-0-0",
+   "market_id": "6512963",
+   "side": "no",
+   "score": 30,
+   "whales": 1,
+   "invested": 3133,
+   "start": "2026-11-14",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 30,
+   "result": null
+  },
+  "0x60a101a32d615a423b00ca9bd0e45123451c4ed5c42256af787d8e362e882034:no": {
+   "tier": "poly",
+   "q": "Norway vs. Wales: Norway O/U 4.5 Corners",
+   "label": "Wales",
+   "slug": "unl-nor-wal-2026-11-14-corners-team-home-4pt5",
+   "market_id": "6518385",
+   "side": "no",
+   "score": 37,
+   "whales": 1,
+   "invested": 2661,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 37,
+   "result": null
+  },
+  "0xb91d866c2ad4ca26303bd5b865967da8e81c7b25d325c6593e5826b29d1bd925:no": {
+   "tier": "poly",
+   "q": "Will RB \u014cmiya Ardija win on 2026-11-14?",
+   "label": "RB \u014cmiya Ardija NOT TO WIN",
+   "slug": "ja2-omi-mon-2026-11-14-omi",
+   "market_id": "6495497",
+   "side": "no",
+   "score": 29,
+   "whales": 1,
+   "invested": 2141,
+   "start": "2026-11-14",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 29,
+   "result": null
+  },
+  "0x3abe67ebee0a4b7f52809a0c58ddf07c74330c452d61b867e936ea071ed82bb0:no": {
+   "tier": "poly",
+   "q": "Spread: Ohio State (-13.5)",
+   "label": "Ohio State +13.5 or better for the other side",
+   "slug": "cfb-nw-ohiost-2026-11-14-spread-home-13pt5",
+   "market_id": "6602058",
+   "side": "no",
+   "score": 53,
+   "whales": 1,
+   "invested": 2000,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 53,
+   "result": null
+  },
+  "0xa27de53012b5e94606fe2b7a8e3e988034579745e329fef65b7a3fc2eb622376:no": {
+   "tier": "poly",
+   "q": "W75 Brisbane: Zhuoxuan Bai vs Carol Young Suh Lee",
+   "label": "Carol Young Suh Lee",
+   "slug": "itf-bai1-lee15-2026-11-14",
+   "market_id": "7011098",
+   "side": "no",
+   "score": 35,
+   "whales": 1,
+   "invested": 1346,
+   "start": "2026-11-14",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 35,
+   "result": null
+  },
+  "0x1406881479af291289fd02d2bc1ce4dfdc9ea351f35231a73bb59c04891c4a7c:no": {
+   "tier": "poly",
+   "q": "Japan vs. Brazil: Both Teams to Score",
+   "label": "Brazil",
+   "slug": "fif-jpn-bra-2026-11-14-btts",
+   "market_id": "6490453",
+   "side": "no",
+   "score": 27,
+   "whales": 1,
+   "invested": 631,
+   "start": "Sat Nov 14 \u00b7 2:15 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 27,
+   "result": null
+  },
+  "0x7b0357fe02398fd2f31cb1c4a47d92fbfb36c9406c18f2fdfe673c0bd50be255:yes": {
+   "tier": "poly",
+   "q": "Utah State vs. San Diego State: O/U 43.5",
+   "label": "OVER",
+   "slug": "cfb-utahst-sdst-2026-11-14-total-43pt5",
+   "market_id": "6608960",
+   "side": "yes",
+   "score": 35,
+   "whales": 1,
+   "invested": 511,
+   "start": "Sat Nov 14 \u00b7 9:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794633488,
+   "first_seen": 1794633488,
+   "scans": 1,
+   "first_score": 35,
    "result": null
   }
  }
