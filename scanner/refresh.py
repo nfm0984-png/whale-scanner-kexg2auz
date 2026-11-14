@@ -88,11 +88,18 @@ HP = os.path.join(HERE, 'history.json'); hist = json.load(open(HP)) if os.path.e
 n_espn = n_k = 0
 emb.setdefault('poly', [])
 emb.setdefault('glue', [])
-def pick_lists(): return emb['signals'] + emb['fun'] + emb['poly'] + emb['glue']
+emb.setdefault('props', [])
+emb.setdefault('longshots', [])
+emb.setdefault('biggest', [])
+def pick_lists(): return emb['signals'] + emb['fun'] + emb['poly'] + emb['glue'] + emb['props'] + emb['longshots'] + emb['biggest']
 def pick_tier(p):
+    if p in emb['longshots']: return 'longshots'
+    if p in emb['props']: return 'props'
     if p in emb['poly']: return 'poly'
     if p in emb['fun']: return 'fun'
     if p in emb['glue']: return 'glue'
+    if p in emb['signals']: return 'top'
+    if p in emb['biggest']: return 'biggest'
     return 'top'
 def has_started(p):
     r = p.get('refresh') or {}
@@ -136,16 +143,19 @@ for p in pick_lists():
     if r.get('final') in ('W', 'L') and not h.get('result'): h['result'] = r['final']; h['graded'] = NOW
     if r.get('ended'): h['ended'] = NOW; h['finalScore'] = r.get('score') or ''; h['active'] = False
 # Ended games: W/L already written to the journal above; drop from every list including Bets/Buys.
-# Started (live) games: drop from Top 20, Fun, Polymarket, and Glue; keep on Bets with a Live tag.
+# Started (live) games: drop from Top 20, Fun, Polymarket, Glue, Props, Longshots and Biggest Bets; keep on Bets with a Live tag.
 ENDED = {p['id'].rsplit(':', 1)[0] for p in pick_lists() if (p.get('refresh') or {}).get('ended')}
-before = (len(emb['signals']), len(emb['fun']), len(emb['poly']), len(emb.get('glue') or []), len(emb['bets']), len(emb['buys']))
+before = (len(emb['signals']), len(emb['fun']), len(emb['poly']), len(emb.get('glue') or []), len(emb.get('props') or []), len(emb.get('longshots') or []), len(emb.get('biggest') or []), len(emb['bets']), len(emb['buys']))
 emb['signals'] = [p for p in emb['signals'] if not has_started(p)]
 emb['fun'] = [p for p in emb['fun'] if not has_started(p)]
 emb['poly'] = [p for p in emb['poly'] if not has_started(p)]
 emb['glue'] = [p for p in emb['glue'] if not has_started(p)]
+emb['props'] = [p for p in emb['props'] if not has_started(p)]
+emb['longshots'] = [p for p in emb['longshots'] if not has_started(p)]
+emb['biggest'] = [p for p in emb['biggest'] if not has_started(p)]
 emb['bets'] = [b for b in emb['bets'] if b.get('cid') not in ENDED and (b.get('game') or {}).get('state') != 'post']
 emb['buys'] = [b for b in emb['buys'] if b.get('cid') not in ENDED and (b.get('game') or {}).get('state') != 'post']
-removed = [a - len(x) for a, x in zip(before, (emb['signals'], emb['fun'], emb['poly'], emb['glue'], emb['bets'], emb['buys']))]
+removed = [a - len(x) for a, x in zip(before, (emb['signals'], emb['fun'], emb['poly'], emb['glue'], emb['props'], emb['longshots'], emb['biggest'], emb['bets'], emb['buys']))]
 known = {h['id'] for h in emb.get('history', [])}
 for pid, hp in hist['picks'].items():
     if pid not in known and hp.get('ended'):
@@ -159,4 +169,4 @@ emb.setdefault('refreshes', []).append(dict(ts=NOW, espnGames=n_espn, kalshiChec
 json.dump(hist, open(HP, 'w'), indent=1)
 json.dump(emb, open(os.path.join(HERE, 'page_embed.json'), 'w'), separators=(',', ':'))
 subprocess.run([sys.executable, os.path.join(HERE, 'compact.py')])
-print(f"refreshed {pt(NOW)}: {len(emb['signals'])} top + {len(emb['fun'])} fun + {len(emb['poly'])} poly + {len(emb.get('glue') or [])} glue picks, ESPN games matched {n_espn}, Kalshi checks {n_k}, started/ended removed (top/fun/poly/glue/bets/buys) {removed}, OrcaLayer calls 0")
+print(f"refreshed {pt(NOW)}: {len(emb['signals'])} top + {len(emb['fun'])} fun + {len(emb['poly'])} poly + {len(emb.get('glue') or [])} glue + {len(emb.get('props') or [])} props + {len(emb.get('longshots') or [])} longshots + {len(emb.get('biggest') or [])} biggest, ESPN games matched {n_espn}, Kalshi checks {n_k}, started/ended removed (top/fun/poly/glue/props/longshots/biggest/bets/buys) {removed}, OrcaLayer calls 0")

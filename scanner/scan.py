@@ -830,6 +830,8 @@ for s in signals:
     if is_prop_sig(s):
         PROPS.append(s); _pl.add(s['id'])
 PROPS.sort(key=rank_key); LONGSHOTS.sort(key=rank_key)
+BIGGEST = [x for x in signals if x.get('backers') and not is_started(x)]
+BIGGEST.sort(key=lambda x: (-max((b.get('cost') or 0) for b in x['backers']), -(x.get('invested') or 0)))
 CONS, GLUE, FUN, _mk = [], [], [], set()
 for s in ONK:
     if is_started(s) or not s['backers'] or s['market_id'] in _mk or s['id'] in _pl or is_prop_sig(s): continue
@@ -871,11 +873,12 @@ for s in CONS[:3]:
 HP = os.path.join(HERE, 'history.json')
 hist = json.load(open(HP)) if os.path.exists(HP) else {'scans': [], 'picks': {}}
 cur_ids = set()
-for s in CONS[:20] + GLUE[:12] + FUN[:20] + POLY[:20] + PROPS[:20] + LONGSHOTS[:20]:
+for s in CONS[:20] + GLUE[:12] + FUN[:20] + POLY[:20] + PROPS[:20] + LONGSHOTS[:20] + [x for x in BIGGEST[:30] if x['id'] not in {c['id'] for c in CONS[:20] + GLUE[:12] + FUN[:20] + POLY[:20] + PROPS[:20] + LONGSHOTS[:20]}]:
     cur_ids.add(s['id']); p = hist['picks'].get(s['id'])
     k = s['kalshi']
     if s in LONGSHOTS: tier = 'longshots'
     elif s in PROPS: tier = 'props'
+    elif s in BIGGEST and s not in CONS and s not in GLUE and s not in FUN and s not in POLY: tier = 'biggest'
     elif s in POLY: tier = 'poly'
     elif s in FUN: tier = 'fun'
     elif s in GLUE: tier = 'glue'
@@ -895,7 +898,7 @@ for pid, p in hist['picks'].items():
         py = m.get('price_yes')
         if py is not None and py in (0, 1) or (py is not None and (py >= 0.99 or py <= 0.01)):
             won = (py >= 0.99) == (p['side'] == 'yes'); p['result'] = 'W' if won else 'L'; p['graded'] = NOW
-hist['scans'].append(dict(ts=NOW, signals=len(CONS), fun=len(FUN), poly=len(POLY), glue=len(GLUE), props=len(PROPS), longshots=len(LONGSHOTS), calls=CALLS['n'], cappers=len(cappers), bets=len(BETS), buys=len(BUYS), wallets=len(POS)))
+hist['scans'].append(dict(ts=NOW, signals=len(CONS), fun=len(FUN), poly=len(POLY), glue=len(GLUE), props=len(PROPS), longshots=len(LONGSHOTS), biggest=len(BIGGEST), calls=CALLS['n'], cappers=len(cappers), bets=len(BETS), buys=len(BUYS), wallets=len(POS)))
 hist['scans'] = hist['scans'][-50:]
 json.dump(hist, open(HP, 'w'), indent=1)
 # ---------- 12. Output ----------
@@ -934,7 +937,7 @@ def risks(s_):
     if s_.get('pricier') and s_.get('over_cents') is not None: r.append(f"Pricier: current price is {s_['over_cents']}¢ above the whales' average entry.")
     if (s_.get('game') or {}).get('src') != 'ESPN': r.append('Start time not confirmed by ESPN (' + (s_.get('game') or {}).get('src', 'unknown') + ').')
     return r
-for s_ in CONS + FUN + POLY + GLUE + PROPS + LONGSHOTS: s_['risks'] = risks(s_)
+for s_ in CONS + FUN + POLY + GLUE + PROPS + LONGSHOTS + BIGGEST: s_['risks'] = risks(s_)
 out = dict(scannedAt=pt(NOW), ts=NOW, secs=round(time.time() - T0), settings=dict(cappers=A.cappers, min=A.min, wallets=A.wallets, markets=A.markets, windowH=12),
     coverage=dict(cappers=len(cappers), qualified=sum(qualifies(c) for c in cappers.values()), golden=sum(golden(c) for c in cappers.values()),
                   marketsFound=found_markets, marketsInWindow=in_window, marketsScanned=min(30, len(ONK)), hedgedExcluded=two_sided, twoSidedExcluded=two_sided, lbAll=LB, lb30=LB, notOnKalshi=len(NOT_ON_KALSHI), picksOnKalshi=len(ONK), sideGroups=len(signals),
@@ -944,13 +947,14 @@ out = dict(scannedAt=pt(NOW), ts=NOW, secs=round(time.time() - T0), settings=dic
     signals=[slim(s) for s in CONS[:20]], totalSignals=len(CONS), fun=[slim(s) for s in FUN[:20]], totalFun=len(FUN),
     poly=[slim(s) for s in POLY[:20]], totalPoly=len(POLY), glue=[slim(s) for s in GLUE[:12]], totalGlue=len(GLUE),
     props=[slim(s) for s in PROPS[:20]], totalProps=len(PROPS), longshots=[slim(s) for s in LONGSHOTS[:20]], totalLongshots=len(LONGSHOTS),
+    biggest=[slim(s) for s in BIGGEST[:30]], totalBiggest=len(BIGGEST),
     bets=BETS[:220], buys=BUYS[:160], traders=TRADERS,
     history=sorted([dict(id=k, **{kk: v[kk] for kk in ('tier', 'q', 'label', 'score', 'whales', 'invested', 'start', 'kalshi', 'kprice', 'first_seen', 'last_seen', 'scans', 'result', 'graded') if kk in v},
                          active=k in cur_ids) for k, v in hist['picks'].items()], key=lambda x: -x['last_seen'])[:80],
     scans=hist['scans'][-20:])
 json.dump(out, open(os.path.join(HERE, 'page_data.json'), 'w'), separators=(',', ':'))
-print(f"consensus={len(CONS)} fun={len(FUN)} poly={len(POLY)} glue={len(GLUE)} props={len(PROPS)} longshots={len(LONGSHOTS)} all={len(signals)} groups={len(signals)} onKalshi={len(ONK)} offKalshi={len(OFFK)} cappers={len(cappers)} orca_calls={CALLS['n']} errors={len(CALLS['errors'])} secs={out['secs']} kalshi_ok={out['coverage']['kalshiMatched']}")
-for s in CONS[:8] + GLUE[:2] + FUN[:3] + POLY[:3] + PROPS[:3] + LONGSHOTS[:3]: print(len(s['backers']), s['net'], s.get('one_sided_share'), s.get('price_band'), s.get('strength'), s['question'], '|', s['label'], '|', s['invested'], '|', s['kalshi'].get('action'), s['kalshi'].get('contract'), s['kalshi'].get('price'), 'longshot' if s in LONGSHOTS else ('prop' if s in PROPS else ('poly' if s in POLY else ('glue' if s in GLUE else ('fun' if s in FUN else 'top')))))
+print(f"consensus={len(CONS)} fun={len(FUN)} poly={len(POLY)} glue={len(GLUE)} props={len(PROPS)} longshots={len(LONGSHOTS)} biggest={len(BIGGEST)} all={len(signals)} groups={len(signals)} onKalshi={len(ONK)} offKalshi={len(OFFK)} cappers={len(cappers)} orca_calls={CALLS['n']} errors={len(CALLS['errors'])} secs={out['secs']} kalshi_ok={out['coverage']['kalshiMatched']}")
+for s in CONS[:8] + GLUE[:2] + FUN[:3] + POLY[:3] + PROPS[:3] + LONGSHOTS[:3] + BIGGEST[:3]: print(len(s['backers']), s['net'], s.get('one_sided_share'), s.get('price_band'), s.get('strength'), s['question'], '|', s['label'], '|', s['invested'], '|', s['kalshi'].get('action'), s['kalshi'].get('contract'), s['kalshi'].get('price'), 'biggest' if s in BIGGEST and s not in CONS and s not in FUN and s not in POLY and s not in PROPS and s not in LONGSHOTS and s not in GLUE else ('longshot' if s in LONGSHOTS else ('prop' if s in PROPS else ('poly' if s in POLY else ('glue' if s in GLUE else ('fun' if s in FUN else 'top'))))))
 # ---------- 13. Page embed (wallets kept for Polymarket profile links) ----------
 for b_ in BETS: b_.pop('_info', None)
 emb = json.loads(json.dumps(out))

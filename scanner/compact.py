@@ -20,7 +20,7 @@ tr = [[t.get(f) if not isinstance(t.get(f), float) else round(t[f], 2) for f in 
 d['buysC'] = {'f': BF, 'r': buys}; d['betsC'] = {'f': TF, 'r': bets}; d['tradersC'] = {'f': RF, 'r': tr}
 d['partNames'] = list((d['buys'] or d['bets'] or [{'parts': {}}])[0]['parts'].keys())
 del d['buys'], d['bets'], d['traders']
-for s in d['signals'] + d['fun'] + (d.get('poly') or []) + (d.get('glue') or []) + (d.get('props') or []) + (d.get('longshots') or []): s['kalshi'].pop('url', None); s['kalshi'].pop('occ', None)
+for s in d['signals'] + d['fun'] + (d.get('poly') or []) + (d.get('glue') or []) + (d.get('props') or []) + (d.get('longshots') or []) + (d.get('biggest') or []): s['kalshi'].pop('url', None); s['kalshi'].pop('occ', None)
 line = 'const DATA: ScanData = ' + json.dumps(d, separators=(',', ':'), ensure_ascii=False) + ';'
 open(os.path.join(HERE, 'page_data_line.txt'), 'w').write(line)
 json.dump(d, open(os.path.join(HERE, '..', 'data.json'), 'w'), separators=(',', ':'), ensure_ascii=False)
