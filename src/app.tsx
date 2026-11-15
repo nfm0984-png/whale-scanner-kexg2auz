@@ -106,6 +106,69 @@ function highConvictionBet(wallet: string | null | undefined, cost: number | nul
 function pickHasComboConviction(p: Pick, backers?: Backer[]): boolean {
   return (backers || p.backers || []).some((b: Backer) => highRoiBacker(b.wallet, p.id) && highConvictionBet(b.wallet, b.cost, p.id));
 }
+const GOOD_LO = 0.45, GOOD_HI = 0.92;
+function sportRecFor(wallet: string | null | undefined, league?: string | null, pid?: string): { sport: string; sr: { w: number; l: number; n: number; roi: number | null } } | null {
+  const rec = QMAP[(wallet || "").toLowerCase()];
+  if (!rec) return null;
+  const lg = (league || (pid && PID_LEAGUE[pid]) || "").toString();
+  if (!lg) return null;
+  const sport = sportOf(lg);
+  const sr = rec.sports ? rec.sports[sport] : undefined;
+  if (!sr) return null;
+  return { sport, sr };
+}
+// Same bars as Proven Picks: GOOD = elite + sport ROI, $500+ and about 1x usual, winning sport record, Kalshi 45-92¢.
+// OK = a real-size elite sport-ROI bet that misses one of those bars (price, size under 1x, thin sport record).
+// CAUTION = small/throwaway bet or no Kalshi market. "" = no elite sport-ROI backer.
+function pickVerdictOf(p: Pick, backers?: Backer[]): { verdict: "GOOD" | "OK" | "CAUTION" | ""; why: string[] } {
+  const bs = backers && backers.length ? backers : (p.backers || []);
+  const k = p.kalshi;
+  const hasK = !!(k && k.status === "ok" && k.price != null && (k.ticker || k.contract || k.action));
+  const kp = hasK && k.price != null ? k.price : null;
+  let anyEliteBar = false, anyReal = false, anyGood = false;
+  const okWhy: string[] = [];
+  bs.forEach((b: Backer) => {
+    const w = (b.wallet || "").toLowerCase();
+    if (!ELITE_W[w]) return;
+    const rec = QMAP[w];
+    if (!rec || rec.croi == null || rec.croi < OVERALL_ROI_FLOOR) return;
+    const info = sportRecFor(w, p.league, p.id);
+    const bar = !!(info && info.sr.n >= SPORT_BAR_N && info.sr.roi != null && info.sr.roi >= SPORT_BAR_ROI);
+    if (!bar) return;
+    anyEliteBar = true;
+    const cost = b.cost || 0;
+    const cv = convOf(w, cost, p.id);
+    const small = cost < COMBO_MIN_BET || (cv.mult != null && cv.mult < 0.5) || cv.tag === "T";
+    if (small) return;
+    anyReal = true;
+    const winning = !!(info && info.sr.w > info.sr.l);
+    const sizeOk = cv.mult == null || cv.mult >= 1;
+    if (sizeOk && cost >= COMBO_MIN_BET && winning && kp != null && kp >= GOOD_LO && kp <= GOOD_HI) anyGood = true;
+    else {
+      if (cv.mult != null && cv.mult < 1) okWhy.push(cv.mult + "x usual (under 1x)");
+      if (!winning) okWhy.push("thin record in " + ((info && info.sport) || "this sport"));
+      if (kp != null && !(kp >= GOOD_LO && kp <= GOOD_HI)) okWhy.push("Kalshi " + Math.round(kp * 100) + "¢ outside 45-92¢");
+    }
+  });
+  if (!hasK) return anyEliteBar || anyReal ? { verdict: "CAUTION", why: ["no Kalshi market"] } : { verdict: "", why: [] };
+  if (!anyEliteBar) return { verdict: "", why: [] };
+  if (!anyReal) return { verdict: "CAUTION", why: ["small bet"] };
+  if (anyGood) return { verdict: "GOOD", why: [] };
+  const seen: Record<string, boolean> = {};
+  return { verdict: "OK", why: okWhy.filter((r: string) => { if (seen[r]) return false; seen[r] = true; return true; }) };
+}
+function isGoodOrOk(p: Pick, backers?: Backer[]): boolean {
+  const v = pickVerdictOf(p, backers).verdict;
+  return v === "GOOD" || v === "OK";
+}
+function verdictRank(p: Pick, backers?: Backer[]): number {
+  const v = pickVerdictOf(p, backers).verdict;
+  return v === "GOOD" ? 0 : v === "OK" ? 1 : 2;
+}
+function VerdictChip(props: { verdict: string }) {
+  if (props.verdict !== "GOOD" && props.verdict !== "OK") return null;
+  return <Chip bg={props.verdict === "GOOD" ? GREEN : AMBER} color="#FFFFFF">{props.verdict}</Chip>;
+}
 function propSizeOk(p: Pick, backers?: Backer[]): boolean {
   return (backers || p.backers || []).some((b: Backer) => {
     if (!highRoiBacker(b.wallet, p.id)) return false;
@@ -1485,6 +1548,23 @@ function takeSortedPicks(pool: Pick[], sort: string, limit: number, backersOf: (
   const best = sortPicksBy(pool, "best", backersOf, now).slice(0, limit);
   return sort === "worst" ? sortPicksBy(best, "worst", backersOf, now) : best;
 }
+function sortTopBy(arr: Pick[], sort: string, backersOf: (p: Pick) => Backer[], now: number): Pick[] {
+  return arr.slice().sort((a: Pick, b: Pick) => {
+    const ad = pickIsDone(a, now) ? 1 : 0, bd = pickIsDone(b, now) ? 1 : 0;
+    if (ad !== bd) return ad - bd;
+    if (sort === "start") return (a.startTs || 9e12) - (b.startTs || 9e12) || verdictRank(a, backersOf(a)) - verdictRank(b, backersOf(b)) || pickQualityScore(b, backersOf(b)) - pickQualityScore(a, backersOf(a));
+    if (sort === "size") return pickBetSize(b, backersOf(b)) - pickBetSize(a, backersOf(a)) || verdictRank(a, backersOf(a)) - verdictRank(b, backersOf(b)) || pickQualityScore(b, backersOf(b)) - pickQualityScore(a, backersOf(a));
+    const vr = verdictRank(a, backersOf(a)) - verdictRank(b, backersOf(b));
+    if (vr) return sort === "worst" ? -vr : vr;
+    const d = pickQualityScore(b, backersOf(b)) - pickQualityScore(a, backersOf(a));
+    return sort === "worst" ? -d : d;
+  });
+}
+function takeSortedTop(pool: Pick[], sort: string, limit: number, backersOf: (p: Pick) => Backer[], now: number): Pick[] {
+  if (sort === "start" || sort === "size") return sortTopBy(pool, sort, backersOf, now).slice(0, limit);
+  const best = sortTopBy(pool, "best", backersOf, now).slice(0, limit);
+  return sort === "worst" ? sortTopBy(best, "worst", backersOf, now) : best;
+}
 function sortProvenBy(arr: ProvenRow[], sort: string, now: number): ProvenRow[] {
   return arr.slice().sort((a: ProvenRow, b: ProvenRow) => {
     const ad = (a.startTs && a.startTs <= now) ? 1 : 0, bd = (b.startTs && b.startTs <= now) ? 1 : 0;
@@ -1537,7 +1617,7 @@ function CapperSportList(props: { backers: { wallet?: string | null; cost?: numb
   );
 }
 function pickMergeKey(p: Pick): string {
-  if (p.kalshi && p.kalshi.status === "ok" && p.kalshi.ticker && (p.kalshi.action || p.label)) return ("k|" + p.kalshi.ticker + "|" + (p.kalshi.action || "") + "|" + (p.label || "")).toLowerCase();
+  if (p.kalshi && p.kalshi.status === "ok" && p.kalshi.ticker && (p.kalshi.action || p.label)) return ("k|" + p.kalshi.ticker + "|" + (p.kalshi.action || "")).toLowerCase();
   return "p|" + pickCatalogKey(p.q, p.label);
 }
 function mergePickPair(a: Pick, b: Pick): Pick {
@@ -1917,21 +1997,24 @@ function ComboCard(props: { a: Pick; b: Pick; rank: number; bankroll: number; no
   const payout = combined > 0 ? stake / combined : 0;
   const exA = explainPick(a), exB = explainPick(b);
   const nA = countedBackers(a.backers, a.id).length, nB = countedBackers(b.backers, b.id).length;
+  const vA = pickVerdictOf(a).verdict, vB = pickVerdictOf(b).verdict;
+  const grade = (vA === "GOOD" && vB === "GOOD") ? "GOOD + GOOD" : (vA === "GOOD" || vB === "GOOD") ? "GOOD + OK" : "OK + OK";
   return (
     <CardShell accent={"linear-gradient(90deg, " + GREEN + ", " + BRAND + ")"}>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
         <Chip bg={GREEN} color="#FFFFFF">Combo #{rank}</Chip>
         <Chip bg={GREEN} color="#FFFFFF">{"Pays " + (combined > 0 ? (Math.round((1 / combined) * 10) / 10) : 0) + "x"}</Chip>
         <Chip bg={t.bg.subtle} color={t.text.primary}>{cents(combined)} combined</Chip>
+        <Chip bg={grade === "GOOD + GOOD" ? GREEN : AMBER} color="#FFFFFF">{grade}</Chip>
         <Chip bg={t.bg.subtle} color={t.text.secondary}>2 legs · 1% stake</Chip>
       </div>
       <div style={{ marginTop: 10, fontSize: 16, lineHeight: "22px", fontWeight: 800, display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
-        <span style={{ display: "inline-flex", gap: 6, alignItems: "center" }}>{exA.headline}<CapperCountBadge count={nA} open={openLeg === "a"} onToggle={() => setOpenLeg(openLeg === "a" ? "" : "a")} /></span>
+        <span style={{ display: "inline-flex", gap: 6, alignItems: "center" }}><VerdictChip verdict={vA} />{exA.headline}<CapperCountBadge count={nA} open={openLeg === "a"} onToggle={() => setOpenLeg(openLeg === "a" ? "" : "a")} /></span>
         <span style={{ color: t.text.tertiary, fontWeight: 600 }}>and</span>
-        <span style={{ display: "inline-flex", gap: 6, alignItems: "center" }}>{exB.headline}<CapperCountBadge count={nB} open={openLeg === "b"} onToggle={() => setOpenLeg(openLeg === "b" ? "" : "b")} /></span>
+        <span style={{ display: "inline-flex", gap: 6, alignItems: "center" }}><VerdictChip verdict={vB} />{exB.headline}<CapperCountBadge count={nB} open={openLeg === "b"} onToggle={() => setOpenLeg(openLeg === "b" ? "" : "b")} /></span>
       </div>
       <div style={{ fontSize: 14, lineHeight: "20px", color: t.text.primary, marginTop: 8 }}>
-        A {money(stake)} combo pays about {money(Math.round(payout) === payout ? payout : Math.round(payout * 100) / 100)} if both hit ({combined > 0 ? (Math.round((1 / combined) * 10) / 10) + "x" : ""} at {cents(combined)} combined). Ranked by quality score × payout. Each game, team and leg is used once on this list.
+        A {money(stake)} combo pays about {money(Math.round(payout) === payout ? payout : Math.round(payout * 100) / 100)} if both hit ({combined > 0 ? (Math.round((1 / combined) * 10) / 10) + "x" : ""} at {cents(combined)} combined). All-GOOD tickets first, then GOOD+OK, then OK+OK, ranked by quality score × payout. Each game, team and leg is used once on this list.
       </div>
       {openLeg === "a" ? <CapperSportList backers={countedBackers(a.backers, a.id)} pid={a.id} /> : null}
       {openLeg === "b" ? <CapperSportList backers={countedBackers(b.backers, b.id)} pid={b.id} /> : null}
@@ -1943,10 +2026,10 @@ function ComboCard(props: { a: Pick; b: Pick; rank: number; bankroll: number; no
         <span> at {cents(pb)}</span>
       </div>
       <div style={{ marginTop: 8 }}>
-        <div style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary, letterSpacing: "0.06em" }}>LEG 1 · HOW IT LOOKS ON KALSHI</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary, letterSpacing: "0.06em", display: "flex", gap: 8, alignItems: "center" }}>LEG 1 · HOW IT LOOKS ON KALSHI <VerdictChip verdict={vA} /></div>
         <ActionBtn ex={exA} compact={true} />
         {a.kalshi && a.kalshi.ticker ? <div style={{ fontSize: 12, lineHeight: "16px", color: t.text.tertiary, marginTop: 2, fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" }}>{a.kalshi.ticker}</div> : null}
-        <div style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary, letterSpacing: "0.06em", marginTop: 10 }}>LEG 2 · HOW IT LOOKS ON KALSHI</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary, letterSpacing: "0.06em", marginTop: 10, display: "flex", gap: 8, alignItems: "center" }}>LEG 2 · HOW IT LOOKS ON KALSHI <VerdictChip verdict={vB} /></div>
         <ActionBtn ex={exB} compact={true} />
         {b.kalshi && b.kalshi.ticker ? <div style={{ fontSize: 12, lineHeight: "16px", color: t.text.tertiary, marginTop: 2, fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" }}>{b.kalshi.ticker}</div> : null}
       </div>
@@ -1979,10 +2062,15 @@ function nearFair(p: Pick): boolean {
   if (over != null && over > 2) return false;
   return true;
 }
+function comboGrade(a: Pick, b: Pick): number {
+  const ga = pickVerdictOf(a).verdict === "GOOD" ? 1 : 0;
+  const gb = pickVerdictOf(b).verdict === "GOOD" ? 1 : 0;
+  return 2 - (ga + gb);
+}
 function buildCombos(legs: Pick[], limit: number = 12): [Pick, Pick][] {
   const pool = legs.filter((p: Pick) => {
     const px = usedPrice(p);
-    return px != null && px >= 0.45 && px < 0.90;
+    return px != null && px > 0;
   });
   type Pair = { a: Pick; b: Pick; pay: number; score: number };
   const pairs: Pair[] = [];
@@ -1997,7 +2085,7 @@ function buildCombos(legs: Pick[], limit: number = 12): [Pick, Pick][] {
     }
   }
   const provenN = (pr: Pair) => (pr.a.fromProven ? 1 : 0) + (pr.b.fromProven ? 1 : 0);
-  pairs.sort((x: Pair, y: Pair) => provenN(y) - provenN(x) || y.score - x.score || y.pay - x.pay);
+  pairs.sort((x: Pair, y: Pair) => comboGrade(x.a, x.b) - comboGrade(y.a, y.b) || y.score - x.score || provenN(y) - provenN(x) || y.pay - x.pay);
   const usedId: Record<string, boolean> = {}, usedGame: Record<string, boolean> = {}, usedTeam: Record<string, boolean> = {};
   const out: [Pick, Pick][] = [];
   for (let n = 0; n < pairs.length && out.length < limit; n++) {
@@ -2482,6 +2570,7 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; longshot?: boo
     <CardShell accent={upcoming ? ("linear-gradient(90deg, " + BRAND2 + ", " + GREEN + ")") : biggest ? ("linear-gradient(90deg, " + GREEN + ", " + AMBER + ")") : longshot ? ("linear-gradient(90deg, " + AMBER + ", " + RED + ")") : fun ? ("linear-gradient(90deg, " + AMBER + ", #F472B6)") : ("linear-gradient(90deg, " + BRAND + ", " + BRAND2 + ")")}>
         <div data-card-league={p.league} data-pick-card="1" style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
           <ScoreChip rank={rank} score={qScore} />
+          <VerdictChip verdict={pickVerdictOf(p, backers).verdict} />
           <CapperCountBadge count={countedBackers(backers, p.id).length} open={openCaps} onToggle={() => setOpenCaps(!openCaps)} />
           <StrengthChip word={word} />
           {info.glue ? <Chip bg={AMBER} color="#FFFFFF">Small, glue leg only</Chip> : null}
@@ -2737,8 +2826,18 @@ export default function App() {
   const bySport = (arr: Pick[]): Pick[] => sportFilter ? arr.filter((p: Pick) => p.league === sportFilter) : arr;
   const vb = (p: Pick): Backer[] => visibleBackers(p);
   const notHedged = (p: Pick): boolean => !pickHasCapperHedge(p);
-  const topPool = rankPicks(uniqueMergedPicks((DATA.signals || []).concat(DATA.fun || [])).filter((p: Pick) => topEligible(p, visibleBackers(p).length, now) && visibleBackers(p).length >= minW && followOk(p) && vetted(p, visibleBackers(p)) && pickHasHighRoiBacker(p, visibleBackers(p)) && notHedged(p) && !isEliteSplitGame(p.slug)));
-  const topAll = sortPicksBy(topPool.slice(0, 20), sortOf("top"), vb, now);
+  const provenRows: ProvenRow[] = sortProvenBy(mergeProvenRows(((PROVEN && PROVEN.picks) || []).filter((r: ProvenRow) => (!r.startTs || r.startTs > now) && !r.hedged && !isEliteSplitGame(r.slug))), sortOf("proven"), now);
+  const provenComboPicks: Pick[] = provenRows.map((r: ProvenRow) => provenToPick(r)).filter((p: Pick | null): p is Pick => !!p);
+  // GOOD first; fill remaining slots with the best OK Kalshi legs. Never CAUTION, no-Kalshi, hedges, or elite-split games.
+  const topCandidates = uniqueMergedPicks((DATA.signals || []).concat(DATA.fun || []).concat(DATA.biggest || []).concat(DATA.upcoming || []).concat(provenComboPicks)).filter((p: Pick) => {
+    const vb0 = visibleBackers(p);
+    if (gone(p) || isPlayerProp(p) || !followOk(p) || !notHedged(p) || isEliteSplitGame(p.slug)) return false;
+    if (!p.kalshi || p.kalshi.status !== "ok") return false;
+    const info = pickInfo(p, vb0.length);
+    if (info.band === "glue") return false;
+    return isGoodOrOk(p, vb0);
+  });
+  const topAll = takeSortedTop(topCandidates, sortOf("top"), 20, vb, now);
   const top = bySport(topAll);
   const gluePool = rankPicks(uniqueMergedPicks((DATA.glue || DATA.signals || []).concat(DATA.fun || [])).filter((p: Pick) => {
     const n = visibleBackers(p).length;
@@ -2761,7 +2860,6 @@ export default function App() {
   const funSeen: Record<string, boolean> = {};
   const funAll = sortPicksBy(funPool.filter((p: Pick) => { if (funSeen[p.id]) return false; funSeen[p.id] = true; return true; }), sortOf("longfun"), vb, now);
   const fun = bySport(funAll);
-  const provenRows: ProvenRow[] = sortProvenBy(mergeProvenRows(((PROVEN && PROVEN.picks) || []).filter((r: ProvenRow) => (!r.startTs || r.startTs > now) && !r.hedged && !isEliteSplitGame(r.slug))), sortOf("proven"), now);
   const polyAll = rankPicks(uniqueMergedPicks(DATA.poly || []).filter((p: Pick) => visibleBackers(p).length >= 1 && vetted(p, visibleBackers(p)) && followOk(p) && !gone(p) && notHedged(p) && p.kalshi.status !== "ok" && !isPlayerProp(p) && !isLongshot(p, visibleBackers(p).length, now)));
   const polyBase = polyAll.slice(0, 20);
   const poly = bySport(polyBase);
@@ -2785,19 +2883,13 @@ export default function App() {
   const upcomingPicks = bySport(upcomingAll);
   const longFunPicks = sortPicksBy(longPicks.concat(fun), sortOf("longfun"), vb, now);
   const bestLongId = (longPicks.slice().sort((a: Pick, b: Pick) => pickQualityScore(b, vb(b)) - pickQualityScore(a, vb(a)))[0] || { id: "" }).id;
-  const provenComboPicks: Pick[] = provenRows.map((r: ProvenRow) => provenToPick(r)).filter((p: Pick | null): p is Pick => !!p);
   const comboLegPool = uniqueByKey(provenComboPicks.concat(DATA.signals || []).concat(DATA.fun || []).concat(topAll).concat(propsBase)).filter((p: Pick) => {
-    const n = visibleBackers(p).length;
+    const vb0 = visibleBackers(p);
     const px = usedPrice(p);
-    const info = pickInfo(p, n);
-    if (n < 1 || !followOk(p) || gone(p)) return false;
-    if (!vetted(p, visibleBackers(p)) || !pickHasHighRoiBacker(p, visibleBackers(p))) return false;
-    if (!pickHasComboConviction(p, visibleBackers(p))) return false;
+    if (vb0.length < 1 || !followOk(p) || gone(p)) return false;
     if (pickHasCapperHedge(p) || isEliteSplitGame(p.slug)) return false;
-    if (p.kalshi.status !== "ok" || !nearFair(p)) return false;
-    if (info.band === "glue" || info.band === "longshot" || info.pricier || info.tooPricier) return false;
-    if (px == null || px < 0.45 || px >= 0.90) return false;
-    return true;
+    if (!p.kalshi || p.kalshi.status !== "ok" || px == null || px <= 0) return false;
+    return isGoodOrOk(p, vb0);
   });
   const comboAll = buildCombos(comboLegPool);
   const combos = sportFilter ? comboAll.filter((pair: [Pick, Pick]) => pair[0].league === sportFilter && pair[1].league === sportFilter) : comboAll;
@@ -2931,8 +3023,8 @@ export default function App() {
   );
   return (
     <Page title="Orca Whale Scanner" summary={{
-      combos: "2-leg combos only, paying 2.5× to 4×, sorted best to worst by quality score × payout. Legs come from Proven Picks first, then Top 20, signals and fun, plus any elite Kalshi player props that qualify. Both legs need a matched Kalshi market at or near fair and a high-conviction bet ($500+ and about 2× usual or more). Small side bets do not count. Different games, no repeats, no both-sides or elite-split games. No singles and no 3+ leg parlays.",
-      top: "The strongest Kalshi singles from high-ROI elite backers, with the best 2-leg combos (2.5×–4×) listed first. Games that have started are hidden.",
+      combos: "2-leg combos only, paying 2.5× to 4×, sorted all-GOOD first, then GOOD+OK, then OK+OK, and within that by quality score × payout. Legs come from Proven Picks first, then Top 20, signals and fun, plus any elite Kalshi player props that qualify. GOOD legs are used first; OK legs fill in when there are not enough GOOD ones. CAUTION legs, picks with no Kalshi market, both-sides bets and elite-split games stay hidden. Different games, no repeats. No singles and no 3+ leg parlays.",
+      top: "The strongest Kalshi singles from high-ROI elite backers. GOOD picks are listed first; the best OK Kalshi-bettable picks fill the list when there are not enough GOOD ones. CAUTION, no Kalshi market, both-sides bets and elite-split games stay hidden. The best 2-leg combos (2.5×–4×) are listed first. Games that have started are hidden.",
       fun: "Kalshi picks that missed Top 20: one-whale, under 10¢ or other cheap leftovers, Split, or Pricier. 10–20¢ picks backed by 2+ whales moved to Longshots; player props moved to Player Props. Started games are hidden.",
       poly: "Whale picks you can only bet on Polymarket (not on Kalshi), from all-time sports whales. Player props and 10–20¢ longshots have their own tabs. Started games are hidden.",
       props: "Only player props backed by an elite capper with +20% sport ROI, and only when Kalshi has a matching player-prop market (NFL TDs or yards, NBA points, rebounds or assists, and the same idea in other sports). Exact Kalshi wording, ticker and price are on the card. Unmatched or weak props are hidden. Sorted best to worst.",
@@ -2963,9 +3055,9 @@ export default function App() {
           <DailyCap />
           <div style={{ borderRadius: 16, padding: "12px 14px", background: t.bg.subtle, fontFamily: t.font.family, fontSize: 14, lineHeight: "20px", color: t.text.secondary, marginBottom: 14 }}>
             <span style={{ color: GREEN, fontWeight: 800 }}>2-leg combos only, best first. </span>
-            Every ticket pays 2.5× to 4× (combined price 25–40¢). Legs come from Proven Picks first, then Top 20, signals and fun, plus any qualifying elite Kalshi player props. Both legs need a high-ROI elite backer, a matched Kalshi market at or near fair, and a high-conviction bet ($500+ and about 2× their usual or more). Small side bets do not count. Different games only; both-sides bets and elite-split games are hidden. Ranked by quality score × payout, with Proven legs first. No singles and no 3+ leg parlays. Games are not reused across these tickets, so you can take more than one.
+            Every ticket pays 2.5× to 4× (combined price 25–40¢). Legs come from Proven Picks first, then Top 20, signals and fun, plus any qualifying elite Kalshi player props. GOOD legs are used first; OK legs fill the second leg (or both) when there are not enough GOOD ones. Each leg shows a GOOD or OK tag. CAUTION, no Kalshi market, both-sides bets and elite-split games stay hidden. All-GOOD tickets sort above GOOD+OK, then OK+OK, then by quality score × payout. Different games only; no repeats. No singles and no 3+ leg parlays. Games are not reused across these tickets, so you can take more than one.
           </div>
-          {combos.length === 0 ? <Text>No 2-leg combo right now pays 2.5× to 4× from high-conviction Proven or elite legs at or near fair, from different games.</Text> : <Text>{combos.length} combo{combos.length === 1 ? "" : "s"}, {sortOf("combos") === "worst" ? "lowest score first" : "best first"}.</Text>}
+          {combos.length === 0 ? <Text>No 2-leg combo right now pays 2.5× to 4× from GOOD or OK Kalshi legs in different games. Hidden games (both-sides or elite splits), CAUTION legs and picks with no Kalshi market do not count.</Text> : <Text>{combos.length} combo{combos.length === 1 ? "" : "s"}, {sortOf("combos") === "worst" ? "lowest score first" : "all-GOOD first, then GOOD+OK, then OK+OK"}.</Text>}
           {(sortOf("combos") === "worst" ? combos.slice().reverse() : combos).map((pair: [Pick, Pick], i: number) => (<ComboCard key={pair[0].id + "+" + pair[1].id} a={pair[0]} b={pair[1]} rank={i + 1} bankroll={bankroll} now={now} />))}
         </Section>
       ) : null}
@@ -2975,14 +3067,14 @@ export default function App() {
           <TabSortBar value={sortOf("top")} onChange={(v: string) => setSortOf(v, "top")} />
           <LeaguePills picks={topAll} value={sportFilter} onChange={setSportFilter} />
           <DailyCap />
-          <Text>Vetted high-ROI picks only: every pick here has at least one elite backer with sport-specific ROI of +20% or more over 10+ graded bets in that sport, plus overall ROI of +15% or more, who bet real size ($500+, at least half their usual bet, not a throwaway). The headline ROI on each card is that sport ROI. Overall +20% ROI is a ranking bonus, not an exclusion. Picks where a capper bet both sides are hidden. Games where elite cappers split (opposite sides) are hidden from this tab and from Proven Picks. Under 45¢, 95¢+, Split under 55%, Pricier, and started games are out. Fewer than 20 shows when fewer qualify.</Text>
+          <Text>GOOD picks first, then the best OK Kalshi-bettable fillers when there are not enough GOOD ones. Every pick has at least one elite backer with sport-specific ROI of +20% or more over 10+ graded bets in that sport, plus overall ROI of +15% or more, who bet real size ($500+, at least half their usual bet, not a throwaway). GOOD also needs about 1x usual size, a winning sport record, and a Kalshi price of 45-92¢. OK is a real-size elite bet that misses one of those bars (for example a price outside 45-92¢). CAUTION, no Kalshi market, both-sides bets and elite-split games stay hidden. Started games are out. The GOOD or OK tag is on each card. Fewer than 20 shows when fewer qualify.</Text>
           <div style={{ borderRadius: 18, padding: "14px 16px", background: t.bg.subtle, border: "1px solid " + t.border.default, margin: "12px 0 16px" }}>
             <div style={{ fontSize: 20, fontWeight: 850, marginBottom: 6 }}>Combos · 2.5×–4× · best first</div>
-            <Text>Play these 2-leg tickets. The full ranked list is on the Combos tab. Each pays 2.5× to 4× from high-conviction Proven or elite legs at or near fair, different games, no both-sides or elite-split games.</Text>
-            {combos.length ? (sortOf("combos") === "worst" ? combos.slice().reverse() : combos).slice(0, 8).map((pair: [Pick, Pick], i: number) => (<ComboCard key={pair[0].id + "+" + pair[1].id} a={pair[0]} b={pair[1]} rank={i + 1} bankroll={bankroll} now={now} />)) : <Text>No 2-leg combo right now pays 2.5× to 4× from high-conviction Proven or elite legs at or near fair, from different games.</Text>}
+            <Text>Play these 2-leg tickets. The full ranked list is on the Combos tab. Each pays 2.5× to 4× from GOOD legs first, with OK legs filling in when needed, different games, no both-sides or elite-split games.</Text>
+            {combos.length ? (sortOf("combos") === "worst" ? combos.slice().reverse() : combos).slice(0, 8).map((pair: [Pick, Pick], i: number) => (<ComboCard key={pair[0].id + "+" + pair[1].id} a={pair[0]} b={pair[1]} rank={i + 1} bankroll={bankroll} now={now} />)) : <Text>No 2-leg combo right now pays 2.5× to 4× from GOOD or OK Kalshi legs in different games.</Text>}
             <Button label={"Open Combos tab" + (combos.length ? " · " + combos.length + " tickets" : "")} onClick={() => setTab("combos")} />
           </div>
-          {top.length === 0 && f.followedOnly ? <Text>No pick clears the filter: none of the top picks is backed by a capper you follow. Turn off "Only picks a followed capper backs" to see them.</Text> : top.length === 0 ? <Text>No pick qualifies right now under the Top 20 rules (elite backer with +20% sport ROI over 10+ graded bets, +15% overall ROI, and a real-size bet). Fun Picks has {fun.length}.</Text> : top.length < 20 ? <Text>Only {top.length} of 20 qualify right now. The list is not padded with unvetted picks.</Text> : null}
+          {top.length === 0 && f.followedOnly ? <Text>No pick clears the filter: none of the top picks is backed by a capper you follow. Turn off "Only picks a followed capper backs" to see them.</Text> : top.length === 0 ? <Text>No GOOD or OK Kalshi pick qualifies right now (elite backer with +20% sport ROI over 10+ graded bets, +15% overall ROI, and a real-size bet). CAUTION legs, splits and picks with no Kalshi market stay hidden.</Text> : top.length < 20 ? <Text>Only {top.length} of 20 qualify right now. GOOD is listed first; OK fills the rest. The list is not padded with CAUTION or unvetted picks.</Text> : null}
           <div style={{ fontSize: 16, fontWeight: 800, margin: "12px 0 8px" }}>Singles</div>
           {top.map((p: Pick, i: number) => (<PickCard key={p.id} p={p} fun={false} bankroll={bankroll} now={now} rank={i + 1} followed={followed} hidden={hidden} toggle={toggle} />))}
           {glue.length ? (
@@ -2992,7 +3084,7 @@ export default function App() {
               {glue.map((p: Pick, i: number) => (<PickCard key={p.id} p={p} fun={false} bankroll={bankroll} now={now} rank={i + 1} followed={followed} hidden={hidden} toggle={toggle} />))}
             </div>
           ) : null}
-          <Text>Top 20 rules: at least one elite backer with +20% ROI over 10+ graded bets in that sport and +15% overall ROI, real-size bet, {minW}+ all-time sports whales (top {DATA.coverage.cappers}) with {money(minP)}+ each, verified Kalshi contract, no both-sides bets, no games where elite cappers split, game has not started, price 45–94¢, one-sided share at least 55%, current price not more than 3¢ above the whales' average entry.</Text>
+          <Text>Top 20 rules: at least one elite backer with +20% ROI over 10+ graded bets in that sport and +15% overall ROI, a real-size bet ($500+, at least half their usual), and a verified Kalshi contract. GOOD needs about 1x usual size, a winning sport record, and 45-92¢. OK fills remaining slots. No both-sides bets, no games where elite cappers split, and the game has not started. {minW}+ whales, a 55% one-sided share and a tight price vs. entry are ranking bonuses for GOOD, not a reason to hide an OK pick.</Text>
         </Section>
       ) : null}
 
