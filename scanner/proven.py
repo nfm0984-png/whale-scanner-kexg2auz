@@ -7,7 +7,7 @@ Elite (computed fresh every scan/refresh from capper_history + 30-day backfill):
   copies once 3+ legs are graded, and not a near-certain-bet record (average entry on graded $500+ bets >= 90¢).
   A pick only appears if that capper also has sport-specific ROI >= +20% over 10+ graded bets in THAT sport.
   Overall ROI >= +20% and overall win rate >= 60% are ranking bonuses, not exclusions (a capper at +15% overall
-  who clears the sport bar, e.g. Siddhartha1, stays). If more than 15 still qualify, keep the top 15 by rank score.
+  who clears the sport bar, e.g. Siddhartha1, stays). There is no cap on how many cappers can be elite.
 For each elite whale, all open sports positions on games in the next ~48h (Polymarket Data API, public) are listed with
 teams, league, PT time (Gamma event), Kalshi action/price (scanner match, refreshed live from Kalshi), bet vs usual,
 their record/ROI in that sport and 14-day form, and a verdict:
@@ -32,7 +32,6 @@ ELITE_MIN_ROI = 15.0
 ELITE_ROI_BONUS = 20.0
 ELITE_MIN_WR = 60.0
 ELITE_MAX_AVG = 0.90
-ELITE_CAP = 15
 SPORT_BAR_N = 10
 SPORT_BAR_ROI = 20.0
 HORIZON_H = 48
@@ -164,11 +163,6 @@ def build(emb, store=None, write=True):
         elif (c.get('cn') or 0) >= 10 and (c.get('croi') or 0) > 0 and (c.get('cw') or 0) > (c.get('cl') or 0):
             near.append({'wallet': c['wallet'], 'name': c.get('name'), 'why': why, 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi')})
     elite.sort(key=lambda c: -elite_rank_score(c))
-    if len(elite) > ELITE_CAP:
-        for c in elite[ELITE_CAP:]:
-            near.append({'wallet': c['wallet'], 'name': c.get('name'), 'why': ['outside top %d by quality' % ELITE_CAP],
-                         'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi')})
-        elite = elite[:ELITE_CAP]
     # scanner picks by id (Kalshi match, game time, teams)
     by_pid = {}
     for k in LISTS:
@@ -336,7 +330,7 @@ def build(emb, store=None, write=True):
     out.sort(key=lambda r: (order[r['verdict']], r['startTs'] or 10 ** 12, -r['cost']))
     res = {
         'updatedTs': int(now), 'updatedAt': pt(now),
-        'rule': 'Elite cappers only: 20+ graded $500+ copyable picks (30-day Polymarket backfill + scanner), overall ROI >= +15%, Hot (week/month/year P&L up), not Cooling on 14-day form, not losing on your copies, not a near-certain-bet record (average entry on graded $500+ bets >= 90¢). A pick only appears if that capper also has +20% ROI over 10+ graded bets in THAT sport. Overall ROI >= +20% and overall win rate >= 60% are ranking bonuses, not exclusions. If more than 15 qualify, the top 15 by rank score (quality plus those bonuses and best sport ROI) are kept. Picks where a capper bet both sides are hidden, not shown as caution. Games where elite cappers split (opposite sides, or an elite who hedged) are hidden from Proven Picks and Top 20.',
+        'rule': 'Elite cappers only: 20+ graded $500+ copyable picks (30-day Polymarket backfill + scanner), overall ROI >= +15%, Hot (week/month/year P&L up), not Cooling on 14-day form, not losing on your copies, not a near-certain-bet record (average entry on graded $500+ bets >= 90¢). A pick only appears if that capper also has +20% ROI over 10+ graded bets in THAT sport. Overall ROI >= +20% and overall win rate >= 60% are ranking bonuses, not exclusions. Every capper who clears these bars is elite; there is no list-size cap. Picks where a capper bet both sides are hidden, not shown as caution. Games where elite cappers split (opposite sides, or an elite who hedged) are hidden from Proven Picks and Top 20.',
         'splitGames': sorted(split_events),
         'elite': [{'wallet': c['wallet'], 'name': c.get('name'), 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi'),
                    'wr': c.get('cwr'), 'quality': c.get('quality'), 'rankScore': elite_rank_score(c), 'avgEntry': c.get('avgEntry'),
