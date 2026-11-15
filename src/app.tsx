@@ -819,7 +819,7 @@ function PillTabs(props: { options: { value: string; label: string; count?: numb
         {props.options.map((o: { value: string; label: string; count?: number }) => {
           const on = o.value === props.value;
           return (
-            <button key={o.value} onClick={() => props.onChange(o.value)} style={{ flex: "0 0 auto", display: "inline-flex", alignItems: "center", gap: 6, height: 44, minHeight: 44, padding: "0 16px", borderRadius: 999, border: on ? "1.5px solid " + BRAND : "1.5px solid " + t.border.default, background: on ? BRAND : t.bg.subtle, color: on ? "#FFFFFF" : t.text.secondary, fontFamily: t.font.family, fontSize: 15, fontWeight: on ? 800 : 600, whiteSpace: "nowrap", cursor: "pointer" }}>
+            <button key={o.value} onClick={() => props.onChange(o.value)} style={{ flex: "0 0 auto", display: "inline-flex", alignItems: "center", gap: 6, height: 40, padding: "0 16px", borderRadius: 999, border: on ? "1.5px solid " + BRAND : "1.5px solid " + t.border.default, background: on ? BRAND : t.bg.subtle, color: on ? "#FFFFFF" : t.text.secondary, fontFamily: t.font.family, fontSize: 15, fontWeight: on ? 800 : 600, whiteSpace: "nowrap", cursor: "pointer" }}>
               {o.label}{o.count !== undefined ? <span style={{ fontSize: 12, fontWeight: 800, minWidth: 20, height: 20, padding: "0 6px", boxSizing: "border-box", borderRadius: 999, display: "inline-flex", alignItems: "center", justifyContent: "center", background: on ? "rgba(255,255,255,0.25)" : t.bg.base, color: on ? "#FFFFFF" : t.text.secondary }}>{o.count}</span> : null}
             </button>
           );
@@ -945,14 +945,14 @@ function ActionBar() {
   void tick;
   return (
     <div style={{ marginTop: 14 }}>
-      <div className="action-btns" style={{ display: "flex", gap: 8 }}>{btn("Scan", "scan", true)}{btn("Refresh", "refresh", false)}</div>
+      <div style={{ display: "flex", gap: 8 }}>{btn("Scan", "scan", true)}{btn("Refresh", "refresh", false)}</div>
       {status}
       {sheet ? (
         <div style={{ marginTop: 10, borderRadius: 14, padding: 12, background: "rgba(0,0,0,0.22)", fontSize: 13, lineHeight: "19px" }}>
           {sheet === "scan" ? (
             <div>
               <div style={{ fontWeight: 800, fontSize: 14 }}>Full scan: top all-time sports whales</div>
-              <div className="scan-presets" style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 8, marginTop: 8 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 8, marginTop: 8 }}>
                 {["20", "40", "60", "80", "100", "200", "400", "custom"].map((v: string) => (
                   <button key={v} onClick={() => setN(v)} style={{ ...BTN(n === v ? "#FFFFFF" : "transparent", n === v ? BRAND : "#FFFFFF", "rgba(255,255,255,0.7)"), height: 44, padding: "0 8px", borderRadius: 12, fontSize: 15, fontFamily: t.font.family }}>{v === "custom" ? "Custom" : "Top " + v}</button>
                 ))}
@@ -1017,16 +1017,16 @@ function Hero(props: { top: number; fun: number; buys: number; bets: number; act
   );
   const chip = (s: string) => <span style={{ fontSize: 11, fontWeight: 600, padding: "4px 9px", borderRadius: 999, background: "rgba(255,255,255,0.12)" }}>{s}</span>;
   return (
-    <div className="hero-card" style={{ borderRadius: 22, padding: 18, background: `linear-gradient(135deg, #1E1B4B 0%, ${BRAND} 55%, ${BRAND2} 100%)`, color: "#FFFFFF", boxShadow: "0 10px 30px rgba(76, 29, 149, 0.25)" }}>
+    <div style={{ borderRadius: 22, padding: 18, background: `linear-gradient(135deg, #1E1B4B 0%, ${BRAND} 55%, ${BRAND2} 100%)`, color: "#FFFFFF", boxShadow: "0 10px 30px rgba(76, 29, 149, 0.25)" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, flexWrap: "wrap" }}>
         <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: "0.14em" }}>ORCA · WHALE SIGNALS</div>
         <span style={{ fontSize: 11, fontWeight: 700, padding: "4px 9px", borderRadius: 999, background: "rgba(255,255,255,0.16)" }}>Live · tap to scan</span>
       </div>
-      <div className="hero-title" style={{ fontSize: 26, lineHeight: "32px", fontWeight: 800, marginTop: 10 }}>Follow conviction. Verify everything.</div>
+      <div style={{ fontSize: 26, lineHeight: "32px", fontWeight: 800, marginTop: 10 }}>Follow conviction. Verify everything.</div>
       <div style={{ fontSize: 13, lineHeight: "18px", color: "rgba(255,255,255,0.82)", marginTop: 4 }}>Top {DATA.coverage.cappers} all-time sports whales · games that haven't started, next {DATA.settings.windowH} hours</div>
       <div style={{ fontSize: 12, lineHeight: "17px", color: "rgba(255,255,255,0.78)", marginTop: 2 }}>Scanned {DATA.scannedAt} · Refreshed {DATA.refreshedAt || "not yet"}</div>
       <ActionBar />
-      <div className="hero-stats" style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 14 }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 14 }}>
         {stat(String(props.top), "TOP PICKS")}
         {stat(String(props.fun), "FUN PICKS")}
         {stat(String(props.buys), "RECENT BUYS")}
@@ -1969,7 +1969,7 @@ function sortBetPicks(arr: Pick[], sort: string): Pick[] {
 function CardShell(props: { accent: string; children: ReactNode }) {
   const t = useGrokTheme();
   return (
-    <div style={{ borderRadius: 22, border: "1px solid " + t.border.default, background: t.bg.base, boxShadow: "0 1px 2px rgba(0,0,0,0.05), 0 10px 28px rgba(0,0,0,0.07)", overflow: "hidden", marginBottom: 18, fontFamily: t.font.family, color: t.text.primary, width: "100%", maxWidth: "100%", minWidth: 0, boxSizing: "border-box" }}>
+    <div style={{ borderRadius: 22, border: "1px solid " + t.border.default, background: t.bg.base, boxShadow: "0 1px 2px rgba(0,0,0,0.05), 0 10px 28px rgba(0,0,0,0.07)", overflow: "hidden", marginBottom: 18, fontFamily: t.font.family, color: t.text.primary }}>
       <div style={{ height: 5, background: props.accent }} />
       <div style={{ padding: 16 }}>{props.children}</div>
     </div>
@@ -2541,7 +2541,7 @@ function ProvenCard(props: { r: ProvenRow; rank: number; now: number }) {
   const sr = r.sportRec || { w: 0, l: 0, n: 0, roi: null };
   const group = r.group && r.group.length ? r.group : [r];
   return (
-    <div data-proven-card={r.verdict} style={{ borderRadius: 18, border: "1px solid " + t.border.default, padding: "12px 14px", marginBottom: 10, background: t.bg.base, fontFamily: t.font.family, width: "100%", maxWidth: "100%", minWidth: 0, boxSizing: "border-box" }}>
+    <div data-proven-card={r.verdict} style={{ borderRadius: 18, border: "1px solid " + t.border.default, padding: "12px 14px", marginBottom: 10, background: t.bg.base, fontFamily: t.font.family }}>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
         <ScoreChip rank={props.rank} score={provenQualityScore(r)} />
         <CapperCountBadge count={group.length} open={openCaps} onToggle={() => setOpenCaps(!openCaps)} />
@@ -3083,9 +3083,7 @@ export default function App() {
     </Section>
   );
   return (
-    <Page title="Orca Whale Scanner" summary="Kalshi combos and whale picks, best first." caution={tabCaution || undefined}>
-      <div className="desk-shell" data-desk-shell="1">
-      <aside className="desk-sidebar" data-desk-sidebar="1">
+    <Page title="Orca Whale Scanner" summary="Kalshi combos and whale picks, best first." record={tabRecord || undefined} caution={tabCaution || undefined}>
       <Hero top={top.length} fun={fun.length} buys={BUY_LINES.length} bets={BET_LINES.length} active={activeTraders.length} value={openValue} />
 
       <Section heading="Bankroll and pick rules" caption={"Bankroll " + money(bankroll) + " · " + money(minP) + "+ positions · Top 20 needs " + minW + "+ whales" + (followed.length ? " · " + followed.length + " followed" : "") + (hidden.length ? " · " + hidden.length + " hidden" : "")} collapsible defaultOpen={false}>
@@ -3096,8 +3094,6 @@ export default function App() {
         </Grid>
         <Toggle label="Only picks a followed capper backs" value={f.followedOnly} onChange={(v: boolean) => set("followedOnly", v)} />
       </Section>
-      </aside>
-      <div className="desk-main" data-desk-main="1">
 
       {tab === "combos" ? (
         <Section heading={"Combos · " + comboCount}>
@@ -3405,9 +3401,6 @@ export default function App() {
           </Section>
         </Section>
       ) : null}
-
-      </div>
-      </div>
 
       <Floating edge="top" align="center" bar>
         <div data-tab-bar="1">
