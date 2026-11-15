@@ -72,6 +72,7 @@ def _kalshi_bits(k, p=None):
     p = p or {}
     return dict(
         kAct=k.get('action') or p.get('kAct'),
+        kTicker=k.get('ticker') or p.get('kTicker'),
         kContract=k.get('contract') or p.get('kContract'),
         kprice=k.get('price') if k.get('price') is not None else (p.get('kprice') if p.get('kprice') is not None else p.get('kPrice')),
         kalshi=p.get('kalshi') if isinstance(p.get('kalshi'), str) else ((k.get('action') or '') + ' ' + (k.get('contract') or '')).strip(),
@@ -251,6 +252,13 @@ def summarize(store, traders=None, current_ids=None, windows=None):
             ))
     tmap = {((t.get('wallet') or '').lower()): t for t in (traders or [])}
     tracked = load_tracked_wallets()
+    bfw = load_backfill()
+    copies = load_copies()
+    for w in bfw:
+        if w not in caps and (bfw[w].get('n') or 0) > 0 and w in tracked:
+            caps[w] = {'wallet': w, 'name': (tracked.get(w) or {}).get('name') or '', 'rankAll': None, 'rank': None, 'golden': False,
+                       'w': 0, 'l': 0, 'push': 0, 'open': 0, 'n': 0, 'profit': 0.0, 'risked': 0.0, 'picks': [],
+                       'cw': 0, 'cl': 0, 'cprofit': 0.0, 'crisked': 0.0}
     for w, tr in tracked.items():
         if w not in caps:  # tracked whale with no picks yet: show as Record building
             caps[w] = {'wallet': w, 'name': tr.get('name') or '', 'rankAll': None, 'rank': None, 'golden': False,
@@ -284,6 +292,7 @@ def summarize(store, traders=None, current_ids=None, windows=None):
             -(p.get('graded') or 0),
         ))
         apply_conviction(c)
+        apply_records(c, bfw.get(w), copies.get(w))
         attach_windows(c, windows)
         tr = tracked.get(w)
         if tr:
@@ -360,6 +369,9 @@ def apply_quality(caps):
         n = c.get('cn') or 0
         wr = c.get('cwr')
         roi = c.get('croi')
+        # Recent form (Noel, Nov 15): the last 14 days count 2x in the quality score.
+        qwr = c.get('qwr') if c.get('qwr') is not None else wr
+        qroi = c.get('qroi') if c.get('qroi') is not None else roi
         c['priorWr'] = round(prior_wr, 1)
         c['priorRoi'] = round(prior_roi, 1)
         badge = c.get('badge')
@@ -381,8 +393,8 @@ def apply_quality(caps):
                 c['hotBoost'] = HOT_SMALL_BOOST
                 c['quality'] = HOT_SMALL_BOOST
             continue
-        swr = (n * wr + SHRINK_K * prior_wr) / (n + SHRINK_K)
-        sroi = (n * roi + SHRINK_K * prior_roi) / (n + SHRINK_K) if roi is not None else prior_roi
+        swr = (n * qwr + SHRINK_K * prior_wr) / (n + SHRINK_K)
+        sroi = (n * qroi + SHRINK_K * prior_roi) / (n + SHRINK_K) if qroi is not None else prior_roi
         c['shrunkWr'] = round(swr, 1)
         c['shrunkRoi'] = round(sroi, 1)
         if roi is not None and roi <= LOW_EDGE_ROI:
@@ -424,6 +436,14 @@ def apply_quality(caps):
             elif n >= HOT_SMALL_MIN and (c.get('cw') or 0) > (c.get('cl') or 0) and roi is not None and roi > 0:
                 c['hotBoost'] = HOT_SMALL_BOOST
             c['quality'] = round(c['quality'] + c['hotBoost'], 2)
+        if c.get('formCooling'):
+            c['quality'] = round(c['quality'] - c.get('hotBoost', 0) - FORM_COOL_PENALTY, 2)
+            c['hotBoost'] = 0.0
+            c['proven'] = False
+    for c in caps:
+        if c.get('formCooling') and (c.get('cn') or 0) < MIN_QUALITY_SAMPLE:
+            c['quality'] = round(min(c.get('quality') or 0, 0) - FORM_COOL_PENALTY, 2)
+            c['hotBoost'] = 0.0
     return caps
 
 def quality_map(store=None, traders=None, current_ids=None):
@@ -439,8 +459,9 @@ VET_SMALL_ROI = 10.0
 VET_MIN_BET = 500.0
 VET_MIN_MULT = 0.5
 
-def vet_verdict(rec, cost):
-    """(counts, tier, why). tier 0 = vetted 10+ sample, 1 = vetted 5-9 clearly positive, 2 = does not count."""
+def vet_verdict(rec, cost, league=None):
+    """(counts, tier, why). tier 0 = vetted 10+ sample, 1 = vetted 5-9 clearly positive, 2 = does not count.
+    Per-sport (Noel, Nov 15): with 5+ graded in the pick's sport and negative ROI there, the backer does not count."""
     rec = rec or {}
     try:
         cost = float(cost or 0)
@@ -464,6 +485,11 @@ def vet_verdict(rec, cost):
         why = 'small sample not clearly positive'
     elif n >= VET_MIN_N and rec.get('demoted'):
         why = 'low edge'
+    if not why and league:
+        sp = sport_of(league)
+        sr = (rec.get('sports') or {}).get(sp)
+        if sr and (sr.get('n') or 0) >= SPORT_MIN_N and sr.get('roi') is not None and sr['roi'] < 0:
+            why = 'losing in ' + sp
     med = rec.get('medBet')
     bet = ''
     if conviction_of(rec, cost) == 'T':
@@ -476,25 +502,25 @@ def vet_verdict(rec, cost):
         return False, 2, why or bet
     return True, (0 if n >= VET_MIN_N else 1), ''
 
-def vetted_backers(backers, qmap):
+def vetted_backers(backers, qmap, league=None):
     out = []
     for b in backers or []:
         if not isinstance(b, dict):
             continue
-        ok, _, _ = vet_verdict(qmap.get((b.get('wallet') or '').lower()), b.get('cost'))
+        ok, _, _ = vet_verdict(qmap.get((b.get('wallet') or '').lower()), b.get('cost'), league)
         if ok:
             out.append(b)
     return out
 
-def vet_tier(backers, qmap):
+def vet_tier(backers, qmap, league=None):
     t = 2
     for b in backers or []:
         if isinstance(b, dict):
-            t = min(t, vet_verdict(qmap.get((b.get('wallet') or '').lower()), b.get('cost'))[1])
+            t = min(t, vet_verdict(qmap.get((b.get('wallet') or '').lower()), b.get('cost'), league)[1])
     return t
 
-def backer_quality(backers, qmap):
-    backers = vetted_backers(backers, qmap)
+def backer_quality(backers, qmap, league=None):
+    backers = vetted_backers(backers, qmap, league)
     tw = 0.0
     tq = 0.0
     w = l = 0
@@ -659,7 +685,7 @@ def apply_conviction(c):
 def conv_factor(wallet, cost, qmap):
     return CONV_WEIGHT.get(conviction_of(qmap.get((wallet or '').lower()) or {}, cost), 1.0)
 
-def conviction_net(backers, opposing, qmap):
+def conviction_net(backers, opposing, qmap, league=None):
     """Net money with throwaway bets nearly ignored and high-conviction bets boosted."""
     def tot(xs):
         s = 0.0
@@ -670,10 +696,10 @@ def conviction_net(backers, opposing, qmap):
                 cost = 0.0
             s += cost * conv_factor(b.get('wallet'), cost, qmap)
         return s
-    return tot(vetted_backers(backers, qmap)) - tot(opposing)
+    return tot(vetted_backers(backers, qmap, league)) - tot(opposing)
 
-def conviction_count(backers, qmap):
-    return len(vetted_backers(backers, qmap))
+def conviction_count(backers, qmap, league=None):
+    return len(vetted_backers(backers, qmap, league))
 
 NEW_DAYS = 3
 
@@ -682,6 +708,146 @@ def load_tracked_wallets():
         return (json.load(open(os.path.join(HERE, 'tracked_cappers.json'))) or {}).get('wallets') or {}
     except Exception:
         return {}
+
+# ---- backfill, recent form, per-sport records, copy tracking (Noel, Nov 15) ----
+from backfill import sport_of, DAYS as BF_DAYS
+FORM_DAYS = 14
+FORM_WEIGHT = 2.0
+FORM_MIN_N = 5
+FORM_COOL_PENALTY = 15.0
+SPORT_MIN_N = 5
+COPIES_MIN_N = 3
+
+def load_backfill():
+    try:
+        return (json.load(open(os.path.join(HERE, 'backfill.json'))) or {}).get('wallets') or {}
+    except Exception:
+        return {}
+
+def load_copies():
+    try:
+        return (json.load(open(os.path.join(HERE, 'copies.json'))) or {}).get('wallets') or {}
+    except Exception:
+        return {}
+
+def _pick_ts(p):
+    t = p.get('graded') or p.get('startTs') or 0
+    try:
+        return float(t)
+    except (TypeError, ValueError):
+        return 0.0
+
+def apply_records(c, bf=None, cp=None):
+    """Recompute the graded record from scanner picks + 30-day Polymarket backfill.
+    Inside the backfill window the backfill (all $500+ settled sports bets) replaces scanner picks for that whale,
+    so nothing is counted twice; scanner picks older than the window still count."""
+    now = time.time()
+    use_bf = bool(bf and bf.get('full'))
+    win_start = now - BF_DAYS * 86400
+    f14 = now - FORM_DAYS * 86400
+    T = {k: 0 for k in ('w', 'l', 'push', 'cw', 'cl')}
+    F = {'risked': 0.0, 'profit': 0.0, 'crisked': 0.0, 'cprofit': 0.0}
+    R = [0, 0, 0.0, 0.0]          # 14d w, l, risked, profit (all graded)
+    Q = [0.0, 0.0, 0.0, 0.0]      # recency-weighted copyable: w, n, risked, profit
+    S = {}
+    src = {'scanner': 0, 'backfill': 0}
+    def add(sp, ts, res, cost, prof, copyable, k=1):
+        if res == 'push':
+            T['push'] += k
+            return
+        if res not in ('W', 'L'):
+            return
+        T['w' if res == 'W' else 'l'] += k
+        F['risked'] += cost
+        F['profit'] += prof
+        s = S.setdefault(sp, [0, 0, 0.0, 0.0])
+        s[0 if res == 'W' else 1] += k
+        s[2] += cost
+        s[3] += prof
+        if ts >= f14:
+            R[0 if res == 'W' else 1] += k
+            R[2] += cost
+            R[3] += prof
+    for p in c['picks']:
+        res = p.get('result')
+        if res not in ('W', 'L', 'push'):
+            continue
+        ts = _pick_ts(p)
+        if use_bf and ts >= win_start:
+            continue
+        cost = float(p.get('cost') or 0)
+        prof = float(p.get('profit') or 0)
+        cop = is_copyable({'result': res, 'kAct': p.get('kAct'), 'kContract': p.get('kContract'), 'kprice': p.get('kprice')})
+        add(sport_of(p.get('league')), ts, res, cost, prof, cop)
+        src['scanner'] += 1
+        if cop and res in ('W', 'L'):
+            T['cw' if res == 'W' else 'cl'] += 1
+            F['crisked'] += cost
+            F['cprofit'] += prof
+            wt = FORM_WEIGHT if ts >= f14 else 1.0
+            Q[0] += wt if res == 'W' else 0
+            Q[1] += wt
+            Q[2] += wt * cost
+            Q[3] += wt * prof
+    if use_bf:
+        for key, cell in (bf.get('cells') or {}).items():
+            sp, day = key.rsplit('|', 1)
+            ts = int(day) * 86400 + 43200
+            w_, l_, pu, rk, pf, cw_, cl_, crk, cpf = cell
+            T['w'] += w_; T['l'] += l_; T['push'] += pu
+            F['risked'] += rk; F['profit'] += pf
+            s = S.setdefault(sp, [0, 0, 0.0, 0.0])
+            s[0] += w_; s[1] += l_; s[2] += rk; s[3] += pf
+            if ts >= f14:
+                R[0] += w_; R[1] += l_; R[2] += rk; R[3] += pf
+            T['cw'] += cw_; T['cl'] += cl_
+            F['crisked'] += crk; F['cprofit'] += cpf
+            wt = FORM_WEIGHT if ts >= f14 else 1.0
+            Q[0] += wt * cw_; Q[1] += wt * (cw_ + cl_); Q[2] += wt * crk; Q[3] += wt * cpf
+            src['backfill'] += w_ + l_
+    c.update(T)
+    c['profit'], c['risked'] = round(F['profit'], 2), round(F['risked'], 2)
+    c['cprofit'], c['crisked'] = round(F['cprofit'], 2), round(F['crisked'], 2)
+    c['n'] = c['w'] + c['l']
+    c['wr'] = round(100.0 * c['w'] / c['n'], 1) if c['n'] else None
+    c['roi'] = round(100.0 * c['profit'] / c['risked'], 1) if c['risked'] else None
+    c['cn'] = c['cw'] + c['cl']
+    c['cwr'] = round(100.0 * c['cw'] / c['cn'], 1) if c['cn'] else None
+    c['croi'] = round(100.0 * c['cprofit'] / c['crisked'], 1) if c['crisked'] else None
+    c['qwr'] = round(100.0 * Q[0] / Q[1], 1) if Q[1] else None
+    c['qroi'] = round(100.0 * Q[3] / Q[2], 1) if Q[2] else None
+    c['qualified'] = c['n'] >= MIN_SAMPLE
+    n14 = R[0] + R[1]
+    c['f14'] = {'w': R[0], 'l': R[1], 'n': n14, 'roi': round(100.0 * R[3] / R[2], 1) if R[2] else None}
+    c['formCooling'] = bool(n14 >= FORM_MIN_N and R[2] and R[3] < 0)
+    c['sports'] = {sp: {'w': v[0], 'l': v[1], 'n': v[0] + v[1], 'roi': round(100.0 * v[3] / v[2], 1) if v[2] else None}
+                   for sp, v in sorted(S.items(), key=lambda kv: -(kv[1][0] + kv[1][1]))}
+    c['recSrc'] = src
+    if use_bf:
+        c['bf'] = {'n': bf.get('n'), 'med': bf.get('med'), 'ts': bf.get('ts'), 'days': BF_DAYS,
+                   'recent': bf.get('recent') or []}
+        if not c.get('medBet') and bf.get('med'):
+            c['medBet'] = bf['med']
+            c['maxBet'] = bf.get('max')
+    if cp:
+        c['copies'] = cp
+
+def proven_ok(c):
+    """Upgraded quality filter for Proven Picks: vetted record (30-day backfill + scanner), not Cold,
+    not Cooling on 14-day form (and 14d ROI not negative), and not negative on Noel's own copies once 3+ are graded."""
+    if not c:
+        return False, 'unknown'
+    ok, tier, why = vet_verdict(c, 10 ** 9)
+    if not ok:
+        return False, why
+    if c.get('formCooling'):
+        return False, 'cooling (14d)'
+    if (c.get('badge') == 'Cooling'):
+        return False, 'cooling (past week P&L down)'
+    cp = c.get('copies') or {}
+    if (cp.get('n') or 0) >= COPIES_MIN_N and (cp.get('w') or 0) < (cp.get('l') or 0):
+        return False, 'losing on your copies'
+    return True, ''
 
 def page_payload(emb=None, hist=None, store=None):
     store = store or load()
@@ -700,6 +866,18 @@ def page_payload(emb=None, hist=None, store=None):
     out['newRecent'] = [info(r) for r in sorted((td.get('wallets') or {}).values(), key=lambda r: -(r.get('addedTs') or 0))
                         if r.get('addedTs') and time.time() - r['addedTs'] <= NEW_DAYS * 86400]
     out['trackedCount'] = len(td.get('wallets') or {})
+    lgs = {str(r.get('league') or '').upper() for r in (store.get('picks') or {}).values() if r.get('league')}
+    for k in ('signals', 'fun', 'poly', 'glue', 'props', 'longshots', 'biggest', 'upcoming'):
+        for p in (emb or {}).get(k) or []:
+            if p.get('league'):
+                lgs.add(str(p['league']).upper())
+    out['sportMap'] = {lg: sport_of(lg) for lg in sorted(lgs)}
+    try:
+        cp = json.load(open(os.path.join(HERE, 'copies.json')))
+        out['copiesInfo'] = {k: cp.get(k) for k in ('updatedTs', 'tickets', 'ticketsMatched', 'legs', 'legsMatched')}
+    except Exception:
+        pass
+    out['backfillDays'] = BF_DAYS
     return out
 
 if __name__ == '__main__':

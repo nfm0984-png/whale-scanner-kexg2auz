@@ -921,6 +921,11 @@ try:
         _ww.discover(list(cappers.keys()) + sorted(_ww_known), _ww_proven, {w: c.get('name') for w, c in cappers.items() if c.get('name')})
     except Exception as _e:
         print('whale_windows failed (using cached windows):', _e)
+    try:
+        import backfill as _bf
+        _bf.refresh(list(_ww.load_tracked().get('wallets', {}).keys()) + sorted(_ww_known))
+    except Exception as _e:
+        print('backfill failed (using cached records):', _e)
     _QMAP = _ch_rank.quality_map(_ch_rank.load())
 except Exception:
     _ch_rank = None
@@ -928,17 +933,19 @@ except Exception:
 def backer_quality(s):
     if not _QMAP or not _ch_rank:
         return 0
-    return _ch_rank.backer_quality(s.get('backers') or [], _QMAP)['quality']
+    return _ch_rank.backer_quality(s.get('backers') or [], _QMAP, _lg(s))['quality']
+def _lg(s):
+    return ((s.get('info') or {}).get('league') or s.get('league') or '')
 # Price band first, then backing-whale quality, then net money, one-sided share, whale count.
 def rank_key(s):
     band = 0 if s.get('price_band') == 'best' else (1 if s.get('price_band') == 'mid' else 2)
     # Conviction (Noel, Nov 13): throwaway-size bets barely count toward net money / agreement; big bets are boosted.
     if _QMAP and _ch_rank:
-        net = _ch_rank.conviction_net(s.get('backers') or [], s.get('opposing') or [], _QMAP)
-        cnt = _ch_rank.conviction_count(s.get('backers') or [], _QMAP)
+        net = _ch_rank.conviction_net(s.get('backers') or [], s.get('opposing') or [], _QMAP, _lg(s))
+        cnt = _ch_rank.conviction_count(s.get('backers') or [], _QMAP, _lg(s))
     else:
         net, cnt = (s.get('net') or 0), len(s['backers'])
-    tier = _ch_rank.vet_tier(s.get('backers') or [], _QMAP) if (_QMAP and _ch_rank) else 1
+    tier = _ch_rank.vet_tier(s.get('backers') or [], _QMAP, _lg(s)) if (_QMAP and _ch_rank) else 1
     s['vet_tier'] = tier
     # Vetting first (Noel, Nov 14): picks with a vetted 10+ sample backer, then vetted small sample, then unvetted.
     return (tier, band, -backer_quality(s), -net, -(s.get('one_sided_share') or 0), -cnt, best_rank(s), -(s.get('score') or 0))
@@ -1128,6 +1135,11 @@ for r_ in emb['bets']:
 import capper_history as _ch
 _ch_store = _ch.update_store(emb, hist)
 emb['capperHistory'] = _ch.page_payload(emb, hist, _ch_store)
+try:
+    import proven as _pv
+    emb['provenPicks'] = _pv.build(emb, _ch_store)
+except Exception as _e:
+    print('proven picks failed:', _e)
 json.dump(emb, open(os.path.join(HERE, 'page_embed.json'), 'w'), separators=(',', ':'))
 open(os.path.join(HERE, 'page_data_line.txt'), 'w').write('const DATA: ScanData = ' + json.dumps(emb, separators=(',', ':')) + ';')
 print('embed bytes', len(json.dumps(emb, separators=(',', ':'))))

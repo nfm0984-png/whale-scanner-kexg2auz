@@ -405,7 +405,17 @@ try:
     _ww.discover(_ww_seen, [c['wallet'] for c in _ch.summarize(_ch_store, emb.get('traders') or [], None) if c.get('proven')])
 except Exception as _e:
     print('whale_windows failed (using cached windows):', _e)
+try:
+    import backfill as _bf, whale_windows as _ww2
+    _bf.refresh(list(_ww2.load_tracked().get('wallets', {}).keys()) + _ww_seen)
+except Exception as _e:
+    print('backfill failed (using cached records):', _e)
 emb['capperHistory'] = _ch.page_payload(emb, hist, _ch_store)
+try:
+    import proven as _pv
+    emb['provenPicks'] = _pv.build(emb, _ch_store)
+except Exception as _e:
+    print('proven picks failed:', _e)
 json.dump(emb, open(os.path.join(HERE, 'page_embed.json'), 'w'), separators=(',', ':'))
 subprocess.run([sys.executable, os.path.join(HERE, 'compact.py')])
 print(f"refreshed {pt(NOW)}: {len(emb['signals'])} top + {len(emb['fun'])} fun + {len(emb['poly'])} poly + {len(emb.get('glue') or [])} glue + {len(emb.get('props') or [])} props + {len(emb.get('longshots') or [])} longshots + {len(emb.get('biggest') or [])} biggest + {len(emb.get('upcoming') or [])} upcoming, ESPN games matched {n_espn}, times/opponents filled {n_filled}, Kalshi checks {n_k}, started/ended removed (top/fun/poly/glue/props/longshots/biggest/upcoming/bets/buys) {removed}, OrcaLayer calls 0")

@@ -101,7 +101,7 @@ def refresh(wallets, force=False, workers=6):
 
 # ---- auto-discovery of new good cappers (Noel, Nov 13) ----
 TRACKED_PATH = os.path.join(HERE, 'tracked_cappers.json')
-MAX_TRACKED = 120       # keeps future OrcaLayer position calls small (20 wallets per call)
+MAX_TRACKED = 200       # OrcaLayer position calls take 20 wallets per call; Cold non-proven wallets are evicted when full
 NEW_DAYS = 3
 
 def load_tracked():
@@ -119,7 +119,7 @@ def save_tracked(d):
     os.replace(tmp, TRACKED_PATH)
 
 def board_wallets(period='month', category='sports', limit=100):
-    r = _get('/leaderboard', {'time_period': period, 'category': category, 'limit': limit})
+    r = _get('/leaderboard', {'time_period': period, 'category': category, 'sort_by': 'PNL', 'limit': limit})
     rows = (r or {}).get('data') if isinstance(r, dict) else None
     out = []
     for x in rows or []:
@@ -144,7 +144,9 @@ def discover(seen_wallets, proven_wallets=(), names=None, seed=False):
     names = dict(names or {})
     cands = list(dict.fromkeys([w.lower() for w in seen_wallets if w]))
     board = []
-    for per, lim in (('month', 100), ('week', 50)):
+    # Fresh leaderboards (Noel, Nov 15): Polymarket sports week + month boards by profit, every scan and refresh.
+    board_set = set()
+    for per, lim in (('month', 100), ('week', 100)):
         try:
             board += board_wallets(per, 'sports', lim)
         except Exception:
@@ -152,6 +154,7 @@ def discover(seen_wallets, proven_wallets=(), names=None, seed=False):
     for w, n in board:
         if n and w not in names:
             names[w] = n
+        board_set.add(w)
         if w not in cands:
             cands.append(w)
     tracked = load_tracked()
@@ -175,10 +178,20 @@ def discover(seen_wallets, proven_wallets=(), names=None, seed=False):
             if reason == 'Proven':
                 tw[w]['reason'] = 'Proven'
             continue
-        if not reason or len(tw) >= MAX_TRACKED:
+        if not reason:
             continue
+        if len(tw) >= MAX_TRACKED:
+            # make room: drop a Cold, non-proven wallet that has been tracked 3+ days
+            evict = [x for x, r in tw.items() if r.get('badge') == 'Cold' and r.get('reason') != 'Proven'
+                     and now - (r.get('addedTs') or r.get('seededTs') or 0) > NEW_DAYS * 86400]
+            if not evict:
+                continue
+            evict.sort(key=lambda x: mo(x))
+            tracked.setdefault('evicted', []).append({'wallet': evict[0], 'name': tw[evict[0]].get('name'), 'ts': now})
+            tracked['evicted'] = tracked['evicted'][-50:]
+            del tw[evict[0]]
         nm = names.get(w) or (ws.get(w) or {}).get('name') or ''
-        src = 'board' if w not in seen_set else 'scan'
+        src = 'board' if (w in board_set and w not in seen_set) else 'scan'
         if seed and src == 'scan':
             # first run: whales we already tracked in capper_history are not "new"
             tw[w] = {'wallet': w, 'name': nm, 'addedTs': None, 'seededTs': now, 'reason': reason, 'badge': b, 'lastSeenTs': now, 'source': src}
