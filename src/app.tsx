@@ -1770,6 +1770,7 @@ function ComboCard(props: { a: Pick; b: Pick; rank: number; bankroll: number; no
     <CardShell accent={"linear-gradient(90deg, " + GREEN + ", " + BRAND + ")"}>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
         <Chip bg={GREEN} color="#FFFFFF">Combo #{rank}</Chip>
+        <Chip bg={GREEN} color="#FFFFFF">{"Pays " + (combined > 0 ? (Math.round((1 / combined) * 10) / 10) : 0) + "x"}</Chip>
         <Chip bg={t.bg.subtle} color={t.text.primary}>{cents(combined)} combined</Chip>
         <Chip bg={t.bg.subtle} color={t.text.secondary}>2 legs · 1% stake</Chip>
       </div>
@@ -1777,7 +1778,7 @@ function ComboCard(props: { a: Pick; b: Pick; rank: number; bankroll: number; no
         {exA.headline} <span style={{ color: t.text.tertiary, fontWeight: 600 }}>and</span> {exB.headline}
       </div>
       <div style={{ fontSize: 14, lineHeight: "20px", color: t.text.primary, marginTop: 8 }}>
-        A {money(stake)} combo pays about {money(Math.round(payout) === payout ? payout : Math.round(payout * 100) / 100)} if both hit (combined price {cents(combined)}).
+        A {money(stake)} combo pays about {money(Math.round(payout) === payout ? payout : Math.round(payout * 100) / 100)} if both hit ({combined > 0 ? (Math.round((1 / combined) * 10) / 10) + "x" : ""} at {cents(combined)} combined). Ranked by quality score × payout.
       </div>
       <BackersLine backers={(a.backers || []).concat(b.backers || [])} />
       <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 6 }}>
@@ -1803,26 +1804,49 @@ function ComboCard(props: { a: Pick; b: Pick; rank: number; bankroll: number; no
     </CardShell>
   );
 }
-function buildCombos(top: Pick[]): [Pick, Pick][] {
-  const pool = top.filter((p: Pick) => {
+const COMBO_MIN_X = 2.5;
+const COMBO_MAX_X = 4;
+function comboPayout(a: Pick, b: Pick): number | null {
+  const pa = usedPrice(a), pb = usedPrice(b);
+  if (pa == null || pb == null || pa <= 0 || pb <= 0) return null;
+  return 1 / (pa * pb);
+}
+function comboEvScore(a: Pick, b: Pick): number {
+  const pay = comboPayout(a, b);
+  if (pay == null) return 0;
+  return (pickQualityScore(a) + pickQualityScore(b)) * pay;
+}
+function nearFair(p: Pick): boolean {
+  if (!p.kalshi || p.kalshi.status !== "ok") return false;
+  const over = overCents(p);
+  if (over != null && over > 2) return false;
+  return true;
+}
+function buildCombos(legs: Pick[]): [Pick, Pick][] {
+  const pool = legs.filter((p: Pick) => {
     const px = usedPrice(p);
-    return px != null && px >= 0.65 && px < 0.95;
+    return px != null && px >= 0.45 && px < 0.90;
   });
+  type Pair = { a: Pick; b: Pick; pay: number; score: number };
+  const pairs: Pair[] = [];
+  for (let i = 0; i < pool.length; i++) {
+    for (let j = i + 1; j < pool.length; j++) {
+      if (gameKey(pool[i]) === gameKey(pool[j])) continue;
+      const pay = comboPayout(pool[i], pool[j]);
+      if (pay == null || pay < COMBO_MIN_X || pay > COMBO_MAX_X + 1e-9) continue;
+      pairs.push({ a: pool[i], b: pool[j], pay, score: comboEvScore(pool[i], pool[j]) });
+    }
+  }
+  pairs.sort((x: Pair, y: Pair) => y.score - x.score || y.pay - x.pay);
   const used: Record<string, boolean> = {}, usedGame: Record<string, boolean> = {};
   const out: [Pick, Pick][] = [];
-  for (let i = 0; i < pool.length && out.length < 3; i++) {
-    if (used[pool[i].id]) continue;
-    const gi = gameKey(pool[i]);
-    if (usedGame[gi]) continue;
-    for (let j = i + 1; j < pool.length; j++) {
-      if (used[pool[j].id]) continue;
-      const gj = gameKey(pool[j]);
-      if (gi === gj || usedGame[gj]) continue;
-      out.push([pool[i], pool[j]]);
-      used[pool[i].id] = true; used[pool[j].id] = true;
-      usedGame[gi] = true; usedGame[gj] = true;
-      break;
-    }
+  for (let n = 0; n < pairs.length && out.length < 3; n++) {
+    const pr = pairs[n];
+    const gi = gameKey(pr.a), gj = gameKey(pr.b);
+    if (used[pr.a.id] || used[pr.b.id] || usedGame[gi] || usedGame[gj]) continue;
+    out.push([pr.a, pr.b]);
+    used[pr.a.id] = true; used[pr.b.id] = true;
+    usedGame[gi] = true; usedGame[gj] = true;
   }
   return out;
 }
@@ -2586,7 +2610,20 @@ export default function App() {
   const upcomingPicks = bySport(upcomingAll);
   const longFunPicks = sortPicksBy(longPicks.concat(fun), sortOf("longfun"), vb, now);
   const bestLongId = (longPicks.slice().sort((a: Pick, b: Pick) => pickQualityScore(b, vb(b)) - pickQualityScore(a, vb(a)))[0] || { id: "" }).id;
-  const combos = buildCombos(top);
+  const comboLegPool = uniqueByKey((DATA.signals || []).concat(DATA.fun || []).concat(topAll)).filter((p: Pick) => {
+    const n = visibleBackers(p).length;
+    const px = usedPrice(p);
+    const info = pickInfo(p, n);
+    if (n < 1 || !followOk(p) || gone(p) || isPlayerProp(p)) return false;
+    if (!vetted(p, visibleBackers(p)) || !pickHasHighRoiBacker(p, visibleBackers(p))) return false;
+    if (pickHasCapperHedge(p) || isEliteSplitGame(p.slug)) return false;
+    if (p.kalshi.status !== "ok" || !nearFair(p)) return false;
+    if (info.band === "glue" || info.band === "longshot" || info.pricier || info.tooPricier) return false;
+    if (px == null || px < 0.45 || px >= 0.90) return false;
+    return true;
+  });
+  const comboAll = buildCombos(comboLegPool);
+  const combos = sportFilter ? comboAll.filter((pair: [Pick, Pick]) => pair[0].league === sportFilter && pair[1].league === sportFilter) : comboAll;
   try { const dbg = (arr: Pick[]) => arr.map((p: Pick) => ({ id: p.id, q: p.q, label: p.label, ticker: p.kalshi && p.kalshi.ticker, act: p.kalshi && p.kalshi.action, contract: p.kalshi && p.kalshi.contract, price: usedPrice(p), startTs: p.startTs, backers: visibleBackers(p).map((b: Backer) => { const r = QMAP[(b.wallet || "").toLowerCase()]; const cv = convOf(b.wallet, b.cost, p.id); return { name: b.name, wallet: b.wallet, cost: b.cost, conv: cv.tag, mult: cv.mult, cw: r ? r.cw : null, cl: r ? r.cl : null, croi: r ? r.croi : null, badge: r ? r.badge : null, quality: r ? r.quality : null }; }), bq: backerStats(visibleBackers(p), p.id).quality })); (window as any).__RANK = { top: dbg(topAll), fun: dbg(funAll), poly: dbg(polyBase), props: dbg(propsBase), long: dbg(longBase), biggest: dbg(biggestAll), upcoming: dbg(upcomingAll), hot: dbg(hotAll) }; } catch (e) { /* debug only */ }
   const capNum = capN === "custom" ? Math.max(1, Math.floor(Number(capCustom) || 0)) : Number(capN);
   const allPicks = DATA.signals.concat(DATA.fun).concat(DATA.props || []).concat(DATA.longshots || []).concat(DATA.biggest || []).filter((p: Pick) => !pickHasCapperHedge(p));
@@ -2750,10 +2787,10 @@ export default function App() {
           {combos.length ? (
             <div style={{ marginBottom: 8 }}>
               <div style={{ fontSize: 16, fontWeight: 800, margin: "8px 0 4px" }}>Suggested 2-leg combos</div>
-              <Text>Built only from Top 20 singles priced 65¢ or higher, never two legs from the same game, never Fun or Polymarket legs. No 3+ leg parlays (4-legs went 0-9).</Text>
+              <Text>2-leg combos only, paying 2.5× to 4× (combined price 25–40¢). Both legs come from high-ROI elite backers (+20% sport ROI over 10+ graded, +15% overall) at or near fair Kalshi price, from different games. Both-sides bets and elite-split games are out. Ranked by quality score × payout, not by safety alone. No 3+ leg parlays (4-legs went 0-9).</Text>
               {combos.map((pair: [Pick, Pick], i: number) => (<ComboCard key={pair[0].id + "+" + pair[1].id} a={pair[0]} b={pair[1]} rank={i + 1} bankroll={bankroll} now={now} />))}
             </div>
-          ) : <Text>No 2-leg combo right now (need two Top 20 singles at 65¢+ from different games). No 3+ leg parlays (4-legs went 0-9).</Text>}
+          ) : <Text>No 2-leg combo right now pays 2.5× to 4× from high-ROI elite legs at or near fair, from different games. No 3+ leg parlays (4-legs went 0-9).</Text>}
           {top.length === 0 && f.followedOnly ? <Text>No pick clears the filter: none of the top picks is backed by a capper you follow. Turn off "Only picks a followed capper backs" to see them.</Text> : top.length === 0 ? <Text>No pick qualifies right now under the Top 20 rules (elite backer with +20% sport ROI over 10+ graded bets, +15% overall ROI, and a real-size bet). Fun Picks has {fun.length}.</Text> : top.length < 20 ? <Text>Only {top.length} of 20 qualify right now. The list is not padded with unvetted picks.</Text> : null}
           <div style={{ fontSize: 16, fontWeight: 800, margin: "12px 0 8px" }}>Singles</div>
           {top.map((p: Pick, i: number) => (<PickCard key={p.id} p={p} fun={false} bankroll={bankroll} now={now} rank={i + 1} followed={followed} hidden={hidden} toggle={toggle} />))}
@@ -3023,7 +3060,7 @@ export default function App() {
               "Whale positions come from each top whale's own open positions (up to 200 per wallet), so a whale with more open bets can be missed.",
               "Refresh uses ESPN and Kalshi only; esports and leagues ESPN doesn't cover show no ESPN win chance.",
               "Started games are dropped from Top 20, Upcoming, Fun, Polymarket, Player Props, Longshots, Biggest Bets and combos on refresh (they stay on Bets with a Live tag). Ended games are removed from every list after their W/L is written to the Journal.",
-              "Suggested 2-leg combos are built only from Top 20 singles priced 65¢+, never the same game, never Fun or Polymarket legs. No 3+ leg parlays (4-legs went 0-9). OrcaLayer itself does not report parlays. ESPN player stats are not loaded.",
+              "Suggested 2-leg combos must pay 2.5× to 4× (combined price 25–40¢). Both legs need a high-ROI elite backer at or near fair, from different games, with no both-sides or elite-split games. Ranked by quality score × payout. No 3+ leg parlays (4-legs went 0-9). OrcaLayer itself does not report parlays. ESPN player stats are not loaded.",
               "Esports start times come from Kalshi contract wording or the same match's markets; some show the date only.",
             ]} />
           </Section>
