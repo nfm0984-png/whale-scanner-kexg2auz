@@ -202,6 +202,22 @@
    "bets": 1028,
    "buys": 68,
    "wallets": 168
+  },
+  {
+   "ts": 1794713585,
+   "signals": 3,
+   "fun": 16,
+   "poly": 44,
+   "glue": 0,
+   "props": 1,
+   "longshots": 0,
+   "biggest": 78,
+   "upcoming": 34,
+   "calls": 305,
+   "cappers": 183,
+   "bets": 522,
+   "buys": 38,
+   "wallets": 183
   }
  ],
  "picks": {
@@ -6142,7 +6158,8 @@
    "first_seen": 1794592933,
    "scans": 1,
    "first_score": 37,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x88697459b84f3ffd3af0fd572b652f35f070f41162f3873562f8f4cbbf312052:no": {
    "tier": "top",
@@ -6512,7 +6529,8 @@
    "first_seen": 1794592933,
    "scans": 3,
    "first_score": 36,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x817b459ec43d6a967f6982e59a6c123cf34ab5b90685ae87ff5a7f3cee5a21e3:yes": {
    "tier": "poly",
@@ -6773,7 +6791,8 @@
    "first_seen": 1794610997,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x46088ccfe3cf972f2aa939393603e53ba9d1253dbe0176cf854212792a33a97c:no": {
    "tier": "fun",
@@ -6812,10 +6831,11 @@
    "first_seen": 1794610997,
    "scans": 4,
    "first_score": 41,
-   "result": null,
+   "result": "L",
    "ended": 1794689207,
    "finalScore": "MIA 36 \u2013 DUKE 25",
-   "active": false
+   "active": false,
+   "graded": 1794713585
   },
   "0xd4b018af41bf71ece1992abec3d0c715ddc5a3b67d78bd068c536c12f1e87dba:yes": {
    "tier": "fun",
@@ -6894,7 +6914,8 @@
    "first_seen": 1794610997,
    "scans": 2,
    "first_score": 30,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x3f69966237245a7eb48e1642fb3c415283c771aa9e4e6717490b7f2be800b281:no": {
    "tier": "poly",
@@ -6933,7 +6954,8 @@
    "first_seen": 1794610997,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0x1dee4ca347b40c81afc8d8d7413ad57e20443b9fb7a523735c62024a5e044b0f:no": {
    "tier": "poly",
@@ -7141,7 +7163,8 @@
    "first_seen": 1794633488,
    "scans": 1,
    "first_score": 38,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xf886d7210d201665b8932790037c0c3a594f2cefbcc2e465196ae3fd59d0182e:no": {
    "tier": "top",
@@ -7299,15 +7322,15 @@
    "slug": "enl-wok-fgr-2026-11-14-spread-home-5pt5",
    "market_id": "6522901",
    "side": "no",
-   "score": 30,
+   "score": 24,
    "whales": 1,
    "invested": 2984,
-   "start": "Sat Nov 14 \u00b7 7:00 AM PT",
+   "start": "2026-11-14",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794637322,
+   "last_seen": 1794713585,
    "first_seen": 1794633488,
-   "scans": 2,
+   "scans": 3,
    "first_score": 30,
    "result": null
   },
@@ -7324,9 +7347,9 @@
    "start": "2026-11-14",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794689395,
+   "last_seen": 1794713585,
    "first_seen": 1794633488,
-   "scans": 3,
+   "scans": 4,
    "first_score": 30,
    "result": null
   },
@@ -7337,15 +7360,15 @@
    "slug": "el1-pet-oxf-2026-11-14-spread-home-5pt5",
    "market_id": "6513755",
    "side": "no",
-   "score": 35,
+   "score": 29,
    "whales": 1,
    "invested": 2299,
-   "start": "Sat Nov 14 \u00b7 7:00 AM PT",
+   "start": "2026-11-14",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794637322,
+   "last_seen": 1794713585,
    "first_seen": 1794633488,
-   "scans": 2,
+   "scans": 3,
    "first_score": 29,
    "result": null
   },
@@ -7356,15 +7379,15 @@
    "slug": "el1-lei-bra-2026-11-14-first-half-total-4pt5",
    "market_id": "6513450",
    "side": "no",
-   "score": 34,
+   "score": 28,
    "whales": 1,
    "invested": 1558,
-   "start": "Sat Nov 14 \u00b7 7:00 AM PT",
+   "start": "2026-11-14",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794637322,
+   "last_seen": 1794713585,
    "first_seen": 1794633488,
-   "scans": 2,
+   "scans": 3,
    "first_score": 28,
    "result": null
   },
@@ -7415,15 +7438,15 @@
    "slug": "el2-wal-bar-2026-11-14-team-total-away-5pt5",
    "market_id": "6516173",
    "side": "no",
-   "score": 33,
+   "score": 27,
    "whales": 1,
    "invested": 1036,
-   "start": "Sat Nov 14 \u00b7 7:00 AM PT",
+   "start": "2026-11-14",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794637322,
+   "last_seen": 1794713585,
    "first_seen": 1794633488,
-   "scans": 2,
+   "scans": 3,
    "first_score": 27,
    "result": null
   },
@@ -7542,7 +7565,8 @@
    "first_seen": 1794633488,
    "scans": 3,
    "first_score": 40,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0x0636d3ae50c3b45664d04cc294778496ff6cc16f4a90003e1bf5c2fe718fe763:yes": {
    "tier": "poly",
@@ -7678,7 +7702,8 @@
    "first_seen": 1794633488,
    "scans": 2,
    "first_score": 58,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x28e757e159249b6b51c4b307a4aed00f55308a6ab43a60afce5089dfc53d766e:no": {
    "tier": "poly",
@@ -7859,7 +7884,8 @@
    "first_seen": 1794637322,
    "scans": 1,
    "first_score": 50,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0xf314b6b85c2f8de46cfad482be3b449525a8b0266f2127d14708852ba9efcc1f:no": {
    "tier": "top",
@@ -7878,7 +7904,8 @@
    "first_seen": 1794637322,
    "scans": 1,
    "first_score": 32,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x5a4b9dde28142967904cf5957cf6af0788bfa2cc098fe09249fcd965a218e578:no": {
    "tier": "top",
@@ -7897,7 +7924,8 @@
    "first_seen": 1794637322,
    "scans": 1,
    "first_score": 62,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x12cfbe2669d514cd2a38b74532ad0cee5304bee3eea9f898b44b113d788d8a7f:yes": {
    "tier": "top",
@@ -8064,7 +8092,8 @@
    "first_seen": 1794637322,
    "scans": 1,
    "first_score": 22,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xed48d4123a9991badaf4dd77fadfb95983302f6d2276d8b63d476cec8de40c84:no": {
    "tier": "fun",
@@ -8083,7 +8112,8 @@
    "first_seen": 1794637322,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0x99b856eb4917f418a53dffc75a46791b5fd0cd700748166fb0314847807e4775:yes": {
    "tier": "fun",
@@ -8102,7 +8132,8 @@
    "first_seen": 1794637322,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0x7cee7e886d5b43191f86df4bfaf840820ff9c7c2961f2383bc2f3b052f865702:yes": {
    "tier": "fun",
@@ -8121,7 +8152,8 @@
    "first_seen": 1794637322,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x04d5a5852f0ecfd16dd9809c7425075a5c4ac677a86bae78ebeb875a335c4680:no": {
    "tier": "fun",
@@ -8140,7 +8172,8 @@
    "first_seen": 1794637322,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x93a2bf869ff9349bb4062efdaccc9502e35fcba9d3987cca0ec773d7a07b01a9:yes": {
    "tier": "fun",
@@ -8159,7 +8192,8 @@
    "first_seen": 1794637322,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xaf9fedc09dc43c32138d210194df1d5bd8c3ee9b9d1fd8ea361c52c62bdebab4:no": {
    "tier": "fun",
@@ -8178,7 +8212,8 @@
    "first_seen": 1794637322,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xec0e49422ce0a73eb9aa5eaadc2533a61e292d707a70c6474a1e0d0fad708cde:yes": {
    "tier": "fun",
@@ -8216,7 +8251,8 @@
    "first_seen": 1794637322,
    "scans": 1,
    "first_score": 35,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x6f0ef42234238d650efc2883b281431e14551223787c5c3dcd96409369dd9c4f:no": {
    "tier": "poly",
@@ -8335,7 +8371,8 @@
    "first_seen": 1794637322,
    "scans": 1,
    "first_score": 33,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xc5aabd4bafb797efb87e33c82014429e4a0cedd897f4851e0e95b53bde2826bf:yes": {
    "tier": "poly",
@@ -8393,7 +8430,8 @@
    "first_seen": 1794637322,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xb6dc51a900f55b3b00eaf494dbe5faaddb7e485dd170afe971f9a5e9f03d17e2:yes": {
    "tier": "longshots",
@@ -8455,7 +8493,8 @@
    "first_seen": 1794637322,
    "scans": 3,
    "first_score": 36,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x3845c19a15cd0f8e61e5d598d31e3f2938371c086e401df0319180b8ee4b8443:yes": {
    "tier": "poly",
@@ -8507,15 +8546,15 @@
    "slug": "el2-rot-cra-2026-11-14-first-to-score-neither",
    "market_id": "6514813",
    "side": "yes",
-   "score": 56,
-   "whales": 1,
-   "invested": 4706,
-   "start": "Sat Nov 14 \u00b7 7:00 AM PT",
+   "score": 42,
+   "whales": 3,
+   "invested": 6645,
+   "start": "2026-11-14",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794637322,
+   "last_seen": 1794713585,
    "first_seen": 1794637322,
-   "scans": 1,
+   "scans": 2,
    "first_score": 56,
    "result": null
   },
@@ -8536,7 +8575,8 @@
    "first_seen": 1794637322,
    "scans": 1,
    "first_score": 40,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0xe42d1e496508a1685f5437b33e00e34f95f1019788d8c6ea434995c0bf0a9419:yes": {
    "tier": "poly",
@@ -8887,7 +8927,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 34,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0x3e4b4646241473c5b25ec1ddf02512593021e83aa016c9bbe37dce7289d598b8:no": {
    "tier": "fun",
@@ -8929,7 +8970,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 48,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x37021fd1db98a4044905bcc171d2aafc950efc6d81d614fea3740d41645bb6da:yes": {
    "tier": "top",
@@ -8948,7 +8990,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 40,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xa05e90799cf44f269a69b62e46b133bbe07bc3b563a0be75a379a3dbec64f43b:yes": {
    "tier": "top",
@@ -9009,7 +9052,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 30,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0xfa7926c8cc37284842fd0756fb94db0c97ef6022a72d3acfb3c49c5f732a7f60:no": {
    "tier": "top",
@@ -9116,7 +9160,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 35,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xbddb7c7946f22cd2c0fd059473c4cd0b3458e901bfa581afccdae0058ae25380:no": {
    "tier": "top",
@@ -9154,7 +9199,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 32,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0x5c94e40aec16a9208079b29ab5771de84c0490684aa7e94850af4ad835cfa81a:yes": {
    "tier": "fun",
@@ -9173,7 +9219,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 38,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x41f94101d57bf028eff62f2cc3714adb79722553dc59c1676071459c0b009e45:no": {
    "tier": "fun",
@@ -9192,7 +9239,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 48,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0x0ba773d41763b0867213fcc7893d91f3d8d5f56174e60245f4ee8d0937ee39f5:no": {
    "tier": "fun",
@@ -9211,7 +9259,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 50,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x8fd357723edf1dde5996476b567e1570318114b2f6908556fe3df629c3c095e1:no": {
    "tier": "fun",
@@ -9230,7 +9279,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 69,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x9f405a5c8f4140e2e23a714fe2f076e56190eec0e41d86506ae1972114dcb38a:no": {
    "tier": "fun",
@@ -9268,7 +9318,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 44,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xfb6db6bdae40130fd8f20c694f38fc6b04e3cc40341c35775ed956fd17015dfe:yes": {
    "tier": "fun",
@@ -9310,7 +9361,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 29,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x7895fd50c23a714b562b1a42fa43a03fe24d4adc4e1a973bf1f57a5074edd90e:no": {
    "tier": "fun",
@@ -9348,7 +9400,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 49,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x6df6ccfabf40f23c187fee1733aa52a45ed259f9fb49614d90683c7f16ca39ba:yes": {
    "tier": "fun",
@@ -9367,7 +9420,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 35,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xd6651d875d9105ba1b1d8156c270d27e968c895b0dd039694c7a28e21dff7d2a:no": {
    "tier": "fun",
@@ -9386,7 +9440,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x5f71c56e0376387066f5814085e9a8243f733decfc47e10a412dd5b9cf206cb4:yes": {
    "tier": "fun",
@@ -9428,7 +9483,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 50,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x7756fcd7845ab7779bc83bb068ceb401a12497f17b38f4260d405cef6ecf375f:yes": {
    "tier": "fun",
@@ -9447,7 +9503,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 54,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0x0cd10772cfd652a962edb033c4764a106e379c6809974cbb1bd60aea34685dde:yes": {
    "tier": "fun",
@@ -9466,7 +9523,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 50,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x0f08cad846e5e2a550edf20f62b6cdc3bbdc2550af3fa8d6170be03eb8815676:no": {
    "tier": "fun",
@@ -9485,7 +9543,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 31,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x39433dd78e10339e63153e9adf30ea09cfc66c128aee8842da546c05ff07509b:no": {
    "tier": "poly",
@@ -9584,7 +9643,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 53,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xeec685ebd747ba2f641945f0a49703ff1cb2645047eec537869a484504b8609f:no": {
    "tier": "poly",
@@ -9686,7 +9746,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 59,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xea0ee3e4a2e999964d30dad8e7b6421c526e15f0b5458ad45ca0b3fcda140a1a:yes": {
    "tier": "poly",
@@ -9725,7 +9786,8 @@
    "first_seen": 1794668814,
    "scans": 2,
    "first_score": 43,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x3489e35cd065910342d37326191290674869b7e14f1d4e46e6c99fb8bfc92d0f:no": {
    "tier": "poly",
@@ -9744,10 +9806,11 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 50,
-   "result": null,
+   "result": "W",
    "ended": 1794689207,
    "finalScore": "ALM 2 \u2013 AND 1",
-   "active": false
+   "active": false,
+   "graded": 1794713585
   },
   "0xea6667b8d1254e9b6411bcccbea72cc7735d2ad847d8b70525990f96fd6ceda5:yes": {
    "tier": "poly",
@@ -9766,7 +9829,8 @@
    "first_seen": 1794668814,
    "scans": 2,
    "first_score": 52,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x98d06af112b7a09b9c0beb3674eef3aed728e98399d73779bb4fc4097dfa37d4:no": {
    "tier": "poly",
@@ -9785,7 +9849,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 40,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0xc5fc24067d4bc55aa56921886c74a384e160a3ca5736a810dbebea0cd87e33a1:yes": {
    "tier": "poly",
@@ -9862,7 +9927,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 34,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0x7f0a0d1a525aad75f59f1f379f1798ae9719ac8c1e6f0eea7bf7cf32b7dce24e:no": {
    "tier": "fun",
@@ -9923,7 +9989,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 37,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x07fa1ea8c4c8616015312a68383f943a033963aaac8372abbb5511d0cdd25a1d:no": {
    "tier": "top",
@@ -9965,7 +10032,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 37,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0x7e18117f745b5c9ccfd1efec23d30c828fc086a0f70cb546b8cd308bb94a16e3:yes": {
    "tier": "top",
@@ -9984,7 +10052,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 37,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xf7ab147a6878321568ae4f7ea180cec13aebc70f775d18714d22ec3f176ecd11:yes": {
    "tier": "fun",
@@ -10003,7 +10072,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x828c4022536030bd4f199445d838a25f96dd32c63ba85540686d4923821cc03a:no": {
    "tier": "top",
@@ -10041,7 +10111,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 31,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0xa7a657b2bf862236533c46f2a213ebcc8e5ce2039be457559f06abe0f0b6402b:no": {
    "tier": "fun",
@@ -10083,7 +10154,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 27,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0xdea548022f4d5ddeadf6dca2221994616201006edb795d97aec73ef27a92a617:yes": {
    "tier": "poly",
@@ -10121,7 +10193,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 35,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xf506f28e388a3db0de094355c18554656dfca9b2ac1b677fcd0b63a5583b6180:no": {
    "tier": "top",
@@ -10140,7 +10213,8 @@
    "first_seen": 1794668814,
    "scans": 1,
    "first_score": 50,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0x697b518ca5520bede4ecbad44501b8a1fc0ebba30e732c9e623a557280e9c039:yes": {
    "tier": "poly",
@@ -10471,7 +10545,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 40,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xc88ade0d2ef4e2587de1cd9481c0950961c5217372fa132def6e5fd386348b1f:yes": {
    "tier": "top",
@@ -10490,7 +10565,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 56,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xbde42d97c464effaac840f9b9105ae05b6fab0a3315a6154da1abfec425621de:no": {
    "tier": "top",
@@ -10528,7 +10604,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 63,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0xe9e19565e5e0f45187854a191a8ffc8056fa9c040665e5531b5bd2d045702144:no": {
    "tier": "top",
@@ -10604,7 +10681,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 38,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0xd90e988511f9df46f9f34838ffc4e1dfed001dacc2f84652a746b0cf318cd3e7:no": {
    "tier": "fun",
@@ -10623,7 +10701,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 47,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0xccaa81c6beeec090e185efe06b5dbb3bdf56bb172ddb009ba7f5188ca86457eb:no": {
    "tier": "fun",
@@ -10718,7 +10797,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 67,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0x4d1627b87b6c2353200dc08b5f391c16332d3253c53d6622fa9c90da216cc951:no": {
    "tier": "fun",
@@ -10756,7 +10836,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 27,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x06ec3284d82452a4dd76b4dc3b259edc45d039642ab8fa60118fc49595de2111:yes": {
    "tier": "fun",
@@ -10775,7 +10856,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 26,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x60f09a71bfd0dcc3a486440838b55dd6fd6d6e92066dfa11f3e182dacc4cf868:yes": {
    "tier": "fun",
@@ -10851,7 +10933,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 26,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0xd2e4296ca1829990b51f153cfc462b1c02287944100c07c4f6192db135a009ef:no": {
    "tier": "fun",
@@ -10912,7 +10995,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 5,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0xda30a67fffe64fa46b998ae7eedfae867a4bed818af391ff06e14fdfe25c0338:no": {
    "tier": "poly",
@@ -10931,7 +11015,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 43,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x2b1f51c9745818e0493c7ce51ead2bc3b6fee4c8aa6978da20b9a5713b268680:yes": {
    "tier": "poly",
@@ -11054,15 +11139,15 @@
    "slug": "cfb-ndkst-hawaii-2026-11-14-total-39pt5",
    "market_id": "6609347",
    "side": "no",
-   "score": 47,
-   "whales": 2,
-   "invested": 3214,
+   "score": 59,
+   "whales": 3,
+   "invested": 3726,
    "start": "Sat Nov 14 \u00b7 8:00 PM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794689395,
+   "last_seen": 1794713585,
    "first_seen": 1794689395,
-   "scans": 1,
+   "scans": 2,
    "first_score": 47,
    "result": null
   },
@@ -11111,15 +11196,15 @@
    "slug": "cfb-ndkst-hawaii-2026-11-14-spread-away-7pt5",
    "market_id": "6609322",
    "side": "no",
-   "score": 46,
+   "score": 47,
    "whales": 2,
-   "invested": 2479,
+   "invested": 3068,
    "start": "Sat Nov 14 \u00b7 8:00 PM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794689395,
+   "last_seen": 1794713585,
    "first_seen": 1794689395,
-   "scans": 1,
+   "scans": 2,
    "first_score": 46,
    "result": null
   },
@@ -11140,10 +11225,11 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 36,
-   "result": null,
+   "result": "L",
    "ended": 1794706561,
    "finalScore": "ECU 72 \u2013 DSU 48",
-   "active": false
+   "active": false,
+   "graded": 1794713585
   },
   "0x0971707abb83763e90f7ee930bebca2151dd0bb7f045a9c3e1c8ef6748fa555e:no": {
    "tier": "poly",
@@ -11162,7 +11248,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 24,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xb3dcab64fb3b1943bd79268a8fe6ba278e9f3070f4ae03fe42b6f1bc756fc29e:no": {
    "tier": "poly",
@@ -11177,9 +11264,9 @@
    "start": "2026-11-14",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794689395,
+   "last_seen": 1794713585,
    "first_seen": 1794689395,
-   "scans": 1,
+   "scans": 2,
    "first_score": 28,
    "result": null
   },
@@ -11219,10 +11306,11 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 28,
-   "result": null,
+   "result": "L",
    "ended": 1794706561,
    "finalScore": "MSST 9 \u2013 AUB 41",
-   "active": false
+   "active": false,
+   "graded": 1794713585
   },
   "0xc9c7d9b93f082cfabbc5ab742e6df0bc56ecd0a85e522faac148d409652fe114:yes": {
    "tier": "poly",
@@ -11260,7 +11348,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 33,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xc6fc98d58f9edab5a95cb2bb703bd466428bd57c1185d7c4c3e4f7a8adb54b2f:no": {
    "tier": "fun",
@@ -11298,7 +11387,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 39,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0xbb70a569d1eb5786984ea56736f4cf03e73129643d087d08f31af347b516185c:yes": {
    "tier": "biggest",
@@ -11317,7 +11407,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 51,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0xc2c371b13e8982caa1fb9a04106609f61e95290b89291021c1c2168fa2121d11:yes": {
    "tier": "fun",
@@ -11336,7 +11427,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 44,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xbb70a569d1eb5786984ea56736f4cf03e73129643d087d08f31af347b516185c:no": {
    "tier": "poly",
@@ -11355,7 +11447,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 50,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x98b9683409ea52806472dd104bad1dbf6e36ce4c9f63d3a354653e68656a6723:no": {
    "tier": "top",
@@ -11412,7 +11505,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 34,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0xf92621b8786635e34e8e8e3009a0fea75c453efd69679d46c68922f3e6418e2a:no": {
    "tier": "fun",
@@ -11478,15 +11572,15 @@
    "slug": "cs2-ts7-furia-2026-11-15",
    "market_id": "7039227",
    "side": "yes",
-   "score": 38,
-   "whales": 2,
-   "invested": 28615,
+   "score": 60,
+   "whales": 4,
+   "invested": 96450,
    "start": "Sun Nov 15 \u00b7 12:00 AM PT",
-   "kalshi": "BUY YES Spirit @ 59\u00a2",
-   "kprice": 0.59,
-   "last_seen": 1794689395,
+   "kalshi": "BUY YES Spirit @ 60\u00a2",
+   "kprice": 0.6,
+   "last_seen": 1794713585,
    "first_seen": 1794689395,
-   "scans": 1,
+   "scans": 2,
    "first_score": 38,
    "result": null
   },
@@ -11535,15 +11629,15 @@
    "slug": "cs2-ts7-furia-2026-11-15",
    "market_id": "7039227",
    "side": "no",
-   "score": 14,
-   "whales": 1,
-   "invested": 15274,
+   "score": 21,
+   "whales": 2,
+   "invested": 30997,
    "start": "Sun Nov 15 \u00b7 12:00 AM PT",
-   "kalshi": "BUY YES FURIA @ 42\u00a2",
-   "kprice": 0.42,
-   "last_seen": 1794689395,
+   "kalshi": "BUY YES FURIA @ 41\u00a2",
+   "kprice": 0.41,
+   "last_seen": 1794713585,
    "first_seen": 1794689395,
-   "scans": 1,
+   "scans": 2,
    "first_score": 14,
    "result": null
   },
@@ -11564,7 +11658,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 34,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0xfa4478edb5bd1b7bbcaeb59b4bdda37a5280483eb41aa279ad36af27d84750c9:no": {
    "tier": "top",
@@ -11583,10 +11678,11 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 29,
-   "result": null,
+   "result": "L",
    "ended": 1794706561,
    "finalScore": "DETM 72 \u2013 TOL 85",
-   "active": false
+   "active": false,
+   "graded": 1794713585
   },
   "0xfa4478edb5bd1b7bbcaeb59b4bdda37a5280483eb41aa279ad36af27d84750c9:yes": {
    "tier": "poly",
@@ -11605,10 +11701,11 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 12,
-   "result": null,
+   "result": "W",
    "ended": 1794706561,
    "finalScore": "DETM 72 \u2013 TOL 85",
-   "active": false
+   "active": false,
+   "graded": 1794713585
   },
   "0x26597524e6922f8ff99db82aa16e1b56ad3defb223e11b7da7d7893761142083:yes": {
    "tier": "poly",
@@ -11627,10 +11724,11 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 36,
-   "result": null,
+   "result": "W",
    "ended": 1794706561,
    "finalScore": "ODU 80 \u2013 LONG 74",
-   "active": false
+   "active": false,
+   "graded": 1794713585
   },
   "0x46013f4fcc90ebd023be3743443c34d052fc24c9ec9118c29dad7ecc50180ec1:yes": {
    "tier": "poly",
@@ -11649,10 +11747,11 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 20,
-   "result": null,
+   "result": "L",
    "ended": 1794706561,
    "finalScore": "UNCO 46 \u2013 SDST 71",
-   "active": false
+   "active": false,
+   "graded": 1794713585
   },
   "0xf30f96231d2203fbbaf44367da8e9fd3c49209d0c1aa749b6a1d5a5ac52f3757:no": {
    "tier": "poly",
@@ -11671,10 +11770,11 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 35,
-   "result": null,
+   "result": "L",
    "ended": 1794706561,
    "finalScore": "DETM 72 \u2013 TOL 85",
-   "active": false
+   "active": false,
+   "graded": 1794713585
   },
   "0x4ac570c71354cd4ff8536a77bf933ec4d95575294d111aa9d07f7dca35cfa453:no": {
    "tier": "top",
@@ -11693,10 +11793,11 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 32,
-   "result": null,
+   "result": "W",
    "ended": 1794706561,
    "finalScore": "MSST 9 \u2013 AUB 41",
-   "active": false
+   "active": false,
+   "graded": 1794713585
   },
   "0x85d21f47fef94c7df2cc9e557720ac2f17ee59f130200176cd3b97673a1cd5a2:yes": {
    "tier": "poly",
@@ -11715,10 +11816,11 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 39,
-   "result": null,
+   "result": "W",
    "ended": 1794706561,
    "finalScore": "MSST 9 \u2013 AUB 41",
-   "active": false
+   "active": false,
+   "graded": 1794713585
   },
   "0xba1d863ef49e4749c636f0c1ff79b1e7a2624883fe6fddc12e2acd17566946f5:no": {
    "tier": "poly",
@@ -11737,10 +11839,11 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 26,
-   "result": null,
+   "result": "L",
    "ended": 1794706561,
    "finalScore": "MSST 9 \u2013 AUB 41",
-   "active": false
+   "active": false,
+   "graded": 1794713585
   },
   "0x29abe69e215911ef9e29afcce886f55c48332378ea0340d628b6de5cae2ff7db:no": {
    "tier": "fun",
@@ -11782,10 +11885,11 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 40,
-   "result": null,
+   "result": "W",
    "ended": 1794706561,
    "finalScore": "MSST 9 \u2013 AUB 41",
-   "active": false
+   "active": false,
+   "graded": 1794713585
   },
   "0x8413adafdeb8b529fea890993c48a4d255102c223049281416c25ffd535a8a8a:yes": {
    "tier": "poly",
@@ -11804,7 +11908,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 38,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x149d09364462859498a1776ff9aa1ba24caed9e97e7ffc20ae6731d076393200:no": {
    "tier": "fun",
@@ -11846,7 +11951,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 28,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x7cf6ddc85d2dd14655acea9aa8e0eeba70017600627c41613abb3ccdc13590b8:no": {
    "tier": "poly",
@@ -11865,7 +11971,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x51d2ab24115f5c87762a8afcca6d61b9dc3d29af531eac7b2a1c80a53388ca3e:yes": {
    "tier": "fun",
@@ -11907,7 +12014,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 22,
-   "result": null
+   "result": "L",
+   "graded": 1794713585
   },
   "0x0b29cb739b2d4018cdb382b90248e1d04edf03883376d01f8a7de4db1a53af2e:no": {
    "tier": "poly",
@@ -11926,7 +12034,8 @@
    "first_seen": 1794689395,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794713585
   },
   "0x5aec81ad9e0a93357877ca2b5b86c7a6abd9581404a8de9d651301e28d993c7b:no": {
    "tier": "fun",
@@ -12018,6 +12127,861 @@
    "ended": 1794706561,
    "finalScore": "OAK 80 \u2013 UNI 76",
    "active": false
+  },
+  "0xecbfaf9f3950fe3bb70053492cb4d6714bec94a488680ac59ff544e939ce78ba:no": {
+   "tier": "top",
+   "q": "Patriots vs. Lions",
+   "label": "Lions",
+   "slug": "nfl-ne-det-2026-11-15",
+   "market_id": "6248123",
+   "side": "no",
+   "score": 68,
+   "whales": 3,
+   "invested": 25254,
+   "start": "Sun Nov 15 \u00b7 6:30 AM PT",
+   "kalshi": "BUY YES Detroit @ 58\u00a2",
+   "kprice": 0.58,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 68,
+   "result": null
+  },
+  "0xe5911fe31ff6ada47f633e9cc21c8edfb3d1be97d580ebffe01d7e953f440a9c:no": {
+   "tier": "top",
+   "q": "Spread: Lions (-2.5)",
+   "label": "Lions +2.5 or better for the other side",
+   "slug": "nfl-ne-det-2026-11-15-spread-home-2pt5",
+   "market_id": "6301680",
+   "side": "no",
+   "score": 70,
+   "whales": 6,
+   "invested": 167359,
+   "start": "Sun Nov 15 \u00b7 6:30 AM PT",
+   "kalshi": "BUY NO Detroit wins by over 2.5 points @ 49\u00a2",
+   "kprice": 0.49,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 70,
+   "result": null
+  },
+  "0x60126676efb1f1e6f92477e8429f3d7b0cf8a57f6a5ea95d02aea17a07e04b79:yes": {
+   "tier": "top",
+   "q": "Counter-Strike: Heroic vs magic (BO3) - PGL Cluj-Napoca: Closed Qualifier Playoffs",
+   "label": "Heroic",
+   "slug": "cs2-hero-mgc-2026-11-15",
+   "market_id": "7039532",
+   "side": "yes",
+   "score": 50,
+   "whales": 3,
+   "invested": 42103,
+   "start": "Sun Nov 15 \u00b7 1:00 AM PT",
+   "kalshi": "BUY NO magic @ 62\u00a2",
+   "kprice": 0.62,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 50,
+   "result": null
+  },
+  "0xc0c5d8a933fcafbb17eb3c6433099dd186c073e761e4f30703b011ef7d267a41:yes": {
+   "tier": "fun",
+   "q": "North Dakota State vs. Hawai'i",
+   "label": "North Dakota State",
+   "slug": "cfb-ndkst-hawaii-2026-11-14",
+   "market_id": "6609314",
+   "side": "yes",
+   "score": 27,
+   "whales": 1,
+   "invested": 2303,
+   "start": "Sat Nov 14 \u00b7 8:00 PM PT",
+   "kalshi": "BUY YES North Dakota St. @ 74\u00a2",
+   "kprice": 0.74,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 27,
+   "result": null
+  },
+  "0x06f886f42d9095870772d8366e5ad0552fab67dbcfdaa3b7745fced823f74ebe:yes": {
+   "tier": "fun",
+   "q": "Patriots vs. Lions: O/U 50.5",
+   "label": "OVER",
+   "slug": "nfl-ne-det-2026-11-15-total-50pt5",
+   "market_id": "6301845",
+   "side": "yes",
+   "score": 47,
+   "whales": 4,
+   "invested": 19872,
+   "start": "Sun Nov 15 \u00b7 6:30 AM PT",
+   "kalshi": "BUY YES Over 50.5 points @ 48\u00a2",
+   "kprice": 0.48,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 47,
+   "result": null
+  },
+  "0x43a0fba09ae00d9cdcbb814c1a4d47dd8fb4030e25239a02c04aabfbda139a25:yes": {
+   "tier": "fun",
+   "q": "Counter-Strike: Leo Team vs The Last Resort (BO3) - CCT Europe Group Stage",
+   "label": "Leo Team",
+   "slug": "cs2-leo2-tlr-2026-11-15",
+   "market_id": "7027651",
+   "side": "yes",
+   "score": 35,
+   "whales": 1,
+   "invested": 2418,
+   "start": "Sun Nov 15 \u00b7 4:00 AM PT",
+   "kalshi": "BUY YES Leo Team @ 74\u00a2",
+   "kprice": 0.74,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 35,
+   "result": null
+  },
+  "0x5dda66cf7a73e27ee44328f0f8c7c9ff49a96974fdcce5a3ffc287dd5787690b:no": {
+   "tier": "fun",
+   "q": "Spread: Patriots (-3.5)",
+   "label": "Patriots +3.5 or better for the other side",
+   "slug": "nfl-ne-det-2026-11-15-spread-away-3pt5",
+   "market_id": "6301664",
+   "side": "no",
+   "score": 60,
+   "whales": 3,
+   "invested": 5425,
+   "start": "Sun Nov 15 \u00b7 6:30 AM PT",
+   "kalshi": "BUY NO New England wins by over 3.5 points @ 70\u00a2",
+   "kprice": 0.7,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 60,
+   "result": null
+  },
+  "0x59c2a9721c15bc805a2861f2b269f60a45d1c5e6f0e8030ff85ef75a53cdf7e2:no": {
+   "tier": "fun",
+   "q": "Spread: Lions (-7.5)",
+   "label": "Lions +7.5 or better for the other side",
+   "slug": "nfl-ne-det-2026-11-15-spread-home-7pt5",
+   "market_id": "6301685",
+   "side": "no",
+   "score": 45,
+   "whales": 2,
+   "invested": 3393,
+   "start": "Sun Nov 15 \u00b7 6:30 AM PT",
+   "kalshi": "BUY NO Detroit wins by over 7.5 points @ 71\u00a2",
+   "kprice": 0.71,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 45,
+   "result": null
+  },
+  "0x60d20bc969bfe6b1c53eaa3005430c30e4bbbb5dcc1130992dc6f6f94634317c:no": {
+   "tier": "fun",
+   "q": "Brisbane 3: Christian Langmo vs August Holmgren",
+   "label": "August Holmgren",
+   "slug": "atp-langmo-holmgre-2026-11-15",
+   "market_id": "7033080",
+   "side": "no",
+   "score": 31,
+   "whales": 1,
+   "invested": 2111,
+   "start": "2026-11-15",
+   "kalshi": "BUY YES August Holmgren @ 73\u00a2",
+   "kprice": 0.73,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 31,
+   "result": null
+  },
+  "0xbf8f2cb89a8cb4753191c6f3fd785f50feb9c88e5542571e164573dfda0ee04f:no": {
+   "tier": "fun",
+   "q": "Helsinki: Aaron Funk vs Carlo Alberto Caniato",
+   "label": "Carlo Alberto Caniato",
+   "slug": "atp-funk-caniato-2026-11-15",
+   "market_id": "7046039",
+   "side": "no",
+   "score": 51,
+   "whales": 1,
+   "invested": 741,
+   "start": "2026-11-15",
+   "kalshi": "BUY YES Carlo Alberto Caniato @ 92\u00a2",
+   "kprice": 0.92,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 51,
+   "result": null
+  },
+  "0x14d9b3a6d5c63374d71ccfa62d09386a8ec6341c963af49d7a39e8ce57e1df53:no": {
+   "tier": "fun",
+   "q": "Sydney: Hayden Jones vs Naoki Nakagawa",
+   "label": "Naoki Nakagawa",
+   "slug": "atp-haydenj-nakaga-2026-11-14",
+   "market_id": "7035524",
+   "side": "no",
+   "score": 27,
+   "whales": 1,
+   "invested": 677,
+   "start": "2026-11-14",
+   "kalshi": "BUY YES Naoki Nakagawa @ 63\u00a2",
+   "kprice": 0.63,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 27,
+   "result": null
+  },
+  "0xc769a3429ab2d916320eff24ee4a03e95643241f36596596aa5d32a894595415:no": {
+   "tier": "fun",
+   "q": "Counter-Strike: Butterfly vs BakS eSports (BO3) - NODWIN Clutch Series Group Stage",
+   "label": "BakS eSports",
+   "slug": "cs2-btf-baks-2026-11-15",
+   "market_id": "7027664",
+   "side": "no",
+   "score": 41,
+   "whales": 1,
+   "invested": 511,
+   "start": "Sun Nov 15 \u00b7 7:00 AM PT",
+   "kalshi": "BUY YES BakS eSports @ 53\u00a2",
+   "kprice": 0.53,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 41,
+   "result": null
+  },
+  "0x07075b98cf0981ef8216a9644a528d4be436770751f79f0636243ec7ff85cf09:no": {
+   "tier": "fun",
+   "q": "Counter-Strike: FaZe vs fnatic (BO3) - PGL Cluj-Napoca: Closed Qualifier Playoffs",
+   "label": "fnatic",
+   "slug": "cs2-faze-fnc-2026-11-15",
+   "market_id": "7039527",
+   "side": "no",
+   "score": 33,
+   "whales": 1,
+   "invested": 1543,
+   "start": "Sun Nov 15 \u00b7 1:00 AM PT",
+   "kalshi": "BUY YES fnatic @ 47\u00a2",
+   "kprice": 0.47,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 33,
+   "result": null
+  },
+  "0x7e6e585f0553bb1d6676427dbda7d9ce3d18dee85a3ae37da12dbf670d0574e9:no": {
+   "tier": "fun",
+   "q": "Patriots vs. Lions: O/U 48.5",
+   "label": "UNDER",
+   "slug": "nfl-ne-det-2026-11-15-total-48pt5",
+   "market_id": "6301844",
+   "side": "no",
+   "score": 36,
+   "whales": 1,
+   "invested": 910,
+   "start": "Sun Nov 15 \u00b7 6:30 AM PT",
+   "kalshi": "BUY NO Over 48.5 points @ 47\u00a2",
+   "kprice": 0.47,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 36,
+   "result": null
+  },
+  "0x444d8eedb8868c727fd2224320ddc115e0e1808806c6fd44d7d2b26c6e87b481:no": {
+   "tier": "fun",
+   "q": "AHL: Hamilton Hammers vs. Wilkes-Barre/Scranton Penguins",
+   "label": "Wilkes-Barre/Scranton Penguins",
+   "slug": "ahl-ham-wil-2026-11-14",
+   "market_id": "6871190",
+   "side": "no",
+   "score": 36,
+   "whales": 1,
+   "invested": 552,
+   "start": "2026-11-14",
+   "kalshi": "BUY YES Wilkes Barre-Scranton Penguins @ 64\u00a2",
+   "kprice": 0.64,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 36,
+   "result": null
+  },
+  "0x2a915980de0a4b239f19959ef7985abad2def45ca898a84ab52047c785397aa2:yes": {
+   "tier": "fun",
+   "q": "Montreal Alouettes vs. Edmonton Elks",
+   "label": "Montreal Alouettes",
+   "slug": "cfl-mtl-edm-2026-11-15",
+   "market_id": "6885183",
+   "side": "yes",
+   "score": 23,
+   "whales": 1,
+   "invested": 2440,
+   "start": "2026-11-15",
+   "kalshi": "BUY YES Montreal Alouettes @ 61\u00a2",
+   "kprice": 0.61,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 23,
+   "result": null
+  },
+  "0xaf984220237c257149fa3e702191c0152281036e68800734f767c67861bfcf4e:no": {
+   "tier": "fun",
+   "q": "Kobe: Koki Matsuda vs Shintaro Imai",
+   "label": "Shintaro Imai",
+   "slug": "atp-matsuda-imai-2026-11-14",
+   "market_id": "7036374",
+   "side": "no",
+   "score": 21,
+   "whales": 1,
+   "invested": 1258,
+   "start": "2026-11-14",
+   "kalshi": "BUY YES Shintaro Imai @ 48\u00a2",
+   "kprice": 0.48,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 21,
+   "result": null
+  },
+  "0x987d5d1261e8dd904c1729e75af35da0f651852d4b7ed277bd50635992f92546:yes": {
+   "tier": "fun",
+   "q": "Spread: Lions (-3.5)",
+   "label": "Lions -3.5",
+   "slug": "nfl-ne-det-2026-11-15-spread-home-3pt5",
+   "market_id": "6301681",
+   "side": "yes",
+   "score": 36,
+   "whales": 1,
+   "invested": 580,
+   "start": "Sun Nov 15 \u00b7 6:30 AM PT",
+   "kalshi": "BUY YES Detroit wins by over 3.5 points @ 43\u00a2",
+   "kprice": 0.43,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 36,
+   "result": null
+  },
+  "0x051325c5801662bfad3ba5a3d7ffe94453353ea4e99cae1f9d6d03235c84c861:no": {
+   "tier": "poly",
+   "q": "Langmo vs. Holmgren: Match O/U 22.5",
+   "label": "Holmgren",
+   "slug": "atp-langmo-holmgre-2026-11-15-match-total-22pt5",
+   "market_id": "7034202",
+   "side": "no",
+   "score": 22,
+   "whales": 1,
+   "invested": 792,
+   "start": "2026-11-15",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 22,
+   "result": null
+  },
+  "0xf6e6b3c879ee104180ae6f4800dceaab7b7cc2e9a2cc6d271c1886fc4c256a3a:no": {
+   "tier": "poly",
+   "q": "Map Handicap: HERO (-1.5) vs magic (+1.5)",
+   "label": "magic (+1.5)",
+   "slug": "cs2-hero-mgc-2026-11-15-map-handicap-away-1pt5",
+   "market_id": "7039534",
+   "side": "no",
+   "score": 36,
+   "whales": 1,
+   "invested": 5146,
+   "start": "Sun Nov 15 \u00b7 1:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 36,
+   "result": null
+  },
+  "0x5c5aecba6a573f40a259d4eef670a89dc75046eb3e55c1812d1ba278cf9aa992:yes": {
+   "tier": "poly",
+   "q": "Deportivo Madryn vs. CD Maipu: O/U 1.5",
+   "label": "OVER",
+   "slug": "argpn-dma-mai-2026-11-14-total-1pt5",
+   "market_id": "6980315",
+   "side": "yes",
+   "score": 52,
+   "whales": 1,
+   "invested": 1534,
+   "start": "2026-11-14",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 52,
+   "result": null
+  },
+  "0x45839c0834a177347e7b4482b466a6df821f41880c020bf7b77cf8ac89f28c85:yes": {
+   "tier": "poly",
+   "q": "Deportivo Madryn vs. CD Maipu: O/U 3.5",
+   "label": "OVER",
+   "slug": "argpn-dma-mai-2026-11-14-total-3pt5",
+   "market_id": "6980317",
+   "side": "yes",
+   "score": 51,
+   "whales": 1,
+   "invested": 822,
+   "start": "2026-11-14",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 51,
+   "result": null
+  },
+  "0x29ef45dd021760a17b3767bf5ec918df06e314ea283f8b74e1edde5136638918:yes": {
+   "tier": "poly",
+   "q": "Deportivo Madryn vs. CD Maipu: O/U 2.5",
+   "label": "OVER",
+   "slug": "argpn-dma-mai-2026-11-14-total-2pt5",
+   "market_id": "6980316",
+   "side": "yes",
+   "score": 51,
+   "whales": 1,
+   "invested": 767,
+   "start": "2026-11-14",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 51,
+   "result": null
+  },
+  "0xa6b2409984e940a0ee9a278333d713eb196e4c80f3b96f20b7ce00167dbfbd79:yes": {
+   "tier": "poly",
+   "q": "Patriots vs. Lions: O/U 42.5",
+   "label": "OVER",
+   "slug": "nfl-ne-det-2026-11-15-total-42pt5",
+   "market_id": "6301841",
+   "side": "yes",
+   "score": 46,
+   "whales": 1,
+   "invested": 720,
+   "start": "Sun Nov 15 \u00b7 6:30 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 46,
+   "result": null
+  },
+  "0x641e844e4dd51c847e0ff328ae747815f0998b987eb5ff7a0cc2b725f0faf5ce:no": {
+   "tier": "poly",
+   "q": "Spread: Oklahoma (-14.5)",
+   "label": "Oklahoma +14.5 or better for the other side",
+   "slug": "cfb-miss-okl-2026-11-14-spread-home-14pt5",
+   "market_id": "6604407",
+   "side": "no",
+   "score": 20,
+   "whales": 1,
+   "invested": 788,
+   "start": "2026-11-14",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 20,
+   "result": null
+  },
+  "0xe6c27a2d9bb2a9a7f8e14b31b0cf9adad5dbb133422a8006a5d9c2c1b0ad7754:no": {
+   "tier": "poly",
+   "q": "Spread: North Dakota State (-17.5)",
+   "label": "North Dakota State +17.5 or better for the other side",
+   "slug": "cfb-ndkst-hawaii-2026-11-14-spread-away-17pt5",
+   "market_id": "6609316",
+   "side": "no",
+   "score": 20,
+   "whales": 1,
+   "invested": 769,
+   "start": "Sat Nov 14 \u00b7 8:00 PM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 20,
+   "result": null
+  },
+  "0x61059fd391fa95be75881aae14015a8c7f86fd9230fd36c55c0eeadbf525ed01:no": {
+   "tier": "poly",
+   "q": "Spread: North Dakota State (-16.5)",
+   "label": "North Dakota State +16.5 or better for the other side",
+   "slug": "cfb-ndkst-hawaii-2026-11-14-spread-away-16pt5",
+   "market_id": "6609317",
+   "side": "no",
+   "score": 20,
+   "whales": 1,
+   "invested": 680,
+   "start": "Sat Nov 14 \u00b7 8:00 PM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 20,
+   "result": null
+  },
+  "0xf85ac7f697326b97c7de39657b7661174790a10aa6b2bdb429452f4d05eab426:no": {
+   "tier": "poly",
+   "q": "Spread: North Dakota State (-14.5)",
+   "label": "North Dakota State +14.5 or better for the other side",
+   "slug": "cfb-ndkst-hawaii-2026-11-14-spread-away-14pt5",
+   "market_id": "6609318",
+   "side": "no",
+   "score": 20,
+   "whales": 1,
+   "invested": 588,
+   "start": "Sat Nov 14 \u00b7 8:00 PM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 20,
+   "result": null
+  },
+  "0x15056c9211e7690629d1345245495f6a3c7b5f381dff605f0208279c3c00180d:no": {
+   "tier": "poly",
+   "q": "Will Sagan Tosu win on 2026-11-14?",
+   "label": "Sagan Tosu NOT TO WIN",
+   "slug": "ja2-con-sag-2026-11-14-sag",
+   "market_id": "6551674",
+   "side": "no",
+   "score": 27,
+   "whales": 1,
+   "invested": 886,
+   "start": "Sat Nov 14 \u00b7 8:00 PM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 27,
+   "result": null
+  },
+  "0x96ed424907b1ac665385a60c302c6463d5ea664770857d3d1b27e4619e53fe88:no": {
+   "tier": "poly",
+   "q": "W50 Yokohama: Heather Watson vs Kyoka Okamura",
+   "label": "Kyoka Okamura",
+   "slug": "itf-watson1-okamur1-2026-11-15",
+   "market_id": "7035249",
+   "side": "no",
+   "score": 27,
+   "whales": 1,
+   "invested": 880,
+   "start": "2026-11-15",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 27,
+   "result": null
+  },
+  "0xbd67f69d13489b5b9a9b9a3b4ba6d5f0900989a54156d7e1bb1c317321c1ab1c:no": {
+   "tier": "props",
+   "q": "Amon-Ra St. Brown: Anytime Touchdown",
+   "label": "Amon-Ra St. Brown not a touchdown",
+   "slug": "nfl-ne-det-2026-11-15-anytime-td-amon-ra-st-brown",
+   "market_id": "6932508",
+   "side": "no",
+   "score": 37,
+   "whales": 2,
+   "invested": 10453,
+   "start": "Sun Nov 15 \u00b7 6:30 AM PT",
+   "kalshi": "No Kalshi match",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 37,
+   "result": null
+  },
+  "0x60126676efb1f1e6f92477e8429f3d7b0cf8a57f6a5ea95d02aea17a07e04b79:no": {
+   "tier": "top",
+   "q": "Counter-Strike: Heroic vs magic (BO3) - PGL Cluj-Napoca: Closed Qualifier Playoffs",
+   "label": "magic",
+   "slug": "cs2-hero-mgc-2026-11-15",
+   "market_id": "7039532",
+   "side": "no",
+   "score": 29,
+   "whales": 1,
+   "invested": 33936,
+   "start": "Sun Nov 15 \u00b7 1:00 AM PT",
+   "kalshi": "BUY NO Heroic @ 38\u00a2",
+   "kprice": 0.38,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 29,
+   "result": null
+  },
+  "0x06f886f42d9095870772d8366e5ad0552fab67dbcfdaa3b7745fced823f74ebe:no": {
+   "tier": "top",
+   "q": "Patriots vs. Lions: O/U 50.5",
+   "label": "UNDER",
+   "slug": "nfl-ne-det-2026-11-15-total-50pt5",
+   "market_id": "6301845",
+   "side": "no",
+   "score": 31,
+   "whales": 1,
+   "invested": 23184,
+   "start": "Sun Nov 15 \u00b7 6:30 AM PT",
+   "kalshi": "BUY NO Over 50.5 points @ 53\u00a2",
+   "kprice": 0.53,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 31,
+   "result": null
+  },
+  "0xe5911fe31ff6ada47f633e9cc21c8edfb3d1be97d580ebffe01d7e953f440a9c:yes": {
+   "tier": "top",
+   "q": "Spread: Lions (-2.5)",
+   "label": "Lions -2.5",
+   "slug": "nfl-ne-det-2026-11-15-spread-home-2pt5",
+   "market_id": "6301680",
+   "side": "yes",
+   "score": 61,
+   "whales": 3,
+   "invested": 25784,
+   "start": "Sun Nov 15 \u00b7 6:30 AM PT",
+   "kalshi": "BUY YES Detroit wins by over 2.5 points @ 52\u00a2",
+   "kprice": 0.52,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 61,
+   "result": null
+  },
+  "0xe4701628a8a5a26993f4949c5e74712be1dba01793d3cd0eb7006c3c9dadf38c:yes": {
+   "tier": "poly",
+   "q": "UFC 334: Kevin Holland vs. Uro\u0161 Medic (Welterweight, Main Card)",
+   "label": "Kevin Holland",
+   "slug": "ufc-kev-uro-2026-11-14",
+   "market_id": "6496462",
+   "side": "yes",
+   "score": 66,
+   "whales": 10,
+   "invested": 56585,
+   "start": "Sat Nov 14 \u00b7 8:59 PM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 66,
+   "result": null
+  },
+  "0x4dfa7e0d84b578df2f3bff663a4b14b6c13c5c4862e4cbdfdd027177362fa0da:no": {
+   "tier": "poly",
+   "q": "Map Handicap: TS (-1.5) vs FURIA (+1.5)",
+   "label": "FURIA (+1.5)",
+   "slug": "cs2-ts7-furia-2026-11-15-map-handicap-away-1pt5",
+   "market_id": "7039231",
+   "side": "no",
+   "score": 22,
+   "whales": 1,
+   "invested": 7200,
+   "start": "Sun Nov 15 \u00b7 12:00 AM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 22,
+   "result": null
+  },
+  "0x4dfa7e0d84b578df2f3bff663a4b14b6c13c5c4862e4cbdfdd027177362fa0da:yes": {
+   "tier": "top",
+   "q": "Map Handicap: TS (-1.5) vs FURIA (+1.5)",
+   "label": "TS (-1.5)",
+   "slug": "cs2-ts7-furia-2026-11-15-map-handicap-away-1pt5",
+   "market_id": "7039231",
+   "side": "yes",
+   "score": 25,
+   "whales": 1,
+   "invested": 5275,
+   "start": "Sun Nov 15 \u00b7 12:00 AM PT",
+   "kalshi": "No Kalshi match",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 25,
+   "result": null
+  },
+  "0xe80812bc4e18475238e9698e7a9bc15ce40ddb7b5aa2b636096ca09a0d416103:no": {
+   "tier": "poly",
+   "q": "Will PAOK win on 2026-11-14?",
+   "label": "PAOK NOT TO WIN",
+   "slug": "clf-pkt-vie-2026-11-14-pkt",
+   "market_id": "6913332",
+   "side": "no",
+   "score": 56,
+   "whales": 1,
+   "invested": 4455,
+   "start": "2026-11-14",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 56,
+   "result": null
+  },
+  "0xecbfaf9f3950fe3bb70053492cb4d6714bec94a488680ac59ff544e939ce78ba:yes": {
+   "tier": "top",
+   "q": "Patriots vs. Lions",
+   "label": "Patriots",
+   "slug": "nfl-ne-det-2026-11-15",
+   "market_id": "6248123",
+   "side": "yes",
+   "score": 50,
+   "whales": 2,
+   "invested": 6401,
+   "start": "Sun Nov 15 \u00b7 6:30 AM PT",
+   "kalshi": "BUY YES New England @ 43\u00a2",
+   "kprice": 0.43,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 50,
+   "result": null
+  },
+  "0x521780493e560a6e464b72dbcc256f40aa46a1b295e53f95e16f7f7961227b00:yes": {
+   "tier": "poly",
+   "q": "Will PAOK vs. First Vienna end in a draw?",
+   "label": "DRAW",
+   "slug": "clf-pkt-vie-2026-11-14-draw",
+   "market_id": "6913342",
+   "side": "yes",
+   "score": 54,
+   "whales": 1,
+   "invested": 2280,
+   "start": "2026-11-14",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 54,
+   "result": null
+  },
+  "0xe4701628a8a5a26993f4949c5e74712be1dba01793d3cd0eb7006c3c9dadf38c:no": {
+   "tier": "top",
+   "q": "UFC 334: Kevin Holland vs. Uro\u0161 Medic (Welterweight, Main Card)",
+   "label": "Uro\u0161 Medic (Welterweight, Main Card)",
+   "slug": "ufc-kev-uro-2026-11-14",
+   "market_id": "6496462",
+   "side": "no",
+   "score": 38,
+   "whales": 1,
+   "invested": 2132,
+   "start": "Sat Nov 14 \u00b7 8:59 PM PT",
+   "kalshi": "No Kalshi match",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 38,
+   "result": null
+  },
+  "0x52882fac1e2758185e446bb4c9446fbec79d96599a5e1341ca9b6c8b01fb4605:yes": {
+   "tier": "poly",
+   "q": "Wycombe Wanderers FC vs. Huddersfield Town AFC: O/U 3.5",
+   "label": "OVER",
+   "slug": "el1-wyc-hud-2026-11-14-total-3pt5",
+   "market_id": "6513296",
+   "side": "yes",
+   "score": 22,
+   "whales": 1,
+   "invested": 1929,
+   "start": "2026-11-14",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 22,
+   "result": null
+  },
+  "0xc0c5d8a933fcafbb17eb3c6433099dd186c073e761e4f30703b011ef7d267a41:no": {
+   "tier": "top",
+   "q": "North Dakota State vs. Hawai'i",
+   "label": "Hawai'i",
+   "slug": "cfb-ndkst-hawaii-2026-11-14",
+   "market_id": "6609314",
+   "side": "no",
+   "score": 46,
+   "whales": 2,
+   "invested": 1672,
+   "start": "Sat Nov 14 \u00b7 8:00 PM PT",
+   "kalshi": "BUY YES Hawai'i @ 27\u00a2",
+   "kprice": 0.27,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 46,
+   "result": null
+  },
+  "0x33c0d770a6680ddaefa4a7b464a42d506b8f3773e186839806a74334073fa5ff:no": {
+   "tier": "poly",
+   "q": "North Dakota State vs. Hawai'i: O/U 41.5",
+   "label": "UNDER",
+   "slug": "cfb-ndkst-hawaii-2026-11-14-total-41pt5",
+   "market_id": "6609348",
+   "side": "no",
+   "score": 40,
+   "whales": 2,
+   "invested": 1283,
+   "start": "Sat Nov 14 \u00b7 8:00 PM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 40,
+   "result": null
+  },
+  "0x1fa797e09b1df63a6a1cacc26a8bfcc3dfe699aaab3e6387133fb098a8eb6872:no": {
+   "tier": "poly",
+   "q": "Spread: North Dakota State (-6.5)",
+   "label": "North Dakota State +6.5 or better for the other side",
+   "slug": "cfb-ndkst-hawaii-2026-11-14-spread-away-6pt5",
+   "market_id": "6609323",
+   "side": "no",
+   "score": 51,
+   "whales": 1,
+   "invested": 582,
+   "start": "Sat Nov 14 \u00b7 8:00 PM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794713585,
+   "first_seen": 1794713585,
+   "scans": 1,
+   "first_score": 51,
+   "result": null
   }
  }
 }
