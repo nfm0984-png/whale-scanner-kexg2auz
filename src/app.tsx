@@ -13,7 +13,7 @@ interface CapperRec { wallet: string; name: string; rankAll?: number | null; ran
 interface NewCap { wallet: string; name: string; reason?: string | null; badge?: string | null; month?: number | null }
 interface CapperHistory { minSample: number; updatedAt?: string; cappers: CapperRec[]; newThisScan?: NewCap[]; newRecent?: NewCap[]; trackedCount?: number; sportMap?: Record<string, string>; copiesInfo?: { updatedTs?: number; tickets?: number; ticketsMatched?: number; legs?: number; legsMatched?: number }; backfillDays?: number }
 interface ProvenRow { pid: string; wallet: string; name: string; league: string; sport: string; game: string; market: string; pick: string; opp: string; slug: string; startTs: number | null; start: string; cost: number; avg: number; now: number | null; usual: number | null; mult: number | null; kalshi: { action: string; price: number | null; ticker: string; contract?: string | null; src?: string; live?: boolean } | null; sportRec: { w: number; l: number; n: number; roi: number | null }; f14?: { w: number; l: number; n: number; roi: number | null }; rec: number[]; roi: number | null; badge?: string; verdict: string; why: string[]; hedged?: boolean; inTop?: boolean }
-interface ProvenData { updatedAt: string; updatedTs: number; rule: string; elite: { wallet: string; name: string; rec: number[]; roi: number | null; f14?: { w: number; l: number; n: number; roi: number | null }; badge?: string; usual?: number | null; open?: number }[]; nearMiss?: { wallet: string; name: string; why: string[]; rec: number[]; roi: number | null }[]; picks: ProvenRow[]; counts: Record<string, number> }
+interface ProvenData { updatedAt: string; updatedTs: number; rule: string; splitGames?: string[]; elite: { wallet: string; name: string; rec: number[]; roi: number | null; wr?: number | null; sports?: { sport: string; w: number; l: number; n: number; roi: number }[]; f14?: { w: number; l: number; n: number; roi: number | null }; badge?: string; usual?: number | null; open?: number }[]; nearMiss?: { wallet: string; name: string; why: string[]; rec: number[]; roi: number | null }[]; picks: ProvenRow[]; counts: Record<string, number> }
 interface Scan { ts: number; signals: number; fun: number; poly?: number; glue?: number; props?: number; longshots?: number; biggest?: number; upcoming?: number; calls: number; cappers?: number; bets?: number; buys?: number; wallets?: number }
 interface Cols { f: string[]; r: unknown[][] }
 interface ScanData { scannedAt: string; ts: number; secs: number; settings: { cappers: number; min: number; wallets: number; markets: number; windowH: number }; coverage: { cappers: number; qualified: number; golden: number; marketsFound: number; marketsInWindow: number; marketsScanned: number; hedgedExcluded: number; twoSidedExcluded: number; walletsLoaded: number; positionsLoaded: number; bets: number; buysRaw: number; buys: number; orcaCalls: number; orcaErrors: string[]; kalshiSeries: number; kalshiMatched: number; espnLeagues: number; lb30?: { asOf: string | null; start: string | null; end: string | null; scanned: number; deepestRank: number; skippedNonSports: number; skippedNoPositions: number; endpoint?: string; params?: string }; lbAll?: { asOf: string | null; start: string | null; end: string | null; scanned: number; deepestRank: number; skippedNonSports: number; skippedNoPositions: number; endpoint?: string; params?: string }; notOnKalshi?: number }; signals: Pick[]; totalSignals: number; fun: Pick[]; totalFun: number; poly?: Pick[]; totalPoly?: number; glue?: Pick[]; totalGlue?: number; props?: Pick[]; totalProps?: number; longshots?: Pick[]; totalLongshots?: number; biggest?: Pick[]; totalBiggest?: number; upcoming?: Pick[]; totalUpcoming?: number; history: Hist[]; scans: Scan[]; buysC: Cols; betsC: Cols; tradersC: Cols; partNames: string[]; refreshedAt?: string; refreshTs?: number; capperHistory?: CapperHistory; provenPicks?: ProvenData }
@@ -71,6 +71,88 @@ const PID_LEAGUE: Record<string, string> = (() => {
   return m;
 })();
 function pid0(pid: string | undefined): boolean { return !!(pid && PID_LEAGUE[pid]); }
+const SPORT_BAR_N = 10;
+const SPORT_BAR_ROI = 20;
+const OVERALL_ROI_FLOOR = 15;
+function sportRecOf(wallet: string | null | undefined, pid?: string): { sport: string; sr: { w: number; l: number; n: number; roi: number | null } } | null {
+  const rec = QMAP[(wallet || "").toLowerCase()];
+  if (!rec || !pid || !PID_LEAGUE[pid]) return null;
+  const sport = sportOf(PID_LEAGUE[pid]);
+  const sr = rec.sports ? rec.sports[sport] : undefined;
+  if (!sr) return null;
+  return { sport, sr };
+}
+function sportBarOk(wallet: string | null | undefined, pid?: string): boolean {
+  const rec = QMAP[(wallet || "").toLowerCase()];
+  if (!rec || rec.croi == null || rec.croi < OVERALL_ROI_FLOOR) return false;
+  const info = sportRecOf(wallet, pid);
+  return !!(info && info.sr.n >= SPORT_BAR_N && info.sr.roi != null && info.sr.roi >= SPORT_BAR_ROI);
+}
+function highRoiBacker(wallet: string | null | undefined, pid?: string): boolean {
+  return !!ELITE_W[(wallet || "").toLowerCase()] && sportBarOk(wallet, pid);
+}
+function pickHasHighRoiBacker(p: Pick, backers?: Backer[]): boolean {
+  return (backers || p.backers || []).some((b: Backer) => highRoiBacker(b.wallet, p.id));
+}
+function bestSportOf(c: CapperRec): { sport: string; sr: { w: number; l: number; n: number; roi: number | null } } | null {
+  let best: { sport: string; sr: { w: number; l: number; n: number; roi: number | null } } | null = null;
+  const sports = c.sports || {};
+  Object.keys(sports).forEach((sp: string) => {
+    const sr = sports[sp];
+    if (sr && sr.n >= SPORT_BAR_N && sr.roi != null && sr.roi >= SPORT_BAR_ROI) {
+      if (!best || (sr.roi as number) > ((best.sr.roi as number) || -999) || (sr.roi === best.sr.roi && sr.n > best.sr.n)) best = { sport: sp, sr };
+    }
+  });
+  return best;
+}
+function evKey(slug: string | null | undefined): string {
+  const m = (slug || "").match(/(.+-20\d{2}-\d{2}-\d{2})/);
+  return m ? m[1] : (slug || "");
+}
+function namesClash(a: string | null | undefined, b: string | null | undefined): boolean {
+  const xx = (a || "").trim().toLowerCase(), yy = (b || "").trim().toLowerCase();
+  if (!xx || !yy) return false;
+  if (xx === "yes" || xx === "no" || yy === "yes" || yy === "no") return false;
+  if (xx.indexOf("over ") === 0 || xx.indexOf("under ") === 0 || xx === "over" || xx === "under") return false;
+  if (yy.indexOf("over ") === 0 || yy.indexOf("under ") === 0 || yy === "over" || yy === "under") return false;
+  return xx === yy || (xx.length >= 4 && yy.indexOf(xx) >= 0) || (yy.length >= 4 && xx.indexOf(yy) >= 0);
+}
+const SPLIT_GAMES: Record<string, boolean> = (() => {
+  const m: Record<string, boolean> = {};
+  ((PROVEN && PROVEN.splitGames) || []).forEach((g: string) => { if (g) m[g] = true; });
+  ["signals", "fun", "poly", "glue", "props", "longshots", "biggest", "upcoming"].forEach((k: string) => {
+    (((DATA as any)[k] || []) as Pick[]).forEach((p: Pick) => {
+      const eliteBack = (p.backers || []).some((b: Backer) => ELITE_W[(b.wallet || "").toLowerCase()]);
+      const eliteOpp = (p.opposing || []).some((o: Opp) => ELITE_W[(o.wallet || "").toLowerCase()]);
+      if (eliteBack && eliteOpp) m[evKey(p.slug)] = true;
+    });
+  });
+  const byEv: Record<string, ProvenRow[]> = {};
+  ((PROVEN && PROVEN.picks) || []).forEach((r: ProvenRow) => { const k = evKey(r.slug); (byEv[k] = byEv[k] || []).push(r); });
+  Object.keys(byEv).forEach((k: string) => {
+    const rs = byEv[k];
+    const mk: Record<string, Record<string, boolean>> = {};
+    rs.forEach((r: ProvenRow) => {
+      const market = (r.market || "").trim().toLowerCase();
+      const pick = (r.pick || "").trim().toLowerCase();
+      (mk[market] = mk[market] || {})[pick] = true;
+    });
+    if (Object.keys(mk).some((market: string) => Object.keys(mk[market]).length > 1)) m[k] = true;
+    for (let i = 0; i < rs.length; i++) {
+      for (let j = i + 1; j < rs.length; j++) {
+        if (namesClash(rs[i].opp, rs[j].pick) || namesClash(rs[j].opp, rs[i].pick)) m[k] = true;
+      }
+    }
+  });
+  return m;
+})();
+function isEliteSplitGame(slug: string | null | undefined): boolean { return !!SPLIT_GAMES[evKey(slug || "")]; }
+function pickHasCapperHedge(p: Pick): boolean {
+  const set: Record<string, boolean> = {};
+  (p.backers || []).forEach((b: Backer) => { const w = (b.wallet || "").toLowerCase(); if (w) set[w] = true; });
+  if ((p.opposing || []).some((o: Opp) => set[(o.wallet || "").toLowerCase()])) return true;
+  return (p.risks || []).some((r: string) => /hedg|both sides|two-sided/i.test(r));
+}
 function pct(v: number | null | undefined): string { return v == null ? "n/a" : (v >= 0 ? "+" : "") + v + "%"; }
 function f14Text(r: { w: number; l: number; n: number; roi: number | null } | undefined): string { return r && r.n ? r.w + "–" + r.l + (r.roi != null ? ", " + pct(r.roi) + " ROI" : "") : "no graded picks"; }
 // Conviction (Noel, Nov 13): a whale's big bets are the real ones; tiny side bets are throwaways.
@@ -161,8 +243,9 @@ function countedBackers<T extends { wallet?: string | null; cost?: number | null
 function vetTier(bs: { wallet?: string | null; cost?: number | null }[] | undefined, pid?: string): number {
   return (bs || []).reduce((m: number, b) => Math.min(m, backerVerdict(b.wallet, b.cost, pid).tier), 2);
 }
-function backerStats(backers: { wallet?: string | null; cost?: number | null }[] | undefined, pid?: string): { quality: number; w: number; l: number; roi: number | null; text: string; counted: number; tier: number } {
-  let tw = 0, tq = 0, w = 0, l = 0, rNum = 0, rDen = 0;
+function backerStats(backers: { wallet?: string | null; cost?: number | null }[] | undefined, pid?: string): { quality: number; w: number; l: number; roi: number | null; oroi: number | null; text: string; counted: number; tier: number } {
+  let tw = 0, tq = 0, w = 0, l = 0, rNum = 0, rDen = 0, sw = 0, sl = 0, sNum = 0, sDen = 0;
+  const sportName = pid && PID_LEAGUE[pid] ? sportOf(PID_LEAGUE[pid]) : null;
   const cb = countedBackers(backers, pid);
   cb.forEach((b) => {
     const rec = QMAP[(b.wallet || "").toLowerCase()];
@@ -174,13 +257,25 @@ function backerStats(backers: { wallet?: string | null; cost?: number | null }[]
       w += rec.cw || 0;
       l += rec.cl || 0;
       if (rec.croi != null && (rec.crisked || 0) > 0) { rNum += wt * rec.croi; rDen += wt; }
+      if (sportName && rec.sports && rec.sports[sportName]) {
+        const sr = rec.sports[sportName];
+        sw += sr.w || 0;
+        sl += sr.l || 0;
+        if (sr.roi != null) { sNum += wt * sr.roi; sDen += wt; }
+      }
     }
   });
-  const roi = rDen ? Math.round((rNum / rDen) * 10) / 10 : null;
+  const oroi = rDen ? Math.round((rNum / rDen) * 10) / 10 : null;
+  const sroi = sDen ? Math.round((sNum / sDen) * 10) / 10 : null;
+  const roi = sroi != null ? sroi : oroi;
   const tier = vetTier(backers, pid);
-  const text = cb.length ? ("Vetted backers " + w + "–" + l + (roi != null ? ", " + (roi >= 0 ? "+" : "") + roi + "% ROI" : "") + (tier === 1 ? " · small sample" : "")) : "⚠ No vetted backer";
-  // Quality only from vetted backers; no vetted backer sinks the pick (it is also filtered off ranked tabs).
-  return { quality: tw ? tq / tw : -999, w, l, roi, text, counted: cb.length, tier };
+  const text = cb.length
+    ? (sportName && (sw + sl)
+      ? ("Vetted backers in " + sportName + " " + sw + "–" + sl + (sroi != null ? ", " + pct(sroi) + " ROI" : "") + " · overall " + w + "–" + l + (oroi != null ? ", " + pct(oroi) + " ROI" : "") + (tier === 1 ? " · small sample" : ""))
+      : ("Vetted backers " + w + "–" + l + (oroi != null ? ", " + pct(oroi) + " ROI" : "") + (tier === 1 ? " · small sample" : "")))
+    : "⚠ No vetted backer";
+  // Quality only from vetted backers; no vetted backer sinks the pick (it is also filtered off ranked tabs). Headline ROI is the sport ROI when we have it.
+  return { quality: tw ? tq / tw : -999, w, l, roi, oroi, text, counted: cb.length, tier };
 }
 function BackersLine(props: { backers: { wallet?: string | null; cost?: number | null; name?: string | null }[] | undefined; pid?: string }) {
   const t = useGrokTheme();
@@ -202,17 +297,21 @@ function BackersLine(props: { backers: { wallet?: string | null; cost?: number |
         const nm = nameFor(b);
         const n = rec ? (rec.cw || 0) + (rec.cl || 0) : 0;
         const roi = rec && rec.croi != null ? rec.croi : null;
-        const recTxt = n ? (rec!.cw || 0) + "–" + (rec!.cl || 0) + (roi != null ? " · " + (roi >= 0 ? "+" : "") + roi + "% ROI" : "") : "ungraded";
-        const bad = !n || roi == null || roi <= 0;
+        const spInfo = sportRecOf(b.wallet, props.pid);
+        const sr = spInfo ? spInfo.sr : null;
+        const recTxt = sr && sr.n
+          ? ((spInfo!.sport) + " " + sr.w + "–" + sr.l + (sr.roi != null ? " · " + pct(sr.roi) + " ROI" : ""))
+          : (n ? (rec!.cw || 0) + "–" + (rec!.cl || 0) + (roi != null ? " · " + pct(roi) + " ROI" : "") : "ungraded");
+        const bad = sr && sr.n && sr.roi != null ? sr.roi <= 0 : (!n || roi == null || roi <= 0);
         return (
           <div key={i} data-backer-conv={cv.tag} data-backer-counts={vd.counts ? "1" : "0"} style={{ fontSize: 12, lineHeight: "18px", color: t.text.secondary, marginTop: 4, opacity: vd.counts ? 1 : 0.92 }}>
             <span data-backer-rec="1" style={{ display: "inline-block", marginRight: 6, padding: "0 7px", borderRadius: 999, background: bad ? RED : (vd.counts ? GREEN : "#64748B"), color: "#FFFFFF", fontWeight: 800, fontSize: 12, lineHeight: "18px" }}>{(bad && n ? "⚠ " : "") + recTxt}</span>
             <span style={{ fontWeight: 750, color: vd.counts ? (cv.tag === "H" ? GREEN : t.text.primary) : t.text.tertiary }}>{nm} {money(b.cost || 0)}{cv.mult != null ? " = " + cv.mult + "x usual" : ""} · {CONV_LABEL[cv.tag]}</span>
+            {sr && sr.n && n ? <span>{" · overall " + (rec!.cw || 0) + "–" + (rec!.cl || 0) + (roi != null ? ", " + pct(roi) + " ROI" : "")}</span> : null}
             {rec && rec.badge === "Hot" ? <span data-hot-badge="1" style={{ display: "inline-block", marginLeft: 6, padding: "0 7px", borderRadius: 999, background: "#EA580C", color: "#FFFFFF", fontWeight: 800, fontSize: 11, lineHeight: "17px" }}>🔥 Hot{rec.proven ? " · Proven" : ""}</span> : rec && rec.badge && rec.badge !== "n/a" ? <span style={{ fontWeight: 750, color: badgeColor(rec.badge) }}>{" · " + rec.badge}</span> : null}
             {vd.counts && vd.tier === 1 ? <span style={{ fontWeight: 750, color: AMBER }}>{" · small sample"}</span> : null}
             {!vd.counts ? <span style={{ fontWeight: 800, color: RED }}>{" · doesn't count: " + [vd.why, vd.bet].filter(Boolean).join(", ")}</span> : null}
             {rec && rec.f14 && rec.f14.n ? <span data-backer-f14="1" style={{ fontWeight: 750, color: rec.formCooling ? RED : (rec.f14.roi != null && rec.f14.roi > 0 ? GREEN : t.text.secondary) }}>{" · 14d " + f14Text(rec.f14) + (rec.formCooling ? " · Cooling (14d)" : "")}</span> : null}
-            {rec && pid0(props.pid) && rec.sports && rec.sports[sportOf(PID_LEAGUE[props.pid as string])] ? <span>{" · in " + sportOf(PID_LEAGUE[props.pid as string]) + " " + f14Text(rec.sports[sportOf(PID_LEAGUE[props.pid as string])])}</span> : null}
             {rec && rec.win ? <span>{" · " + winShort(rec)}</span> : null}
           </div>
         );
@@ -514,7 +613,7 @@ export function passLine(l: Line, f: Filters, followed: string[], hidden: string
   if (!windowOk(l, f.status, scanTs)) return false;
   if (f.betType !== "all" && l.kind !== f.betType) return false;
   if (!f.props && l.kind === "prop") return false;
-  if (f.hideHedgers && l.hedged) return false;
+  if (l.hedged) return false;
   const lastBuy = l.ts || l.firstTs;
   if (f.freshOnly && lastBuy !== null && scanTs - lastBuy > 86400) return false;
   const text = (l.q + " " + l.label + " " + l.name + " " + l.wallet).toLowerCase();
@@ -1257,15 +1356,18 @@ function pickQualityScore(p: Pick, backers?: Backer[]): number {
   });
   s += backerBand;
   const qPart = (!st.counted || st.quality <= -900) ? 0 : clampNum((st.quality + 20) / 120, 0, 1) * 12;
-  const roiPart = st.roi == null ? 0 : clampNum((st.roi + 10) / 60, 0, 1) * 6;
+  // Headline ranking uses sport ROI; overall +20% is a bonus, not the main bar.
+  const roiPart = st.roi == null ? 0 : clampNum((st.roi + 10) / 80, 0, 1) * 4;
+  const overallBonus = st.oroi != null && st.oroi >= 20 ? 4 : 0;
   let sportPart = 0;
   const sp = sportOf(p.league);
   cb.forEach((b: Backer) => {
     const rec = QMAP[(b.wallet || "").toLowerCase()];
     const sr = rec && rec.sports ? rec.sports[sp] : undefined;
-    if (sr && sr.n >= 5 && sr.roi != null) sportPart = Math.max(sportPart, clampNum((sr.roi + 10) / 60, 0, 1) * 4);
+    if (sr && sr.n >= 10 && sr.roi != null) sportPart = Math.max(sportPart, clampNum((sr.roi + 10) / 80, 0, 1) * 10);
+    else if (sr && sr.n >= 5 && sr.roi != null) sportPart = Math.max(sportPart, clampNum((sr.roi + 10) / 80, 0, 1) * 4);
   });
-  s += qPart + roiPart + sportPart;
+  s += qPart + roiPart + overallBonus + sportPart;
   let convPart = 0;
   cb.forEach((b: Backer) => {
     const cv = convOf(b.wallet, b.cost, p.id);
@@ -1290,9 +1392,10 @@ function provenQualityScore(r: ProvenRow): number {
   s += 16;
   const n = r.rec ? ((r.rec[0] || 0) + (r.rec[1] || 0)) : 0;
   const roi = r.roi;
-  s += (roi != null && n >= 10) ? clampNum((roi + 10) / 60, 0, 1) * 12 : (roi != null && n >= 5) ? clampNum((roi + 10) / 60, 0, 1) * 6 : 0;
+  s += (roi != null && roi >= 20 && n >= 10) ? 4 : (roi != null && n >= 10) ? clampNum((roi + 10) / 80, 0, 1) * 6 : 0;
   const sr = r.sportRec;
-  if (sr && sr.n >= 5 && sr.roi != null) s += clampNum((sr.roi + 10) / 60, 0, 1) * 6;
+  if (sr && sr.n >= 10 && sr.roi != null) s += clampNum((sr.roi + 10) / 80, 0, 1) * 12;
+  else if (sr && sr.n >= 5 && sr.roi != null) s += clampNum((sr.roi + 10) / 80, 0, 1) * 6;
   else s += 2;
   const recW = r.rec ? (r.rec[0] || 0) : 0, recL = r.rec ? (r.rec[1] || 0) : 0;
   if (n >= 10) s += clampNum((recW - recL) / 20, 0, 1) * 4;
@@ -1330,6 +1433,8 @@ function capperQualityScore(c: CapperRec): number {
   } else if (((n >= 5) || ((c.n || 0) >= 5)) && wr != null) {
     s += clampNum((wr - 40) / 40, 0, 1) * 8;
   }
+  const bestSp = bestSportOf(c);
+  if (bestSp && bestSp.sr.roi != null) s += clampNum((bestSp.sr.roi + 10) / 80, 0, 1) * 10;
   if (c.formCooling) s -= 6;
   if (c.coldDemoted || c.badge === "Cold") s -= 8;
   return Math.round(clampNum(s, 0, 100));
@@ -2039,8 +2144,9 @@ function CapperCard(props: { rec: CapperRec; trader?: Trader; now: number; bankr
           <div style={{ fontSize: 22, lineHeight: "26px", fontWeight: 850, overflowWrap: "anywhere" }}><NameLink name={nameOf(rec.name, rec.wallet)} wallet={rec.wallet} bold={true} /></div>
           <div style={{ fontSize: 12, color: t.text.tertiary, marginTop: 2 }}>{shortWallet(rec.wallet)}</div>
           <div style={{ fontSize: 18, lineHeight: "22px", fontWeight: 800, marginTop: 6 }}>
-            {rec.n ? <span>{record}{wr != null ? " · " + wr + "%" : ""}{rec.profit || rec.risked ? " · net " + (rec.profit < 0 ? "-" : "") + money(Math.abs(rec.profit)) : ""}</span> : <span style={{ color: t.text.secondary }}>Record building</span>}
+            {(function () { const bestSp = bestSportOf(rec); return bestSp ? <span>{bestSp.sport + " " + bestSp.sr.w + "–" + bestSp.sr.l + " · " + pct(bestSp.sr.roi) + " ROI"}</span> : rec.n ? <span>{record}{wr != null ? " · " + wr + "%" : ""}{rec.profit || rec.risked ? " · net " + (rec.profit < 0 ? "-" : "") + money(Math.abs(rec.profit)) : ""}</span> : <span style={{ color: t.text.secondary }}>Record building</span>; })()}
           </div>
+          {bestSportOf(rec) && rec.n ? <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 2 }}>{"Overall " + record + (wr != null ? " · " + wr + "%" : "") + (rec.profit || rec.risked ? " · net " + (rec.profit < 0 ? "-" : "") + money(Math.abs(rec.profit)) : "") + (rec.croi != null ? " · " + pct(rec.croi) + " copyable ROI" : "")}</div> : null}
         </div>
         {wr != null ? <Ring score={Math.round(wr)} label="WIN %" color={wr >= 55 ? GREEN : wr >= 50 ? AMBER : RED} size={64} track={t.border.default} text={t.text.primary} sub={t.text.tertiary} /> : null}
       </div>
@@ -2067,9 +2173,9 @@ function CapperCard(props: { rec: CapperRec; trader?: Trader; now: number; bankr
       </div>
       {rec.sports && Object.keys(rec.sports).length ? (
         <div data-capper-sports={rec.wallet} style={{ marginTop: 8 }}>
-          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: t.text.tertiary }}>BY SPORT · A BACKER DOESN'T COUNT IN A SPORT WHERE THEY'RE LOSING (5+ GRADED, NEGATIVE ROI)</div>
+          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: t.text.tertiary }}>BY SPORT · TOP 20 AND PROVEN PICKS NEED +20% ROI OVER 10+ GRADED IN THAT SPORT</div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 6 }}>
-            {Object.keys(rec.sports).slice(0, 10).map((sp: string) => { const r = rec.sports![sp]; const losing = r.n >= 5 && r.roi != null && r.roi < 0; return <span key={sp} style={{ display: "inline-block", padding: "2px 9px", borderRadius: 999, background: losing ? RED : (r.roi != null && r.roi > 0 ? GREEN : t.bg.subtle), color: losing || (r.roi != null && r.roi > 0) ? "#FFFFFF" : t.text.primary, fontSize: 12, fontWeight: 750 }}>{sp + " " + r.w + "–" + r.l + (r.roi != null ? " · " + pct(r.roi) : "")}</span>; })}
+            {Object.keys(rec.sports).slice().sort((a: string, b: string) => { const ra = rec.sports![a], rb = rec.sports![b]; const qa = ra.n >= SPORT_BAR_N && ra.roi != null && ra.roi >= SPORT_BAR_ROI ? 1 : 0; const qb = rb.n >= SPORT_BAR_N && rb.roi != null && rb.roi >= SPORT_BAR_ROI ? 1 : 0; return qb - qa || (rb.roi || -999) - (ra.roi || -999); }).slice(0, 10).map((sp: string) => { const r = rec.sports![sp]; const bar = r.n >= SPORT_BAR_N && r.roi != null && r.roi >= SPORT_BAR_ROI; const losing = r.n >= 5 && r.roi != null && r.roi < 0; return <span key={sp} style={{ display: "inline-block", padding: "2px 9px", borderRadius: 999, background: losing ? RED : (bar ? GREEN : (r.roi != null && r.roi > 0 ? "#15803D" : t.bg.subtle)), color: losing || (r.roi != null && r.roi > 0) ? "#FFFFFF" : t.text.primary, fontSize: 12, fontWeight: bar ? 850 : 750 }}>{sp + " " + r.w + "–" + r.l + (r.roi != null ? " · " + pct(r.roi) : "") + (bar ? " · qualifies" : "")}</span>; })}
           </div>
         </div>
       ) : null}
@@ -2122,12 +2228,11 @@ function ProvenCard(props: { r: ProvenRow; rank: number; now: number }) {
       {k ? <div style={{ fontSize: 11, color: t.text.tertiary }}>{k.ticker}</div> : null}
       <div style={{ fontSize: 13, lineHeight: "19px", marginTop: 6, color: t.text.secondary }}>
         <span style={{ fontWeight: 800, color: t.text.primary }}>{nameOf(r.name, r.wallet)}</span>
-        {" backs " + r.pick + " · " + money(r.cost) + " at " + Math.round(r.avg * 100) + "¢" + (r.mult != null ? " = " + r.mult + "x usual (" + money(r.usual) + ")" : "") + (r.hedged ? " · holds both sides" : "")}
+        {" backs " + r.pick + " · " + money(r.cost) + " at " + Math.round(r.avg * 100) + "¢" + (r.mult != null ? " = " + r.mult + "x usual (" + money(r.usual) + ")" : "")}
       </div>
       <div style={{ fontSize: 13, lineHeight: "19px", marginTop: 2, color: t.text.secondary }}>
-        {"Overall " + (r.rec ? r.rec[0] + "–" + r.rec[1] : "n/a") + ", " + pct(r.roi) + " ROI · "}
-        <span style={{ fontWeight: 800, color: sr.n >= 5 && sr.roi != null && sr.roi < 0 ? RED : sr.roi != null && sr.roi > 0 ? GREEN : t.text.secondary }}>{"in " + r.sport + " " + f14Text(sr)}</span>
-        {" · 14d " + f14Text(r.f14)}
+        <span style={{ fontWeight: 800, color: sr.n >= 5 && sr.roi != null && sr.roi < 0 ? RED : sr.roi != null && sr.roi > 0 ? GREEN : t.text.secondary }}>{r.sport + " " + f14Text(sr)}</span>
+        {" · overall " + (r.rec ? r.rec[0] + "–" + r.rec[1] : "n/a") + ", " + pct(r.roi) + " ROI · 14d " + f14Text(r.f14)}
       </div>
       {r.why && r.why.length ? <div style={{ fontSize: 12, fontWeight: 750, color: r.verdict === "CAUTION" ? RED : AMBER, marginTop: 4 }}>{(r.verdict === "CAUTION" ? "⚠ " : "") + r.why.join(" · ")}</div> : null}
     </div>
@@ -2429,12 +2534,13 @@ export default function App() {
   const rankPicks = (arr: Pick[]): Pick[] => arr.slice().sort((a: Pick, b: Pick) => cmpRankKey(rankKey(a, visibleBackers(a).length, visibleBackers(a)), rankKey(b, visibleBackers(b).length, visibleBackers(b))));
   const bySport = (arr: Pick[]): Pick[] => sportFilter ? arr.filter((p: Pick) => p.league === sportFilter) : arr;
   const vb = (p: Pick): Backer[] => visibleBackers(p);
-  const topPool = rankPicks((DATA.signals || []).concat(DATA.fun || []).filter((p: Pick) => topEligible(p, visibleBackers(p).length, now) && visibleBackers(p).length >= minW && followOk(p) && vetted(p, visibleBackers(p))));
+  const notHedged = (p: Pick): boolean => !pickHasCapperHedge(p);
+  const topPool = rankPicks((DATA.signals || []).concat(DATA.fun || []).filter((p: Pick) => topEligible(p, visibleBackers(p).length, now) && visibleBackers(p).length >= minW && followOk(p) && vetted(p, visibleBackers(p)) && pickHasHighRoiBacker(p, visibleBackers(p)) && notHedged(p) && !isEliteSplitGame(p.slug)));
   const topAll = sortPicksBy(topPool.slice(0, 20), sortOf("top"), vb, now);
   const top = bySport(topAll);
   const gluePool = rankPicks((DATA.glue || DATA.signals || []).concat(DATA.fun || []).filter((p: Pick) => {
     const n = visibleBackers(p).length;
-    return n >= 2 && followOk(p) && !gone(p) && p.kalshi.status === "ok" && pickInfo(p, n).glue && !isPlayerProp(p) && vetted(p, visibleBackers(p));
+    return n >= 2 && followOk(p) && !gone(p) && p.kalshi.status === "ok" && pickInfo(p, n).glue && !isPlayerProp(p) && vetted(p, visibleBackers(p)) && notHedged(p);
   }));
   // unique by id, not already in top
   const glueIds: Record<string, boolean> = {};
@@ -2443,7 +2549,7 @@ export default function App() {
   const glue = bySport(glueAll).slice(0, 12);
   const funPool = rankPicks((DATA.fun || []).concat(DATA.signals || []).filter((p: Pick) => {
     const n = visibleBackers(p).length;
-    if (n < 1 || !followOk(p) || gone(p) || p.kalshi.status !== "ok") return false;
+    if (n < 1 || !followOk(p) || gone(p) || p.kalshi.status !== "ok" || !notHedged(p)) return false;
     if (!vetted(p, visibleBackers(p))) return false;
     if (isPlayerProp(p) || isLongshot(p, n, now)) return false;
     if (top.some((x: Pick) => x.id === p.id)) return false;
@@ -2453,15 +2559,15 @@ export default function App() {
   const funSeen: Record<string, boolean> = {};
   const funAll = sortPicksBy(funPool.filter((p: Pick) => { if (funSeen[p.id]) return false; funSeen[p.id] = true; return true; }), sortOf("longfun"), vb, now);
   const fun = bySport(funAll);
-  const provenRows: ProvenRow[] = sortProvenBy(((PROVEN && PROVEN.picks) || []).filter((r: ProvenRow) => !r.startTs || r.startTs > now), sortOf("proven"), now);
-  const polyAll = rankPicks((DATA.poly || []).filter((p: Pick) => visibleBackers(p).length >= 1 && vetted(p, visibleBackers(p)) && followOk(p) && !gone(p) && p.kalshi.status !== "ok" && !isPlayerProp(p) && !isLongshot(p, visibleBackers(p).length, now)));
+  const provenRows: ProvenRow[] = sortProvenBy(((PROVEN && PROVEN.picks) || []).filter((r: ProvenRow) => (!r.startTs || r.startTs > now) && !r.hedged && !isEliteSplitGame(r.slug)), sortOf("proven"), now);
+  const polyAll = rankPicks((DATA.poly || []).filter((p: Pick) => visibleBackers(p).length >= 1 && vetted(p, visibleBackers(p)) && followOk(p) && !gone(p) && notHedged(p) && p.kalshi.status !== "ok" && !isPlayerProp(p) && !isLongshot(p, visibleBackers(p).length, now)));
   const polyBase = polyAll.slice(0, 20);
   const poly = bySport(polyBase);
   const uniqueByKey = (arr: Pick[]): Pick[] => {
     const seen: Record<string, boolean> = {};
     return arr.filter((p: Pick) => { const k = pickCatalogKey(p.q, p.label); if (seen[k]) return false; seen[k] = true; return true; });
   };
-  const catalogPicks = uniqueByKey((DATA.props || []).concat(DATA.longshots || []).concat(DATA.biggest || []).concat(DATA.upcoming || []).concat(DATA.signals || []).concat(DATA.fun || []).concat(DATA.poly || []).concat(DATA.glue || []).concat(linesToPicks(BET_LINES)));
+  const catalogPicks = uniqueByKey((DATA.props || []).concat(DATA.longshots || []).concat(DATA.biggest || []).concat(DATA.upcoming || []).concat(DATA.signals || []).concat(DATA.fun || []).concat(DATA.poly || []).concat(DATA.glue || []).concat(linesToPicks(BET_LINES))).filter(notHedged);
   const propsPool = catalogPicks.filter((p: Pick) => isPlayerProp(p) && visibleBackers(p).length >= 1 && vetted(p, visibleBackers(p)) && followOk(p) && !gone(p));
   const propsBase = takeSortedPicks(propsPool, sortOf("props"), 20, vb, now);
   const propsPicks = bySport(propsBase);
@@ -2471,10 +2577,10 @@ export default function App() {
   const biggestPool = catalogPicks.filter((p: Pick) => visibleBackers(p).length >= 1 && vetted(p, visibleBackers(p)) && followOk(p) && !gone(p));
   const biggestAll = takeSortedPicks(biggestPool, sortOf("biggest"), 30, vb, now);
   const biggestPicks = bySport(biggestAll);
-  const upcomingPool = uniqueByKey((DATA.upcoming || []).concat(catalogPicks)).filter((p: Pick) => visibleBackers(p).length >= 1 && followOk(p) && !gone(p) && p.startTs > now && p.startTs <= now + 24 * 3600);
+  const upcomingPool = uniqueByKey((DATA.upcoming || []).concat(catalogPicks)).filter((p: Pick) => visibleBackers(p).length >= 1 && followOk(p) && !gone(p) && notHedged(p) && p.startTs > now && p.startTs <= now + 24 * 3600);
   const upcomingAll = takeSortedPicks(upcomingPool, sortOf("upcoming"), 30, vb, now);
   // Hot Cappers: picks backed by at least one Hot whale (all four P&L windows up) with a High or Normal conviction bet.
-  const hotPool = uniqueByKey((DATA.signals || []).concat(DATA.fun || []).concat(catalogPicks)).filter((p: Pick) => !gone(p) && followOk(p) && hotBackers(visibleBackers(p), p.id).length > 0 && vetted(p, visibleBackers(p)));
+  const hotPool = uniqueByKey((DATA.signals || []).concat(DATA.fun || []).concat(catalogPicks)).filter((p: Pick) => !gone(p) && followOk(p) && notHedged(p) && hotBackers(visibleBackers(p), p.id).length > 0 && vetted(p, visibleBackers(p)));
   const hotAll = takeSortedPicks(hotPool, sortOf("hot"), 40, vb, now);
   const hotPicks = bySport(hotAll);
   const upcomingPicks = bySport(upcomingAll);
@@ -2483,7 +2589,7 @@ export default function App() {
   const combos = buildCombos(top);
   try { const dbg = (arr: Pick[]) => arr.map((p: Pick) => ({ id: p.id, q: p.q, label: p.label, ticker: p.kalshi && p.kalshi.ticker, act: p.kalshi && p.kalshi.action, contract: p.kalshi && p.kalshi.contract, price: usedPrice(p), startTs: p.startTs, backers: visibleBackers(p).map((b: Backer) => { const r = QMAP[(b.wallet || "").toLowerCase()]; const cv = convOf(b.wallet, b.cost, p.id); return { name: b.name, wallet: b.wallet, cost: b.cost, conv: cv.tag, mult: cv.mult, cw: r ? r.cw : null, cl: r ? r.cl : null, croi: r ? r.croi : null, badge: r ? r.badge : null, quality: r ? r.quality : null }; }), bq: backerStats(visibleBackers(p), p.id).quality })); (window as any).__RANK = { top: dbg(topAll), fun: dbg(funAll), poly: dbg(polyBase), props: dbg(propsBase), long: dbg(longBase), biggest: dbg(biggestAll), upcoming: dbg(upcomingAll), hot: dbg(hotAll) }; } catch (e) { /* debug only */ }
   const capNum = capN === "custom" ? Math.max(1, Math.floor(Number(capCustom) || 0)) : Number(capN);
-  const allPicks = DATA.signals.concat(DATA.fun).concat(DATA.props || []).concat(DATA.longshots || []).concat(DATA.biggest || []);
+  const allPicks = DATA.signals.concat(DATA.fun).concat(DATA.props || []).concat(DATA.longshots || []).concat(DATA.biggest || []).filter((p: Pick) => !pickHasCapperHedge(p));
 
   const buyAll = sortLines(BUY_LINES.filter((l: Line) => passLine(l, f, followed, hidden, DATA.ts)), f.sort);
   const buys = sportFilter ? buyAll.filter((l: Line) => l.league === sportFilter) : buyAll;
@@ -2523,7 +2629,7 @@ export default function App() {
   const directory: Trader[] = TRADERS.map((x: Trader) => ({ ...x, bets: Math.max(x.bets, seen[x.wallet.toLowerCase()] ? seen[x.wallet.toLowerCase()].n : 0), value: Math.max(x.value, seen[x.wallet.toLowerCase()] ? Math.round(seen[x.wallet.toLowerCase()].amt) : 0) })).concat(others);
   const traderByW: Record<string, Trader> = {};
   directory.forEach((x: Trader) => { traderByW[(x.wallet || "").toLowerCase()] = x; });
-  const tabPickPool: Pick[] = DATA.signals.concat(DATA.fun).concat(DATA.poly || []).concat(DATA.glue || []).concat(DATA.props || []).concat(DATA.longshots || []).concat(DATA.biggest || []).concat(DATA.upcoming || []);
+  const tabPickPool: Pick[] = DATA.signals.concat(DATA.fun).concat(DATA.poly || []).concat(DATA.glue || []).concat(DATA.props || []).concat(DATA.longshots || []).concat(DATA.biggest || []).concat(DATA.upcoming || []).filter((p: Pick) => !pickHasCapperHedge(p));
   const livePicksOf = (w: string): Pick[] => {
     const lw = (w || "").toLowerCase();
     const fromLines = linesToPicks(BET_LINES.filter((l: Line) => (l.wallet || "").toLowerCase() === lw));
@@ -2537,7 +2643,7 @@ export default function App() {
       seenKeys[k] = true;
       extra.push(p);
     });
-    return fromLines.concat(extra);
+    return fromLines.concat(extra).filter((p: Pick) => !pickHasCapperHedge(p));
   };
   const capFiltered = capperRecsAll.filter((c: CapperRec) => {
     const w = (c.wallet || "").toLowerCase();
@@ -2603,7 +2709,6 @@ export default function App() {
       <Grid columns={2}>
         <Toggle label="Followed cappers only" value={f.followedOnly} onChange={(v: boolean) => set("followedOnly", v)} />
         <Toggle label="Show hidden cappers" value={f.showHidden} onChange={(v: boolean) => set("showHidden", v)} />
-        <Toggle label="Hide hedgers (two-sided)" value={f.hideHedgers} onChange={(v: boolean) => set("hideHedgers", v)} />
         <Toggle label="Hide stale (no buy in 24h)" value={f.freshOnly} onChange={(v: boolean) => set("freshOnly", v)} />
         <Toggle label="Include player props" value={f.props} onChange={(v: boolean) => set("props", v)} />
       </Grid>
@@ -2641,7 +2746,7 @@ export default function App() {
           <TabSortBar value={sortOf("top")} onChange={(v: string) => setSortOf(v, "top")} />
           <LeaguePills picks={topAll} value={sportFilter} onChange={setSportFilter} />
           <DailyCap />
-          <Text>Vetted picks only: every pick here has at least one backer with a winning graded record and positive copyable ROI (10+ graded picks, or 5–9 only if 60%+ wins and +10% ROI, labeled small sample) who bet real size ($500+, at least half their usual bet, not a throwaway). Negative-ROI, Cold, ungraded and small-bet backers count for nothing and are shown as a red caution. Ranked by vetted sample (10+ first), then price band (65–84¢ first), then vetted backers' quality, net money and one-sided share. Under 45¢, 95¢+, Split under 55%, Pricier, and started games are out. Fewer than 20 shows when fewer qualify.</Text>
+          <Text>Vetted high-ROI picks only: every pick here has at least one elite backer with sport-specific ROI of +20% or more over 10+ graded bets in that sport, plus overall ROI of +15% or more, who bet real size ($500+, at least half their usual bet, not a throwaway). The headline ROI on each card is that sport ROI. Overall +20% ROI is a ranking bonus, not an exclusion. Picks where a capper bet both sides are hidden. Games where elite cappers split (opposite sides) are hidden from this tab and from Proven Picks. Under 45¢, 95¢+, Split under 55%, Pricier, and started games are out. Fewer than 20 shows when fewer qualify.</Text>
           {combos.length ? (
             <div style={{ marginBottom: 8 }}>
               <div style={{ fontSize: 16, fontWeight: 800, margin: "8px 0 4px" }}>Suggested 2-leg combos</div>
@@ -2649,7 +2754,7 @@ export default function App() {
               {combos.map((pair: [Pick, Pick], i: number) => (<ComboCard key={pair[0].id + "+" + pair[1].id} a={pair[0]} b={pair[1]} rank={i + 1} bankroll={bankroll} now={now} />))}
             </div>
           ) : <Text>No 2-leg combo right now (need two Top 20 singles at 65¢+ from different games). No 3+ leg parlays (4-legs went 0-9).</Text>}
-          {top.length === 0 && f.followedOnly ? <Text>No pick clears the filter: none of the top picks is backed by a capper you follow. Turn off "Only picks a followed capper backs" to see them.</Text> : top.length === 0 ? <Text>No pick qualifies right now under the Top 20 rules (vetted backer with a winning record, positive ROI and a real-size bet). Fun Picks has {fun.length}.</Text> : top.length < 20 ? <Text>Only {top.length} of 20 qualify right now. The list is not padded with unvetted picks.</Text> : null}
+          {top.length === 0 && f.followedOnly ? <Text>No pick clears the filter: none of the top picks is backed by a capper you follow. Turn off "Only picks a followed capper backs" to see them.</Text> : top.length === 0 ? <Text>No pick qualifies right now under the Top 20 rules (elite backer with +20% sport ROI over 10+ graded bets, +15% overall ROI, and a real-size bet). Fun Picks has {fun.length}.</Text> : top.length < 20 ? <Text>Only {top.length} of 20 qualify right now. The list is not padded with unvetted picks.</Text> : null}
           <div style={{ fontSize: 16, fontWeight: 800, margin: "12px 0 8px" }}>Singles</div>
           {top.map((p: Pick, i: number) => (<PickCard key={p.id} p={p} fun={false} bankroll={bankroll} now={now} rank={i + 1} followed={followed} hidden={hidden} toggle={toggle} />))}
           {glue.length ? (
@@ -2659,7 +2764,7 @@ export default function App() {
               {glue.map((p: Pick, i: number) => (<PickCard key={p.id} p={p} fun={false} bankroll={bankroll} now={now} rank={i + 1} followed={followed} hidden={hidden} toggle={toggle} />))}
             </div>
           ) : null}
-          <Text>Top 20 rules: at least one vetted backer (winning record, positive ROI, real-size bet), {minW}+ all-time sports whales (top {DATA.coverage.cappers}) with {money(minP)}+ each, verified Kalshi contract, no hedgers, game has not started, price 45–94¢, one-sided share at least 55%, current price not more than 3¢ above the whales' average entry.</Text>
+          <Text>Top 20 rules: at least one elite backer with +20% ROI over 10+ graded bets in that sport and +15% overall ROI, real-size bet, {minW}+ all-time sports whales (top {DATA.coverage.cappers}) with {money(minP)}+ each, verified Kalshi contract, no both-sides bets, no games where elite cappers split, game has not started, price 45–94¢, one-sided share at least 55%, current price not more than 3¢ above the whales' average entry.</Text>
         </Section>
       ) : null}
 
@@ -2694,11 +2799,11 @@ export default function App() {
         <Section heading={"Proven Picks · " + provenRows.length}>
           <TabSortBar value={sortOf("proven")} onChange={(v: string) => setSortOf(v, "proven")} />
           <div style={{ borderRadius: 16, padding: "12px 14px", background: t.bg.subtle, fontFamily: t.font.family, fontSize: 14, lineHeight: "20px", color: t.text.secondary, marginBottom: 14 }}>
-            <span style={{ color: "#7C3AED", fontWeight: 800 }}>Elite cappers only, every open sports bet. </span>{(PROVEN && PROVEN.rule) || ""} GOOD = bet $500+ and at least 1x their usual, winning in that sport, Kalshi price 45–92¢. CAUTION = small or throwaway bet, losing in that sport, both sides held, or no Kalshi market. Top 20 is still the best 20 overall. {PROVEN ? "Updated " + PROVEN.updatedAt + "." : ""}
+            <span style={{ color: "#7C3AED", fontWeight: 800 }}>Elite cappers only, sport-ROI bar required. </span>{(PROVEN && PROVEN.rule) || ""} GOOD = bet $500+ and at least 1x their usual, +20% ROI over 10+ graded in that sport, Kalshi price 45–92¢. CAUTION = small or throwaway bet, or no Kalshi market. Both-sides bets and games where elite cappers split are hidden, not shown as caution. The headline ROI is the sport ROI. {PROVEN ? "Updated " + PROVEN.updatedAt + "." : ""}
           </div>
           <div data-elite-list="1" style={{ fontSize: 13, lineHeight: "19px", color: t.text.secondary, marginBottom: 10 }}>
             <span style={{ fontWeight: 800, color: t.text.primary }}>{"Elite now (" + ((PROVEN && PROVEN.elite) || []).length + "): "}</span>
-            {((PROVEN && PROVEN.elite) || []).map((e) => nameOf(e.name, e.wallet) + " " + e.rec[0] + "–" + e.rec[1] + " " + pct(e.roi) + " · 14d " + f14Text(e.f14)).join("; ") || "none qualify right now"}
+            {((PROVEN && PROVEN.elite) || []).map((e) => nameOf(e.name, e.wallet) + " " + e.rec[0] + "–" + e.rec[1] + " " + pct(e.roi) + (e.sports && e.sports[0] ? " · " + e.sports[0].sport + " " + e.sports[0].w + "–" + e.sports[0].l + " " + pct(e.sports[0].roi) : "") + " · 14d " + f14Text(e.f14)).join("; ") || "none qualify right now"}
           </div>
           {PROVEN ? <Text>{"GOOD " + (PROVEN.counts.GOOD || 0) + " · OK " + (PROVEN.counts.OK || 0) + " · CAUTION " + (PROVEN.counts.CAUTION || 0)}</Text> : <Text>Proven Picks build on the next scan or refresh.</Text>}
           {provenRows.length === 0 && PROVEN ? <Text>No unstarted sports bets from elite cappers in the next 48 hours.</Text> : null}

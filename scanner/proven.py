@@ -2,20 +2,23 @@
 """Proven Picks (Noel, Nov 15): every open sports pick from ELITE cappers only.
 
 Elite (computed fresh every scan/refresh from capper_history + 30-day backfill):
-  20+ graded copyable $500+ picks, copyable ROI >= +20%, win rate >= 60%, Polymarket P&L positive over the past
+  20+ graded copyable $500+ picks, copyable overall ROI >= +15%, Polymarket P&L positive over the past
   week, month and year (Hot), not Cooling (14-day form: 5+ picks with negative ROI), not losing on Noel's own
   copies once 3+ legs are graded, and not a near-certain-bet record (average entry on graded $500+ bets >= 90¢).
-  If more than 15 still qualify, keep the top 15 by quality score. A backer still does not count on a pick in a
-  sport where they are losing (5+ graded, negative ROI).
+  A pick only appears if that capper also has sport-specific ROI >= +20% over 10+ graded bets in THAT sport.
+  Overall ROI >= +20% and overall win rate >= 60% are ranking bonuses, not exclusions (a capper at +15% overall
+  who clears the sport bar, e.g. Siddhartha1, stays). If more than 15 still qualify, keep the top 15 by rank score.
 For each elite whale, all open sports positions on games in the next ~48h (Polymarket Data API, public) are listed with
 teams, league, PT time (Gamma event), Kalshi action/price (scanner match, refreshed live from Kalshi), bet vs usual,
 their record/ROI in that sport and 14-day form, and a verdict:
-  GOOD    = bet >= $500 and >= 1x usual, winning in that sport (5+ graded, more W than L, ROI > 0), Kalshi price 45-92c
-  CAUTION = small/throwaway bet (< $500 or < 0.5x usual), losing in that sport, hedged both sides, or no Kalshi market
+  GOOD    = bet >= $500 and >= 1x usual, sport bar cleared (10+ graded in that sport, ROI >= +20%), Kalshi price 45-92c
+  CAUTION = small/throwaway bet (< $500 or < 0.5x usual) or no Kalshi market
   OK      = everything else
+  Hidden (not listed, no caution card): a capper betting both sides of a market, and any game where elite
+  cappers are on opposite sides (those games are also hidden from Top 20).
 Written to proven_picks.json (repo root copy too, served by Pages) for the morning-picks routine.
 """
-import json, os, sys, time, datetime as dt, urllib.request, urllib.parse
+import json, os, sys, time, datetime as dt, urllib.request, urllib.parse, re
 from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -25,10 +28,13 @@ import backfill as bf
 
 PT = dt.timezone(dt.timedelta(hours=-8))
 ELITE_MIN_N = 20
-ELITE_MIN_ROI = 20.0
+ELITE_MIN_ROI = 15.0
+ELITE_ROI_BONUS = 20.0
 ELITE_MIN_WR = 60.0
 ELITE_MAX_AVG = 0.90
 ELITE_CAP = 15
+SPORT_BAR_N = 10
+SPORT_BAR_ROI = 20.0
 HORIZON_H = 48
 GOOD_LO, GOOD_HI = 0.45, 0.92
 OUT = os.path.join(HERE, 'proven_picks.json')
@@ -46,6 +52,70 @@ def _json(url, timeout=20):
 def pt(ts):
     return dt.datetime.fromtimestamp(int(ts), PT).strftime('%a %b %-d · %-I:%M %p PT')
 
+def evkey(slug):
+    m = re.search(r'(.+-20\d{2}-\d{2}-\d{2})', slug or '')
+    return m.group(1) if m else (slug or '')
+
+def _norm(s):
+    return ' '.join((s or '').lower().split())
+
+def _looks_team(s):
+    t = _norm(s)
+    if not t or t in ('yes', 'no', 'over', 'under', 'draw'):
+        return False
+    if t.startswith('over ') or t.startswith('under '):
+        return False
+    return True
+
+def _names_clash(a, b):
+    a, b = _norm(a), _norm(b)
+    if not a or not b or not _looks_team(a) or not _looks_team(b):
+        return False
+    if a == b:
+        return True
+    if len(a) >= 4 and a in b:
+        return True
+    if len(b) >= 4 and b in a:
+        return True
+    return False
+
+def best_sport_bar(c, sport=None):
+    """A sport record clears the bar at 10+ graded and ROI >= +20%."""
+    sports = c.get('sports') or {}
+    items = [(sport, sports.get(sport) or {})] if sport else list(sports.items())
+    best = None
+    for name, sr in items:
+        if not name or not sr:
+            continue
+        n = sr.get('n') or 0
+        roi = sr.get('roi')
+        if n >= SPORT_BAR_N and roi is not None and roi >= SPORT_BAR_ROI:
+            cand = {'sport': name, 'w': sr.get('w') or 0, 'l': sr.get('l') or 0, 'n': n, 'roi': roi}
+            if best is None or (cand['roi'], cand['n']) > (best['roi'], best['n']):
+                best = cand
+    return best
+
+def sport_bars(c):
+    out = []
+    for name in (c.get('sports') or {}):
+        b = best_sport_bar(c, name)
+        if b:
+            out.append(b)
+    out.sort(key=lambda x: (-x['roi'], -x['n']))
+    return out
+
+def elite_rank_score(c):
+    """Quality, plus bonuses for overall +20% ROI and 60% win rate, plus best sport ROI."""
+    q = float(c.get('quality') or 0)
+    if (c.get('croi') or 0) >= ELITE_ROI_BONUS:
+        q += 30
+    if (c.get('cwr') or 0) >= ELITE_MIN_WR:
+        q += 15
+    sb = best_sport_bar(c)
+    if sb:
+        q += min(float(sb['roi']), 100) * 0.5
+    return round(q, 2)
+
 def elite_check(c):
     win = c.get('win') or {}
     def pos(k):
@@ -57,10 +127,9 @@ def elite_check(c):
     if (c.get('cw') or 0) <= (c.get('cl') or 0):
         why.append('not a winning record')
     if c.get('croi') is None or c['croi'] < ELITE_MIN_ROI:
-        why.append('ROI %s%% < +20%%' % (c.get('croi'),))
-    wr = c.get('cwr')
-    if wr is None or wr < ELITE_MIN_WR:
-        why.append('win rate %s%% < 60%%' % wr)
+        why.append('ROI %s%% < +15%%' % (c.get('croi'),))
+    if not best_sport_bar(c):
+        why.append('no sport with 10+ graded and +20% ROI')
     if not (pos('week') and pos('month') and pos('year')):
         why.append('not Hot (week/month/year P&L not all up)')
     if c.get('badge') == 'Cold':
@@ -94,7 +163,7 @@ def build(emb, store=None, write=True):
             elite.append(c)
         elif (c.get('cn') or 0) >= 10 and (c.get('croi') or 0) > 0 and (c.get('cw') or 0) > (c.get('cl') or 0):
             near.append({'wallet': c['wallet'], 'name': c.get('name'), 'why': why, 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi')})
-    elite.sort(key=lambda c: -(c.get('quality') or 0))
+    elite.sort(key=lambda c: -elite_rank_score(c))
     if len(elite) > ELITE_CAP:
         for c in elite[ELITE_CAP:]:
             near.append({'wallet': c['wallet'], 'name': c.get('name'), 'why': ['outside top %d by quality' % ELITE_CAP],
@@ -156,9 +225,15 @@ def build(emb, store=None, write=True):
             tick_need[p['k']['ticker']] = None
     with ThreadPoolExecutor(max_workers=8) as ex:
         live = dict(zip(list(tick_need), ex.map(lambda t: _json('https://api.elections.kalshi.com/trade-api/v2/markets/' + t), list(tick_need))))
+    hedge_events = set()
+    for p in rows:
+        if p.get('hedged'):
+            hedge_events.add(evkey(p.get('eventSlug') or p.get('slug') or ''))
     out = []
     for p in rows:
-        c = p.pop('_c')
+        c = p.pop('_c', None) or p.get('_c')
+        if p.get('hedged'):
+            continue
         ev = ev_info.get(p['eventSlug'] or p['slug']) or {}
         sp = by_pid.get(p['pid']) or {}
         ts = sp.get('startTs') or ev.get('ts')
@@ -190,8 +265,12 @@ def build(emb, store=None, write=True):
         srec = (c.get('sports') or {}).get(sport) or {'w': 0, 'l': 0, 'n': 0, 'roi': None}
         med = c.get('medBet')
         mult = round(p['cost'] / med, 2) if med else None
+        # A pick only appears if this capper clears the sport bar in THIS sport.
+        sport_bar_ok = (srec.get('n') or 0) >= SPORT_BAR_N and srec.get('roi') is not None and srec['roi'] >= SPORT_BAR_ROI
+        if not sport_bar_ok:
+            continue
         losing_sport = (srec.get('n') or 0) >= ch.SPORT_MIN_N and srec.get('roi') is not None and srec['roi'] < 0
-        winning_sport = (srec.get('n') or 0) >= ch.SPORT_MIN_N and srec['w'] > srec['l'] and (srec.get('roi') or 0) > 0
+        winning_sport = sport_bar_ok and srec['w'] > srec['l']
         small = p['cost'] < 500 or (mult is not None and mult < 0.5) or ch.conviction_of(c, p['cost']) == 'T'
         kp = (k or {}).get('price')
         reasons = []
@@ -199,8 +278,6 @@ def build(emb, store=None, write=True):
             reasons.append('small bet' if p['cost'] >= 500 else 'small bet (under $500)')
         if losing_sport:
             reasons.append('losing in ' + sport)
-        if p.get('hedged'):
-            reasons.append('hedged both sides')
         if not k or kp is None:
             reasons.append('no Kalshi market')
         if reasons:
@@ -222,7 +299,7 @@ def build(emb, store=None, write=True):
             'startTs': ts, 'start': pt(ts) if ts else (bf.slug_date(p['slug']) or '') + ' (time TBD)',
             'cost': round(p['cost']), 'avg': p['avg'], 'now': p.get('now'), 'usual': med, 'mult': mult,
             'kalshi': k, 'sportRec': srec, 'f14': c.get('f14'), 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi'),
-            'badge': c.get('badge'), 'verdict': verdict, 'why': reasons, 'hedged': p.get('hedged', False),
+            'badge': c.get('badge'), 'verdict': verdict, 'why': reasons,
             'inTop': p['pid'] in {x.get('id') for x in (emb or {}).get('signals') or []},
         })
     order = {'GOOD': 0, 'OK': 1, 'CAUTION': 2}
@@ -233,12 +310,37 @@ def build(emb, store=None, write=True):
         if key not in best or r['cost'] > best[key]['cost']:
             best[key] = r
     out = list(best.values())
+    # Hide the whole game when elite cappers are on opposite sides, including an elite who hedged both sides.
+    split_events = set(k for k in hedge_events if k)
+    by_ev = {}
+    for r in out:
+        by_ev.setdefault(evkey(r['slug']), []).append(r)
+    for ek, rs in by_ev.items():
+        mk = {}
+        for r in rs:
+            mk.setdefault((r.get('market') or '').strip().lower(), set()).add((r.get('pick') or '').strip().lower())
+        if any(len(v) > 1 for v in mk.values()):
+            split_events.add(ek)
+            continue
+        done = False
+        for i, a in enumerate(rs):
+            if done:
+                break
+            for b in rs[i + 1:]:
+                if _names_clash(a.get('opp'), b.get('pick')) or _names_clash(b.get('opp'), a.get('pick')):
+                    split_events.add(ek)
+                    done = True
+                    break
+    if split_events:
+        out = [r for r in out if evkey(r['slug']) not in split_events]
     out.sort(key=lambda r: (order[r['verdict']], r['startTs'] or 10 ** 12, -r['cost']))
     res = {
         'updatedTs': int(now), 'updatedAt': pt(now),
-        'rule': 'Elite cappers only: 20+ graded $500+ copyable picks (30-day Polymarket backfill + scanner), ROI >= +20%, win rate >= 60%, Hot (week/month/year P&L up), not Cooling on 14-day form, not losing on your copies, not a near-certain-bet record (average entry on graded $500+ bets >= 90¢). If more than 15 qualify, the top 15 by quality score are kept.',
+        'rule': 'Elite cappers only: 20+ graded $500+ copyable picks (30-day Polymarket backfill + scanner), overall ROI >= +15%, Hot (week/month/year P&L up), not Cooling on 14-day form, not losing on your copies, not a near-certain-bet record (average entry on graded $500+ bets >= 90¢). A pick only appears if that capper also has +20% ROI over 10+ graded bets in THAT sport. Overall ROI >= +20% and overall win rate >= 60% are ranking bonuses, not exclusions. If more than 15 qualify, the top 15 by rank score (quality plus those bonuses and best sport ROI) are kept. Picks where a capper bet both sides are hidden, not shown as caution. Games where elite cappers split (opposite sides, or an elite who hedged) are hidden from Proven Picks and Top 20.',
+        'splitGames': sorted(split_events),
         'elite': [{'wallet': c['wallet'], 'name': c.get('name'), 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi'),
-                   'wr': c.get('cwr'), 'quality': c.get('quality'), 'avgEntry': c.get('avgEntry'),
+                   'wr': c.get('cwr'), 'quality': c.get('quality'), 'rankScore': elite_rank_score(c), 'avgEntry': c.get('avgEntry'),
+                   'sports': sport_bars(c),
                    'f14': c.get('f14'), 'badge': c.get('badge'), 'usual': c.get('medBet'), 'open': len(opens.get(c['wallet']) or [])} for c in elite],
         'nearMiss': near[:25],
         'picks': out,
@@ -247,7 +349,7 @@ def build(emb, store=None, write=True):
     if write:
         for pth in (OUT, OUT_ROOT):
             json.dump(res, open(pth, 'w'), separators=(',', ':'))
-    print(f"proven picks: {len(elite)} elite cappers ({', '.join((c.get('name') or c['wallet'][:10]) for c in elite[:12])}), {len(out)} open picks, {res['counts']}")
+    print(f"proven picks: {len(elite)} elite cappers ({', '.join((c.get('name') or c['wallet'][:10]) for c in elite[:12])}), {len(out)} open picks, {res['counts']}, hidden {len(split_events)} elite-split/hedged games")
     return res
 
 if __name__ == '__main__':
