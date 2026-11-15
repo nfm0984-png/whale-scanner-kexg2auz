@@ -2,9 +2,11 @@
 """Proven Picks (Noel, Nov 15): every open sports pick from ELITE cappers only.
 
 Elite (computed fresh every scan/refresh from capper_history + 30-day backfill):
-  10+ graded copyable $500+ picks, winning record, copyable ROI >= +15%, Polymarket P&L positive over the past
+  20+ graded copyable $500+ picks, copyable ROI >= +20%, win rate >= 60%, Polymarket P&L positive over the past
   week, month and year (Hot), not Cooling (14-day form: 5+ picks with negative ROI), not losing on Noel's own
-  copies once 3+ legs are graded.
+  copies once 3+ legs are graded, and not a near-certain-bet record (average entry on graded $500+ bets >= 90¢).
+  If more than 15 still qualify, keep the top 15 by quality score. A backer still does not count on a pick in a
+  sport where they are losing (5+ graded, negative ROI).
 For each elite whale, all open sports positions on games in the next ~48h (Polymarket Data API, public) are listed with
 teams, league, PT time (Gamma event), Kalshi action/price (scanner match, refreshed live from Kalshi), bet vs usual,
 their record/ROI in that sport and 14-day form, and a verdict:
@@ -22,8 +24,11 @@ import capper_history as ch
 import backfill as bf
 
 PT = dt.timezone(dt.timedelta(hours=-8))
-ELITE_MIN_N = 10
-ELITE_MIN_ROI = 15.0
+ELITE_MIN_N = 20
+ELITE_MIN_ROI = 20.0
+ELITE_MIN_WR = 60.0
+ELITE_MAX_AVG = 0.90
+ELITE_CAP = 15
 HORIZON_H = 48
 GOOD_LO, GOOD_HI = 0.45, 0.92
 OUT = os.path.join(HERE, 'proven_picks.json')
@@ -52,7 +57,10 @@ def elite_check(c):
     if (c.get('cw') or 0) <= (c.get('cl') or 0):
         why.append('not a winning record')
     if c.get('croi') is None or c['croi'] < ELITE_MIN_ROI:
-        why.append('ROI %s%% < +15%%' % (c.get('croi'),))
+        why.append('ROI %s%% < +20%%' % (c.get('croi'),))
+    wr = c.get('cwr')
+    if wr is None or wr < ELITE_MIN_WR:
+        why.append('win rate %s%% < 60%%' % wr)
     if not (pos('week') and pos('month') and pos('year')):
         why.append('not Hot (week/month/year P&L not all up)')
     if c.get('badge') == 'Cold':
@@ -62,6 +70,9 @@ def elite_check(c):
     cp = c.get('copies') or {}
     if (cp.get('n') or 0) >= 3 and (cp.get('l') or 0) > (cp.get('w') or 0):
         why.append('losing on your copies')
+    avg = c.get('avgEntry')
+    if avg is not None and avg >= ELITE_MAX_AVG:
+        why.append('avg entry %d¢ is near-certain' % round(avg * 100))
     return not why, why
 
 def _iso_ts(s):
@@ -81,8 +92,14 @@ def build(emb, store=None, write=True):
         ok, why = elite_check(c)
         if ok:
             elite.append(c)
-        elif (c.get('cn') or 0) >= ELITE_MIN_N and (c.get('croi') or 0) > 0 and (c.get('cw') or 0) > (c.get('cl') or 0):
+        elif (c.get('cn') or 0) >= 10 and (c.get('croi') or 0) > 0 and (c.get('cw') or 0) > (c.get('cl') or 0):
             near.append({'wallet': c['wallet'], 'name': c.get('name'), 'why': why, 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi')})
+    elite.sort(key=lambda c: -(c.get('quality') or 0))
+    if len(elite) > ELITE_CAP:
+        for c in elite[ELITE_CAP:]:
+            near.append({'wallet': c['wallet'], 'name': c.get('name'), 'why': ['outside top %d by quality' % ELITE_CAP],
+                         'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi')})
+        elite = elite[:ELITE_CAP]
     # scanner picks by id (Kalshi match, game time, teams)
     by_pid = {}
     for k in LISTS:
@@ -219,8 +236,9 @@ def build(emb, store=None, write=True):
     out.sort(key=lambda r: (order[r['verdict']], r['startTs'] or 10 ** 12, -r['cost']))
     res = {
         'updatedTs': int(now), 'updatedAt': pt(now),
-        'rule': 'Elite cappers only: 10+ graded $500+ copyable picks (30-day Polymarket backfill + scanner), winning record, ROI >= +15%, Hot (week/month/year P&L up), not Cooling on 14-day form, not losing on your copies.',
+        'rule': 'Elite cappers only: 20+ graded $500+ copyable picks (30-day Polymarket backfill + scanner), ROI >= +20%, win rate >= 60%, Hot (week/month/year P&L up), not Cooling on 14-day form, not losing on your copies, not a near-certain-bet record (average entry on graded $500+ bets >= 90¢). If more than 15 qualify, the top 15 by quality score are kept.',
         'elite': [{'wallet': c['wallet'], 'name': c.get('name'), 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi'),
+                   'wr': c.get('cwr'), 'quality': c.get('quality'), 'avgEntry': c.get('avgEntry'),
                    'f14': c.get('f14'), 'badge': c.get('badge'), 'usual': c.get('medBet'), 'open': len(opens.get(c['wallet']) or [])} for c in elite],
         'nearMiss': near[:25],
         'picks': out,

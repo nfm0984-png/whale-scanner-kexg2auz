@@ -749,8 +749,22 @@ def apply_records(c, bf=None, cp=None):
     F = {'risked': 0.0, 'profit': 0.0, 'crisked': 0.0, 'cprofit': 0.0}
     R = [0, 0, 0.0, 0.0]          # 14d w, l, risked, profit (all graded)
     Q = [0.0, 0.0, 0.0, 0.0]      # recency-weighted copyable: w, n, risked, profit
+    E = [0.0, 0, 0]               # entry sum, n with a price, n at 90¢+ (all graded $500+)
     S = {}
     src = {'scanner': 0, 'backfill': 0}
+    def add_entry(avg):
+        if avg is None:
+            return
+        try:
+            a = float(avg)
+        except (TypeError, ValueError):
+            return
+        if a <= 0:
+            return
+        E[0] += a
+        E[1] += 1
+        if a >= 0.90:
+            E[2] += 1
     def add(sp, ts, res, cost, prof, copyable, k=1):
         if res == 'push':
             T['push'] += k
@@ -779,6 +793,8 @@ def apply_records(c, bf=None, cp=None):
         prof = float(p.get('profit') or 0)
         cop = is_copyable({'result': res, 'kAct': p.get('kAct'), 'kContract': p.get('kContract'), 'kprice': p.get('kprice')})
         add(sport_of(p.get('league')), ts, res, cost, prof, cop)
+        if res in ('W', 'L'):
+            add_entry(p.get('avg') if p.get('avg') is not None else p.get('kprice'))
         src['scanner'] += 1
         if cop and res in ('W', 'L'):
             T['cw' if res == 'W' else 'cl'] += 1
@@ -805,6 +821,10 @@ def apply_records(c, bf=None, cp=None):
             wt = FORM_WEIGHT if ts >= f14 else 1.0
             Q[0] += wt * cw_; Q[1] += wt * (cw_ + cl_); Q[2] += wt * crk; Q[3] += wt * cpf
             src['backfill'] += w_ + l_
+        if bf.get('nAll') and bf.get('avgAll') is not None:
+            E[0] += float(bf['avgAll']) * int(bf['nAll'])
+            E[1] += int(bf['nAll'])
+            E[2] += int(bf.get('nNear') or 0)
     c.update(T)
     c['profit'], c['risked'] = round(F['profit'], 2), round(F['risked'], 2)
     c['cprofit'], c['crisked'] = round(F['cprofit'], 2), round(F['crisked'], 2)
@@ -823,9 +843,12 @@ def apply_records(c, bf=None, cp=None):
     c['sports'] = {sp: {'w': v[0], 'l': v[1], 'n': v[0] + v[1], 'roi': round(100.0 * v[3] / v[2], 1) if v[2] else None}
                    for sp, v in sorted(S.items(), key=lambda kv: -(kv[1][0] + kv[1][1]))}
     c['recSrc'] = src
+    c['avgEntry'] = round(E[0] / E[1], 4) if E[1] else None
+    c['avgN'] = int(E[1])
+    c['nearCertN'] = int(E[2])
     if use_bf:
         c['bf'] = {'n': bf.get('n'), 'med': bf.get('med'), 'ts': bf.get('ts'), 'days': BF_DAYS,
-                   'recent': bf.get('recent') or []}
+                   'recent': bf.get('recent') or [], 'avgAll': bf.get('avgAll'), 'nNear': bf.get('nNear')}
         if not c.get('medBet') and bf.get('med'):
             c['medBet'] = bf['med']
             c['maxBet'] = bf.get('max')

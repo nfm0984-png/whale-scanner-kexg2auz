@@ -120,6 +120,8 @@ def aggregate(raw):
         bets = rec.get('bets') or {}
         cells = {}
         costs = []
+        a_sum = a_n = a_near = 0.0
+        c_sum = c_n = 0.0
         for pid, (cost, avg, res, ts, slug, outcome) in bets.items():
             sp = sport_of(league_of_slug(slug))
             key = sp + '|' + str(int((ts or 0) // 86400))
@@ -132,15 +134,25 @@ def aggregate(raw):
             c[0 if res == 'W' else 1] += 1
             c[3] += cost
             c[4] += pr
+            if res in ('W', 'L') and avg and avg > 0:
+                a_sum += avg
+                a_n += 1
+                if avg >= 0.90:
+                    a_near += 1
             if 0.10 <= avg < 0.95:  # copyable price band (same 10-94c rule as scanner picks)
                 c[5 if res == 'W' else 6] += 1
                 c[7] += cost
                 c[8] += pr
+                if res in ('W', 'L'):
+                    c_sum += avg
+                    c_n += 1
         for c in cells.values():
             c[3], c[4], c[7], c[8] = round(c[3]), round(c[4]), round(c[7]), round(c[8])
         recent = sorted(bets.values(), key=lambda r: -(r[3] or 0))[:8]
         out['wallets'][w] = {'ts': rec.get('ts'), 'full': bool(rec.get('full')), 'n': len(bets),
                              'med': round(_med(costs)) if costs else None, 'max': round(max(costs)) if costs else None,
+                             'avgAll': round(a_sum / a_n, 4) if a_n else None, 'nAll': int(a_n), 'nNear': int(a_near),
+                             'avgCopy': round(c_sum / c_n, 4) if c_n else None, 'nCopy': int(c_n),
                              'cells': cells, 'recent': [[r[4], r[5], round(r[0]), r[1], r[2], r[3]] for r in recent]}
     tmp = PATH + '.tmp'
     json.dump(out, open(tmp, 'w'), separators=(',', ':'))
