@@ -945,14 +945,14 @@ function ActionBar() {
   void tick;
   return (
     <div style={{ marginTop: 14 }}>
-      <div style={{ display: "flex", gap: 8 }}>{btn("Scan", "scan", true)}{btn("Refresh", "refresh", false)}</div>
+      <div className="action-btns" style={{ display: "flex", gap: 8 }}>{btn("Scan", "scan", true)}{btn("Refresh", "refresh", false)}</div>
       {status}
       {sheet ? (
         <div style={{ marginTop: 10, borderRadius: 14, padding: 12, background: "rgba(0,0,0,0.22)", fontSize: 13, lineHeight: "19px" }}>
           {sheet === "scan" ? (
             <div>
               <div style={{ fontWeight: 800, fontSize: 14 }}>Full scan: top all-time sports whales</div>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 8, marginTop: 8 }}>
+              <div className="scan-presets" style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 8, marginTop: 8 }}>
                 {["20", "40", "60", "80", "100", "200", "400", "custom"].map((v: string) => (
                   <button key={v} onClick={() => setN(v)} style={{ ...BTN(n === v ? "#FFFFFF" : "transparent", n === v ? BRAND : "#FFFFFF", "rgba(255,255,255,0.7)"), height: 44, padding: "0 8px", borderRadius: 12, fontSize: 15, fontFamily: t.font.family }}>{v === "custom" ? "Custom" : "Top " + v}</button>
                 ))}
@@ -1017,16 +1017,16 @@ function Hero(props: { top: number; fun: number; buys: number; bets: number; act
   );
   const chip = (s: string) => <span style={{ fontSize: 11, fontWeight: 600, padding: "4px 9px", borderRadius: 999, background: "rgba(255,255,255,0.12)" }}>{s}</span>;
   return (
-    <div style={{ borderRadius: 22, padding: 18, background: `linear-gradient(135deg, #1E1B4B 0%, ${BRAND} 55%, ${BRAND2} 100%)`, color: "#FFFFFF", boxShadow: "0 10px 30px rgba(76, 29, 149, 0.25)" }}>
+    <div className="hero-card" style={{ borderRadius: 22, padding: 18, background: `linear-gradient(135deg, #1E1B4B 0%, ${BRAND} 55%, ${BRAND2} 100%)`, color: "#FFFFFF", boxShadow: "0 10px 30px rgba(76, 29, 149, 0.25)" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, flexWrap: "wrap" }}>
         <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: "0.14em" }}>ORCA · WHALE SIGNALS</div>
         <span style={{ fontSize: 11, fontWeight: 700, padding: "4px 9px", borderRadius: 999, background: "rgba(255,255,255,0.16)" }}>Live · tap to scan</span>
       </div>
-      <div style={{ fontSize: 26, lineHeight: "32px", fontWeight: 800, marginTop: 10 }}>Follow conviction. Verify everything.</div>
+      <div className="hero-title" style={{ fontSize: 26, lineHeight: "32px", fontWeight: 800, marginTop: 10 }}>Follow conviction. Verify everything.</div>
       <div style={{ fontSize: 13, lineHeight: "18px", color: "rgba(255,255,255,0.82)", marginTop: 4 }}>Top {DATA.coverage.cappers} all-time sports whales · games that haven't started, next {DATA.settings.windowH} hours</div>
       <div style={{ fontSize: 12, lineHeight: "17px", color: "rgba(255,255,255,0.78)", marginTop: 2 }}>Scanned {DATA.scannedAt} · Refreshed {DATA.refreshedAt || "not yet"}</div>
       <ActionBar />
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 14 }}>
+      <div className="hero-stats" style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 14 }}>
         {stat(String(props.top), "TOP PICKS")}
         {stat(String(props.fun), "FUN PICKS")}
         {stat(String(props.buys), "RECENT BUYS")}
@@ -3083,21 +3083,9 @@ export default function App() {
     </Section>
   );
   return (
-    <Page title="Orca Whale Scanner" summary={{
-      combos: "2-team and 3-team combos paying 1.8× to 4× (combined 25–55¢), ranked all-GOOD first, then mixed, then all-OK. Legs are GOOD and OK Kalshi picks from every tab. Different games, no repeats in a section.",
-      top: "The strongest Kalshi singles from high-ROI elite backers. GOOD picks are listed first; the best OK Kalshi-bettable picks fill the list when there are not enough GOOD ones. CAUTION, no Kalshi market, both-sides bets and elite-split games stay hidden. The best 2-team and 3-team combos (1.8×–4×) are listed first. Games that have started are hidden.",
-      fun: "Kalshi picks that missed Top 20: one-whale, under 10¢ or other cheap leftovers, Split, or Pricier. 10–20¢ picks backed by 2+ whales moved to Longshots; player props moved to Player Props. Started games are hidden.",
-      poly: "Whale picks you can only bet on Polymarket (not on Kalshi), from all-time sports whales. Player props and 10–20¢ longshots have their own tabs. Started games are hidden.",
-      props: "Only player props backed by an elite capper with +20% sport ROI, and only when Kalshi has a matching player-prop market (NFL TDs or yards, NBA points, rebounds or assists, and the same idea in other sports). Exact Kalshi wording, ticker and price are on the card. Unmatched or weak props are hidden. Sorted best to worst.",
-      longshots: "5x–10x payout picks priced 10–20¢, backed by 2+ proven whales with real money. Most will lose; each hit pays 5–10x. Flat $1 stakes, or $2 for the strongest. Started games are hidden.",
-      hot: "Only picks backed by at least one Hot whale (Polymarket P&L up over the past week, month, year and all time) betting a High or Normal conviction amount, not a throwaway. Ranked by backing-whale quality: Hot + Proven strongest, then Hot with 10+ graded picks, then Hot with a small winning sample.",
-      upcoming: "The next games with $500+ bets from proven whales, in the next 24 hours, any sport or market including player props. Sorted best to worst by default (start time and bet size are in the sort menu). Started games are hidden.",
-      biggest: "The largest whale bets, any sport or market type. Sorted best to worst by default; switch the sort to bet size to see the biggest single positions first. Started and ended games are hidden. A pick can also appear on other tabs.",
-      buys: "The latest big whale buys, shown like Top 20: rank, strength, and the exact Kalshi (or Polymarket) bet in plain words.",
-      bets: "Every whale pick in the next 12 hours, shown like Top 20: rank, strength, and the exact Kalshi (or Polymarket) bet in plain words. Live games stay here with a Live tag. Ended games are removed.",
-      cappers: "Cappers ranked by the graded record we have collected from their whale picks — wins, losses, win %, and net $ on those picks. Tap a capper for current live picks and every tracked pick, each labeled HIT, MISSED, PUSH, or OPEN/LIVE. Records need " + capMinSample + " graded picks (pushes don't count) to rank at the top; smaller samples are labeled. Records are saved across scans and never wiped.",
-      more: "Bankroll, daily cap, your win/loss results, scan details and how the rankings work.",
-    }[tab] || ""} record={tabRecord || undefined} caution={tabCaution || undefined}>
+    <Page title="Orca Whale Scanner" summary="Kalshi combos and whale picks, best first." caution={tabCaution || undefined}>
+      <div className="desk-shell" data-desk-shell="1">
+      <aside className="desk-sidebar" data-desk-sidebar="1">
       <Hero top={top.length} fun={fun.length} buys={BUY_LINES.length} bets={BET_LINES.length} active={activeTraders.length} value={openValue} />
 
       <Section heading="Bankroll and pick rules" caption={"Bankroll " + money(bankroll) + " · " + money(minP) + "+ positions · Top 20 needs " + minW + "+ whales" + (followed.length ? " · " + followed.length + " followed" : "") + (hidden.length ? " · " + hidden.length + " hidden" : "")} collapsible defaultOpen={false}>
@@ -3108,21 +3096,22 @@ export default function App() {
         </Grid>
         <Toggle label="Only picks a followed capper backs" value={f.followedOnly} onChange={(v: boolean) => set("followedOnly", v)} />
       </Section>
+      </aside>
+      <div className="desk-main" data-desk-main="1">
 
       {tab === "combos" ? (
         <Section heading={"Combos · " + comboCount}>
-          <TabSortBar value={sortOf("combos")} onChange={(v: string) => setSortOf(v, "combos")} options={COMBO_SORT_OPTS} label="Sort combos" />
-          <LeaguePills picks={comboLegList} value={sportFilter} onChange={setSportFilter} />
-          <DailyCap />
-          <div style={{ borderRadius: 16, padding: "12px 14px", background: t.bg.subtle, fontFamily: t.font.family, fontSize: 14, lineHeight: "20px", color: t.text.secondary, marginBottom: 14 }}>
-            <span style={{ color: GREEN, fontWeight: 800 }}>2-team and 3-team combos, best first. </span>
-            Every ticket pays 1.8× to 4× (combined 25–55¢). Legs are GOOD and OK Kalshi picks from every tab. All-GOOD first, then mixed, then all-OK. Different games; no repeats in a section.
-          </div>
-          {comboCount === 0 ? <Text>No 2-team or 3-team combo right now pays 1.8× to 4× from GOOD or OK Kalshi legs in different games.</Text> : <Text>{combos2.length} 2-team · {combos3.length} 3-team, {sortOf("combos") === "worst" ? "lowest score first" : "all-GOOD first, then mixed, then all-OK"}.</Text>}
-          <div style={{ fontSize: 16, fontWeight: 800, margin: "12px 0 8px" }}>{"2-team · " + combos2.length}</div>
-          {combos2.length === 0 ? <Text>No 2-team combo qualifies right now.</Text> : <CardGrid>{shownCombos(combos2).map((legs: Pick[], i: number) => (<ComboCard key={legs.map((p: Pick) => p.id).join("+")} legs={legs} rank={i + 1} bankroll={bankroll} now={now} />))}</CardGrid>}
-          <div style={{ fontSize: 16, fontWeight: 800, margin: "16px 0 8px" }}>{"3-team · " + combos3.length}</div>
-          {combos3.length === 0 ? <Text>No 3-team combo qualifies right now.</Text> : <CardGrid>{shownCombos(combos3).map((legs: Pick[], i: number) => (<ComboCard key={legs.map((p: Pick) => p.id).join("+")} legs={legs} rank={i + 1} bankroll={bankroll} now={now} />))}</CardGrid>}
+          {comboCount === 0 ? <Text>No combos qualify right now — next scan 3 PM PT</Text> : (
+            <div>
+              <TabSortBar value={sortOf("combos")} onChange={(v: string) => setSortOf(v, "combos")} options={COMBO_SORT_OPTS} label="Sort combos" />
+              <LeaguePills picks={comboLegList} value={sportFilter} onChange={setSportFilter} />
+              <Text>{combos2.length} 2-team · {combos3.length} 3-team, 1.8×–4×, {sortOf("combos") === "worst" ? "lowest score first" : "all-GOOD first, then mixed, then all-OK"}.</Text>
+              {combos2.length ? <div style={{ fontSize: 16, fontWeight: 800, margin: "12px 0 8px" }}>{"2-team · " + combos2.length}</div> : null}
+              {combos2.length ? <CardGrid>{shownCombos(combos2).map((legs: Pick[], i: number) => (<ComboCard key={legs.map((p: Pick) => p.id).join("+")} legs={legs} rank={i + 1} bankroll={bankroll} now={now} />))}</CardGrid> : null}
+              {combos3.length ? <div style={{ fontSize: 16, fontWeight: 800, margin: "16px 0 8px" }}>{"3-team · " + combos3.length}</div> : null}
+              {combos3.length ? <CardGrid>{shownCombos(combos3).map((legs: Pick[], i: number) => (<ComboCard key={legs.map((p: Pick) => p.id).join("+")} legs={legs} rank={i + 1} bankroll={bankroll} now={now} />))}</CardGrid> : null}
+            </div>
+          )}
         </Section>
       ) : null}
 
@@ -3416,6 +3405,9 @@ export default function App() {
           </Section>
         </Section>
       ) : null}
+
+      </div>
+      </div>
 
       <Floating edge="top" align="center" bar>
         <div data-tab-bar="1">

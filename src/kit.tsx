@@ -14,11 +14,16 @@ export const useGrokTheme = () => theme;
 const TONE: Record<string, [string, string]> = { success: ["#DCFCE7", "#166534"], warning: ["#FEF3C7", "#92400E"], danger: ["#FEE2E2", "#991B1B"], info: ["#E0F2FE", "#075985"] };
 
 const LAYOUT_CSS = `
-html, body { margin: 0; max-width: 100%; overflow-x: hidden; }
+html, body, #root { margin: 0; width: 100%; min-height: 100%; max-width: none; }
+html, body { overflow-x: hidden; background: #fff; }
 *, *::before, *::after { box-sizing: border-box; }
 img, svg, video, canvas { max-width: 100%; }
 .page-wrap { width: 100%; max-width: 100%; margin: 0 auto; padding: 68px 12px 48px; font-family: ${FONT}; color: ${theme.text.primary}; overflow-x: hidden; }
-.floating-inner { width: 100%; max-width: 100%; }
+.page-wrap > h1 { font-size: 22px; line-height: 28px; margin: 6px 2px 2px; font-weight: 800; letter-spacing: -0.01em; }
+.page-wrap > .page-sub { font-size: 14px; line-height: 20px; color: ${theme.text.secondary}; margin: 0 2px 14px; }
+.floating-inner { width: 100%; max-width: 100%; margin: 0 auto; }
+.desk-shell { display: block; width: 100%; }
+.desk-sidebar, .desk-main { min-width: 0; width: 100%; }
 .card-grid { display: grid; grid-template-columns: 1fr; gap: 14px; width: 100%; min-width: 0; }
 .card-grid > * { margin-bottom: 0 !important; min-width: 0; width: 100%; max-width: 100%; }
 [data-tab-bar] { width: 100%; max-width: 100%; }
@@ -28,22 +33,29 @@ img, svg, video, canvas { max-width: 100%; }
   .kit-grid { grid-template-columns: 1fr !important; }
   [data-league-pills] button { min-height: 44px; }
 }
-@media (min-width: 900px) {
-  .page-wrap { max-width: 1400px; padding: 76px 24px 56px; }
-  .floating-inner { max-width: 1400px; }
-  .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (min-width: 1024px) {
+  .page-wrap { max-width: 1400px; padding: 72px 28px 48px; }
+  .floating-inner { max-width: none; width: 100%; padding: 0 16px; box-sizing: border-box; }
+  .desk-shell { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 24px; align-items: start; }
+  .desk-sidebar { position: sticky; top: 72px; }
+  .card-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .hero-title { font-size: 20px !important; line-height: 24px !important; }
+  .hero-stats { display: grid !important; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .action-btns { display: flex; gap: 8px; }
+  .action-btns button { flex: 1 1 0 !important; height: 48px !important; min-height: 48px !important; width: auto; }
+  .desk-sidebar .kit-grid { grid-template-columns: 1fr !important; }
+  .scan-presets { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
 }
 @media (min-width: 1280px) {
-  .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .card-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
 }
 `;
 export function Page(p: { title?: string; summary?: string; record?: string; caution?: string; children?: React.ReactNode }) {
   return (
     <div className="page-wrap">
       <style>{LAYOUT_CSS}</style>
-      {p.title ? <h1 style={{ fontSize: 22, lineHeight: "28px", margin: "6px 2px 4px", fontWeight: 800, letterSpacing: "-0.01em" }}>{p.title}</h1> : null}
-      {p.summary ? <p style={{ fontSize: 13, lineHeight: "18px", color: theme.text.tertiary, margin: "0 2px 8px" }}>{p.summary}</p> : null}
-      {p.record ? <p style={{ fontSize: 14, lineHeight: "18px", fontWeight: 800, color: theme.text.primary, margin: "0 2px 6px" }}>{p.record}</p> : null}
+      {p.title ? <h1>{p.title}</h1> : null}
+      {p.summary ? <p className="page-sub">{p.summary}</p> : null}
       {p.caution ? <p style={{ fontSize: 13, lineHeight: "18px", fontWeight: 650, color: "#B45309", margin: "0 2px 12px" }}>{p.caution}</p> : null}
       {p.children}
     </div>
