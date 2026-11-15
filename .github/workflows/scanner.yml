@@ -9,9 +9,9 @@ on:
         options: [refresh, scan]
         default: refresh
       cappers:
-        description: number of top 30-day whales to scan
+        description: number of top all-time sports whales to scan
         type: string
-        default: "100"
+        default: "400"
   push:
     branches: [main]
 permissions:
@@ -51,7 +51,7 @@ jobs:
           CAPPERS: ${{ inputs.cappers }}
         run: |
           if [ "$MODE" = "scan" ]; then
-            N=$(printf '%s' "$CAPPERS" | tr -cd '0-9'); N=${N:-100}; [ "$N" -lt 1 ] && N=1; [ "$N" -gt 2000 ] && N=2000
+            N=$(printf '%s' "$CAPPERS" | tr -cd '0-9'); N=${N:-400}; [ "$N" -lt 1 ] && N=1; [ "$N" -gt 2000 ] && N=2000
             python3 -u scan.py --cappers "$N"
           else
             python3 -u refresh.py

@@ -330,7 +330,7 @@ def build(emb, store=None, write=True):
     out.sort(key=lambda r: (order[r['verdict']], r['startTs'] or 10 ** 12, -r['cost']))
     res = {
         'updatedTs': int(now), 'updatedAt': pt(now),
-        'rule': 'Elite cappers only: 20+ graded $500+ copyable picks (30-day Polymarket backfill + scanner), overall ROI >= +15%, Hot (week/month/year P&L up), not Cooling on 14-day form, not losing on your copies, not a near-certain-bet record (average entry on graded $500+ bets >= 90¢). A pick only appears if that capper also has +20% ROI over 10+ graded bets in THAT sport. Overall ROI >= +20% and overall win rate >= 60% are ranking bonuses, not exclusions. Every capper who clears these bars is elite; there is no list-size cap. Picks where a capper bet both sides are hidden, not shown as caution. Games where elite cappers split (opposite sides, or an elite who hedged) are hidden from Proven Picks and Top 20.',
+        'rule': 'Elite cappers only: 20+ big bets, +15% ROI, Hot, and +20% ROI in that sport. Split/both-sides games hidden.',
         'splitGames': sorted(split_events),
         'elite': [{'wallet': c['wallet'], 'name': c.get('name'), 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi'),
                    'wr': c.get('cwr'), 'quality': c.get('quality'), 'rankScore': elite_rank_score(c), 'avgEntry': c.get('avgEntry'),

@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """OrcaLayer whale scanner (snapshot). Whale data: OrcaLayer API only. Kalshi: contract match + price. ESPN: schedule/scores.
-Usage: python3 scan.py [--cappers 100 (any positive integer)] [--min 500]
+Usage: python3 scan.py [--cappers 400 (any positive integer)] [--min 500]
 Whales = top N sports whales by all-time P&L (OrcaLayer /api/v2/whales/leaderboard?sort=pnl; pnl-leaderboard only supports window=7|30), processed #1 first."""
 import json, time, math, re, sys, os, argparse, urllib.request, collections, datetime as dt, hashlib
 from concurrent.futures import ThreadPoolExecutor
 from orca import orca, CALLS
 HERE = os.path.dirname(os.path.abspath(__file__))
-ap = argparse.ArgumentParser(); ap.add_argument('--cappers', type=int, default=100); ap.add_argument('--min', type=float, default=500)
+ap = argparse.ArgumentParser(); ap.add_argument('--cappers', type=int, default=400); ap.add_argument('--min', type=float, default=500)
 ap.add_argument('--markets', type=int, default=60); ap.add_argument('--wallets', type=int, default=2); A = ap.parse_args()
-if A.cappers < 1: sys.exit('--cappers must be a positive integer')  # presets 20/40/60/80/100 or any custom number; default 100
+if A.cappers < 1: sys.exit('--cappers must be a positive integer')  # presets 20/40/60/80/100/200/400 or any custom number; default 400
 T0 = time.time(); NOW = int(T0)
 PT = dt.timezone(dt.timedelta(hours=-8))
 def pt(ts): return dt.datetime.fromtimestamp(ts, PT).strftime('%a %b %-d · %-I:%M %p PT')
