@@ -12,7 +12,7 @@ interface CapperHistPick { id: string; q?: string | null; label?: string | null;
 interface CapperRec { wallet: string; name: string; rankAll?: number | null; rank?: number | null; golden?: boolean; w: number; l: number; push: number; open: number; n: number; profit: number; risked: number; wr?: number | null; roi?: number | null; qualified: boolean; pnl?: number | null; wrAll?: number | null; picks: CapperHistPick[]; cw?: number; cl?: number; cn?: number; cwr?: number | null; croi?: number | null; cprofit?: number; crisked?: number; quality?: number; qQual?: boolean; demoted?: boolean; shrunkWr?: number | null; shrunkRoi?: number | null; win?: Record<string, { pnl?: number; roi?: number | null; rec?: number[] }>; badge?: string; proven?: boolean; coldDemoted?: boolean; medBet?: number | null; maxBet?: number | null; convRec?: Record<string, { w: number; l: number; roi: number | null }>; winStale?: string[]; tracked?: boolean; isNew?: boolean; addedTs?: number | null; trackedReason?: string | null; hotBoost?: number; f14?: { w: number; l: number; n: number; roi: number | null }; formCooling?: boolean; sports?: Record<string, { w: number; l: number; n: number; roi: number | null }>; copies?: { w: number; l: number; n: number; push: number; open: number; tickets: number; tw: number; tl: number; stake: number }; bf?: { n: number; med: number | null; ts: number; days: number; recent: (string | number)[][] }; recSrc?: { scanner: number; backfill: number }; qwr?: number | null; qroi?: number | null }
 interface NewCap { wallet: string; name: string; reason?: string | null; badge?: string | null; month?: number | null }
 interface CapperHistory { minSample: number; updatedAt?: string; cappers: CapperRec[]; newThisScan?: NewCap[]; newRecent?: NewCap[]; trackedCount?: number; sportMap?: Record<string, string>; copiesInfo?: { updatedTs?: number; tickets?: number; ticketsMatched?: number; legs?: number; legsMatched?: number }; backfillDays?: number }
-interface ProvenRow { pid: string; wallet: string; name: string; league: string; sport: string; game: string; market: string; pick: string; opp: string; slug: string; startTs: number | null; start: string; cost: number; avg: number; now: number | null; usual: number | null; mult: number | null; kalshi: { action: string; price: number | null; ticker: string; contract?: string | null; src?: string; live?: boolean } | null; sportRec: { w: number; l: number; n: number; roi: number | null }; f14?: { w: number; l: number; n: number; roi: number | null }; rec: number[]; roi: number | null; badge?: string; verdict: string; why: string[]; hedged?: boolean; inTop?: boolean }
+interface ProvenRow { pid: string; wallet: string; name: string; league: string; sport: string; game: string; market: string; pick: string; opp: string; slug: string; startTs: number | null; start: string; cost: number; avg: number; now: number | null; usual: number | null; mult: number | null; kalshi: { action: string; price: number | null; ticker: string; contract?: string | null; src?: string; live?: boolean } | null; sportRec: { w: number; l: number; n: number; roi: number | null }; f14?: { w: number; l: number; n: number; roi: number | null }; rec: number[]; roi: number | null; badge?: string; verdict: string; why: string[]; hedged?: boolean; inTop?: boolean; group?: ProvenRow[] }
 interface ProvenData { updatedAt: string; updatedTs: number; rule: string; splitGames?: string[]; elite: { wallet: string; name: string; rec: number[]; roi: number | null; wr?: number | null; sports?: { sport: string; w: number; l: number; n: number; roi: number }[]; f14?: { w: number; l: number; n: number; roi: number | null }; badge?: string; usual?: number | null; open?: number }[]; nearMiss?: { wallet: string; name: string; why: string[]; rec: number[]; roi: number | null }[]; picks: ProvenRow[]; counts: Record<string, number> }
 interface Scan { ts: number; signals: number; fun: number; poly?: number; glue?: number; props?: number; longshots?: number; biggest?: number; upcoming?: number; calls: number; cappers?: number; bets?: number; buys?: number; wallets?: number }
 interface Cols { f: string[]; r: unknown[][] }
@@ -1383,7 +1383,7 @@ function pickQualityScore(p: Pick, backers?: Backer[]): number {
   s += info.band === "best" ? 4 : info.band === "mid" ? 2 : 0;
   s += clampNum(info.share, 0, 1) * 5;
   s += clampNum(convNet(cb, p.oppMoney || 0, p.id) / 20000, 0, 1) * 5;
-  s += clampNum(cb.length / 4, 0, 1) * 2;
+  s += clampNum(cb.length / 5, 0, 1) * 8;
   return Math.round(clampNum(s, 0, 100));
 }
 function provenQualityScore(r: ProvenRow): number {
@@ -1410,6 +1410,7 @@ function provenQualityScore(r: ProvenRow): number {
   } else s += 3;
   s += clampNum((r.cost || 0) / 20000, 0, 1) * 8;
   s += r.inTop ? 4 : 0;
+  s += clampNum((((r.group && r.group.length) || 1) / 5), 0, 1) * 8;
   return Math.round(clampNum(s, 0, 100));
 }
 function capperQualityScore(c: CapperRec): number {
@@ -1481,6 +1482,94 @@ function ScoreChip(props: { rank: number; score: number }) {
       <Chip bg={t.bg.subtle} color={t.text.primary}>{"Score " + props.score}</Chip>
     </span>
   );
+}
+function CapperCountBadge(props: { count: number; open?: boolean; onToggle?: () => void }) {
+  if (props.count < 2) return null;
+  return (
+    <button type="button" data-capper-count={props.count} onClick={props.onToggle} title={props.count + " qualifying cappers on this pick. Tap to see their sport ROI."} style={{ width: 28, height: 28, borderRadius: 999, border: props.open ? "2px solid #FFFFFF" : "none", boxShadow: props.open ? "0 0 0 2px " + BRAND : "none", background: BRAND, color: "#FFFFFF", fontWeight: 850, fontSize: 13, cursor: props.onToggle ? "pointer" : "default", display: "inline-flex", alignItems: "center", justifyContent: "center", flex: "none", lineHeight: 1, padding: 0, fontFamily: "inherit" }}>
+      {props.count}
+    </button>
+  );
+}
+function CapperSportList(props: { backers: { wallet?: string | null; cost?: number | null; name?: string | null }[] | undefined; pid?: string }) {
+  const t = useGrokTheme();
+  const rows = (props.backers || []).slice().sort((a, b) => (b.cost || 0) - (a.cost || 0));
+  if (!rows.length) return null;
+  return (
+    <div data-capper-sport-list="1" style={{ marginTop: 8, padding: "8px 10px", borderRadius: 14, background: t.bg.subtle }}>
+      <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: t.text.tertiary, marginBottom: 4 }}>QUALIFYING CAPPERS · SPORT ROI</div>
+      {rows.map((b, i: number) => {
+        const rec = QMAP[(b.wallet || "").toLowerCase()];
+        const sp = sportRecOf(b.wallet, props.pid);
+        const nm = nameOf((rec && rec.name && rec.name.indexOf("0x") !== 0 ? rec.name : b.name), b.wallet || "");
+        const sportTxt = sp && sp.sr && sp.sr.n ? (sp.sport + " " + f14Text(sp.sr)) : "no sport record";
+        const overall = rec && (rec.cw || rec.cl) ? ("overall " + (rec.cw || 0) + "–" + (rec.cl || 0) + (rec.croi != null ? ", " + pct(rec.croi) + " ROI" : "")) : "";
+        const sportGood = !!(sp && sp.sr && sp.sr.roi != null && sp.sr.roi >= 20 && sp.sr.n >= 10);
+        return (
+          <div key={i} style={{ fontSize: 13, lineHeight: "19px", marginTop: i ? 4 : 0, color: t.text.secondary }}>
+            <span style={{ fontWeight: 800, color: sportGood ? GREEN : t.text.primary }}>{sportTxt}</span>
+            {" · " + nm + (b.cost ? " " + money(b.cost) : "") + (overall ? " · " + overall : "")}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+function pickMergeKey(p: Pick): string {
+  if (p.kalshi && p.kalshi.status === "ok" && p.kalshi.ticker && (p.kalshi.action || p.label)) return ("k|" + p.kalshi.ticker + "|" + (p.kalshi.action || "") + "|" + (p.label || "")).toLowerCase();
+  return "p|" + pickCatalogKey(p.q, p.label);
+}
+function mergePickPair(a: Pick, b: Pick): Pick {
+  const byW: Record<string, Backer> = {};
+  (a.backers || []).concat(b.backers || []).forEach((bk: Backer) => {
+    const w = (bk.wallet || bk.name || "").toLowerCase();
+    if (!w) return;
+    if (!byW[w] || (bk.cost || 0) > (byW[w].cost || 0)) byW[w] = bk;
+  });
+  const backers = Object.keys(byW).map((w: string) => byW[w]).sort((x: Backer, y: Backer) => (y.cost || 0) - (x.cost || 0));
+  const prefer = (a.kalshi && a.kalshi.status === "ok") || backers.length === (a.backers || []).length ? a : b;
+  return { ...prefer, backers, whales: Math.max(a.whales || 0, b.whales || 0, backers.length), invested: Math.max(a.invested || 0, b.invested || 0) };
+}
+function uniqueMergedPicks(arr: Pick[]): Pick[] {
+  const m: Record<string, Pick> = {}, order: string[] = [];
+  arr.forEach((p: Pick) => {
+    const k = pickMergeKey(p);
+    if (!m[k]) { m[k] = p; order.push(k); }
+    else m[k] = mergePickPair(m[k], p);
+  });
+  return order.map((k: string) => m[k]);
+}
+function provenMergeKey(r: ProvenRow): string {
+  if (r.kalshi && r.kalshi.ticker) return ("k|" + r.kalshi.ticker + "|" + (r.kalshi.action || "") + "|" + (r.pick || "")).toLowerCase();
+  return ("p|" + (r.slug || "") + "||" + (r.market || "") + "||" + (r.pick || "")).toLowerCase();
+}
+function mergeProvenRows(rows: ProvenRow[]): ProvenRow[] {
+  const m: Record<string, ProvenRow[]> = {}, order: string[] = [];
+  rows.forEach((r: ProvenRow) => {
+    const k = provenMergeKey(r);
+    if (!m[k]) { m[k] = []; order.push(k); }
+    m[k].push(r);
+  });
+  const vo: Record<string, number> = { GOOD: 0, OK: 1, CAUTION: 2 };
+  return order.map((k: string) => {
+    const g = m[k].slice().sort((a: ProvenRow, b: ProvenRow) => (vo[a.verdict] ?? 9) - (vo[b.verdict] ?? 9) || (b.cost || 0) - (a.cost || 0));
+    return { ...g[0], group: g };
+  });
+}
+function pickTeams(p: Pick): string[] {
+  const fromGame = (p.game && p.game.teams) || [];
+  const raw = (fromGame.length >= 2 ? fromGame : matchupTeams(p.q)).slice();
+  return raw.map((t: string) => normName(t)).filter(Boolean);
+}
+function comboClash(p: Pick, usedGame: Record<string, boolean>, usedTeam: Record<string, boolean>, usedId: Record<string, boolean>): boolean {
+  if (usedId[p.id]) return true;
+  if (usedGame[gameKey(p)]) return true;
+  return pickTeams(p).some((t: string) => usedTeam[(p.league || "") + "|" + t]);
+}
+function markComboUsed(p: Pick, usedGame: Record<string, boolean>, usedTeam: Record<string, boolean>, usedId: Record<string, boolean>) {
+  usedId[p.id] = true;
+  usedGame[gameKey(p)] = true;
+  pickTeams(p).forEach((t: string) => { usedTeam[(p.league || "") + "|" + t] = true; });
 }
 const PICK_SORT_OPTS = [{ value: "best", label: "Best to worst" }, { value: "worst", label: "Worst to best" }, { value: "start", label: "Start time · earliest first" }, { value: "size", label: "Bet size · largest first" }];
 const COMBO_SORT_OPTS = [{ value: "best", label: "Best to worst" }, { value: "worst", label: "Worst to best" }];
@@ -1762,11 +1851,13 @@ function CopyId(props: { id: string }) {
 function ComboCard(props: { a: Pick; b: Pick; rank: number; bankroll: number; now: number }) {
   const t = useGrokTheme();
   const { a, b, rank, bankroll } = props;
+  const [openLeg, setOpenLeg] = useState<string>("");
   const pa = usedPrice(a), pb = usedPrice(b);
   const combined = (pa || 0) * (pb || 0);
   const stake = dollarStake("Small", bankroll, true);
   const payout = combined > 0 ? stake / combined : 0;
   const exA = explainPick(a), exB = explainPick(b);
+  const nA = countedBackers(a.backers, a.id).length, nB = countedBackers(b.backers, b.id).length;
   return (
     <CardShell accent={"linear-gradient(90deg, " + GREEN + ", " + BRAND + ")"}>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
@@ -1775,13 +1866,17 @@ function ComboCard(props: { a: Pick; b: Pick; rank: number; bankroll: number; no
         <Chip bg={t.bg.subtle} color={t.text.primary}>{cents(combined)} combined</Chip>
         <Chip bg={t.bg.subtle} color={t.text.secondary}>2 legs · 1% stake</Chip>
       </div>
-      <div style={{ marginTop: 10, fontSize: 16, lineHeight: "22px", fontWeight: 800 }}>
-        {exA.headline} <span style={{ color: t.text.tertiary, fontWeight: 600 }}>and</span> {exB.headline}
+      <div style={{ marginTop: 10, fontSize: 16, lineHeight: "22px", fontWeight: 800, display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
+        <span style={{ display: "inline-flex", gap: 6, alignItems: "center" }}>{exA.headline}<CapperCountBadge count={nA} open={openLeg === "a"} onToggle={() => setOpenLeg(openLeg === "a" ? "" : "a")} /></span>
+        <span style={{ color: t.text.tertiary, fontWeight: 600 }}>and</span>
+        <span style={{ display: "inline-flex", gap: 6, alignItems: "center" }}>{exB.headline}<CapperCountBadge count={nB} open={openLeg === "b"} onToggle={() => setOpenLeg(openLeg === "b" ? "" : "b")} /></span>
       </div>
       <div style={{ fontSize: 14, lineHeight: "20px", color: t.text.primary, marginTop: 8 }}>
-        A {money(stake)} combo pays about {money(Math.round(payout) === payout ? payout : Math.round(payout * 100) / 100)} if both hit ({combined > 0 ? (Math.round((1 / combined) * 10) / 10) + "x" : ""} at {cents(combined)} combined). Ranked by quality score × payout.
+        A {money(stake)} combo pays about {money(Math.round(payout) === payout ? payout : Math.round(payout * 100) / 100)} if both hit ({combined > 0 ? (Math.round((1 / combined) * 10) / 10) + "x" : ""} at {cents(combined)} combined). Ranked by quality score × payout. Each game, team and leg is used once on this list.
       </div>
-      <BackersLine backers={(a.backers || []).concat(b.backers || [])} />
+      {openLeg === "a" ? <CapperSportList backers={countedBackers(a.backers, a.id)} pid={a.id} /> : null}
+      {openLeg === "b" ? <CapperSportList backers={countedBackers(b.backers, b.id)} pid={b.id} /> : null}
+      {openLeg ? null : <BackersLine backers={(a.backers || []).concat(b.backers || [])} />}
       <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 6 }}>
         <EventMeta ev={resolveEvent(a)} now={props.now} compact={true} />
         <span> at {cents(pa)}</span>
@@ -1833,21 +1928,22 @@ function buildCombos(legs: Pick[], limit: number = 12): [Pick, Pick][] {
   for (let i = 0; i < pool.length; i++) {
     for (let j = i + 1; j < pool.length; j++) {
       if (gameKey(pool[i]) === gameKey(pool[j])) continue;
+      const ti = pickTeams(pool[i]), tj = pickTeams(pool[j]);
+      if (ti.some((t: string) => tj.indexOf(t) >= 0)) continue;
       const pay = comboPayout(pool[i], pool[j]);
       if (pay == null || pay < COMBO_MIN_X || pay > COMBO_MAX_X + 1e-9) continue;
       pairs.push({ a: pool[i], b: pool[j], pay, score: comboEvScore(pool[i], pool[j]) });
     }
   }
   pairs.sort((x: Pair, y: Pair) => y.score - x.score || y.pay - x.pay);
-  const used: Record<string, boolean> = {}, usedGame: Record<string, boolean> = {};
+  const usedId: Record<string, boolean> = {}, usedGame: Record<string, boolean> = {}, usedTeam: Record<string, boolean> = {};
   const out: [Pick, Pick][] = [];
   for (let n = 0; n < pairs.length && out.length < limit; n++) {
     const pr = pairs[n];
-    const gi = gameKey(pr.a), gj = gameKey(pr.b);
-    if (used[pr.a.id] || used[pr.b.id] || usedGame[gi] || usedGame[gj]) continue;
+    if (comboClash(pr.a, usedGame, usedTeam, usedId) || comboClash(pr.b, usedGame, usedTeam, usedId)) continue;
     out.push([pr.a, pr.b]);
-    used[pr.a.id] = true; used[pr.b.id] = true;
-    usedGame[gi] = true; usedGame[gj] = true;
+    markComboUsed(pr.a, usedGame, usedTeam, usedId);
+    markComboUsed(pr.b, usedGame, usedTeam, usedId);
   }
   return out;
 }
@@ -2234,13 +2330,16 @@ function CapperCard(props: { rec: CapperRec; trader?: Trader; now: number; bankr
 function ProvenCard(props: { r: ProvenRow; rank: number; now: number }) {
   const t = useGrokTheme();
   const r = props.r;
+  const [openCaps, setOpenCaps] = useState<boolean>(false);
   const vc = r.verdict === "GOOD" ? GREEN : r.verdict === "OK" ? AMBER : RED;
   const k = r.kalshi;
   const sr = r.sportRec || { w: 0, l: 0, n: 0, roi: null };
+  const group = r.group && r.group.length ? r.group : [r];
   return (
     <div data-proven-card={r.verdict} style={{ borderRadius: 18, border: "1px solid " + t.border.default, padding: "12px 14px", marginBottom: 10, background: t.bg.base, fontFamily: t.font.family }}>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
         <ScoreChip rank={props.rank} score={provenQualityScore(r)} />
+        <CapperCountBadge count={group.length} open={openCaps} onToggle={() => setOpenCaps(!openCaps)} />
         <span style={{ display: "inline-block", padding: "1px 10px", borderRadius: 999, background: vc, color: "#FFFFFF", fontWeight: 850, fontSize: 13 }}>{r.verdict}</span>
         <span style={{ fontSize: 12, fontWeight: 800, color: t.text.secondary }}>{r.league + (r.sport && r.sport !== r.league ? " (" + r.sport + ")" : "") + " · " + r.start}</span>
         {r.inTop ? <Chip bg={BRAND} color="#FFFFFF">Also on Top 20</Chip> : null}
@@ -2252,13 +2351,27 @@ function ProvenCard(props: { r: ProvenRow; rank: number; now: number }) {
       </div>
       {k ? <div style={{ fontSize: 11, color: t.text.tertiary }}>{k.ticker}</div> : null}
       <div style={{ fontSize: 13, lineHeight: "19px", marginTop: 6, color: t.text.secondary }}>
-        <span style={{ fontWeight: 800, color: t.text.primary }}>{nameOf(r.name, r.wallet)}</span>
-        {" backs " + r.pick + " · " + money(r.cost) + " at " + Math.round(r.avg * 100) + "¢" + (r.mult != null ? " = " + r.mult + "x usual (" + money(r.usual) + ")" : "")}
+        <span style={{ fontWeight: 800, color: t.text.primary }}>{group.length > 1 ? (group.length + " elite cappers") : nameOf(r.name, r.wallet)}</span>
+        {" back" + (group.length > 1 ? "" : "s") + " " + r.pick + " · " + (group.length > 1 ? "biggest " : "") + money(r.cost) + " at " + Math.round(r.avg * 100) + "¢" + (r.mult != null && group.length === 1 ? " = " + r.mult + "x usual (" + money(r.usual) + ")" : "")}
       </div>
+      {group.length === 1 ? (
       <div style={{ fontSize: 13, lineHeight: "19px", marginTop: 2, color: t.text.secondary }}>
         <span style={{ fontWeight: 800, color: sr.n >= 5 && sr.roi != null && sr.roi < 0 ? RED : sr.roi != null && sr.roi > 0 ? GREEN : t.text.secondary }}>{r.sport + " " + f14Text(sr)}</span>
         {" · overall " + (r.rec ? r.rec[0] + "–" + r.rec[1] : "n/a") + ", " + pct(r.roi) + " ROI · 14d " + f14Text(r.f14)}
       </div>
+      ) : null}
+      {openCaps || group.length > 1 ? (
+        <div style={{ marginTop: 6 }}>
+          {(openCaps ? group : group.slice(0, 0)).length || openCaps ? (
+            <div data-capper-sport-list="1">
+              {group.map((g: ProvenRow, i: number) => {
+                const gsr = g.sportRec || { w: 0, l: 0, n: 0, roi: null };
+                return <div key={g.wallet + i} style={{ fontSize: 13, lineHeight: "19px", marginTop: 4, color: t.text.secondary }}><span style={{ fontWeight: 800, color: gsr.roi != null && gsr.roi >= 20 ? GREEN : t.text.primary }}>{g.sport + " " + f14Text(gsr)}</span>{" · " + nameOf(g.name, g.wallet) + " " + money(g.cost) + (g.mult != null ? " = " + g.mult + "x usual" : "") + " · overall " + (g.rec ? g.rec[0] + "–" + g.rec[1] : "n/a") + ", " + pct(g.roi) + " ROI"}</div>;
+              })}
+            </div>
+          ) : <div style={{ fontSize: 12, color: t.text.tertiary, marginTop: 4 }}>Tap the {group.length} badge to see each capper's sport ROI.</div>}
+        </div>
+      ) : null}
       {r.why && r.why.length ? <div style={{ fontSize: 12, fontWeight: 750, color: r.verdict === "CAUTION" ? RED : AMBER, marginTop: 4 }}>{(r.verdict === "CAUTION" ? "⚠ " : "") + r.why.join(" · ")}</div> : null}
     </div>
   );
@@ -2272,6 +2385,7 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; longshot?: boo
   const upcoming = !!props.upcoming;
   const moneyBoxes = biggest || upcoming;
   const [open, setOpen] = useState<boolean>(false);
+  const [openCaps, setOpenCaps] = useState<boolean>(false);
   const k = p.kalshi;
   const ok = k.status === "ok";
   const c = conf(p.score);
@@ -2306,6 +2420,7 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; longshot?: boo
     <CardShell accent={upcoming ? ("linear-gradient(90deg, " + BRAND2 + ", " + GREEN + ")") : biggest ? ("linear-gradient(90deg, " + GREEN + ", " + AMBER + ")") : longshot ? ("linear-gradient(90deg, " + AMBER + ", " + RED + ")") : fun ? ("linear-gradient(90deg, " + AMBER + ", #F472B6)") : ("linear-gradient(90deg, " + BRAND + ", " + BRAND2 + ")")}>
         <div data-card-league={p.league} data-pick-card="1" style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
           <ScoreChip rank={rank} score={qScore} />
+          <CapperCountBadge count={countedBackers(backers, p.id).length} open={openCaps} onToggle={() => setOpenCaps(!openCaps)} />
           <StrengthChip word={word} />
           {info.glue ? <Chip bg={AMBER} color="#FFFFFF">Small, glue leg only</Chip> : null}
           {info.split ? <Chip bg={AMBER} color="#FFFFFF">Split</Chip> : null}
@@ -2329,7 +2444,7 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; longshot?: boo
           <div style={{ flex: "1 1 auto", minWidth: 0 }}>
             <EventMeta ev={resolveEvent(p)} now={now} live={live} extra={<Fragment>{p.game.score ? p.game.score + " · " : ""}<span style={{ color: c.color, fontWeight: 700 }}>{c.word} confidence</span> · <Pct v={Math.round(p.price * 100)} /> chance (market)</Fragment>} />
             <div style={{ fontSize: 24, lineHeight: "29px", fontWeight: 850, marginTop: 4, overflowWrap: "anywhere" }}>Bet: {ex.headline}</div>
-            <BackersLine backers={backers} pid={p.id} />
+            {openCaps ? <CapperSportList backers={countedBackers(backers, p.id)} pid={p.id} /> : <BackersLine backers={backers} pid={p.id} />}
             {p.refresh ? (
               <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 4 }}>
                 {p.refresh.final ? <Chip bg={p.refresh.final === "W" ? GREEN : p.refresh.final === "L" ? RED : t.bg.subtle} color="#FFFFFF">{p.refresh.final === "W" ? "WON" : p.refresh.final === "L" ? "LOST" : "PUSH"}</Chip> : null}
@@ -2560,10 +2675,10 @@ export default function App() {
   const bySport = (arr: Pick[]): Pick[] => sportFilter ? arr.filter((p: Pick) => p.league === sportFilter) : arr;
   const vb = (p: Pick): Backer[] => visibleBackers(p);
   const notHedged = (p: Pick): boolean => !pickHasCapperHedge(p);
-  const topPool = rankPicks((DATA.signals || []).concat(DATA.fun || []).filter((p: Pick) => topEligible(p, visibleBackers(p).length, now) && visibleBackers(p).length >= minW && followOk(p) && vetted(p, visibleBackers(p)) && pickHasHighRoiBacker(p, visibleBackers(p)) && notHedged(p) && !isEliteSplitGame(p.slug)));
+  const topPool = rankPicks(uniqueMergedPicks((DATA.signals || []).concat(DATA.fun || [])).filter((p: Pick) => topEligible(p, visibleBackers(p).length, now) && visibleBackers(p).length >= minW && followOk(p) && vetted(p, visibleBackers(p)) && pickHasHighRoiBacker(p, visibleBackers(p)) && notHedged(p) && !isEliteSplitGame(p.slug)));
   const topAll = sortPicksBy(topPool.slice(0, 20), sortOf("top"), vb, now);
   const top = bySport(topAll);
-  const gluePool = rankPicks((DATA.glue || DATA.signals || []).concat(DATA.fun || []).filter((p: Pick) => {
+  const gluePool = rankPicks(uniqueMergedPicks((DATA.glue || DATA.signals || []).concat(DATA.fun || [])).filter((p: Pick) => {
     const n = visibleBackers(p).length;
     return n >= 2 && followOk(p) && !gone(p) && p.kalshi.status === "ok" && pickInfo(p, n).glue && !isPlayerProp(p) && vetted(p, visibleBackers(p)) && notHedged(p);
   }));
@@ -2572,7 +2687,7 @@ export default function App() {
   top.forEach((p: Pick) => { glueIds[p.id] = true; });
   const glueAll = sortPicksBy(gluePool.filter((p: Pick) => { if (glueIds[p.id]) return false; glueIds[p.id] = true; return true; }), sortOf("top"), vb, now);
   const glue = bySport(glueAll).slice(0, 12);
-  const funPool = rankPicks((DATA.fun || []).concat(DATA.signals || []).filter((p: Pick) => {
+  const funPool = rankPicks(uniqueMergedPicks((DATA.fun || []).concat(DATA.signals || [])).filter((p: Pick) => {
     const n = visibleBackers(p).length;
     if (n < 1 || !followOk(p) || gone(p) || p.kalshi.status !== "ok" || !notHedged(p)) return false;
     if (!vetted(p, visibleBackers(p))) return false;
@@ -2584,14 +2699,11 @@ export default function App() {
   const funSeen: Record<string, boolean> = {};
   const funAll = sortPicksBy(funPool.filter((p: Pick) => { if (funSeen[p.id]) return false; funSeen[p.id] = true; return true; }), sortOf("longfun"), vb, now);
   const fun = bySport(funAll);
-  const provenRows: ProvenRow[] = sortProvenBy(((PROVEN && PROVEN.picks) || []).filter((r: ProvenRow) => (!r.startTs || r.startTs > now) && !r.hedged && !isEliteSplitGame(r.slug)), sortOf("proven"), now);
-  const polyAll = rankPicks((DATA.poly || []).filter((p: Pick) => visibleBackers(p).length >= 1 && vetted(p, visibleBackers(p)) && followOk(p) && !gone(p) && notHedged(p) && p.kalshi.status !== "ok" && !isPlayerProp(p) && !isLongshot(p, visibleBackers(p).length, now)));
+  const provenRows: ProvenRow[] = sortProvenBy(mergeProvenRows(((PROVEN && PROVEN.picks) || []).filter((r: ProvenRow) => (!r.startTs || r.startTs > now) && !r.hedged && !isEliteSplitGame(r.slug))), sortOf("proven"), now);
+  const polyAll = rankPicks(uniqueMergedPicks(DATA.poly || []).filter((p: Pick) => visibleBackers(p).length >= 1 && vetted(p, visibleBackers(p)) && followOk(p) && !gone(p) && notHedged(p) && p.kalshi.status !== "ok" && !isPlayerProp(p) && !isLongshot(p, visibleBackers(p).length, now)));
   const polyBase = polyAll.slice(0, 20);
   const poly = bySport(polyBase);
-  const uniqueByKey = (arr: Pick[]): Pick[] => {
-    const seen: Record<string, boolean> = {};
-    return arr.filter((p: Pick) => { const k = pickCatalogKey(p.q, p.label); if (seen[k]) return false; seen[k] = true; return true; });
-  };
+  const uniqueByKey = (arr: Pick[]): Pick[] => uniqueMergedPicks(arr);
   const catalogPicks = uniqueByKey((DATA.props || []).concat(DATA.longshots || []).concat(DATA.biggest || []).concat(DATA.upcoming || []).concat(DATA.signals || []).concat(DATA.fun || []).concat(DATA.poly || []).concat(DATA.glue || []).concat(linesToPicks(BET_LINES))).filter(notHedged);
   const propsPool = catalogPicks.filter((p: Pick) => isPlayerProp(p) && visibleBackers(p).length >= 1 && vetted(p, visibleBackers(p)) && followOk(p) && !gone(p));
   const propsBase = takeSortedPicks(propsPool, sortOf("props"), 20, vb, now);
