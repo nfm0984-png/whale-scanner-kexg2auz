@@ -430,6 +430,18 @@ try:
     emb['provenPicks'] = _pv.build(emb, _ch_store)
 except Exception as _e:
     print('proven picks failed:', _e)
+try:
+    import coming_up as _cu
+    def _cu_px(tk):
+        kn = kalshi_now(tk)
+        return kn
+    WIN_END = NOW + 36 * 3600
+    emb['comingUp'] = _cu.refresh(emb.get('comingUp') or [], NOW, WIN_END, kalshi_now=_cu_px)
+    emb['totalComingUp'] = len(emb['comingUp'])
+    print('comingUp games', emb['totalComingUp'], flush=True)
+except Exception as _e:
+    print('comingUp refresh failed:', _e)
+    emb.setdefault('comingUp', []); emb.setdefault('totalComingUp', 0)
 json.dump(emb, open(os.path.join(HERE, 'page_embed.json'), 'w'), separators=(',', ':'))
 subprocess.run([sys.executable, os.path.join(HERE, 'compact.py')])
-print(f"refreshed {pt(NOW)}: {len(emb['signals'])} top + {len(emb['fun'])} fun + {len(emb['poly'])} poly + {len(emb.get('glue') or [])} glue + {len(emb.get('props') or [])} props + {len(emb.get('longshots') or [])} longshots + {len(emb.get('biggest') or [])} biggest + {len(emb.get('upcoming') or [])} upcoming, ESPN games matched {n_espn}, times/opponents filled {n_filled}, Kalshi checks {n_k}, started/ended removed (top/fun/poly/glue/props/longshots/biggest/upcoming/bets/buys) {removed}, OrcaLayer calls 0")
+print(f"refreshed {pt(NOW)}: {len(emb['signals'])} top + {len(emb['fun'])} fun + {len(emb['poly'])} poly + {len(emb.get('glue') or [])} glue + {len(emb.get('props') or [])} props + {len(emb.get('longshots') or [])} longshots + {len(emb.get('biggest') or [])} biggest + {len(emb.get('upcoming') or [])} upcoming + {len(emb.get('comingUp') or [])} coming-up, ESPN games matched {n_espn}, times/opponents filled {n_filled}, Kalshi checks {n_k}, started/ended removed (top/fun/poly/glue/props/longshots/biggest/upcoming/bets/buys) {removed}, OrcaLayer calls 0")

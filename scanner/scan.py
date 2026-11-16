@@ -227,6 +227,7 @@ for off in range(0, 500, 100):
 found_markets = len(mk); MK_ALL = {m['id']: m for m in mk}
 def ets(x): return dt.datetime.fromisoformat(x.replace(' ', 'T').replace('Z', '+00:00')).timestamp()
 WIN_H = 36  # Nov 15: was 12h; 36h keeps overnight/early-morning and next-day games (Asia, Europe, esports, tennis)
+LEAN_MIN = 100  # Coming Up lean view; pick lists still use A.min ($500)
 WIN_END = NOW + WIN_H * 3600; WIN_START = NOW - 5 * 3600
 mk = [m for m in mk if re.search(r'-20\d\d-\d\d-\d\d', m['slug']) and WIN_START <= ets(m['end_date']) <= WIN_END]
 in_window = len(mk)
@@ -834,7 +835,7 @@ def phase(g, ts):
     if g.get('state') == 'in': return 'live'
     if ts and ts <= NOW: return 'live'
     return 'upcoming'
-BETS, two_sided, TSTAT = [], 0, {}
+BETS, LEAN_BETS, two_sided, TSTAT = [], [], 0, {}
 for w, ps in POS.items():
     c = cappers.get(w) or {}
     sides = collections.defaultdict(set)
@@ -847,7 +848,7 @@ for w, ps in POS.items():
         if cp is None or cp >= 0.99 or cp <= 0.01: continue
         if len(sides[p.get('condition_id')]) > 1: two_sided += 1; st['hedged'] += 1; continue
         cost = p.get('initial_value') or p.get('buy_cost') or 0
-        if cost < A.min: st['small'] += 1; continue
+        if cost < LEAN_MIN: st['small'] += 1; continue
         try: info = parse(dict(slug=slug, question=p.get('question') or ''))
         except Exception: info = dict(league=slug.split('-')[0], codes=[], date=str(sd), tail='', kind='other', teams=[])
         side = 'yes' if p.get('side') == 'token1' else 'no'
@@ -857,13 +858,16 @@ for w, ps in POS.items():
         mrow = MK_ALL.get(str(p.get('market_id'))) or {}
         g, ts = loc_for(info, mrow.get('end_date'), kal, p.get('condition_id'))
         if not in_win2(g, ts, sd): continue
-        st['bets'] += 1; st['value'] += p.get('current_value') or 0
-        BETS.append(dict(wallet=w, name=wname(w), rank=c.get('rank'), rankAll=c.get('rankAll'), rank30=c.get('rank30'), _info=info, lastTs=p.get('last_trade_ts'), wr=c.get('win_rate'), resolved=c.get('resolved_markets'), cpnl=round(c.get('total_pnl') or 0),
+        row = dict(wallet=w, name=wname(w), rank=c.get('rank'), rankAll=c.get('rankAll'), rank30=c.get('rank30'), _info=info, lastTs=p.get('last_trade_ts'), wr=c.get('win_rate'), resolved=c.get('resolved_markets'), cpnl=round(c.get('total_pnl') or 0),
                          qualified=qualifies(c), golden=golden(c), skill=bool(c.get('skill_badge')),
                          q=p.get('question'), slug=slug, market_id=str(p.get('market_id')), cid=p.get('condition_id'), side=side,
                          label=info.get(side) or p.get('outcome'), outcome=p.get('outcome'), kind=bet_kind(info, p.get('question') or ''), league=info['league'].upper(),
                          shares=round(p.get('tokens') or 0, 1), avg=avg, now=cp, cost=round(cost), value=round(p.get('current_value') or 0), upnl=round(p.get('pnl') or 0), upct=p.get('pnl_pct'),
-                         firstTs=p.get('first_trade_ts'), cons=(p.get('whale_consensus') or {}), top100=True, src='whale positions', kalshi=kal, game=g, startTs=int(ts) if ts else None, phase=phase(g, ts)))
+                         firstTs=p.get('first_trade_ts'), cons=(p.get('whale_consensus') or {}), top100=True, src='whale positions', kalshi=kal, game=g, startTs=int(ts) if ts else None, phase=phase(g, ts))
+        LEAN_BETS.append(row)
+        if cost < A.min: st['small'] += 1; continue
+        st['bets'] += 1; st['value'] += p.get('current_value') or 0
+        BETS.append(row)
 # ---------- 15. Recent buys: qualified whales, game in window ----------
 BUYS = []
 for r in RAW_BUYS:
@@ -921,10 +925,10 @@ for b in BUYS:
     if len(_two[((b['wallet'] or '').lower(), b['cid'])]) > 1: b['hedged'] = True; b['twoSided'] = True
 def evkey(slug): m_ = re.match(r'(.+?-20\d\d-\d\d-\d\d)', slug or ''); return m_.group(1) if m_ else slug
 _ev = {}
-_cand = [(r_['game'], r_['startTs'], r_['slug']) for r_ in BETS + BUYS if r_.get('startTs')]
+_cand = [(r_['game'], r_['startTs'], r_['slug']) for r_ in BETS + BUYS + LEAN_BETS if r_.get('startTs')]
 for g_, t_, sl_ in sorted(_cand, key=lambda c_: 0 if c_[0].get('src') in ('ESPN', 'Kalshi contract rules') else 1):
     if 'same match' not in (g_.get('src') or ''): _ev.setdefault(evkey(sl_), (g_, t_))
-for r_ in BETS + BUYS:
+for r_ in BETS + BUYS + LEAN_BETS:
     ek = evkey(r_.get('slug'))
     if ek in _ev:
         g0, t0 = _ev[ek]
@@ -1259,6 +1263,14 @@ try:
     emb['provenPicks'] = _pv.build(emb, _ch_store)
 except Exception as _e:
     print('proven picks failed:', _e)
+try:
+    import coming_up as _cu
+    emb['comingUp'] = _cu.build(LEAN_BETS, emb.get('capperHistory') or {}, NOW, WIN_END)
+    emb['totalComingUp'] = len(emb['comingUp'])
+    print('comingUp games', emb['totalComingUp'], 'leanBets', len(LEAN_BETS), flush=True)
+except Exception as _e:
+    print('comingUp failed:', _e)
+    emb.setdefault('comingUp', []); emb.setdefault('totalComingUp', 0)
 json.dump(emb, open(os.path.join(HERE, 'page_embed.json'), 'w'), separators=(',', ':'))
 open(os.path.join(HERE, 'page_data_line.txt'), 'w').write('const DATA: ScanData = ' + json.dumps(emb, separators=(',', ':')) + ';')
 print('embed bytes', len(json.dumps(emb, separators=(',', ':'))))
