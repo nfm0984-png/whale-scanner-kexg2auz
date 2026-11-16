@@ -330,6 +330,22 @@
    "bets": 755,
    "buys": 142,
    "wallets": 405
+  },
+  {
+   "ts": 1794801649,
+   "signals": 3,
+   "fun": 4,
+   "poly": 12,
+   "glue": 0,
+   "props": 0,
+   "longshots": 0,
+   "biggest": 24,
+   "upcoming": 6,
+   "calls": 386,
+   "cappers": 234,
+   "bets": 128,
+   "buys": 39,
+   "wallets": 234
   }
  ],
  "picks": {
@@ -12613,7 +12629,8 @@
    "first_seen": 1794713585,
    "scans": 3,
    "first_score": 23,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xaf984220237c257149fa3e702191c0152281036e68800734f767c67861bfcf4e:no": {
    "tier": "fun",
@@ -13444,7 +13461,8 @@
    "first_seen": 1794730386,
    "scans": 4,
    "first_score": 32,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x08cc48db805e0d99175b04925429f72f5c0381ee088610310e87c57de7a19e93:yes": {
    "tier": "top",
@@ -13813,15 +13831,15 @@
    "slug": "cwbb-south-okl-2026-11-15",
    "market_id": "6906632",
    "side": "no",
-   "score": 29,
+   "score": 33,
    "whales": 2,
-   "invested": 10350,
+   "invested": 10371,
    "start": "2026-11-15",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794784242,
+   "last_seen": 1794801649,
    "first_seen": 1794730386,
-   "scans": 3,
+   "scans": 4,
    "first_score": 23,
    "result": null
   },
@@ -13858,9 +13876,9 @@
    "start": "2026-11-15",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794784242,
+   "last_seen": 1794801649,
    "first_seen": 1794730386,
-   "scans": 3,
+   "scans": 4,
    "first_score": 16,
    "result": null
   },
@@ -14121,7 +14139,8 @@
    "first_seen": 1794730386,
    "scans": 6,
    "first_score": 21,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xbe96c8be240c94a4b97b458fcbd173b43a8046c34ea80434451533abb8c7f989:yes": {
    "tier": "top",
@@ -14440,7 +14459,8 @@
    "first_seen": 1794754922,
    "scans": 4,
    "first_score": 66,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x6619c2b5337061520e670b00bc7d630e12c95f0ca1fcc8076cfabd5d388df1a7:yes": {
    "tier": "top",
@@ -14459,7 +14479,8 @@
    "first_seen": 1794754922,
    "scans": 3,
    "first_score": 64,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x17f755b491010e4f9531fec1f77898f5c2830bafb1bfc77f1930d6c715e1c63d:no": {
    "tier": "top",
@@ -14498,7 +14519,8 @@
    "first_seen": 1794754922,
    "scans": 2,
    "first_score": 54,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x18eb13c50987e50f82293662dd229c1323c021ee08993548712e60e6195f5af2:no": {
    "tier": "top",
@@ -14557,7 +14579,8 @@
    "first_seen": 1794754922,
    "scans": 4,
    "first_score": 72,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x591c6c4eefb2438bf273b62fe2cf321fd584cced0593921aa734e4225c1a404d:no": {
    "tier": "top",
@@ -14695,7 +14718,8 @@
    "first_seen": 1794754922,
    "scans": 2,
    "first_score": 34,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xf71c0f53e1208e5777c1d3ffdf5889f53d90b0d906fd6eb9c36ede33f569ef54:yes": {
    "tier": "top",
@@ -14794,7 +14818,8 @@
    "first_seen": 1794754922,
    "scans": 3,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x9bc40a6afc587341e1f4ef34db5df35dd1402ac8c7af76981a61bba19a8f7efa:yes": {
    "tier": "fun",
@@ -15052,7 +15077,8 @@
    "first_seen": 1794754922,
    "scans": 3,
    "first_score": 28,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xe581b734d411b671fce080b674323d9ec00a92a291324239c40800bb719755a4:no": {
    "tier": "poly",
@@ -15231,7 +15257,8 @@
    "first_seen": 1794754922,
    "scans": 3,
    "first_score": 30,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x2a56891400a415235744a48106b953b31cd19fbcc45cf393310893d07ec5110f:yes": {
    "tier": "poly",
@@ -15270,7 +15297,8 @@
    "first_seen": 1794754922,
    "scans": 3,
    "first_score": 40,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xc7db52dccbf7f07ec89a8380323d87a7dc996baac7b916fddfe838016a2eaeeb:no": {
    "tier": "top",
@@ -15729,7 +15757,8 @@
    "first_seen": 1794760876,
    "scans": 2,
    "first_score": 66,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xaa4ff7e5972b54e1bb147cf87ca42227969985c05ab62387af8e9a9df2cc7375:yes": {
    "tier": "top",
@@ -15788,7 +15817,8 @@
    "first_seen": 1794760876,
    "scans": 4,
    "first_score": 65,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x9eb0c3f278f5f566d57f8add8a2ec2d81fc96586d7e025163087e374a7ee05f2:yes": {
    "tier": "top",
@@ -15807,7 +15837,8 @@
    "first_seen": 1794760876,
    "scans": 5,
    "first_score": 45,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xd9c0d110fa75a77568407c7390cb8119401992434d22232441c51fccba7fbcf4:no": {
    "tier": "top",
@@ -15826,7 +15857,8 @@
    "first_seen": 1794760876,
    "scans": 2,
    "first_score": 36,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x1552d247ee5f44a9c11330f4f9998be7805b233d3a4e59cc10ad8ab2b72665e5:yes": {
    "tier": "glue",
@@ -15885,7 +15917,8 @@
    "first_seen": 1794760876,
    "scans": 3,
    "first_score": 32,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xf71c0f53e1208e5777c1d3ffdf5889f53d90b0d906fd6eb9c36ede33f569ef54:no": {
    "tier": "fun",
@@ -15924,7 +15957,8 @@
    "first_seen": 1794760876,
    "scans": 5,
    "first_score": 70,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xb89444f470b749b70246fda605252c7737c0d7caa0083bcfe01a5eebfe6ef6e5:no": {
    "tier": "fun",
@@ -15943,7 +15977,8 @@
    "first_seen": 1794760876,
    "scans": 3,
    "first_score": 52,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x98afe89f5d85def9b11bcd95fdb5743a189d72ea070895e286c8a6bdb68d6ca3:no": {
    "tier": "fun",
@@ -16062,7 +16097,8 @@
    "first_seen": 1794760876,
    "scans": 1,
    "first_score": 51,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x8bd8334ab9afbd9767c10326d214a4a3e9489e18ede9d5dac0d3287d552a6053:no": {
    "tier": "poly",
@@ -16101,7 +16137,8 @@
    "first_seen": 1794760876,
    "scans": 3,
    "first_score": 46,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x6fb8dfec797047b14aeed79dd2a15858a41400d5f86aaa0d37ef6068f80898d5:yes": {
    "tier": "poly",
@@ -16479,7 +16516,8 @@
    "first_seen": 1794769595,
    "scans": 3,
    "first_score": 63,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x64b095e879cb5f721d3a29b3f72dc0fe93d6f526f928d598a03d59fb73dee5e0:no": {
    "tier": "top",
@@ -16498,7 +16536,8 @@
    "first_seen": 1794769595,
    "scans": 3,
    "first_score": 54,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xee19747f7bbef1a4fc1322dc7d4c674ba14276baeeaec41b51612bd96be908f2:no": {
    "tier": "top",
@@ -16517,7 +16556,8 @@
    "first_seen": 1794769595,
    "scans": 3,
    "first_score": 34,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x2b57544d14c8caebecdafec56bdde206776adfb99f545d5a976720514f552675:yes": {
    "tier": "top",
@@ -16654,7 +16694,8 @@
    "first_seen": 1794769595,
    "scans": 3,
    "first_score": 42,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x430e274ba25e9fc67c949d8d9a0f26fdc3df66736723a4fea82c75a649950f13:yes": {
    "tier": "fun",
@@ -16713,7 +16754,8 @@
    "first_seen": 1794769595,
    "scans": 2,
    "first_score": 46,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xb89444f470b749b70246fda605252c7737c0d7caa0083bcfe01a5eebfe6ef6e5:yes": {
    "tier": "top",
@@ -16732,7 +16774,8 @@
    "first_seen": 1794769595,
    "scans": 2,
    "first_score": 55,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x5223c4725e1b98444a422c0f53dba751a1ee933757d10ca8d9be5f79dea60956:no": {
    "tier": "fun",
@@ -16850,7 +16893,8 @@
    "first_seen": 1794769595,
    "scans": 2,
    "first_score": 41,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x871a326d71e52ccaa1dd2d558e2ec507f6a197e64d8834864f9198ad5f7069ad:no": {
    "tier": "fun",
@@ -16869,7 +16913,8 @@
    "first_seen": 1794769595,
    "scans": 1,
    "first_score": 47,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x188453d2f6aa6a284a5c958fc03de2a1f52e3b1b6d066b3840033a4f75c69984:yes": {
    "tier": "poly",
@@ -16923,9 +16968,9 @@
    "start": "2026-11-16",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794784242,
+   "last_seen": 1794801649,
    "first_seen": 1794769595,
-   "scans": 4,
+   "scans": 5,
    "first_score": 15,
    "result": null
   },
@@ -17086,7 +17131,8 @@
    "first_seen": 1794769595,
    "scans": 2,
    "first_score": 51,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xc9beef5e8ab4d0bb916a702951f1df33ff31ee7065b9e8062b6ef0fa90983770:no": {
    "tier": "poly",
@@ -17144,7 +17190,8 @@
    "first_seen": 1794769595,
    "scans": 1,
    "first_score": 36,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xb98404ec035ece6904c669d4c32e66d6cf1a1831cb093b5d234cbb7ff446bd40:no": {
    "tier": "poly",
@@ -17163,7 +17210,8 @@
    "first_seen": 1794769595,
    "scans": 1,
    "first_score": 35,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x5591dc8b9d34adbfa3b37457a5b220989289de1fcf1d402bae79aacc8b8f7b3e:no": {
    "tier": "longshots",
@@ -17222,7 +17270,8 @@
    "first_seen": 1794769595,
    "scans": 2,
    "first_score": 62,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xbe96c8be240c94a4b97b458fcbd173b43a8046c34ea80434451533abb8c7f989:no": {
    "tier": "top",
@@ -17261,7 +17310,8 @@
    "first_seen": 1794769595,
    "scans": 2,
    "first_score": 57,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x2c4bc1dc34eaa1cb08943f536d4ce630384f3e93e028f6fa7a20933438334853:yes": {
    "tier": "top",
@@ -17598,7 +17648,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 28,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x52558ad81c9a27c484f904371029a4e5a5d375435a22532ceedc55d6d7dcf5ca:no": {
    "tier": "fun",
@@ -17617,7 +17668,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 25,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xd3a7ae9e2bce2860fe673b200820b05815fb9094fb58a5f946dcb391c95d02a1:no": {
    "tier": "fun",
@@ -17636,7 +17688,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x3ec56b9161607385140d1bb5ccf24f3bf41c47a0e0fbb4ed9488247e8e2925ee:no": {
    "tier": "fun",
@@ -17655,7 +17708,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 32,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x38d98fd799296f53be92df35ad9b358f6a24f985f40084d36f32cc217df42982:yes": {
    "tier": "fun",
@@ -17674,7 +17728,8 @@
    "first_seen": 1794776811,
    "scans": 3,
    "first_score": 36,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xde04d4e97f4ce30097f619f3f9dd07364c015d72d9ddf3870d0278e0f62e08b7:no": {
    "tier": "fun",
@@ -17693,7 +17748,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 26,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x535620ac100b7ee650e20df8fe8c596adf1909fb2d4306b779aebb08a9944734:no": {
    "tier": "fun",
@@ -17731,7 +17787,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x697487bd401edd58a0e98bce84c29fc62cdd72eb1613693a5022f33524f673e4:no": {
    "tier": "fun",
@@ -17750,7 +17807,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 45,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x45efddb3e98e41f6ad47b4dcdb19b15026d57d5e469284f273a3860d2125d102:yes": {
    "tier": "fun",
@@ -17788,7 +17846,8 @@
    "first_seen": 1794776811,
    "scans": 2,
    "first_score": 24,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xb6842717345d74df809f46cf193406cd2d9354cbb62409978eea264cf33e61d2:no": {
    "tier": "poly",
@@ -17827,7 +17886,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 26,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xd79b6d81f90ff4e2272e58db1616875feb2c4ee58e728a2179f7ea4cc1233314:no": {
    "tier": "poly",
@@ -17846,7 +17906,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xab9c05ee07e6b50dd82723b688af09588aabb489fcaa0f35f824f7d5077600a7:no": {
    "tier": "poly",
@@ -17865,7 +17926,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 19,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x600a958da510aa9ed5b96da53b288e12e07bb6caf5e73109e2ba2a87fc20f985:yes": {
    "tier": "poly",
@@ -17884,7 +17946,8 @@
    "first_seen": 1794776811,
    "scans": 2,
    "first_score": 35,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x630d529aef9b4a1e50a53cf7f208c6f9d3e974941e755f72116d107548f3ddc6:no": {
    "tier": "poly",
@@ -17903,7 +17966,8 @@
    "first_seen": 1794776811,
    "scans": 2,
    "first_score": 35,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x77329fb26d5e7c2a0be135fbd060020aee43d9728c97cc36a2b2c4fca30b92b6:no": {
    "tier": "poly",
@@ -17922,7 +17986,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 26,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x431660e00273dbecb5ac53f5c8a3c2a882046d00ef40a8bf2b1893ef88d54f78:yes": {
    "tier": "poly",
@@ -17941,7 +18006,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 26,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xfe95ab0aa9840c699fd3391276376f92047494c621f8c6fe33450d04b579132d:yes": {
    "tier": "poly",
@@ -17960,7 +18026,8 @@
    "first_seen": 1794776811,
    "scans": 3,
    "first_score": 51,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xeb3011cc77f5225ca5d855a79252da12e834d475197635cf80664bdb70648b6c:no": {
    "tier": "poly",
@@ -17979,7 +18046,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 39,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x5c2a949baed5392c212e65566f3dd7b0cb15ec82a698cd8da7f1075632d840c5:yes": {
    "tier": "poly",
@@ -17998,7 +18066,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 46,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x6d5cb79e8ce1ac115ccf202a1e8149abd2c58579fecb7bf74ea89bebd1199b61:yes": {
    "tier": "poly",
@@ -18017,7 +18086,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 46,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xf08ed109deba3505a6cd8c112b7af7a000454d46c6bd33cdd63571c87b3719fa:no": {
    "tier": "poly",
@@ -18056,7 +18126,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 23,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x1b47414a2445d4cf97f7a61570cdc2f9942335d0496371bb12a0fe2108a5c2a7:yes": {
    "tier": "fun",
@@ -18075,7 +18146,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 40,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xeea6a3fe785d31aa90ec1553ce7f1639bace695fe0a15d9af78f79854e37c5c7:yes": {
    "tier": "fun",
@@ -18094,7 +18166,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 50,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xc088b8e98815d7a3bedfc2eafde8009b039a560a645ef336d48566bf14606da1:no": {
    "tier": "top",
@@ -18113,7 +18186,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 69,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x1b47414a2445d4cf97f7a61570cdc2f9942335d0496371bb12a0fe2108a5c2a7:no": {
    "tier": "top",
@@ -18132,7 +18206,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 28,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x775f9a02471cf3445de62d1ba337ad5587699e44c948e878f773d905bfbd728f:yes": {
    "tier": "fun",
@@ -18151,7 +18226,8 @@
    "first_seen": 1794776811,
    "scans": 3,
    "first_score": 33,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xeea6a3fe785d31aa90ec1553ce7f1639bace695fe0a15d9af78f79854e37c5c7:no": {
    "tier": "top",
@@ -18170,7 +18246,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 28,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xa7294fa7751c5c9d9e7fb1c39e93f3e125eec094ee5cf6f784cb2b85f6957b87:no": {
    "tier": "top",
@@ -18189,7 +18266,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 46,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xc088b8e98815d7a3bedfc2eafde8009b039a560a645ef336d48566bf14606da1:yes": {
    "tier": "fun",
@@ -18208,7 +18286,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 50,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x775f9a02471cf3445de62d1ba337ad5587699e44c948e878f773d905bfbd728f:no": {
    "tier": "top",
@@ -18227,7 +18306,8 @@
    "first_seen": 1794776811,
    "scans": 3,
    "first_score": 47,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xec6a309ecdcac586a4a6c1f0fcf2c7f5a4dc8df25be8b09c18e3c4c0232a2b66:yes": {
    "tier": "fun",
@@ -18265,7 +18345,8 @@
    "first_seen": 1794776811,
    "scans": 2,
    "first_score": 42,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x8a778d50bf4725732c764f6f12bdc632ba23c350811c9da3869aa61b2da3f9eb:yes": {
    "tier": "top",
@@ -18284,7 +18365,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 44,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xd3a7ae9e2bce2860fe673b200820b05815fb9094fb58a5f946dcb391c95d02a1:yes": {
    "tier": "top",
@@ -18303,7 +18385,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 36,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xe8b4d1f979113b49eb42d93e62161ec4530734ffb093459ba6c70110bbb2966d:yes": {
    "tier": "top",
@@ -18322,7 +18405,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 30,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x697487bd401edd58a0e98bce84c29fc62cdd72eb1613693a5022f33524f673e4:yes": {
    "tier": "top",
@@ -18341,7 +18425,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 42,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xbd26d80db00fb1c2d2ae89d9f23fe3bf90fad3909303d2a39884f52819073f03:yes": {
    "tier": "top",
@@ -18360,7 +18445,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 45,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x52558ad81c9a27c484f904371029a4e5a5d375435a22532ceedc55d6d7dcf5ca:yes": {
    "tier": "top",
@@ -18379,7 +18465,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 38,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x6210ec49e876c8c1ca9ffbf8227e34870177fb2573cbd30addee44255be4e6ea:yes": {
    "tier": "top",
@@ -18398,7 +18485,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 40,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xd69dd14fd680fd4186995a6b5d90da95adc111050ec43847d98b960e7f95144f:no": {
    "tier": "top",
@@ -18417,7 +18505,8 @@
    "first_seen": 1794776811,
    "scans": 1,
    "first_score": 15,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x939ba835c7ddb9af60fd885cf0389c0374332c525ea9f8fa8e7f0aceeeb111e5:yes": {
    "tier": "top",
@@ -18436,7 +18525,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 47,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xb69fe3437bcc8c68cca5ef13f157052728db8470a5260041c7f3f2e76a71432f:no": {
    "tier": "fun",
@@ -18455,7 +18545,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 28,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x06bcbe649c097f94aa010cc9d4afc74de3dcb2aafc5a578fbd2cb884f1b992ad:no": {
    "tier": "fun",
@@ -18474,7 +18565,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 40,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x3bfeb43b11aa56271b159ac45296327c17e6f4a250af6c1591002d1b2316b454:no": {
    "tier": "fun",
@@ -18532,7 +18624,8 @@
    "first_seen": 1794778628,
    "scans": 2,
    "first_score": 39,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x1ff5aae3d2f3efc8475466b5f544618d8e92fc6036730196429c5c8024591dc5:no": {
    "tier": "fun",
@@ -18570,7 +18663,8 @@
    "first_seen": 1794778628,
    "scans": 2,
    "first_score": 24,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x525304d691a277870e3b793b1fd78abcb8f93c6de5ff5e3a188fb073d3317d63:no": {
    "tier": "fun",
@@ -18589,7 +18683,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 49,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x5d4b3ab9d7a901fb9885e39f9550a57546b7541cec40b6605f78bff77797e980:yes": {
    "tier": "fun",
@@ -18608,7 +18703,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 41,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xd9d3388daff72c09e2bd875103d47b412c0aa0ebbab616ed947a4ea3c6304a4d:no": {
    "tier": "fun",
@@ -18665,7 +18761,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 35,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xbbe0ca9b37f688585d36decb272ce21341b69ec59a0d5dff31b0a448d73131e3:no": {
    "tier": "fun",
@@ -18684,7 +18781,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 35,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xa55bc82fc6b56447764139f57e39b45051ce4f4dcff84fa8995c4f965761ca0e:no": {
    "tier": "fun",
@@ -18703,7 +18801,8 @@
    "first_seen": 1794778628,
    "scans": 2,
    "first_score": 35,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xfc2cedcde400c680a58fa5054c1b39388ff5cada50919bdd2002630f93aa1293:yes": {
    "tier": "poly",
@@ -18722,7 +18821,8 @@
    "first_seen": 1794778628,
    "scans": 2,
    "first_score": 61,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xefbf9241abec30c6545c6e4cab025d8d03a9bfbf28a89245b3c48b1266bab0a9:yes": {
    "tier": "poly",
@@ -18741,7 +18841,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 29,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x5c2a949baed5392c212e65566f3dd7b0cb15ec82a698cd8da7f1075632d840c5:no": {
    "tier": "poly",
@@ -18760,7 +18861,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 49,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xd79b6d81f90ff4e2272e58db1616875feb2c4ee58e728a2179f7ea4cc1233314:yes": {
    "tier": "poly",
@@ -18779,7 +18881,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 16,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x53f4bf5a4474f9f93f065f9ce82fd38c3f031e75845a65789a15a6081d250e46:no": {
    "tier": "poly",
@@ -18798,7 +18901,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 31,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xb6842717345d74df809f46cf193406cd2d9354cbb62409978eea264cf33e61d2:yes": {
    "tier": "poly",
@@ -18837,7 +18941,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 60,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x279989c57064a19e12cee4fef3d9f914a0d30f5c963285c8b6c00921b8ebb100:no": {
    "tier": "poly",
@@ -18856,7 +18961,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 25,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xb646e663a600297b1edf49d44b0b3887d4fc14b084b6df5365753731d761ce2c:no": {
    "tier": "poly",
@@ -18875,7 +18981,8 @@
    "first_seen": 1794778628,
    "scans": 2,
    "first_score": 31,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xe52dc9fee8fe347247c15a7a0297b7cff80947bbc3b736b880b270755214e48d:yes": {
    "tier": "poly",
@@ -18894,7 +19001,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 30,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x2c2573534bb960fb6619e6811c367c4b56727fe03bddab48c8128d7e991d8aae:yes": {
    "tier": "poly",
@@ -18932,7 +19040,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 37,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x44dde1349226bb39731bbcc1153e21a5575f9118e5b568d9ff90344eb79755cc:no": {
    "tier": "poly",
@@ -18970,7 +19079,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 42,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x721adcbc4671ad50f94931970e759377907503db27ff9cdb931c826e76197579:no": {
    "tier": "top",
@@ -18989,7 +19099,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 26,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x20a66b4b198f10b54ca39ffbbcaee02a725611c3e2231716acdddb5faf50e327:yes": {
    "tier": "top",
@@ -19008,7 +19119,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 39,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x20a66b4b198f10b54ca39ffbbcaee02a725611c3e2231716acdddb5faf50e327:no": {
    "tier": "fun",
@@ -19027,7 +19139,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 39,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x471ca55dc350d5c5577522943c9155a2e4ed3c1939510ca3cc5ea2b49e1dc856:no": {
    "tier": "top",
@@ -19046,7 +19159,8 @@
    "first_seen": 1794778628,
    "scans": 2,
    "first_score": 24,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xd5a79507297a1421ee13d97bf8677873d0c90d65e6e269a9e47170001f3c6734:no": {
    "tier": "top",
@@ -19084,7 +19198,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 33,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xb69fe3437bcc8c68cca5ef13f157052728db8470a5260041c7f3f2e76a71432f:yes": {
    "tier": "top",
@@ -19103,7 +19218,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 47,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xda8e22f288d867dc5b116d33053baa96e265e65525fe78d16c6d2f4e8dde6e46:no": {
    "tier": "fun",
@@ -19122,7 +19238,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 26,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x7ffe775eb7d6f3bf50b1f5c2156a616d52363d6586424048b573de4362e8f851:yes": {
    "tier": "fun",
@@ -19160,7 +19277,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 35,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xc6cdc0dd292caee82cbfe40b38dbd4ada6ad9b1c370c37311b19d7466ed59dfa:no": {
    "tier": "fun",
@@ -19179,7 +19297,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 32,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x768e5d93d4fc7f9d5411e06e5e0eed7e668bb5205c56c7cef3dd302990ef1e6d:yes": {
    "tier": "top",
@@ -19198,7 +19317,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 32,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x35d54aadfc0ed0ce5507aa6298d831b35dfd9edde69ae25b54913b390e312cfb:no": {
    "tier": "poly",
@@ -19217,7 +19337,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 28,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x56ca7152bdd447bdc551b26f5279c94423a82e6c98e3e94ed5971d6ac9416e06:yes": {
    "tier": "fun",
@@ -19236,7 +19357,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 22,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xbf36227d74594eee02d95cbe6f05c794ddee4d23562ddc05d99880754fdb6340:yes": {
    "tier": "top",
@@ -19255,7 +19377,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 11,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x279989c57064a19e12cee4fef3d9f914a0d30f5c963285c8b6c00921b8ebb100:yes": {
    "tier": "top",
@@ -19274,7 +19397,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 11,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xc6cdc0dd292caee82cbfe40b38dbd4ada6ad9b1c370c37311b19d7466ed59dfa:yes": {
    "tier": "top",
@@ -19293,7 +19417,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 34,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xb7010d1850a87720976bc07f54f10bc4db16c3430b7e8d9f580d96604c5b0352:yes": {
    "tier": "top",
@@ -19312,7 +19437,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 15,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x05a16e5fd76621e19474c5ea22126ad294632797cd1790b1661c2c18ea7b8830:yes": {
    "tier": "top",
@@ -19331,7 +19457,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 5,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x7a0d6ff012e4ed0249e525b5480fbf9c3590ee56d516ac961ddf85a4d57002b1:no": {
    "tier": "fun",
@@ -19350,7 +19477,8 @@
    "first_seen": 1794778628,
    "scans": 1,
    "first_score": 22,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x2c527388cab460a129eef68ae78265c3aca70c776177b91be1e4a9f9e9ab96bc:no": {
    "tier": "top",
@@ -19359,15 +19487,15 @@
    "slug": "unl-ger-nld-2026-11-16-draw",
    "market_id": "6631574",
    "side": "no",
-   "score": 71,
-   "whales": 4,
-   "invested": 4862,
+   "score": 65,
+   "whales": 3,
+   "invested": 3509,
    "start": "2026-11-16",
-   "kalshi": "BUY NO Tie @ 78\u00a2",
-   "kprice": 0.78,
-   "last_seen": 1794784242,
+   "kalshi": "BUY NO Tie @ 79\u00a2",
+   "kprice": 0.79,
+   "last_seen": 1794801649,
    "first_seen": 1794784242,
-   "scans": 1,
+   "scans": 2,
    "first_score": 71,
    "result": null
   },
@@ -19388,7 +19516,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 40,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xbd0c63be316d821b17dac31cfcfc5a911603e691bf87d23f5d926ede4e3c3a54:yes": {
    "tier": "fun",
@@ -19426,7 +19555,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 37,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xe9da1e14ca7c5b28bad675ccff8ea6eb49fd375f7285f21505eb106f3f82cc94:yes": {
    "tier": "fun",
@@ -19445,7 +19575,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 36,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xc6dc102d9240acc9f602b3125fdacf8caf76f5191e319dd95d5ee96870f502e9:yes": {
    "tier": "fun",
@@ -19521,7 +19652,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 38,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x18ef13387cb3c7e64a39ae54b4b6c3d1f8eb8edcb080b6179d24627c9a10215f:no": {
    "tier": "poly",
@@ -19540,7 +19672,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 26,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xc32fb0c644eba6cc260f064b88a2aa037c139a67448da3cd89ae8bcde7034471:no": {
    "tier": "poly",
@@ -19559,7 +19692,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 43,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x67c42b51b13b493cfb6c6663a2d7cf9f323ea7108d50c8dea4582092fcde6e28:no": {
    "tier": "poly",
@@ -19578,7 +19712,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 22,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x073f2625cf3750b534292e9f3c36d0c9365a1fb40f7d0e8800487e6a5645496e:no": {
    "tier": "poly",
@@ -19597,7 +19732,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 41,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x90bfe1cd10b86766d5cbcc967b0e93fab6c784fe29cb56caf437d17ed889f895:no": {
    "tier": "poly",
@@ -19616,7 +19752,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 27,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x8e38c0f6f46f46dfe07bfbb475b383754b5141a3b07699b41934869b7b1872ca:no": {
    "tier": "poly",
@@ -19654,7 +19791,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 51,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xb87a08e648d9aa03791625a45693ac653ddd4a32a10250b670e7e62b40919f31:yes": {
    "tier": "poly",
@@ -19692,7 +19830,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 64,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x163250cc61eba38ad33afef3a9eece4c2316c199a594b1919ab4338a8e72b251:no": {
    "tier": "poly",
@@ -19711,7 +19850,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xccf0c167ec03a675f913dadb247d8e10871f694a4d50e5cfeac6dc47b7b7b703:yes": {
    "tier": "poly",
@@ -19726,9 +19866,9 @@
    "start": "2026-11-15",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794784242,
+   "last_seen": 1794801649,
    "first_seen": 1794784242,
-   "scans": 1,
+   "scans": 2,
    "first_score": 51,
    "result": null
   },
@@ -19749,7 +19889,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 54,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x58b6758bc7454868b922909b94cf7c47937761ad4eb6cb92003981a60beec893:no": {
    "tier": "poly",
@@ -19787,7 +19928,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 10,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x471ca55dc350d5c5577522943c9155a2e4ed3c1939510ca3cc5ea2b49e1dc856:yes": {
    "tier": "fun",
@@ -19806,7 +19948,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 34,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x8f16e8d308ae13bba1b02c7cb995f797da9075b642f41d3181e3507226435531:no": {
    "tier": "top",
@@ -19825,7 +19968,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 28,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x039e2090242866bd16938dec0a7aade1726797c59bd943cf28237202add60dc8:no": {
    "tier": "fun",
@@ -19844,7 +19988,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 30,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x38d98fd799296f53be92df35ad9b358f6a24f985f40084d36f32cc217df42982:no": {
    "tier": "top",
@@ -19863,7 +20008,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 32,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x04251c05d360eb7508e9a9877f11d51e78b7a6f8096f52e29782d5a93aab3622:yes": {
    "tier": "fun",
@@ -19901,7 +20047,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 39,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0xec6a309ecdcac586a4a6c1f0fcf2c7f5a4dc8df25be8b09c18e3c4c0232a2b66:no": {
    "tier": "top",
@@ -19939,7 +20086,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 57,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x039e2090242866bd16938dec0a7aade1726797c59bd943cf28237202add60dc8:yes": {
    "tier": "top",
@@ -19958,7 +20106,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 14,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0x94421cdd5603c9c87ef9c2b58bdf5644c2a8a4afb10e4ea1a1c8a3441b738cfc:yes": {
    "tier": "top",
@@ -19977,7 +20126,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 5,
-   "result": null
+   "result": "W",
+   "graded": 1794801649
   },
   "0xf6b1a230e40d0635c294f12b0b18a310589343d5bbfbb8b79d15ce7c3b435078:no": {
    "tier": "top",
@@ -19996,7 +20146,8 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 36,
-   "result": null
+   "result": "L",
+   "graded": 1794801649
   },
   "0x2c2573534bb960fb6619e6811c367c4b56727fe03bddab48c8128d7e991d8aae:no": {
    "tier": "top",
@@ -20034,6 +20185,367 @@
    "first_seen": 1794784242,
    "scans": 1,
    "first_score": 15,
+   "result": null
+  },
+  "0xd2b9aec4c07527d38e965f530ce7ba7abd8e5a64ba688eb5ec409a104d3713d9:no": {
+   "tier": "top",
+   "q": "Dota 2: Froglings vs DO KONCA (BO3) - 1win Essence Playoffs",
+   "label": "DO KONCA",
+   "slug": "dota2-frogli-konca-2026-11-16",
+   "market_id": "7078837",
+   "side": "no",
+   "score": 39,
+   "whales": 2,
+   "invested": 1486,
+   "start": "Mon Nov 16 \u00b7 5:00 AM PT",
+   "kalshi": "BUY NO Froglings @ 65\u00a2",
+   "kprice": 0.65,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 39,
+   "result": null
+  },
+  "0x4a38c2f5fb288bb5c982758be18a179f5b3d95ce75c99bad1342ffb0c6cca49c:no": {
+   "tier": "top",
+   "q": "Kobe: Masamichi Imamura vs Yusuke Takahashi",
+   "label": "Yusuke Takahashi",
+   "slug": "atp-imamura-takahas-2026-11-15",
+   "market_id": "7062709",
+   "side": "no",
+   "score": 43,
+   "whales": 2,
+   "invested": 5584,
+   "start": "2026-11-15",
+   "kalshi": "BUY YES Yusuke Takahashi @ 59\u00a2",
+   "kprice": 0.59,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 43,
+   "result": null
+  },
+  "0x6a761949f355be5e9aff975aff9fc2abb99297e2866753ea9231cd8d694f307f:yes": {
+   "tier": "fun",
+   "q": "Dota 2: Team Synapse vs PuckChamp (BO3) - European Pro League Group B",
+   "label": "Team Synapse",
+   "slug": "dota2-synaps-pckcp-2026-11-16",
+   "market_id": "7075376",
+   "side": "yes",
+   "score": 29,
+   "whales": 1,
+   "invested": 975,
+   "start": "Mon Nov 16 \u00b7 8:00 AM PT",
+   "kalshi": "BUY YES Team Synapse @ 66\u00a2",
+   "kprice": 0.66,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 29,
+   "result": null
+  },
+  "0x7e79036ea9e9418d11b4fb27052243eecad245b0233a816935f4980b835c65d0:yes": {
+   "tier": "fun",
+   "q": "Dota 2: GamerLegion vs LGD Gaming (BO3) - 1win Essence Playoffs",
+   "label": "GamerLegion",
+   "slug": "dota2-gl-lgd-2026-11-16",
+   "market_id": "7079815",
+   "side": "yes",
+   "score": 28,
+   "whales": 1,
+   "invested": 900,
+   "start": "Mon Nov 16 \u00b7 2:00 AM PT",
+   "kalshi": "BUY YES GamerLegion @ 47\u00a2",
+   "kprice": 0.47,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 28,
+   "result": null
+  },
+  "0xa935724ee0f11814f8d32b2a6d44cb04a083e38e6f3c87665ea25e17fdae0a92:yes": {
+   "tier": "fun",
+   "q": "Dota 2: PARIVISION vs Team Spirit (BO3) - 1win Essence Playoffs",
+   "label": "PARIVISION",
+   "slug": "dota2-pari-ts8-2026-11-16",
+   "market_id": "7079820",
+   "side": "yes",
+   "score": 27,
+   "whales": 1,
+   "invested": 810,
+   "start": "Mon Nov 16 \u00b7 8:00 AM PT",
+   "kalshi": "BUY NO Team Spirit @ 54\u00a2",
+   "kprice": 0.54,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 27,
+   "result": null
+  },
+  "0x987a4d0ee5521882ca78261dc5b978c9af8ac41c29f2be83279f71ea2b24c7c0:yes": {
+   "tier": "fun",
+   "q": "ATP World Tour Finals, Ivan Lendl Group: Carlos Alcaraz vs Frances Tiafoe",
+   "label": "Carlos Alcaraz",
+   "slug": "atp-alcaraz-tiafoe-2026-11-16",
+   "market_id": "7001804",
+   "side": "yes",
+   "score": 36,
+   "whales": 1,
+   "invested": 3574,
+   "start": "Mon Nov 16 \u00b7 5:00 AM PT",
+   "kalshi": "BUY YES Carlos Alcaraz @ 89\u00a2",
+   "kprice": 0.89,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 36,
+   "result": null
+  },
+  "0x5269d18cff176358dfc8e14d34080a86368c3b0702a9323e8b11001d8e15783f:no": {
+   "tier": "poly",
+   "q": "Map Handicap: EF (-1.5) vs magic (+1.5)",
+   "label": "magic (+1.5)",
+   "slug": "cs2-mgc-ef1-2026-11-16-map-handicap-home-1pt5",
+   "market_id": "7078812",
+   "side": "no",
+   "score": 47,
+   "whales": 1,
+   "invested": 4848,
+   "start": "2026-11-16",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 47,
+   "result": null
+  },
+  "0xbc8b2f9baaed71c920d40393c636b560824ef60a0fa707354be304c47927f33d:no": {
+   "tier": "poly",
+   "q": "Deportes Quindio vs. Real Cartagena FC: 1st Half O/U 0.5",
+   "label": "Real Cartagena FC",
+   "slug": "col2-qui-car-2026-11-15-first-half-total-0pt5",
+   "market_id": "7034966",
+   "side": "no",
+   "score": 56,
+   "whales": 1,
+   "invested": 1251,
+   "start": "2026-11-15",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 56,
+   "result": null
+  },
+  "0xdf5ccc956026785d7d03ea269ddb46f6bda3611e5829b9134205be8358760273:no": {
+   "tier": "poly",
+   "q": "M15 Hua Hin: Denis Vishenchuk Vishenko vs Veerawit Kamput",
+   "label": "Veerawit Kamput",
+   "slug": "itf-vishen1-kamput1-2026-11-16",
+   "market_id": "7063343",
+   "side": "no",
+   "score": 28,
+   "whales": 1,
+   "invested": 627,
+   "start": "2026-11-16",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 28,
+   "result": null
+  },
+  "0x66ec5976470b68e8447c9414d4155759bbb671663f659ad3750a26e4c8eed7e0:yes": {
+   "tier": "poly",
+   "q": "Will Real Cartagena FC win on 2026-11-15?",
+   "label": "Real Cartagena FC WIN",
+   "slug": "col2-qui-car-2026-11-15-car",
+   "market_id": "7034611",
+   "side": "yes",
+   "score": 28,
+   "whales": 1,
+   "invested": 1435,
+   "start": "2026-11-15",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 28,
+   "result": null
+  },
+  "0x5e8ff054dd057d36003710ea31ee8940d140c6739f20f571a8ff58b4339de3e9:yes": {
+   "tier": "poly",
+   "q": "Spread: Kansas State Wildcats (-15.5)",
+   "label": "Kansas State Wildcats -15.5",
+   "slug": "cbb-mont-kanst-2026-11-16-spread-home-15pt5",
+   "market_id": "7079098",
+   "side": "yes",
+   "score": 32,
+   "whales": 1,
+   "invested": 749,
+   "start": "2026-11-16",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 32,
+   "result": null
+  },
+  "0xc7f6fae3e850d5573a5c88697625bf2924a8b302e91975bd92f985b67b8fa8a9:no": {
+   "tier": "poly",
+   "q": "Exact Score: Lithuania 0 - 1 Liechtenstein?",
+   "label": "No",
+   "slug": "unl-lit-lie-2026-11-16-exact-score-0-1",
+   "market_id": "6631338",
+   "side": "no",
+   "score": 24,
+   "whales": 1,
+   "invested": 3002,
+   "start": "2026-11-16",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 24,
+   "result": null
+  },
+  "0x7877618e540c2117f1b22ec04a31b6f839e8011e50c17fb5c3343bc80f01360b:no": {
+   "tier": "poly",
+   "q": "Exact Score: Faroe Islands 1 - 2 Moldova?",
+   "label": "No",
+   "slug": "unl-far-mol-2026-11-16-exact-score-1-2",
+   "market_id": "6631197",
+   "side": "no",
+   "score": 49,
+   "whales": 1,
+   "invested": 831,
+   "start": "2026-11-16",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 49,
+   "result": null
+  },
+  "0xc7f93fa9f2ae22bdab3e4f4dbcc81a1c16a06b3bf5bc8ee402af00f1fd24eb26:no": {
+   "tier": "poly",
+   "q": "Exact Score: Lithuania 4 - 1 Liechtenstein?",
+   "label": "No",
+   "slug": "unl-lit-lie-2026-11-16-exact-score-4-1",
+   "market_id": "6631356",
+   "side": "no",
+   "score": 49,
+   "whales": 1,
+   "invested": 690,
+   "start": "2026-11-16",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 49,
+   "result": null
+  },
+  "0x33989d06075665057ad697f77a1c331f6ddc4cecd09db389a1cbfc31be3adbe5:no": {
+   "tier": "biggest",
+   "q": "Will Albacete Balompi\u00e9 win on 2026-11-16?",
+   "label": "Albacete Balompi\u00e9 NOT TO WIN",
+   "slug": "es2-alb-cel-2026-11-16-alb",
+   "market_id": "6627846",
+   "side": "no",
+   "score": 17,
+   "whales": 1,
+   "invested": 1622,
+   "start": "2026-11-16",
+   "kalshi": "No Kalshi match",
+   "kprice": null,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 17,
+   "result": null
+  },
+  "0xf4bc7d73ab052b34f5a528298f5db52bf0ef779e41857a0489fe4510a5d76e1b:no": {
+   "tier": "biggest",
+   "q": "Shinshu Brave Warriors vs. Ibaraki Robots",
+   "label": "Ibaraki Robots",
+   "slug": "bkjpn-shi3-iba-2026-11-15",
+   "market_id": "6842931",
+   "side": "no",
+   "score": 16,
+   "whales": 1,
+   "invested": 1159,
+   "start": "2026-11-15",
+   "kalshi": "No Kalshi match",
+   "kprice": null,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 16,
+   "result": null
+  },
+  "0x4a38c2f5fb288bb5c982758be18a179f5b3d95ce75c99bad1342ffb0c6cca49c:yes": {
+   "tier": "biggest",
+   "q": "Kobe: Masamichi Imamura vs Yusuke Takahashi",
+   "label": "Masamichi Imamura",
+   "slug": "atp-imamura-takahas-2026-11-15",
+   "market_id": "7062709",
+   "side": "yes",
+   "score": 13,
+   "whales": 1,
+   "invested": 1046,
+   "start": "2026-11-15",
+   "kalshi": "BUY YES Masamichi Imamura @ 42\u00a2",
+   "kprice": 0.42,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 13,
+   "result": null
+  },
+  "0x987a4d0ee5521882ca78261dc5b978c9af8ac41c29f2be83279f71ea2b24c7c0:no": {
+   "tier": "top",
+   "q": "ATP World Tour Finals, Ivan Lendl Group: Carlos Alcaraz vs Frances Tiafoe",
+   "label": "Frances Tiafoe",
+   "slug": "atp-alcaraz-tiafoe-2026-11-16",
+   "market_id": "7001804",
+   "side": "no",
+   "score": 13,
+   "whales": 2,
+   "invested": 1344,
+   "start": "Mon Nov 16 \u00b7 5:00 AM PT",
+   "kalshi": "BUY YES Frances Tiafoe @ 12\u00a2",
+   "kprice": 0.12,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 13,
+   "result": null
+  },
+  "0x5e8ff054dd057d36003710ea31ee8940d140c6739f20f571a8ff58b4339de3e9:no": {
+   "tier": "biggest",
+   "q": "Spread: Kansas State Wildcats (-15.5)",
+   "label": "Kansas State Wildcats +15.5 or better for the other side",
+   "slug": "cbb-mont-kanst-2026-11-16-spread-home-15pt5",
+   "market_id": "7079098",
+   "side": "no",
+   "score": 25,
+   "whales": 1,
+   "invested": 574,
+   "start": "2026-11-16",
+   "kalshi": "No Kalshi match",
+   "kprice": null,
+   "last_seen": 1794801649,
+   "first_seen": 1794801649,
+   "scans": 1,
+   "first_score": 25,
    "result": null
   }
  }
