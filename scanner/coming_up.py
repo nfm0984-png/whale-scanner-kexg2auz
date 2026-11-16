@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
-"""Coming Up tab: upcoming Kalshi games where eligible pool cappers hold $100+ positions.
+"""Coming Up tab: flat list of upcoming Kalshi picks from Hot and Elite cappers.
 
-This is a lean view, separate from All Picks ($500/$300, GOOD/OK rules).
-Market makers / bots stay out. Grouped by game, soonest first.
+$100+ open positions, next 36 hours, games not started. Market makers / bots
+and one-offs are excluded. Several cappers on the same pick collapse to one row
+with backing vs against counts. Separate from All Picks ($500/$300) rules.
 """
 import collections, re
 import wallet_flags as wf
 
 LEAN_MIN = 100
-# "Clear lean": one side has more cappers and more $, at least 55% of the money,
-# and Kalshi (plus taker fee) is under 2¢ worse than the average entry.
-CLEAR_SHARE = 0.55
-KIND_RANK = {
-    'moneyline': 0, 'teamwin': 1, 'draw': 2, 'spread': 3, 'total': 4, 'other': 5, 'prop': 6,
+STALE_SECS = wf.STALE_SECS
+SPORT_BAR_N = 10
+SPORT_BAR_ROI = 20
+SPORT_BAR_ROI_VOL = 10
+SPORT_BAR_VOL_N = 100
+SPORT_EX = {
+    'NBA': 'NBA', 'WNBA': 'WNBA', 'CBB': 'NCAAB', 'CWBB': 'NCAAB', 'NFL': 'NFL', 'CFB': 'NCAAF',
+    'NHL': 'NHL', 'MLB': 'MLB', 'ATP': 'Tennis', 'WTA': 'Tennis', 'ITF': 'Tennis', 'UFC': 'MMA',
+    'CS2': 'Esports', 'DOTA2': 'Esports', 'LOL': 'Esports', 'VAL': 'Esports', 'OW': 'Esports',
 }
 
 def evkey(slug):
@@ -51,21 +56,92 @@ def game_key(b):
     title = re.sub(r'[^a-z0-9]+', '-', game_title(b).lower()).strip('-')
     return (b.get('league') or 'na').lower() + '|' + str(ts) + '|' + title
 
-def verdict_of(n, usd, opp_n, opp_usd, slip):
-    total = (usd or 0) + (opp_usd or 0)
-    most_caps = (n or 0) > (opp_n or 0)
-    most_usd = (usd or 0) > (opp_usd or 0)
-    share = ((usd or 0) / total) if total else 1.0
-    pricey = slip is not None and slip >= wf.SLIP_CAP_CENTS
-    if pricey:
-        return 'Pricey' if most_usd or most_caps else 'Split'
-    if (n or 0) >= 2 and most_caps and most_usd and share >= CLEAR_SHARE and slip is not None and slip < wf.SLIP_CAP_CENTS:
-        return 'Clear lean'
-    if (usd or 0) < (opp_usd or 0) or (total and share < 0.5):
-        return 'Split'
-    return 'Lean'
+def sport_of(lg, sport_map=None):
+    L = (lg or '').upper()
+    if isinstance(sport_map, dict) and L in sport_map:
+        return sport_map[L]
+    if L in SPORT_EX:
+        return SPORT_EX[L]
+    return 'Basketball (intl)' if L.startswith('BK') else ('Soccer' if L else 'Other')
 
-def _uniq_wallets(rows):
+def sport_bar_roi(c):
+    return SPORT_BAR_ROI_VOL if (c.get('n') or 0) >= SPORT_BAR_VOL_N else SPORT_BAR_ROI
+
+def best_sport(c):
+    best = None
+    bar = sport_bar_roi(c)
+    for sport, sr in (c.get('sports') or {}).items():
+        if not sr:
+            continue
+        if (sr.get('n') or 0) >= SPORT_BAR_N and sr.get('roi') is not None and sr['roi'] >= bar:
+            if best is None or sr['roi'] > best[1]['roi'] or (sr['roi'] == best[1]['roi'] and (sr.get('n') or 0) > (best[1].get('n') or 0)):
+                best = (sport, sr)
+    return best
+
+def is_hot_tab_capper(c):
+    """Same rule as src/app.tsx isHotTabCapper."""
+    f = (c or {}).get('f14') or {}
+    if (f.get('n') or 0) < 10 or f.get('roi') is None or f['roi'] <= 0:
+        return False
+    if not best_sport(c):
+        return False
+    if (c.get('n') or 0) < 20:
+        return False
+    if c.get('wr') is None or c['wr'] < 55:
+        return False
+    if c.get('avgEntry') is None or c['avgEntry'] >= 0.90:
+        return False
+    return True
+
+def elite_wallets(proven):
+    out = set()
+    for e in (proven or {}).get('elite') or []:
+        w = (e.get('wallet') or '').lower()
+        if w:
+            out.add(w)
+    return out
+
+def is_hot_or_elite(c, elite):
+    if not c or c.get('mm') or c.get('oneOff'):
+        return False
+    w = (c.get('wallet') or '').lower()
+    if w in elite:
+        return True
+    return is_hot_tab_capper(c)
+
+def hot_wallets(capper_history, proven):
+    elite = elite_wallets(proven)
+    blocked = set()
+    out = {}
+    for c in (capper_history or {}).get('cappers') or []:
+        w = (c.get('wallet') or '').lower()
+        if c.get('mm') or c.get('oneOff'):
+            if w:
+                blocked.add(w)
+            continue
+        if is_hot_or_elite(c, elite) and w:
+            out[w] = c
+    # Elites missing from capperHistory still count, unless already flagged mm/one-off.
+    for w in elite:
+        if w not in blocked:
+            out.setdefault(w, {'wallet': w})
+    return out
+
+def _in_window(b, now, win_end):
+    k = b.get('kalshi') or {}
+    if k.get('status') != 'ok' or k.get('price') is None:
+        return False
+    if (b.get('cost') or 0) < LEAN_MIN:
+        return False
+    ts = b.get('startTs') or 0
+    if not ts or ts <= now or ts > win_end:
+        return False
+    g = b.get('game') or {}
+    if g.get('state') in ('in', 'post') or b.get('phase') == 'live':
+        return False
+    return True
+
+def _uniq(rows):
     best = {}
     for b in rows:
         w = (b.get('wallet') or '').lower()
@@ -75,40 +151,76 @@ def _uniq_wallets(rows):
             best[w] = b
     return list(best.values())
 
-def _side_stats(rows):
-    uniq = _uniq_wallets(rows)
+def _backer(b, rec, sport_map):
+    sport = sport_of(b.get('league'), sport_map)
+    sr = ((rec or {}).get('sports') or {}).get(sport) or {}
+    return dict(
+        wallet=b.get('wallet'),
+        name=b.get('name') or (b.get('wallet') or '')[:10],
+        cost=round(b.get('cost') or 0),
+        avg=round(b['avg'], 3) if b.get('avg') is not None else None,
+        lastTs=b.get('lastTs') or b.get('firstTs') or None,
+        sport=sport,
+        sw=sr.get('w') or 0,
+        sl=sr.get('l') or 0,
+        sn=sr.get('n') or 0,
+        sroi=sr.get('roi'),
+        elite=bool((rec or {}).get('proven')),
+    )
+
+def _side_blob(rows, hot, sport_map):
+    uniq = _uniq(rows)
     usd = sum(b.get('cost') or 0 for b in uniq)
     inv = sum((b.get('cost') or 0) * (b.get('avg') or 0) for b in uniq if b.get('avg') is not None)
     avg = (inv / usd) if usd and inv else None
-    names = [b.get('name') or (b.get('wallet') or '')[:10] for b in sorted(uniq, key=lambda x: -(x.get('cost') or 0))]
+    uniq.sort(key=lambda x: -(x.get('cost') or 0))
+    backers = [_backer(b, hot.get((b.get('wallet') or '').lower()), sport_map) for b in uniq]
     last_ts = max((b.get('lastTs') or b.get('firstTs') or 0) for b in uniq) if uniq else 0
-    return dict(n=len(uniq), usd=round(usd), avg=round(avg, 3) if avg is not None else None,
-                names=names[:6], lastTs=last_ts or None)
+    return dict(
+        n=len(uniq),
+        usd=round(usd),
+        avg=round(avg, 3) if avg is not None else None,
+        names=[x['name'] for x in backers],
+        backers=backers,
+        lastTs=last_ts or None,
+    )
 
-def _market_row(cid, rows):
-    b0 = rows[0]
-    by_side = collections.defaultdict(list)
-    for b in rows:
-        by_side[b.get('side') or 'yes'].append(b)
-    sides = {side: _side_stats(sbs) for side, sbs in by_side.items()}
-    # Favored side: more $, then more cappers.
-    fav_side = max(sides.keys(), key=lambda s: (sides[s]['usd'], sides[s]['n']))
-    fav = sides[fav_side]
-    opp_side = 'no' if fav_side == 'yes' else 'yes'
-    opp = sides.get(opp_side) or dict(n=0, usd=0, avg=None, names=[], lastTs=None)
-    # Prefer a row on the favored side for Kalshi/label (same market).
-    src = next((b for b in rows if b.get('side') == fav_side), b0)
+def capper_count(rows):
+    seen = set()
+    for r in rows or []:
+        for b in r.get('backers') or []:
+            w = (b.get('wallet') or '').lower()
+            if w:
+                seen.add(w)
+        for name in r.get('oppNames') or []:
+            pass
+        for b in r.get('oppBackers') or []:
+            w = (b.get('wallet') or '').lower()
+            if w:
+                seen.add(w)
+    return len(seen)
+
+def _pick_row(cid, side, rows, opp_rows, hot, sport_map):
+    fav = _side_blob(rows, hot, sport_map)
+    opp = _side_blob(opp_rows, hot, sport_map)
+    src = rows[0]
     k = dict(src.get('kalshi') or {})
     kprice = k.get('price')
     slip = wf.slip_cents(kprice, fav.get('avg'))
     if slip is not None:
         slip = round(slip, 1)
-    label = src.get('label') or src.get('outcome') or fav_side.upper()
+    g = src.get('game') or {}
+    title = game_title(src)
+    ts = src.get('startTs') or 0
     return dict(
-        id=str(cid) + ':' + fav_side,
-        cid=cid,
-        side=fav_side,
-        label=label,
+        id=str(cid) + ':' + side,
+        gameId=game_key(src),
+        game=title,
+        league=(src.get('league') or '').upper(),
+        startTs=int(ts or 0),
+        start=g.get('start') or '',
+        side=side,
+        label=src.get('label') or src.get('outcome') or side.upper(),
         kind=src.get('kind') or 'other',
         q=src.get('q') or '',
         kPrice=kprice,
@@ -120,141 +232,79 @@ def _market_row(cid, rows):
         cappers=fav['n'],
         usd=fav['usd'],
         names=fav['names'],
+        backers=fav['backers'],
         oppCappers=opp['n'],
         oppUsd=opp['usd'],
         oppNames=opp['names'],
-        verdict=verdict_of(fav['n'], fav['usd'], opp['n'], opp['usd'], slip),
+        oppBackers=opp['backers'],
         lastTs=fav.get('lastTs'),
     )
 
-def _favor_market(markets):
-    if not markets:
-        return None
-    best_usd = max(m['usd'] for m in markets) or 1
-    def key(m):
-        clear = 0 if m.get('verdict') == 'Clear lean' else 1
-        kind = KIND_RANK.get(m.get('kind') or 'other', 5)
-        # Prefer moneyline when it has a decent share of the biggest market's money.
-        ml_ok = 0 if kind <= 1 and (m['usd'] >= 0.4 * best_usd) else 1
-        return (ml_ok, clear, kind, -m['usd'], -m['cappers'])
-    return min(markets, key=key)
-
-def _eligible_wallets(capper_history):
-    import capper_history as ch
-    out = set()
-    for c in (capper_history or {}).get('cappers') or []:
-        if ch.eligibility(c):
-            continue
-        w = (c.get('wallet') or '').lower()
-        if w:
-            out.add(w)
-    return out
-
-def slim_game(g, ts, league, title, favor, markets):
-    start = (g or {}).get('start') or ''
-    return dict(
-        id=None,  # filled by caller
-        game=title,
-        league=(league or '').upper(),
-        startTs=int(ts or 0),
-        start=start,
-        favor=favor,
-        markets=markets,
-    )
-
-def build(lean_bets, capper_history, now, win_end):
-    """Return a list of game dicts, soonest first."""
-    elig = _eligible_wallets(capper_history)
-    rows = []
+def build(lean_bets, capper_history, now, win_end, proven=None):
+    """Return a flat list of pick rows, soonest first."""
+    hot = hot_wallets(capper_history, proven)
+    sport_map = (capper_history or {}).get('sportMap')
+    if not isinstance(sport_map, dict):
+        sport_map = {}
+    kept = []
     for b in lean_bets or []:
         w = (b.get('wallet') or '').lower()
-        if w not in elig:
+        if w not in hot:
             continue
-        if (b.get('cost') or 0) < LEAN_MIN:
+        if not _in_window(b, now, win_end):
             continue
-        k = b.get('kalshi') or {}
-        if k.get('status') != 'ok' or k.get('price') is None:
+        kept.append(b)
+    by_cid_side = collections.defaultdict(list)
+    for b in kept:
+        cid = b.get('cid') or b.get('q') or game_key(b)
+        side = b.get('side') or 'yes'
+        by_cid_side[(cid, side)].append(b)
+    rows = []
+    for (cid, side), bs in by_cid_side.items():
+        opp_side = 'no' if side == 'yes' else 'yes'
+        opp = by_cid_side.get((cid, opp_side), [])
+        rec = _pick_row(cid, side, bs, opp, hot, sport_map)
+        if rec.get('kPrice') is None or rec.get('cappers', 0) < 1:
             continue
-        ts = b.get('startTs') or 0
-        if not ts or ts <= now or ts > win_end:
-            continue
-        g = b.get('game') or {}
-        if g.get('state') in ('in', 'post') or b.get('phase') == 'live':
-            continue
-        rows.append(b)
-    groups = collections.OrderedDict()
-    for b in rows:
-        groups.setdefault(game_key(b), []).append(b)
-    games = []
-    for gk, bs in groups.items():
-        by_cid = collections.defaultdict(list)
-        for b in bs:
-            by_cid[b.get('cid') or b.get('q') or game_key(b)].append(b)
-        markets = [_market_row(cid, mbs) for cid, mbs in by_cid.items()]
-        markets = [m for m in markets if m.get('kPrice') is not None]
-        if not markets:
-            continue
-        markets.sort(key=lambda m: (0 if m.get('verdict') == 'Clear lean' else 1, -m['usd'], -m['cappers']))
-        favor = _favor_market(markets)
-        if not favor:
-            continue
-        b0 = bs[0]
-        title = game_title(b0)
-        ts = min((b.get('startTs') or 0) for b in bs if b.get('startTs')) or (b0.get('startTs') or 0)
-        # Prefer a named ESPN/Kalshi game blob.
-        g = b0.get('game') or {}
-        for b in bs:
-            gb = b.get('game') or {}
-            if gb.get('name') and (not g.get('name') or ' vs ' not in str(g.get('name'))):
-                g = gb
-        rec = slim_game(g, ts, b0.get('league'), title, favor, markets)
-        rec['id'] = gk
-        games.append(rec)
-    games.sort(key=lambda x: (x.get('startTs') or 10**12, 0 if (x.get('favor') or {}).get('verdict') == 'Clear lean' else 1, -((x.get('favor') or {}).get('usd') or 0)))
-    return games
+        rows.append(rec)
+    rows.sort(key=lambda r: (r.get('startTs') or 10**12, -(r.get('cappers') or 0), -(r.get('usd') or 0)))
+    return rows
 
-def apply_price(market, kprice):
-    """Update a market/favor row after a Kalshi refresh and recompute slip + verdict."""
+def apply_price(row, kprice):
     if kprice is None:
-        return market
-    market = dict(market)
-    market['kPrice'] = kprice
-    slip = wf.slip_cents(kprice, market.get('avgEntry'))
-    market['slip'] = round(slip, 1) if slip is not None else None
-    market['verdict'] = verdict_of(market.get('cappers') or 0, market.get('usd') or 0,
-                                   market.get('oppCappers') or 0, market.get('oppUsd') or 0,
-                                   market['slip'])
-    return market
+        return row
+    row = dict(row)
+    row['kPrice'] = kprice
+    slip = wf.slip_cents(kprice, row.get('avgEntry'))
+    row['slip'] = round(slip, 1) if slip is not None else None
+    return row
 
-def refresh(games, now, win_end, kalshi_now=None):
-    """Drop started games and refresh Kalshi prices in place. kalshi_now(ticker) -> {yes,no} or price."""
+def refresh(rows, now, win_end, kalshi_now=None):
+    """Drop started picks and refresh Kalshi prices. Works on the flat list (and ignores leftover game-grouped rows)."""
     out = []
-    for g in games or []:
-        ts = g.get('startTs') or 0
+    for r in rows or []:
+        # Legacy game-grouped payload from the first Coming Up version: skip; a scan rebuilds the list.
+        if r.get('favor') and not r.get('label') and not r.get('backers'):
+            continue
+        ts = r.get('startTs') or 0
         if not ts or ts <= now or ts > win_end:
             continue
-        markets = []
-        for m in g.get('markets') or []:
-            px = m.get('kPrice')
-            tk = m.get('ticker')
-            if kalshi_now and tk:
-                try:
-                    kn = kalshi_now(tk)
-                except Exception:
-                    kn = None
-                if kn is not None:
-                    if isinstance(kn, dict):
-                        act = (m.get('action') or '')
-                        px = kn.get('no') if act.endswith('NO') else kn.get('yes', kn.get('price', kn.get('no')))
-                    else:
-                        px = kn
-            markets.append(apply_price(m, px))
-        markets = [m for m in markets if m.get('kPrice') is not None]
-        if not markets:
+        px = r.get('kPrice')
+        tk = r.get('ticker')
+        if kalshi_now and tk:
+            try:
+                kn = kalshi_now(tk)
+            except Exception:
+                kn = None
+            if kn is not None:
+                if isinstance(kn, dict):
+                    act = (r.get('action') or '')
+                    px = kn.get('no') if act.endswith('NO') else kn.get('yes', kn.get('price', kn.get('no')))
+                else:
+                    px = kn
+        rec = apply_price(r, px)
+        if rec.get('kPrice') is None:
             continue
-        favor_id = (g.get('favor') or {}).get('id')
-        favor = next((m for m in markets if m.get('id') == favor_id), None) or _favor_market(markets)
-        rec = dict(g, markets=markets, favor=favor)
         out.append(rec)
-    out.sort(key=lambda x: (x.get('startTs') or 10**12, 0 if (x.get('favor') or {}).get('verdict') == 'Clear lean' else 1, -((x.get('favor') or {}).get('usd') or 0)))
+    out.sort(key=lambda r: (r.get('startTs') or 10**12, -(r.get('cappers') or 0), -(r.get('usd') or 0)))
     return out

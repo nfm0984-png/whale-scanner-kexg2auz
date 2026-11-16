@@ -438,7 +438,8 @@ try:
     WIN_END = NOW + 36 * 3600
     emb['comingUp'] = _cu.refresh(emb.get('comingUp') or [], NOW, WIN_END, kalshi_now=_cu_px)
     emb['totalComingUp'] = len(emb['comingUp'])
-    print('comingUp games', emb['totalComingUp'], flush=True)
+    emb['comingUpCappers'] = _cu.capper_count(emb['comingUp'])
+    print('comingUp rows', emb['totalComingUp'], 'cappers', emb['comingUpCappers'], flush=True)
 except Exception as _e:
     print('comingUp refresh failed:', _e)
     emb.setdefault('comingUp', []); emb.setdefault('totalComingUp', 0)
