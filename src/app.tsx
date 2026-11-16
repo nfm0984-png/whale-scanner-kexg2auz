@@ -3168,6 +3168,99 @@ function CapperProfile(props: { wallet: string; onClose: () => void }) {
   );
 }
 
+function titleTeamsOf(title: string): string[] {
+  return matchupTeams(title || "");
+}
+function otherTeamLabel(known: string, teams: string[], nick?: boolean): string | null {
+  if (!known || teams.length < 2) return null;
+  const hit = teams.find((t: string) => namesOverlap(known, t));
+  const rest = teams.filter((t: string) => t !== hit);
+  if (!rest.length) return null;
+  const other = rest[0];
+  if (nick && hit) {
+    const hp = hit.split(" "), op = other.split(" "), knownLast = (known.split(" ").pop() || "");
+    if (hp.length >= 2 && op.length >= 2 && hp[hp.length - 1].toLowerCase() === knownLast.toLowerCase()) return op[op.length - 1];
+  }
+  return other;
+}
+function willWinTeamOf(q: string, contract: string, lab: string): string | null {
+  const m = (q || "").match(/^Will (.+?) win\b/i);
+  if (m) return m[1].trim();
+  const m2 = (lab || "").match(/^(.+?)\s+(?:NOT TO WIN|to win|not to win|WIN)\s*$/i);
+  if (m2) return m2[1].trim();
+  if (contract && !/^(tie|draw)$|over|under|wins? by over/i.test(contract)) return contract.trim();
+  return null;
+}
+function marketSideLabels(m: ComingMarket, gameTitle: string): { yes: string; no: string } {
+  const yesS = (m.sides || []).find((s: ComingSide) => s.side === "yes");
+  const noS = (m.sides || []).find((s: ComingSide) => s.side === "no");
+  const q = m.q || "";
+  const kind = m.kind || "";
+  const contract = (yesS && yesS.contract) || (noS && noS.contract) || "";
+  let yesLab = (yesS && yesS.label) || "";
+  let noLab = (noS && noS.label) || "";
+  const teams = titleTeamsOf(gameTitle) || matchupTeams(q);
+  if (kind === "draw" || /\bend in a (?:tie|draw)\b/i.test(q) || /^(tie|draw)$/i.test(contract) || /^draw$/i.test(yesLab) || /no\s*draw/i.test(noLab)) {
+    return { yes: "DRAW", no: "NO DRAW" };
+  }
+  const team = willWinTeamOf(q, contract, yesLab || noLab);
+  if ((kind === "teamwin" || /^Will .+ win\b/i.test(q) || /(?:NOT TO WIN|not to win|\bWIN|\bto win)\s*$/i.test(yesLab || noLab)) && team && (kind === "teamwin" || /^Will .+ win\b/i.test(q) || /NOT TO WIN|not to win/i.test(yesLab || noLab))) {
+    return { yes: team + " to win", no: team + " not to win" };
+  }
+  const isSpread = kind === "spread" || /^Spread:/i.test(q) || /wins? by over/i.test(contract) || (/[+-][\d.]+/.test((yesLab || "") + " " + (noLab || "")) && !/\bO\/?U\s+/i.test(q));
+  if (isSpread) {
+    let yes = /wins? by over/i.test(contract) ? contract.trim() : "";
+    const sm = q.match(/^Spread:\s*(.+?)\s*\((-?[\d.]+)\)/i);
+    let fav = sm ? sm[1].trim() : "";
+    let line = sm ? Math.abs(parseFloat(sm[2])) : NaN;
+    if (!(line >= 0)) {
+      const mLine = contract.match(/wins? by over\s+([\d.]+)/i) || (noLab || yesLab || "").match(/([+-])([\d.]+)/);
+      if (mLine) line = Math.abs(parseFloat(mLine[2] || mLine[1]));
+    }
+    if (!fav) {
+      const mFav = (noLab || yesLab || "").match(/^(.+?)\s+[+-][\d.]+/);
+      if (mFav) fav = mFav[1].trim();
+    }
+    const dog = fav ? otherTeamLabel(fav, teams, true) : null;
+    const lineStr = line >= 0 ? String(line).replace(/\\.0$/, "") : "";
+    if (!yes && fav && line >= 0) {
+      const favFull = teams.find((t: string) => namesOverlap(fav, t)) || fav;
+      yes = favFull + " wins by over " + lineStr;
+    }
+    const no = dog && line >= 0 ? dog + " +" + lineStr : "";
+    if (yes && no) return { yes, no };
+    if (yes) return { yes, no: no || (fav && line >= 0 ? fav + " +" + lineStr : "Under the spread") };
+    if (no && fav && line >= 0) return { yes: fav + " -" + lineStr, no };
+  }
+  if (kind === "total" || /\bO\/?U\s+[\d.]+/i.test(q) || /^(?:Over|Under)\s+[\d.]+/i.test(contract) || /^over$/i.test(yesLab) || /^under$/i.test(noLab)) {
+    const lm = q.match(/O\/?U\s+([\d.]+)/i) || (contract || "").match(/^(?:Over|Under)\s+([\d.]+)/i);
+    if (lm) return { yes: "Over " + lm[1], no: "Under " + lm[1] };
+    return { yes: "Over", no: "Under" };
+  }
+  if (yesLab && noLab && !/or better for the other side|^Other side$/i.test(yesLab + " " + noLab)) return { yes: yesLab, no: noLab };
+  const known = yesLab || noLab;
+  if (known && teams.length >= 2 && (kind === "moneyline" || kind === "teamwin" || kind === "other" || kind === "") && !/draw|over|under|not to win|[+-][\d.]+/i.test(known)) {
+    const other = otherTeamLabel(known, teams, false);
+    if (other) return { yes: yesLab || (noLab ? other : known), no: noLab || (yesLab ? other : known) };
+  }
+  if (known) {
+    let flipped = "Not " + known;
+    if (/\bover\b/i.test(known)) flipped = known.replace(/\bover\b/i, "Under");
+    else if (/\bunder\b/i.test(known)) flipped = known.replace(/\bunder\b/i, "Over");
+    else if (/no\s*draw/i.test(known)) flipped = "DRAW";
+    else if (/^draw$/i.test(known)) flipped = "NO DRAW";
+    return { yes: yesLab || flipped, no: noLab || flipped };
+  }
+  return { yes: yesLab || "Yes", no: noLab || "No" };
+}
+function relabelMarketSides(m: ComingMarket, gameTitle: string): ComingMarket {
+  const pair = marketSideLabels(m, gameTitle);
+  return { ...m, sides: (m.sides || []).map((s: ComingSide) => {
+    const next = s.side === "yes" ? pair.yes : s.side === "no" ? pair.no : s.label;
+    return next && next !== s.label ? { ...s, label: next } : s;
+  }) };
+}
+
 function SidesGameCard(props: { g: ComingGame; now: number; rank?: number; suggested?: boolean; selectedSideId?: string; onSelectSide?: (g: ComingGame, s: ComingSide) => void; onCapper: (wallet: string) => void }) {
   const t = useGrokTheme();
   const g = props.g;
@@ -3187,9 +3280,11 @@ function SidesGameCard(props: { g: ComingGame; now: number; rank?: number; sugge
           {props.suggested ? <Chip bg={GREEN} color="#FFFFFF">Suggested</Chip> : null}
         </div>
         <div style={{ fontSize: 20, lineHeight: "25px", fontWeight: 850, marginTop: 8, overflowWrap: "anywhere" }}>{g.game}</div>
-        {(g.markets || []).map((m: ComingMarket, mi: number) => (
+        {(g.markets || []).map((raw: ComingMarket, mi: number) => {
+          const m = relabelMarketSides(raw, g.game || "");
+          return (
           <div key={m.id || mi} style={{ marginTop: 12 }}>
-            {m.kind && m.kind !== "moneyline" && m.kind !== "teamwin" ? <div style={{ fontSize: 12, fontWeight: 800, color: t.text.tertiary, marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.04em" }}>{kindWord(m.kind)}</div> : null}
+            {m.kind && m.kind !== "moneyline" && m.kind !== "teamwin" && m.kind !== "draw" ? <div style={{ fontSize: 12, fontWeight: 800, color: t.text.tertiary, marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.04em" }}>{kindWord(m.kind)}</div> : null}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 8 }}>
               {(m.sides || []).slice(0, 2).map((side: ComingSide) => {
                 const sel = props.selectedSideId === side.id;
@@ -3222,7 +3317,8 @@ function SidesGameCard(props: { g: ComingGame; now: number; rank?: number; sugge
               })}
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

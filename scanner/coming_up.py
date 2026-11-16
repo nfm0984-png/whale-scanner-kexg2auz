@@ -226,47 +226,150 @@ def _side_blob(rows, hot, sport_map, label, side, src, kalshi=None):
 def _other_side(side):
     return 'no' if side == 'yes' else 'yes'
 
-def _side_label(side, rows, other_rows, sample):
-    info = (sample or {}).get('_info') or {}
-    if info.get(side):
-        return info[side]
-    for b in rows:
+def _title_teams(title):
+    if not title:
+        return []
+    s = re.sub(r'^[A-Za-z0-9 .]+:\s+(?=.+\svs)', '', title)
+    s = re.sub(r'\s*\(BO\d\).*$', '', s, flags=re.I)
+    parts = [p.strip() for p in re.split(r'\s+vs\.?\s+', s, flags=re.I) if p.strip()]
+    return parts[:2] if len(parts) >= 2 else parts
+
+def _name_hit(name, team):
+    if not name or not team:
+        return False
+    a, b = name.lower(), team.lower()
+    return a == b or a in b or b in a
+
+def _other_team_label(known, teams, nick=False):
+    if not known or len(teams) < 2:
+        return None
+    hit = next((t for t in teams if _name_hit(known, t)), None)
+    rest = [t for t in teams if t is not hit]
+    if not rest:
+        return None
+    other = rest[0]
+    if nick and hit:
+        hp, op = hit.split(), other.split()
+        known_last = (known.split() or [''])[-1]
+        if len(hp) >= 2 and len(op) >= 2 and hp[-1].lower() == known_last.lower():
+            return op[-1]
+    return other
+
+def _will_team(q, contract, lab):
+    m = re.match(r'Will (.+?) win\b', q or '', re.I)
+    if m:
+        return _clean(m.group(1))
+    m = re.search(r'^(.+?)\s+(?:NOT TO WIN|to win|not to win|WIN)\s*$', lab or '', re.I)
+    if m:
+        return _clean(m.group(1))
+    if contract and not re.search(r'^(tie|draw)$|over|under|wins? by over', contract, re.I):
+        return _clean(contract)
+    return None
+
+def _ctx_contract(ctx, *rowsets):
+    for src in [ctx] + [r for rows in rowsets for r in (rows or [])]:
+        if not src:
+            continue
+        c = src.get('contract') or ((src.get('kalshi') or {}).get('contract'))
+        if c:
+            return c
+    return ''
+
+def _row_label(rows):
+    for b in rows or []:
         if b.get('label'):
             return b['label']
         if b.get('outcome'):
             return b['outcome']
-    lab = None
-    other = other_rows[0] if other_rows else sample
-    if other:
-        lab = other.get('label') or other.get('outcome') or (other.get('_info') or {}).get(_other_side(side))
-    title = game_title(sample or (other_rows[0] if other_rows else {}))
-    kind = (sample or {}).get('kind') or (other or {}).get('kind') or ''
-    if re.search(r'\svs\.?\s', title, re.I) and kind in ('moneyline', 'teamwin', 'other', ''):
-        parts = [p.strip() for p in re.split(r'\s+vs\.?\s+', title, flags=re.I) if p.strip()]
-        if len(parts) >= 2:
-            if lab:
-                if lab.lower() in parts[0].lower() or parts[0].lower() in lab.lower():
-                    return parts[1]
-                if lab.lower() in parts[1].lower() or parts[1].lower() in lab.lower():
-                    return parts[0]
-            return parts[1] if side == 'no' else parts[0]
-    if lab:
-        if re.search(r'no\s*draw', lab, re.I):
-            return 'DRAW'
-        if re.search(r'^draw$', lab, re.I) or re.search(r'\bdraw\b', lab, re.I) and 'no' not in lab.lower():
-            return 'NO DRAW'
-        if re.search(r'\bover\b', lab, re.I):
-            return re.sub(r'\bover\b', 'Under', lab, flags=re.I)
-        if re.search(r'\bunder\b', lab, re.I):
-            return re.sub(r'\bunder\b', 'Over', lab, flags=re.I)
-        if re.search(r'\bWIN\b', lab):
-            return re.sub(r'\bWIN\b', 'LOSE', lab)
-        if re.search(r'\bwin\b', lab):
-            return re.sub(r'\bwin\b', 'lose', lab)
-        if kind == 'spread' or re.search(r'\+\d|\-\d', lab):
-            return 'Other side'
-        return 'Not ' + lab
-    return 'Yes' if side == 'yes' else 'No'
+    return None
+
+def market_labels(ctx, yes_lab=None, no_lab=None, title=None):
+    """YES/NO labels from the Kalshi/Polymarket market itself, never a vs-title guess."""
+    ctx = ctx or {}
+    q = ctx.get('q') or ''
+    kind = ctx.get('kind') or ''
+    contract = _ctx_contract(ctx)
+    info = ctx.get('_info') or {}
+    title = title or game_title(ctx)
+    yes_lab = yes_lab or info.get('yes')
+    no_lab = no_lab or info.get('no')
+    teams = _title_teams(title) or _title_teams(q)
+
+    if kind == 'draw' or re.search(r'\bend in a (?:tie|draw)\b', q, re.I) or re.search(r'^(tie|draw)$', contract, re.I) \
+            or (yes_lab and re.search(r'^draw$', yes_lab, re.I)) or (no_lab and re.search(r'no\s*draw', no_lab, re.I)):
+        return 'DRAW', 'NO DRAW'
+
+    team = _will_team(q, contract, yes_lab or no_lab or '')
+    if kind == 'teamwin' or re.match(r'Will .+ win\b', q, re.I) or re.search(r'(?:NOT TO WIN|not to win|\bWIN|\bto win)\s*$', (yes_lab or no_lab or ''), re.I):
+        if team and (kind == 'teamwin' or re.match(r'Will .+ win\b', q, re.I) or re.search(r'NOT TO WIN|not to win', (yes_lab or no_lab or ''), re.I)):
+            return team + ' to win', team + ' not to win'
+
+    is_spread = kind == 'spread' or re.match(r'Spread:', q, re.I) or re.search(r'wins? by over', contract, re.I) \
+        or bool(re.search(r'[+-][\d.]+', (yes_lab or '') + ' ' + (no_lab or ''))) and not re.search(r'\bO/?U\s+', q, re.I)
+    if is_spread:
+        yes = contract.strip() if re.search(r'wins? by over', contract, re.I) else None
+        sm = re.match(r'Spread:\s*(.+?)\s*\((-?[\d.]+)\)', q)
+        fav = _clean(sm.group(1)) if sm else None
+        line = abs(float(sm.group(2))) if sm else None
+        if line is None:
+            m = re.search(r'wins? by over\s+([\d.]+)', contract, re.I) or re.search(r'([+-])([\d.]+)', (no_lab or yes_lab or ''))
+            if m:
+                line = abs(float(m.group(2) if m.lastindex >= 2 else m.group(1)))
+        if not fav:
+            m = re.search(r'^(.+?)\s+[+-][\d.]+', no_lab or yes_lab or '')
+            fav = _clean(m.group(1)) if m else None
+        dog = _other_team_label(fav or '', teams, nick=True) if fav else None
+        if not yes and fav and line is not None:
+            fav_full = next((t for t in teams if _name_hit(fav, t)), fav)
+            yes = fav_full + ' wins by over ' + ('%g' % line)
+        no = (dog + ' +' + ('%g' % line)) if dog and line is not None else None
+        if yes and no:
+            return yes, no
+        if yes:
+            return yes, no or (fav + ' +' + ('%g' % line) if fav and line is not None else 'Under the spread')
+        if no and fav and line is not None:
+            return fav + ' -' + ('%g' % line), no
+
+    if kind == 'total' or re.search(r'\bO/?U\s+[\d.]+', q, re.I) or re.search(r'^(?:Over|Under)\s+[\d.]+', contract, re.I) \
+            or (yes_lab and re.search(r'^over$', yes_lab, re.I)) or (no_lab and re.search(r'^under$', no_lab, re.I)):
+        lm = re.search(r'O/?U\s+([\d.]+)', q, re.I) or re.search(r'^(?:Over|Under)\s+([\d.]+)', contract or '', re.I)
+        if lm:
+            line = lm.group(1)
+            return 'Over ' + line, 'Under ' + line
+        return 'Over', 'Under'
+
+    if yes_lab and no_lab and not re.search(r'or better for the other side|^Other side$', (yes_lab or '') + ' ' + (no_lab or ''), re.I):
+        return yes_lab, no_lab
+    known = yes_lab or no_lab
+    if known and teams and len(teams) >= 2 and kind in ('moneyline', 'teamwin', 'other', '') \
+            and not re.search(r'draw|over|under|not to win|[+-][\d.]+', known, re.I):
+        other = _other_team_label(known, teams)
+        if other:
+            return (yes_lab or (known if not no_lab else other), no_lab or (other if yes_lab else known))
+    if info.get('yes') or info.get('no'):
+        return info.get('yes') or yes_lab or 'Yes', info.get('no') or no_lab or 'No'
+    if known:
+        flipped = None
+        if re.search(r'\bover\b', known, re.I):
+            flipped = re.sub(r'\bover\b', 'Under', known, flags=re.I)
+        elif re.search(r'\bunder\b', known, re.I):
+            flipped = re.sub(r'\bunder\b', 'Over', known, flags=re.I)
+        elif re.search(r'no\s*draw', known, re.I):
+            flipped = 'DRAW'
+        elif re.search(r'^draw$', known, re.I):
+            flipped = 'NO DRAW'
+        else:
+            flipped = 'Not ' + known
+        if yes_lab:
+            return yes_lab, no_lab or flipped
+        return yes_lab or flipped, no_lab
+    return yes_lab or 'Yes', no_lab or 'No'
+
+def _side_label(side, rows, other_rows, sample):
+    yes_rows = rows if side == 'yes' else other_rows
+    no_rows = rows if side == 'no' else other_rows
+    y, n = market_labels(sample, _row_label(yes_rows), _row_label(no_rows))
+    return y if side == 'yes' else n
 
 def capper_count(games):
     seen = set()
@@ -340,12 +443,13 @@ def build(lean_bets, capper_history, now, win_end, proven=None):
             for b in mbs:
                 by_side[b.get('side') or 'yes'].append(b)
             sample = mbs[0]
+            yes_rows, no_rows = by_side.get('yes') or [], by_side.get('no') or []
+            ctx = dict(sample)
+            ctx['contract'] = _ctx_contract(sample, mbs)
+            yes_lab, no_lab = market_labels(ctx, _row_label(yes_rows), _row_label(no_rows), title=game_title(sample))
             sides = []
-            for side in ('yes', 'no'):
-                rows = by_side.get(side) or []
-                other = by_side.get(_other_side(side)) or []
+            for side, rows, label in (('yes', yes_rows, yes_lab), ('no', no_rows, no_lab)):
                 src = rows[0] if rows else None
-                label = _side_label(side, rows, other, src or sample)
                 sides.append(_side_blob(rows, hot, sport_map, label, side, src))
             if not any(s.get('cappers') for s in sides):
                 continue
