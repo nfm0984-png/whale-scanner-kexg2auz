@@ -2489,6 +2489,98 @@ function CapperRoiAndPicks(props: { rec: CapperRec; trader?: Trader; now: number
   );
 }
 
+// All Picks card (Nov 15): same layout and look as the Cappers card (chip row, face + title, ring, 2-column stat tiles, 4-box strip).
+function AllPickCard(props: { p: Pick; rank: number; now: number; bankroll: number; followed: string[]; hidden: string[]; toggle: (kind: string, w: string) => void; biggest?: boolean }) {
+  const t = useGrokTheme();
+  const { p, now } = props;
+  const [open, setOpen] = useState<boolean>(false);
+  const [openCaps, setOpenCaps] = useState<boolean>(false);
+  const backers = p.backers.filter((b: Backer) => props.hidden.indexOf((b.wallet || "").toLowerCase()) < 0);
+  const sorted = backers.slice().sort((a: Backer, b: Backer) => (b.cost || 0) - (a.cost || 0));
+  const top = sorted[0];
+  const rec = top ? QMAP[(top.wallet || "").toLowerCase()] : undefined;
+  const k = p.kalshi;
+  const ok = !!(k && k.status === "ok");
+  const ex = explainPick(p, !ok);
+  const info = pickInfo(p, backers.length);
+  const qScore = pickQualityScore(p, backers);
+  const verdict = pickVerdictOf(p, backers).verdict;
+  const nCap = distinctBackerCount(backers);
+  const total = backers.reduce((a: number, b: Backer) => a + (b.cost || 0), 0);
+  const bst = backerStats(backers, p.id);
+  const live = p.game.state === "in" || (p.startTs > 0 && p.startTs <= now);
+  const stake = ok ? dollarStake(info.word, props.bankroll) : 0;
+  const cv = top ? convOf(top.wallet, top.cost, p.id) : { tag: "N", mult: null };
+  const sp = top ? sportRecFor(top.wallet, p.league, p.id) : null;
+  const small = backers.some((b: Backer) => { const lw = (b.wallet || "").toLowerCase(); const r0 = QMAP[lw]; return !!(ELITE_W[lw] && r0 && (r0.cn || 0) < ELITE_FULL_N); });
+  const title = vsTitleOf(p.q) || matchup(p.q);
+  const tile = (lab: string, v: string, sub: string) => (
+    <div style={{ borderRadius: 16, padding: 12, background: t.bg.subtle, minWidth: 0 }}>
+      <div style={{ fontSize: 12, lineHeight: "15px", fontWeight: 600, color: t.text.secondary }}>{lab}</div>
+      <div style={{ fontSize: 22, lineHeight: "26px", fontWeight: 800, marginTop: 6, overflowWrap: "anywhere" }}>{v}</div>
+      <div style={{ fontSize: 12, lineHeight: "16px", color: t.text.tertiary, marginTop: 2 }}>{sub}</div>
+    </div>
+  );
+  const win = (rec && rec.win) || {};
+  const f = rec ? rec.f14 : undefined;
+  const strip: [string, string, number | null | undefined, string][] = [
+    ["14 days", f && f.n && f.roi != null ? pct(f.roi) : "—", f && f.n ? f.roi : null, f && f.n ? f.w + "–" + f.l + " · " + f.n + " bets" : "0 bets"],
+    [((rec && rec.bf && rec.bf.days) || 30) + " days", rec && rec.n && rec.roi != null ? pct(rec.roi) : "—", rec && rec.n ? rec.roi : null, rec && rec.n ? rec.w + "–" + rec.l + " · " + rec.n + " bets" : "0 bets"],
+    ["Year profit", win.year && win.year.pnl != null ? kShort(win.year.pnl) : "—", win.year ? win.year.pnl : null, "Polymarket P&L"],
+    ["All-time ROI", win.all && win.all.roi != null ? pct(win.all.roi) : "—", win.all ? (win.all.roi != null ? win.all.roi : win.all.pnl) : null, win.all && win.all.pnl != null ? kShort(win.all.pnl) + " P&L" : "no data"],
+  ];
+  return (
+    <CardShell accent={"linear-gradient(90deg, " + BRAND + ", " + AMBER + ")"}>
+      <div data-pick-card="1" data-all-pick={p.id} data-card-league={p.league} style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
+        <ScoreChip rank={props.rank} score={qScore} />
+        <VerdictChip verdict={verdict} />
+        <CapperCountBadge count={nCap} open={openCaps} onToggle={() => setOpenCaps(!openCaps)} />
+        <Chip bg={BRAND} color="#FFFFFF">{p.league}</Chip>
+        <Chip bg={t.bg.subtle} color={t.text.secondary}>{kindWord(p.kind)}</Chip>
+        <Chip bg={live ? RED : t.bg.subtle} color={live ? "#FFFFFF" : t.text.primary}>{live ? "LIVE" : until(p.startTs, now, p.game && p.game.start)}</Chip>
+        {small ? <Chip bg={AMBER} color="#FFFFFF">Small sample (12–19 graded)</Chip> : null}
+        {info.split ? <Chip bg={AMBER} color="#FFFFFF">Split</Chip> : null}
+        {info.pricier ? <Chip bg={AMBER} color="#FFFFFF">Pricier</Chip> : null}
+        {!ok ? <Chip bg={BRAND2} color="#FFFFFF">No Kalshi</Chip> : null}
+        {props.biggest ? <Chip bg={GREEN} color="#FFFFFF">Biggest</Chip> : null}
+      </div>
+      {openCaps ? <CapperSportList backers={backers} pid={p.id} /> : null}
+      <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 12 }}>
+        <Face name={(top && top.name) || p.label} size={48} />
+        <div style={{ minWidth: 0, flex: "1 1 auto" }}>
+          <div style={{ fontSize: 22, lineHeight: "26px", fontWeight: 850, overflowWrap: "anywhere" }}>{title}</div>
+          <div style={{ fontSize: 12, color: t.text.tertiary, marginTop: 2 }}>{p.league + " · " + kindWord(p.kind) + (p.startTs ? " · " + ptTime(p.startTs) : "")}</div>
+          <div style={{ fontSize: 18, lineHeight: "22px", fontWeight: 800, marginTop: 6, overflowWrap: "anywhere" }}>{ex.action || ex.headline || p.label}</div>
+          {top ? <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 2 }}><NameLink name={nameOf(top.name, top.wallet)} wallet={top.wallet} />{(nCap > 1 ? " + " + (nCap - 1) + " more" : "") + (sp && sp.sr.n ? " · " + sp.sport + " " + sp.sr.w + "–" + sp.sr.l + (sp.sr.roi != null ? ", " + pct(sp.sr.roi) + " ROI" : "") : "")}</div> : null}
+        </div>
+        <Ring score={qScore} label="SCORE" color={qScore >= 65 ? GREEN : qScore >= 45 ? AMBER : RED} size={64} track={t.border.default} text={t.text.primary} sub={t.text.tertiary} />
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 8, marginTop: 14 }}>
+        {tile("Kalshi price", ok && k.price != null ? cents(k.price) : "n/a", ok ? ((k.action || "") + (k.contract ? " " + k.contract : "")).trim() || "Verified contract" : (k && k.why) || "No Kalshi market")}
+        {tile("Top capper bet", top ? money(top.cost) : "n/a", top ? nameOf(top.name, top.wallet) + (cv.mult != null ? " · " + cv.mult + "x usual" : "") + (cv.tag === "H" ? " · High conviction" : "") : "")}
+        {tile("Cappers on this pick", String(nCap), "total " + money(total) + ((p.oppMoney || 0) > 0 ? " · " + kMoney(p.oppMoney) + " against" : ""))}
+        {tile("Backers record", bst.w + bst.l ? bst.w + "–" + bst.l : "n/a", bst.roi != null ? pct(bst.roi) + " ROI on graded bets" : "No graded bets yet")}
+        {tile("Stake", ok ? money(stake) : "—", ok ? info.word + " · " + stakePctOf(info.word) + "% of bankroll" : "No Kalshi bet")}
+        {tile("Starts", live ? "LIVE" : until(p.startTs, now, p.game && p.game.start).replace("starts in ", ""), p.startTs ? ptTime(p.startTs) : "Time n/a")}
+      </div>
+      {rec ? (
+        <div data-all-pick-windows={p.id} style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: 6, marginTop: 8 }}>
+          {strip.map((x) => (
+            <div key={x[0]} style={{ borderRadius: 12, padding: "8px 8px", background: t.bg.subtle, minWidth: 0 }}>
+              <div style={{ fontSize: 11, fontWeight: 600, color: t.text.secondary }}>{x[0]}</div>
+              <div style={{ fontSize: 16, fontWeight: 850, marginTop: 2, color: x[2] == null ? t.text.tertiary : x[2] >= 0 ? GREEN : RED }}>{x[1]}</div>
+              <div style={{ fontSize: 11, color: t.text.tertiary, marginTop: 1 }}>{x[3]}</div>
+            </div>
+          ))}
+        </div>
+      ) : null}
+      <div style={{ marginTop: 10 }}><ActionBtn ex={ex} /></div>
+      <ExpandBtn open={open} on={() => setOpen(!open)} label={open ? "Hide full details" : "Full pick details"} />
+      {open ? <div style={{ marginTop: 8 }}><PickCard p={p} fun={false} poly={!ok} biggest={props.biggest} bankroll={props.bankroll} now={now} rank={props.rank} followed={props.followed} hidden={props.hidden} toggle={props.toggle} /></div> : null}
+    </CardShell>
+  );
+}
+
 function ProvenCard(props: { r: ProvenRow; rank: number; now: number }) {
   const t = useGrokTheme();
   const r = props.r;
@@ -3096,13 +3188,13 @@ export default function App() {
           {bigOnly ? (
             <Fragment>
               <Text>{biggestPicks.length ? biggestPicks.length + " open whale bets from vetted cappers, largest single dollar bet first." : "No open vetted whale bets on games that have not started."}</Text>
-              <CardGrid>{biggestPicks.slice(0, rankedLimit).map((p: Pick, i: number) => (<PickCard key={"B" + p.id} p={p} fun={false} poly={p.kalshi.status !== "ok"} biggest={true} bankroll={bankroll} now={now} rank={i + 1} followed={followed} hidden={hidden} toggle={toggle} />))}</CardGrid>
+              <CardGrid>{biggestPicks.slice(0, rankedLimit).map((p: Pick, i: number) => (<AllPickCard key={"B" + p.id} p={p} biggest={true} bankroll={bankroll} now={now} rank={i + 1} followed={followed} hidden={hidden} toggle={toggle} />))}</CardGrid>
               {biggestPicks.length > rankedLimit ? <Button label={"Show more (" + (biggestPicks.length - rankedLimit) + " left)"} onClick={() => setRankedLimit(rankedLimit + 30)} /> : null}
             </Fragment>
           ) : (
             <Fragment>
               {ranked.length === 0 ? <Text>No open picks from elite or Hot cappers right now. Started games drop off; new ones come in with the next scan.</Text> : null}
-              <CardGrid>{ranked.slice(0, rankedLimit).map((p: Pick, i: number) => (<PickCard key={"R" + p.id} p={p} fun={false} poly={p.kalshi.status !== "ok"} bankroll={bankroll} now={now} rank={i + 1} followed={followed} hidden={hidden} toggle={toggle} />))}</CardGrid>
+              <CardGrid>{ranked.slice(0, rankedLimit).map((p: Pick, i: number) => (<AllPickCard key={"R" + p.id} p={p} bankroll={bankroll} now={now} rank={i + 1} followed={followed} hidden={hidden} toggle={toggle} />))}</CardGrid>
               {ranked.length > rankedLimit ? <Button label={"Show more (" + (ranked.length - rankedLimit) + " left)"} onClick={() => setRankedLimit(rankedLimit + 30)} /> : null}
             </Fragment>
           )}
