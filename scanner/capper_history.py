@@ -921,7 +921,7 @@ if __name__ == '__main__':
 
 # ---- Pick eligibility (Noel, Nov 15 9 PM) ----
 # A capper's picks only count (elite, Hot, All Picks) when ALL of these hold; the Cappers tab still lists everyone.
-ELIG_LT_ROI = 10.0      # all-time Polymarket ROI floor (%)
+ELIG_LT_ROI = 5.0       # all-time Polymarket ROI floor (%)
 ELIG_KSHARE = 0.50      # share of last-30-day $500+ bets in Kalshi-listed leagues
 ELIG_MAX_AVG = 0.90     # average entry on graded $500+ bets must be under 90c
 
@@ -944,7 +944,7 @@ def eligibility(c):
     if not (c.get('n') or 0) or c.get('roi') is None or c['roi'] <= 0:
         why.append('30d not green')
     if not long_term_ok(c):
-        why.append('long-term weak (all-time ROI < +10% or year down)')
+        why.append('long-term weak (all-time ROI < +5% or year down)')
     ks = c.get('kShare')
     if ks is None or ks < ELIG_KSHARE:
         why.append('mostly non-Kalshi' if ks is not None else 'Kalshi share unknown')

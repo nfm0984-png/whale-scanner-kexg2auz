@@ -77,9 +77,9 @@ const SPORT_BAR_ROI = 20;
 const SPORT_BAR_ROI_VOL = 10;
 const SPORT_BAR_VOL_N = 100;
 function sportBarRoiOf(rec: { n?: number } | null | undefined): number { return rec && (rec.n || 0) >= SPORT_BAR_VOL_N ? SPORT_BAR_ROI_VOL : SPORT_BAR_ROI; }
-// Long-term rule (Noel, Nov 15 9 PM): a capper's picks only count/appear if all-time Polymarket ROI >= +10% AND yearly profit > 0.
+// Long-term rule (Noel, Nov 15 9 PM): a capper's picks only count/appear if all-time Polymarket ROI >= +5% (was +10%, Noel 9:15 PM) AND yearly profit > 0.
 // No all-time ROI -> yearly profit > 0 alone. Neither -> excluded.
-const LT_MIN_ROI = 10;
+const LT_MIN_ROI = 5;
 function longTermOk(rec: CapperRec | null | undefined): boolean {
   if (!rec) return false;
   const w = rec.win || {};
@@ -3195,7 +3195,7 @@ export default function App() {
           {bigOnly ? null : <TabSortBar value={sortOf("picks")} onChange={(v: string) => setSortOf(v, "picks")} />}
           <LeaguePills picks={bigOnly ? biggestAll : rankedAll} value={sportFilter} onChange={setSportFilter} />
           <DailyCap />
-          <Text>Elite and Hot cappers, every sport, best first (GOOD, then OK, then the rest). Cappers must be green on 14d and 30d ROI, +10% all-time ROI with a profitable year, 50%+ of recent bets Kalshi-listed, and average entry under 90¢. Elite: 12+ graded big bets (12–19 tagged Small sample), +15% ROI, and +20% ROI in the sport (+10% at 100+ graded). Elites count from $300, everyone else $500. Big bet = 1.5x usual. Kalshi 45–92¢ for GOOD. Split games, both-sides bets and started games hidden. Same pick from several cappers = one row with a count.</Text>
+          <Text>Elite and Hot cappers, every sport, best first (GOOD, then OK, then the rest). Cappers must be green on 14d and 30d ROI, +5% all-time ROI with a profitable year, 50%+ of recent bets Kalshi-listed, and average entry under 90¢. Elite: 12+ graded big bets (12–19 tagged Small sample), +15% ROI, and +20% ROI in the sport (+10% at 100+ graded). Elites count from $300, everyone else $500. Big bet = 1.5x usual. Kalshi 45–92¢ for GOOD. Split games, both-sides bets and started games hidden. Same pick from several cappers = one row with a count.</Text>
           <div data-pinned-proven="1" style={{ borderRadius: 16, padding: "10px 12px", background: t.bg.subtle, margin: "4px 0 12px" }}>
             <div style={{ fontSize: 15, fontWeight: 850, color: "#7C3AED" }}>{"📌 Proven Picks · " + provenPinned.length + (PROVEN ? " · GOOD " + (PROVEN.counts.GOOD || 0) + " · OK " + (PROVEN.counts.OK || 0) : "")}</div>
             <div style={{ fontSize: 12, color: t.text.tertiary, margin: "2px 0 6px" }}>{"Elite cappers' own open bets, $300+" + (provenRows.length > provenPinned.length ? " · " + (provenRows.length - provenPinned.length) + " smaller positions hidden" : "") + (PROVEN ? " · updated " + shortUpdatedAt(PROVEN.updatedAt) : "")}</div>
