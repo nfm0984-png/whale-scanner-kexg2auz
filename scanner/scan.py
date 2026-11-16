@@ -1268,7 +1268,7 @@ try:
     emb['comingUp'] = _cu.build(LEAN_BETS, emb.get('capperHistory') or {}, NOW, WIN_END, proven=emb.get('provenPicks'))
     emb['totalComingUp'] = len(emb['comingUp'])
     emb['comingUpCappers'] = _cu.capper_count(emb['comingUp'])
-    print('comingUp rows', emb['totalComingUp'], 'cappers', emb['comingUpCappers'], 'leanBets', len(LEAN_BETS), flush=True)
+    print('comingUp cards', emb['totalComingUp'], 'cappers', emb['comingUpCappers'], 'leanBets', len(LEAN_BETS), flush=True)
 except Exception as _e:
     print('comingUp failed:', _e)
     emb.setdefault('comingUp', []); emb.setdefault('totalComingUp', 0)
