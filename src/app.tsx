@@ -3326,7 +3326,7 @@ function SidesGameCard(props: { g: ComingGame; now: number; rank?: number; sugge
 
 function ComingUpTab(props: { now: number }) {
   const t = useGrokTheme();
-  const games = sortComingGames(asComingGames((DATA.comingUp || []) as ComingGame[]), "best", props.now);
+  const games = sortComingGames(asComingGames((DATA.comingUp || []) as ComingGame[]), "start", props.now);
   const [sel, setSel] = useState<{ gameId: string; sideId: string }[]>([]);
   const [stakeText, setStakeText] = useState<string>("2");
   const [profile, setProfile] = useState<string>("");
@@ -3358,7 +3358,7 @@ function ComingUpTab(props: { now: number }) {
   const capN = DATA.comingUpCappers || 0;
   const selSideOf = (g: ComingGame): string => { const hit = sel.find((x) => x.gameId === g.id); return hit ? hit.sideId : ""; };
   return (
-    <Section heading={"Coming Up · " + games.length} caption={"One card per game · Hot and Elite cappers only · $100+ · next 36 hours · ranked by capper count, then ROI" + (capN ? " · " + capN + " cappers" : "")}>
+    <Section heading={"Coming Up · " + games.length} caption={"One card per game · Hot and Elite cappers only · $100+ · next 36 hours · sorted by date and start time, soonest first" + (capN ? " · " + capN + " cappers" : "")}>
       <Text>Each card shows both sides of the game and how many Hot or Elite cappers are on each one, with their ROI under their name. Tap a name for week, month and year numbers and the sports they have been sharp in. Tap a side to add it to a $2 parlay (one leg per game). Market makers, bots and one-off jackpot records are left out. This is a lean view — smaller bets than All Picks can show, and it is not a GOOD or OK verdict.</Text>
       <div data-parlay-builder="1" style={{ borderRadius: 18, border: "1px solid " + t.border.default, padding: "12px 14px", background: t.bg.subtle, margin: "4px 0 14px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
