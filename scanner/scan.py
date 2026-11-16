@@ -54,12 +54,67 @@ def classify(r, ps):
     if not ps or tot <= 0: LB['skippedNoPositions'] += 1; return
     if sp / tot < 0.5: LB['skippedNonSports'] += 1; return
     CAND.append((r, ps, round(100 * sp / tot, 1)))
-_off = 0
+# ---- Capper pool (Noel, Nov 15 9 PM): all-time + monthly + weekly leaderboards, deduped; cappers already known to fail
+# pick eligibility (14d/30d not green, all-time ROI < +10% or year down, mostly non-Kalshi, 90c+ favorites) are skipped,
+# known-eligible cappers are scanned first, then unknown (new) ones. Same positions calls as before; a few leaderboard calls more.
+ELIG, POOL_STATS = {}, dict(sources={}, eligibleKnown=0, unknown=0, skippedIneligible=0, skipReasons={})
+try:
+    import capper_history as _chE
+    for _c in _chE.summarize(_chE.load(), None, None):
+        ELIG[(_c.get('wallet') or '').lower()] = [x for x in _chE.eligibility(_c) if x != 'Kalshi share unknown']
+except Exception as _e:
+    print('eligibility preload failed (scanning by leaderboard order):', _e, flush=True)
+POOL, _seen = [], set()
+def _pool_add(rows, src):
+    n = 0
+    for r in rows:
+        w = (r.get('wallet') or '').lower()
+        if not w or w in _seen: continue
+        _seen.add(w); r['src'] = src; r['ord'] = len(POOL); POOL.append(r); n += 1
+    POOL_STATS['sources'][src] = n
+_rows_all = []
+for _o in range(0, 1000, 100):
+    d = orca('/api/v2/whales/leaderboard', {'sort': 'pnl', 'filter': 'all', 'limit': 100, 'offset': _o, 'min_markets': 0})
+    raw = (d or {}).get('whales') or []
+    if not raw: break
+    _rows_all += lb_rows(raw, _o)
+    if len(raw) < 100: break
+_pool_add(_rows_all, 'all-time')
+for _win, _src in ((30, 'month'), (7, 'week')):
+    _rw = []
+    for _o in range(0, 1000, 500):
+        dw = orca('/api/v2/business/pnl-leaderboard', {'window': _win, 'order': 'desc', 'limit': 500, 'offset': _o})
+        rows_w = (dw or {}).get('rows') or []
+        for r in rows_w:
+            _rw.append(dict(rank=r.get('rank'), wallet=r.get('wallet'), name=r.get('name') or r.get('display_name'), pnl_usd=None, volume_usd=None,
+                            trades=None, resolved_markets=r.get('resolved_markets') or 0, resolved_won=r.get('resolved_won') or 0, win_rate=None))
+        if len(rows_w) < 500: break
+    _pool_add(_rw, _src)
+_ordered = []
+for r in POOL:
+    why = ELIG.get(r['wallet'].lower())
+    if why is None: r['prio'] = 1; POOL_STATS['unknown'] += 1; _ordered.append(r)
+    elif not why: r['prio'] = 0; POOL_STATS['eligibleKnown'] += 1; _ordered.append(r)
+    else:
+        POOL_STATS['skippedIneligible'] += 1
+        for x in why: POOL_STATS['skipReasons'][x] = POOL_STATS['skipReasons'].get(x, 0) + 1
+_ordered.sort(key=lambda r: (r['prio'], r['ord']))
+print(f"capper pool: {len(POOL)} leaderboard wallets {POOL_STATS['sources']}; {POOL_STATS['eligibleKnown']} known-eligible first, {POOL_STATS['unknown']} new/unknown, skipped {POOL_STATS['skippedIneligible']} known-ineligible {POOL_STATS['skipReasons']}", flush=True)
+for i in range(0, len(_ordered), 20):
+    if len(CAND) >= A.cappers: break
+    chunk = _ordered[i:i + 20]; LB['deepestRank'] = max(LB['deepestRank'], max((r.get('rank') or 0) for r in chunk if r.get('src') == 'all-time') if any(r.get('src') == 'all-time' for r in chunk) else 0)
+    _t = time.time(); got = fetch_pos([r['wallet'] for r in chunk], False)
+    if got is None: PENDING.append(chunk); print(f"  pool {i + 1}-{i + len(chunk)}: OrcaLayer still computing, will retry", flush=True); continue
+    for r in chunk: classify(r, got.get(r['wallet'].lower(), []))
+    print(f"  pool {i + 1}-{i + len(chunk)}: positions in {time.time()-_t:.0f}s, sports whales so far {len(CAND)}", flush=True)
+# Fallback: keep walking the all-time leaderboard past rank 1000 if the pool did not fill N.
+_off = 1000
 while len(CAND) < A.cappers and _off < 5000:
     d = orca('/api/v2/whales/leaderboard', {'sort': 'pnl', 'filter': 'all', 'limit': 100, 'offset': _off, 'min_markets': 0})
     raw = (d or {}).get('whales') or []
     if not raw: break
-    rows = lb_rows(raw, _off)
+    rows = [r for r in lb_rows(raw, _off) if r['wallet'].lower() not in _seen]
+    for r in rows: _seen.add(r['wallet'].lower()); r['src'] = 'all-time'; r['prio'] = 2; r['ord'] = 10 ** 6 + r['rank']
     _off += len(raw)
     for i in range(0, len(rows), 20):
         if len(CAND) >= A.cappers: break
@@ -81,10 +136,10 @@ for chunk in PENDING:  # higher-ranked wallets that were still being computed: r
     for r in chunk:
         if r['wallet'].lower() in got: classify(r, got[r['wallet'].lower()])
     print(f"  retried all-time ranks {chunk[0]['rank']}-{chunk[-1]['rank']}: sports whales so far {len(CAND)}", flush=True)
-CAND.sort(key=lambda c_: c_[0]['rank'])
+CAND.sort(key=lambda c_: (c_[0].get('prio', 2), c_[0].get('ord', 10 ** 7)))
 for r, ps, spct in CAND[:A.cappers]:  # rank order: all-time #1 first
     w = r['wallet'].lower(); res = r.get('resolved_markets') or 0; won = r.get('resolved_won') or 0
-    cappers[w] = dict(wallet=w, name=r.get('name'), rank=len(cappers) + 1, rankAll=r['rank'], rank30=None, pnl30=None,
+    cappers[w] = dict(wallet=w, name=r.get('name'), rank=len(cappers) + 1, rankAll=r['rank'] if r.get('src', 'all-time') == 'all-time' else None, rank30=None, poolSrc=r.get('src'), pnl30=None,
                       total_pnl=r.get('pnl_usd'), total_volume=r.get('volume_usd'),
                       win_rate=r.get('win_rate') if r.get('win_rate') is not None else (round(100 * won / res, 1) if res else None),
                       resolved_markets=res, wins=won, losses=(res - won) if res else None, sports_pct=spct, trades=r.get('trades'),
@@ -259,6 +314,12 @@ KALT = {'itf': ('KXITFWMATCH',), 'bkjpn': ('KXBLEAGUEONEGAME',), 'atp': ('KXATPC
         'f1': ('KXF1RACE',), 'pga': ('KXGOLFTOURN',), 'golf': ('KXGOLFTOURN',), 'lpga': ('KXLPGATOUR',)}
 NAME_ONLY = ('atp', 'wta', 'itf', 'ufc', 'mma', 'box', 'pga', 'golf', 'lpga', 'f1', 'nascar', 'indycar', 'indy', 'darts', 'motogp')  # player/fighter/driver markets: match by name, not slug code
 KM = {}
+try:
+    import kalshi_leagues as _kl
+    _miss = set(KSER) - set(_kl.KALSHI_LEAGUES)
+    if _miss: print('kalshi_leagues.py is missing', sorted(_miss), flush=True)
+except Exception as _e:
+    print('kalshi_leagues check failed:', _e)
 
 # Per-game player-prop series (title like "Ryan Rollins: 20+ points"). Not awards, season leaders, or protected/ladder variants.
 KPROP = {
@@ -1116,7 +1177,7 @@ def risks(s_):
 for s_ in CONS + FUN + POLY + GLUE + PROPS + LONGSHOTS + BIGGEST + UPCOMING: s_['risks'] = risks(s_)
 out = dict(scannedAt=pt(NOW), ts=NOW, secs=round(time.time() - T0), settings=dict(cappers=A.cappers, min=A.min, wallets=A.wallets, markets=A.markets, windowH=WIN_H),
     coverage=dict(cappers=len(cappers), qualified=sum(qualifies(c) for c in cappers.values()), golden=sum(golden(c) for c in cappers.values()),
-                  marketsFound=found_markets, marketsInWindow=in_window, marketsScanned=min(30, len(ONK)), hedgedExcluded=two_sided, twoSidedExcluded=two_sided, lbAll=LB, lb30=LB, notOnKalshi=len(NOT_ON_KALSHI), picksOnKalshi=len(ONK), sideGroups=len(signals),
+                  marketsFound=found_markets, marketsInWindow=in_window, marketsScanned=min(30, len(ONK)), hedgedExcluded=two_sided, twoSidedExcluded=two_sided, lbAll=LB, lb30=LB, pool=POOL_STATS, notOnKalshi=len(NOT_ON_KALSHI), picksOnKalshi=len(ONK), sideGroups=len(signals),
                   walletsLoaded=len(POS), positionsLoaded=sum(len(v) for v in POS.values()), bets=len(BETS), buysRaw=len(RAW_BUYS), buys=len(BUYS),
                   orcaCalls=CALLS['n'], orcaErrors=CALLS['errors'][:10], kalshiSeries=len(KM), kalshiMatched=len(ONK),
                   espnLeagues=len({k[0] for k in ESPN})),

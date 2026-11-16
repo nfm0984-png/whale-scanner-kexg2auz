@@ -9,7 +9,7 @@ interface Refresh { at: number; state?: string | null; detail?: string; score?: 
 interface Pick { id: string; q: string; label: string; kind: string; league: string; slug: string; score: number; parts: Record<string, number>; price: number; avgEntry: number | null; whales: number; invested: number; golden: number; oppMoney: number; oppCount: number; oppQualified: number; fresh24: number; fresh24Opp: number; sideAll: number; sideCountAll: number | null; oppAll: number; oppCountAll: number | null; hedgeAll: number; game: Game; startTs: number; backers: Backer[]; opposing: Opp[]; kalshi: Kalshi; risks: string[]; net?: number; totalBackers?: number | null; refresh?: Refresh; oneSidedShare?: number | null; priceBand?: string; split?: boolean; glue?: boolean; pricier?: boolean; overCents?: number | null; pickId?: string; strength?: string; started?: boolean; fromProven?: boolean }
 interface Hist { id: string; tier?: string; q: string; label: string; score: number; whales: number; invested: number; start: string; kalshi: string; kprice?: number | null; first_seen: number; last_seen: number; scans: number; result: string | null; graded?: number; active: boolean }
 interface CapperHistPick { id: string; q?: string | null; label?: string | null; side?: string | null; league?: string | null; start?: string | null; startTs?: number | null; kind?: string | null; cost?: number | null; avg?: number | null; result?: string | null; graded?: number | null; kAct?: string | null; kContract?: string | null; kprice?: number | null; profit?: number | null; current?: boolean; conv?: string | null; mult?: number | null }
-interface CapperRec { wallet: string; name: string; rankAll?: number | null; rank?: number | null; golden?: boolean; w: number; l: number; push: number; open: number; n: number; profit: number; risked: number; wr?: number | null; roi?: number | null; qualified: boolean; pnl?: number | null; wrAll?: number | null; picks: CapperHistPick[]; cw?: number; cl?: number; cn?: number; cwr?: number | null; croi?: number | null; cprofit?: number; crisked?: number; quality?: number; qQual?: boolean; demoted?: boolean; shrunkWr?: number | null; shrunkRoi?: number | null; win?: Record<string, { pnl?: number; roi?: number | null; rec?: number[] }>; badge?: string; proven?: boolean; coldDemoted?: boolean; medBet?: number | null; maxBet?: number | null; convRec?: Record<string, { w: number; l: number; roi: number | null }>; winStale?: string[]; tracked?: boolean; isNew?: boolean; addedTs?: number | null; trackedReason?: string | null; hotBoost?: number; f14?: { w: number; l: number; n: number; roi: number | null }; formCooling?: boolean; sports?: Record<string, { w: number; l: number; n: number; roi: number | null }>; copies?: { w: number; l: number; n: number; push: number; open: number; tickets: number; tw: number; tl: number; stake: number }; bf?: { n: number; med: number | null; ts: number; days: number; recent: (string | number)[][] }; recSrc?: { scanner: number; backfill: number }; qwr?: number | null; qroi?: number | null; avgEntry?: number | null; avgN?: number; nearCertN?: number }
+interface CapperRec { kShare?: number | null; wallet: string; name: string; rankAll?: number | null; rank?: number | null; golden?: boolean; w: number; l: number; push: number; open: number; n: number; profit: number; risked: number; wr?: number | null; roi?: number | null; qualified: boolean; pnl?: number | null; wrAll?: number | null; picks: CapperHistPick[]; cw?: number; cl?: number; cn?: number; cwr?: number | null; croi?: number | null; cprofit?: number; crisked?: number; quality?: number; qQual?: boolean; demoted?: boolean; shrunkWr?: number | null; shrunkRoi?: number | null; win?: Record<string, { pnl?: number; roi?: number | null; rec?: number[] }>; badge?: string; proven?: boolean; coldDemoted?: boolean; medBet?: number | null; maxBet?: number | null; convRec?: Record<string, { w: number; l: number; roi: number | null }>; winStale?: string[]; tracked?: boolean; isNew?: boolean; addedTs?: number | null; trackedReason?: string | null; hotBoost?: number; f14?: { w: number; l: number; n: number; roi: number | null }; formCooling?: boolean; sports?: Record<string, { w: number; l: number; n: number; roi: number | null }>; copies?: { w: number; l: number; n: number; push: number; open: number; tickets: number; tw: number; tl: number; stake: number }; bf?: { n: number; med: number | null; ts: number; days: number; recent: (string | number)[][] }; recSrc?: { scanner: number; backfill: number }; qwr?: number | null; qroi?: number | null; avgEntry?: number | null; avgN?: number; nearCertN?: number }
 interface NewCap { wallet: string; name: string; reason?: string | null; badge?: string | null; month?: number | null }
 interface CapperHistory { minSample: number; updatedAt?: string; cappers: CapperRec[]; newThisScan?: NewCap[]; newRecent?: NewCap[]; trackedCount?: number; sportMap?: Record<string, string>; copiesInfo?: { updatedTs?: number; tickets?: number; ticketsMatched?: number; legs?: number; legsMatched?: number }; backfillDays?: number }
 interface ProvenRow { smallSample?: boolean; cn?: number | null; pid: string; wallet: string; name: string; league: string; sport: string; game: string; market: string; pick: string; opp: string; slug: string; startTs: number | null; start: string; cost: number; avg: number; now: number | null; usual: number | null; mult: number | null; kalshi: { action: string; price: number | null; ticker: string; contract?: string | null; src?: string; live?: boolean } | null; sportRec: { w: number; l: number; n: number; roi: number | null }; f14?: { w: number; l: number; n: number; roi: number | null }; rec: number[]; roi: number | null; badge?: string; verdict: string; why: string[]; hedged?: boolean; inTop?: boolean; group?: ProvenRow[] }
@@ -77,6 +77,32 @@ const SPORT_BAR_ROI = 20;
 const SPORT_BAR_ROI_VOL = 10;
 const SPORT_BAR_VOL_N = 100;
 function sportBarRoiOf(rec: { n?: number } | null | undefined): number { return rec && (rec.n || 0) >= SPORT_BAR_VOL_N ? SPORT_BAR_ROI_VOL : SPORT_BAR_ROI; }
+// Long-term rule (Noel, Nov 15 9 PM): a capper's picks only count/appear if all-time Polymarket ROI >= +10% AND yearly profit > 0.
+// No all-time ROI -> yearly profit > 0 alone. Neither -> excluded.
+const LT_MIN_ROI = 10;
+function longTermOk(rec: CapperRec | null | undefined): boolean {
+  if (!rec) return false;
+  const w = rec.win || {};
+  const a = w.all && w.all.roi != null ? w.all.roi : null;
+  const y = w.year && w.year.pnl != null ? w.year.pnl : null;
+  if (a == null && y == null) return false;
+  if (a != null) return a >= LT_MIN_ROI && (y == null || y > 0);
+  return (y as number) > 0;
+}
+// Pick eligibility (Noel, Nov 15 9 PM; mirrors scanner/capper_history.py eligibility): green 14d AND 30d ROI on graded $500+ bets,
+// the long-term floor above, 50%+ of last-30-day $500+ bets in Kalshi-listed leagues, and average entry under 90¢.
+function eligibilityOf(rec: CapperRec | null | undefined): string[] {
+  if (!rec) return ["no record"];
+  const why: string[] = [];
+  const f = rec.f14;
+  if (!f || !f.n || f.roi == null || f.roi <= 0) why.push("Cold 14d");
+  if (!rec.n || rec.roi == null || rec.roi <= 0) why.push("Cold 30d");
+  if (!longTermOk(rec)) why.push("Weak long-term");
+  if (rec.kShare == null) why.push("Kalshi share unknown"); else if (rec.kShare < 0.5) why.push("Mostly non-Kalshi");
+  if (rec.avgEntry != null && rec.avgEntry >= 0.9) why.push("90¢+ favorites");
+  return why;
+}
+function walletLongTermOk(w: string | null | undefined): boolean { return eligibilityOf(QMAP[(w || "").toLowerCase()]).length === 0; }
 // Loosened Nov 15: elites may bet $300+ (everyone else $500+); 12-19 graded elites are a small sample.
 const ELITE_MIN_BET = 300;
 const ELITE_FULL_N = 20;
@@ -136,7 +162,7 @@ function pickVerdictOf(p: Pick, backers?: Backer[]): { verdict: "GOOD" | "OK" | 
   const okWhy: string[] = [];
   bs.forEach((b: Backer) => {
     const w = (b.wallet || "").toLowerCase();
-    if (!ELITE_W[w]) return;
+    if (!ELITE_W[w] || !walletLongTermOk(w)) return;
     const rec = QMAP[w];
     if (!rec || rec.croi == null || rec.croi < OVERALL_ROI_FLOOR) return;
     const info = sportRecFor(w, p.league, p.id);
@@ -2360,7 +2386,7 @@ function CapperCard(props: { rec: CapperRec; trader?: Trader; now: number; bankr
         {rec.isNew ? <Chip bg="#7C3AED" color="#FFFFFF">{"New" + (rec.trackedReason ? " · " + rec.trackedReason : "")}</Chip> : rec.tracked ? <Chip bg={t.bg.subtle} color={t.text.secondary}>Tracked</Chip> : null}
         {rec.coldDemoted ? null : rec.demoted ? <Chip bg={RED} color="#FFFFFF">Low-edge volume</Chip> : rec.qQual ? <Chip bg={GREEN} color="#FFFFFF">Copyable quality</Chip> : null}
         {rec.open ? <Chip bg="#2563EB" color="#FFFFFF">{rec.open} open</Chip> : null}
-        {props.openPicks && capperWeakLong(rec) ? <Chip bg={RED} color="#FFFFFF">Weak long-term · year or all-time down</Chip> : null}
+        {props.openPicks && capperWeakLong(rec) ? <span data-inelig="1" style={{ display: "contents" }}>{eligibilityOf(rec).map((r: string) => <Chip key={r} bg={RED} color="#FFFFFF">{r}</Chip>)}<Chip bg={t.bg.subtle} color={RED}>Picks hidden</Chip></span> : null}
       </div>
       <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 12 }}>
         <Face name={rec.name || rec.wallet} size={48} />
@@ -2432,11 +2458,7 @@ function CapperCard(props: { rec: CapperRec; trader?: Trader; now: number; bankr
 }
 
 // Cappers tab (Nov 15): 14d / 30d / year / all-time ROI with counts, Weak long-term flag, and open picks inline.
-function capperWeakLong(rec: CapperRec): boolean {
-  const w = rec.win || {};
-  const yr = w.year || {}, all = w.all || {};
-  return (yr.pnl != null && yr.pnl < 0) || (all.pnl != null && all.pnl < 0);
-}
+function capperWeakLong(rec: CapperRec): boolean { return eligibilityOf(rec).length > 0; }
 function CapperRoiAndPicks(props: { rec: CapperRec; trader?: Trader; now: number; picks: Pick[] }) {
   const t = useGrokTheme();
   const { rec, now, picks } = props;
@@ -2463,7 +2485,7 @@ function CapperRoiAndPicks(props: { rec: CapperRec; trader?: Trader; now: number
       </div>
       <div data-cap-open-picks={rec.wallet} style={{ marginTop: 10 }}>
         <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: t.text.tertiary }}>{"OPEN PICKS · " + picks.length}</div>
-        {picks.length ? picks.map((p: Pick) => {
+        {eligibilityOf(rec).length ? <div style={{ fontSize: 13, color: RED, marginTop: 4 }}>{"Picks hidden (" + eligibilityOf(rec).join(", ") + "). " + picks.length + " open."}</div> : picks.length ? picks.map((p: Pick) => {
           const mine = (p.backers || []).filter((b: Backer) => (b.wallet || "").toLowerCase() === (rec.wallet || "").toLowerCase())[0];
           const live = p.game.state === "in" || (p.startTs > 0 && p.startTs <= now);
           const ok = p.kalshi && p.kalshi.status === "ok";
@@ -2936,7 +2958,7 @@ export default function App() {
   const bySport = (arr: Pick[]): Pick[] => sportFilter ? arr.filter((p: Pick) => p.league === sportFilter) : arr;
   const vb = (p: Pick): Backer[] => visibleBackers(p);
   const notHedged = (p: Pick): boolean => !pickHasCapperHedge(p);
-  const provenRows: ProvenRow[] = sortProvenBy(mergeProvenRows(((PROVEN && PROVEN.picks) || []).filter((r: ProvenRow) => (!r.startTs || r.startTs > now) && !r.hedged && !isEliteSplitGame(r.slug))), sortOf("proven"), now);
+  const provenRows: ProvenRow[] = sortProvenBy(mergeProvenRows(((PROVEN && PROVEN.picks) || []).filter((r: ProvenRow) => walletLongTermOk(r.wallet) && (!r.startTs || r.startTs > now) && !r.hedged && !isEliteSplitGame(r.slug))), sortOf("proven"), now);
   // Pinned Proven section hides sub-$300 throwaway positions (still counted in the CAUTION total).
   const provenPinned: ProvenRow[] = provenRows.filter((r: ProvenRow) => r.verdict !== "CAUTION" || (r.cost || 0) >= ELITE_MIN_BET);
   const provenComboPicks: Pick[] = provenRows.map((r: ProvenRow) => provenToPick(r)).filter((p: Pick | null): p is Pick => !!p);
@@ -2983,17 +3005,18 @@ export default function App() {
   const longPool = catalogPicks.filter((p: Pick) => isLongshot(p, visibleBackers(p).length, now) && vetted(p, visibleBackers(p)) && followOk(p) && !gone(p));
   const longBase = takeSortedPicks(longPool, sortOf("longfun"), 20, vb, now);
   const longPicks = bySport(longBase);
-  const biggestPool = catalogPicks.filter((p: Pick) => visibleBackers(p).length >= 1 && vetted(p, visibleBackers(p)) && followOk(p) && !gone(p) && !isEliteSplitGame(p.slug));
+  const ltPick = (p: Pick): Pick => ({ ...p, backers: (p.backers || []).filter((b: Backer) => walletLongTermOk(b.wallet)) });
+  const biggestPool = catalogPicks.map(ltPick).filter((p: Pick) => p.backers.length > 0).filter((p: Pick) => visibleBackers(p).length >= 1 && vetted(p, visibleBackers(p)) && followOk(p) && !gone(p) && !isEliteSplitGame(p.slug));
   const biggestAll = takeSortedPicks(biggestPool, sortOf("biggest"), 30, vb, now);
   const biggestPicks = bySport(biggestAll);
   // Ranked feed (Nov 15): every open pick from an elite or Hot capper, verdict then quality. No filtering by Noel's own tickets.
-  const qualCapper = (w: string | null | undefined): boolean => { const lw = (w || "").toLowerCase(); if (ELITE_W[lw]) return true; const r = QMAP[lw]; return !!(r && isHotTabCapper(r)); };
+  const qualCapper = (w: string | null | undefined): boolean => { const lw = (w || "").toLowerCase(); if (!walletLongTermOk(lw)) return false; if (ELITE_W[lw]) return true; const r = QMAP[lw]; return !!(r && isHotTabCapper(r)); };
   const qualBackersOf = (p: Pick): Backer[] => visibleBackers(p).filter((b: Backer) => {
     if (!qualCapper(b.wallet)) return false;
     const info = sportRecFor(b.wallet, p.league, p.id);
     return !(info && info.sr.n >= 5 && info.sr.roi != null && info.sr.roi < 0);
   });
-  const rankedPoolAll = uniqueMergedPicks(catalogPicks.concat(provenComboPicks)).filter((p: Pick) => qualBackersOf(p).length >= 1 && followOk(p) && !gone(p) && notHedged(p) && !isEliteSplitGame(p.slug));
+  const rankedPoolAll = uniqueMergedPicks(catalogPicks.concat(provenComboPicks)).map(ltPick).filter((p: Pick) => p.backers.length > 0).filter((p: Pick) => qualBackersOf(p).length >= 1 && followOk(p) && !gone(p) && notHedged(p) && !isEliteSplitGame(p.slug));
   const rankedNoKCount = rankedPoolAll.filter((p: Pick) => !p.kalshi || p.kalshi.status !== "ok").length;
   const rankedPool = rankedNoK ? rankedPoolAll : rankedPoolAll.filter((p: Pick) => p.kalshi && p.kalshi.status === "ok");
   const rankedAll = sortTopBy(rankedPool, sortOf("picks"), vb, now);
@@ -3172,7 +3195,7 @@ export default function App() {
           {bigOnly ? null : <TabSortBar value={sortOf("picks")} onChange={(v: string) => setSortOf(v, "picks")} />}
           <LeaguePills picks={bigOnly ? biggestAll : rankedAll} value={sportFilter} onChange={setSportFilter} />
           <DailyCap />
-          <Text>Elite and Hot cappers, every sport, best first (GOOD, then OK, then the rest). Elite: 12+ graded big bets (12–19 tagged Small sample), +15% ROI, and +20% ROI in the sport (+10% at 100+ graded). Elites count from $300, everyone else $500. Big bet = 1.5x usual. Kalshi 45–92¢ for GOOD. Split games, both-sides bets and started games hidden. Same pick from several cappers = one row with a count.</Text>
+          <Text>Elite and Hot cappers, every sport, best first (GOOD, then OK, then the rest). Cappers must be green on 14d and 30d ROI, +10% all-time ROI with a profitable year, 50%+ of recent bets Kalshi-listed, and average entry under 90¢. Elite: 12+ graded big bets (12–19 tagged Small sample), +15% ROI, and +20% ROI in the sport (+10% at 100+ graded). Elites count from $300, everyone else $500. Big bet = 1.5x usual. Kalshi 45–92¢ for GOOD. Split games, both-sides bets and started games hidden. Same pick from several cappers = one row with a count.</Text>
           <div data-pinned-proven="1" style={{ borderRadius: 16, padding: "10px 12px", background: t.bg.subtle, margin: "4px 0 12px" }}>
             <div style={{ fontSize: 15, fontWeight: 850, color: "#7C3AED" }}>{"📌 Proven Picks · " + provenPinned.length + (PROVEN ? " · GOOD " + (PROVEN.counts.GOOD || 0) + " · OK " + (PROVEN.counts.OK || 0) : "")}</div>
             <div style={{ fontSize: 12, color: t.text.tertiary, margin: "2px 0 6px" }}>{"Elite cappers' own open bets, $300+" + (provenRows.length > provenPinned.length ? " · " + (provenRows.length - provenPinned.length) + " smaller positions hidden" : "") + (PROVEN ? " · updated " + shortUpdatedAt(PROVEN.updatedAt) : "")}</div>

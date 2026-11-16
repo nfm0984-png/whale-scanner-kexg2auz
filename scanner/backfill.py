@@ -148,12 +148,18 @@ def aggregate(raw):
                     c_n += 1
         for c in cells.values():
             c[3], c[4], c[7], c[8] = round(c[3]), round(c[4]), round(c[7]), round(c[8])
+        # Kalshi-usable share (Nov 15): bets in leagues with a Kalshi series, last 30 days
+        try:
+            from kalshi_leagues import KALSHI_LEAGUES as _KL
+        except Exception:
+            _KL = frozenset()
+        k_n = sum(1 for r in bets.values() if ((r[4] or '').split('-')[0] in _KL))
         recent = sorted(bets.values(), key=lambda r: -(r[3] or 0))[:8]
         out['wallets'][w] = {'ts': rec.get('ts'), 'full': bool(rec.get('full')), 'n': len(bets),
                              'med': round(_med(costs)) if costs else None, 'max': round(max(costs)) if costs else None,
                              'avgAll': round(a_sum / a_n, 4) if a_n else None, 'nAll': int(a_n), 'nNear': int(a_near),
                              'avgCopy': round(c_sum / c_n, 4) if c_n else None, 'nCopy': int(c_n),
-                             'cells': cells, 'recent': [[r[4], r[5], round(r[0]), r[1], r[2], r[3]] for r in recent]}
+                             'kN': k_n, 'kShare': round(k_n / len(bets), 3) if bets else None, 'cells': cells, 'recent': [[r[4], r[5], round(r[0]), r[1], r[2], r[3]] for r in recent]}
     tmp = PATH + '.tmp'
     json.dump(out, open(tmp, 'w'), separators=(',', ':'))
     os.replace(tmp, PATH)

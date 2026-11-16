@@ -848,7 +848,8 @@ def apply_records(c, bf=None, cp=None):
     c['nearCertN'] = int(E[2])
     if use_bf:
         c['bf'] = {'n': bf.get('n'), 'med': bf.get('med'), 'ts': bf.get('ts'), 'days': BF_DAYS,
-                   'recent': bf.get('recent') or [], 'avgAll': bf.get('avgAll'), 'nNear': bf.get('nNear')}
+                   'recent': bf.get('recent') or [], 'avgAll': bf.get('avgAll'), 'nNear': bf.get('nNear'), 'kShare': bf.get('kShare'), 'kN': bf.get('kN')}
+        c['kShare'] = bf.get('kShare')
         if not c.get('medBet') and bf.get('med'):
             c['medBet'] = bf['med']
             c['maxBet'] = bf.get('max')
@@ -916,3 +917,38 @@ if __name__ == '__main__':
     print(f"capper_history: {n_p} pick rows, {len(caps)} cappers, {graded} with graded records, {qual} with {MIN_SAMPLE}+ graded")
     for c in caps[:8]:
         print(f"  {c['name'] or c['wallet'][:10]:20} {c['w']}-{c['l']} wr={c['wr']} n={c['n']} profit={c['profit']} roi={c['roi']} open={c['open']} qual={c['qualified']}")
+
+
+# ---- Pick eligibility (Noel, Nov 15 9 PM) ----
+# A capper's picks only count (elite, Hot, All Picks) when ALL of these hold; the Cappers tab still lists everyone.
+ELIG_LT_ROI = 10.0      # all-time Polymarket ROI floor (%)
+ELIG_KSHARE = 0.50      # share of last-30-day $500+ bets in Kalshi-listed leagues
+ELIG_MAX_AVG = 0.90     # average entry on graded $500+ bets must be under 90c
+
+def long_term_ok(c):
+    w = (c or {}).get('win') or {}
+    a = (w.get('all') or {}).get('roi')
+    y = (w.get('year') or {}).get('pnl')
+    if a is None and y is None:
+        return False
+    if a is not None:
+        return a >= ELIG_LT_ROI and (y is None or y > 0)
+    return y > 0
+
+def eligibility(c):
+    """Reasons a capper's picks are excluded ([] = eligible)."""
+    why = []
+    f = (c or {}).get('f14') or {}
+    if not f.get('n') or f.get('roi') is None or f['roi'] <= 0:
+        why.append('14d not green')
+    if not (c.get('n') or 0) or c.get('roi') is None or c['roi'] <= 0:
+        why.append('30d not green')
+    if not long_term_ok(c):
+        why.append('long-term weak (all-time ROI < +10% or year down)')
+    ks = c.get('kShare')
+    if ks is None or ks < ELIG_KSHARE:
+        why.append('mostly non-Kalshi' if ks is not None else 'Kalshi share unknown')
+    avg = c.get('avgEntry')
+    if avg is not None and avg >= ELIG_MAX_AVG:
+        why.append('90c+ favorites')
+    return why

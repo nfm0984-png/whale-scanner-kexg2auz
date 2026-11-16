@@ -148,6 +148,9 @@ def elite_check(c):
     avg = c.get('avgEntry')
     if avg is not None and avg >= ELITE_MAX_AVG:
         why.append('avg entry %d¢ is near-certain' % round(avg * 100))
+    for r in ch.eligibility(c):
+        if r not in why:
+            why.append(r)
     return not why, why
 
 def _iso_ts(s):
