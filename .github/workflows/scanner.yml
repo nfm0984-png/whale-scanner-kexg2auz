@@ -66,7 +66,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # Data/site outputs only. Never add .trigger_token or scanner/.orca_api_key.
-          outs=(data.json proven_picks.json scanner/history.json scanner/page_embed.json scanner/capper_history.json scanner/whale_windows.json scanner/tracked_cappers.json scanner/backfill.json scanner/proven_picks.json)
+          outs=(data.json proven_picks.json scanner/history.json scanner/page_embed.json scanner/capper_history.json scanner/whale_windows.json scanner/tracked_cappers.json scanner/backfill.json scanner/proven_picks.json scanner/wallet_stats.json)
           save_outs() {
             mkdir -p /tmp/scanner-out
             for f in "${outs[@]}"; do
@@ -82,6 +82,7 @@ jobs:
             [ -f /tmp/scanner-out/tracked_cappers.json ] && cp -f /tmp/scanner-out/tracked_cappers.json scanner/tracked_cappers.json
             [ -f /tmp/scanner-out/backfill.json ] && cp -f /tmp/scanner-out/backfill.json scanner/backfill.json
             [ -f /tmp/scanner-out/proven_picks.json ] && cp -f /tmp/scanner-out/proven_picks.json scanner/proven_picks.json && cp -f /tmp/scanner-out/proven_picks.json proven_picks.json
+            [ -f /tmp/scanner-out/wallet_stats.json ] && cp -f /tmp/scanner-out/wallet_stats.json scanner/wallet_stats.json
           }
           commit_outs() {
             git add -- "${outs[@]}"

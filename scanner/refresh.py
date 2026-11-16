@@ -269,6 +269,20 @@ def enrich_row(p, do_wp=False, do_kalshi=False):
         kn = kalshi_now(k['ticker']); n_k += 1
         if kn:
             r['kNow'] = kn['yes'] if (k.get('action') or '').endswith('YES') else kn['no']
+            if r.get('kNow') is not None:
+                k['price'] = r['kNow']
+                avg = p.get('avgEntry')
+                if avg is not None:
+                    k['edge_vs_whales'] = round((avg - k['price']) * 100, 1)
+                    try:
+                        import wallet_flags as _wf
+                        sl = _wf.slip_cents(k['price'], avg)
+                        if sl is not None:
+                            k['slip'] = round(sl, 1)
+                            k['light'] = 'green' if sl < 0 else ('yellow' if sl < 2 else 'red')
+                    except Exception:
+                        k['light'] = 'green' if k['edge_vs_whales'] >= 0 else ('yellow' if k['edge_vs_whales'] >= -5 else 'red')
+                p['kalshi'] = k
             if kn.get('status') in ('closed', 'settled', 'finalized', 'determined'): r['ended'] = True
             if kn.get('result') in ('yes', 'no') and 'final' not in r:
                 r['final'] = 'W' if kn['result'] == ('yes' if (k.get('action') or '').endswith('YES') else 'no') else 'L'

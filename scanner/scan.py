@@ -55,7 +55,7 @@ def classify(r, ps):
     if sp / tot < 0.5: LB['skippedNonSports'] += 1; return
     CAND.append((r, ps, round(100 * sp / tot, 1)))
 # ---- Capper pool (Noel, Nov 15 9 PM): all-time + monthly + weekly leaderboards, deduped; cappers already known to fail
-# pick eligibility (14d/30d not green, all-time ROI < +10% or year down, mostly non-Kalshi, 90c+ favorites) are skipped,
+# pick eligibility (14d/30d not green, all-time ROI < +5% or year down, market maker/bot, mostly non-Kalshi, 90c+ favorites) are skipped,
 # known-eligible cappers are scanned first, then unknown (new) ones. Same positions calls as before; a few leaderboard calls more.
 ELIG, POOL_STATS = {}, dict(sources={}, eligibleKnown=0, unknown=0, skippedIneligible=0, skipReasons={})
 try:
@@ -90,10 +90,39 @@ for _win, _src in ((30, 'month'), (7, 'week')):
                             trades=None, resolved_markets=r.get('resolved_markets') or 0, resolved_won=r.get('resolved_won') or 0, win_rate=None))
         if len(rows_w) < 500: break
     _pool_add(_rw, _src)
+# Polymarket sports-category boards (week / month / all-time PNL). Public Data API v2, deduped into the same pool.
+def _poly_sports_board(period, limit=400):
+    rows, cursor = [], None
+    while len(rows) < limit:
+        if cursor:
+            url = 'https://data-api.polymarket.com/v2/leaderboard?cursor=' + urllib.parse.quote(cursor)
+        else:
+            url = 'https://data-api.polymarket.com/v2/leaderboard?category=sports&time_period=' + period + '&sort_by=PNL&limit=' + str(min(200, limit - len(rows)))
+        d = pub(url) or {}
+        batch = d.get('data') or []
+        if not batch:
+            break
+        for r in batch:
+            w = (r.get('user_id') or '').lower()
+            if not w:
+                continue
+            rows.append(dict(rank=r.get('rank'), wallet=w, name=r.get('user_name'), pnl_usd=r.get('pnl'), volume_usd=r.get('volume'),
+                             trades=None, resolved_markets=0, resolved_won=0, win_rate=None))
+        pag = d.get('pagination') or {}
+        cursor = pag.get('next_cursor')
+        if not pag.get('has_more') or not cursor:
+            break
+    return rows
+for _period, _src in (('all', 'sports-all'), ('month', 'sports-month'), ('week', 'sports-week')):
+    try:
+        _pool_add(_poly_sports_board(_period), _src)
+    except Exception as _e:
+        print('sports leaderboard', _src, 'failed:', _e, flush=True)
 _ordered = []
 for r in POOL:
     why = ELIG.get(r['wallet'].lower())
-    if why is None: r['prio'] = 1; POOL_STATS['unknown'] += 1; _ordered.append(r)
+    sports = str(r.get('src') or '').startswith('sports')
+    if why is None: r['prio'] = 1 if sports else 2; POOL_STATS['unknown'] += 1; _ordered.append(r)
     elif not why: r['prio'] = 0; POOL_STATS['eligibleKnown'] += 1; _ordered.append(r)
     else:
         POOL_STATS['skippedIneligible'] += 1
@@ -779,7 +808,16 @@ def kal_for(info, side, avg, cp, key):
         try: KCACHE[key] = kalshi(dict(info=info, side=side, avg_entry=avg, price=cp or 0))
         except Exception as ex: KCACHE[key] = dict(status='none', why='Kalshi lookup failed')
     k = dict(KCACHE[key])
-    if k.get('status') == 'ok' and avg: k['edge_vs_whales'] = round((avg - k['price']) * 100, 1); k['light'] = 'green' if k['edge_vs_whales'] >= 0 else ('yellow' if k['edge_vs_whales'] >= -5 else 'red')
+    if k.get('status') == 'ok' and avg:
+        k['edge_vs_whales'] = round((avg - k['price']) * 100, 1)
+        try:
+            import wallet_flags as _wf
+            sl = _wf.slip_cents(k['price'], avg)
+            if sl is not None:
+                k['slip'] = round(sl, 1)
+            k['light'] = 'green' if (sl is not None and sl < 0) else ('yellow' if sl is not None and sl < 2 else ('red' if sl is not None else ('green' if k['edge_vs_whales'] >= 0 else ('yellow' if k['edge_vs_whales'] >= -5 else 'red'))))
+        except Exception:
+            k['light'] = 'green' if k['edge_vs_whales'] >= 0 else ('yellow' if k['edge_vs_whales'] >= -5 else 'red')
     return k
 def loc_for(info, end, kal, key):
     if key not in LCACHE:
@@ -932,7 +970,14 @@ for (cid, side), bs in grp.items():
 for s in signals:
     if s['kalshi'].get('status') == 'ok' and s['avg_entry']:
         s['kalshi'] = dict(s['kalshi'], edge_vs_whales=round((s['avg_entry'] - s['kalshi']['price']) * 100, 1)); e_ = s['kalshi']['edge_vs_whales']
-        s['kalshi']['light'] = 'green' if e_ >= 0 else ('yellow' if e_ >= -5 else 'red')
+        try:
+            import wallet_flags as _wf
+            sl = _wf.slip_cents(s['kalshi'].get('price'), s['avg_entry'])
+            if sl is not None:
+                s['kalshi']['slip'] = round(sl, 1)
+            s['kalshi']['light'] = 'green' if sl is not None and sl < 0 else ('yellow' if sl is not None and sl < 2 else ('red' if sl is not None else ('green' if e_ >= 0 else ('yellow' if e_ >= -5 else 'red'))))
+        except Exception:
+            s['kalshi']['light'] = 'green' if e_ >= 0 else ('yellow' if e_ >= -5 else 'red')
     score(s)
 def used_price(s):
     k = s['kalshi']
@@ -1196,7 +1241,7 @@ for s in CONS[:8] + GLUE[:2] + FUN[:3] + POLY[:3] + PROPS[:3] + LONGSHOTS[:3] + 
 # ---------- 13. Page embed (wallets kept for Polymarket profile links) ----------
 for b_ in BETS: b_.pop('_info', None)
 emb = json.loads(json.dumps(out))
-def kslim(k): return {kk: k.get(kk) for kk in ('status', 'why', 'action', 'price', 'contract', 'ticker', 'edge_vs_whales', 'light', 'rule') if k.get(kk) is not None}
+def kslim(k): return {kk: k.get(kk) for kk in ('status', 'why', 'action', 'price', 'contract', 'ticker', 'edge_vs_whales', 'slip', 'light', 'rule') if k.get(kk) is not None}
 for r_ in emb['bets'] + emb['buys']:
     r_['kalshi'] = kslim(r_['kalshi'])
     if r_['kalshi'].get('rule'): r_['kalshi']['rule'] = r_['kalshi']['rule'][:160]

@@ -24,6 +24,7 @@ from concurrent.futures import ThreadPoolExecutor
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import capper_history as ch
+import wallet_flags as wf
 import backfill as bf
 
 PT = dt.timezone(dt.timedelta(hours=-8))
@@ -38,6 +39,7 @@ SPORT_BAR_ROI = 20.0
 SPORT_BAR_ROI_VOL = 10.0      # loosened Nov 15: +10% sport ROI for cappers with 100+ graded bets total
 SPORT_BAR_VOL_N = 100
 ELITE_MIN_BET = 300           # loosened Nov 15: elites may bet $300+ (everyone else $500)
+SPORT_GOOD_N = 30             # a pick can only be GOOD if the capper has 30+ graded in THAT sport
 
 def sport_bar_roi(c):
     return SPORT_BAR_ROI_VOL if ((c or {}).get('n') or 0) >= SPORT_BAR_VOL_N else SPORT_BAR_ROI
@@ -151,7 +153,18 @@ def elite_check(c):
     for r in ch.eligibility(c):
         if r not in why:
             why.append(r)
+    if c.get('oneOff'):
+        why.append('one-off (' + (c.get('oneOffWhy') or 'profit concentrated in a few bets') + ')')
     return not why, why
+
+def _ts(v):
+    if v is None or v == '':
+        return None
+    if isinstance(v, (int, float)) and v > 10 ** 8:
+        return int(v)
+    if isinstance(v, str) and v.isdigit():
+        return int(v)
+    return _iso_ts(v) if isinstance(v, str) else None
 
 def _iso_ts(s):
     if not s:
@@ -287,7 +300,11 @@ def build(emb, store=None, write=True):
         if reasons:
             verdict = 'CAUTION'
         elif (mult is None or mult >= 1) and p['cost'] >= ELITE_MIN_BET and winning_sport and GOOD_LO <= kp <= GOOD_HI:
-            verdict = 'GOOD'
+            if (srec.get('n') or 0) < SPORT_GOOD_N:
+                verdict = 'OK'
+                reasons.append('under 30 graded in ' + sport)
+            else:
+                verdict = 'GOOD'
         else:
             verdict = 'OK'
             if mult is not None and mult < 1:
@@ -296,6 +313,15 @@ def build(emb, store=None, write=True):
                 reasons.append('thin record in ' + sport)
             if kp is not None and not (GOOD_LO <= kp <= GOOD_HI):
                 reasons.append('Kalshi %d¢ outside 45-92¢' % round(kp * 100))
+        slip = wf.slip_cents(kp, p.get('avg'))
+        if wf.too_expensive(kp, p.get('avg')):
+            # Hidden: Kalshi ask plus taker fee is 2c+ worse than the whale's entry
+            p['_slipHidden'] = True
+            continue
+        first_ts = _ts(p.get('firstTs')) or _ts(p.get('lastTs'))
+        stale = bool(first_ts and (now - first_ts) > wf.STALE_SECS)
+        if stale:
+            reasons.append('stale (buy older than 1 hour)')
         title = ev.get('title') or (sp.get('game') or {}).get('name') or p['title']
         out.append({
             'pid': p['pid'], 'wallet': c['wallet'], 'name': c.get('name') or '', 'league': lg, 'sport': sport,
@@ -305,6 +331,8 @@ def build(emb, store=None, write=True):
             'kalshi': k, 'sportRec': srec, 'f14': c.get('f14'), 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi'),
             'badge': c.get('badge'), 'verdict': verdict, 'why': reasons, 'smallSample': (c.get('cn') or 0) < ELITE_FULL_N, 'cn': c.get('cn'),
             'inTop': p['pid'] in {x.get('id') for x in (emb or {}).get('signals') or []},
+            'firstTs': first_ts, 'lastTs': _ts(p.get('lastTs')), 'stale': stale,
+            'slip': None if slip is None else round(slip, 1),
         })
     order = {'GOOD': 0, 'OK': 1, 'CAUTION': 2}
     # one row per whale + market title + side (several fills/markets with the same title collapse to the biggest)
@@ -337,10 +365,13 @@ def build(emb, store=None, write=True):
                     break
     if split_events:
         out = [r for r in out if evkey(r['slug']) not in split_events]
-    out.sort(key=lambda r: (order[r['verdict']], r['startTs'] or 10 ** 12, -r['cost']))
+    # stale picks rank below fresh ones of the same verdict
+    out.sort(key=lambda r: (order[r['verdict']], 1 if r.get('stale') else 0, r['startTs'] or 10 ** 12, -r['cost']))
+    slip_hidden = sum(1 for p in rows if p.get('_slipHidden'))
     res = {
         'updatedTs': int(now), 'updatedAt': pt(now),
-        'rule': 'Elite: 12+ graded big bets (12-19 = small sample), +15% ROI, Hot, and +20% ROI in the sport (+10% if 100+ graded). Elites $300+, others $500+. Split games hidden.',
+        'rule': 'Elite: 12+ graded big bets (12-19 = small sample), +15% ROI, Hot, and +20% ROI in the sport (+10% if 100+ graded). A pick is only GOOD if that capper has 30+ graded in that sport. Elites $300+, others $500+. Market makers/bots dropped. One-off jackpot records cannot be elite. Picks 2c+ worse than the whale entry (after Kalshi fee) are hidden. Buys older than 1 hour are tagged stale. Split games hidden.',
+        'filters': {'slipHidden': slip_hidden, 'stale': sum(1 for r in out if r.get('stale'))},
         'splitGames': sorted(split_events),
         'elite': [{'wallet': c['wallet'], 'name': c.get('name'), 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi'),
                    'wr': c.get('cwr'), 'quality': c.get('quality'), 'rankScore': elite_rank_score(c), 'avgEntry': c.get('avgEntry'),
@@ -353,7 +384,7 @@ def build(emb, store=None, write=True):
     if write:
         for pth in (OUT, OUT_ROOT):
             json.dump(res, open(pth, 'w'), separators=(',', ':'))
-    print(f"proven picks: {len(elite)} elite cappers ({', '.join((c.get('name') or c['wallet'][:10]) for c in elite[:12])}), {len(out)} open picks, {res['counts']}, hidden {len(split_events)} elite-split/hedged games")
+    print(f"proven picks: {len(elite)} elite cappers ({', '.join((c.get('name') or c['wallet'][:10]) for c in elite[:12])}), {len(out)} open picks, {res['counts']}, hidden {len(split_events)} elite-split/hedged games, slip-hidden {slip_hidden}, stale {res['filters']['stale']}")
     return res
 
 if __name__ == '__main__':

@@ -2,17 +2,17 @@ import { Page, Section, Rows, Properties, Segmented, Select, Input, Toggle, Grid
 import type { ReactNode } from "./kit";
 
 interface Backer { name: string; cost: number; avg: number | null; wr: number | null; resolved: number | null; pnl: number; rank: number | null; golden: boolean; skill: boolean; flow: string | null; buy24: number | null; sell24: number | null; sport: { n: number; wr: number; pnl: number } | null; wallet: string; top100?: boolean | null; rank30?: number | null; rankAll?: number | null; firstTs: number | null; lastTs: number | null; trades: number | null }
-interface Kalshi { status: string; why?: string; action?: string; price?: number; ticker?: string; contract?: string; rule?: string; edge_vs_whales?: number | null; edge_vs_poly?: number; light?: string }
+interface Kalshi { status: string; why?: string; action?: string; price?: number; ticker?: string; contract?: string; rule?: string; edge_vs_whales?: number | null; edge_vs_poly?: number; slip?: number | null; light?: string }
 interface Game { name: string | null; start: string; src: string; state: string | null; detail: string; score: string; venue?: string | null; records?: string[]; url?: string | null; teams?: string[] }
 interface Opp { name: string; wallet: string; cost: number; avg: number | null; wr: number | null; qualified: boolean; golden: boolean; rank?: number | null; rank30?: number | null; rankAll?: number | null }
 interface Refresh { at: number; state?: string | null; detail?: string; score?: string; pct?: number | null; src?: string; team?: string; kNow?: number; final?: string; ended?: boolean; why?: string }
 interface Pick { id: string; q: string; label: string; kind: string; league: string; slug: string; score: number; parts: Record<string, number>; price: number; avgEntry: number | null; whales: number; invested: number; golden: number; oppMoney: number; oppCount: number; oppQualified: number; fresh24: number; fresh24Opp: number; sideAll: number; sideCountAll: number | null; oppAll: number; oppCountAll: number | null; hedgeAll: number; game: Game; startTs: number; backers: Backer[]; opposing: Opp[]; kalshi: Kalshi; risks: string[]; net?: number; totalBackers?: number | null; refresh?: Refresh; oneSidedShare?: number | null; priceBand?: string; split?: boolean; glue?: boolean; pricier?: boolean; overCents?: number | null; pickId?: string; strength?: string; started?: boolean; fromProven?: boolean }
 interface Hist { id: string; tier?: string; q: string; label: string; score: number; whales: number; invested: number; start: string; kalshi: string; kprice?: number | null; first_seen: number; last_seen: number; scans: number; result: string | null; graded?: number; active: boolean }
 interface CapperHistPick { id: string; q?: string | null; label?: string | null; side?: string | null; league?: string | null; start?: string | null; startTs?: number | null; kind?: string | null; cost?: number | null; avg?: number | null; result?: string | null; graded?: number | null; kAct?: string | null; kContract?: string | null; kprice?: number | null; profit?: number | null; current?: boolean; conv?: string | null; mult?: number | null }
-interface CapperRec { kShare?: number | null; wallet: string; name: string; rankAll?: number | null; rank?: number | null; golden?: boolean; w: number; l: number; push: number; open: number; n: number; profit: number; risked: number; wr?: number | null; roi?: number | null; qualified: boolean; pnl?: number | null; wrAll?: number | null; picks: CapperHistPick[]; cw?: number; cl?: number; cn?: number; cwr?: number | null; croi?: number | null; cprofit?: number; crisked?: number; quality?: number; qQual?: boolean; demoted?: boolean; shrunkWr?: number | null; shrunkRoi?: number | null; win?: Record<string, { pnl?: number; roi?: number | null; rec?: number[] }>; badge?: string; proven?: boolean; coldDemoted?: boolean; medBet?: number | null; maxBet?: number | null; convRec?: Record<string, { w: number; l: number; roi: number | null }>; winStale?: string[]; tracked?: boolean; isNew?: boolean; addedTs?: number | null; trackedReason?: string | null; hotBoost?: number; f14?: { w: number; l: number; n: number; roi: number | null }; formCooling?: boolean; sports?: Record<string, { w: number; l: number; n: number; roi: number | null }>; copies?: { w: number; l: number; n: number; push: number; open: number; tickets: number; tw: number; tl: number; stake: number }; bf?: { n: number; med: number | null; ts: number; days: number; recent: (string | number)[][] }; recSrc?: { scanner: number; backfill: number }; qwr?: number | null; qroi?: number | null; avgEntry?: number | null; avgN?: number; nearCertN?: number }
+interface CapperRec { kShare?: number | null; wallet: string; name: string; rankAll?: number | null; rank?: number | null; golden?: boolean; w: number; l: number; push: number; open: number; n: number; profit: number; risked: number; wr?: number | null; roi?: number | null; qualified: boolean; pnl?: number | null; wrAll?: number | null; picks: CapperHistPick[]; cw?: number; cl?: number; cn?: number; cwr?: number | null; croi?: number | null; cprofit?: number; crisked?: number; quality?: number; qQual?: boolean; demoted?: boolean; shrunkWr?: number | null; shrunkRoi?: number | null; win?: Record<string, { pnl?: number; roi?: number | null; rec?: number[] }>; badge?: string; proven?: boolean; coldDemoted?: boolean; medBet?: number | null; maxBet?: number | null; convRec?: Record<string, { w: number; l: number; roi: number | null }>; winStale?: string[]; tracked?: boolean; isNew?: boolean; addedTs?: number | null; trackedReason?: string | null; hotBoost?: number; f14?: { w: number; l: number; n: number; roi: number | null }; formCooling?: boolean; sports?: Record<string, { w: number; l: number; n: number; roi: number | null }>; copies?: { w: number; l: number; n: number; push: number; open: number; tickets: number; tw: number; tl: number; stake: number }; bf?: { n: number; med: number | null; ts: number; days: number; recent: (string | number)[][] }; recSrc?: { scanner: number; backfill: number }; qwr?: number | null; qroi?: number | null; avgEntry?: number | null; avgN?: number; nearCertN?: number; mm?: boolean; mmWhy?: string | null; oneOff?: boolean; oneOffWhy?: string | null }
 interface NewCap { wallet: string; name: string; reason?: string | null; badge?: string | null; month?: number | null }
 interface CapperHistory { minSample: number; updatedAt?: string; cappers: CapperRec[]; newThisScan?: NewCap[]; newRecent?: NewCap[]; trackedCount?: number; sportMap?: Record<string, string>; copiesInfo?: { updatedTs?: number; tickets?: number; ticketsMatched?: number; legs?: number; legsMatched?: number }; backfillDays?: number }
-interface ProvenRow { smallSample?: boolean; cn?: number | null; pid: string; wallet: string; name: string; league: string; sport: string; game: string; market: string; pick: string; opp: string; slug: string; startTs: number | null; start: string; cost: number; avg: number; now: number | null; usual: number | null; mult: number | null; kalshi: { action: string; price: number | null; ticker: string; contract?: string | null; src?: string; live?: boolean } | null; sportRec: { w: number; l: number; n: number; roi: number | null }; f14?: { w: number; l: number; n: number; roi: number | null }; rec: number[]; roi: number | null; badge?: string; verdict: string; why: string[]; hedged?: boolean; inTop?: boolean; group?: ProvenRow[] }
+interface ProvenRow { smallSample?: boolean; cn?: number | null; pid: string; wallet: string; name: string; league: string; sport: string; game: string; market: string; pick: string; opp: string; slug: string; startTs: number | null; start: string; cost: number; avg: number; now: number | null; usual: number | null; mult: number | null; kalshi: { action: string; price: number | null; ticker: string; contract?: string | null; src?: string; live?: boolean } | null; sportRec: { w: number; l: number; n: number; roi: number | null }; f14?: { w: number; l: number; n: number; roi: number | null }; rec: number[]; roi: number | null; badge?: string; verdict: string; why: string[]; hedged?: boolean; inTop?: boolean; group?: ProvenRow[]; firstTs?: number | null; lastTs?: number | null; stale?: boolean; slip?: number | null }
 interface ProvenData { updatedAt: string; updatedTs: number; rule: string; splitGames?: string[]; elite: { wallet: string; name: string; rec: number[]; roi: number | null; wr?: number | null; sports?: { sport: string; w: number; l: number; n: number; roi: number }[]; f14?: { w: number; l: number; n: number; roi: number | null }; badge?: string; usual?: number | null; open?: number }[]; nearMiss?: { wallet: string; name: string; why: string[]; rec: number[]; roi: number | null }[]; picks: ProvenRow[]; counts: Record<string, number> }
 interface Scan { ts: number; signals: number; fun: number; poly?: number; glue?: number; props?: number; longshots?: number; biggest?: number; upcoming?: number; calls: number; cappers?: number; bets?: number; buys?: number; wallets?: number }
 interface Cols { f: string[]; r: unknown[][] }
@@ -72,6 +72,7 @@ const PID_LEAGUE: Record<string, string> = (() => {
 })();
 function pid0(pid: string | undefined): boolean { return !!(pid && PID_LEAGUE[pid]); }
 const SPORT_BAR_N = 10;
+const SPORT_GOOD_N = 30;
 const SPORT_BAR_ROI = 20;
 // Loosened Nov 15: +10% sport ROI is enough for cappers with 100+ graded bets total; +20% under 100.
 const SPORT_BAR_ROI_VOL = 10;
@@ -100,9 +101,45 @@ function eligibilityOf(rec: CapperRec | null | undefined): string[] {
   if (!longTermOk(rec)) why.push("Weak long-term");
   if (rec.kShare == null) why.push("Kalshi share unknown"); else if (rec.kShare < 0.5) why.push("Mostly non-Kalshi");
   if (rec.avgEntry != null && rec.avgEntry >= 0.9) why.push("90¢+ favorites");
+  if (rec.mm) why.push("market maker / bot");
   return why;
 }
 function walletLongTermOk(w: string | null | undefined): boolean { return eligibilityOf(QMAP[(w || "").toLowerCase()]).length === 0; }
+const KALSHI_TAKER = 0.07;
+const SLIP_CAP_CENTS = 2;
+const STALE_SECS = 3600;
+function kalshiFee(p: number): number { return KALSHI_TAKER * p * (1 - p); }
+function slipCents(kprice: number | null | undefined, entry: number | null | undefined): number | null {
+  if (kprice == null || entry == null) return null;
+  return (kprice + kalshiFee(kprice) - entry) * 100;
+}
+function pickTooExpensive(p: Pick): boolean {
+  const k = p.kalshi;
+  if (!k || k.status !== "ok" || k.price == null) return false;
+  const s = k.slip != null ? k.slip : slipCents(k.price, p.avgEntry);
+  return s != null && s >= SLIP_CAP_CENTS;
+}
+function provenTooExpensive(r: ProvenRow): boolean {
+  const k = r.kalshi;
+  const px = k && k.price != null ? k.price : null;
+  const s = r.slip != null ? r.slip : slipCents(px, r.avg);
+  return s != null && s >= SLIP_CAP_CENTS;
+}
+function pickFreshTs(p: Pick): number | null {
+  let m = 0;
+  (p.backers || []).forEach((b: Backer) => { const t = b.lastTs || b.firstTs || 0; if (t > m) m = t; });
+  return m || null;
+}
+function pickIsStale(p: Pick, now: number): boolean {
+  const t = pickFreshTs(p);
+  return t != null && now - t > STALE_SECS;
+}
+function provenIsStale(r: ProvenRow, now: number): boolean {
+  if (r.stale) return true;
+  const t = r.lastTs || r.firstTs || 0;
+  return !!t && now - t > STALE_SECS;
+}
+
 // Loosened Nov 15: elites may bet $300+ (everyone else $500+); 12-19 graded elites are a small sample.
 const ELITE_MIN_BET = 300;
 const ELITE_FULL_N = 20;
@@ -176,8 +213,10 @@ function pickVerdictOf(p: Pick, backers?: Backer[]): { verdict: "GOOD" | "OK" | 
     anyReal = true;
     const winning = !!(info && info.sr.w > info.sr.l);
     const sizeOk = cv.mult == null || cv.mult >= 1;
-    if (sizeOk && cost >= ELITE_MIN_BET && winning && kp != null && kp >= GOOD_LO && kp <= GOOD_HI) anyGood = true;
-    else {
+    if (sizeOk && cost >= ELITE_MIN_BET && winning && kp != null && kp >= GOOD_LO && kp <= GOOD_HI) {
+      if (info && (info.sr.n || 0) >= SPORT_GOOD_N) anyGood = true;
+      else okWhy.push("under 30 graded in " + ((info && info.sport) || "this sport"));
+    } else {
       if (cv.mult != null && cv.mult < 1) okWhy.push(cv.mult + "x usual (under 1x)");
       if (!winning) okWhy.push("thin record in " + ((info && info.sport) || "this sport"));
       if (kp != null && !(kp >= GOOD_LO && kp <= GOOD_HI)) okWhy.push("Kalshi " + Math.round(kp * 100) + "¢ outside 45-92¢");
@@ -1523,6 +1562,7 @@ function pickQualityScore(p: Pick, backers?: Backer[]): number {
   s += clampNum(info.share, 0, 1) * 5;
   s += clampNum(convNet(cb, p.oppMoney || 0, p.id) / 20000, 0, 1) * 5;
   s += clampNum(cb.length / 5, 0, 1) * 8;
+  if (pickIsStale(p, Date.now() / 1000)) s -= 12;
   return Math.round(clampNum(s, 0, 100));
 }
 function provenQualityScore(r: ProvenRow): number {
@@ -1550,6 +1590,7 @@ function provenQualityScore(r: ProvenRow): number {
   s += clampNum((r.cost || 0) / 20000, 0, 1) * 8;
   s += r.inTop ? 4 : 0;
   s += clampNum((((r.group && r.group.length) || 1) / 5), 0, 1) * 8;
+  if (r.stale) s -= 12;
   return Math.round(clampNum(s, 0, 100));
 }
 function capperQualityScore(c: CapperRec): number {
@@ -1606,6 +1647,10 @@ function sortTopBy(arr: Pick[], sort: string, backersOf: (p: Pick) => Backer[], 
   return arr.slice().sort((a: Pick, b: Pick) => {
     const ad = pickIsDone(a, now) ? 1 : 0, bd = pickIsDone(b, now) ? 1 : 0;
     if (ad !== bd) return ad - bd;
+    if (sort !== "start" && sort !== "size") {
+      const as0 = pickIsStale(a, now) ? 1 : 0, bs0 = pickIsStale(b, now) ? 1 : 0;
+      if (as0 !== bs0) return sort === "worst" ? bs0 - as0 : as0 - bs0;
+    }
     if (sort === "start") return (a.startTs || 9e12) - (b.startTs || 9e12) || verdictRank(a, backersOf(a)) - verdictRank(b, backersOf(b)) || pickQualityScore(b, backersOf(b)) - pickQualityScore(a, backersOf(a));
     if (sort === "size") return pickBetSize(b, backersOf(b)) - pickBetSize(a, backersOf(a)) || verdictRank(a, backersOf(a)) - verdictRank(b, backersOf(b)) || pickQualityScore(b, backersOf(b)) - pickQualityScore(a, backersOf(a));
     const vr = verdictRank(a, backersOf(a)) - verdictRank(b, backersOf(b));
@@ -1623,6 +1668,10 @@ function sortProvenBy(arr: ProvenRow[], sort: string, now: number): ProvenRow[] 
   return arr.slice().sort((a: ProvenRow, b: ProvenRow) => {
     const ad = (a.startTs && a.startTs <= now) ? 1 : 0, bd = (b.startTs && b.startTs <= now) ? 1 : 0;
     if (ad !== bd) return ad - bd;
+    if (sort !== "start" && sort !== "size") {
+      const as0 = provenIsStale(a, now) ? 1 : 0, bs0 = provenIsStale(b, now) ? 1 : 0;
+      if (as0 !== bs0) return sort === "worst" ? bs0 - as0 : as0 - bs0;
+    }
     if (sort === "start") return (a.startTs || 9e12) - (b.startTs || 9e12) || provenQualityScore(b) - provenQualityScore(a);
     if (sort === "size") return (b.cost || 0) - (a.cost || 0) || provenQualityScore(b) - provenQualityScore(a);
     const d = provenQualityScore(b) - provenQualityScore(a);
@@ -2383,6 +2432,7 @@ function CapperCard(props: { rec: CapperRec; trader?: Trader; now: number; bankr
         {rec.proven ? <Chip bg={GREEN} color="#FFFFFF">Proven</Chip> : null}
         {rec.formCooling ? <span data-form-cooling="1"><Chip bg={RED} color="#FFFFFF">{"Cooling (14d) · " + f14Text(rec.f14)}</Chip></span> : null}
         {ELITE_W[(rec.wallet || "").toLowerCase()] ? <Chip bg="#7C3AED" color="#FFFFFF">Elite · Proven Picks</Chip> : null}
+        {rec.oneOff ? <Chip bg={AMBER} color="#FFFFFF" title={rec.oneOffWhy || "Profit concentrated in a few bets"}>One-off</Chip> : null}
         {rec.isNew ? <Chip bg="#7C3AED" color="#FFFFFF">{"New" + (rec.trackedReason ? " · " + rec.trackedReason : "")}</Chip> : rec.tracked ? <Chip bg={t.bg.subtle} color={t.text.secondary}>Tracked</Chip> : null}
         {rec.coldDemoted ? null : rec.demoted ? <Chip bg={RED} color="#FFFFFF">Low-edge volume</Chip> : rec.qQual ? <Chip bg={GREEN} color="#FFFFFF">Copyable quality</Chip> : null}
         {rec.open ? <Chip bg="#2563EB" color="#FFFFFF">{rec.open} open</Chip> : null}
@@ -2563,6 +2613,7 @@ function AllPickCard(props: { p: Pick; rank: number; now: number; bankroll: numb
         {small ? <Chip bg={AMBER} color="#FFFFFF">Small sample (12–19 graded)</Chip> : null}
         {info.split ? <Chip bg={AMBER} color="#FFFFFF">Split</Chip> : null}
         {info.pricier ? <Chip bg={AMBER} color="#FFFFFF">Pricier</Chip> : null}
+        {pickIsStale(p, now) ? <Chip bg={AMBER} color="#FFFFFF">Stale</Chip> : null}
         {!ok ? <Chip bg={BRAND2} color="#FFFFFF">No Kalshi</Chip> : null}
         {props.biggest ? <Chip bg={GREEN} color="#FFFFFF">Biggest</Chip> : null}
       </div>
@@ -2578,7 +2629,7 @@ function AllPickCard(props: { p: Pick; rank: number; now: number; bankroll: numb
         <Ring score={qScore} label="SCORE" color={qScore >= 65 ? GREEN : qScore >= 45 ? AMBER : RED} size={64} track={t.border.default} text={t.text.primary} sub={t.text.tertiary} />
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 8, marginTop: 14 }}>
-        {tile("Kalshi price", ok && k.price != null ? cents(k.price) : "n/a", ok ? ((k.action || "") + (k.contract ? " " + k.contract : "")).trim() || "Verified contract" : (k && k.why) || "No Kalshi market")}
+        {tile("Kalshi price", ok && k.price != null ? cents(k.price) : "n/a", (ok && p.avgEntry != null ? "whale entry " + cents(p.avgEntry) : "") + (ok ? (((k.action || "") + (k.contract ? " " + k.contract : "")).trim() ? ((p.avgEntry != null ? " · " : "") + ((k.action || "") + (k.contract ? " " + k.contract : "")).trim()) : (p.avgEntry != null ? "" : "Verified contract")) : ((k && k.why) || "No Kalshi market")))}
         {tile("Top capper bet", top ? money(top.cost) : "n/a", top ? nameOf(top.name, top.wallet) + (cv.mult != null ? " · " + cv.mult + "x usual" : "") + (cv.tag === "H" ? " · High conviction" : "") : "")}
         {tile("Cappers on this pick", String(nCap), "total " + money(total) + ((p.oppMoney || 0) > 0 ? " · " + kMoney(p.oppMoney) + " against" : ""))}
         {tile("Backers record", bst.w + bst.l ? bst.w + "–" + bst.l : "n/a", bst.roi != null ? pct(bst.roi) + " ROI on graded bets" : "No graded bets yet")}
@@ -2618,13 +2669,14 @@ function ProvenCard(props: { r: ProvenRow; rank: number; now: number }) {
         <CapperCountBadge count={group.length} open={openCaps} onToggle={() => setOpenCaps(!openCaps)} />
         <span style={{ display: "inline-block", padding: "1px 10px", borderRadius: 999, background: vc, color: "#FFFFFF", fontWeight: 850, fontSize: 13 }}>{r.verdict}</span>
         {r.smallSample || ((QMAP[(r.wallet || "").toLowerCase()] || {} as CapperRec).cn || 99) < ELITE_FULL_N ? <Chip bg={AMBER} color="#FFFFFF">Small sample</Chip> : null}
+        {provenIsStale(r, props.now) ? <Chip bg={AMBER} color="#FFFFFF">Stale</Chip> : null}
         <span style={{ fontSize: 12, fontWeight: 800, color: t.text.secondary }}>{r.league + (r.sport && r.sport !== r.league ? " (" + r.sport + ")" : "") + " · " + r.start}</span>
         {r.inTop ? <Chip bg={BRAND} color="#FFFFFF">Also on Top 20</Chip> : null}
       </div>
       <div style={{ fontSize: 18, lineHeight: "23px", fontWeight: 850, marginTop: 6 }}>{r.game}</div>
       {r.market && r.market !== r.game ? <div style={{ fontSize: 13, color: t.text.secondary, marginTop: 2 }}>{r.market}</div> : null}
       <div style={{ fontSize: 15, lineHeight: "21px", fontWeight: 800, marginTop: 6, color: k ? t.text.primary : RED }}>
-        {k ? "Kalshi: " + k.action + " " + (k.contract || r.pick) + (k.price != null ? " at " + Math.round(k.price * 100) + "¢" : "") + (k.live ? "" : " (last scan price)") : "No Kalshi market found for this bet"}
+        {k ? "Kalshi: " + k.action + " " + (k.contract || r.pick) + (k.price != null ? " at " + Math.round(k.price * 100) + "¢" : "") + (r.avg != null ? " · whale entry " + Math.round(r.avg * 100) + "¢" : "") + (k.live ? "" : " (last scan price)") : "No Kalshi market found for this bet"}
       </div>
       {k ? <div style={{ fontSize: 11, color: t.text.tertiary }}>{k.ticker}</div> : null}
       <div style={{ fontSize: 13, lineHeight: "19px", marginTop: 6, color: t.text.secondary }}>
@@ -2958,7 +3010,7 @@ export default function App() {
   const bySport = (arr: Pick[]): Pick[] => sportFilter ? arr.filter((p: Pick) => p.league === sportFilter) : arr;
   const vb = (p: Pick): Backer[] => visibleBackers(p);
   const notHedged = (p: Pick): boolean => !pickHasCapperHedge(p);
-  const provenRows: ProvenRow[] = sortProvenBy(mergeProvenRows(((PROVEN && PROVEN.picks) || []).filter((r: ProvenRow) => walletLongTermOk(r.wallet) && (!r.startTs || r.startTs > now) && !r.hedged && !isEliteSplitGame(r.slug))), sortOf("proven"), now);
+  const provenRows: ProvenRow[] = sortProvenBy(mergeProvenRows(((PROVEN && PROVEN.picks) || []).filter((r: ProvenRow) => walletLongTermOk(r.wallet) && (!r.startTs || r.startTs > now) && !r.hedged && !isEliteSplitGame(r.slug) && !provenTooExpensive(r))), sortOf("proven"), now);
   // Pinned Proven section hides sub-$300 throwaway positions (still counted in the CAUTION total).
   const provenPinned: ProvenRow[] = provenRows.filter((r: ProvenRow) => r.verdict !== "CAUTION" || (r.cost || 0) >= ELITE_MIN_BET);
   const provenComboPicks: Pick[] = provenRows.map((r: ProvenRow) => provenToPick(r)).filter((p: Pick | null): p is Pick => !!p);
@@ -3016,7 +3068,7 @@ export default function App() {
     const info = sportRecFor(b.wallet, p.league, p.id);
     return !(info && info.sr.n >= 5 && info.sr.roi != null && info.sr.roi < 0);
   });
-  const rankedPoolAll = uniqueMergedPicks(catalogPicks.concat(provenComboPicks)).map(ltPick).filter((p: Pick) => p.backers.length > 0).filter((p: Pick) => qualBackersOf(p).length >= 1 && followOk(p) && !gone(p) && notHedged(p) && !isEliteSplitGame(p.slug));
+  const rankedPoolAll = uniqueMergedPicks(catalogPicks.concat(provenComboPicks)).map(ltPick).filter((p: Pick) => p.backers.length > 0).filter((p: Pick) => qualBackersOf(p).length >= 1 && followOk(p) && !gone(p) && notHedged(p) && !isEliteSplitGame(p.slug) && !pickTooExpensive(p));
   const rankedNoKCount = rankedPoolAll.filter((p: Pick) => !p.kalshi || p.kalshi.status !== "ok").length;
   const rankedPool = rankedNoK ? rankedPoolAll : rankedPoolAll.filter((p: Pick) => p.kalshi && p.kalshi.status === "ok");
   const rankedAll = sortTopBy(rankedPool, sortOf("picks"), vb, now);
@@ -3195,7 +3247,7 @@ export default function App() {
           {bigOnly ? null : <TabSortBar value={sortOf("picks")} onChange={(v: string) => setSortOf(v, "picks")} />}
           <LeaguePills picks={bigOnly ? biggestAll : rankedAll} value={sportFilter} onChange={setSportFilter} />
           <DailyCap />
-          <Text>Elite and Hot cappers, every sport, best first (GOOD, then OK, then the rest). Cappers must be green on 14d and 30d ROI, +5% all-time ROI with a profitable year, 50%+ of recent bets Kalshi-listed, and average entry under 90¢. Elite: 12+ graded big bets (12–19 tagged Small sample), +15% ROI, and +20% ROI in the sport (+10% at 100+ graded). Elites count from $300, everyone else $500. Big bet = 1.5x usual. Kalshi 45–92¢ for GOOD. Split games, both-sides bets and started games hidden. Same pick from several cappers = one row with a count.</Text>
+          <Text>Elite and Hot cappers, every sport, best first (GOOD, then OK, then the rest). Cappers must be green on 14d and 30d ROI, +5% all-time ROI with a profitable year, 50%+ of recent bets Kalshi-listed, and average entry under 90¢. Market makers and bots (huge trade counts, big maker rebates or fee refunds, or heavy both-sides hedging) are dropped. A capper whose biggest win is over 40% of lifetime profit, or who has under 20 markets with most of the profit in a few bets, is tagged One-off and cannot be elite. Elite: 12+ graded big bets (12–19 tagged Small sample), +15% ROI, and +20% ROI in the sport (+10% at 100+ graded). Elites count from $300, everyone else $500. Big bet = 1.5x usual. A pick can only be GOOD if that capper has 30+ graded bets in that sport and Kalshi is 45–92¢; otherwise the best is OK. If Kalshi's price plus its taker fee is 2¢ or more worse than the whale's entry, the pick is hidden. Buys older than about an hour are tagged Stale and ranked lower. Each card shows the whale's entry next to the Kalshi price. The capper pool includes Polymarket's sports week, month and all-time leaderboards. Split games, both-sides bets and started games hidden. Same pick from several cappers = one row with a count.</Text>
           <div data-pinned-proven="1" style={{ borderRadius: 16, padding: "10px 12px", background: t.bg.subtle, margin: "4px 0 12px" }}>
             <div style={{ fontSize: 15, fontWeight: 850, color: "#7C3AED" }}>{"📌 Proven Picks · " + provenPinned.length + (PROVEN ? " · GOOD " + (PROVEN.counts.GOOD || 0) + " · OK " + (PROVEN.counts.OK || 0) : "")}</div>
             <div style={{ fontSize: 12, color: t.text.tertiary, margin: "2px 0 6px" }}>{"Elite cappers' own open bets, $300+" + (provenRows.length > provenPinned.length ? " · " + (provenRows.length - provenPinned.length) + " smaller positions hidden" : "") + (PROVEN ? " · updated " + shortUpdatedAt(PROVEN.updatedAt) : "")}</div>
@@ -3289,6 +3341,7 @@ export default function App() {
               { label: "Kalshi", value: DATA.coverage.kalshiSeries + " series read, " + DATA.coverage.kalshiMatched + " pick contracts verified, " + (DATA.coverage.notOnKalshi || 0) + " side-groups with no Kalshi match (Polymarket tab)" },
               { label: "ESPN", value: DATA.coverage.espnLeagues + " league scoreboards checked" },
               { label: "Times", value: "Pacific Time. Window: next 36 hours (was 12), games that have not started. Started games are dropped from Top 20, Upcoming, Fun, Polymarket, Player Props, Longshots and Biggest Bets (they stay on Bets with a Live tag). Ended games are removed everywhere." },
+              { label: "Capper and pick rules", value: "The capper pool is Polymarket's overall and sports (week, month, all-time) leaderboards. Picks only count from cappers who are green over 14 and 30 days, have +5% all-time ROI and a profitable year, make at least half of their recent $500+ bets on Kalshi-listed games, and average under 90¢ entry. Market makers and bots (huge trade or market counts, big maker rebates or fee refunds, or heavy both-sides hedging) are dropped. A one-off jackpot record (biggest win over 40% of lifetime profit, or under 20 markets with most profit in a few bets) cannot be elite. Elite still needs 12+ graded big bets, but a pick is only GOOD if that capper has 30+ graded bets in that sport. If Kalshi's price plus its taker fee is 2¢ or more worse than the whale's entry, the pick is hidden. Buys older than about an hour are tagged Stale and ranked lower." },
             ]} />
           </Section>
           <Section heading="Methodology" collapsible defaultOpen={false} caption="Scores rank evidence; they are not win probabilities.">

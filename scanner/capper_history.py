@@ -302,6 +302,11 @@ def summarize(store, traders=None, current_ids=None, windows=None):
             c['isNew'] = bool(tr.get('addedTs') and time.time() - tr['addedTs'] <= NEW_DAYS * 86400)
         out.append(c)
     apply_quality(out)
+    try:
+        import wallet_flags as _wf
+        _wf.attach(out, traders)
+    except Exception as _e:
+        print('wallet_flags failed:', _e, flush=True)
     def sort_key(c):
         return (0 if c.get('proven') else (2 if c.get('coldDemoted') else 1), -(c.get('quality') or 0), -(c.get('cn') or 0),
                 -(c['wr'] or 0), -c['n'])
@@ -951,4 +956,6 @@ def eligibility(c):
     avg = c.get('avgEntry')
     if avg is not None and avg >= ELIG_MAX_AVG:
         why.append('90c+ favorites')
+    if c.get('mm'):
+        why.append('market maker / bot')
     return why
