@@ -2845,6 +2845,8 @@ export default function App() {
   const vb = (p: Pick): Backer[] => visibleBackers(p);
   const notHedged = (p: Pick): boolean => !pickHasCapperHedge(p);
   const provenRows: ProvenRow[] = sortProvenBy(mergeProvenRows(((PROVEN && PROVEN.picks) || []).filter((r: ProvenRow) => (!r.startTs || r.startTs > now) && !r.hedged && !isEliteSplitGame(r.slug))), sortOf("proven"), now);
+  // Pinned Proven section hides sub-$300 throwaway positions (still counted in the CAUTION total).
+  const provenPinned: ProvenRow[] = provenRows.filter((r: ProvenRow) => r.verdict !== "CAUTION" || (r.cost || 0) >= ELITE_MIN_BET);
   const provenComboPicks: Pick[] = provenRows.map((r: ProvenRow) => provenToPick(r)).filter((p: Pick | null): p is Pick => !!p);
   // GOOD first; fill remaining slots with the best OK Kalshi legs. Never CAUTION, no-Kalshi, hedges, or elite-split games.
   const topCandidates = uniqueMergedPicks((DATA.signals || []).concat(DATA.fun || []).concat(DATA.biggest || []).concat(DATA.upcoming || []).concat(provenComboPicks)).filter((p: Pick) => {
@@ -3080,12 +3082,12 @@ export default function App() {
           <DailyCap />
           <Text>Elite and Hot cappers, every sport, best first (GOOD, then OK, then the rest). Elite: 12+ graded big bets (12–19 tagged Small sample), +15% ROI, and +20% ROI in the sport (+10% at 100+ graded). Elites count from $300, everyone else $500. Big bet = 1.5x usual. Kalshi 45–92¢ for GOOD. Split games, both-sides bets and started games hidden. Same pick from several cappers = one row with a count.</Text>
           <div data-pinned-proven="1" style={{ borderRadius: 16, padding: "10px 12px", background: t.bg.subtle, margin: "4px 0 12px" }}>
-            <div style={{ fontSize: 15, fontWeight: 850, color: "#7C3AED" }}>{"📌 Proven Picks · " + provenRows.length + (PROVEN ? " · GOOD " + (PROVEN.counts.GOOD || 0) + " · OK " + (PROVEN.counts.OK || 0) : "")}</div>
-            <div style={{ fontSize: 12, color: t.text.tertiary, margin: "2px 0 6px" }}>{"Elite cappers' own open bets" + (PROVEN ? " · updated " + shortUpdatedAt(PROVEN.updatedAt) : "")}</div>
+            <div style={{ fontSize: 15, fontWeight: 850, color: "#7C3AED" }}>{"📌 Proven Picks · " + provenPinned.length + (PROVEN ? " · GOOD " + (PROVEN.counts.GOOD || 0) + " · OK " + (PROVEN.counts.OK || 0) : "")}</div>
+            <div style={{ fontSize: 12, color: t.text.tertiary, margin: "2px 0 6px" }}>{"Elite cappers' own open bets, $300+" + (provenRows.length > provenPinned.length ? " · " + (provenRows.length - provenPinned.length) + " smaller positions hidden" : "") + (PROVEN ? " · updated " + shortUpdatedAt(PROVEN.updatedAt) : "")}</div>
             <EliteCapperList />
-            {provenRows.length === 0 ? <Text>No unstarted sports bets from elite cappers in the next 48 hours.</Text> : null}
-            {provenRows.slice(0, provenLimit).map((r: ProvenRow, i: number) => <ProvenCard key={r.pid + r.wallet} r={r} rank={i + 1} now={now} />)}
-            {provenRows.length > provenLimit ? <Button label={"Show all Proven Picks (" + (provenRows.length - provenLimit) + " more)"} onClick={() => setProvenLimit(provenRows.length)} /> : null}
+            {provenPinned.length === 0 ? <Text>No unstarted sports bets from elite cappers in the next 48 hours.</Text> : null}
+            {provenPinned.slice(0, provenLimit).map((r: ProvenRow, i: number) => <ProvenCard key={r.pid + r.wallet} r={r} rank={i + 1} now={now} />)}
+            {provenPinned.length > provenLimit ? <Button label={"Show all Proven Picks (" + (provenPinned.length - provenLimit) + " more)"} onClick={() => setProvenLimit(provenPinned.length)} /> : null}
           </div>
           <Grid columns={2}>
             <Toggle label="Biggest bets only · largest $ first" value={bigOnly} onChange={(v: boolean) => { setBigOnly(v); setRankedLimit(30); }} />
