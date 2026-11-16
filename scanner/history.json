@@ -444,20 +444,20 @@
    "wallets": 518
   },
   {
-   "ts": 1794869249,
-   "signals": 12,
-   "fun": 95,
-   "poly": 43,
+   "ts": 1794870854,
+   "signals": 15,
+   "fun": 100,
+   "poly": 48,
    "glue": 0,
    "props": 5,
    "longshots": 0,
-   "biggest": 210,
-   "upcoming": 174,
-   "calls": 575,
-   "cappers": 495,
-   "bets": 384,
-   "buys": 33,
-   "wallets": 495
+   "biggest": 233,
+   "upcoming": 196,
+   "calls": 578,
+   "cappers": 503,
+   "bets": 463,
+   "buys": 38,
+   "wallets": 503
   }
  ],
  "picks": {
@@ -12843,7 +12843,7 @@
    "scans": 1,
    "first_score": 52,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x45839c0834a177347e7b4482b466a6df821f41880c020bf7b77cf8ac89f28c85:yes": {
    "tier": "poly",
@@ -19629,7 +19629,7 @@
    "scans": 7,
    "first_score": 71,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xbca55c392fb3c0af2ad8f6c732022aa8bbda71b7f337f5e933d57c1f89ebeb62:no": {
    "tier": "fun",
@@ -20387,7 +20387,7 @@
    "scans": 6,
    "first_score": 29,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x7e79036ea9e9418d11b4fb27052243eecad245b0233a816935f4980b835c65d0:yes": {
    "tier": "top",
@@ -20427,7 +20427,7 @@
    "scans": 6,
    "first_score": 27,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x987a4d0ee5521882ca78261dc5b978c9af8ac41c29f2be83279f71ea2b24c7c0:yes": {
    "tier": "fun",
@@ -20487,7 +20487,7 @@
    "scans": 1,
    "first_score": 56,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xdf5ccc956026785d7d03ea269ddb46f6bda3611e5829b9134205be8358760273:no": {
    "tier": "poly",
@@ -20713,12 +20713,12 @@
    "market_id": "6567950",
    "side": "no",
    "score": 52,
-   "whales": 8,
-   "invested": 13672,
+   "whales": 12,
+   "invested": 71685,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "BUY NO Chicago @ 75\u00a2",
+   "kalshi": "BUY YES Cleveland @ 75\u00a2",
    "kprice": 0.75,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794807831,
    "scans": 7,
    "first_score": 30,
@@ -20762,7 +20762,7 @@
    "scans": 6,
    "first_score": 37,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xc27150c31d90483c86e751fe03ac717cb40b6f1a263bcce1d62d985979b71719:no": {
    "tier": "glue",
@@ -20782,7 +20782,7 @@
    "scans": 5,
    "first_score": 42,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x40171d015e394099dc363c560adf404d4fc3da005eb15add60c76d5d29f21874:yes": {
    "tier": "top",
@@ -20802,7 +20802,7 @@
    "scans": 6,
    "first_score": 14,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x6fe22c63ffee1f81f2458e9fd166d0c1e358b12a838f58b011c393bb820c95a6:yes": {
    "tier": "longshots",
@@ -20851,32 +20851,32 @@
    "slug": "nba-gsw-nop-2026-11-16",
    "market_id": "6567955",
    "side": "no",
-   "score": 43,
-   "whales": 4,
-   "invested": 31965,
+   "score": 48,
+   "whales": 7,
+   "invested": 63650,
    "start": "Mon Nov 16 \u00b7 5:00 PM PT",
    "kalshi": "BUY YES New Orleans @ 41\u00a2",
    "kprice": 0.41,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794807831,
    "scans": 7,
    "first_score": 48,
    "result": null
   },
   "0xd52bf2df8eebb1aa0f1e87662421f431d730474c81932a434e4c66d82fa00725:no": {
-   "tier": "top",
+   "tier": "fun",
    "q": "Magic vs. Celtics",
    "label": "Celtics",
    "slug": "nba-orl-bos-2026-11-16",
    "market_id": "6567949",
    "side": "no",
-   "score": 49,
-   "whales": 6,
-   "invested": 78193,
+   "score": 44,
+   "whales": 7,
+   "invested": 80247,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
    "kalshi": "BUY YES Boston @ 77\u00a2",
    "kprice": 0.77,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794807831,
    "scans": 7,
    "first_score": 34,
@@ -20900,7 +20900,7 @@
    "scans": 6,
    "first_score": 58,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x2a54c71802ea0352bc9bd2ee93eb37dd602e9961a8628124bb6619dc0f10eda4:no": {
    "tier": "fun",
@@ -20928,13 +20928,13 @@
    "slug": "nfl-lac-bal-2026-11-17",
    "market_id": "6296764",
    "side": "no",
-   "score": 48,
+   "score": 47,
    "whales": 3,
-   "invested": 36524,
+   "invested": 42187,
    "start": "Mon Nov 16 \u00b7 5:15 PM PT",
    "kalshi": "BUY YES Baltimore @ 68\u00a2",
    "kprice": 0.68,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794807831,
    "scans": 6,
    "first_score": 30,
@@ -20958,7 +20958,7 @@
    "scans": 6,
    "first_score": 30,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x92e4d5e6d48986c1daa03069ca16489235744305f927dfaf1bfcb6094e633c0d:yes": {
    "tier": "top",
@@ -20967,13 +20967,13 @@
    "slug": "nba-phi-bkn-2026-11-16",
    "market_id": "6567952",
    "side": "yes",
-   "score": 47,
-   "whales": 6,
-   "invested": 37756,
+   "score": 48,
+   "whales": 8,
+   "invested": 67683,
    "start": "Mon Nov 16 \u00b7 4:30 PM PT",
-   "kalshi": "BUY YES Philadelphia @ 67\u00a2",
-   "kprice": 0.67,
-   "last_seen": 1794869249,
+   "kalshi": "BUY YES Philadelphia @ 68\u00a2",
+   "kprice": 0.68,
+   "last_seen": 1794870854,
    "first_seen": 1794807831,
    "scans": 7,
    "first_score": 33,
@@ -20986,13 +20986,13 @@
    "slug": "nba-hou-mia-2026-11-16",
    "market_id": "6567953",
    "side": "no",
-   "score": 41,
-   "whales": 8,
-   "invested": 99905,
+   "score": 43,
+   "whales": 9,
+   "invested": 224417,
    "start": "Mon Nov 16 \u00b7 4:30 PM PT",
-   "kalshi": "BUY YES Miami @ 45\u00a2",
-   "kprice": 0.45,
-   "last_seen": 1794869249,
+   "kalshi": "BUY YES Miami @ 44\u00a2",
+   "kprice": 0.44,
+   "last_seen": 1794870854,
    "first_seen": 1794807831,
    "scans": 5,
    "first_score": 31,
@@ -21007,11 +21007,11 @@
    "side": "no",
    "score": 45,
    "whales": 5,
-   "invested": 58637,
+   "invested": 60766,
    "start": "Mon Nov 16 \u00b7 5:00 PM PT",
    "kalshi": "BUY YES Minnesota @ 58\u00a2",
    "kprice": 0.58,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794807831,
    "scans": 7,
    "first_score": 31,
@@ -21028,9 +21028,9 @@
    "whales": 5,
    "invested": 7018,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "BUY YES Over 213.5 points @ 51\u00a2",
-   "kprice": 0.51,
-   "last_seen": 1794869249,
+   "kalshi": "BUY YES Over 213.5 points @ 52\u00a2",
+   "kprice": 0.52,
+   "last_seen": 1794870854,
    "first_seen": 1794807831,
    "scans": 4,
    "first_score": 21,
@@ -21081,13 +21081,13 @@
    "slug": "nba-chi-cle-2026-11-16-total-241pt5",
    "market_id": "7081671",
    "side": "yes",
-   "score": 15,
-   "whales": 2,
-   "invested": 3585,
+   "score": 20,
+   "whales": 3,
+   "invested": 4125,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "BUY YES Over 241.5 points @ 51\u00a2",
-   "kprice": 0.51,
-   "last_seen": 1794869249,
+   "kalshi": "BUY YES Over 241.5 points @ 50\u00a2",
+   "kprice": 0.5,
+   "last_seen": 1794870854,
    "first_seen": 1794807831,
    "scans": 4,
    "first_score": 20,
@@ -21130,7 +21130,7 @@
    "scans": 4,
    "first_score": 20,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x17bf305a39bcc0be4fe964bcd47996a8cf08d423471e49d51fe661234de2a45f:yes": {
    "tier": "poly",
@@ -21209,7 +21209,7 @@
    "scans": 3,
    "first_score": 55,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x7f76e51acb29c4bef38529b292afe09887b32d840728e701a2c09d558b57df8f:yes": {
    "tier": "poly",
@@ -21229,7 +21229,7 @@
    "scans": 4,
    "first_score": 20,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xedf31b95a289f3b339617c1a527f263b601fe889966fd485310288e54d515d88:no": {
    "tier": "poly",
@@ -21268,7 +21268,7 @@
    "scans": 3,
    "first_score": 20,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x0abfcf55744da0ded70c2f56e97e5af30b1ab15d6eda66a3fbc9cd7e4e3aa0b4:no": {
    "tier": "poly",
@@ -21288,7 +21288,7 @@
    "scans": 2,
    "first_score": 20,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x78988895480dbb47412fa1f220a2fe12e4219d7d15ff0e0c6ed12f7ad474bb14:no": {
    "tier": "props",
@@ -21316,13 +21316,13 @@
    "slug": "nfl-lac-bal-2026-11-17-spread-home-4pt5",
    "market_id": "6305593",
    "side": "yes",
-   "score": 26,
+   "score": 27,
    "whales": 2,
-   "invested": 20802,
+   "invested": 24903,
    "start": "Mon Nov 16 \u00b7 5:15 PM PT",
-   "kalshi": "BUY YES Baltimore wins by over 4.5 points @ 51\u00a2",
-   "kprice": 0.51,
-   "last_seen": 1794869249,
+   "kalshi": "BUY YES Baltimore wins by over 4.5 points @ 50\u00a2",
+   "kprice": 0.5,
+   "last_seen": 1794870854,
    "first_seen": 1794807831,
    "scans": 6,
    "first_score": 18,
@@ -21374,13 +21374,13 @@
    "slug": "nba-hou-mia-2026-11-16-spread-away-2pt5",
    "market_id": "7083686",
    "side": "yes",
-   "score": 32,
-   "whales": 3,
-   "invested": 70894,
+   "score": 37,
+   "whales": 4,
+   "invested": 74777,
    "start": "Mon Nov 16 \u00b7 4:30 PM PT",
-   "kalshi": "BUY YES Houston wins by over 2.5 points @ 49\u00a2",
-   "kprice": 0.49,
-   "last_seen": 1794869249,
+   "kalshi": "BUY YES Houston wins by over 2.5 points @ 51\u00a2",
+   "kprice": 0.51,
+   "last_seen": 1794870854,
    "first_seen": 1794807831,
    "scans": 7,
    "first_score": 17,
@@ -21424,7 +21424,7 @@
    "scans": 5,
    "first_score": 32,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x92e4d5e6d48986c1daa03069ca16489235744305f927dfaf1bfcb6094e633c0d:no": {
    "tier": "top",
@@ -21452,15 +21452,15 @@
    "slug": "nfl-lac-bal-2026-11-17",
    "market_id": "6296764",
    "side": "yes",
-   "score": 14,
-   "whales": 2,
-   "invested": 3320,
+   "score": 38,
+   "whales": 5,
+   "invested": 32365,
    "start": "Mon Nov 16 \u00b7 5:15 PM PT",
-   "kalshi": "BUY YES Los Angeles C @ 32\u00a2",
-   "kprice": 0.32,
-   "last_seen": 1794814866,
+   "kalshi": "BUY YES Los Angeles C @ 33\u00a2",
+   "kprice": 0.33,
+   "last_seen": 1794870854,
    "first_seen": 1794807831,
-   "scans": 2,
+   "scans": 3,
    "first_score": 14,
    "result": null
   },
@@ -21482,7 +21482,7 @@
    "scans": 3,
    "first_score": 16,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xc6793dd33bc6e019c2b3779a818b572bc3381e3e2851012fed4cd093503c7165:no": {
    "tier": "fun",
@@ -21502,7 +21502,7 @@
    "scans": 5,
    "first_score": 8,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x2ed8e1862b8c34edfecb55a54360c7592abb6310f1011bc9d200f1d5a02cafe6:yes": {
    "tier": "fun",
@@ -21515,9 +21515,9 @@
    "whales": 3,
    "invested": 5014,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "BUY YES Cleveland wins by over 9.5 points @ 47\u00a2",
-   "kprice": 0.47,
-   "last_seen": 1794869249,
+   "kalshi": "BUY YES Cleveland wins by over 9.5 points @ 46\u00a2",
+   "kprice": 0.46,
+   "last_seen": 1794870854,
    "first_seen": 1794807831,
    "scans": 2,
    "first_score": 22,
@@ -21661,7 +21661,7 @@
    "scans": 3,
    "first_score": 43,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x6fe22c63ffee1f81f2458e9fd166d0c1e358b12a838f58b011c393bb820c95a6:no": {
    "tier": "fun",
@@ -21740,7 +21740,7 @@
    "scans": 4,
    "first_score": 30,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x95e78dde932919aaa1d2646cdf4a37076e2879dda964ba44c588c3f893d9ec0a:no": {
    "tier": "poly",
@@ -21760,7 +21760,7 @@
    "scans": 2,
    "first_score": 20,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xd742c45f7c007b27f0aae51a8e8df5b02965c041936fd18dd57d62db3d84b50e:no": {
    "tier": "poly",
@@ -21780,7 +21780,7 @@
    "scans": 2,
    "first_score": 20,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x490445799b876bd5cbe2b9403209415bbb733f04750534d04b9d9d064871b31c:yes": {
    "tier": "fun",
@@ -21859,7 +21859,7 @@
    "scans": 3,
    "first_score": 20,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xbe2b59704cf7118fa7eccf84d4a1d2bfd16675d365ae4d22373abbbeff6b260a:no": {
    "tier": "poly",
@@ -21879,7 +21879,7 @@
    "scans": 1,
    "first_score": 53,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x9ae4d853232c464f4c0b1f0451391dfabb5a4aa2c1e1b38d59014d730866af9e:yes": {
    "tier": "poly",
@@ -21918,7 +21918,7 @@
    "scans": 2,
    "first_score": 20,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x490445799b876bd5cbe2b9403209415bbb733f04750534d04b9d9d064871b31c:no": {
    "tier": "top",
@@ -21978,7 +21978,7 @@
    "scans": 3,
    "first_score": 42,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xe3e398cb241a9da84a8ab4963dce0ae7fd748fe0c1f52ec7d5c7a117cdbcb614:yes": {
    "tier": "fun",
@@ -21998,7 +21998,7 @@
    "scans": 3,
    "first_score": 23,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x512dff5405c6cbc50cd237875521a03ad1e39241779feb4b2b74a71dbe28e7ad:yes": {
    "tier": "top",
@@ -22058,7 +22058,7 @@
    "scans": 3,
    "first_score": 42,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x4dee85f26e0892475de06eb7c1f2154924b0f6dde5369a74b3d93529b6d7a6cc:yes": {
    "tier": "fun",
@@ -22073,7 +22073,7 @@
    "start": "Tue Nov 17 \u00b7 11:45 AM PT",
    "kalshi": "BUY YES Portugal @ 69\u00a2",
    "kprice": 0.69,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794836882,
    "scans": 4,
    "first_score": 27,
@@ -22130,9 +22130,9 @@
    "whales": 1,
    "invested": 1593,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "BUY NO Memphis wins by over 7.5 points @ 65\u00a2",
-   "kprice": 0.65,
-   "last_seen": 1794869249,
+   "kalshi": "BUY NO Memphis wins by over 7.5 points @ 63\u00a2",
+   "kprice": 0.63,
+   "last_seen": 1794870854,
    "first_seen": 1794836882,
    "scans": 4,
    "first_score": 32,
@@ -22156,7 +22156,7 @@
    "scans": 3,
    "first_score": 17,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x4a3c8909f9e482f4fc2050d4742609247046b9ab58bca70f4e303381fe8ee1cb:yes": {
    "tier": "top",
@@ -22171,7 +22171,7 @@
    "start": "Mon Nov 16 \u00b7 5:00 PM PT",
    "kalshi": "BUY YES Over 228.5 points @ 49\u00a2",
    "kprice": 0.49,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794836882,
    "scans": 4,
    "first_score": 25,
@@ -22195,7 +22195,7 @@
    "scans": 2,
    "first_score": 16,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xb44a09508b392d0e447bff2f3ce2d15eafc0a3644452240be056642340bdce0f:no": {
    "tier": "top",
@@ -22215,7 +22215,7 @@
    "scans": 3,
    "first_score": 6,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x2a8d6ed1d7e10223582b87bc11b713c27d345cd5eeccbcf1a3333f1d814ab55d:yes": {
    "tier": "fun",
@@ -22253,7 +22253,8 @@
    "first_seen": 1794836882,
    "scans": 3,
    "first_score": 53,
-   "result": null
+   "result": "W",
+   "graded": 1794870854
   },
   "0x1908f129684fe2247b9d145ad5f8d9168be65a1dd731fd573bb78d819cd689c9:yes": {
    "tier": "fun",
@@ -22273,7 +22274,7 @@
    "scans": 2,
    "first_score": 53,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x4e9b28349ccf69bb943a82ec06908f0b7b225cb5274c12a094ae7624f259361d:yes": {
    "tier": "poly",
@@ -22433,7 +22434,7 @@
    "scans": 3,
    "first_score": 30,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xb52ef1c650cc377d3c79f519d350bdd030b983149d2ec5845b84211cc16ccdcc:no": {
    "tier": "poly",
@@ -22528,7 +22529,7 @@
    "start": "Tue Nov 17 \u00b7 4:00 PM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794836882,
    "scans": 3,
    "first_score": 20,
@@ -22587,7 +22588,7 @@
    "start": "Mon Nov 16 \u00b7 4:30 PM PT",
    "kalshi": "BUY NO Jaylen Brown: 4+ assists @ 41\u00a2",
    "kprice": 0.41,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794836882,
    "scans": 4,
    "first_score": 59,
@@ -22631,7 +22632,7 @@
    "scans": 3,
    "first_score": 28,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xc60598366a8358b18c8f9d81e2aa4bcb9ebd672fe4879b8026800ffcccd7c48b:yes": {
    "tier": "fun",
@@ -22640,13 +22641,13 @@
    "slug": "nba-hou-mia-2026-11-16",
    "market_id": "6567953",
    "side": "yes",
-   "score": 30,
-   "whales": 2,
-   "invested": 183854,
+   "score": 37,
+   "whales": 4,
+   "invested": 186587,
    "start": "Mon Nov 16 \u00b7 4:30 PM PT",
-   "kalshi": "BUY YES Houston @ 56\u00a2",
-   "kprice": 0.56,
-   "last_seen": 1794869249,
+   "kalshi": "BUY YES Houston @ 57\u00a2",
+   "kprice": 0.57,
+   "last_seen": 1794870854,
    "first_seen": 1794836882,
    "scans": 4,
    "first_score": 28,
@@ -22690,7 +22691,7 @@
    "scans": 2,
    "first_score": 21,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x3259ab7b86d7a7414ddb64ebdb68b635defd42813b0ec276eb853833bdb56264:yes": {
    "tier": "top",
@@ -22710,7 +22711,7 @@
    "scans": 2,
    "first_score": 19,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x49ddab393fbc6d87e4ef30a2cc428570afee324d47b2f72317ab417e831d78a5:yes": {
    "tier": "poly",
@@ -22733,26 +22734,26 @@
    "graded": 1794842555
   },
   "0x1e392b5d80711a000230f6eec6b7b67cf1b4a7ee793d83c8e432680e37217c4f:yes": {
-   "tier": "top",
+   "tier": "fun",
    "q": "Canadiens vs. Rangers",
    "label": "Canadiens",
    "slug": "nhl-mon-nyr-2026-11-16",
    "market_id": "5972105",
    "side": "yes",
-   "score": 28,
+   "score": 29,
    "whales": 3,
-   "invested": 29472,
+   "invested": 32482,
    "start": "Mon Nov 16 \u00b7 4:30 PM PT",
-   "kalshi": "BUY YES Montreal @ 50\u00a2",
-   "kprice": 0.5,
-   "last_seen": 1794869249,
+   "kalshi": "BUY YES Montreal @ 51\u00a2",
+   "kprice": 0.51,
+   "last_seen": 1794870854,
    "first_seen": 1794836882,
    "scans": 4,
    "first_score": 18,
    "result": null
   },
   "0x1e392b5d80711a000230f6eec6b7b67cf1b4a7ee793d83c8e432680e37217c4f:no": {
-   "tier": "fun",
+   "tier": "top",
    "q": "Canadiens vs. Rangers",
    "label": "Rangers",
    "slug": "nhl-mon-nyr-2026-11-16",
@@ -22760,11 +22761,11 @@
    "side": "no",
    "score": 29,
    "whales": 3,
-   "invested": 31297,
+   "invested": 31529,
    "start": "Mon Nov 16 \u00b7 4:30 PM PT",
    "kalshi": "BUY YES New York R @ 50\u00a2",
    "kprice": 0.5,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794836882,
    "scans": 4,
    "first_score": 17,
@@ -22848,7 +22849,7 @@
    "scans": 2,
    "first_score": 40,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xb52ef1c650cc377d3c79f519d350bdd030b983149d2ec5845b84211cc16ccdcc:yes": {
    "tier": "top",
@@ -22983,7 +22984,7 @@
    "start": "Mon Nov 16 \u00b7 5:00 PM PT",
    "kalshi": "BUY NO Over 225.5 points @ 54\u00a2",
    "kprice": 0.54,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794842555,
    "scans": 3,
    "first_score": 26,
@@ -23007,7 +23008,7 @@
    "scans": 1,
    "first_score": 52,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x2bdf7173dfc725d0aa48445d4df4fed84d99e4e54f1586cb8f5e084ddf33a3f4:yes": {
    "tier": "fun",
@@ -23067,7 +23068,7 @@
    "scans": 1,
    "first_score": 31,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xf9adf6203794bb13c562c06de595947626f12ea0b5348404cf6ebe44b591e18b:yes": {
    "tier": "fun",
@@ -23107,7 +23108,7 @@
    "scans": 1,
    "first_score": 26,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xe8914e6b271a158c37892dfddef8a689ad95793b1d3c3734058820404e050bf9:no": {
    "tier": "poly",
@@ -23127,7 +23128,7 @@
    "scans": 1,
    "first_score": 19,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x6ccb6148e261e3140888bd5a30a3babafb17dd186b8966370204220e5605dcd0:no": {
    "tier": "poly",
@@ -23147,7 +23148,7 @@
    "scans": 1,
    "first_score": 24,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x2c27301f242e224742ed3f534f06ad03b6c721d85a60291c51ef7936ed567d44:no": {
    "tier": "poly",
@@ -23167,7 +23168,7 @@
    "scans": 1,
    "first_score": 18,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xc830204192d27d379a28e2571bd2158aa703c7438c2fe384f816bb955c682ba7:no": {
    "tier": "poly",
@@ -23187,7 +23188,7 @@
    "scans": 1,
    "first_score": 15,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x26d21d78374caedb24c6d9a4e900ec1ff21700cd4bede9b6b5dd921ca7762651:no": {
    "tier": "poly",
@@ -23207,7 +23208,7 @@
    "scans": 1,
    "first_score": 26,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xeec22b807fb3b933b98d4828f51fe528d9c3f8bd8d68c2f5686463099fd67fc1:yes": {
    "tier": "poly",
@@ -23227,7 +23228,7 @@
    "scans": 1,
    "first_score": 38,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x17587b5919a1dca0cc7bda31aa1e34442a2be818eea5692ffaeac0725d5b99b4:no": {
    "tier": "poly",
@@ -23247,7 +23248,7 @@
    "scans": 1,
    "first_score": 29,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x9206dd12ac1a722a680313292d99d66296f91c14c2edaf1a946fe02c288f99cf:no": {
    "tier": "poly",
@@ -23267,7 +23268,7 @@
    "scans": 1,
    "first_score": 23,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xab2327fc36c2f06e2ab99b3b0b4a5f846271c98e497c0fcfe670b06de79e142b:no": {
    "tier": "poly",
@@ -23287,7 +23288,7 @@
    "scans": 1,
    "first_score": 17,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x3c64179b64e6a1ffabda2b6f644f2e0ca82753dd72334f778464e7378b1fe7b3:no": {
    "tier": "poly",
@@ -23307,7 +23308,7 @@
    "scans": 1,
    "first_score": 16,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x2a5b759efb1e014a69e22927425f49bc73eea74cd59925415098c40e519a50aa:yes": {
    "tier": "poly",
@@ -23327,7 +23328,7 @@
    "scans": 1,
    "first_score": 23,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xe4c49f5f136efbb65c8ad0cbee3f50ea7a19133a0d3285412d68ae7d1fb03df5:yes": {
    "tier": "poly",
@@ -23347,7 +23348,7 @@
    "scans": 1,
    "first_score": 15,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x2cbffad9b932deab8774433e989cd462b7d4832badead718575f98de5cf457d0:no": {
    "tier": "poly",
@@ -23387,7 +23388,7 @@
    "scans": 1,
    "first_score": 28,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x7d5898deefbf55c4944c17247c4cfa03c70ebc6aa5dbae4c88e992754c298152:yes": {
    "tier": "poly",
@@ -23506,7 +23507,7 @@
    "scans": 2,
    "first_score": 34,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xafdaa7d089ae7009572d7971a04d8029bb7d26738ffd7a6004bf9d435e9e25f4:no": {
    "tier": "fun",
@@ -23526,7 +23527,7 @@
    "scans": 1,
    "first_score": 58,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x53d09012b30e4055049452500f053a37e6eefc960e94e474b835531d8b614b30:no": {
    "tier": "fun",
@@ -23565,7 +23566,7 @@
    "scans": 1,
    "first_score": 20,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x5a90c55129ad2785a7a8f7a862d228496ad7cd2ad6892aff9660cfd9e05443fb:no": {
    "tier": "top",
@@ -23685,22 +23686,22 @@
    "scans": 1,
    "first_score": 27,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x651f52936b2119794ceb56335c2131816880e31e2f0f112d7f68fb059200cea5:no": {
-   "tier": "top",
+   "tier": "fun",
    "q": "Spread: Warriors (-3.5)",
    "label": "Warriors +3.5 or better for the other side",
    "slug": "nba-gsw-nop-2026-11-16-spread-away-3pt5",
    "market_id": "7081667",
    "side": "no",
-   "score": 28,
+   "score": 26,
    "whales": 3,
    "invested": 16813,
    "start": "Mon Nov 16 \u00b7 5:00 PM PT",
    "kalshi": "BUY NO Golden State wins by over 3.5 points @ 51\u00a2",
    "kprice": 0.51,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794856060,
    "scans": 2,
    "first_score": 23,
@@ -23724,7 +23725,7 @@
    "scans": 1,
    "first_score": 47,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xaaab98f8616aebf6d68c6045f0df7393cacf9d631d2c03a1a5a636bd7a10f69c:no": {
    "tier": "glue",
@@ -23763,7 +23764,7 @@
    "scans": 1,
    "first_score": 9,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x293f36d9dcf13d2126b1d188973ce9742ac3b569bc4d9e586f9dad46601091f1:yes": {
    "tier": "fun",
@@ -23778,7 +23779,7 @@
    "start": "Tue Nov 17 \u00b7 4:00 PM PT",
    "kalshi": "BUY NO Florida @ 48\u00a2",
    "kprice": 0.48,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794856060,
    "scans": 2,
    "first_score": 65,
@@ -23802,7 +23803,7 @@
    "scans": 1,
    "first_score": 20,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xe540967b1973db4d5a3ea5eae647951d99eba4c8f6f113da0a7db468085d3707:no": {
    "tier": "fun",
@@ -23822,7 +23823,7 @@
    "scans": 1,
    "first_score": 26,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x40171d015e394099dc363c560adf404d4fc3da005eb15add60c76d5d29f21874:no": {
    "tier": "fun",
@@ -23842,7 +23843,7 @@
    "scans": 1,
    "first_score": 36,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xb9d61dfd874e35bb48e0096f7286d369e56c56185bdb127027e8fe43aade673a:no": {
    "tier": "fun",
@@ -23862,7 +23863,7 @@
    "scans": 1,
    "first_score": 28,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x43cd2b241bfa0a17f1835ea5600c3018cd059eebd73ed30299b70922426b043b:yes": {
    "tier": "fun",
@@ -23877,7 +23878,7 @@
    "start": "Tue Nov 17 \u00b7 8:00 PM PT",
    "kalshi": "BUY NO Los Angeles L @ 21\u00a2",
    "kprice": 0.21,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794856060,
    "scans": 2,
    "first_score": 24,
@@ -23890,13 +23891,13 @@
    "slug": "nba-mem-was-2026-11-16",
    "market_id": "6567951",
    "side": "no",
-   "score": 29,
-   "whales": 4,
-   "invested": 16787,
+   "score": 41,
+   "whales": 6,
+   "invested": 22122,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "BUY YES Washington @ 43\u00a2",
-   "kprice": 0.43,
-   "last_seen": 1794869249,
+   "kalshi": "BUY YES Washington @ 41\u00a2",
+   "kprice": 0.41,
+   "last_seen": 1794870854,
    "first_seen": 1794856060,
    "scans": 2,
    "first_score": 38,
@@ -23913,9 +23914,9 @@
    "whales": 1,
    "invested": 520,
    "start": "Mon Nov 16 \u00b7 4:30 PM PT",
-   "kalshi": "BUY YES Over 220.5 points @ 76\u00a2",
-   "kprice": 0.76,
-   "last_seen": 1794869249,
+   "kalshi": "BUY YES Over 220.5 points @ 75\u00a2",
+   "kprice": 0.75,
+   "last_seen": 1794870854,
    "first_seen": 1794856060,
    "scans": 2,
    "first_score": 20,
@@ -23934,7 +23935,7 @@
    "start": "Tue Nov 17 \u00b7 2:05 AM PT",
    "kalshi": "BUY YES Seahorses Mikawa @ 70\u00a2",
    "kprice": 0.7,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794856060,
    "scans": 2,
    "first_score": 52,
@@ -23958,7 +23959,7 @@
    "scans": 1,
    "first_score": 21,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xee53da3f0aba4b979d79f3980d4049148d2041b70257ed6bc0f0a05d73236ed8:yes": {
    "tier": "poly",
@@ -23978,7 +23979,7 @@
    "scans": 1,
    "first_score": 21,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x06ff4c983101b8927225f3589d4a6b7ca4b33dcac14971fa5b6bcea7697f8173:no": {
    "tier": "poly",
@@ -23998,7 +23999,7 @@
    "scans": 1,
    "first_score": 45,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x38ba9922a394c86e71715f58fd964c131416c719ab538a030b2f4ee759e1ea8f:no": {
    "tier": "poly",
@@ -24018,7 +24019,7 @@
    "scans": 1,
    "first_score": 20,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x5a5217564926ea9bf772d17853cf060dfbf8bf6cdcfb0cad41bebdc99e23a695:yes": {
    "tier": "poly",
@@ -24038,7 +24039,7 @@
    "scans": 1,
    "first_score": 22,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x44d0e326c363e3ea6698ec135a4bc7510c93a1683ea655fd52ab1cbdaeb5c4dd:no": {
    "tier": "poly",
@@ -24058,7 +24059,7 @@
    "scans": 1,
    "first_score": 13,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xcc397907f89cc8575878b35de205bd26af42e05113a4193c8d2d55e325e93d91:yes": {
    "tier": "poly",
@@ -24067,13 +24068,13 @@
    "slug": "nba-mem-was-2026-11-16-total-231pt5",
    "market_id": "7081702",
    "side": "yes",
-   "score": 39,
-   "whales": 6,
-   "invested": 30668,
+   "score": 36,
+   "whales": 8,
+   "invested": 31751,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794856060,
    "scans": 2,
    "first_score": 32,
@@ -24097,7 +24098,7 @@
    "scans": 1,
    "first_score": 20,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x8d19584d53f7a00a4da544a62bd6ad366cec19df06d6fafd689f8058fd55d3eb:no": {
    "tier": "poly",
@@ -24117,7 +24118,7 @@
    "scans": 1,
    "first_score": 21,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xa23e5d075156e2ac7b6ba81da4e854a583f580e6d8f18f0eab7c0f3468553bf7:yes": {
    "tier": "poly",
@@ -24137,7 +24138,7 @@
    "scans": 1,
    "first_score": 10,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x12cde6a5afbd4ed6e413898e8d1b7526ac33d3f9fdbc4e18bebc4c77424e3e28:yes": {
    "tier": "poly",
@@ -24157,7 +24158,7 @@
    "scans": 1,
    "first_score": 20,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x8742da600df6285e45d8bd26878b398659bedfc8666165de951dc78013641c73:yes": {
    "tier": "poly",
@@ -24177,7 +24178,7 @@
    "scans": 1,
    "first_score": 24,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x7ac04a18090ca14336ceb4a08cb26e485b2971006119800df037fee9c0660a93:no": {
    "tier": "poly",
@@ -24197,7 +24198,7 @@
    "scans": 1,
    "first_score": 20,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x558387909f08c50cca2ba65dc71195d8121fcad18b0b9623ab009dc05b549562:no": {
    "tier": "poly",
@@ -24217,7 +24218,7 @@
    "scans": 1,
    "first_score": 10,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x55090fa2ea28c7f3b7574067275a812c74b0a15b839c73403dfa533d56b35ebe:yes": {
    "tier": "poly",
@@ -24237,7 +24238,7 @@
    "scans": 1,
    "first_score": 20,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x89a75f9599f516e17530bcca193b38d219ab09ea461eeb9edd8a238723f7a5e6:no": {
    "tier": "poly",
@@ -24295,7 +24296,7 @@
    "scans": 1,
    "first_score": 53,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xcc397907f89cc8575878b35de205bd26af42e05113a4193c8d2d55e325e93d91:no": {
    "tier": "top",
@@ -24304,13 +24305,13 @@
    "slug": "nba-mem-was-2026-11-16-total-231pt5",
    "market_id": "7081702",
    "side": "no",
-   "score": 23,
-   "whales": 1,
-   "invested": 58797,
+   "score": 36,
+   "whales": 3,
+   "invested": 86413,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
    "kalshi": "No Kalshi match",
    "kprice": null,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794856060,
    "scans": 2,
    "first_score": 22,
@@ -24323,13 +24324,13 @@
    "slug": "nba-hou-mia-2026-11-16-spread-away-2pt5",
    "market_id": "7083686",
    "side": "no",
-   "score": 41,
-   "whales": 5,
-   "invested": 64935,
+   "score": 36,
+   "whales": 4,
+   "invested": 64156,
    "start": "Mon Nov 16 \u00b7 4:30 PM PT",
-   "kalshi": "BUY NO Houston wins by over 2.5 points @ 52\u00a2",
-   "kprice": 0.52,
-   "last_seen": 1794869249,
+   "kalshi": "BUY NO Houston wins by over 2.5 points @ 50\u00a2",
+   "kprice": 0.5,
+   "last_seen": 1794870854,
    "first_seen": 1794856060,
    "scans": 2,
    "first_score": 41,
@@ -24353,7 +24354,7 @@
    "scans": 1,
    "first_score": 60,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x23912566c55e4cb5058e3905dfa1d0e0d19ccdfe85f70c55cea3c6cd7ed3dd78:no": {
    "tier": "fun",
@@ -24368,7 +24369,7 @@
    "start": "Mon Nov 16 \u00b7 6:30 PM PT",
    "kalshi": "BUY YES Utah @ 75\u00a2",
    "kprice": 0.75,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794856060,
    "scans": 2,
    "first_score": 36,
@@ -24382,14 +24383,14 @@
    "market_id": "7072669",
    "side": "yes",
    "score": 39,
-   "whales": 2,
-   "invested": 31158,
+   "whales": 3,
+   "invested": 33850,
    "start": "Mon Nov 16 \u00b7 6:30 PM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794856060,
+   "last_seen": 1794870854,
    "first_seen": 1794856060,
-   "scans": 1,
+   "scans": 2,
    "first_score": 39,
    "result": null
   },
@@ -24406,7 +24407,7 @@
    "start": "Mon Nov 16 \u00b7 5:00 PM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794856060,
    "scans": 2,
    "first_score": 21,
@@ -24425,7 +24426,7 @@
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
    "kalshi": "BUY NO Boston wins by over 8.5 points @ 49\u00a2",
    "kprice": 0.49,
-   "last_seen": 1794869249,
+   "last_seen": 1794870854,
    "first_seen": 1794856060,
    "scans": 2,
    "first_score": 21,
@@ -24438,13 +24439,13 @@
    "slug": "nba-orl-bos-2026-11-16-total-213pt5",
    "market_id": "7081700",
    "side": "no",
-   "score": 25,
-   "whales": 2,
-   "invested": 18199,
+   "score": 30,
+   "whales": 3,
+   "invested": 18740,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "BUY NO Over 213.5 points @ 50\u00a2",
-   "kprice": 0.5,
-   "last_seen": 1794869249,
+   "kalshi": "BUY NO Over 213.5 points @ 49\u00a2",
+   "kprice": 0.49,
+   "last_seen": 1794870854,
    "first_seen": 1794856060,
    "scans": 2,
    "first_score": 27,
@@ -24468,7 +24469,7 @@
    "scans": 1,
    "first_score": 21,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x58f666955a8f602bb795ff1607b5bf810024c9a98b8cc1ba1ce9741bdeed546d:yes": {
    "tier": "top",
@@ -24488,7 +24489,7 @@
    "scans": 1,
    "first_score": 20,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x58f666955a8f602bb795ff1607b5bf810024c9a98b8cc1ba1ce9741bdeed546d:no": {
    "tier": "poly",
@@ -24508,7 +24509,7 @@
    "scans": 1,
    "first_score": 10,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x5a627a7c3500d00e916ad27f60ab7dad26d5f8e4ab7a799ed5578578fa99b153:no": {
    "tier": "poly",
@@ -24528,7 +24529,7 @@
    "scans": 1,
    "first_score": 24,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x72df24df164102fec955267a7ab9dee8521728c087770bc2395078185bcbc948:no": {
    "tier": "poly",
@@ -24548,7 +24549,7 @@
    "scans": 1,
    "first_score": 23,
    "result": "L",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0x9ca8ef547921522b830c38f0e787b723b706d41798621fdf04a8247ac6800e3a:no": {
    "tier": "poly",
@@ -24568,7 +24569,7 @@
    "scans": 1,
    "first_score": 43,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
   },
   "0xcc137d59b759da6dcbf3ad93c72bd8af40354e8e0c7dcf2ca074fa48b087768b:yes": {
    "tier": "fun",
@@ -24588,7 +24589,64 @@
    "scans": 1,
    "first_score": 28,
    "result": "W",
-   "graded": 1794869249
+   "graded": 1794870854
+  },
+  "0xd035099b728a8beaf433a9b8490c690cb0406868439aae1c9d4f2b0ee514b6b8:no": {
+   "tier": "top",
+   "q": "Spread: Chargers (-2.5)",
+   "label": "Chargers +2.5 or better for the other side",
+   "slug": "nfl-lac-bal-2026-11-17-spread-away-2pt5",
+   "market_id": "6305574",
+   "side": "no",
+   "score": 36,
+   "whales": 2,
+   "invested": 4105,
+   "start": "Mon Nov 16 \u00b7 5:15 PM PT",
+   "kalshi": "BUY NO Los Angeles C wins by over 2.5 points @ 72\u00a2",
+   "kprice": 0.72,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
+   "scans": 1,
+   "first_score": 36,
+   "result": null
+  },
+  "0x2b28958e31aa61df92dc2fc1d2120f43d2d1ddf82b7af55417c6a8523456c76c:no": {
+   "tier": "top",
+   "q": "Tarleton State Texans vs. Drake Bulldogs",
+   "label": "Drake Bulldogs",
+   "slug": "cbb-tarl-drake-2026-11-16",
+   "market_id": "6919156",
+   "side": "no",
+   "score": 43,
+   "whales": 4,
+   "invested": 5926,
+   "start": "Mon Nov 16 \u00b7 4:30 PM PT",
+   "kalshi": "BUY YES Drake @ 80\u00a2",
+   "kprice": 0.8,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
+   "scans": 1,
+   "first_score": 43,
+   "result": null
+  },
+  "0xc6d9612b4fe83040b6daa8200ba17df7e8acfb8335a83b762b5845cb98b1698e:yes": {
+   "tier": "top",
+   "q": "Champaign: Oliver Tarvet vs Karl Poling",
+   "label": "Oliver Tarvet",
+   "slug": "atp-tarvet-poling-2026-11-16",
+   "market_id": "7055364",
+   "side": "yes",
+   "score": 42,
+   "whales": 3,
+   "invested": 3763,
+   "start": "2026-11-16",
+   "kalshi": "BUY YES Oliver Tarvet @ 94\u00a2",
+   "kprice": 0.94,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
+   "scans": 1,
+   "first_score": 42,
+   "result": null
   },
   "0x004431ae01ff503d7a1ee2f5c34e684b2a18ae35e834ca3e6d3afb3bba4a1bbd:no": {
    "tier": "top",
@@ -24603,8 +24661,8 @@
    "start": "Tue Nov 17 \u00b7 11:45 AM PT",
    "kalshi": "BUY NO Austria @ 48\u00a2",
    "kprice": 0.48,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 25,
    "result": null
@@ -24616,35 +24674,35 @@
    "slug": "nba-mem-was-2026-11-16",
    "market_id": "6567951",
    "side": "yes",
-   "score": 54,
-   "whales": 9,
-   "invested": 40438,
+   "score": 55,
+   "whales": 8,
+   "invested": 86898,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "BUY YES Memphis @ 58\u00a2",
-   "kprice": 0.58,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "kalshi": "BUY YES Memphis @ 60\u00a2",
+   "kprice": 0.6,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
-   "first_score": 54,
+   "first_score": 55,
    "result": null
   },
-  "0xdb926ddf31fc0b34a6902b9760454d8e4f23316ab137973db2a6ae6522bd1848:yes": {
+  "0xfb65dc21b65f64ce585db5e6b7710dd013688a31c142fef645f64537f5943748:no": {
    "tier": "top",
-   "q": "Spread: Grizzlies (-3.5)",
-   "label": "Grizzlies -3.5",
-   "slug": "nba-mem-was-2026-11-16-spread-away-3pt5",
-   "market_id": "7081779",
-   "side": "yes",
-   "score": 36,
-   "whales": 4,
-   "invested": 44090,
+   "q": "Grizzlies vs. Wizards: O/U 232.5",
+   "label": "UNDER",
+   "slug": "nba-mem-was-2026-11-16-total-232pt5",
+   "market_id": "7102316",
+   "side": "no",
+   "score": 29,
+   "whales": 2,
+   "invested": 13850,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "BUY YES Memphis wins by over 3.5 points @ 50\u00a2",
-   "kprice": 0.5,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "kalshi": "BUY NO Over 232.5 points @ 53\u00a2",
+   "kprice": 0.53,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
-   "first_score": 36,
+   "first_score": 29,
    "result": null
   },
   "0x82fffe3310c79693b170fe3dbe72df418b63efa063400e090852835d2cc6c707:yes": {
@@ -24654,35 +24712,54 @@
    "slug": "nfl-lac-bal-2026-11-17-spread-home-3pt5",
    "market_id": "6305592",
    "side": "yes",
-   "score": 49,
+   "score": 50,
    "whales": 2,
-   "invested": 12134,
+   "invested": 39925,
    "start": "Mon Nov 16 \u00b7 5:15 PM PT",
    "kalshi": "BUY YES Baltimore wins by over 3.5 points @ 55\u00a2",
    "kprice": 0.55,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
-   "first_score": 49,
+   "first_score": 50,
    "result": null
   },
-  "0xcf656d66e23bdc422268654e988f7ceb9d649e4dd6bbbd5c7e9740005c3ae95c:yes": {
-   "tier": "fun",
-   "q": "Montevideo: Tristan Boyer vs Hugo Dellien",
-   "label": "Tristan Boyer",
-   "slug": "atp-boyer-dellien-2026-11-17",
-   "market_id": "7053095",
+  "0xdb926ddf31fc0b34a6902b9760454d8e4f23316ab137973db2a6ae6522bd1848:yes": {
+   "tier": "top",
+   "q": "Spread: Grizzlies (-3.5)",
+   "label": "Grizzlies -3.5",
+   "slug": "nba-mem-was-2026-11-16-spread-away-3pt5",
+   "market_id": "7081779",
    "side": "yes",
-   "score": 32,
+   "score": 39,
    "whales": 4,
-   "invested": 6155,
-   "start": "2026-11-17",
-   "kalshi": "BUY YES Tristan Boyer @ 76\u00a2",
-   "kprice": 0.76,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "invested": 152286,
+   "start": "Mon Nov 16 \u00b7 4:00 PM PT",
+   "kalshi": "BUY YES Memphis wins by over 3.5 points @ 53\u00a2",
+   "kprice": 0.53,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
-   "first_score": 32,
+   "first_score": 39,
+   "result": null
+  },
+  "0x2efb54d6ad7a3c7c6d45d75cf96a9db4dcae4cd0bed92dd1e44cc66a05791f1f:yes": {
+   "tier": "top",
+   "q": "Counter-Strike: Inner Circle Esports vs Betclic Apogee Esports (BO3) - Stake Ranked Episode 6 Playoffs",
+   "label": "Inner Circle Esports",
+   "slug": "cs2-ice-bca-2026-11-17",
+   "market_id": "6675268",
+   "side": "yes",
+   "score": 51,
+   "whales": 3,
+   "invested": 5112,
+   "start": "Tue Nov 17 \u00b7 3:00 AM PT",
+   "kalshi": "BUY YES Inner Circle Esports @ 61\u00a2",
+   "kprice": 0.61,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
+   "scans": 1,
+   "first_score": 51,
    "result": null
   },
   "0xcce05048134ddb633a6501b595f250b0a16fde570031a50e93953deec0d2b302:yes": {
@@ -24694,33 +24771,33 @@
    "side": "yes",
    "score": 23,
    "whales": 1,
-   "invested": 2456,
+   "invested": 2489,
    "start": "2026-11-16",
-   "kalshi": "BUY YES Wanderers @ 49\u00a2",
-   "kprice": 0.49,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "kalshi": "BUY YES Wanderers @ 69\u00a2",
+   "kprice": 0.69,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 23,
    "result": null
   },
-  "0x2efb54d6ad7a3c7c6d45d75cf96a9db4dcae4cd0bed92dd1e44cc66a05791f1f:yes": {
+  "0x1d9d6d5d1fb316d8b0bd27c0ccdb3aced95d6d0b2f47162eebca39e082c729d1:no": {
    "tier": "fun",
-   "q": "Counter-Strike: Inner Circle Esports vs Betclic Apogee Esports (BO3) - Stake Ranked Episode 6 Playoffs",
-   "label": "Inner Circle Esports",
-   "slug": "cs2-ice-bca-2026-11-17",
-   "market_id": "6675268",
-   "side": "yes",
-   "score": 39,
+   "q": "Counter-Strike: Hype Tech vs ex-INOX Division (BO3) - NODWIN Clutch Series Group Stage",
+   "label": "ex-INOX Division",
+   "slug": "cs2-ht1-inox1-2026-11-17",
+   "market_id": "7083110",
+   "side": "no",
+   "score": 37,
    "whales": 1,
-   "invested": 776,
-   "start": "Tue Nov 17 \u00b7 3:00 AM PT",
-   "kalshi": "BUY YES Inner Circle Esports @ 60\u00a2",
-   "kprice": 0.6,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "invested": 640,
+   "start": "Tue Nov 17 \u00b7 4:00 AM PT",
+   "kalshi": "BUY YES ex-INOX Division @ 45\u00a2",
+   "kprice": 0.45,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
-   "first_score": 39,
+   "first_score": 37,
    "result": null
   },
   "0x4357ec22455170567a90116c686bc41937675b23141177615aff279abbf9cd2f:yes": {
@@ -24734,10 +24811,10 @@
    "whales": 1,
    "invested": 630,
    "start": "Mon Nov 16 \u00b7 3:45 PM PT",
-   "kalshi": "BUY YES Axorfy Gaming @ 61\u00a2",
-   "kprice": 0.61,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "kalshi": "BUY YES Axorfy Gaming @ 64\u00a2",
+   "kprice": 0.64,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 39,
    "result": null
@@ -24753,12 +24830,69 @@
    "whales": 1,
    "invested": 560,
    "start": "Tue Nov 17 \u00b7 11:00 AM PT",
-   "kalshi": "BUY NO Team Allied @ 54\u00a2",
-   "kprice": 0.54,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "kalshi": "BUY YES Nemiga Gaming @ 52\u00a2",
+   "kprice": 0.52,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 37,
+   "result": null
+  },
+  "0xcddfc23b0a6cbdb14db162437c5d2210bb20b5d382d3860cfa4b2cb570378fd5:no": {
+   "tier": "fun",
+   "q": "Spread: Rockets (-4.5)",
+   "label": "Rockets +4.5 or better for the other side",
+   "slug": "nba-hou-mia-2026-11-16-spread-away-4pt5",
+   "market_id": "7083694",
+   "side": "no",
+   "score": 38,
+   "whales": 5,
+   "invested": 10690,
+   "start": "Mon Nov 16 \u00b7 4:30 PM PT",
+   "kalshi": "BUY NO Houston wins by over 4.5 points @ 58\u00a2",
+   "kprice": 0.58,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
+   "scans": 1,
+   "first_score": 38,
+   "result": null
+  },
+  "0xca6a1331e08d95932bb3d01f58b2520a0d6cbb49da8612fcc596e585a9d9ab8b:no": {
+   "tier": "fun",
+   "q": "Spread: Rockets (-3.5)",
+   "label": "Rockets +3.5 or better for the other side",
+   "slug": "nba-hou-mia-2026-11-16-spread-away-3pt5",
+   "market_id": "7083688",
+   "side": "no",
+   "score": 36,
+   "whales": 3,
+   "invested": 3866,
+   "start": "Mon Nov 16 \u00b7 4:30 PM PT",
+   "kalshi": "BUY NO Houston wins by over 3.5 points @ 54\u00a2",
+   "kprice": 0.54,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
+   "scans": 1,
+   "first_score": 36,
+   "result": null
+  },
+  "0x53f42c56f8bd05b0d979b4512afc2651ad301dc081ca72e4aee506b0349f7632:no": {
+   "tier": "fun",
+   "q": "Sydney: Casey Hoole vs Florian Broska",
+   "label": "Florian Broska",
+   "slug": "atp-hoole-broska-2026-11-16",
+   "market_id": "7037451",
+   "side": "no",
+   "score": 31,
+   "whales": 2,
+   "invested": 6236,
+   "start": "2026-11-16",
+   "kalshi": "BUY YES Florian Broska @ 37\u00a2",
+   "kprice": 0.37,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
+   "scans": 1,
+   "first_score": 31,
    "result": null
   },
   "0xd36f0bb90aab237ae44d7df9dddb1a299c30743cb28c6a3a5be1d849962194cc:yes": {
@@ -24774,48 +24908,29 @@
    "start": "Tue Nov 17 \u00b7 5:30 AM PT",
    "kalshi": "BUY YES PuckChamp @ 29\u00a2",
    "kprice": 0.29,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 38,
    "result": null
   },
-  "0x1d9d6d5d1fb316d8b0bd27c0ccdb3aced95d6d0b2f47162eebca39e082c729d1:no": {
+  "0x6eb81f3d9c16eef9c2d5e074537a31a50fd0d4410e43458208010cd111a70791:no": {
    "tier": "fun",
-   "q": "Counter-Strike: Hype Tech vs ex-INOX Division (BO3) - NODWIN Clutch Series Group Stage",
-   "label": "ex-INOX Division",
-   "slug": "cs2-ht1-inox1-2026-11-17",
-   "market_id": "7083110",
+   "q": "Sydney: Matthew Dellavedova vs Jason Kubler",
+   "label": "Jason Kubler",
+   "slug": "atp-dellave-kubler-2026-11-16",
+   "market_id": "7089722",
    "side": "no",
-   "score": 37,
-   "whales": 1,
-   "invested": 640,
-   "start": "Tue Nov 17 \u00b7 4:00 AM PT",
-   "kalshi": "BUY YES ex-INOX Division @ 44\u00a2",
-   "kprice": 0.44,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "score": 30,
+   "whales": 2,
+   "invested": 4539,
+   "start": "2026-11-16",
+   "kalshi": "BUY YES Jason Kubler @ 42\u00a2",
+   "kprice": 0.42,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
-   "first_score": 37,
-   "result": null
-  },
-  "0x2b28958e31aa61df92dc2fc1d2120f43d2d1ddf82b7af55417c6a8523456c76c:no": {
-   "tier": "fun",
-   "q": "Tarleton State Texans vs. Drake Bulldogs",
-   "label": "Drake Bulldogs",
-   "slug": "cbb-tarl-drake-2026-11-16",
-   "market_id": "6919156",
-   "side": "no",
-   "score": 43,
-   "whales": 4,
-   "invested": 5926,
-   "start": "Mon Nov 16 \u00b7 4:30 PM PT",
-   "kalshi": "BUY YES Drake @ 80\u00a2",
-   "kprice": 0.8,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
-   "scans": 1,
-   "first_score": 43,
+   "first_score": 30,
    "result": null
   },
   "0xd40fce430e3028bb9de2ead41c451fc66df62dcd64c539749dffad399c0b44a4:yes": {
@@ -24831,48 +24946,29 @@
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
    "kalshi": "BUY YES Over 201.5 points @ 77\u00a2",
    "kprice": 0.77,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 20,
    "result": null
   },
-  "0xa469848630fa046e27171b3dc389d8bdd21027b126091d3dea76f437f5889b52:yes": {
-   "tier": "fun",
-   "q": "Counter-Strike: NIP vs UNiTY esports (BO3) - Stake Ranked Episode 6 Playoffs",
-   "label": "NIP",
-   "slug": "cs2-nip-unity-2026-11-17",
-   "market_id": "6675290",
-   "side": "yes",
-   "score": 47,
-   "whales": 1,
-   "invested": 1016,
-   "start": "Tue Nov 17 \u00b7 8:00 AM PT",
-   "kalshi": "BUY YES NIP @ 80\u00a2",
-   "kprice": 0.8,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+  "0x205a78a150a9374b5c0d7b5ce1ad808f8a815c0dd5fab67a8844d2208c68cac0:no": {
+   "tier": "poly",
+   "q": "Grizzlies vs. Wizards: O/U 233.5",
+   "label": "UNDER",
+   "slug": "nba-mem-was-2026-11-16-total-233pt5",
+   "market_id": "7081730",
+   "side": "no",
+   "score": 30,
+   "whales": 2,
+   "invested": 20596,
+   "start": "Mon Nov 16 \u00b7 4:00 PM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
-   "first_score": 47,
-   "result": null
-  },
-  "0x275ab6a32a046d0b7045c9d844eca4f58c53346a5b172c04a83a6e245c28753d:yes": {
-   "tier": "fun",
-   "q": "Kobe: Kasidit Samrej vs Yuta Tomida",
-   "label": "Kasidit Samrej",
-   "slug": "atp-samrej-tomida-2026-11-16",
-   "market_id": "7036482",
-   "side": "yes",
-   "score": 22,
-   "whales": 1,
-   "invested": 666,
-   "start": "2026-11-16",
-   "kalshi": "BUY YES Kasidit Samrej @ 81\u00a2",
-   "kprice": 0.81,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
-   "scans": 1,
-   "first_score": 22,
+   "first_score": 30,
    "result": null
   },
   "0xbc29be28a92c76dea6bd90d13c1c39ef60509a4c20d47b22c57a27f8268e4b59:yes": {
@@ -24888,29 +24984,29 @@
    "start": "2026-11-17",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 30,
    "result": null
   },
-  "0xda840caa53104dc4c46adc8d16efa925b4e7c594332dee1de2feb1559850cd61:yes": {
+  "0xb77ee05aee8054b38a520df81bad089e4d06e28045d857ed5ede6224bf18dda7:no": {
    "tier": "poly",
-   "q": "Suns vs. Nuggets: O/U 229.5",
-   "label": "OVER",
-   "slug": "nba-phx-den-2026-11-16-total-229pt5",
-   "market_id": "7082926",
-   "side": "yes",
-   "score": 31,
-   "whales": 2,
-   "invested": 6186,
-   "start": "Mon Nov 16 \u00b7 6:00 PM PT",
+   "q": "Spread: Ravens (-8.5)",
+   "label": "Ravens +8.5 or better for the other side",
+   "slug": "nfl-lac-bal-2026-11-17-spread-home-8pt5",
+   "market_id": "6305597",
+   "side": "no",
+   "score": 20,
+   "whales": 1,
+   "invested": 721,
+   "start": "Mon Nov 16 \u00b7 5:15 PM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
-   "first_score": 31,
+   "first_score": 20,
    "result": null
   },
   "0x2d8848ca2dfec1b63e4d6276606214cb1148d7ab426a8746a787291d8ea061f4:yes": {
@@ -24926,8 +25022,8 @@
    "start": "Mon Nov 16 \u00b7 7:00 PM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 22,
    "result": null
@@ -24945,8 +25041,8 @@
    "start": "Mon Nov 16 \u00b7 5:00 PM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 21,
    "result": null
@@ -24964,8 +25060,8 @@
    "start": "Mon Nov 16 \u00b7 5:00 PM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 20,
    "result": null
@@ -24983,8 +25079,8 @@
    "start": "Mon Nov 16 \u00b7 5:00 PM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 20,
    "result": null
@@ -25002,8 +25098,8 @@
    "start": "Mon Nov 16 \u00b7 5:00 PM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 20,
    "result": null
@@ -25021,27 +25117,27 @@
    "start": "Tue Nov 17 \u00b7 2:00 AM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 22,
    "result": null
   },
-  "0xed2737f15fee3fb7ad614699d103678186c7065d093656e390cf6d5480895de9:no": {
+  "0x85479fb4d01dcccf73a36267466479643d9365282927a180f0de12161d9e8a11:yes": {
    "tier": "poly",
-   "q": "Montevideo Wanderers vs. CA Juventud de Las Piedras: Both Teams to Score",
-   "label": "CA Juventud de Las Piedras",
-   "slug": "uru1-wan-juv-2026-11-16-btts",
-   "market_id": "6957458",
-   "side": "no",
+   "q": "Montevideo Wanderers vs. CA Juventud de Las Piedras: O/U 2.5",
+   "label": "OVER",
+   "slug": "uru1-wan-juv-2026-11-16-total-2pt5",
+   "market_id": "6957451",
+   "side": "yes",
    "score": 20,
    "whales": 1,
-   "invested": 621,
+   "invested": 897,
    "start": "2026-11-16",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 20,
    "result": null
@@ -25059,8 +25155,8 @@
    "start": "2026-11-16",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 34,
    "result": null
@@ -25078,10 +25174,29 @@
    "start": "Mon Nov 16 \u00b7 5:00 PM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 25,
+   "result": null
+  },
+  "0x4352c0a1c1d5db94b249d00ae6d4da4b705057447ddf12d2343ca6da388d8fbc:no": {
+   "tier": "poly",
+   "q": "Grizzlies vs. Wizards: 1H O/U 120.5",
+   "label": "Wizards",
+   "slug": "nba-mem-was-2026-11-16-1h-total-120pt5",
+   "market_id": "7092620",
+   "side": "no",
+   "score": 23,
+   "whales": 1,
+   "invested": 2493,
+   "start": "Mon Nov 16 \u00b7 4:00 PM PT",
+   "kalshi": "Polymarket only",
+   "kprice": null,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
+   "scans": 1,
+   "first_score": 23,
    "result": null
   },
   "0x7802027deff7eec30043c91333d68bba8c052926996e02452b192fc48e86b7e4:no": {
@@ -25097,8 +25212,8 @@
    "start": "Mon Nov 16 \u00b7 7:00 PM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 20,
    "result": null
@@ -25116,8 +25231,8 @@
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 20,
    "result": null
@@ -25135,8 +25250,8 @@
    "start": "Tue Nov 17 \u00b7 8:00 AM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 28,
    "result": null
@@ -25154,65 +25269,46 @@
    "start": "2026-11-17",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 30,
    "result": null
   },
-  "0x0be94bdb06fa23ee5bd5faea96675133361a58b5bf01a47fdd7ad5fbf1b87718:no": {
+  "0xe9f911281a2c9b536ecb8d53f77f0805465d9f08d236af75f8634751264d5dfe:yes": {
    "tier": "poly",
-   "q": "WTT Star Contender: Ibrahim Gunduz vs Yang Sun",
-   "label": "Yang Sun",
-   "slug": "wtt-gunduz-yangsun-2026-11-17",
-   "market_id": "7069375",
-   "side": "no",
+   "q": "WTT Star Contender: Denis Ivonin vs Fanbo Meng",
+   "label": "Denis Ivonin",
+   "slug": "wtt-ivonin-meng-2026-11-17",
+   "market_id": "7069368",
+   "side": "yes",
    "score": 30,
    "whales": 1,
    "invested": 858,
    "start": "2026-11-17",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 30,
    "result": null
   },
-  "0x4d989e8a8523c67025db6ffcf924b2c2faff18eea50d3b016fee1e05bf6d43ea:yes": {
-   "tier": "poly",
-   "q": "WTT Star Contender: Yeongmin Ma vs Andrei Istrate",
-   "label": "Yeongmin Ma",
-   "slug": "wtt-ma-istrate-2026-11-17",
-   "market_id": "7069367",
-   "side": "yes",
-   "score": 30,
-   "whales": 1,
-   "invested": 851,
-   "start": "2026-11-17",
-   "kalshi": "Polymarket only",
-   "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
-   "scans": 1,
-   "first_score": 30,
-   "result": null
-  },
-  "0x55224cfe1861a71df9d1719b98da600e95b472c0e6d26c6eb60cc25338a3d580:yes": {
-   "tier": "poly",
-   "q": "Ecuador vs. Bolivia: O/U 2.5",
-   "label": "OVER",
-   "slug": "fif-ecu-bol-2026-11-17-total-2pt5",
-   "market_id": "6695300",
-   "side": "yes",
+  "0xbac4721bc747e5bc12442ae83ba7aa28252ee971b1288406c8fc30bded888592:no": {
+   "tier": "props",
+   "q": "Desmond Bane: Points O/U 17.5",
+   "label": "Desmond Bane under 17.5 points",
+   "slug": "nba-orl-bos-2026-11-16-points-desmond-bane-17pt5",
+   "market_id": "7087428",
+   "side": "no",
    "score": 20,
    "whales": 1,
-   "invested": 1162,
-   "start": "Tue Nov 17 \u00b7 3:30 PM PT",
-   "kalshi": "Polymarket only",
+   "invested": 683,
+   "start": "Mon Nov 16 \u00b7 4:00 PM PT",
+   "kalshi": "No Kalshi match",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 20,
    "result": null
@@ -25230,8 +25326,8 @@
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
    "kalshi": "BUY NO Jalen Smith: 2+ assists @ 48\u00a2",
    "kprice": 0.48,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 61,
    "result": null
@@ -25249,8 +25345,8 @@
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
    "kalshi": "No Kalshi match",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 55,
    "result": null
@@ -25266,88 +25362,31 @@
    "whales": 1,
    "invested": 554,
    "start": "Mon Nov 16 \u00b7 4:30 PM PT",
-   "kalshi": "BUY NO Joel Embiid: 4+ assists @ 50\u00a2",
-   "kprice": 0.5,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "kalshi": "BUY NO Joel Embiid: 4+ assists @ 51\u00a2",
+   "kprice": 0.51,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 51,
    "result": null
   },
-  "0xdb926ddf31fc0b34a6902b9760454d8e4f23316ab137973db2a6ae6522bd1848:no": {
+  "0xa4205ef4d7859ca4bbfbe3bf42454f854489c4187133b895d17a21175d4d668b:yes": {
    "tier": "top",
-   "q": "Spread: Grizzlies (-3.5)",
-   "label": "Grizzlies +3.5 or better for the other side",
-   "slug": "nba-mem-was-2026-11-16-spread-away-3pt5",
-   "market_id": "7081779",
-   "side": "no",
-   "score": 37,
+   "q": "Warriors vs. Pelicans",
+   "label": "Warriors",
+   "slug": "nba-gsw-nop-2026-11-16",
+   "market_id": "6567955",
+   "side": "yes",
+   "score": 51,
    "whales": 5,
-   "invested": 29030,
-   "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "BUY NO Memphis wins by over 3.5 points @ 51\u00a2",
-   "kprice": 0.51,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "invested": 132465,
+   "start": "Mon Nov 16 \u00b7 5:00 PM PT",
+   "kalshi": "BUY YES Golden State @ 60\u00a2",
+   "kprice": 0.6,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
-   "first_score": 37,
-   "result": null
-  },
-  "0x5ab1e0c7d4760f72fbaf240276e3258c51c9b686cd369df63215b1ba2bd34f85:yes": {
-   "tier": "fun",
-   "q": "Spread: Ravens (-2.5)",
-   "label": "Ravens -2.5",
-   "slug": "nfl-lac-bal-2026-11-17-spread-home-2pt5",
-   "market_id": "6305591",
-   "side": "yes",
-   "score": 20,
-   "whales": 1,
-   "invested": 11661,
-   "start": "Mon Nov 16 \u00b7 5:15 PM PT",
-   "kalshi": "BUY YES Baltimore wins by over 2.5 points @ 63\u00a2",
-   "kprice": 0.63,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
-   "scans": 1,
-   "first_score": 20,
-   "result": null
-  },
-  "0xcec2cf01b04a88fd8c5750a0c506382612ae606e0eb176d924b4ed5a82bcc9dd:yes": {
-   "tier": "top",
-   "q": "Spread: Rockets (-1.5)",
-   "label": "Rockets -1.5",
-   "slug": "nba-hou-mia-2026-11-16-spread-away-1pt5",
-   "market_id": "7083692",
-   "side": "yes",
-   "score": 24,
-   "whales": 2,
-   "invested": 10515,
-   "start": "Mon Nov 16 \u00b7 4:30 PM PT",
-   "kalshi": "BUY YES Houston wins by over 1.5 points @ 54\u00a2",
-   "kprice": 0.54,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
-   "scans": 1,
-   "first_score": 24,
-   "result": null
-  },
-  "0xe35a370066b707c21fb598bd11142a8f839023d607d73e71952cd7aefd3d6219:no": {
-   "tier": "fun",
-   "q": "Spread: Heat (-1.5)",
-   "label": "Heat +1.5 or better for the other side",
-   "slug": "nba-hou-mia-2026-11-16-spread-home-1pt5",
-   "market_id": "7083700",
-   "side": "no",
-   "score": 22,
-   "whales": 1,
-   "invested": 10000,
-   "start": "Mon Nov 16 \u00b7 4:30 PM PT",
-   "kalshi": "BUY NO Miami wins by over 1.5 points @ 58\u00a2",
-   "kprice": 0.58,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
-   "scans": 1,
-   "first_score": 22,
+   "first_score": 51,
    "result": null
   },
   "0xd52bf2df8eebb1aa0f1e87662421f431d730474c81932a434e4c66d82fa00725:yes": {
@@ -25357,16 +25396,92 @@
    "slug": "nba-orl-bos-2026-11-16",
    "market_id": "6567949",
    "side": "yes",
-   "score": 33,
-   "whales": 5,
-   "invested": 12118,
+   "score": 41,
+   "whales": 6,
+   "invested": 71597,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
    "kalshi": "BUY YES Orlando @ 24\u00a2",
    "kprice": 0.24,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
-   "first_score": 33,
+   "first_score": 41,
+   "result": null
+  },
+  "0xdb926ddf31fc0b34a6902b9760454d8e4f23316ab137973db2a6ae6522bd1848:no": {
+   "tier": "top",
+   "q": "Spread: Grizzlies (-3.5)",
+   "label": "Grizzlies +3.5 or better for the other side",
+   "slug": "nba-mem-was-2026-11-16-spread-away-3pt5",
+   "market_id": "7081779",
+   "side": "no",
+   "score": 44,
+   "whales": 11,
+   "invested": 111137,
+   "start": "Mon Nov 16 \u00b7 4:00 PM PT",
+   "kalshi": "BUY NO Memphis wins by over 3.5 points @ 49\u00a2",
+   "kprice": 0.49,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
+   "scans": 1,
+   "first_score": 44,
+   "result": null
+  },
+  "0xaac8a6b71e71bd75ad1134e7f56c6b7ea7599113b6906cb6a6af832b692102b1:yes": {
+   "tier": "top",
+   "q": "Bulls vs. Cavaliers",
+   "label": "Bulls",
+   "slug": "nba-chi-cle-2026-11-16",
+   "market_id": "6567950",
+   "side": "yes",
+   "score": 30,
+   "whales": 1,
+   "invested": 53238,
+   "start": "Mon Nov 16 \u00b7 4:00 PM PT",
+   "kalshi": "BUY YES Chicago @ 26\u00a2",
+   "kprice": 0.26,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
+   "scans": 1,
+   "first_score": 30,
+   "result": null
+  },
+  "0x03abab47adbc2dc4c195ee1f7c20c411cf38459924015b1948262d41059745e6:no": {
+   "tier": "fun",
+   "q": "Spread: Cavaliers (-8.5)",
+   "label": "Cavaliers +8.5 or better for the other side",
+   "slug": "nba-chi-cle-2026-11-16-spread-home-8pt5",
+   "market_id": "7081678",
+   "side": "no",
+   "score": 22,
+   "whales": 2,
+   "invested": 14727,
+   "start": "Mon Nov 16 \u00b7 4:00 PM PT",
+   "kalshi": "BUY NO Cleveland wins by over 8.5 points @ 51\u00a2",
+   "kprice": 0.51,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
+   "scans": 1,
+   "first_score": 22,
+   "result": null
+  },
+  "0x03abab47adbc2dc4c195ee1f7c20c411cf38459924015b1948262d41059745e6:yes": {
+   "tier": "top",
+   "q": "Spread: Cavaliers (-8.5)",
+   "label": "Cavaliers -8.5",
+   "slug": "nba-chi-cle-2026-11-16-spread-home-8pt5",
+   "market_id": "7081678",
+   "side": "yes",
+   "score": 30,
+   "whales": 4,
+   "invested": 12766,
+   "start": "Mon Nov 16 \u00b7 4:00 PM PT",
+   "kalshi": "BUY YES Cleveland wins by over 8.5 points @ 51\u00a2",
+   "kprice": 0.51,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
+   "scans": 1,
+   "first_score": 30,
    "result": null
   },
   "0xce5769585eaba514eff88efc6367d472941000a15bc1b1b06547fcda37205f1c:yes": {
@@ -25382,29 +25497,10 @@
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
    "kalshi": "Polymarket only",
    "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 31,
-   "result": null
-  },
-  "0x03abab47adbc2dc4c195ee1f7c20c411cf38459924015b1948262d41059745e6:yes": {
-   "tier": "fun",
-   "q": "Spread: Cavaliers (-8.5)",
-   "label": "Cavaliers -8.5",
-   "slug": "nba-chi-cle-2026-11-16-spread-home-8pt5",
-   "market_id": "7081678",
-   "side": "yes",
-   "score": 30,
-   "whales": 3,
-   "invested": 9236,
-   "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "BUY YES Cleveland wins by over 8.5 points @ 51\u00a2",
-   "kprice": 0.51,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
-   "scans": 1,
-   "first_score": 30,
    "result": null
   },
   "0xbf1f4fe058e91cade12bc1a3d73b9e6d159ec7a1c29d78642e0765eb44e8b34f:yes": {
@@ -25420,8 +25516,8 @@
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
    "kalshi": "BUY YES Boston wins by over 8.5 points @ 52\u00a2",
    "kprice": 0.52,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 22,
    "result": null
@@ -25433,16 +25529,16 @@
    "slug": "nba-chi-cle-2026-11-16-total-241pt5",
    "market_id": "7081671",
    "side": "no",
-   "score": 21,
+   "score": 20,
    "whales": 2,
    "invested": 6428,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "BUY NO Over 241.5 points @ 50\u00a2",
-   "kprice": 0.5,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "kalshi": "BUY NO Over 241.5 points @ 51\u00a2",
+   "kprice": 0.51,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
-   "first_score": 21,
+   "first_score": 20,
    "result": null
   },
   "0xcfc5bb99334ddf6fb5dae00206319bc7a2cd346bb8b6fe1a1839b3ebf59b9478:no": {
@@ -25452,16 +25548,16 @@
    "slug": "nba-chi-cle-2026-11-16-total-243pt5",
    "market_id": "7081701",
    "side": "no",
-   "score": 23,
-   "whales": 2,
-   "invested": 4840,
+   "score": 30,
+   "whales": 3,
+   "invested": 6220,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "BUY NO Over 243.5 points @ 54\u00a2",
-   "kprice": 0.54,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "kalshi": "BUY NO Over 243.5 points @ 55\u00a2",
+   "kprice": 0.55,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
-   "first_score": 23,
+   "first_score": 30,
    "result": null
   },
   "0xa9aead322c135a923f756066a9e5a301d525d9c8bc4ed1f63e77a59c64506d47:yes": {
@@ -25475,29 +25571,29 @@
    "whales": 2,
    "invested": 4764,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "BUY YES Over 211.5 points @ 56\u00a2",
-   "kprice": 0.56,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "kalshi": "BUY YES Over 211.5 points @ 58\u00a2",
+   "kprice": 0.58,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 24,
    "result": null
   },
-  "0x03abab47adbc2dc4c195ee1f7c20c411cf38459924015b1948262d41059745e6:no": {
+  "0x205a78a150a9374b5c0d7b5ce1ad808f8a815c0dd5fab67a8844d2208c68cac0:yes": {
    "tier": "top",
-   "q": "Spread: Cavaliers (-8.5)",
-   "label": "Cavaliers +8.5 or better for the other side",
-   "slug": "nba-chi-cle-2026-11-16-spread-home-8pt5",
-   "market_id": "7081678",
-   "side": "no",
+   "q": "Grizzlies vs. Wizards: O/U 233.5",
+   "label": "OVER",
+   "slug": "nba-mem-was-2026-11-16-total-233pt5",
+   "market_id": "7081730",
+   "side": "yes",
    "score": 10,
    "whales": 1,
-   "invested": 4728,
+   "invested": 4731,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "BUY NO Cleveland wins by over 8.5 points @ 51\u00a2",
-   "kprice": 0.51,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "kalshi": "No Kalshi match",
+   "kprice": null,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 10,
    "result": null
@@ -25515,8 +25611,8 @@
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
    "kalshi": "BUY YES Memphis wins by over 2.5 points @ 54\u00a2",
    "kprice": 0.54,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 30,
    "result": null
@@ -25534,86 +25630,10 @@
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
    "kalshi": "BUY YES Boston wins by over 10.5 points @ 45\u00a2",
    "kprice": 0.45,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
    "first_score": 15,
-   "result": null
-  },
-  "0x205a78a150a9374b5c0d7b5ce1ad808f8a815c0dd5fab67a8844d2208c68cac0:no": {
-   "tier": "poly",
-   "q": "Grizzlies vs. Wizards: O/U 233.5",
-   "label": "UNDER",
-   "slug": "nba-mem-was-2026-11-16-total-233pt5",
-   "market_id": "7081730",
-   "side": "no",
-   "score": 14,
-   "whales": 1,
-   "invested": 2714,
-   "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "Polymarket only",
-   "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
-   "scans": 1,
-   "first_score": 14,
-   "result": null
-  },
-  "0x205a78a150a9374b5c0d7b5ce1ad808f8a815c0dd5fab67a8844d2208c68cac0:yes": {
-   "tier": "top",
-   "q": "Grizzlies vs. Wizards: O/U 233.5",
-   "label": "OVER",
-   "slug": "nba-mem-was-2026-11-16-total-233pt5",
-   "market_id": "7081730",
-   "side": "yes",
-   "score": 13,
-   "whales": 1,
-   "invested": 2473,
-   "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "No Kalshi match",
-   "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
-   "scans": 1,
-   "first_score": 13,
-   "result": null
-  },
-  "0xce5769585eaba514eff88efc6367d472941000a15bc1b1b06547fcda37205f1c:no": {
-   "tier": "top",
-   "q": "Magic vs. Celtics: O/U 212.5",
-   "label": "UNDER",
-   "slug": "nba-orl-bos-2026-11-16-total-212pt5",
-   "market_id": "7082821",
-   "side": "no",
-   "score": 17,
-   "whales": 3,
-   "invested": 2118,
-   "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "No Kalshi match",
-   "kprice": null,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
-   "scans": 1,
-   "first_score": 17,
-   "result": null
-  },
-  "0xcfc5bb99334ddf6fb5dae00206319bc7a2cd346bb8b6fe1a1839b3ebf59b9478:yes": {
-   "tier": "top",
-   "q": "Bulls vs. Cavaliers: O/U 243.5",
-   "label": "OVER",
-   "slug": "nba-chi-cle-2026-11-16-total-243pt5",
-   "market_id": "7081701",
-   "side": "yes",
-   "score": 7,
-   "whales": 1,
-   "invested": 2109,
-   "start": "Mon Nov 16 \u00b7 4:00 PM PT",
-   "kalshi": "BUY YES Over 243.5 points @ 47\u00a2",
-   "kprice": 0.47,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
-   "scans": 1,
-   "first_score": 7,
    "result": null
   },
   "0x12200299d160ea8b38497d1e88f7f39a6090a01ab0732488467d7c5c891ff3d5:no": {
@@ -25623,16 +25643,16 @@
    "slug": "nba-orl-bos-2026-11-16-spread-home-7pt5",
    "market_id": "7081707",
    "side": "no",
-   "score": 22,
-   "whales": 1,
-   "invested": 1974,
+   "score": 28,
+   "whales": 2,
+   "invested": 2532,
    "start": "Mon Nov 16 \u00b7 4:00 PM PT",
    "kalshi": "BUY NO Boston wins by over 7.5 points @ 45\u00a2",
    "kprice": 0.45,
-   "last_seen": 1794869249,
-   "first_seen": 1794869249,
+   "last_seen": 1794870854,
+   "first_seen": 1794870854,
    "scans": 1,
-   "first_score": 22,
+   "first_score": 28,
    "result": null
   }
  }
