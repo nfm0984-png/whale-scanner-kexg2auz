@@ -615,7 +615,7 @@ def attach_windows(c, windows):
     c['badge'] = badge_of(win)
 
 # ---- conviction: big bets are the real ones ----
-CONV_HIGH_X = 2.0
+CONV_HIGH_X = 1.5  # loosened Nov 15 (was 2x): a big bet is 1.5x the capper's usual size
 CONV_LOW_X = 0.25
 CONV_WEIGHT = {'H': 1.5, 'N': 1.0, 'T': 0.1}
 

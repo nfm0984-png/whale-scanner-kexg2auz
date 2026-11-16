@@ -2,10 +2,10 @@
 """Proven Picks (Noel, Nov 15): every open sports pick from ELITE cappers only.
 
 Elite (computed fresh every scan/refresh from capper_history + 30-day backfill):
-  20+ graded copyable $500+ picks, copyable overall ROI >= +15%, Polymarket P&L positive over the past
+  12+ graded copyable $500+ picks (12-19 = small sample), copyable overall ROI >= +15%, Polymarket P&L positive over the past
   week, month and year (Hot), not Cooling (14-day form: 5+ picks with negative ROI), not losing on Noel's own
   copies once 3+ legs are graded, and not a near-certain-bet record (average entry on graded $500+ bets >= 90¢).
-  A pick only appears if that capper also has sport-specific ROI >= +20% over 10+ graded bets in THAT sport.
+  A pick only appears if that capper also has sport-specific ROI >= +20% (+10% at 100+ graded total) over 10+ graded bets in THAT sport. Elites count from $300.
   Overall ROI >= +20% and overall win rate >= 60% are ranking bonuses, not exclusions (a capper at +15% overall
   who clears the sport bar, e.g. Siddhartha1, stays). There is no cap on how many cappers can be elite.
 For each elite whale, all open sports positions on games in the next ~48h (Polymarket Data API, public) are listed with
@@ -27,13 +27,20 @@ import capper_history as ch
 import backfill as bf
 
 PT = dt.timezone(dt.timedelta(hours=-8))
-ELITE_MIN_N = 20
+ELITE_MIN_N = 12          # loosened Nov 15 (was 20); 12-19 graded = small sample
+ELITE_FULL_N = 20
 ELITE_MIN_ROI = 15.0
 ELITE_ROI_BONUS = 20.0
 ELITE_MIN_WR = 60.0
 ELITE_MAX_AVG = 0.90
 SPORT_BAR_N = 10
 SPORT_BAR_ROI = 20.0
+SPORT_BAR_ROI_VOL = 10.0      # loosened Nov 15: +10% sport ROI for cappers with 100+ graded bets total
+SPORT_BAR_VOL_N = 100
+ELITE_MIN_BET = 300           # loosened Nov 15: elites may bet $300+ (everyone else $500)
+
+def sport_bar_roi(c):
+    return SPORT_BAR_ROI_VOL if ((c or {}).get('n') or 0) >= SPORT_BAR_VOL_N else SPORT_BAR_ROI
 HORIZON_H = 48
 GOOD_LO, GOOD_HI = 0.45, 0.92
 OUT = os.path.join(HERE, 'proven_picks.json')
@@ -79,7 +86,7 @@ def _names_clash(a, b):
     return False
 
 def best_sport_bar(c, sport=None):
-    """A sport record clears the bar at 10+ graded and ROI >= +20%."""
+    """A sport record clears the bar at 10+ graded and ROI >= +20% (+10% for cappers with 100+ graded bets)."""
     sports = c.get('sports') or {}
     items = [(sport, sports.get(sport) or {})] if sport else list(sports.items())
     best = None
@@ -88,7 +95,7 @@ def best_sport_bar(c, sport=None):
             continue
         n = sr.get('n') or 0
         roi = sr.get('roi')
-        if n >= SPORT_BAR_N and roi is not None and roi >= SPORT_BAR_ROI:
+        if n >= SPORT_BAR_N and roi is not None and roi >= sport_bar_roi(c):
             cand = {'sport': name, 'w': sr.get('w') or 0, 'l': sr.get('l') or 0, 'n': n, 'roi': roi}
             if best is None or (cand['roi'], cand['n']) > (best['roi'], best['n']):
                 best = cand
@@ -128,7 +135,7 @@ def elite_check(c):
     if c.get('croi') is None or c['croi'] < ELITE_MIN_ROI:
         why.append('ROI %s%% < +15%%' % (c.get('croi'),))
     if not best_sport_bar(c):
-        why.append('no sport with 10+ graded and +20% ROI')
+        why.append('no sport with 10+ graded and +%d%% ROI' % sport_bar_roi(c))
     if not (pos('week') and pos('month') and pos('year')):
         why.append('not Hot (week/month/year P&L not all up)')
     if c.get('badge') == 'Cold':
@@ -260,23 +267,23 @@ def build(emb, store=None, write=True):
         med = c.get('medBet')
         mult = round(p['cost'] / med, 2) if med else None
         # A pick only appears if this capper clears the sport bar in THIS sport.
-        sport_bar_ok = (srec.get('n') or 0) >= SPORT_BAR_N and srec.get('roi') is not None and srec['roi'] >= SPORT_BAR_ROI
+        sport_bar_ok = (srec.get('n') or 0) >= SPORT_BAR_N and srec.get('roi') is not None and srec['roi'] >= sport_bar_roi(c)
         if not sport_bar_ok:
             continue
         losing_sport = (srec.get('n') or 0) >= ch.SPORT_MIN_N and srec.get('roi') is not None and srec['roi'] < 0
         winning_sport = sport_bar_ok and srec['w'] > srec['l']
-        small = p['cost'] < 500 or (mult is not None and mult < 0.5) or ch.conviction_of(c, p['cost']) == 'T'
+        small = p['cost'] < ELITE_MIN_BET or (mult is not None and mult < 0.5) or ch.conviction_of(c, p['cost']) == 'T'
         kp = (k or {}).get('price')
         reasons = []
         if small:
-            reasons.append('small bet' if p['cost'] >= 500 else 'small bet (under $500)')
+            reasons.append('small bet' if p['cost'] >= ELITE_MIN_BET else 'small bet (under $%d)' % ELITE_MIN_BET)
         if losing_sport:
             reasons.append('losing in ' + sport)
         if not k or kp is None:
             reasons.append('no Kalshi market')
         if reasons:
             verdict = 'CAUTION'
-        elif (mult is None or mult >= 1) and p['cost'] >= 500 and winning_sport and GOOD_LO <= kp <= GOOD_HI:
+        elif (mult is None or mult >= 1) and p['cost'] >= ELITE_MIN_BET and winning_sport and GOOD_LO <= kp <= GOOD_HI:
             verdict = 'GOOD'
         else:
             verdict = 'OK'
@@ -293,7 +300,7 @@ def build(emb, store=None, write=True):
             'startTs': ts, 'start': pt(ts) if ts else (bf.slug_date(p['slug']) or '') + ' (time TBD)',
             'cost': round(p['cost']), 'avg': p['avg'], 'now': p.get('now'), 'usual': med, 'mult': mult,
             'kalshi': k, 'sportRec': srec, 'f14': c.get('f14'), 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi'),
-            'badge': c.get('badge'), 'verdict': verdict, 'why': reasons,
+            'badge': c.get('badge'), 'verdict': verdict, 'why': reasons, 'smallSample': (c.get('cn') or 0) < ELITE_FULL_N, 'cn': c.get('cn'),
             'inTop': p['pid'] in {x.get('id') for x in (emb or {}).get('signals') or []},
         })
     order = {'GOOD': 0, 'OK': 1, 'CAUTION': 2}
@@ -330,12 +337,12 @@ def build(emb, store=None, write=True):
     out.sort(key=lambda r: (order[r['verdict']], r['startTs'] or 10 ** 12, -r['cost']))
     res = {
         'updatedTs': int(now), 'updatedAt': pt(now),
-        'rule': 'Elite cappers only: 20+ big bets, +15% ROI, Hot, and +20% ROI in that sport. Split/both-sides games hidden.',
+        'rule': 'Elite: 12+ graded big bets (12-19 = small sample), +15% ROI, Hot, and +20% ROI in the sport (+10% if 100+ graded). Elites $300+, others $500+. Split games hidden.',
         'splitGames': sorted(split_events),
         'elite': [{'wallet': c['wallet'], 'name': c.get('name'), 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi'),
                    'wr': c.get('cwr'), 'quality': c.get('quality'), 'rankScore': elite_rank_score(c), 'avgEntry': c.get('avgEntry'),
                    'sports': sport_bars(c),
-                   'f14': c.get('f14'), 'badge': c.get('badge'), 'usual': c.get('medBet'), 'open': len(opens.get(c['wallet']) or [])} for c in elite],
+                   'f14': c.get('f14'), 'badge': c.get('badge'), 'usual': c.get('medBet'), 'cn': c.get('cn'), 'n': c.get('n'), 'smallSample': (c.get('cn') or 0) < ELITE_FULL_N, 'open': len(opens.get(c['wallet']) or [])} for c in elite],
         'nearMiss': near[:25],
         'picks': out,
         'counts': {v: sum(1 for r in out if r['verdict'] == v) for v in order},

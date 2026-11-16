@@ -142,7 +142,8 @@ for off in range(0, 500, 100):
     if len(d['markets']) < 100: break
 found_markets = len(mk); MK_ALL = {m['id']: m for m in mk}
 def ets(x): return dt.datetime.fromisoformat(x.replace(' ', 'T').replace('Z', '+00:00')).timestamp()
-WIN_END = NOW + 12 * 3600; WIN_START = NOW - 5 * 3600
+WIN_H = 36  # Nov 15: was 12h; 36h keeps overnight/early-morning and next-day games (Asia, Europe, esports, tennis)
+WIN_END = NOW + WIN_H * 3600; WIN_START = NOW - 5 * 3600
 mk = [m for m in mk if re.search(r'-20\d\d-\d\d-\d\d', m['slug']) and WIN_START <= ets(m['end_date']) <= WIN_END]
 in_window = len(mk)
 
@@ -239,12 +240,24 @@ KSER = {'nba': ('KXNBAGAME', 'KXNBATOTAL', 'KXNBASPREAD'), 'nfl': ('KXNFLGAME', 
         # golf / racing / darts: verified series (open or real past tickers). Player/driver markets use NAME_ONLY.
         'pga': ('KXGOLFTOURN', None, None), 'golf': ('KXGOLFTOURN', None, None), 'lpga': ('KXLPGATOUR', None, None),
         'f1': ('KXF1H2H', None, None), 'nascar': ('KXNASCARRACE', None, None), 'indycar': ('KXINDYCARRACE', None, None), 'indy': ('KXINDYCARRACE', None, None),
-        'darts': ('KXDARTSMATCH', None, None), 'motogp': ('KXMOTOGPRACE', None, None)}
+        'darts': ('KXDARTSMATCH', None, None), 'motogp': ('KXMOTOGPRACE', None, None),
+        # Nov 15: non-US leagues whales bet that Kalshi lists (Polymarket slug prefix -> Kalshi series)
+        'itf': ('KXITFMATCH', None, None), 'es2': ('KXLALIGA2GAME', 'KXLALIGA2TOTAL', 'KXLALIGA2SPREAD'),
+        'conl': ('KXCONCACAFNLGAME', None, None), 'el1': ('KXEFLL1GAME', None, None), 'el2': ('KXEFLL2GAME', None, None),
+        'per1': ('KXPERLIGA1GAME', None, None), 'uru1': ('KXURYPDGAME', None, None), 'ecu1': ('KXECULPGAME', None, None), 'bol1': ('KXBOLPDIVGAME', None, None),
+        'argpn': ('KXARGNACBGAME', None, None), 'ja2': ('KXJ2LEAGUEGAME', None, None), 'ja3': ('KXJ3LEAGUEGAME', None, None),
+        'chi': ('KXCHNSLGAME', None, None), 'chi1': ('KXCHNL1GAME', None, None), 'afcq': ('KXAFCONGAME', None, None),
+        'hr1': ('KXHNLGAME', None, None), 'lva1': ('KXLVAVIRGAME', None, None), 'ned2': ('KXEERSTEDIVGAME', None, None), 'uslc': ('KXUSLGAME', None, None),
+        'liiga': ('KXLIIGAGAME', None, None),
+        'bkjpn': ('KXJBLEAGUEGAME', None, None), 'bkkbl': ('KXKBLGAME', 'KXKBLTOTAL', 'KXKBLSPREAD'), 'bknbl': ('KXNBLGAME', 'KXNBLTOTAL', 'KXNBLSPREAD'),
+        'bkbbl': ('KXBBLGAME', None, None), 'bkbsl': ('KXBSLGAME', 'KXBSLTOTAL', 'KXBSLSPREAD'), 'bkaba': ('KXABAGAME', 'KXABATOTAL', 'KXABASPREAD'),
+        'bkfr1': ('KXLNBELITEGAME', 'KXLNBELITETOTAL', 'KXLNBELITESPREAD'), 'bkarg': ('KXARGLNBGAME', None, None), 'bknbb': ('KXNBBGAME', None, None),
+        'bkligend': ('KXACBGAME', 'KXACBTOTAL', 'KXACBSPREAD'), 'bkcba': ('KXCBAGAME', 'KXCBATOTAL', 'KXCBASPREAD'), 'bkvtb': ('KXVTBGAME', 'KXVTBTOTAL', 'KXVTBSPREAD')}
 # tennis / MMA / boxing: Kalshi lists both singles and fights under one series; extra series tried in order when the first has no event
 # F1: H2H first for two-driver markets; KXF1RACE (multi-runner) is only used for "will X win" teamwin
-KALT = {'atp': ('KXATPCHALLENGERMATCH',), 'wta': ('KXWTACHALLENGERMATCH',), 'ufc': ('KXMMAFIGHT',), 'cs2': ('KXCSGOGAME',), 'lol': ('KXLOLLONGGAME', 'KXLOLSHORTGAME'), 'rl': ('KXRLGAME',),
+KALT = {'itf': ('KXITFWMATCH',), 'bkjpn': ('KXBLEAGUEONEGAME',), 'atp': ('KXATPCHALLENGERMATCH',), 'wta': ('KXWTACHALLENGERMATCH',), 'ufc': ('KXMMAFIGHT',), 'cs2': ('KXCSGOGAME',), 'lol': ('KXLOLLONGGAME', 'KXLOLSHORTGAME'), 'rl': ('KXRLGAME',),
         'f1': ('KXF1RACE',), 'pga': ('KXGOLFTOURN',), 'golf': ('KXGOLFTOURN',), 'lpga': ('KXLPGATOUR',)}
-NAME_ONLY = ('atp', 'wta', 'ufc', 'mma', 'box', 'pga', 'golf', 'lpga', 'f1', 'nascar', 'indycar', 'indy', 'darts', 'motogp')  # player/fighter/driver markets: match by name, not slug code
+NAME_ONLY = ('atp', 'wta', 'itf', 'ufc', 'mma', 'box', 'pga', 'golf', 'lpga', 'f1', 'nascar', 'indycar', 'indy', 'darts', 'motogp')  # player/fighter/driver markets: match by name, not slug code
 KM = {}
 
 # Per-game player-prop series (title like "Ryan Rollins: 20+ points"). Not awards, season leaders, or protected/ladder variants.
@@ -1101,7 +1114,7 @@ def risks(s_):
     if (s_.get('game') or {}).get('src') != 'ESPN': r.append('Start time not confirmed by ESPN (' + (s_.get('game') or {}).get('src', 'unknown') + ').')
     return r
 for s_ in CONS + FUN + POLY + GLUE + PROPS + LONGSHOTS + BIGGEST + UPCOMING: s_['risks'] = risks(s_)
-out = dict(scannedAt=pt(NOW), ts=NOW, secs=round(time.time() - T0), settings=dict(cappers=A.cappers, min=A.min, wallets=A.wallets, markets=A.markets, windowH=12),
+out = dict(scannedAt=pt(NOW), ts=NOW, secs=round(time.time() - T0), settings=dict(cappers=A.cappers, min=A.min, wallets=A.wallets, markets=A.markets, windowH=WIN_H),
     coverage=dict(cappers=len(cappers), qualified=sum(qualifies(c) for c in cappers.values()), golden=sum(golden(c) for c in cappers.values()),
                   marketsFound=found_markets, marketsInWindow=in_window, marketsScanned=min(30, len(ONK)), hedgedExcluded=two_sided, twoSidedExcluded=two_sided, lbAll=LB, lb30=LB, notOnKalshi=len(NOT_ON_KALSHI), picksOnKalshi=len(ONK), sideGroups=len(signals),
                   walletsLoaded=len(POS), positionsLoaded=sum(len(v) for v in POS.values()), bets=len(BETS), buysRaw=len(RAW_BUYS), buys=len(BUYS),
