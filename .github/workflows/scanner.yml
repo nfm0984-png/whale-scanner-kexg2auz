@@ -85,6 +85,19 @@ jobs:
             echo "Running refresh (event=$EVENT_NAME schedule=${SCHEDULE:-n/a})"
             python3 -u refresh.py
           fi
+      - name: Kalshi display lines (best effort, falls back to the last committed file)
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+        continue-on-error: true
+        run: |
+          cp -f kalshi_display.json /tmp/kalshi_display.prev.json 2>/dev/null || echo '{"events":{},"byTicker":{}}' > /tmp/kalshi_display.prev.json
+          ok=0
+          if timeout 600 python3 scanner/kalshi_display.py; then
+            if python3 -c 'import json,sys; d=json.load(open("kalshi_display.json")); sys.exit(0 if d.get("events") else 1)'; then ok=1; fi
+          fi
+          if [ "$ok" -ne 1 ]; then
+            echo "kalshi_display step failed or produced no events; keeping the last file"
+            cp -f /tmp/kalshi_display.prev.json kalshi_display.json
+          fi
       - name: Commit new data
         if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
         env:
@@ -95,7 +108,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # Data/site outputs only. Never add .trigger_token or scanner/.orca_api_key.
-          outs=(data.json proven_picks.json scanner/history.json scanner/page_embed.json scanner/capper_history.json scanner/whale_windows.json scanner/tracked_cappers.json scanner/backfill.json scanner/proven_picks.json scanner/wallet_stats.json)
+          outs=(data.json proven_picks.json scanner/history.json scanner/page_embed.json scanner/capper_history.json scanner/whale_windows.json scanner/tracked_cappers.json scanner/backfill.json scanner/proven_picks.json scanner/wallet_stats.json kalshi_display.json)
 
           validate_outs() {
             python3 scanner/validate_json.py "$1" "${outs[@]}"
@@ -117,6 +130,7 @@ jobs:
             [ -f /tmp/scanner-out/backfill.json ] && cp -f /tmp/scanner-out/backfill.json scanner/backfill.json
             [ -f /tmp/scanner-out/proven_picks.json ] && cp -f /tmp/scanner-out/proven_picks.json scanner/proven_picks.json && cp -f /tmp/scanner-out/proven_picks.json proven_picks.json
             [ -f /tmp/scanner-out/wallet_stats.json ] && cp -f /tmp/scanner-out/wallet_stats.json scanner/wallet_stats.json
+            [ -f /tmp/scanner-out/kalshi_display.json ] && cp -f /tmp/scanner-out/kalshi_display.json kalshi_display.json
           }
           commit_outs() {
             validate_outs "pre-commit" || { echo "ERROR: refusing to commit invalid JSON"; return 1; }
