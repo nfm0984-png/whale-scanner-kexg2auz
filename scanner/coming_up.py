@@ -9,6 +9,7 @@ Picks ($500/$300) pick rules.
 import collections, json, re, urllib.request
 import wallet_flags as wf
 import capper_history as ch
+import kalshi_names as kn
 
 LEAN_MIN = 100
 LIVE_SECS = int(3.5 * 3600)
@@ -259,11 +260,10 @@ def _title_teams(title):
     parts = [p.strip() for p in re.split(r'\s+vs\.?\s+', s, flags=re.I) if p.strip()]
     return parts[:2] if len(parts) >= 2 else parts
 
+def _name_tokens(s):
+    return kn.tokens(s)
 def _name_hit(name, team):
-    if not name or not team:
-        return False
-    a, b = name.lower(), team.lower()
-    return a == b or a in b or b in a
+    return kn.name_hit(name, team)
 
 def _other_team_label(known, teams, nick=False):
     if not known or len(teams) < 2:
@@ -633,16 +633,11 @@ def _match_team_market(markets, label, exclude_ticker=None):
     if not markets or not label:
         return None
     cands = [m for m in markets if m and m.get('ticker') != exclude_ticker and (m.get('ticker') or '').rsplit('-', 1)[-1] != 'TIE']
-    def title_of(m):
-        return m.get('yes_sub_title') or m.get('title') or ''
-    exact = [m for m in cands if _name_hit(label, title_of(m)) or _name_hit(title_of(m), label)]
-    if len(exact) == 1:
-        return exact[0]
-    if exact:
-        return exact[0]
-    if len(cands) == 1:
-        return cands[0]
-    return None
+    wrapped = []
+    for m in cands:
+        wrapped.append({"yes_sub_title": m.get('yes_sub_title') or m.get('title') or '', "_m": m})
+    hit = kn.find_team_market(wrapped, label)
+    return hit.get("_m") if hit else None
 
 def _moneyline_title(src_market, event, game_title, src, peer=None):
     if event and event.get('title'):

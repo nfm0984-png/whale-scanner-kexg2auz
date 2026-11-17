@@ -514,9 +514,9 @@ def find_event(series, info, kind=None):
         if hits and (not best or hits > best[0]): best = (hits, e, ms)
     return best
 def norm(x): return re.sub(r'[^a-z0-9 ]', '', (x or '').lower()).strip()
+import kalshi_names as _knames
 def namematch(a, b):
-    a, b = norm(a), norm(b)
-    return bool(a and b) and (a == b or a.startswith(b) or b.startswith(a) or (len(b) > 3 and b in a) or (len(a) > 3 and a in b))
+    return _knames.name_hit(a, b)
 def suffix(m): return m['ticker'].rsplit('-', 1)[1]
 def fp(x):
     try: return float(x)
@@ -1321,6 +1321,12 @@ try:
 except Exception as _e:
     print('comingUp failed:', _e)
     emb.setdefault('comingUp', []); emb.setdefault('totalComingUp', 0)
+try:
+    import kalshi_cappers as _kc
+    _kc.attach(emb, NOW)
+except Exception as _e:
+    print('kalshiCappers failed:', _e, flush=True)
+    emb.setdefault('kalshiCappers', {'cappers': [], 'combos': [], 'coverage': {}, 'blocklist': ['Wiseandstrong']})
 json.dump(emb, open(os.path.join(HERE, 'page_embed.json'), 'w'), separators=(',', ':'))
 open(os.path.join(HERE, 'page_data_line.txt'), 'w').write('const DATA: ScanData = ' + json.dumps(emb, separators=(',', ':')) + ';')
 print('embed bytes', len(json.dumps(emb, separators=(',', ':'))))

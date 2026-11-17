@@ -20,7 +20,30 @@ interface ComingMarket { id: string; kind: string; q?: string; sides: ComingSide
 interface ComingGame { id: string; game: string; league: string; startTs: number; start: string; capperCount?: number; capperRoi?: number | null; state?: string | null; phase?: string | null; markets: ComingMarket[] }
 interface Scan { ts: number; signals: number; fun: number; poly?: number; glue?: number; props?: number; longshots?: number; biggest?: number; upcoming?: number; calls: number; cappers?: number; bets?: number; buys?: number; wallets?: number }
 interface Cols { f: string[]; r: unknown[][] }
-interface ScanData { scannedAt: string; ts: number; secs: number; settings: { cappers: number; min: number; wallets: number; markets: number; windowH: number }; coverage: { cappers: number; qualified: number; golden: number; marketsFound: number; marketsInWindow: number; marketsScanned: number; hedgedExcluded: number; twoSidedExcluded: number; walletsLoaded: number; positionsLoaded: number; bets: number; buysRaw: number; buys: number; orcaCalls: number; orcaErrors: string[]; kalshiSeries: number; kalshiMatched: number; espnLeagues: number; lb30?: { asOf: string | null; start: string | null; end: string | null; scanned: number; deepestRank: number; skippedNonSports: number; skippedNoPositions: number; endpoint?: string; params?: string }; lbAll?: { asOf: string | null; start: string | null; end: string | null; scanned: number; deepestRank: number; skippedNonSports: number; skippedNoPositions: number; endpoint?: string; params?: string }; notOnKalshi?: number }; signals: Pick[]; totalSignals: number; fun: Pick[]; totalFun: number; poly?: Pick[]; totalPoly?: number; glue?: Pick[]; totalGlue?: number; props?: Pick[]; totalProps?: number; longshots?: Pick[]; totalLongshots?: number; biggest?: Pick[]; totalBiggest?: number; upcoming?: Pick[]; totalUpcoming?: number; history: Hist[]; scans: Scan[]; buysC: Cols; betsC: Cols; tradersC: Cols; partNames: string[]; refreshedAt?: string; refreshTs?: number; capperHistory?: CapperHistory; provenPicks?: ProvenData; comingUp?: ComingGame[]; totalComingUp?: number; comingUpCappers?: number }
+interface KalshiCapperPick {
+  id: string; ticker: string; eventTicker?: string; marketTitle?: string; contractTitle?: string;
+  backing: string; action: string; side?: string; yesNo?: string; label: string;
+  entry: number | null; price: number | null; yesAsk?: number | null; noAsk?: number | null;
+  yesSubTitle?: string; noSubTitle?: string; cost: number; contracts?: number;
+  lastTs?: number | null; startTs?: number; start?: string; state?: string; league: string; game: string;
+  stale?: boolean; slip?: number | null; priceMoved?: boolean;
+}
+interface KalshiCapper {
+  nickname: string; profileUrl: string; joinedAt?: string; followers?: number;
+  ranks?: Record<string, number>; pnl?: number | null; weeklyPnl?: number | null; monthlyPnl?: number | null;
+  markets?: number; avgEntry?: number | null; medStake?: number | null; floor?: number; shortRecord?: boolean;
+  recordLine?: string; formPnl?: number | null; score?: number; picks: KalshiCapperPick[];
+}
+interface KalshiComboLeg {
+  nickname: string; pickId: string; game: string; league: string; label: string; price: number | null;
+  ticker?: string; action?: string; marketTitle?: string; backing?: string; yesNo?: string;
+  yesSubTitle?: string; noSubTitle?: string; contractTitle?: string;
+}
+interface KalshiCappersData {
+  updatedAt?: string; updatedTs?: number; blocklist?: string[]; coverage?: Record<string, number | string | string[] | Record<string, number>>;
+  cappers?: KalshiCapper[]; combos?: { combined: number; legs: KalshiComboLeg[] }[];
+}
+interface ScanData { scannedAt: string; ts: number; secs: number; settings: { cappers: number; min: number; wallets: number; markets: number; windowH: number }; coverage: { cappers: number; qualified: number; golden: number; marketsFound: number; marketsInWindow: number; marketsScanned: number; hedgedExcluded: number; twoSidedExcluded: number; walletsLoaded: number; positionsLoaded: number; bets: number; buysRaw: number; buys: number; orcaCalls: number; orcaErrors: string[]; kalshiSeries: number; kalshiMatched: number; espnLeagues: number; lb30?: { asOf: string | null; start: string | null; end: string | null; scanned: number; deepestRank: number; skippedNonSports: number; skippedNoPositions: number; endpoint?: string; params?: string }; lbAll?: { asOf: string | null; start: string | null; end: string | null; scanned: number; deepestRank: number; skippedNonSports: number; skippedNoPositions: number; endpoint?: string; params?: string }; notOnKalshi?: number }; signals: Pick[]; totalSignals: number; fun: Pick[]; totalFun: number; poly?: Pick[]; totalPoly?: number; glue?: Pick[]; totalGlue?: number; props?: Pick[]; totalProps?: number; longshots?: Pick[]; totalLongshots?: number; biggest?: Pick[]; totalBiggest?: number; upcoming?: Pick[]; totalUpcoming?: number; history: Hist[]; scans: Scan[]; buysC: Cols; betsC: Cols; tradersC: Cols; partNames: string[]; refreshedAt?: string; refreshTs?: number; capperHistory?: CapperHistory; provenPicks?: ProvenData; comingUp?: ComingGame[]; totalComingUp?: number; comingUpCappers?: number; kalshiCappers?: KalshiCappersData }
 interface BuyRaw { ts: number; firstTs: number; fills: number; wallet: string; name: string; wr: number | null; wpnl: number; top100: boolean; rank: number | null; golden: boolean; q: string; side: string; label: string; kind: string; league: string; price: number | null; now: number | null; usd: number; shares: number | null; posCost: number; hedged: boolean; agree60: number; agreeAll: number; score: number; parts: number[]; kAct: string | null; kPrice: number | null; kContract: string | null; kEdge: number | null; kWhy: string | null; start: string; src: string; startTs: number | null; phase: string; gDetail: string; gScore: string; rank30?: number | null; rankAll?: number | null; gName?: string }
 interface BetRaw { firstTs: number | null; lastBuyTs: number | null; wallet: string; name: string; wr: number | null; resolved: number | null; cpnl: number; rank: number | null; golden: boolean; skill: boolean; top100: boolean; src: string; q: string; side: string; label: string; outcome: string; kind: string; league: string; shares: number | null; avg: number | null; now: number | null; cost: number; value: number | null; upnl: number | null; upct: number | null; consYes: number | null; consNo: number | null; agree60: number; agreeAll: number; score: number; parts: number[]; kAct: string | null; kPrice: number | null; kContract: string | null; kEdge: number | null; kWhy: string | null; start: string; src2: string; startTs: number | null; phase: string; gDetail: string; gScore: string; rank30?: number | null; rankAll?: number | null; gName?: string }
 interface Trader { wallet: string; name: string; rank: number; pnl: number; wr: number | null; resolved: number | null; wins: number | null; losses: number | null; pf: number | null; skill: boolean; golden: boolean; qualified: boolean; bets: number; value: number; lastTs: number | null; skillEdge: number | null; rank30?: number | null; sportsPct?: number | null; rankAll?: number | null; pnl30?: number | null }
@@ -1278,14 +1301,242 @@ function Hero(props: { top: number; fun: number; buys: number; bets: number; act
 interface KMarketDisp { ticker: string; title?: string; yes_sub_title?: string; no_sub_title?: string; yes_ask?: number | null; no_ask?: number | null }
 interface KEventDisp { title: string; sub_title?: string; markets: KMarketDisp[] }
 const KDISP: { events?: Record<string, KEventDisp>; byTicker?: Record<string, string> } = ((window as any).__KALSHI_DISPLAY) || {};
+const KALSHI_GENERIC = new Set(["academy", "afc", "and", "betting", "boys", "cf", "clan", "club", "clubs", "esport", "esports", "fc", "gaming", "gg", "girls", "official", "org", "sc", "sport", "sports", "team", "teams", "the", "win", "winner", "wins"]);
+const KALSHI_ALIASES: Record<string, string[]> = {
+  "hawks": ["atlanta"],
+  "celtics": ["boston"],
+  "nets": ["brooklyn"],
+  "hornets": ["charlotte"],
+  "bulls": ["chicago"],
+  "cavaliers": ["cleveland"],
+  "cavs": ["cleveland"],
+  "mavericks": ["dallas"],
+  "mavs": ["dallas"],
+  "nuggets": ["denver"],
+  "pistons": ["detroit"],
+  "warriors": ["golden state"],
+  "rockets": ["houston"],
+  "pacers": ["indiana"],
+  "clippers": ["los angeles c", "la clippers", "los angeles clippers"],
+  "lakers": ["los angeles l", "la lakers", "los angeles lakers"],
+  "grizzlies": ["memphis"],
+  "heat": ["miami"],
+  "bucks": ["milwaukee"],
+  "timberwolves": ["minnesota"],
+  "pelicans": ["new orleans"],
+  "knicks": ["new york knicks", "new york k", "ny knicks"],
+  "thunder": ["oklahoma city", "okc"],
+  "magic": ["orlando"],
+  "76ers": ["philadelphia"],
+  "sixers": ["philadelphia"],
+  "philly": ["philadelphia"],
+  "suns": ["phoenix"],
+  "blazers": ["portland"],
+  "trail blazers": ["portland"],
+  "kings": ["sacramento", "los angeles k"],
+  "spurs": ["san antonio"],
+  "raptors": ["toronto"],
+  "jazz": ["utah"],
+  "wizards": ["washington"],
+  "ducks": ["anaheim"],
+  "bruins": ["boston"],
+  "sabres": ["buffalo"],
+  "flames": ["calgary"],
+  "hurricanes": ["carolina"],
+  "canes": ["carolina"],
+  "blackhawks": ["chicago"],
+  "avalanche": ["colorado"],
+  "avs": ["colorado"],
+  "blue jackets": ["columbus"],
+  "jackets": ["columbus"],
+  "stars": ["dallas"],
+  "red wings": ["detroit"],
+  "wings": ["detroit"],
+  "oilers": ["edmonton"],
+  "panthers": ["florida"],
+  "wild": ["minnesota"],
+  "canadiens": ["montreal"],
+  "habs": ["montreal"],
+  "predators": ["nashville"],
+  "preds": ["nashville"],
+  "devils": ["new jersey"],
+  "islanders": ["new york i", "ny islanders", "new york islanders"],
+  "rangers": ["texas", "new york r", "ny rangers"],
+  "senators": ["ottawa"],
+  "sens": ["ottawa"],
+  "flyers": ["philadelphia"],
+  "penguins": ["pittsburgh"],
+  "pens": ["pittsburgh"],
+  "sharks": ["san jose"],
+  "kraken": ["seattle"],
+  "blues": ["st louis", "st. louis"],
+  "lightning": ["tampa bay"],
+  "maple leafs": ["toronto"],
+  "leafs": ["toronto"],
+  "canucks": ["vancouver"],
+  "golden knights": ["vegas", "las vegas"],
+  "knights": ["vegas", "las vegas"],
+  "capitals": ["washington"],
+  "caps": ["washington"],
+  "jets": ["winnipeg", "new york j", "ny jets"],
+  "cardinals": ["st louis", "st. louis", "arizona"],
+  "falcons": ["atlanta"],
+  "ravens": ["baltimore"],
+  "bills": ["buffalo"],
+  "bears": ["chicago"],
+  "bengals": ["cincinnati"],
+  "browns": ["cleveland"],
+  "cowboys": ["dallas"],
+  "broncos": ["denver"],
+  "lions": ["detroit"],
+  "packers": ["green bay"],
+  "texans": ["houston"],
+  "colts": ["indianapolis"],
+  "jaguars": ["jacksonville"],
+  "jags": ["jacksonville"],
+  "chiefs": ["kansas city"],
+  "raiders": ["las vegas"],
+  "chargers": ["los angeles chargers", "la chargers"],
+  "rams": ["los angeles rams", "la rams"],
+  "dolphins": ["miami"],
+  "vikings": ["minnesota"],
+  "patriots": ["new england"],
+  "saints": ["new orleans"],
+  "giants": ["san francisco", "new york g", "ny giants", "new york giants"],
+  "eagles": ["philadelphia"],
+  "steelers": ["pittsburgh"],
+  "49ers": ["san francisco"],
+  "niners": ["san francisco"],
+  "seahawks": ["seattle"],
+  "buccaneers": ["tampa bay"],
+  "bucs": ["tampa bay"],
+  "titans": ["tennessee"],
+  "commanders": ["washington"],
+  "diamondbacks": ["arizona"],
+  "dbacks": ["arizona"],
+  "braves": ["atlanta"],
+  "orioles": ["baltimore"],
+  "red sox": ["boston"],
+  "cubs": ["chicago c", "chicago cubs"],
+  "white sox": ["chicago w", "chicago white sox"],
+  "reds": ["cincinnati"],
+  "guardians": ["cleveland"],
+  "rockies": ["colorado"],
+  "tigers": ["detroit"],
+  "astros": ["houston"],
+  "royals": ["kansas city"],
+  "angels": ["los angeles a", "la angels"],
+  "dodgers": ["los angeles d", "la dodgers"],
+  "marlins": ["miami"],
+  "brewers": ["milwaukee"],
+  "twins": ["minnesota"],
+  "mets": ["new york m", "ny mets"],
+  "yankees": ["new york y", "ny yankees"],
+  "athletics": ["athletics", "oakland", "sacramento a"],
+  "as": ["athletics"],
+  "phillies": ["philadelphia"],
+  "pirates": ["pittsburgh"],
+  "padres": ["san diego"],
+  "mariners": ["seattle"],
+  "rays": ["tampa bay"],
+  "blue jays": ["toronto"],
+  "nationals": ["washington"],
+  "nats": ["washington"]
+};
+function kalshiRawName(s: string): string {
+  return (s || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+function kalshiNameTokens(s: string): string[] {
+  return kalshiRawName(s).split(/\s+/).filter((w: string) => w && !KALSHI_GENERIC.has(w) && (w.length >= 2 || /\d/.test(w)));
+}
+function kalshiBackingCore(label: string): { name: string; side: "yes" | "no" | "over" | "under" | null } {
+  let s = (label || "").trim();
+  let side: "yes" | "no" | "over" | "under" | null = null;
+  if (/^\s*under\b|\bunder\s+\d/i.test(s)) side = "under";
+  else if (/^\s*over\b|\bover\s+\d/i.test(s)) side = "over";
+  else if (/\bnot\s+to\s+win\b/i.test(s)) { side = "no"; s = s.replace(/\bnot\s+to\s+win\b/ig, ""); }
+  else if (/\bto\s+win\b/i.test(s) || /\bWIN\b/.test(s)) {
+    side = "yes";
+    s = s.replace(/\bnot\s+to\s+win\b/ig, "").replace(/\bto\s+win\b/ig, "").replace(/\bWIN\b/g, "");
+  }
+  return { name: s.replace(/\s+/g, " ").trim(), side };
+}
+function kalshiExpand(s: string): string[] {
+  const out: string[] = [s];
+  const seen: Record<string, boolean> = {};
+  seen[kalshiRawName(s)] = true;
+  const xs = kalshiNameTokens(s);
+  const keys = [xs.join(" ")].concat(xs);
+  if (xs.length >= 2) keys.push(xs.slice(-2).join(" "));
+  keys.forEach((k: string) => {
+    (KALSHI_ALIASES[k] || []).forEach((alt: string) => {
+      const r = kalshiRawName(alt);
+      if (r && !seen[r]) { seen[r] = true; out.push(alt); }
+    });
+  });
+  return out;
+}
+function kalshiTokenHit(a: string, b: string): boolean {
+  const xs = kalshiNameTokens(a);
+  const ys = kalshiNameTokens(b);
+  if (!xs.length || !ys.length) return false;
+  const xj = xs.join(" ");
+  const yj = ys.join(" ");
+  if (xj === yj) return true;
+  if (xj.indexOf(yj) >= 0 || yj.indexOf(xj) >= 0) return true;
+  const sh = xs.length <= ys.length ? xs : ys;
+  const lg = xs.length <= ys.length ? ys : xs;
+  return sh.every((w: string) => lg.indexOf(w) >= 0);
+}
 function kalshiNameHit(a: string, b: string): boolean {
-  const x = (a || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
-  const y = (b || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
-  if (!x || !y) return false;
-  if (x === y || x.indexOf(y) >= 0 || y.indexOf(x) >= 0) return true;
-  const xs = x.split(" ").filter((w: string) => w.length > 2);
-  const ys = y.split(" ").filter((w: string) => w.length > 2);
-  return xs.some((w: string) => ys.indexOf(w) >= 0 && w.length > 3);
+  const ra = kalshiRawName(a);
+  const rb = kalshiRawName(b);
+  if (ra && rb && ra === rb) return true;
+  if (kalshiTokenHit(a, b)) return true;
+  const expA = kalshiExpand(a);
+  for (let i = 1; i < expA.length; i++) {
+    if (kalshiRawName(expA[i]) === rb || kalshiTokenHit(expA[i], b)) return true;
+  }
+  const expB = kalshiExpand(b);
+  for (let i = 1; i < expB.length; i++) {
+    if (kalshiRawName(expB[i]) === ra || kalshiTokenHit(a, expB[i])) return true;
+  }
+  return false;
+}
+function kalshiNameScore(backing: string, yesTitle: string): number {
+  if (!kalshiNameHit(backing, yesTitle)) return -1;
+  const xs = kalshiNameTokens(backing);
+  const ys = kalshiNameTokens(yesTitle);
+  if (kalshiRawName(backing) === kalshiRawName(yesTitle) || (xs.length && ys.length && xs.join(" ") === ys.join(" "))) return 100;
+  if (kalshiTokenHit(backing, yesTitle)) {
+    const overlap = xs.filter((w: string) => ys.indexOf(w) >= 0).length;
+    return 80 + overlap * 2 - Math.abs(xs.length - ys.length);
+  }
+  return 50;
+}
+function findTeamMarket(markets: KMarketDisp[] | undefined, backing: string): KMarketDisp | null {
+  if (!markets || !markets.length || !backing) return null;
+  const core = kalshiBackingCore(backing);
+  const name = core.name || backing;
+  const scored = markets.map((m: KMarketDisp) => {
+    const yes = (m.yes_sub_title || "").trim();
+    return { m, yes, score: kalshiNameScore(name, yes) };
+  }).filter((x: { m: KMarketDisp; yes: string; score: number }) => x.score >= 0 && x.yes);
+  if (!scored.length) return null;
+  scored.sort((a, b) => b.score - a.score);
+  if (scored.length > 1 && scored[0].score === scored[1].score) return null;
+  return scored[0].m;
+}
+function findTotalMarket(markets: KMarketDisp[] | undefined, backing: string): KMarketDisp | null {
+  if (!markets || !markets.length) return null;
+  const mm = (backing || "").match(/(\d+(?:\.\d+)?)/);
+  if (!mm) return null;
+  const line = mm[1];
+  const hits = markets.filter((m: KMarketDisp) => {
+    const t = ((m.yes_sub_title || m.title || "") + "").toLowerCase();
+    return t.indexOf("over") >= 0 && t.indexOf(line) >= 0;
+  });
+  return hits.length === 1 ? hits[0] : null;
 }
 function eventTickerOf(ticker: string | null | undefined): string | null {
   if (!ticker) return null;
@@ -1293,29 +1544,53 @@ function eventTickerOf(ticker: string | null | undefined): string | null {
   const cut = ticker.replace(/-[A-Z0-9]+$/, "");
   return cut && cut !== ticker ? cut : null;
 }
-interface KalshiView { backing: string; marketTitle: string; outcome: string; yesNo: "Yes" | "No" | null; price: number | null; ticker: string | null }
+interface KalshiView { backing: string; marketTitle: string; outcome: string; yesNo: "Yes" | "No" | null; price: number | null; ticker: string | null; unmatched?: boolean }
 function resolveKalshiView(side: { label?: string | null; action?: string | null; kPrice?: number | null; price?: number | null; ticker?: string | null; contract?: string | null; marketTitle?: string | null; eventTitle?: string | null; yesAsk?: number | null; noAsk?: number | null; yesSubTitle?: string | null; noSubTitle?: string | null }): KalshiView {
   const backing = (side.label || "").trim();
   const evTk = eventTickerOf(side.ticker || null);
   const ev = evTk && KDISP.events ? KDISP.events[evTk] : null;
   const storedPx = side.kPrice != null ? side.kPrice : (side.price != null ? side.price : null);
+  const marketTitle = (ev && ev.title) || side.eventTitle || side.marketTitle || "";
+  const unmatched = (): KalshiView => ({ backing, marketTitle, outcome: "", yesNo: null, price: null, ticker: null, unmatched: true });
+  const core = kalshiBackingCore(backing);
+  const name = core.name || backing;
   if (ev && ev.markets && ev.markets.length) {
-    const own = ev.markets.find((m: KMarketDisp) => kalshiNameHit(backing, m.yes_sub_title || m.title || ""));
-    if (own && own.yes_ask != null) {
-      return { backing, marketTitle: ev.title || side.eventTitle || side.marketTitle || "", outcome: own.yes_sub_title || own.title || backing, yesNo: "Yes", price: own.yes_ask, ticker: own.ticker };
+    if (core.side === "over" || core.side === "under") {
+      let tot = findTotalMarket(ev.markets, backing);
+      if (!tot) tot = findTotalMarket(ev.markets, [side.marketTitle, side.eventTitle, side.contract, marketTitle].filter(Boolean).join(" "));
+      if (!tot && side.ticker) {
+        const cur = ev.markets.filter((m: KMarketDisp) => m.ticker === side.ticker)[0] || null;
+        const t = ((cur && (cur.yes_sub_title || cur.title)) || "");
+        if (cur && /over|under/i.test(t)) tot = cur;
+      }
+      if (tot) {
+        const wantYes = core.side === "over";
+        const px = wantYes ? tot.yes_ask : tot.no_ask;
+        if (px != null) return { backing, marketTitle, outcome: tot.yes_sub_title || tot.title || backing, yesNo: wantYes ? "Yes" : "No", price: px, ticker: tot.ticker, unmatched: false };
+      }
+      return unmatched();
     }
-    const cur = ev.markets.find((m: KMarketDisp) => m.ticker === side.ticker) || ev.markets[0];
-    const isYes = (side.action || "").toUpperCase().indexOf("YES") >= 0;
-    const px = isYes ? cur.yes_ask : cur.no_ask;
-    const outcome = isYes ? (cur.yes_sub_title || cur.title) : (cur.no_sub_title || cur.title);
-    return { backing, marketTitle: ev.title || side.eventTitle || side.marketTitle || "", outcome: outcome || side.contract || backing, yesNo: isYes ? "Yes" : "No", price: px != null ? px : storedPx, ticker: cur.ticker || side.ticker || null };
+    const own = findTeamMarket(ev.markets, name);
+    if (own && kalshiNameHit(name, own.yes_sub_title || "")) {
+      const wantYes = core.side !== "no";
+      const px = wantYes ? own.yes_ask : own.no_ask;
+      if (px != null) return { backing, marketTitle, outcome: own.yes_sub_title || backing, yesNo: wantYes ? "Yes" : "No", price: px, ticker: own.ticker, unmatched: false };
+    }
+    // Never fall back to markets[0] or a ticker that is not this team's contract.
+    if (backing) return unmatched();
   }
+  const storedYesName = (side.yesSubTitle || ((side.action || "").toUpperCase().indexOf("YES") >= 0 ? (side.contract || "") : "") || "").trim();
+  if (backing && storedYesName && kalshiNameHit(name, storedYesName) && (core.side !== "no") && (core.side !== "under") && (side.action || "").toUpperCase().indexOf("YES") >= 0) {
+    return { backing, marketTitle: side.eventTitle || side.marketTitle || "", outcome: storedYesName, yesNo: "Yes", price: storedPx, ticker: side.ticker || null, unmatched: false };
+  }
+  if (backing && (side.ticker || side.contract || side.action || storedYesName)) return unmatched();
   const isYes = (side.action || "").toUpperCase().indexOf("YES") >= 0;
   const outcome = isYes ? (side.yesSubTitle || side.contract || backing) : (side.noSubTitle || side.contract || backing);
-  return { backing, marketTitle: side.eventTitle || side.marketTitle || "", outcome: outcome || backing, yesNo: side.action ? (isYes ? "Yes" : "No") : null, price: storedPx, ticker: side.ticker || null };
+  return { backing, marketTitle: side.eventTitle || side.marketTitle || "", outcome: outcome || backing, yesNo: side.action ? (isYes ? "Yes" : "No") : null, price: storedPx, ticker: side.ticker || null, unmatched: false };
 }
 function applyResolvedSide(s: ComingSide): ComingSide {
   const v = resolveKalshiView(s);
+  if (v.unmatched) return { ...s, marketTitle: v.marketTitle || s.marketTitle, kPrice: null, action: null, slip: null };
   if (v.price == null || !v.yesNo) return { ...s, marketTitle: v.marketTitle || s.marketTitle };
   return {
     ...s,
@@ -1365,10 +1640,10 @@ function kalshiLinesOfGame(g: ComingGame): KalshiLineView[] {
     const rel = relabelMarketSides(m, g.game || "");
     (rel.sides || []).forEach((raw: ComingSide) => {
       const s = applyResolvedSide(raw);
-      if (s.kPrice == null && !s.action) return;
-      const backers = s.backers || [];
-      if (s.kPrice == null || !backers.length) return;
-      const view = resolveKalshiView(s);
+      const view = resolveKalshiView(raw);
+      const backers = s.backers || raw.backers || [];
+      if (!backers.length) return;
+      if (!view.unmatched && s.kPrice == null && !s.action && view.price == null) return;
       lines.push({
         key: s.id || ((m.id || "") + ":" + (s.side || s.label)),
         marketId: m.id,
@@ -1406,10 +1681,11 @@ function pickBestKalshiKey(lines: KalshiLineView[]): string | null {
 function KalshiGreenBox(props: { view: KalshiView; badge?: "best" | null; compact?: boolean; why?: string | null; onPick?: (() => void) | null; selected?: boolean }) {
   const t = useGrokTheme();
   const v = props.view;
-  const ok = !!(v.yesNo && v.price != null);
+  const unmatched = !!v.unmatched;
+  const ok = !unmatched && !!(v.yesNo && v.price != null);
   const yes = v.yesNo === "Yes";
   const pillBg = yes ? GREEN : (ok ? RED : "#9CA3AF");
-  const clickable = !!props.onPick;
+  const clickable = !!props.onPick && ok;
   const row = ok ? (v.outcome + " — " + v.yesNo) : "";
   return (
     <div>
@@ -1445,7 +1721,7 @@ function KalshiGreenBox(props: { view: KalshiView; badge?: "best" | null; compac
             </div>
           </div>
         ) : (
-          <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 6 }}><span style={{ fontWeight: 700, color: t.text.primary }}>Not on Kalshi.</span> {props.why || "No verified contract for this pick."}</div>
+          <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 6 }}><span style={{ fontWeight: 700, color: t.text.primary }}>{unmatched ? "Kalshi line not matched." : "Not on Kalshi."}</span> {unmatched ? "The backed team does not match this contract's Yes line, so no button is shown." : (props.why || "No verified contract for this pick.")}</div>
         )}
       </div>
     </div>
@@ -4186,6 +4462,149 @@ function ComingUpTab(props: { now: number }) {
   return <CapperSlateTab now={props.now} mode="coming" />;
 }
 
+function kalshiBlocked(nick: string, data: KalshiCappersData | undefined): boolean {
+  const n = (nick || "").toLowerCase();
+  return ((data && data.blocklist) || ["Wiseandstrong"]).some((x: string) => (x || "").toLowerCase() === n);
+}
+function kalshiCappersData(): KalshiCappersData {
+  const raw = ((DATA as ScanData).kalshiCappers || { cappers: [], combos: [], blocklist: ["Wiseandstrong"] }) as KalshiCappersData;
+  const blocked = new Set(((raw.blocklist && raw.blocklist.length) ? raw.blocklist : ["Wiseandstrong"]).map((x: string) => (x || "").toLowerCase()));
+  const cappers = ((raw.cappers || []) as KalshiCapper[]).filter((c: KalshiCapper) => c && c.nickname && !blocked.has(c.nickname.toLowerCase()) && (c.picks || []).length);
+  return { ...raw, cappers };
+}
+function kalshiPickView(p: KalshiCapperPick | KalshiComboLeg): { backing: string; marketTitle: string; outcome: string; yesNo: "Yes" | "No" | null; price: number | null; ticker: string | null } {
+  const backing = (p.backing || p.label || "").trim();
+  const yesNoRaw = (p as any).yesNo || "";
+  const yes = yesNoRaw ? yesNoRaw === "Yes" : ((p as any).action || "").toUpperCase().indexOf("YES") >= 0;
+  const outcome = yes ? ((p as any).yesSubTitle || (p as any).contractTitle || backing) : ((p as any).noSubTitle || (p as any).contractTitle || backing);
+  const hasSide = !!(yesNoRaw || (p as any).action);
+  return { backing, marketTitle: (p as any).marketTitle || (p as any).contractTitle || "", outcome: outcome || backing, yesNo: hasSide ? (yes ? "Yes" : "No") : null, price: (p as any).price != null ? (p as any).price : null, ticker: (p as any).ticker || null };
+}
+function KalshiCappersTab(props: { now: number }) {
+  const t = useGrokTheme();
+  const data = kalshiCappersData();
+  const cappers = (data.cappers || []).slice();
+  const pickN = cappers.reduce((n: number, c: KalshiCapper) => n + (c.picks || []).length, 0);
+  const liveN = cappers.filter((c: KalshiCapper) => (c.picks || []).some((p: KalshiCapperPick) => p.state === "live" || (!!p.startTs && (p.startTs as number) <= props.now && p.state !== "final"))).length;
+  const [sel, setSel] = useState<string[]>([]);
+  const [stakeText, setStakeText] = useState<string>("2");
+  const pickById: Record<string, KalshiCapperPick> = {};
+  cappers.forEach((c: KalshiCapper) => (c.picks || []).forEach((p: KalshiCapperPick) => { pickById[p.id] = p; }));
+  const togglePick = (p: KalshiCapperPick) => {
+    if (sel.indexOf(p.id) >= 0) { setSel(sel.filter((x: string) => x !== p.id)); return; }
+    const ev = p.eventTicker || p.ticker;
+    const withoutGame = sel.filter((id: string) => {
+      const o = pickById[id];
+      return !o || (o.eventTicker || o.ticker) !== ev;
+    });
+    if (withoutGame.length >= 3) return;
+    setSel(withoutGame.concat([p.id]));
+  };
+  const selected = sel.map((id: string) => pickById[id]).filter(Boolean);
+  const prices = selected.map((p: KalshiCapperPick) => p.price).filter((x: number | null | undefined): x is number => x != null && x > 0);
+  const combined = prices.length === selected.length && selected.length >= 1 ? parlayCombined(prices) : null;
+  const stake = Math.max(0, Number(stakeText) || 0);
+  const payout = combined && stake > 0 && combined > 0 ? stake / combined : null;
+  const stakeLabel = "$" + (stake % 1 ? stake.toFixed(2) : String(stake));
+  let parlayLine = "No legs yet";
+  if (selected.length === 1) parlayLine = "Add 1 or 2 more legs";
+  else if (selected.length >= 2 && combined != null) parlayLine = selected.length + "-leg · " + cents(combined) + (payout != null ? " · " + stakeLabel + " pays $" + payout.toFixed(2) + " if all hit" : "");
+  else if (selected.length >= 2) parlayLine = "Need a Kalshi price on every leg";
+  const combos = (data.combos || []).filter((c) => (c.legs || []).every((l: KalshiComboLeg) => pickById[l.pickId]));
+  const useCombo = (c: { legs: KalshiComboLeg[] }) => setSel(c.legs.map((l: KalshiComboLeg) => l.pickId));
+  const emptyTitle = "No Kalshi capper picks right now";
+  const emptyBody = "No public Sports-leaderboard cappers cleared the long-term record bar with a qualifying open bet right now — " + nextScanLabel(props.now) + ".";
+  return (
+    <Section heading={"Kalshi Cappers · " + cappers.length} caption={"Public Kalshi cappers · live first, then start time" + (liveN ? " · " + liveN + " live" : "")}>
+      <RecordStrip wins={journalWL().wins} losses={journalWL().losses} tiles={[{ label: "Cappers", value: String(cappers.length) }, { label: "Picks", value: String(pickN) }, { label: "Live", value: String(liveN), color: liveN ? RED : undefined }]} />
+      <div data-combo-list="1" style={{ margin: "4px 0 14px" }}>
+        <div style={{ fontSize: 16, fontWeight: 850, color: t.text.primary, marginBottom: 8 }}>Suggested $2 combos</div>
+        {combos.length ? combos.map((c, i: number) => {
+          const pay = c.combined > 0 ? 2 / c.combined : null;
+          return (
+            <div key={c.legs.map((l: KalshiComboLeg) => l.pickId).join("+")} data-combo={String(i + 1)} style={{ borderRadius: 18, border: "1.5px solid #86EFAC", background: "linear-gradient(180deg,#ECFDF3 0%, #FFFFFF 100%)", padding: "12px 14px", marginBottom: 10, boxShadow: "0 6px 16px rgba(22,163,74,0.10)" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                <div style={{ fontSize: 15, fontWeight: 850, color: GREEN }}>Combo {i + 1} · 2-leg · $2</div>
+                <button type="button" data-combo-use={String(i + 1)} onClick={() => useCombo(c)} style={{ padding: "7px 14px", borderRadius: 999, border: "none", background: GREEN, color: "#FFFFFF", fontWeight: 800, fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>Use this combo</button>
+              </div>
+              {c.legs.map((l: KalshiComboLeg, li: number) => (
+                <div key={l.pickId} style={{ marginTop: 10 }}>
+                  <div style={{ fontSize: 13, fontWeight: 800, color: t.text.secondary }}>{(li + 1) + ". " + l.league + " · " + l.game + " — " + l.label + (l.nickname ? " · " + l.nickname : "")}</div>
+                  <KalshiGreenBox view={kalshiPickView(l)} compact={true} />
+                </div>
+              ))}
+              <div style={{ fontSize: 20, fontWeight: 850, marginTop: 10, fontVariantNumeric: "tabular-nums" }}>{"Combined " + cents(c.combined) + (pay != null ? " · $2 pays $" + pay.toFixed(2) + " if both hit" : "")}</div>
+              <div style={{ fontSize: 12, color: t.text.tertiary, marginTop: 2 }}>Product of the current Kalshi ask prices, before fees. Actual payout may be a bit less.</div>
+            </div>
+          );
+        }) : <div style={{ fontSize: 13, color: t.text.secondary, padding: "10px 12px", borderRadius: 14, background: t.bg.subtle }}>No 2-leg combo clears the bar right now (Kalshi price, under 2¢ slip, different upcoming games, not stale).</div>}
+      </div>
+      <div data-parlay-builder="1" style={{ borderRadius: 18, border: "1.5px solid " + BRAND, padding: "12px 14px", background: "linear-gradient(180deg,#F5F0FF 0%, #EDE9FE 100%)", margin: "4px 0 14px", boxShadow: "0 6px 16px rgba(124,58,237,0.10)" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+          <div style={{ fontSize: 16, fontWeight: 850, color: BRAND }}>Parlay builder</div>
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <span style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary }}>Stake $</span>
+            <input data-parlay-stake="1" type="number" min="0.01" step="1" value={stakeText} onChange={(e) => setStakeText(e.target.value)} style={{ width: 72, height: 36, borderRadius: 10, border: "1px solid " + t.border.default, padding: "0 8px", fontSize: 16, fontWeight: 800, fontFamily: "inherit" }} />
+          </div>
+        </div>
+        {selected.length === 0 ? <div style={{ fontSize: 13, color: t.text.secondary, marginTop: 8 }}>Tap a Kalshi line below, or use a suggested combo.</div> : (
+          <div style={{ marginTop: 8 }}>
+            {selected.map((p: KalshiCapperPick, i: number) => (
+              <div key={p.id} style={{ fontSize: 14, lineHeight: "20px", fontWeight: 700, marginTop: 2 }}>{(i + 1) + ". " + p.game + " — " + p.label + (p.price != null ? " @ " + cents(p.price) : "")}</div>
+            ))}
+          </div>
+        )}
+        <div style={{ fontSize: 20, fontWeight: 850, marginTop: 10, fontVariantNumeric: "tabular-nums" }}>{parlayLine}</div>
+        {combined != null && selected.length >= 2 ? <div style={{ fontSize: 12, color: t.text.tertiary, marginTop: 2 }}>Product of the current Kalshi ask prices, before fees. Actual payout may be a bit less.</div> : null}
+        {sel.length >= 3 ? <div style={{ fontSize: 12, color: AMBER, marginTop: 4, fontWeight: 700 }}>Max 3 legs. Unselect one to swap.</div> : null}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 10 }}>
+          {sel.length ? <button type="button" onClick={() => setSel([])} style={{ padding: "8px 14px", borderRadius: 999, border: "1px solid " + t.border.default, background: t.bg.base, color: t.text.primary, fontWeight: 800, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>Clear</button> : null}
+        </div>
+      </div>
+      {cappers.length === 0 ? <EmptyState title={emptyTitle} body={emptyBody} /> : cappers.map((c: KalshiCapper) => {
+        const hasLive = (c.picks || []).some((p: KalshiCapperPick) => p.state === "live");
+        return (
+          <div key={c.nickname} data-kalshi-capper={c.nickname} style={{ borderRadius: 20, border: "1.5px solid " + t.border.default, background: t.bg.base, boxShadow: "0 6px 18px rgba(76,29,149,0.10)", overflow: "hidden", marginBottom: 16, fontFamily: t.font.family }}>
+            <div style={{ height: 6, background: hasLive ? "linear-gradient(90deg,#DC2626,#F97316)" : "linear-gradient(90deg," + BRAND + "," + BRAND2 + ")" }} />
+            <div style={{ padding: "12px 14px 6px", display: "flex", gap: 10, alignItems: "center" }}>
+              <Face name={c.nickname} size={44} />
+              <a href={c.profileUrl} target="_blank" rel="noopener noreferrer" style={{ flex: 1, minWidth: 0, textDecoration: "none" }}>
+                <div style={{ fontSize: 18, fontWeight: 850, color: t.text.primary, overflowWrap: "anywhere" }}>{c.nickname}</div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: (c.pnl || 0) >= 0 ? GREEN : RED, marginTop: 2 }}>{c.recordLine || "Record n/a"}</div>
+              </a>
+              {<Chip bg={GREEN} color="#FFFFFF">Kalshi</Chip>}
+              <Chip bg={t.bg.subtle} color={t.text.secondary}>{c.picks.length === 1 ? "1 pick" : c.picks.length + " picks"}</Chip>
+            </div>
+            {(c.picks || []).map((p: KalshiCapperPick) => {
+              const live = p.state === "live";
+              const stale = !!(p.stale || (p.lastTs && props.now - p.lastTs > 3600));
+              const selectedOn = sel.indexOf(p.id) >= 0;
+              return (
+                <div key={p.id} data-kalshi-pick={p.id} style={{ padding: "4px 14px 14px", borderTop: "1px solid " + t.border.default, marginTop: 8 }}>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center", marginTop: 10 }}>
+                    {live ? <Chip bg={RED} color="#FFFFFF">LIVE</Chip> : null}
+                    {stale ? <Chip bg={AMBER} color="#FFFFFF">Stale</Chip> : null}
+                    {p.priceMoved ? <Chip bg={AMBER} color="#FFFFFF">Price moved</Chip> : null}
+                    <Chip bg={BRAND} color="#FFFFFF">{p.league}</Chip>
+                    <Chip bg={t.bg.subtle} color={t.text.primary}>{p.start || (p.startTs ? ptTime(p.startTs) : "")}</Chip>
+                  </div>
+                  <div style={{ fontSize: 18, lineHeight: "23px", fontWeight: 850, marginTop: 6, overflowWrap: "anywhere" }}>{p.game}</div>
+                  <div style={{ fontSize: 16, fontWeight: 850, color: t.text.primary, marginTop: 8 }}>{p.label}</div>
+                  <div style={{ marginTop: 4, display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}><BetAmt n={p.cost} /><span style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary }}>on Kalshi</span></div>
+                  {slipWords(p.slip, p.entry) ? <div style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary, marginTop: 2 }}>{slipWords(p.slip, p.entry)}</div> : null}
+                  <div style={{ margin: "8px 0 0" }}>
+                    <KalshiGreenBox view={kalshiPickView(p)} selected={selectedOn} onPick={() => togglePick(p)} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
+    </Section>
+  );
+}
+
 export default function App() {
   const t = useGrokTheme();
   const [tab, setTab] = useState<string>("picks");
@@ -4385,7 +4804,7 @@ export default function App() {
     return !!(b && b.sport === sportFilter);
   }) : hotCapAll;
   const hotCapRows = sortHotCappers(hotCapVisible, sortOf("hot"));
-  const tabRecord = tab === "top" ? "Top 20: " + wlTop.text : tab === "longfun" ? "Longshots: " + wlLong.text + " · Fun: " + wlFun.text : tab === "fun" ? "Fun: " + wlFun.text : tab === "poly" ? "Polymarket: " + wlPoly.text : tab === "props" ? "Player Props: " + wlProps.text : tab === "longshots" ? "Longshots: " + wlLong.text : tab === "biggest" ? "Biggest Bets: " + wlBig.text : tab === "upcoming" ? "Upcoming: " + wlUp.text : tab === "cappers" ? "Cappers: " + capWlW + "-" + capWlL + " (per capper; a shared pick can count more than once)" : tab === "picks" || tab === "coming" || tab === "elite" ? "Journal: " + wins + "–" + (graded.length - wins) + (graded.length ? "  ·  " + Math.round((100 * wins) / graded.length) + "%  ·  " : "  ·  ") + nextScanLabel(now) : tab === "more" ? "Top 20 " + wlTop.text + " · Fun " + wlFun.text + " · Polymarket " + wlPoly.text + (wlGlue.w + wlGlue.l ? " · Glue " + wlGlue.text : "") + (wlProps.w + wlProps.l ? " · Props " + wlProps.text : "") + (wlLong.w + wlLong.l ? " · Longshots " + wlLong.text : "") + (wlBig.w + wlBig.l ? " · Biggest " + wlBig.text : "") + (wlUp.w + wlUp.l ? " · Upcoming " + wlUp.text : "") : "";
+  const tabRecord = tab === "top" ? "Top 20: " + wlTop.text : tab === "longfun" ? "Longshots: " + wlLong.text + " · Fun: " + wlFun.text : tab === "fun" ? "Fun: " + wlFun.text : tab === "poly" ? "Polymarket: " + wlPoly.text : tab === "props" ? "Player Props: " + wlProps.text : tab === "longshots" ? "Longshots: " + wlLong.text : tab === "biggest" ? "Biggest Bets: " + wlBig.text : tab === "upcoming" ? "Upcoming: " + wlUp.text : tab === "cappers" ? "Cappers: " + capWlW + "-" + capWlL + " (per capper; a shared pick can count more than once)" : tab === "picks" || tab === "coming" || tab === "elite" || tab === "kalshi" ? "Journal: " + wins + "–" + (graded.length - wins) + (graded.length ? "  ·  " + Math.round((100 * wins) / graded.length) + "%  ·  " : "  ·  ") + nextScanLabel(now) : tab === "more" ? "Top 20 " + wlTop.text + " · Fun " + wlFun.text + " · Polymarket " + wlPoly.text + (wlGlue.w + wlGlue.l ? " · Glue " + wlGlue.text : "") + (wlProps.w + wlProps.l ? " · Props " + wlProps.text : "") + (wlLong.w + wlLong.l ? " · Longshots " + wlLong.text : "") + (wlBig.w + wlBig.l ? " · Biggest " + wlBig.text : "") + (wlUp.w + wlUp.l ? " · Upcoming " + wlUp.text : "") : "";
   const tabCaution = tab === "poly" && wlPoly.l > wlPoly.w ? "Caution: the Polymarket tab is losing so far (" + wlPoly.text + "). Bet smaller or skip until the record turns around." : "";
 
   const journalRows = DATA.history.filter((h: Hist) => journal === "all" || (journal === "won" && h.result === "W") || (journal === "lost" && h.result === "L") || (journal === "pending" && !h.result) || (journal === "top" && (h.tier === "top" || !h.tier)) || (journal === "fun" && h.tier === "fun") || (journal === "poly" && h.tier === "poly") || (journal === "glue" && h.tier === "glue") || (journal === "props" && h.tier === "props") || (journal === "longshots" && h.tier === "longshots") || (journal === "biggest" && h.tier === "biggest") || (journal === "upcoming" && h.tier === "upcoming"));
@@ -4560,6 +4979,7 @@ export default function App() {
 
       {tab === "elite" ? <EliteTab now={now} /> : null}
       {tab === "coming" ? <ComingUpTab now={now} /> : null}
+      {tab === "kalshi" ? <KalshiCappersTab now={now} /> : null}
 
       {(
         <Section heading="More · bankroll, record, scan details" collapsible defaultOpen={false}>
@@ -4652,7 +5072,7 @@ export default function App() {
       <Floating edge="top" align="center" bar>
         <div data-tab-bar="1">
         <PillTabs
-          options={[{ value: "picks", label: "All Picks", count: bigOnly ? biggestAll.length : rankedAll.length }, { value: "elite", label: "Elite", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: sortComingGames(asComingGames((DATA.comingUp || []) as ComingGame[]), "best", now).length }, { value: "cappers", label: "Cappers", count: capRows.length }]}
+          options={[{ value: "picks", label: "All Picks", count: bigOnly ? biggestAll.length : rankedAll.length }, { value: "elite", label: "Elite", count: eliteTabCount(now) }, { value: "kalshi", label: "Kalshi Cappers", count: ((kalshiCappersData().cappers || []).length) }, { value: "coming", label: "Coming Up", count: sortComingGames(asComingGames((DATA.comingUp || []) as ComingGame[]), "best", now).length }, { value: "cappers", label: "Cappers", count: capRows.length }]}
           value={tab}
           onChange={(v: string) => { setTab(v); setSportFilter(""); }}
         />

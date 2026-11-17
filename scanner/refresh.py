@@ -460,6 +460,12 @@ try:
 except Exception as _e:
     print('comingUp refresh failed:', _e)
     emb.setdefault('comingUp', []); emb.setdefault('totalComingUp', 0)
+try:
+    import kalshi_cappers as _kc
+    _kc.attach(emb, NOW)
+except Exception as _e:
+    print('kalshiCappers failed:', _e, flush=True)
+    emb.setdefault('kalshiCappers', {'cappers': [], 'combos': [], 'coverage': {}, 'blocklist': ['Wiseandstrong']})
 json.dump(emb, open(os.path.join(HERE, 'page_embed.json'), 'w'), separators=(',', ':'))
 subprocess.run([sys.executable, os.path.join(HERE, 'compact.py')])
 print(f"refreshed {pt(NOW)}: {len(emb['signals'])} top + {len(emb['fun'])} fun + {len(emb['poly'])} poly + {len(emb.get('glue') or [])} glue + {len(emb.get('props') or [])} props + {len(emb.get('longshots') or [])} longshots + {len(emb.get('biggest') or [])} biggest + {len(emb.get('upcoming') or [])} upcoming + {len(emb.get('comingUp') or [])} coming-up, ESPN games matched {n_espn}, times/opponents filled {n_filled}, Kalshi checks {n_k}, started/ended removed (top/fun/poly/glue/props/longshots/biggest/upcoming/bets/buys) {removed}, OrcaLayer calls 0")
