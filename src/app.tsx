@@ -3544,8 +3544,8 @@ function isHotSideCapper(wallet: string | null | undefined): boolean {
   if (!lw) return false;
   const rec = QMAP[lw];
   if (rec && (rec.mm || rec.oneOff)) return false;
-  if (ELITE_W[lw]) return true;
-  return !!(rec && isHotTabCapper(rec));
+  // Noel Nov 17: any capper who passes the proven floor counts (no Hot 55% win-rate / elite-only gate). Cooling stays out.
+  return !!rec && rec.badge !== "Cooling" && walletLongTermOk(lw);
 }
 function comingBackerFrom(wallet: string, name: string, cost: number, avg: number | null | undefined, lastTs: number | null | undefined, league: string): ComingBacker | null {
   const lw = (wallet || "").toLowerCase();
@@ -4857,7 +4857,7 @@ export default function App() {
   const biggestAll = takeSortedPicks(biggestPool, sortOf("biggest"), 30, vb, now);
   const biggestPicks = bySport(biggestAll);
   // Ranked feed (Nov 15): every open pick from an elite or Hot capper, verdict then quality. No filtering by Noel's own tickets.
-  const qualCapper = (w: string | null | undefined): boolean => { const lw = (w || "").toLowerCase(); if (!walletLongTermOk(lw)) return false; if (ELITE_W[lw]) return true; const r = QMAP[lw]; return !!(r && isHotTabCapper(r)); };
+  const qualCapper = (w: string | null | undefined): boolean => { const lw = (w || "").toLowerCase(); if (!walletLongTermOk(lw)) return false; const r = QMAP[lw]; return !!r && r.badge !== "Cooling"; };
   const qualBackersOf = (p: Pick): Backer[] => visibleBackers(p).filter((b: Backer) => {
     if (!qualCapper(b.wallet)) return false;
     const info = sportRecFor(b.wallet, p.league, p.id);

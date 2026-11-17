@@ -110,10 +110,8 @@ def is_hot_or_elite(c, elite):
         return False
     if ch.eligibility(c):
         return False
-    w = (c.get('wallet') or '').lower()
-    if w in elite:
-        return True
-    return is_hot_tab_capper(c)
+    # Noel Nov 17: the proven floor (eligibility above) is the only capper gate; no Hot 55% win-rate / elite-only rule.
+    return True
 
 def hot_wallets(capper_history, proven):
     elite = elite_wallets(proven)
