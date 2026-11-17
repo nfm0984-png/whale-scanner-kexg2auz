@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 export { useState, useEffect, useMemo, useRef, useCallback, useReducer, Fragment } from "react";
 export type ReactNode = React.ReactNode;
-const BRAND = "#6D28D9";
+const BRAND = "#7C3AED";
 const FONT = '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif';
 const theme = {
-  bg: { base: "#FFFFFF", subtle: "#F3F3F7", elevated: "#FFFFFF" },
-  text: { primary: "#0F0F14", secondary: "#4B4B57", tertiary: "#85858F", accent: BRAND, onColor: "#FFFFFF", onPrimary: "#FFFFFF", success: "#16A34A", warning: "#D97706", danger: "#DC2626" },
-  border: { subtle: "#EEEEF2", weak: "#E6E6EC", default: "#DCDCE3", strong: "#A1A1AA", focus: BRAND },
+  bg: { base: "#FFFFFF", subtle: "#EDE9FE", elevated: "#FFFFFF", page: "#F4F0FF" },
+  text: { primary: "#0F0F14", secondary: "#4B4B57", tertiary: "#6B6578", accent: BRAND, onColor: "#FFFFFF", onPrimary: "#FFFFFF", success: "#16A34A", warning: "#D97706", danger: "#DC2626" },
+  border: { subtle: "#EDE9FE", weak: "#DDD6FE", default: "#D8D0F0", strong: "#A78BFA", focus: BRAND },
   font: { family: FONT, mono: "ui-monospace, SFMono-Regular, Menlo, monospace", label: {} },
   dataviz: { categorical: [BRAND, "#0891B2", "#DB2777", "#16A34A", "#EA580C"] },
 };
@@ -15,8 +15,8 @@ const TONE: Record<string, [string, string]> = { success: ["#DCFCE7", "#166534"]
 
 export function Page(p: { title?: string; summary?: string; record?: string; caution?: string; children?: React.ReactNode }) {
   return (
-    <div style={{ maxWidth: 760, margin: "0 auto", padding: "68px 12px 48px", fontFamily: FONT, color: theme.text.primary }}>
-      {p.title ? <h1 style={{ fontSize: 22, lineHeight: "28px", margin: "6px 2px 4px", fontWeight: 800, letterSpacing: "-0.01em" }}>{p.title}</h1> : null}
+    <div style={{ maxWidth: 760, margin: "0 auto", padding: "68px 12px 56px", fontFamily: FONT, color: theme.text.primary, minHeight: "100vh", background: "#F4F0FF" }}>
+      {p.title ? <h1 style={{ fontSize: 24, lineHeight: "30px", margin: "6px 2px 4px", fontWeight: 850, letterSpacing: "-0.02em" }}>{p.title}</h1> : null}
       {p.summary ? <p style={{ fontSize: 13, lineHeight: "18px", color: theme.text.tertiary, margin: "0 2px 8px" }}>{p.summary}</p> : null}
       {p.record ? <p style={{ fontSize: 14, lineHeight: "18px", fontWeight: 800, color: theme.text.primary, margin: "0 2px 6px" }}>{p.record}</p> : null}
       {p.caution ? <p style={{ fontSize: 13, lineHeight: "18px", fontWeight: 650, color: "#B45309", margin: "0 2px 12px" }}>{p.caution}</p> : null}
@@ -25,7 +25,7 @@ export function Page(p: { title?: string; summary?: string; record?: string; cau
   );
 }
 export function Floating(p: { edge?: string; align?: string; bar?: boolean; children?: React.ReactNode }) {
-  return <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", justifyContent: "center", background: "#FFFFFF" }}><div style={{ width: "100%", maxWidth: 760 }}>{p.children}</div></div>;
+  return <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", justifyContent: "center", background: "rgba(244,240,255,0.92)", backdropFilter: "saturate(1.4) blur(12px)", WebkitBackdropFilter: "saturate(1.4) blur(12px)", borderBottom: "1px solid #DDD6FE", boxShadow: "0 4px 16px rgba(124,58,237,0.08)" }}><div style={{ width: "100%", maxWidth: 760 }}>{p.children}</div></div>;
 }
 export function CardGrid(p: { children?: React.ReactNode }) {
   return <div>{p.children}</div>;
@@ -36,7 +36,7 @@ export function Section(p: { heading?: string; caption?: string; collapsible?: b
     <div onClick={p.collapsible ? () => setOpen(!open) : undefined} role={p.collapsible ? "button" : undefined}
       style={{ display: "flex", alignItems: "center", gap: 10, cursor: p.collapsible ? "pointer" : "default", userSelect: "none", padding: p.collapsible ? "12px 14px" : "0 2px", borderRadius: 16, background: p.collapsible ? theme.bg.subtle : "transparent" }}>
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: p.collapsible ? 16 : 20, fontWeight: 800, lineHeight: p.collapsible ? "22px" : "26px" }}>{p.heading}</div>
+        <div style={{ fontSize: p.collapsible ? 16 : 22, fontWeight: 850, lineHeight: p.collapsible ? "22px" : "28px", letterSpacing: "-0.02em" }}>{p.heading}</div>
         {p.caption ? <div style={{ fontSize: 12.5, lineHeight: "17px", color: theme.text.tertiary, marginTop: 2 }}>{p.caption}</div> : null}
       </div>
       {p.collapsible ? <span aria-hidden style={{ fontSize: 14, color: theme.text.tertiary, transform: open ? "rotate(180deg)" : "none", transition: "transform .15s" }}>▼</span> : null}
@@ -95,7 +95,7 @@ export function Segmented(p: { options: { value: string; label: string; count?: 
     <div style={{ display: "flex", gap: 6, overflowX: "auto", padding: 4, background: theme.bg.subtle, borderRadius: 999, scrollbarWidth: "none" }}>
       {p.options.map((o) => {
         const on = o.value === p.value;
-        return <button key={o.value} onClick={() => p.onChange(o.value)} style={{ flex: "1 0 auto", height: 36, padding: "0 12px", borderRadius: 999, border: "none", background: on ? "#FFFFFF" : "transparent", boxShadow: on ? "0 1px 4px rgba(0,0,0,0.12)" : "none", color: on ? BRAND : theme.text.secondary, fontWeight: 800, fontSize: 13.5, fontFamily: FONT, cursor: "pointer", whiteSpace: "nowrap" }}>{o.label}{o.count !== undefined ? <span style={{ marginLeft: 6, opacity: 0.7 }}>{o.count}</span> : null}</button>;
+        return <button key={o.value} onClick={() => p.onChange(o.value)} style={{ flex: "1 0 auto", height: 36, padding: "0 12px", borderRadius: 999, border: "none", background: on ? BRAND : "transparent", boxShadow: on ? "0 2px 8px rgba(124,58,237,0.35)" : "none", color: on ? "#FFFFFF" : theme.text.secondary, fontWeight: 800, fontSize: 13.5, fontFamily: FONT, cursor: "pointer", whiteSpace: "nowrap" }}>{o.label}{o.count !== undefined ? <span style={{ marginLeft: 6, opacity: 0.8 }}>{o.count}</span> : null}</button>;
       })}
     </div>
   );
@@ -123,5 +123,5 @@ export function Grid(p: { columns?: number; children?: React.ReactNode }) {
   return <div style={{ display: "grid", gridTemplateColumns: c >= 3 ? "repeat(auto-fit, minmax(min(100%, 150px), 1fr))" : "repeat(" + c + ", minmax(0, 1fr))", gap: 10 }}>{p.children}</div>;
 }
 export function Button(p: { label: string; onClick?: () => void }) {
-  return <button onClick={p.onClick} style={{ width: "100%", height: 46, borderRadius: 14, border: "1.5px solid " + theme.border.default, background: "#FFFFFF", color: BRAND, fontWeight: 800, fontSize: 15, fontFamily: FONT, cursor: "pointer" }}>{p.label}</button>;
+  return <button onClick={p.onClick} style={{ width: "100%", height: 46, borderRadius: 14, border: "none", background: BRAND, color: "#FFFFFF", fontWeight: 800, fontSize: 15, fontFamily: FONT, cursor: "pointer", boxShadow: "0 4px 12px rgba(124,58,237,0.28)" }}>{p.label}</button>;
 }

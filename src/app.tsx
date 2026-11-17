@@ -29,7 +29,7 @@ interface Filters { q: string; status: string; betType: string; evidence: string
 
 const DATA: ScanData = (window as any).__DATA;
 
-const BRAND = "#6D28D9";
+const BRAND = "#7C3AED";
 const BRAND2 = "#0891B2";
 const GREEN = "#16A34A";
 const AMBER = "#D97706";
@@ -949,6 +949,56 @@ function Chip(props: { children: ReactNode; bg: string; color: string; border?: 
   );
 }
 
+function nextScanLabel(now: number): string {
+  const d = new Date(now * 1000);
+  const target = new Date(d);
+  target.setHours(5, 50, 0, 0);
+  if (d.getTime() >= target.getTime()) target.setDate(target.getDate() + 1);
+  const sameDay = target.getDate() === d.getDate() && target.getMonth() === d.getMonth() && target.getFullYear() === d.getFullYear();
+  return "next scan " + (sameDay ? "today" : "tomorrow") + " 5:50 AM PT";
+}
+
+function journalWL(): { wins: number; losses: number } {
+  const graded = (DATA.history || []).filter((h: Hist) => h.result === "W" || h.result === "L");
+  const wins = graded.filter((h: Hist) => h.result === "W").length;
+  return { wins, losses: graded.length - wins };
+}
+
+function EmptyState(props: { title: string; body: string }) {
+  const t = useGrokTheme();
+  return (
+    <div data-empty-state="1" style={{ margin: "8px 0 16px", borderRadius: 18, border: "1.5px dashed " + BRAND, background: "linear-gradient(180deg, #F5F0FF 0%, #FFFFFF 100%)", padding: "22px 18px", textAlign: "center", boxShadow: "0 6px 18px rgba(124,58,237,0.08)" }}>
+      <div style={{ fontSize: 28, lineHeight: 1 }}>🐋</div>
+      <div style={{ fontSize: 16, lineHeight: "22px", fontWeight: 850, color: t.text.primary, marginTop: 8 }}>{props.title}</div>
+      <div style={{ fontSize: 13, lineHeight: "19px", color: t.text.secondary, marginTop: 6 }}>{props.body}</div>
+    </div>
+  );
+}
+
+function RecordStrip(props: { wins: number; losses: number; tiles?: { label: string; value: string; color?: string }[] }) {
+  const t = useGrokTheme();
+  const n = props.wins + props.losses;
+  const wr = n ? Math.round((1000 * props.wins) / n) / 10 : null;
+  const good = n ? props.wins >= props.losses : null;
+  const recColor = good == null ? t.text.primary : good ? GREEN : RED;
+  const recBg = good == null ? t.bg.subtle : good ? "#DCFCE7" : "#FEE2E2";
+  const tile = (label: string, value: string, color?: string, bg?: string) => (
+    <div style={{ flex: "1 1 72px", minWidth: 72, background: bg || t.bg.subtle, borderRadius: 14, padding: "10px 8px 9px", textAlign: "center", boxShadow: "0 1px 0 rgba(255,255,255,0.7) inset" }}>
+      <div style={{ fontSize: 18, lineHeight: "22px", fontWeight: 850, color: color || t.text.primary, letterSpacing: "-0.02em", overflowWrap: "anywhere" }}>{value}</div>
+      <div style={{ fontSize: 10, lineHeight: "13px", fontWeight: 750, color: t.text.tertiary, marginTop: 3, letterSpacing: "0.05em", textTransform: "uppercase" }}>{label}</div>
+    </div>
+  );
+  return (
+    <div data-record-strip="1" style={{ display: "flex", gap: 8, margin: "4px 0 14px", flexWrap: "wrap" }}>
+      {tile("Wins", String(props.wins), GREEN, "#DCFCE7")}
+      {tile("Losses", String(props.losses), RED, "#FEE2E2")}
+      {tile("Record", n ? (props.wins + "–" + props.losses) : "—", recColor, recBg)}
+      {tile("Win rate", wr == null ? "—" : wr + "%", recColor, recBg)}
+      {(props.tiles || []).map((x) => tile(x.label, x.value, x.color))}
+    </div>
+  );
+}
+
 function Face(props: { name: string; size?: number }) {
   const s = props.size || 32;
   return (
@@ -974,7 +1024,7 @@ const BTN = (bg: string, color: string, border?: string): Record<string, string 
 function PillTabs(props: { options: { value: string; label: string; count?: number }[]; value: string; onChange: (v: string) => void }) {
   const t = useGrokTheme();
   return (
-    <div style={{ position: "sticky", top: 0, zIndex: 20, width: "100%", background: t.bg.base, boxShadow: "0 2px 8px rgba(0,0,0,0.12)", padding: "8px 0" }}>
+    <div style={{ position: "sticky", top: 0, zIndex: 20, width: "100%", background: "rgba(244,240,255,0.94)", boxShadow: "0 4px 14px rgba(124,58,237,0.12)", padding: "8px 0", borderBottom: "1px solid #DDD6FE" }}>
       <div style={{ display: "flex", flexWrap: "nowrap", gap: 8, overflowX: "auto", padding: "0 12px", WebkitOverflowScrolling: "touch", scrollbarWidth: "none" }}>
         {props.options.map((o: { value: string; label: string; count?: number }) => {
           const on = o.value === props.value;
@@ -1177,7 +1227,7 @@ function Hero(props: { top: number; fun: number; buys: number; bets: number; act
   );
   const chip = (s: string) => <span style={{ fontSize: 11, fontWeight: 600, padding: "4px 9px", borderRadius: 999, background: "rgba(255,255,255,0.12)" }}>{s}</span>;
   return (
-    <div style={{ borderRadius: 22, padding: 18, background: `linear-gradient(135deg, #1E1B4B 0%, ${BRAND} 55%, ${BRAND2} 100%)`, color: "#FFFFFF", boxShadow: "0 10px 30px rgba(76, 29, 149, 0.25)" }}>
+    <div style={{ borderRadius: 22, padding: 18, background: `linear-gradient(135deg, #1E1B4B 0%, ${BRAND} 50%, #F97316 100%)`, color: "#FFFFFF", boxShadow: "0 14px 36px rgba(76, 29, 149, 0.35)" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, flexWrap: "wrap" }}>
         <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: "0.14em" }}>ORCA · WHALE SIGNALS</div>
         <span style={{ fontSize: 11, fontWeight: 700, padding: "4px 9px", borderRadius: 999, background: "rgba(255,255,255,0.16)" }}>Live · tap to scan</span>
@@ -2146,7 +2196,7 @@ function sortBetPicks(arr: Pick[], sort: string): Pick[] {
 function CardShell(props: { accent: string; children: ReactNode }) {
   const t = useGrokTheme();
   return (
-    <div style={{ borderRadius: 22, border: "1px solid " + t.border.default, background: t.bg.base, boxShadow: "0 1px 2px rgba(0,0,0,0.05), 0 10px 28px rgba(0,0,0,0.07)", overflow: "hidden", marginBottom: 18, fontFamily: t.font.family, color: t.text.primary }}>
+    <div style={{ borderRadius: 22, border: "1.5px solid " + t.border.default, background: t.bg.base, boxShadow: "0 8px 24px rgba(76,29,149,0.12)", overflow: "hidden", marginBottom: 18, fontFamily: t.font.family, color: t.text.primary }}>
       <div style={{ height: 5, background: props.accent }} />
       <div style={{ padding: 16 }}>{props.children}</div>
     </div>
@@ -3462,8 +3512,8 @@ function SidesGameCard(props: { g: ComingGame; now: number; rank?: number; sugge
   const live = comingIsLive(g, props.now);
   const liveIn = until(g.startTs, props.now, g.start);
   return (
-    <div data-coming-game={g.id} data-coming-selected={on ? "1" : "0"} data-coming-live={live ? "1" : "0"} style={{ borderRadius: 18, border: on ? "2px solid " + BRAND : "1px solid " + t.border.default, background: t.bg.base, boxShadow: "0 1px 2px rgba(0,0,0,0.05)", overflow: "hidden", marginBottom: 14, fontFamily: t.font.family }}>
-      <div style={{ height: 5, background: live ? RED : on ? BRAND : BRAND2 }} />
+    <div data-coming-game={g.id} data-coming-selected={on ? "1" : "0"} data-coming-live={live ? "1" : "0"} style={{ borderRadius: 20, border: on ? "2px solid " + BRAND : "1.5px solid " + (live ? "#FECACA" : t.border.default), background: t.bg.base, boxShadow: on ? "0 8px 22px rgba(124,58,237,0.18)" : live ? "0 8px 22px rgba(220,38,38,0.14)" : "0 6px 18px rgba(76,29,149,0.10)", overflow: "hidden", marginBottom: 14, fontFamily: t.font.family }}>
+      <div style={{ height: 6, background: live ? "linear-gradient(90deg,#DC2626,#F97316)" : "linear-gradient(90deg," + BRAND + "," + BRAND2 + ")" }} />
       <div style={{ padding: 14 }}>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
           {props.rank != null ? <Chip bg={BRAND} color="#FFFFFF">#{props.rank}</Chip> : null}
@@ -3471,7 +3521,7 @@ function SidesGameCard(props: { g: ComingGame; now: number; rank?: number; sugge
           <Chip bg={BRAND} color="#FFFFFF">{g.league}</Chip>
           <Chip bg={t.bg.subtle} color={t.text.primary}>{g.start || ptTime(g.startTs)}</Chip>
           {live ? null : <Chip bg={t.bg.subtle} color={t.text.secondary}>{liveIn.replace("starts in ", "in ")}</Chip>}
-          <Chip bg={t.bg.subtle} color={t.text.primary}>{comingCaps(g.capperCount || 0)}</Chip>
+          <Chip bg={(g.capperCount || 0) >= 2 ? GREEN : AMBER} color="#FFFFFF">{comingCaps(g.capperCount || 0)}</Chip>
           {g.capperRoi != null ? <Chip bg={t.bg.subtle} color={g.capperRoi >= 0 ? GREEN : RED}>{pct(g.capperRoi)} ROI</Chip> : null}
           {props.suggested ? <Chip bg={GREEN} color="#FFFFFF">Suggested</Chip> : null}
         </div>
@@ -3490,10 +3540,10 @@ function SidesGameCard(props: { g: ComingGame; now: number; rank?: number; sugge
                 const clickable = !!props.onSelectSide && side.kPrice != null;
                 const isPick = !!(leadId && side.id === leadId);
                 return (
-                  <div key={side.id} data-coming-side={side.id} onClick={clickable ? () => props.onSelectSide && props.onSelectSide(g, side) : undefined} style={{ borderRadius: 14, border: sel ? "2px solid " + BRAND : "1px solid " + t.border.default, background: sel ? "#F5F0FF" : t.bg.subtle, padding: 10, cursor: clickable ? "pointer" : "default", minWidth: 0 }}>
+                  <div key={side.id} data-coming-side={side.id} onClick={clickable ? () => props.onSelectSide && props.onSelectSide(g, side) : undefined} style={{ borderRadius: 14, border: sel ? "2px solid " + BRAND : isPick ? "1.5px solid " + GREEN : "1.5px solid " + t.border.default, background: sel ? "#F5F0FF" : isPick ? "#ECFDF3" : t.bg.subtle, padding: 10, cursor: clickable ? "pointer" : "default", minWidth: 0, boxShadow: sel ? "0 4px 12px rgba(124,58,237,0.16)" : "none" }}>
                     <div><SideTag pick={isPick} /></div>
                     <div style={{ fontSize: 15, fontWeight: 850, lineHeight: "20px", overflowWrap: "anywhere" }}>{side.label}</div>
-                    <div data-kalshi-line="1" style={{ fontSize: 14, fontWeight: 850, marginTop: 6, padding: "7px 8px", borderRadius: 8, background: t.bg.base, border: "1px solid " + t.border.default, color: t.text.primary, lineHeight: "18px", overflowWrap: "anywhere" }}>
+                    <div data-kalshi-line="1" style={{ fontSize: 14, fontWeight: 850, marginTop: 6, padding: "7px 8px", borderRadius: 8, background: t.bg.base, border: "1.5px solid " + (isPick ? GREEN : t.border.default), color: t.text.primary, lineHeight: "18px", overflowWrap: "anywhere" }}>
                       {kalshiHowLine(side)}
                     </div>
                     <div style={{ fontSize: 16, fontWeight: 850, marginTop: 8, color: side.cappers ? t.text.primary : t.text.tertiary }}>{comingCaps(side.cappers || 0)}</div>
@@ -3541,7 +3591,7 @@ function ComingGroups(props: { games: ComingGame[]; now: number; keyPrefix: stri
     <div>
       {live.length ? (
         <div data-live-now="1" style={{ marginBottom: 8 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, margin: "4px 0 8px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, margin: "4px 0 10px", background: "linear-gradient(90deg,#FEE2E2,#FFEDD5)", borderRadius: 14, padding: "8px 12px" }}>
             <Chip bg={RED} color="#FFFFFF">LIVE</Chip>
             <div style={{ fontSize: 16, fontWeight: 850, color: RED }}>{"Live now · " + live.length}</div>
           </div>
@@ -3593,7 +3643,8 @@ function ComingUpTab(props: { now: number }) {
   return (
     <Section heading={"Coming Up · " + games.length} caption={"One card per game · proven cappers only (60+ day accounts, 30+ big bets, +5% big-bet ROI, $10k+ big-bet profit) · $100+ · live first, multi-capper cards above 1-capper, then start time" + (liveN ? " · " + liveN + " live" : "") + (capN ? " · " + capN + " cappers" : "")}>
       <Text>Each card shows both sides of the game and how many Hot or Elite cappers are on each one, with a PICK or OPPOSITE label and the exact Kalshi market, Buy YES or NO, and price at the top of each side. Tap a name for week, month and year numbers and the sports they have been sharp in. Tap a side to add it to a $2 parlay (one leg per game). Games that have already started stay in Live now until they are final (or about 3.5 hours in). Market makers, bots and one-off jackpot records are left out. This is a lean view — smaller bets than All Picks can show, and it is not a GOOD or OK verdict.</Text>
-      <div data-parlay-builder="1" style={{ borderRadius: 18, border: "1px solid " + t.border.default, padding: "12px 14px", background: t.bg.subtle, margin: "4px 0 14px" }}>
+      <RecordStrip wins={journalWL().wins} losses={journalWL().losses} tiles={[{ label: "Games", value: String(games.length) }, { label: "Live", value: String(liveN), color: liveN ? RED : undefined }]} />
+      <div data-parlay-builder="1" style={{ borderRadius: 18, border: "1.5px solid " + BRAND, padding: "12px 14px", background: "linear-gradient(180deg,#F5F0FF 0%, #EDE9FE 100%)", margin: "4px 0 14px", boxShadow: "0 6px 16px rgba(124,58,237,0.10)" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
           <div style={{ fontSize: 16, fontWeight: 850, color: BRAND }}>Parlay builder</div>
           <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
@@ -3616,7 +3667,7 @@ function ComingUpTab(props: { now: number }) {
           {sel.length ? <button type="button" onClick={() => setSel([])} style={{ padding: "8px 14px", borderRadius: 999, border: "1px solid " + t.border.default, background: t.bg.base, color: t.text.primary, fontWeight: 800, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>Clear</button> : null}
         </div>
       </div>
-      {games.length === 0 ? <Text>No live or upcoming Kalshi games with Hot or Elite cappers right now. New ones show up after a scan.</Text> : <ComingGroups games={games} now={props.now} keyPrefix="" onCapper={setProfile} suggested={suggested} selSideOf={selSideOf} onSelectSide={toggleSide} />}
+      {games.length === 0 ? <EmptyState title="No proven-capper games yet" body={"Nothing live or upcoming from proven cappers right now. Live games stay until they finish — " + nextScanLabel(props.now) + "."} /> : <ComingGroups games={games} now={props.now} keyPrefix="" onCapper={setProfile} suggested={suggested} selSideOf={selSideOf} onSelectSide={toggleSide} />}
       {profile ? <CapperProfile wallet={profile} onClose={() => setProfile("")} /> : null}
     </Section>
   );
@@ -3821,7 +3872,7 @@ export default function App() {
     return !!(b && b.sport === sportFilter);
   }) : hotCapAll;
   const hotCapRows = sortHotCappers(hotCapVisible, sortOf("hot"));
-  const tabRecord = tab === "top" ? "Top 20: " + wlTop.text : tab === "longfun" ? "Longshots: " + wlLong.text + " · Fun: " + wlFun.text : tab === "fun" ? "Fun: " + wlFun.text : tab === "poly" ? "Polymarket: " + wlPoly.text : tab === "props" ? "Player Props: " + wlProps.text : tab === "longshots" ? "Longshots: " + wlLong.text : tab === "biggest" ? "Biggest Bets: " + wlBig.text : tab === "upcoming" ? "Upcoming: " + wlUp.text : tab === "cappers" ? "Cappers: " + capWlW + "-" + capWlL + " (per capper; a shared pick can count more than once)" : tab === "more" ? "Top 20 " + wlTop.text + " · Fun " + wlFun.text + " · Polymarket " + wlPoly.text + (wlGlue.w + wlGlue.l ? " · Glue " + wlGlue.text : "") + (wlProps.w + wlProps.l ? " · Props " + wlProps.text : "") + (wlLong.w + wlLong.l ? " · Longshots " + wlLong.text : "") + (wlBig.w + wlBig.l ? " · Biggest " + wlBig.text : "") + (wlUp.w + wlUp.l ? " · Upcoming " + wlUp.text : "") : "";
+  const tabRecord = tab === "top" ? "Top 20: " + wlTop.text : tab === "longfun" ? "Longshots: " + wlLong.text + " · Fun: " + wlFun.text : tab === "fun" ? "Fun: " + wlFun.text : tab === "poly" ? "Polymarket: " + wlPoly.text : tab === "props" ? "Player Props: " + wlProps.text : tab === "longshots" ? "Longshots: " + wlLong.text : tab === "biggest" ? "Biggest Bets: " + wlBig.text : tab === "upcoming" ? "Upcoming: " + wlUp.text : tab === "cappers" ? "Cappers: " + capWlW + "-" + capWlL + " (per capper; a shared pick can count more than once)" : tab === "picks" || tab === "coming" ? "Journal: " + wins + "–" + (graded.length - wins) + (graded.length ? "  ·  " + Math.round((100 * wins) / graded.length) + "%  ·  " : "  ·  ") + nextScanLabel(now) : tab === "more" ? "Top 20 " + wlTop.text + " · Fun " + wlFun.text + " · Polymarket " + wlPoly.text + (wlGlue.w + wlGlue.l ? " · Glue " + wlGlue.text : "") + (wlProps.w + wlProps.l ? " · Props " + wlProps.text : "") + (wlLong.w + wlLong.l ? " · Longshots " + wlLong.text : "") + (wlBig.w + wlBig.l ? " · Biggest " + wlBig.text : "") + (wlUp.w + wlUp.l ? " · Upcoming " + wlUp.text : "") : "";
   const tabCaution = tab === "poly" && wlPoly.l > wlPoly.w ? "Caution: the Polymarket tab is losing so far (" + wlPoly.text + "). Bet smaller or skip until the record turns around." : "";
 
   const journalRows = DATA.history.filter((h: Hist) => journal === "all" || (journal === "won" && h.result === "W") || (journal === "lost" && h.result === "L") || (journal === "pending" && !h.result) || (journal === "top" && (h.tier === "top" || !h.tier)) || (journal === "fun" && h.tier === "fun") || (journal === "poly" && h.tier === "poly") || (journal === "glue" && h.tier === "glue") || (journal === "props" && h.tier === "props") || (journal === "longshots" && h.tier === "longshots") || (journal === "biggest" && h.tier === "biggest") || (journal === "upcoming" && h.tier === "upcoming"));
@@ -3939,6 +3990,7 @@ export default function App() {
 
       {tab === "picks" ? (
         <Section heading={"All Picks · " + (bigOnly ? biggestGames.length : allPickGames.length)}>
+          <RecordStrip wins={wins} losses={graded.length - wins} tiles={[{ label: "Open", value: String(bigOnly ? biggestGames.length : allPickGames.length) }, { label: "Proven", value: String(provenGames.length), color: provenGames.length ? GREEN : undefined }]} />
           {bigOnly ? null : (
             <div data-sort-quick="1" style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center", margin: "0 0 10px" }}>
               {[["best", "★ Best first"], ["start", "⏱ Soonest"]].map((o: string[]) => { const on = sortOf("picks") === o[0]; return <button key={o[0]} type="button" data-sort-btn={o[0]} onClick={() => setSortOf(o[0], "picks")} style={{ padding: "8px 16px", borderRadius: 999, border: on ? "none" : "1px solid " + t.border.default, background: on ? BRAND : t.bg.base, color: on ? "#FFFFFF" : t.text.primary, fontWeight: 800, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>{o[1]}</button>; })}
@@ -3948,11 +4000,11 @@ export default function App() {
           <LeaguePills picks={bigOnly ? biggestAll : rankedAll} value={sportFilter} onChange={setSportFilter} />
           <DailyCap />
           <Text>One card per game, both sides, with Hot and Elite capper counts and each capper's ROI. Cards are ranked by capper count, then ROI (not dollars), unless you turn on Biggest bets. Tap a capper's name for week, month and year numbers and the sports they have been sharp in. Cappers must clear the proven floor first: 60+ day account, 30+ graded BIG bets (stake at least $500 and 1.5× their usual size — small fun bets are ignored), +5% big-bet ROI and $10k+ big-bet profit over that record, plus green 14d and 30d form, a profitable year, 50%+ of recent bets Kalshi-listed, and average entry under 90¢. ROI never qualifies a capper on its own. Market makers, bots and one-off jackpot records are dropped. Elite: 30+ graded big bets, +15% big-bet ROI, and +20% ROI in the sport (+10% at 100+ graded). No 12-bet small-sample path. Cards with one capper are labeled “1 capper” and ranked below multi-capper cards. Elites count from $300, everyone else $500. A pick can only be GOOD if that capper has 30+ graded bets in that sport and Kalshi is 45–92¢; otherwise the best is OK. If Kalshi's price plus its taker fee is 2¢ or more worse than the whale's entry, the pick is hidden. Buys older than about an hour are tagged Stale. The capper pool includes Polymarket's sports week, month and all-time leaderboards.</Text>
-          <div data-pinned-proven="1" style={{ borderRadius: 16, padding: "10px 12px", background: t.bg.subtle, margin: "4px 0 12px" }}>
+          <div data-pinned-proven="1" style={{ borderRadius: 16, padding: "10px 12px", background: "linear-gradient(180deg,#F5F0FF 0%, #EDE9FE 100%)", margin: "4px 0 12px", border: "1.5px solid #DDD6FE", boxShadow: "0 6px 16px rgba(124,58,237,0.08)" }}>
             <div style={{ fontSize: 15, fontWeight: 850, color: "#7C3AED" }}>{"📌 Proven Picks · " + provenGames.length + (PROVEN ? " · GOOD " + (PROVEN.counts.GOOD || 0) + " · OK " + (PROVEN.counts.OK || 0) : "")}</div>
             <div style={{ fontSize: 12, color: t.text.tertiary, margin: "2px 0 6px" }}>{"Elite cappers' own open bets, $300+, both sides on each game, with the Kalshi line on each side" + (provenRows.length > provenPinned.length ? " · " + (provenRows.length - provenPinned.length) + " smaller positions hidden" : "") + (PROVEN ? " · updated " + shortUpdatedAt(PROVEN.updatedAt) : "")}</div>
             <EliteCapperList />
-            {provenGames.length === 0 ? <Text>No live or upcoming sports bets from elite cappers in the next 48 hours.</Text> : <ComingGroups games={provenGames} now={now} keyPrefix="P" onCapper={setPickProfile} limit={provenLimit} onMore={() => setProvenLimit(provenGames.length)} />}
+            {provenGames.length === 0 ? <EmptyState title="No proven-capper picks yet" body={"No live or upcoming sports bets from elite cappers in the next 48 hours — " + nextScanLabel(now) + "."} /> : <ComingGroups games={provenGames} now={now} keyPrefix="P" onCapper={setPickProfile} limit={provenLimit} onMore={() => setProvenLimit(provenGames.length)} />}
           </div>
           <Grid columns={2}>
             <Toggle label="Biggest bets only · largest $ first" value={bigOnly} onChange={(v: boolean) => { setBigOnly(v); setRankedLimit(30); }} />
@@ -3960,12 +4012,12 @@ export default function App() {
           </Grid>
           {bigOnly ? (
             <Fragment>
-              <Text>{biggestGames.length ? biggestGames.length + " games with vetted whale bets, largest combined dollars first. Live games stay on the list until they are final." : "No open vetted whale bets on live or upcoming games."}</Text>
+              {biggestGames.length ? <Text>{biggestGames.length + " games with vetted whale bets, largest combined dollars first. Live games stay on the list until they are final."}</Text> : <EmptyState title="No vetted whale bets right now" body={"No open vetted whale bets on live or upcoming games — " + nextScanLabel(now) + "."} />}
               {biggestGames.length ? <ComingGroups games={biggestGames} now={now} keyPrefix="B" onCapper={setPickProfile} limit={rankedLimit} onMore={() => setRankedLimit(rankedLimit + 30)} /> : null}
             </Fragment>
           ) : (
             <Fragment>
-              {allPickGames.length === 0 ? <Text>No open picks from elite or Hot cappers right now. Live games stay until they are over; new ones come in with the next scan.</Text> : <ComingGroups games={allPickGames} now={now} keyPrefix="R" onCapper={setPickProfile} limit={rankedLimit} onMore={() => setRankedLimit(rankedLimit + 30)} />}
+              {allPickGames.length === 0 ? <EmptyState title="No proven-capper picks yet" body={"No open picks from elite or Hot cappers right now. Live games stay until they finish — " + nextScanLabel(now) + "."} /> : <ComingGroups games={allPickGames} now={now} keyPrefix="R" onCapper={setPickProfile} limit={rankedLimit} onMore={() => setRankedLimit(rankedLimit + 30)} />}
             </Fragment>
           )}
           {pickProfile ? <CapperProfile wallet={pickProfile} onClose={() => setPickProfile("")} /> : null}
@@ -3974,6 +4026,7 @@ export default function App() {
 
       {tab === "cappers" ? (
         <Section heading={"Cappers · " + capRows.length}>
+          <RecordStrip wins={capWlW} losses={capWlL} tiles={[{ label: "Shown", value: String(capRows.length) }, { label: "Hot", value: String(hotCapAll.length), color: hotCapAll.length ? GREEN : undefined }]} />
           <TabSortBar value={sortOf("cappers")} onChange={(v: string) => setSortOf(v, "cappers")} options={CAPPER_SORT_OPTS} label="Sort cappers" />
           <LeaguePills picks={capLeagueItems} value={sportFilter} onChange={setSportFilter} allCount={capAll.length} />
           <Text>Cappers ranked by quality: Proven first (10+ graded copyable picks, winning record, positive copyable ROI, positive Polymarket P&L in the past month and all time, and not negative in both the past week and past year). Each row shows Polymarket P&L for the past week, month, year and all time with a badge: Hot (all four up), OK, Cooling (past week down, small penalty) or Cold (past month, past year or all time down, demoted on every tab). Conviction: each whale's usual bet is the median of their tracked bets; 2x+ (or a top-3 bet that day) is High conviction, 0.25x or less is Throwaway and barely counts in ranking. Picks inside a capper are listed biggest bet first. A capper needs {capMinSample} graded picks (pushes don't count) to rank at the top; smaller samples are labeled Small sample, and cappers with no grades yet show Record building. Quality ranking for picks uses only Kalshi-copyable singles in the 10–94¢ bands, needs 10 graded copyable picks, and shrinks toward the average; below 10 is treated as neutral, not boosted. High-volume, low-edge whales are demoted. Tap a card for current live picks (PickCards labeled OPEN or LIVE) and every tracked pick labeled HIT, MISSED, PUSH, or OPEN/LIVE. Records are saved across scans and never wiped. The tab W-L adds each capper's record, so a pick two cappers both took is counted twice. Follow to filter other tabs to them; hide to drop them from every count. New Hot or Proven whales found in each scan (including Polymarket's sports week and month leaderboards) are added to a tracked list and scanned every time, even if they fall off the leaderboard. Upgrades (Nov 15): records now include every $500+ settled sports bet from the last 30 days (Polymarket backfill), the last 14 days count 2x in quality and a whale with 5+ picks and negative 14-day ROI is flagged Cooling (14d) and down-ranked, each whale has a by-sport record (a backer doesn't count on a pick in a sport where they are losing with 5+ graded), and Your copies shows how the Kalshi tickets you placed from their picks did.</Text>
@@ -3989,7 +4042,7 @@ export default function App() {
           {saved ? <Text>{saved}</Text> : null}
           {capRows.length ? <CardGrid>{capRows.slice(0, capLimit).map((c: CapperRec, i: number) => (
               <CapperCard key={c.wallet} rec={c} trader={traderByW[(c.wallet || "").toLowerCase()]} now={now} bankroll={bankroll} livePicks={livePicksOf(c.wallet)} openPicks={hotOpenPicksOf(c.wallet)} followed={followed} hidden={hidden} toggle={toggle} rank={i + 1} />
-            ))}</CardGrid> : <Text>{capperRecsAll.length ? "No cappers match these filters." : "Records are building — run a refresh or scan to start grading capper picks."}</Text>}
+            ))}</CardGrid> : <EmptyState title={capperRecsAll.length ? "No cappers match these filters" : "Records are still building"} body={capperRecsAll.length ? "Try All, clear search, or switch off a sport filter. " + nextScanLabel(now) + "." : "Run a refresh or scan to start grading capper picks — " + nextScanLabel(now) + "."} />}
           {capRows.length > capLimit ? <Button label={"Show more cappers (" + (capRows.length - capLimit) + " left)"} onClick={() => setCapLimit(capLimit + 25)} /> : null}
         </Section>
       ) : null}
