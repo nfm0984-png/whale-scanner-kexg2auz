@@ -24996,7 +24996,11 @@
    "first_seen": 1794870854,
    "scans": 4,
    "first_score": 37,
-   "result": null
+   "result": "W",
+   "graded": 1794919384,
+   "ended": 1794919384,
+   "finalScore": "",
+   "active": false
   },
   "0xcddfc23b0a6cbdb14db162437c5d2210bb20b5d382d3860cfa4b2cb570378fd5:no": {
    "tier": "fun",
@@ -25312,7 +25316,10 @@
    "first_seen": 1794870854,
    "scans": 4,
    "first_score": 22,
-   "result": null
+   "result": null,
+   "ended": 1794919384,
+   "finalScore": "SIN 0 \u2013 BRA 7",
+   "active": false
   },
   "0x85479fb4d01dcccf73a36267466479643d9365282927a180f0de12161d9e8a11:yes": {
    "tier": "poly",
@@ -26777,7 +26784,10 @@
    "first_seen": 1794889481,
    "scans": 2,
    "first_score": 20,
-   "result": null
+   "result": null,
+   "ended": 1794919384,
+   "finalScore": "SIN 0 \u2013 BRA 7",
+   "active": false
   },
   "0xbe16f9b95a95533449b756ee6de426cd4316013e8855d9121b0553448303eaa3:no": {
    "tier": "poly",
@@ -26796,7 +26806,10 @@
    "first_seen": 1794889481,
    "scans": 2,
    "first_score": 20,
-   "result": null
+   "result": null,
+   "ended": 1794919384,
+   "finalScore": "SIN 0 \u2013 BRA 7",
+   "active": false
   },
   "0x57a640e63f697cf467c6eb1dea090133a495e1dd1dd8bcadfada7006454c303c:no": {
    "tier": "poly",
@@ -27214,7 +27227,11 @@
    "first_seen": 1794892260,
    "scans": 1,
    "first_score": 40,
-   "result": null
+   "result": "L",
+   "graded": 1794919384,
+   "ended": 1794919384,
+   "finalScore": "",
+   "active": false
   },
   "0xa469848630fa046e27171b3dc389d8bdd21027b126091d3dea76f437f5889b52:yes": {
    "tier": "fun",
