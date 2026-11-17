@@ -29982,7 +29982,11 @@
    "first_seen": 1794938900,
    "scans": 3,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794945912,
+   "ended": 1794945912,
+   "finalScore": "DEN 2 \u2013 NOR 0",
+   "active": false
   },
   "0xfc785f0f49fe8e078c530b5dca0425ab520ee8c1c295a06a4349936a916ef4e0:yes": {
    "tier": "biggest",
@@ -31179,7 +31183,10 @@
    "first_seen": 1794944238,
    "scans": 1,
    "first_score": 28,
-   "result": null
+   "result": null,
+   "ended": 1794945912,
+   "finalScore": "LIB 0 \u2013 PLE 0",
+   "active": false
   },
   "0x725d481a52bfae5a65deadf7eee220872eb9257724594e8e28d2f66e0f9f4120:no": {
    "tier": "poly",
