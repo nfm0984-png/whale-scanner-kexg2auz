@@ -9,7 +9,7 @@ interface Refresh { at: number; state?: string | null; detail?: string; score?: 
 interface Pick { id: string; q: string; label: string; kind: string; league: string; slug: string; score: number; parts: Record<string, number>; price: number; avgEntry: number | null; whales: number; invested: number; golden: number; oppMoney: number; oppCount: number; oppQualified: number; fresh24: number; fresh24Opp: number; sideAll: number; sideCountAll: number | null; oppAll: number; oppCountAll: number | null; hedgeAll: number; game: Game; startTs: number; backers: Backer[]; opposing: Opp[]; kalshi: Kalshi; risks: string[]; net?: number; totalBackers?: number | null; refresh?: Refresh; oneSidedShare?: number | null; priceBand?: string; split?: boolean; glue?: boolean; pricier?: boolean; overCents?: number | null; pickId?: string; strength?: string; started?: boolean; fromProven?: boolean }
 interface Hist { id: string; tier?: string; q: string; label: string; score: number; whales: number; invested: number; start: string; kalshi: string; kprice?: number | null; first_seen: number; last_seen: number; scans: number; result: string | null; graded?: number; active: boolean }
 interface CapperHistPick { id: string; q?: string | null; label?: string | null; side?: string | null; league?: string | null; start?: string | null; startTs?: number | null; kind?: string | null; cost?: number | null; avg?: number | null; result?: string | null; graded?: number | null; kAct?: string | null; kContract?: string | null; kprice?: number | null; profit?: number | null; current?: boolean; conv?: string | null; mult?: number | null }
-interface CapperRec { kShare?: number | null; wallet: string; name: string; rankAll?: number | null; rank?: number | null; golden?: boolean; w: number; l: number; push: number; open: number; n: number; profit: number; risked: number; wr?: number | null; roi?: number | null; qualified: boolean; pnl?: number | null; wrAll?: number | null; picks: CapperHistPick[]; cw?: number; cl?: number; cn?: number; cwr?: number | null; croi?: number | null; cprofit?: number; crisked?: number; quality?: number; qQual?: boolean; demoted?: boolean; shrunkWr?: number | null; shrunkRoi?: number | null; win?: Record<string, { pnl?: number; roi?: number | null; rec?: number[] }>; badge?: string; proven?: boolean; coldDemoted?: boolean; medBet?: number | null; maxBet?: number | null; convRec?: Record<string, { w: number; l: number; roi: number | null }>; winStale?: string[]; tracked?: boolean; isNew?: boolean; addedTs?: number | null; trackedReason?: string | null; hotBoost?: number; f14?: { w: number; l: number; n: number; roi: number | null }; formCooling?: boolean; sports?: Record<string, { w: number; l: number; n: number; roi: number | null }>; copies?: { w: number; l: number; n: number; push: number; open: number; tickets: number; tw: number; tl: number; stake: number }; bf?: { n: number; med: number | null; ts: number; days: number; recent: (string | number)[][] }; recSrc?: { scanner: number; backfill: number }; qwr?: number | null; qroi?: number | null; avgEntry?: number | null; avgN?: number; nearCertN?: number; mm?: boolean; mmWhy?: string | null; oneOff?: boolean; oneOffWhy?: string | null }
+interface CapperRec { firstTs?: number | null; ageDays?: number | null; big?: { w?: number; l?: number; n?: number; profit?: number | null; risked?: number | null; roi?: number | null; spanDays?: number | null; firstTs?: number | null; lastTs?: number | null; floor?: number | null; med?: number | null }; kShare?: number | null; wallet: string; name: string; rankAll?: number | null; rank?: number | null; golden?: boolean; w: number; l: number; push: number; open: number; n: number; profit: number; risked: number; wr?: number | null; roi?: number | null; qualified: boolean; pnl?: number | null; wrAll?: number | null; picks: CapperHistPick[]; cw?: number; cl?: number; cn?: number; cwr?: number | null; croi?: number | null; cprofit?: number; crisked?: number; quality?: number; qQual?: boolean; demoted?: boolean; shrunkWr?: number | null; shrunkRoi?: number | null; win?: Record<string, { pnl?: number; roi?: number | null; rec?: number[] }>; badge?: string; proven?: boolean; coldDemoted?: boolean; medBet?: number | null; maxBet?: number | null; convRec?: Record<string, { w: number; l: number; roi: number | null }>; winStale?: string[]; tracked?: boolean; isNew?: boolean; addedTs?: number | null; trackedReason?: string | null; hotBoost?: number; f14?: { w: number; l: number; n: number; roi: number | null }; formCooling?: boolean; sports?: Record<string, { w: number; l: number; n: number; roi: number | null }>; copies?: { w: number; l: number; n: number; push: number; open: number; tickets: number; tw: number; tl: number; stake: number }; bf?: { n: number; med: number | null; ts: number; days: number; recent: (string | number)[][] }; recSrc?: { scanner: number; backfill: number }; qwr?: number | null; qroi?: number | null; avgEntry?: number | null; avgN?: number; nearCertN?: number; mm?: boolean; mmWhy?: string | null; oneOff?: boolean; oneOffWhy?: string | null }
 interface NewCap { wallet: string; name: string; reason?: string | null; badge?: string | null; month?: number | null }
 interface CapperHistory { minSample: number; updatedAt?: string; cappers: CapperRec[]; newThisScan?: NewCap[]; newRecent?: NewCap[]; trackedCount?: number; sportMap?: Record<string, string>; copiesInfo?: { updatedTs?: number; tickets?: number; ticketsMatched?: number; legs?: number; legsMatched?: number }; backfillDays?: number }
 interface ProvenRow { smallSample?: boolean; cn?: number | null; pid: string; wallet: string; name: string; league: string; sport: string; game: string; market: string; pick: string; opp: string; slug: string; startTs: number | null; start: string; cost: number; avg: number; now: number | null; usual: number | null; mult: number | null; kalshi: { action: string; price: number | null; ticker: string; contract?: string | null; src?: string; live?: boolean; yesAsk?: number | null; noAsk?: number | null; marketTitle?: string | null; eventTitle?: string | null; oppTicker?: string | null; oppContract?: string | null; oppAction?: string | null; oppPrice?: number | null } | null; sportRec: { w: number; l: number; n: number; roi: number | null }; f14?: { w: number; l: number; n: number; roi: number | null }; rec: number[]; roi: number | null; badge?: string; verdict: string; why: string[]; hedged?: boolean; inTop?: boolean; group?: ProvenRow[]; firstTs?: number | null; lastTs?: number | null; stale?: boolean; slip?: number | null }
@@ -82,30 +82,62 @@ const SPORT_BAR_ROI = 20;
 const SPORT_BAR_ROI_VOL = 10;
 const SPORT_BAR_VOL_N = 100;
 function sportBarRoiOf(rec: { n?: number } | null | undefined): number { return rec && (rec.n || 0) >= SPORT_BAR_VOL_N ? SPORT_BAR_ROI_VOL : SPORT_BAR_ROI; }
-// Long-term rule (Noel, Nov 15 9 PM): a capper's picks only count/appear if all-time Polymarket ROI >= +5% (was +10%, Noel 9:15 PM) AND yearly profit > 0.
-// No all-time ROI -> yearly profit > 0 alone. Neither -> excluded.
+// Track-record floor (Noel, Nov 16): big bets only (>= max($500, 1.5x median)), 30+ graded big bets,
+// +5% big-bet ROI, +$10k big-bet profit, account age 60+ days. ROI never qualifies on its own.
+// Year still has to be profitable when we have a Polymarket year window.
 const LT_MIN_ROI = 5;
+const ELIG_MIN_AGE_DAYS = 60;
+const ELIG_MIN_BIG_N = 30;
+const ELIG_MIN_BIG_ROI = 5;
+const ELIG_MIN_BIG_PROFIT = 10000;
 function longTermOk(rec: CapperRec | null | undefined): boolean {
   if (!rec) return false;
-  const w = rec.win || {};
-  const a = w.all && w.all.roi != null ? w.all.roi : null;
-  const y = w.year && w.year.pnl != null ? w.year.pnl : null;
-  if (a == null && y == null) return false;
-  if (a != null) return a >= LT_MIN_ROI && (y == null || y > 0);
-  return (y as number) > 0;
+  const y = rec.win && rec.win.year && rec.win.year.pnl != null ? rec.win.year.pnl : null;
+  if (y == null) return true;
+  return y > 0;
 }
-// Pick eligibility (Noel, Nov 15 9 PM; mirrors scanner/capper_history.py eligibility): green 14d AND 30d ROI on graded $500+ bets,
-// the long-term floor above, 50%+ of last-30-day $500+ bets in Kalshi-listed leagues, and average entry under 90¢.
+function ageDaysOf(rec: CapperRec | null | undefined, now?: number): number | null {
+  if (!rec || rec.firstTs == null) return rec && rec.ageDays != null ? rec.ageDays : null;
+  const n = now || (Math.floor(Date.now() / 1000));
+  return (n - rec.firstTs) / 86400;
+}
+function recentStreak(rec: CapperRec | null | undefined, now?: number): boolean {
+  if (!rec || !rec.win) return false;
+  const allp = rec.win.all && rec.win.all.pnl != null ? rec.win.all.pnl : null;
+  const month = rec.win.month && rec.win.month.pnl != null ? rec.win.month.pnl : null;
+  const year = rec.win.year && rec.win.year.pnl != null ? rec.win.year.pnl : null;
+  if (allp == null || allp <= 0) return false;
+  const age = ageDaysOf(rec, now);
+  const bn = rec.big && rec.big.n != null ? rec.big.n : 0;
+  const thin = age == null || age < ELIG_MIN_AGE_DAYS || bn < ELIG_MIN_BIG_N;
+  const monthHeavy = month != null && month > 0.5 * allp;
+  const yearEq = year != null && year >= 0.9 * allp;
+  if (thin && monthHeavy) return true;
+  if (thin && yearEq && (age == null || age < 180)) return true;
+  return false;
+}
+// Mirrors scanner/capper_history.py eligibility. Fun/small bets are ignored; big-bet record is the floor.
 function eligibilityOf(rec: CapperRec | null | undefined): string[] {
   if (!rec) return ["no record"];
   const why: string[] = [];
   const f = rec.f14;
   if (!f || !f.n || f.roi == null || f.roi <= 0) why.push("Cold 14d");
   if (!rec.n || rec.roi == null || rec.roi <= 0) why.push("Cold 30d");
-  if (!longTermOk(rec)) why.push("Weak long-term");
+  if (!longTermOk(rec)) why.push("Year down");
   if (rec.kShare == null) why.push("Kalshi share unknown"); else if (rec.kShare < 0.5) why.push("Mostly non-Kalshi");
   if (rec.avgEntry != null && rec.avgEntry >= 0.9) why.push("90¢+ favorites");
   if (rec.mm) why.push("market maker / bot");
+  if (rec.oneOff) why.push("one-off");
+  const age = ageDaysOf(rec);
+  if (age == null) why.push("account age unknown");
+  else if (age < ELIG_MIN_AGE_DAYS) why.push("account younger than 60 days");
+  const b = rec.big || {};
+  const bn = b.n || 0;
+  if (bn < ELIG_MIN_BIG_N) why.push("under 30 graded big bets");
+  if (b.profit == null || b.profit <= 0) why.push("big-bet profit not positive");
+  if (b.roi == null || b.roi < ELIG_MIN_BIG_ROI) why.push("big-bet ROI under +5%");
+  if (b.profit != null && b.profit < ELIG_MIN_BIG_PROFIT) why.push("big-bet profit under $10k");
+  if (recentStreak(rec)) why.push("recent-streak P&L");
   return why;
 }
 function walletLongTermOk(w: string | null | undefined): boolean { return eligibilityOf(QMAP[(w || "").toLowerCase()]).length === 0; }
@@ -278,10 +310,10 @@ function capperLastBetTs(c: CapperRec): number {
 }
 // Hot Cappers tab: all of 14d P&L/ROI up on 10+ graded $500+ bets, +20% ROI in a sport over 10+, 55%+ win rate, average entry under 90¢, 20+ graded $500+ bets.
 function isHotTabCapper(c: CapperRec): boolean {
+  if (eligibilityOf(c).length > 0) return false;
   const f = c.f14;
   if (!f || f.n < 10 || f.roi == null || f.roi <= 0) return false;
   if (!bestSportOf(c)) return false;
-  if ((c.n || 0) < 20) return false;
   if (c.wr == null || c.wr < 55) return false;
   if (c.avgEntry == null || c.avgEntry >= 0.90) return false;
   return true;
@@ -3044,8 +3076,11 @@ function partitionComing(games: ComingGame[], now: number): { live: ComingGame[]
 }
 function sortComingGames(games: ComingGame[], sort: string, now: number): ComingGame[] {
   const rows = games.filter((g: ComingGame) => comingStatus(g, now) !== "final").slice();
-  if (sort === "start") rows.sort((a: ComingGame, b: ComingGame) => (comingIsLive(a, now) === comingIsLive(b, now) ? 0 : comingIsLive(a, now) ? -1 : 1) || (a.startTs || 0) - (b.startTs || 0));
-  else rows.sort((a: ComingGame, b: ComingGame) => (comingIsLive(a, now) === comingIsLive(b, now) ? 0 : comingIsLive(a, now) ? -1 : 1) || ((b.capperCount || 0) - (a.capperCount || 0)) || ((b.capperRoi != null ? b.capperRoi : -999) - (a.capperRoi != null ? a.capperRoi : -999)) || ((a.startTs || 0) - (b.startTs || 0)));
+  const liveCmp = (a: ComingGame, b: ComingGame) => (comingIsLive(a, now) === comingIsLive(b, now) ? 0 : comingIsLive(a, now) ? -1 : 1);
+  // Single-capper cards always sit below multi-capper cards (Noel, Nov 16). ROI is only a tiebreak after that.
+  const bandCmp = (a: ComingGame, b: ComingGame) => ((b.capperCount || 0) >= 2 ? 1 : 0) - ((a.capperCount || 0) >= 2 ? 1 : 0);
+  if (sort === "start") rows.sort((a: ComingGame, b: ComingGame) => liveCmp(a, b) || bandCmp(a, b) || (a.startTs || 0) - (b.startTs || 0));
+  else rows.sort((a: ComingGame, b: ComingGame) => liveCmp(a, b) || bandCmp(a, b) || ((b.capperCount || 0) - (a.capperCount || 0)) || ((b.capperRoi != null ? b.capperRoi : -999) - (a.capperRoi != null ? a.capperRoi : -999)) || ((a.startTs || 0) - (b.startTs || 0)));
   return rows;
 }
 function fillGameStats(g: ComingGame): ComingGame {
@@ -3556,7 +3591,7 @@ function ComingUpTab(props: { now: number }) {
   const capN = DATA.comingUpCappers || 0;
   const selSideOf = (g: ComingGame): string => { const hit = sel.find((x) => x.gameId === g.id); return hit ? hit.sideId : ""; };
   return (
-    <Section heading={"Coming Up · " + games.length} caption={"One card per game · Hot and Elite cappers only · $100+ · live games first, then next 36 hours by start time" + (liveN ? " · " + liveN + " live" : "") + (capN ? " · " + capN + " cappers" : "")}>
+    <Section heading={"Coming Up · " + games.length} caption={"One card per game · proven cappers only (60+ day accounts, 30+ big bets, +5% big-bet ROI, $10k+ big-bet profit) · $100+ · live first, multi-capper cards above 1-capper, then start time" + (liveN ? " · " + liveN + " live" : "") + (capN ? " · " + capN + " cappers" : "")}>
       <Text>Each card shows both sides of the game and how many Hot or Elite cappers are on each one, with a PICK or OPPOSITE label and the exact Kalshi market, Buy YES or NO, and price at the top of each side. Tap a name for week, month and year numbers and the sports they have been sharp in. Tap a side to add it to a $2 parlay (one leg per game). Games that have already started stay in Live now until they are final (or about 3.5 hours in). Market makers, bots and one-off jackpot records are left out. This is a lean view — smaller bets than All Picks can show, and it is not a GOOD or OK verdict.</Text>
       <div data-parlay-builder="1" style={{ borderRadius: 18, border: "1px solid " + t.border.default, padding: "12px 14px", background: t.bg.subtle, margin: "4px 0 14px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
@@ -3912,7 +3947,7 @@ export default function App() {
           {bigOnly ? null : <TabSortBar value={sortOf("picks")} onChange={(v: string) => setSortOf(v, "picks")} />}
           <LeaguePills picks={bigOnly ? biggestAll : rankedAll} value={sportFilter} onChange={setSportFilter} />
           <DailyCap />
-          <Text>One card per game, both sides, with Hot and Elite capper counts and each capper's ROI. Cards are ranked by capper count, then ROI (not dollars), unless you turn on Biggest bets. Tap a capper's name for week, month and year numbers and the sports they have been sharp in. Cappers must be green on 14d and 30d ROI, +5% all-time ROI with a profitable year, 50%+ of recent bets Kalshi-listed, and average entry under 90¢. Market makers, bots and one-off jackpot records are dropped. Elite: 12+ graded big bets (12–19 tagged Small sample), +15% ROI, and +20% ROI in the sport (+10% at 100+ graded). Elites count from $300, everyone else $500. A pick can only be GOOD if that capper has 30+ graded bets in that sport and Kalshi is 45–92¢; otherwise the best is OK. If Kalshi's price plus its taker fee is 2¢ or more worse than the whale's entry, the pick is hidden. Buys older than about an hour are tagged Stale. The capper pool includes Polymarket's sports week, month and all-time leaderboards.</Text>
+          <Text>One card per game, both sides, with Hot and Elite capper counts and each capper's ROI. Cards are ranked by capper count, then ROI (not dollars), unless you turn on Biggest bets. Tap a capper's name for week, month and year numbers and the sports they have been sharp in. Cappers must clear the proven floor first: 60+ day account, 30+ graded BIG bets (stake at least $500 and 1.5× their usual size — small fun bets are ignored), +5% big-bet ROI and $10k+ big-bet profit over that record, plus green 14d and 30d form, a profitable year, 50%+ of recent bets Kalshi-listed, and average entry under 90¢. ROI never qualifies a capper on its own. Market makers, bots and one-off jackpot records are dropped. Elite: 30+ graded big bets, +15% big-bet ROI, and +20% ROI in the sport (+10% at 100+ graded). No 12-bet small-sample path. Cards with one capper are labeled “1 capper” and ranked below multi-capper cards. Elites count from $300, everyone else $500. A pick can only be GOOD if that capper has 30+ graded bets in that sport and Kalshi is 45–92¢; otherwise the best is OK. If Kalshi's price plus its taker fee is 2¢ or more worse than the whale's entry, the pick is hidden. Buys older than about an hour are tagged Stale. The capper pool includes Polymarket's sports week, month and all-time leaderboards.</Text>
           <div data-pinned-proven="1" style={{ borderRadius: 16, padding: "10px 12px", background: t.bg.subtle, margin: "4px 0 12px" }}>
             <div style={{ fontSize: 15, fontWeight: 850, color: "#7C3AED" }}>{"📌 Proven Picks · " + provenGames.length + (PROVEN ? " · GOOD " + (PROVEN.counts.GOOD || 0) + " · OK " + (PROVEN.counts.OK || 0) : "")}</div>
             <div style={{ fontSize: 12, color: t.text.tertiary, margin: "2px 0 6px" }}>{"Elite cappers' own open bets, $300+, both sides on each game, with the Kalshi line on each side" + (provenRows.length > provenPinned.length ? " · " + (provenRows.length - provenPinned.length) + " smaller positions hidden" : "") + (PROVEN ? " · updated " + shortUpdatedAt(PROVEN.updatedAt) : "")}</div>

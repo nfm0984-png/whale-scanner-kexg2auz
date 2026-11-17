@@ -28,7 +28,7 @@ import wallet_flags as wf
 import backfill as bf
 
 PT = dt.timezone(dt.timedelta(hours=-8))
-ELITE_MIN_N = 12          # loosened Nov 15 (was 20); 12-19 graded = small sample
+ELITE_MIN_N = 30          # big bets only (Noel, Nov 16); no 12-bet small-sample path
 ELITE_FULL_N = 20
 ELITE_MIN_ROI = 15.0
 ELITE_ROI_BONUS = 20.0
@@ -130,12 +130,17 @@ def elite_check(c):
         v = (win.get(k) or {}).get('pnl')
         return v is not None and v > 0
     why = []
-    if (c.get('cn') or 0) < ELITE_MIN_N:
-        why.append('only %d graded' % (c.get('cn') or 0))
-    if (c.get('cw') or 0) <= (c.get('cl') or 0):
-        why.append('not a winning record')
-    if c.get('croi') is None or c['croi'] < ELITE_MIN_ROI:
-        why.append('ROI %s%% < +15%%' % (c.get('croi'),))
+    big = c.get('big') or {}
+    bn = big.get('n') if big.get('n') is not None else (c.get('cn') or 0)
+    bw = big.get('w') if big.get('w') is not None else (c.get('cw') or 0)
+    bl = big.get('l') if big.get('l') is not None else (c.get('cl') or 0)
+    broi = big.get('roi') if big.get('roi') is not None else c.get('croi')
+    if (bn or 0) < ELITE_MIN_N:
+        why.append('only %d graded big bets' % (bn or 0))
+    if (bw or 0) <= (bl or 0):
+        why.append('not a winning big-bet record')
+    if broi is None or broi < ELITE_MIN_ROI:
+        why.append('big-bet ROI %s%% < +15%%' % (broi,))
     if not best_sport_bar(c):
         why.append('no sport with 10+ graded and +%d%% ROI' % sport_bar_roi(c))
     if not (pos('week') and pos('month') and pos('year')):
@@ -344,7 +349,7 @@ def build(emb, store=None, write=True):
             'startTs': ts, 'start': pt(ts) if ts else (bf.slug_date(p['slug']) or '') + ' (time TBD)',
             'cost': round(p['cost']), 'avg': p['avg'], 'now': p.get('now'), 'usual': med, 'mult': mult,
             'kalshi': k, 'sportRec': srec, 'f14': c.get('f14'), 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi'),
-            'badge': c.get('badge'), 'verdict': verdict, 'why': reasons, 'smallSample': (c.get('cn') or 0) < ELITE_FULL_N, 'cn': c.get('cn'),
+            'badge': c.get('badge'), 'verdict': verdict, 'why': reasons, 'smallSample': False, 'cn': c.get('cn'),
             'inTop': p['pid'] in {x.get('id') for x in (emb or {}).get('signals') or []},
             'firstTs': first_ts, 'lastTs': _ts(p.get('lastTs')), 'stale': stale,
             'slip': None if slip is None else round(slip, 1),
@@ -385,13 +390,13 @@ def build(emb, store=None, write=True):
     slip_hidden = sum(1 for p in rows if p.get('_slipHidden'))
     res = {
         'updatedTs': int(now), 'updatedAt': pt(now),
-        'rule': 'Elite: 12+ graded big bets (12-19 = small sample), +15% ROI, Hot, and +20% ROI in the sport (+10% if 100+ graded). A pick is only GOOD if that capper has 30+ graded in that sport. Elites $300+, others $500+. Market makers/bots dropped. One-off jackpot records cannot be elite. Picks 2c+ worse than the whale entry (after Kalshi fee) are hidden. Buys older than 1 hour are tagged stale. Split games hidden.',
+        'rule': 'Elite: 30+ graded BIG bets (stake >= max($500, 1.5x median)) over a 60+ day account, +15% big-bet ROI, Hot, and +20% ROI in the sport (+10% if 100+ graded). No 12-bet small-sample path. Fun/small bets are ignored. A pick is only GOOD if that capper has 30+ graded in that sport. Elites $300+, others $500+. Market makers/bots dropped. One-off jackpot records cannot be elite. Picks 2c+ worse than the whale entry (after Kalshi fee) are hidden. Buys older than 1 hour are tagged stale. Split games hidden.',
         'filters': {'slipHidden': slip_hidden, 'stale': sum(1 for r in out if r.get('stale'))},
         'splitGames': sorted(split_events),
         'elite': [{'wallet': c['wallet'], 'name': c.get('name'), 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi'),
                    'wr': c.get('cwr'), 'quality': c.get('quality'), 'rankScore': elite_rank_score(c), 'avgEntry': c.get('avgEntry'),
                    'sports': sport_bars(c),
-                   'f14': c.get('f14'), 'badge': c.get('badge'), 'usual': c.get('medBet'), 'cn': c.get('cn'), 'n': c.get('n'), 'smallSample': (c.get('cn') or 0) < ELITE_FULL_N, 'open': len(opens.get(c['wallet']) or [])} for c in elite],
+                   'f14': c.get('f14'), 'badge': c.get('badge'), 'usual': c.get('medBet'), 'cn': c.get('cn'), 'n': c.get('n'), 'smallSample': False, 'open': len(opens.get(c['wallet']) or [])} for c in elite],
         'nearMiss': near[:25],
         'picks': out,
         'counts': {v: sum(1 for r in out if r['verdict'] == v) for v in order},

@@ -322,6 +322,7 @@ def summarize(store, traders=None, current_ids=None, windows=None):
     return out
 
 def slim_for_page(cappers, updated_at=None):
+    attach_track_record(cappers)
     return {'minSample': MIN_SAMPLE, 'updatedAt': updated_at or pt(int(time.time())), 'cappers': cappers}
 
 def backfill_from_git(store, repo=None):
@@ -811,9 +812,12 @@ def apply_records(c, bf=None, cp=None):
             Q[2] += wt * cost
             Q[3] += wt * prof
     if use_bf:
+        thirty = now - 30 * 86400
         for key, cell in (bf.get('cells') or {}).items():
             sp, day = key.rsplit('|', 1)
             ts = int(day) * 86400 + 43200
+            if ts < thirty:
+                continue  # 90d raw backfill; 14d/30d form and n stay on the last 30 days
             w_, l_, pu, rk, pf, cw_, cl_, crk, cpf = cell
             T['w'] += w_; T['l'] += l_; T['push'] += pu
             F['risked'] += rk; F['profit'] += pf
@@ -858,6 +862,8 @@ def apply_records(c, bf=None, cp=None):
         if not c.get('medBet') and bf.get('med'):
             c['medBet'] = bf['med']
             c['maxBet'] = bf.get('max')
+        if bf.get('big'):
+            c['big'] = bf['big']
     if cp:
         c['copies'] = cp
 
@@ -924,23 +930,69 @@ if __name__ == '__main__':
         print(f"  {c['name'] or c['wallet'][:10]:20} {c['w']}-{c['l']} wr={c['wr']} n={c['n']} profit={c['profit']} roi={c['roi']} open={c['open']} qual={c['qualified']}")
 
 
-# ---- Pick eligibility (Noel, Nov 15 9 PM) ----
-# A capper's picks only count (elite, Hot, All Picks) when ALL of these hold; the Cappers tab still lists everyone.
-ELIG_LT_ROI = 5.0       # all-time Polymarket ROI floor (%)
+# ---- Pick eligibility (Noel, Nov 15–16) ----
+# A capper's picks only count (elite, Hot, All Picks, Coming Up, combos) when ALL of these hold.
+# The Cappers tab still lists everyone. ROI never qualifies a capper on its own: the track-record
+# floor must be met first, and qualification uses the BIG-BET record (bets >= max($500, 1.5x median)),
+# not overall win totals that include small "fun" bets.
+ELIG_LT_ROI = 5.0       # kept as a secondary all-time Polymarket check when present
 ELIG_KSHARE = 0.50      # share of last-30-day $500+ bets in Kalshi-listed leagues
 ELIG_MAX_AVG = 0.90     # average entry on graded $500+ bets must be under 90c
+ELIG_MIN_AGE_DAYS = 60
+ELIG_MIN_BIG_N = 30
+ELIG_MIN_BIG_ROI = 5.0
+ELIG_MIN_BIG_PROFIT = 10000.0   # highest of $2k/$5k/$10k that still leaves a workable pool
+STREAK_MONTH_SHARE = 0.50
+STREAK_YEAR_EQ = 0.90
+STREAK_THIN_AGE_DAYS = 180      # 6 months; only applied when the big-bet record is still thin
 
 def long_term_ok(c):
+    """Year still has to be profitable when we have the Polymarket window. All-time ROI is no longer
+    enough to qualify — big-bet ROI in eligibility() is the track-record floor."""
     w = (c or {}).get('win') or {}
-    a = (w.get('all') or {}).get('roi')
     y = (w.get('year') or {}).get('pnl')
-    if a is None and y is None:
-        return False
-    if a is not None:
-        return a >= ELIG_LT_ROI and (y is None or y > 0)
+    if y is None:
+        return True
     return y > 0
 
-def eligibility(c):
+def _big(c):
+    return (c or {}).get('big') or {}
+
+def age_days(c, now=None):
+    ts = (c or {}).get('firstTs')
+    if not ts:
+        return None
+    import time as _t
+    now = now or _t.time()
+    try:
+        return (float(now) - float(ts)) / 86400.0
+    except (TypeError, ValueError):
+        return None
+
+def recent_streak(c, now=None):
+    """Cut a short-history heater: month P&L > 50% of all-time, or year ~ all-time on a <6 month
+    account, but only when the capper does not already have a 30+ big-bet / 60-day record.
+    This catches new wallets whose week/month/year/all boxes are the same number, without dropping
+    established volume cappers (LeonDk, Stiff-Desktop, lonmi2511) whose whole Polymarket life is
+    still inside the last year so month/all can look high after a good month."""
+    win = (c or {}).get('win') or {}
+    allp = (win.get('all') or {}).get('pnl')
+    month = (win.get('month') or {}).get('pnl')
+    year = (win.get('year') or {}).get('pnl')
+    if not allp or allp <= 0:
+        return False
+    age = age_days(c, now)
+    bn = _big(c).get('n') or 0
+    thin = (age is None or age < ELIG_MIN_AGE_DAYS or bn < ELIG_MIN_BIG_N)
+    month_heavy = month is not None and month > STREAK_MONTH_SHARE * allp
+    year_eq = year is not None and year >= STREAK_YEAR_EQ * allp
+    if thin and month_heavy:
+        return True
+    if thin and year_eq and (age is None or age < STREAK_THIN_AGE_DAYS):
+        return True
+    return False
+
+def eligibility(c, now=None):
     """Reasons a capper's picks are excluded ([] = eligible)."""
     why = []
     f = (c or {}).get('f14') or {}
@@ -949,7 +1001,7 @@ def eligibility(c):
     if not (c.get('n') or 0) or c.get('roi') is None or c['roi'] <= 0:
         why.append('30d not green')
     if not long_term_ok(c):
-        why.append('long-term weak (all-time ROI < +5% or year down)')
+        why.append('year down')
     ks = c.get('kShare')
     if ks is None or ks < ELIG_KSHARE:
         why.append('mostly non-Kalshi' if ks is not None else 'Kalshi share unknown')
@@ -958,4 +1010,54 @@ def eligibility(c):
         why.append('90c+ favorites')
     if c.get('mm'):
         why.append('market maker / bot')
+    if c.get('oneOff'):
+        why.append('one-off (' + (c.get('oneOffWhy') or 'profit concentrated in a few bets') + ')')
+    age = age_days(c, now)
+    if age is None:
+        why.append('account age unknown')
+    elif age < ELIG_MIN_AGE_DAYS:
+        why.append('account younger than 60 days')
+    b = _big(c)
+    bn = b.get('n') or 0
+    broi = b.get('roi')
+    bprofit = b.get('profit')
+    if bn < ELIG_MIN_BIG_N:
+        why.append('under 30 graded big bets')
+    if bprofit is None or bprofit <= 0:
+        why.append('big-bet profit not positive')
+    if broi is None or broi < ELIG_MIN_BIG_ROI:
+        why.append('big-bet ROI under +5%')
+    if bprofit is not None and bprofit < ELIG_MIN_BIG_PROFIT:
+        why.append('big-bet profit under $10k')
+    if recent_streak(c, now):
+        why.append('recent-streak P&L (month or year is most of all-time, short history)')
     return why
+
+
+def load_first_activity():
+    path = os.path.join(HERE, 'first_activity.json')
+    try:
+        d = json.load(open(path))
+        return d.get('wallets') or d
+    except Exception:
+        return {}
+
+def attach_track_record(caps, now=None):
+    """Copy first-trade timestamps and 90-day big-bet records onto capper rows."""
+    now = now or time.time()
+    first = load_first_activity()
+    bf_w = {}
+    try:
+        import backfill as _bf
+        bf_w = ((_bf.load() or {}).get('wallets')) or {}
+    except Exception:
+        bf_w = {}
+    for c in caps or []:
+        w = (c.get('wallet') or '').lower()
+        ts = (first.get(w) or {}).get('firstTs') or c.get('firstTs')
+        if ts:
+            c['firstTs'] = int(ts)
+            c['ageDays'] = round((now - float(ts)) / 86400.0, 1)
+        if not c.get('big') and (bf_w.get(w) or {}).get('big'):
+            c['big'] = bf_w[w]['big']
+    return caps

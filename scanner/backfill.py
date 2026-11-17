@@ -7,6 +7,7 @@ CLOSED = redeemed or sold, REDEEMABLE = resolved but not redeemed (includes lose
 A position is graded W when the market resolved to its outcome (current_price ~1), L at ~0, push at 0.5.
 Only sports game markets (slug like "<league>-<team>-<team>-YYYY-MM-DD...") and only $500+ bets
 (total_size x avg_price) are kept. If a whale holds both sides of a market, only the bigger side counts.
+Lookback is 90 days so big-bet records (stake >= max($500, 1.5x median)) can be graded over 60+ days.
 
 Incremental + cached: raw rows live in .cache/backfill_raw.json (gitignored, kept between Actions runs with
 actions/cache); each wallet is re-read from (last fetch - 3 days), at most every 3h, or the full 30 days when
@@ -22,8 +23,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 PATH = os.path.join(HERE, 'backfill.json')
 RAW = os.path.join(HERE, '.cache', 'backfill_raw.json')
 BASE = 'https://data-api.polymarket.com/v2'
-DAYS = 30
-KEEP_DAYS = 30
+DAYS = 90
+KEEP_DAYS = 90
 MIN_COST = 500.0
 MAX_AGE = 3 * 3600
 OVERLAP = 3 * 86400
@@ -155,11 +156,37 @@ def aggregate(raw):
             _KL = frozenset()
         k_n = sum(1 for r in bets.values() if ((r[4] or '').split('-')[0] in _KL))
         recent = sorted(bets.values(), key=lambda r: -(r[3] or 0))[:8]
+        med = _med(costs)
+        floor = max(MIN_COST, 1.5 * med) if med else MIN_COST
+        bw = bl = 0
+        brk = bpf = 0.0
+        bts = []
+        for cost, avg, res, ts, slug, outcome in bets.values():
+            if res not in ('W', 'L') or cost < floor:
+                continue
+            pr = _profit(cost, avg, res)
+            if res == 'W':
+                bw += 1
+            else:
+                bl += 1
+            brk += cost
+            bpf += pr
+            if ts:
+                bts.append(int(ts))
+        span = ((max(bts) - min(bts)) / 86400.0) if len(bts) >= 2 else (0.0 if bts else None)
+        big = {
+            'w': bw, 'l': bl, 'n': bw + bl, 'profit': round(bpf, 2), 'risked': round(brk, 2),
+            'roi': round(100.0 * bpf / brk, 1) if brk else None,
+            'spanDays': round(span, 1) if span is not None else None,
+            'firstTs': min(bts) if bts else None, 'lastTs': max(bts) if bts else None,
+            'floor': round(floor, 2), 'med': round(med, 2) if med else None,
+        }
         out['wallets'][w] = {'ts': rec.get('ts'), 'full': bool(rec.get('full')), 'n': len(bets),
-                             'med': round(_med(costs)) if costs else None, 'max': round(max(costs)) if costs else None,
+                             'med': round(med) if med else None, 'max': round(max(costs)) if costs else None,
                              'avgAll': round(a_sum / a_n, 4) if a_n else None, 'nAll': int(a_n), 'nNear': int(a_near),
                              'avgCopy': round(c_sum / c_n, 4) if c_n else None, 'nCopy': int(c_n),
-                             'kN': k_n, 'kShare': round(k_n / len(bets), 3) if bets else None, 'cells': cells, 'recent': [[r[4], r[5], round(r[0]), r[1], r[2], r[3]] for r in recent]}
+                             'kN': k_n, 'kShare': round(k_n / len(bets), 3) if bets else None, 'cells': cells,
+                             'recent': [[r[4], r[5], round(r[0]), r[1], r[2], r[3]] for r in recent], 'big': big}
     tmp = PATH + '.tmp'
     json.dump(out, open(tmp, 'w'), separators=(',', ':'))
     os.replace(tmp, PATH)

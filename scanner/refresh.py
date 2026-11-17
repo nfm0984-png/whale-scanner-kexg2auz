@@ -436,6 +436,11 @@ try:
     _bf.refresh(list(_ww2.load_tracked().get('wallets', {}).keys()) + _ww_seen)
 except Exception as _e:
     print('backfill failed (using cached records):', _e)
+try:
+    import first_activity as _fa, whale_windows as _ww3
+    _fa.refresh(list(_ww3.load_tracked().get('wallets', {}).keys()) + _ww_seen)
+except Exception as _e:
+    print('first_activity failed (using cached ages):', _e)
 emb['capperHistory'] = _ch.page_payload(emb, hist, _ch_store)
 try:
     import proven as _pv

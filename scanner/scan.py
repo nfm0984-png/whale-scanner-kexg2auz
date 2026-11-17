@@ -1088,6 +1088,11 @@ try:
         _bf.refresh(list(_ww.load_tracked().get('wallets', {}).keys()) + sorted(_ww_known))
     except Exception as _e:
         print('backfill failed (using cached records):', _e)
+    try:
+        import first_activity as _fa
+        _fa.refresh(list(_ww.load_tracked().get('wallets', {}).keys()) + sorted(_ww_known) + list(cappers.keys()))
+    except Exception as _e:
+        print('first_activity failed (using cached ages):', _e)
     _QMAP = _ch_rank.quality_map(_ch_rank.load())
 except Exception:
     _ch_rank = None

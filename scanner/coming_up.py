@@ -8,6 +8,7 @@ Picks ($500/$300) pick rules.
 """
 import collections, json, re, urllib.request
 import wallet_flags as wf
+import capper_history as ch
 
 LEAN_MIN = 100
 LIVE_SECS = int(3.5 * 3600)
@@ -106,6 +107,8 @@ def elite_wallets(proven):
 def is_hot_or_elite(c, elite):
     if not c or c.get('mm') or c.get('oneOff'):
         return False
+    if ch.eligibility(c):
+        return False
     w = (c.get('wallet') or '').lower()
     if w in elite:
         return True
@@ -173,6 +176,9 @@ def _uniq(rows):
 def _capper_roi(rec):
     if not rec:
         return None
+    b = rec.get('big') or {}
+    if b.get('roi') is not None:
+        return b['roi']
     f = rec.get('f14') or {}
     if f.get('roi') is not None:
         return f['roi']
