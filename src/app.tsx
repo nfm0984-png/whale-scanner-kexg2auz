@@ -2,7 +2,7 @@ import { Page, Section, Rows, Properties, Segmented, Select, Input, Toggle, Grid
 import type { ReactNode } from "./kit";
 
 interface Backer { name: string; cost: number; avg: number | null; wr: number | null; resolved: number | null; pnl: number; rank: number | null; golden: boolean; skill: boolean; flow: string | null; buy24: number | null; sell24: number | null; sport: { n: number; wr: number; pnl: number } | null; wallet: string; top100?: boolean | null; rank30?: number | null; rankAll?: number | null; firstTs: number | null; lastTs: number | null; trades: number | null }
-interface Kalshi { status: string; why?: string; action?: string; price?: number; ticker?: string; contract?: string; rule?: string; edge_vs_whales?: number | null; edge_vs_poly?: number; slip?: number | null; light?: string }
+interface Kalshi { status: string; why?: string; action?: string; price?: number; ticker?: string; contract?: string; rule?: string; edge_vs_whales?: number | null; edge_vs_poly?: number; slip?: number | null; light?: string; yesAsk?: number | null; noAsk?: number | null; marketTitle?: string; eventTitle?: string; oppTicker?: string; oppContract?: string; oppAction?: string; oppPrice?: number | null }
 interface Game { name: string | null; start: string; src: string; state: string | null; detail: string; score: string; venue?: string | null; records?: string[]; url?: string | null; teams?: string[] }
 interface Opp { name: string; wallet: string; cost: number; avg: number | null; wr: number | null; qualified: boolean; golden: boolean; rank?: number | null; rank30?: number | null; rankAll?: number | null }
 interface Refresh { at: number; state?: string | null; detail?: string; score?: string; pct?: number | null; src?: string; team?: string; kNow?: number; final?: string; ended?: boolean; why?: string }
@@ -12,10 +12,10 @@ interface CapperHistPick { id: string; q?: string | null; label?: string | null;
 interface CapperRec { kShare?: number | null; wallet: string; name: string; rankAll?: number | null; rank?: number | null; golden?: boolean; w: number; l: number; push: number; open: number; n: number; profit: number; risked: number; wr?: number | null; roi?: number | null; qualified: boolean; pnl?: number | null; wrAll?: number | null; picks: CapperHistPick[]; cw?: number; cl?: number; cn?: number; cwr?: number | null; croi?: number | null; cprofit?: number; crisked?: number; quality?: number; qQual?: boolean; demoted?: boolean; shrunkWr?: number | null; shrunkRoi?: number | null; win?: Record<string, { pnl?: number; roi?: number | null; rec?: number[] }>; badge?: string; proven?: boolean; coldDemoted?: boolean; medBet?: number | null; maxBet?: number | null; convRec?: Record<string, { w: number; l: number; roi: number | null }>; winStale?: string[]; tracked?: boolean; isNew?: boolean; addedTs?: number | null; trackedReason?: string | null; hotBoost?: number; f14?: { w: number; l: number; n: number; roi: number | null }; formCooling?: boolean; sports?: Record<string, { w: number; l: number; n: number; roi: number | null }>; copies?: { w: number; l: number; n: number; push: number; open: number; tickets: number; tw: number; tl: number; stake: number }; bf?: { n: number; med: number | null; ts: number; days: number; recent: (string | number)[][] }; recSrc?: { scanner: number; backfill: number }; qwr?: number | null; qroi?: number | null; avgEntry?: number | null; avgN?: number; nearCertN?: number; mm?: boolean; mmWhy?: string | null; oneOff?: boolean; oneOffWhy?: string | null }
 interface NewCap { wallet: string; name: string; reason?: string | null; badge?: string | null; month?: number | null }
 interface CapperHistory { minSample: number; updatedAt?: string; cappers: CapperRec[]; newThisScan?: NewCap[]; newRecent?: NewCap[]; trackedCount?: number; sportMap?: Record<string, string>; copiesInfo?: { updatedTs?: number; tickets?: number; ticketsMatched?: number; legs?: number; legsMatched?: number }; backfillDays?: number }
-interface ProvenRow { smallSample?: boolean; cn?: number | null; pid: string; wallet: string; name: string; league: string; sport: string; game: string; market: string; pick: string; opp: string; slug: string; startTs: number | null; start: string; cost: number; avg: number; now: number | null; usual: number | null; mult: number | null; kalshi: { action: string; price: number | null; ticker: string; contract?: string | null; src?: string; live?: boolean } | null; sportRec: { w: number; l: number; n: number; roi: number | null }; f14?: { w: number; l: number; n: number; roi: number | null }; rec: number[]; roi: number | null; badge?: string; verdict: string; why: string[]; hedged?: boolean; inTop?: boolean; group?: ProvenRow[]; firstTs?: number | null; lastTs?: number | null; stale?: boolean; slip?: number | null }
+interface ProvenRow { smallSample?: boolean; cn?: number | null; pid: string; wallet: string; name: string; league: string; sport: string; game: string; market: string; pick: string; opp: string; slug: string; startTs: number | null; start: string; cost: number; avg: number; now: number | null; usual: number | null; mult: number | null; kalshi: { action: string; price: number | null; ticker: string; contract?: string | null; src?: string; live?: boolean; yesAsk?: number | null; noAsk?: number | null; marketTitle?: string | null; eventTitle?: string | null; oppTicker?: string | null; oppContract?: string | null; oppAction?: string | null; oppPrice?: number | null } | null; sportRec: { w: number; l: number; n: number; roi: number | null }; f14?: { w: number; l: number; n: number; roi: number | null }; rec: number[]; roi: number | null; badge?: string; verdict: string; why: string[]; hedged?: boolean; inTop?: boolean; group?: ProvenRow[]; firstTs?: number | null; lastTs?: number | null; stale?: boolean; slip?: number | null }
 interface ProvenData { updatedAt: string; updatedTs: number; rule: string; splitGames?: string[]; elite: { wallet: string; name: string; rec: number[]; roi: number | null; wr?: number | null; sports?: { sport: string; w: number; l: number; n: number; roi: number }[]; f14?: { w: number; l: number; n: number; roi: number | null }; badge?: string; usual?: number | null; open?: number }[]; nearMiss?: { wallet: string; name: string; why: string[]; rec: number[]; roi: number | null }[]; picks: ProvenRow[]; counts: Record<string, number> }
 interface ComingBacker { wallet?: string; name: string; cost: number; avg?: number | null; lastTs?: number | null; sport?: string; sw?: number; sl?: number; sn?: number; sroi?: number | null; roi?: number | null; wr?: number | null; elite?: boolean }
-interface ComingSide { id: string; side: string; label: string; kPrice: number | null; avgEntry: number | null; slip: number | null; action?: string | null; contract?: string | null; ticker?: string | null; cappers: number; usd: number; names?: string[]; backers?: ComingBacker[]; lastTs?: number | null }
+interface ComingSide { id: string; side: string; label: string; kPrice: number | null; avgEntry: number | null; slip: number | null; action?: string | null; contract?: string | null; ticker?: string | null; marketTitle?: string | null; yesAsk?: number | null; noAsk?: number | null; oppTicker?: string | null; oppContract?: string | null; oppAction?: string | null; oppPrice?: number | null; cappers: number; usd: number; names?: string[]; backers?: ComingBacker[]; lastTs?: number | null }
 interface ComingMarket { id: string; kind: string; q?: string; sides: ComingSide[] }
 interface ComingGame { id: string; game: string; league: string; startTs: number; start: string; capperCount?: number; capperRoi?: number | null; markets: ComingMarket[] }
 interface Scan { ts: number; signals: number; fun: number; poly?: number; glue?: number; props?: number; longshots?: number; biggest?: number; upcoming?: number; calls: number; cappers?: number; bets?: number; buys?: number; wallets?: number }
@@ -3059,7 +3059,7 @@ function picksToGameCards(picks: Pick[]): ComingGame[] {
           const parts = title.split(/\s+vs\s+/i);
           if (parts.length === 2) label = parts[1] && (oppOf.label || "").toLowerCase().indexOf(parts[0].toLowerCase()) >= 0 ? parts[1] : parts[0];
         }
-        return { id: cid + ":" + side, side: side, label: label || labelGuess, kPrice: k && k.price != null ? k.price : null, avgEntry: avg, slip: k ? slipCents(k.price, avg) : null, action: k ? k.action : null, contract: k ? k.contract : null, ticker: k ? k.ticker : null, cappers: backers.length, usd: Math.round(usd), names: backers.map((b: ComingBacker) => b.name), backers: backers, lastTs: backers.reduce((a: number, b: ComingBacker) => Math.max(a, b.lastTs || 0), 0) || null };
+        return { id: cid + ":" + side, side: side, label: label || labelGuess, kPrice: k && k.price != null ? k.price : null, avgEntry: avg, slip: k ? slipCents(k.price, avg) : null, action: k ? k.action : null, contract: k ? k.contract : null, ticker: k ? k.ticker : null, marketTitle: k ? (k.eventTitle || k.marketTitle || null) : null, yesAsk: k ? k.yesAsk : null, noAsk: k ? k.noAsk : null, oppTicker: k ? k.oppTicker : null, oppContract: k ? k.oppContract : null, oppAction: k ? k.oppAction : null, oppPrice: k ? k.oppPrice : null, cappers: backers.length, usd: Math.round(usd), names: backers.map((b: ComingBacker) => b.name), backers: backers, lastTs: backers.reduce((a: number, b: ComingBacker) => Math.max(a, b.lastTs || 0), 0) || null };
       };
       const yes = mkSide("yes", slot.yes, slot.no, "Yes");
       const no = mkSide("no", slot.no, slot.yes, "No");
@@ -3096,7 +3096,7 @@ function provenToGameCards(rows: ProvenRow[]): ComingGame[] {
       const k = set[0].kalshi;
       const inv = backers.reduce((a: number, b: ComingBacker) => a + (b.cost || 0) * (b.avg || 0), 0);
       const avg = usd && inv ? inv / usd : (set[0].avg || null);
-      return { id: (set[0].pid || gid) + ":" + i, side: i === 0 ? "yes" : "no", label: lab, kPrice: k && k.price != null ? k.price : null, avgEntry: avg, slip: k ? slipCents(k.price, avg) : null, action: k ? k.action : null, contract: k ? k.contract : null, ticker: k ? k.ticker : null, cappers: backers.length, usd: Math.round(usd), names: backers.map((b: ComingBacker) => b.name), backers: backers, lastTs: backers.reduce((a: number, b: ComingBacker) => Math.max(a, b.lastTs || 0), 0) || null };
+      return { id: (set[0].pid || gid) + ":" + i, side: i === 0 ? "yes" : "no", label: lab, kPrice: k && k.price != null ? k.price : null, avgEntry: avg, slip: k ? slipCents(k.price, avg) : null, action: k ? k.action : null, contract: k ? k.contract : null, ticker: k ? k.ticker : null, marketTitle: k ? (k.eventTitle || k.marketTitle || null) : null, yesAsk: k ? k.yesAsk : null, noAsk: k ? k.noAsk : null, oppTicker: k ? k.oppTicker : null, oppContract: k ? k.oppContract : null, oppAction: k ? k.oppAction : null, oppPrice: k ? k.oppPrice : null, cappers: backers.length, usd: Math.round(usd), names: backers.map((b: ComingBacker) => b.name), backers: backers, lastTs: backers.reduce((a: number, b: ComingBacker) => Math.max(a, b.lastTs || 0), 0) || null };
     });
     if (sides.length === 1) {
       const other = (rs[0].opp || "").trim();
@@ -3253,12 +3253,89 @@ function marketSideLabels(m: ComingMarket, gameTitle: string): { yes: string; no
   }
   return { yes: yesLab || "Yes", no: noLab || "No" };
 }
+
+function flipAct(act?: string | null): string | null {
+  const a = (act || "").toUpperCase();
+  if (a.endsWith("NO")) return "BUY YES";
+  if (a.endsWith("YES")) return "BUY NO";
+  return null;
+}
+function isBinaryKMarket(kind?: string, contract?: string | null, q?: string | null): boolean {
+  const k = (kind || "").toLowerCase();
+  if (k === "spread" || k === "total" || k === "draw" || k === "teamwin" || k === "prop") return true;
+  const t = ((contract || "") + " " + (q || "")).toLowerCase();
+  return /wins?\s+by\s+over|\bo\/?u\s+|end in a (?:tie|draw)|\b(?:over|under)\s+[\d.]+|^(?:tie|draw)$/.test(t);
+}
+function completeComingSides(sides: ComingSide[], kind: string, gameTitle: string, q?: string): ComingSide[] {
+  const list = (sides || []).slice();
+  if (list.length < 2) return list;
+  const src = list.find((s: ComingSide) => !!(s.ticker && s.action)) || list.find((s: ComingSide) => !!(s.contract || s.action));
+  if (!src) return list;
+  const binary = isBinaryKMarket(kind, src.contract, q);
+  const title = src.marketTitle || (!binary && gameTitle && /\svs\.?\s/i.test(gameTitle) ? gameTitle + " winner" : "") || src.contract || "";
+  return list.map((s: ComingSide) => {
+    if (s.ticker && s.action) {
+      return s.marketTitle ? s : { ...s, marketTitle: title || s.marketTitle };
+    }
+    if (!binary && (src.oppTicker || src.oppContract || src.oppAction)) {
+      const act = src.oppAction || "BUY YES";
+      const px = src.oppPrice != null ? src.oppPrice : (s.kPrice != null ? s.kPrice : null);
+      return { ...s, ticker: src.oppTicker || s.ticker, contract: src.oppContract || s.contract || s.label, action: act, kPrice: px, marketTitle: title || s.marketTitle || null };
+    }
+    const act = s.action || flipAct(src.action) || (s.side === "no" ? "BUY NO" : "BUY YES");
+    let px = s.kPrice;
+    if (px == null && act) {
+      if (act.toUpperCase().endsWith("NO") && src.noAsk != null) px = src.noAsk;
+      else if (act.toUpperCase().endsWith("YES") && src.yesAsk != null) px = src.yesAsk;
+    }
+    return { ...s, ticker: s.ticker || src.ticker, contract: s.contract || src.contract, action: act, kPrice: px, marketTitle: s.marketTitle || title || null, yesAsk: s.yesAsk != null ? s.yesAsk : src.yesAsk, noAsk: s.noAsk != null ? s.noAsk : src.noAsk };
+  });
+}
+function kalshiActionWords(act?: string | null): string {
+  const a = (act || "").toUpperCase().trim();
+  if (a.endsWith("NO")) return "Buy NO";
+  if (a.endsWith("YES")) return "Buy YES";
+  return (act || "").replace(/^BUY\s+/i, "Buy ") || "Buy YES/NO";
+}
+function kalshiHowLine(side: ComingSide): string {
+  const act = kalshiActionWords(side.action);
+  const price = side.kPrice != null ? cents(side.kPrice) : "price not loaded";
+  const contract = (side.contract || "").trim();
+  const market = ((side.marketTitle || "").trim()) || contract;
+  if (contract && market && market.toLowerCase() !== contract.toLowerCase() && /winner/i.test(market)) {
+    return "Kalshi: " + market + " · " + contract + " · " + act + " · " + price;
+  }
+  const looksLikeTeam = !!(contract && market && market.toLowerCase() !== contract.toLowerCase() && !/wins\s+by|over\s+[\d.]|under\s+[\d.]|draw/i.test(contract) && contract.length < 40);
+  if (looksLikeTeam && market) return "Kalshi: " + market + " · " + contract + " · " + act + " · " + price;
+  if (market) return "Kalshi: " + market + " · " + act + " · " + price;
+  if (side.action) return "Kalshi: " + act + " · " + price;
+  return "Kalshi: market not matched · " + act + " · price not loaded";
+}
+function comingSideRoi(side: ComingSide): number {
+  const vals = (side.backers || []).map(comingRoiOf).filter((x): x is number => x != null);
+  if (!vals.length) return -999;
+  return vals.reduce((a: number, b: number) => a + b, 0) / vals.length;
+}
+function pickSideId(sides: ComingSide[]): string | null {
+  const scored = (sides || []).slice(0, 2).filter((s: ComingSide) => (s.cappers || 0) > 0);
+  if (!scored.length) return null;
+  scored.sort((a: ComingSide, b: ComingSide) => ((b.cappers || 0) - (a.cappers || 0)) || (comingSideRoi(b) - comingSideRoi(a)));
+  return scored[0].id;
+}
+function SideTag(props: { pick: boolean }) {
+  const color = props.pick ? GREEN : "#6B7280";
+  return (
+    <span style={{ display: "inline-block", fontSize: 10, fontWeight: 850, letterSpacing: "0.08em", lineHeight: "14px", padding: "2px 7px", borderRadius: 6, border: "1.5px solid " + color, color: color, background: "transparent", marginBottom: 6 }}>{props.pick ? "PICK" : "OPPOSITE"}</span>
+  );
+}
+
 function relabelMarketSides(m: ComingMarket, gameTitle: string): ComingMarket {
   const pair = marketSideLabels(m, gameTitle);
-  return { ...m, sides: (m.sides || []).map((s: ComingSide) => {
+  const relabeled = (m.sides || []).map((s: ComingSide) => {
     const next = s.side === "yes" ? pair.yes : s.side === "no" ? pair.no : s.label;
     return next && next !== s.label ? { ...s, label: next } : s;
-  }) };
+  });
+  return { ...m, sides: completeComingSides(relabeled, m.kind || "", gameTitle, m.q) };
 }
 
 function SidesGameCard(props: { g: ComingGame; now: number; rank?: number; suggested?: boolean; selectedSideId?: string; onSelectSide?: (g: ComingGame, s: ComingSide) => void; onCapper: (wallet: string) => void }) {
@@ -3282,22 +3359,27 @@ function SidesGameCard(props: { g: ComingGame; now: number; rank?: number; sugge
         <div style={{ fontSize: 20, lineHeight: "25px", fontWeight: 850, marginTop: 8, overflowWrap: "anywhere" }}>{g.game}</div>
         {(g.markets || []).map((raw: ComingMarket, mi: number) => {
           const m = relabelMarketSides(raw, g.game || "");
+          const shown = (m.sides || []).slice(0, 2);
+          const leadId = pickSideId(shown);
           return (
           <div key={m.id || mi} style={{ marginTop: 12 }}>
             {m.kind && m.kind !== "moneyline" && m.kind !== "teamwin" && m.kind !== "draw" ? <div style={{ fontSize: 12, fontWeight: 800, color: t.text.tertiary, marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.04em" }}>{kindWord(m.kind)}</div> : null}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 8 }}>
-              {(m.sides || []).slice(0, 2).map((side: ComingSide) => {
+              {shown.map((side: ComingSide) => {
                 const sel = props.selectedSideId === side.id;
                 const stale = !!(side.lastTs && props.now - side.lastTs > STALE_SECS);
                 const clickable = !!props.onSelectSide && side.kPrice != null;
+                const isPick = !!(leadId && side.id === leadId);
                 return (
                   <div key={side.id} data-coming-side={side.id} onClick={clickable ? () => props.onSelectSide && props.onSelectSide(g, side) : undefined} style={{ borderRadius: 14, border: sel ? "2px solid " + BRAND : "1px solid " + t.border.default, background: sel ? "#F5F0FF" : t.bg.subtle, padding: 10, cursor: clickable ? "pointer" : "default", minWidth: 0 }}>
+                    <div><SideTag pick={isPick} /></div>
                     <div style={{ fontSize: 15, fontWeight: 850, lineHeight: "20px", overflowWrap: "anywhere" }}>{side.label}</div>
                     <div style={{ fontSize: 16, fontWeight: 850, marginTop: 6, color: side.cappers ? t.text.primary : t.text.tertiary }}>{comingCaps(side.cappers || 0)}</div>
                     {side.cappers ? <div style={{ fontSize: 11, color: t.text.tertiary, marginTop: 1 }}>{money(side.usd)}</div> : null}
-                    <div style={{ fontSize: 12, fontWeight: 700, marginTop: 6, color: t.text.secondary }}>
-                      {side.kPrice != null ? "Kalshi " + cents(side.kPrice) + (side.avgEntry != null ? " · entry " + cents(side.avgEntry) : "") + (side.slip != null ? " · " + (side.slip >= 0 ? "+" : "") + side.slip.toFixed(1) + "¢ fee" : "") : "No Kalshi price"}
+                    <div style={{ fontSize: 12, fontWeight: 850, marginTop: 6, color: t.text.primary, lineHeight: "16px", overflowWrap: "anywhere" }}>
+                      {kalshiHowLine(side)}
                     </div>
+                    {side.avgEntry != null || side.slip != null ? <div style={{ fontSize: 11, fontWeight: 700, marginTop: 3, color: t.text.tertiary }}>{[side.avgEntry != null ? "entry " + cents(side.avgEntry) : "", side.slip != null ? ((side.slip >= 0 ? "+" : "") + side.slip.toFixed(1) + "¢ fee") : ""].filter(Boolean).join(" · ")}</div> : null}
                     {stale ? <div style={{ marginTop: 6 }}><Chip bg={AMBER} color="#FFFFFF">Stale</Chip></div> : null}
                     {sel ? <div style={{ marginTop: 6 }}><Chip bg={BRAND} color="#FFFFFF">In parlay</Chip></div> : null}
                     <div style={{ marginTop: 8 }} onClick={(e) => e.stopPropagation()}>

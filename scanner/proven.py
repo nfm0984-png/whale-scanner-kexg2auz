@@ -234,6 +234,9 @@ def build(emb, store=None, write=True):
         k = (sp or {}).get('kalshi') if isinstance((sp or {}).get('kalshi'), dict) else {}
         if k.get('status') == 'ok' and k.get('ticker'):
             p['k'] = {'action': k.get('action'), 'price': k.get('price'), 'ticker': k.get('ticker'), 'contract': k.get('contract'), 'src': 'scanner'}
+            for kk in ('yesAsk', 'noAsk', 'marketTitle', 'eventTitle', 'oppTicker', 'oppContract', 'oppAction', 'oppPrice'):
+                if k.get(kk) is not None:
+                    p['k'][kk] = k.get(kk)
         elif rec.get('kTicker') and rec.get('kAct'):
             p['k'] = {'action': rec.get('kAct'), 'price': rec.get('kprice'), 'ticker': rec.get('kTicker'), 'contract': rec.get('kContract'), 'src': 'last scan'}
         else:
@@ -269,6 +272,15 @@ def build(emb, store=None, write=True):
                     try:
                         k['price'] = round(float(m.get(f)), 2)
                         k['live'] = True
+                    except (TypeError, ValueError):
+                        pass
+                    try:
+                        if m.get('yes_ask_dollars') is not None:
+                            k['yesAsk'] = float(m.get('yes_ask_dollars'))
+                        if m.get('no_ask_dollars') is not None:
+                            k['noAsk'] = float(m.get('no_ask_dollars'))
+                        if m.get('title') and not k.get('marketTitle'):
+                            k['marketTitle'] = m.get('title')
                     except (TypeError, ValueError):
                         pass
         # guard: a Kalshi price far from Polymarket's current price means the contract is not the same bet

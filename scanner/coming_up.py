@@ -5,7 +5,7 @@ $100+ open positions, next 36 hours, games not started. Market makers / bots
 and one-offs are excluded. Cards are ranked by hot-capper count, then capper ROI
 (not dollars). Separate from All Picks ($500/$300) pick rules.
 """
-import collections, re
+import collections, json, re, urllib.request
 import wallet_flags as wf
 
 LEAN_MIN = 100
@@ -188,7 +188,7 @@ def _uniq(rows):
             best[w] = b
     return list(best.values())
 
-def _side_blob(rows, hot, sport_map, label, side, src, kalshi=None):
+def _side_blob(rows, hot, sport_map, label, side, src, kalshi=None, cid=None):
     uniq = _uniq(rows)
     usd = sum(b.get('cost') or 0 for b in uniq)
     inv = sum((b.get('cost') or 0) * (b.get('avg') or 0) for b in uniq if b.get('avg') is not None)
@@ -205,7 +205,7 @@ def _side_blob(rows, hot, sport_map, label, side, src, kalshi=None):
     slip = wf.slip_cents(kprice, avg) if kprice is not None else None
     if slip is not None:
         slip = round(slip, 1)
-    cid = (src or {}).get('cid') or ''
+    cid = cid or (src or {}).get('cid') or ''
     return dict(
         id=str(cid) + ':' + side,
         side=side,
@@ -450,7 +450,8 @@ def build(lean_bets, capper_history, now, win_end, proven=None):
             sides = []
             for side, rows, label in (('yes', yes_rows, yes_lab), ('no', no_rows, no_lab)):
                 src = rows[0] if rows else None
-                sides.append(_side_blob(rows, hot, sport_map, label, side, src))
+                sides.append(_side_blob(rows, hot, sport_map, label, side, src, cid=cid))
+            sides = complete_sides(sides, kind=sample.get('kind') or 'other', game_title=game_title(sample), q=sample.get('q') or '')
             if not any(s.get('cappers') for s in sides):
                 continue
             # Leading side first (count, then ROI) so the lean is on the left.
@@ -496,6 +497,244 @@ def build(lean_bets, capper_history, now, win_end, proven=None):
     games.sort(key=_sort_key)
     return games
 
+
+# ---------- Kalshi how-to on both sides of a card ----------
+_KMARKET = {}
+_KEVENT = {}
+_KEV_MARKETS = {}
+_KURL = 'https://api.elections.kalshi.com/trade-api/v2/'
+
+def _kjson(url):
+    req = urllib.request.Request(url, headers={'User-Agent': 'whale-scanner/1.0', 'Accept': 'application/json'})
+    try:
+        with urllib.request.urlopen(req, timeout=15) as r:
+            return json.load(r)
+    except Exception:
+        return None
+
+def _kfp(x):
+    try:
+        return float(x)
+    except Exception:
+        return None
+
+def fetch_market(ticker):
+    if not ticker:
+        return None
+    if ticker in _KMARKET:
+        return _KMARKET[ticker]
+    d = _kjson(_KURL + 'markets/' + ticker)
+    m = (d or {}).get('market') if isinstance(d, dict) else None
+    _KMARKET[ticker] = m
+    return m
+
+def fetch_event(event_ticker):
+    if not event_ticker:
+        return None
+    if event_ticker in _KEVENT:
+        return _KEVENT[event_ticker]
+    d = _kjson(_KURL + 'events/' + event_ticker)
+    e = (d or {}).get('event') if isinstance(d, dict) else None
+    _KEVENT[event_ticker] = e
+    return e
+
+def fetch_event_markets(event_ticker):
+    if not event_ticker:
+        return []
+    if event_ticker in _KEV_MARKETS:
+        return _KEV_MARKETS[event_ticker]
+    d = _kjson(_KURL + 'markets?event_ticker=' + event_ticker + '&limit=200')
+    ms = (d or {}).get('markets') if isinstance(d, dict) else None
+    ms = ms or []
+    _KEV_MARKETS[event_ticker] = ms
+    for m in ms:
+        tk = m.get('ticker')
+        if tk and tk not in _KMARKET:
+            _KMARKET[tk] = m
+    return ms
+
+def event_ticker_of(ticker, market=None):
+    if market and market.get('event_ticker'):
+        return market.get('event_ticker')
+    if not ticker or ticker.count('-') < 2:
+        return None
+    return ticker.rsplit('-', 1)[0]
+
+def flip_action(act):
+    a = (act or '').upper().strip()
+    if a.endswith('NO'):
+        return 'BUY YES'
+    if a.endswith('YES'):
+        return 'BUY NO'
+    return None
+
+def _asks(m):
+    if not m:
+        return None, None
+    yes = _kfp(m.get('yes_ask_dollars'))
+    no = _kfp(m.get('no_ask_dollars'))
+    yes_bid = _kfp(m.get('yes_bid_dollars'))
+    no_bid = _kfp(m.get('no_bid_dollars'))
+    if no is None and yes_bid is not None:
+        no = round(1 - yes_bid, 4)
+    if yes is None and no_bid is not None:
+        yes = round(1 - no_bid, 4)
+    if yes is not None and yes <= 0:
+        yes = None
+    if no is not None and no <= 0:
+        no = None
+    return yes, no
+
+def _px_for_action(yes, no, action):
+    a = (action or '').upper()
+    if a.endswith('NO'):
+        return no
+    if a.endswith('YES'):
+        return yes
+    return None
+
+def _binary_market(kind, contract=None, q=None):
+    kind = (kind or '').lower()
+    if kind in ('spread', 'total', 'draw', 'teamwin', 'prop'):
+        return True
+    t = ((contract or '') + ' ' + (q or '')).lower()
+    if re.search(r'wins?\s+by\s+over|\bo/?u\s+|end in a (?:tie|draw)|^(?:over|under)\s+', t) or re.search(r'\b(?:over|under)\s+[\d.]+', t):
+        return True
+    if re.search(r'^(?:tie|draw)$', (contract or '').strip(), re.I):
+        return True
+    return False
+
+def _match_team_market(markets, label, exclude_ticker=None):
+    if not markets or not label:
+        return None
+    cands = [m for m in markets if m and m.get('ticker') != exclude_ticker and (m.get('ticker') or '').rsplit('-', 1)[-1] != 'TIE']
+    def title_of(m):
+        return m.get('yes_sub_title') or m.get('title') or ''
+    exact = [m for m in cands if _name_hit(label, title_of(m)) or _name_hit(title_of(m), label)]
+    if len(exact) == 1:
+        return exact[0]
+    if exact:
+        return exact[0]
+    if len(cands) == 1:
+        return cands[0]
+    return None
+
+def _moneyline_title(src_market, event, game_title, src, peer=None):
+    if event and event.get('title'):
+        t = _clean(event.get('title'))
+        return t if re.search(r'\bwinner\b', t, re.I) else t + ' winner'
+    a = (src_market or {}).get('yes_sub_title') or (src or {}).get('contract') or ''
+    b = (peer or {}).get('yes_sub_title') or ''
+    if a and b and not _name_hit(a, b):
+        return _clean(a) + ' vs ' + _clean(b) + ' winner'
+    if game_title and re.search(r'\svs\.?\s', game_title, re.I):
+        return _clean(game_title) + ' winner'
+    return None
+
+def complete_sides(sides, kind='other', game_title='', q=''):
+    """Copy the matched Kalshi market onto the empty side and attach the real complementary ask."""
+    sides = [dict(s or {}) for s in (sides or [])]
+    if len(sides) < 2:
+        return sides
+    src = next((s for s in sides if s.get('ticker') and s.get('action')), None)
+    if not src:
+        src = next((s for s in sides if s.get('ticker') or s.get('contract') or s.get('action')), None)
+    if not src:
+        return sides
+    ticker = src.get('ticker')
+    market = fetch_market(ticker) if ticker else None
+    ev_tk = event_ticker_of(ticker, market)
+    ev = fetch_event(ev_tk) if ev_tk else None
+    ev_ms = fetch_event_markets(ev_tk) if ev_tk else []
+    yes, no = _asks(market)
+    two_contract = (kind or '').lower() == 'moneyline' and not _binary_market(kind, src.get('contract'), q)
+    team_for = {}
+    if two_contract and ev_ms:
+        for s in sides:
+            team_for[id(s)] = _match_team_market(ev_ms, s.get('label') or '')
+    # Title from the event, not from a single team's contract.
+    other_team = next((team_for.get(id(s)) for s in sides if s is not src and team_for.get(id(s))), None)
+    market_title = src.get('marketTitle')
+    if two_contract:
+        market_title = market_title or _moneyline_title(market, ev, game_title, src, other_team)
+    if not market_title:
+        market_title = (market or {}).get('title') or src.get('contract') or (ev or {}).get('title')
+    src_id = src.get('id') or ''
+    src_cid = src_id.rsplit(':', 1)[0] if ':' in src_id else src_id
+
+    for i, s in enumerate(sides):
+        if (s.get('id') or '').startswith(':'):
+            s['id'] = (src_cid or '') + ':' + (s.get('side') or s['id'][1:])
+        is_src = s is src or s.get('id') == src.get('id')
+        has_own = bool(s.get('cappers') and s.get('ticker') and s.get('action'))
+        if is_src or has_own:
+            if market_title and not s.get('marketTitle'):
+                s['marketTitle'] = market_title
+            # Quotes for this side's own ticker (may differ from src on a two-contract moneyline).
+            own = fetch_market(s.get('ticker')) if s.get('ticker') else market
+            oy, on = _asks(own) if own is not None else (yes, no)
+            if oy is not None:
+                s['yesAsk'] = oy
+            if on is not None:
+                s['noAsk'] = on
+            live = _px_for_action(oy, on, s.get('action'))
+            if live is not None:
+                s = apply_price(s, live)
+            # Opp = the other side's team contract, matched by that side's label.
+            empty = next((x for x in sides if x is not s and x.get('id') != s.get('id')), None)
+            opp_m = team_for.get(id(empty)) if empty is not None else None
+            if two_contract and opp_m:
+                s['oppTicker'] = opp_m.get('ticker')
+                s['oppContract'] = opp_m.get('yes_sub_title') or opp_m.get('title')
+                s['oppAction'] = 'BUY YES'
+                py, _pn = _asks(opp_m if opp_m.get('yes_ask_dollars') or opp_m.get('no_ask_dollars') else fetch_market(opp_m.get('ticker')))
+                if py is not None:
+                    s['oppPrice'] = py
+            sides[i] = s
+            continue
+        # Empty / opposite side: Buy YES on this side's own team contract when we can.
+        own_m = team_for.get(id(s)) if two_contract else None
+        if two_contract and own_m:
+            p_yes, p_no = _asks(own_m if own_m.get('yes_ask_dollars') or own_m.get('no_ask_dollars') else fetch_market(own_m.get('ticker')))
+            s['ticker'] = own_m.get('ticker')
+            s['contract'] = own_m.get('yes_sub_title') or own_m.get('title') or s.get('label')
+            s['action'] = 'BUY YES'
+            s['marketTitle'] = market_title
+            if p_yes is not None:
+                s['yesAsk'] = p_yes
+            if p_no is not None:
+                s['noAsk'] = p_no
+            s = apply_price(s, p_yes)
+        else:
+            act = flip_action(src.get('action')) or ('BUY NO' if (s.get('side') == 'no') else 'BUY YES')
+            s['ticker'] = s.get('ticker') or ticker
+            s['contract'] = s.get('contract') or src.get('contract') or (market or {}).get('title')
+            s['action'] = s.get('action') or act
+            s['marketTitle'] = market_title or s.get('contract')
+            if yes is not None:
+                s['yesAsk'] = yes
+            if no is not None:
+                s['noAsk'] = no
+            s = apply_price(s, _px_for_action(yes, no, s.get('action')))
+        sides[i] = s
+    return sides
+
+
+def complete_games(games):
+    """Fill Kalshi how-to + complementary prices on every side of existing cards (no rescan)."""
+    out = []
+    for g in games or []:
+        markets = []
+        for m in g.get('markets') or []:
+            if not m.get('sides'):
+                markets.append(m)
+                continue
+            sides = complete_sides(list(m['sides']), kind=m.get('kind') or 'other', game_title=g.get('game') or '', q=m.get('q') or '')
+            markets.append(dict(m, sides=sides))
+        out.append(dict(g, markets=markets))
+    return out
+
+
 def apply_price(side, kprice):
     if kprice is None:
         return side
@@ -535,7 +774,8 @@ def refresh(games, now, win_end, kalshi_now=None):
         for m in g.get('markets') or []:
             # New shape: markets[].sides
             if m.get('sides'):
-                sides = [_refresh_side(s, kalshi_now) for s in m['sides']]
+                sides = complete_sides(list(m['sides']), kind=m.get('kind') or 'other', game_title=g.get('game') or '', q=m.get('q') or '')
+                sides = [_refresh_side(s, kalshi_now) for s in sides]
                 if not any(s.get('cappers') for s in sides):
                     continue
                 markets.append(dict(m, sides=sides))

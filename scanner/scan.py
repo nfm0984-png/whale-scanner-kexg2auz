@@ -524,6 +524,7 @@ def fp(x):
 def kalshi(s):
     info = s['info']; ser = KSER.get(info['league'])
     if not ser: return dict(status='none', why=f"Kalshi doesn't list {info['league'].upper()}")
+    event_title = None; opp_ticker = None; opp_contract = None; opp_action = None; opp_price = None
     gm, tot, spr = ser
     if info['kind'] in ('moneyline', 'teamwin', 'draw'):
         ev = find_event(gm, info, info['kind'])
@@ -556,6 +557,15 @@ def kalshi(s):
             opts = [o for o in opts if o[2] and o[2] > 0]
             if not opts: return dict(status='none', why='Kalshi market matched but has no ask right now')
             act, m, p = min(opts, key=lambda o: o[2])
+            peer = m_no if s['side'] == 'yes' else m_yes
+            if peer:
+                opp_ticker = peer.get('ticker')
+                opp_contract = peer.get('yes_sub_title') or peer.get('title')
+                opp_action = 'BUY YES'
+                opp_price = fp(peer.get('yes_ask_dollars'))
+            names = [x.get('yes_sub_title') for x in (m_yes, m_no) if x and x.get('yes_sub_title')]
+            if len(names) == 2:
+                event_title = names[0] + ' vs ' + names[1] + ' winner'
         elif info['kind'] == 'teamwin':
             m = mfor(info['code'].upper())
             if not m and info.get('team'):
@@ -619,9 +629,25 @@ def kalshi(s):
     rule = m.get('rules_primary') or ''
     sel = (m.get('title') if info.get('kind') == 'prop' else None) or m.get('yes_sub_title') or ''
     edge = round((s['avg_entry'] - p) * 100, 1) if s['avg_entry'] else None
-    return dict(status='ok', occ=m.get('occurrence_datetime'), action=act, price=p, ticker=m['ticker'], contract=sel, rule=rule[:260], url=f"https://kalshi.com/markets/{m['event_ticker'].split('-')[0].lower()}",
+    yes_ask = fp(m.get('yes_ask_dollars'))
+    no_ask = fp(m.get('no_ask_dollars'))
+    market_title = m.get('title') or sel
+    out = dict(status='ok', occ=m.get('occurrence_datetime'), action=act, price=p, ticker=m['ticker'], contract=sel, rule=rule[:260], url=f"https://kalshi.com/markets/{m['event_ticker'].split('-')[0].lower()}",
                 edge_vs_whales=edge, edge_vs_poly=round((s['price'] - p) * 100, 1),
-                light='green' if edge is not None and edge >= 0 else ('yellow' if edge is not None and edge >= -5 else 'red'))
+                light='green' if edge is not None and edge >= 0 else ('yellow' if edge is not None and edge >= -5 else 'red'),
+                yesAsk=yes_ask, noAsk=no_ask, marketTitle=event_title or market_title)
+    if event_title:
+        out['eventTitle'] = event_title
+        out['marketTitle'] = event_title
+    else:
+        out['marketTitle'] = market_title
+    if opp_ticker:
+        out['oppTicker'] = opp_ticker
+        out['oppContract'] = opp_contract
+        out['oppAction'] = opp_action or 'BUY YES'
+        if opp_price:
+            out['oppPrice'] = opp_price
+    return out
 
 # ---------- 10. ESPN schedule / scores ----------
 EP = {'nba': 'basketball/nba', 'nfl': 'football/nfl', 'nhl': 'hockey/nhl', 'mlb': 'baseball/mlb', 'cfb': 'football/college-football',
@@ -1245,7 +1271,7 @@ for s in CONS[:8] + GLUE[:2] + FUN[:3] + POLY[:3] + PROPS[:3] + LONGSHOTS[:3] + 
 # ---------- 13. Page embed (wallets kept for Polymarket profile links) ----------
 for b_ in BETS: b_.pop('_info', None)
 emb = json.loads(json.dumps(out))
-def kslim(k): return {kk: k.get(kk) for kk in ('status', 'why', 'action', 'price', 'contract', 'ticker', 'edge_vs_whales', 'slip', 'light', 'rule') if k.get(kk) is not None}
+def kslim(k): return {kk: k.get(kk) for kk in ('status', 'why', 'action', 'price', 'contract', 'ticker', 'edge_vs_whales', 'slip', 'light', 'rule', 'yesAsk', 'noAsk', 'marketTitle', 'eventTitle', 'oppTicker', 'oppContract', 'oppAction', 'oppPrice') if k.get(kk) is not None}
 for r_ in emb['bets'] + emb['buys']:
     r_['kalshi'] = kslim(r_['kalshi'])
     if r_['kalshi'].get('rule'): r_['kalshi']['rule'] = r_['kalshi']['rule'][:160]
