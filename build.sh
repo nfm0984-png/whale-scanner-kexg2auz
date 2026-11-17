@@ -4,6 +4,7 @@ set -e; cd "$(dirname "$0")"
 NM=${NM:-./node_modules}
 # Copy tracking: rebuild scanner/copies.json from the shared ledger when it exists (box only; Actions reads the committed file)
 [ -f "${LEDGER:-/workspace/shared/ledger/bets.csv}" ] && python3 scanner/copies.py || true
+python3 scanner/kalshi_display.py || true
 NODE_PATH=$NM $NM/.bin/esbuild src/main.tsx --bundle --minify --format=iife --target=es2019 --jsx=automatic --define:process.env.NODE_ENV='"production"' --outfile=app.js --log-level=warning
 V=$(cat app.js config.js | md5sum | cut -c1-10); sed -i -E "s/app\.js\?v=[a-z0-9]+/app.js?v=$V/; s/config\.js\?v=[a-z0-9]+/config.js?v=$V/" index.html
 echo "built app.js v=$V ($(wc -c < app.js) bytes)"

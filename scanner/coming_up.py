@@ -646,8 +646,7 @@ def _match_team_market(markets, label, exclude_ticker=None):
 
 def _moneyline_title(src_market, event, game_title, src, peer=None):
     if event and event.get('title'):
-        t = _clean(event.get('title'))
-        return t if re.search(r'\bwinner\b', t, re.I) else t + ' winner'
+        return _clean(event.get('title'))
     a = (src_market or {}).get('yes_sub_title') or (src or {}).get('contract') or ''
     b = (peer or {}).get('yes_sub_title') or ''
     if a and b and not _name_hit(a, b):
@@ -695,16 +694,35 @@ def complete_sides(sides, kind='other', game_title='', q=''):
         if is_src or has_own:
             if market_title and not s.get('marketTitle'):
                 s['marketTitle'] = market_title
-            # Quotes for this side's own ticker (may differ from src on a two-contract moneyline).
-            own = fetch_market(s.get('ticker')) if s.get('ticker') else market
-            oy, on = _asks(own) if own is not None else (yes, no)
-            if oy is not None:
-                s['yesAsk'] = oy
-            if on is not None:
-                s['noAsk'] = on
-            live = _px_for_action(oy, on, s.get('action'))
-            if live is not None:
-                s = apply_price(s, live)
+            # Prefer Yes on this side's own team contract when Kalshi has per-team markets.
+            own_m = team_for.get(id(s)) if two_contract else None
+            if two_contract and own_m:
+                p_yes, p_no = _asks(own_m if own_m.get('yes_ask_dollars') or own_m.get('no_ask_dollars') else fetch_market(own_m.get('ticker')))
+                s['ticker'] = own_m.get('ticker')
+                s['contract'] = own_m.get('yes_sub_title') or own_m.get('title') or s.get('label')
+                s['action'] = 'BUY YES'
+                s['yesSubTitle'] = own_m.get('yes_sub_title')
+                s['noSubTitle'] = own_m.get('no_sub_title')
+                if ev and ev.get('title'):
+                    s['marketTitle'] = _clean(ev.get('title'))
+                if p_yes is not None:
+                    s['yesAsk'] = p_yes
+                if p_no is not None:
+                    s['noAsk'] = p_no
+                s = apply_price(s, p_yes)
+            else:
+                own = fetch_market(s.get('ticker')) if s.get('ticker') else market
+                oy, on = _asks(own) if own is not None else (yes, no)
+                if oy is not None:
+                    s['yesAsk'] = oy
+                if on is not None:
+                    s['noAsk'] = on
+                if own:
+                    s['yesSubTitle'] = own.get('yes_sub_title') or s.get('yesSubTitle')
+                    s['noSubTitle'] = own.get('no_sub_title') or s.get('noSubTitle')
+                live = _px_for_action(oy, on, s.get('action'))
+                if live is not None:
+                    s = apply_price(s, live)
             # Opp = the other side's team contract, matched by that side's label.
             empty = next((x for x in sides if x is not s and x.get('id') != s.get('id')), None)
             opp_m = team_for.get(id(empty)) if empty is not None else None

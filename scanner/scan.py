@@ -551,12 +551,17 @@ def kalshi(s):
             target = m_yes if s['side'] == 'yes' else m_no
             if (info['league'] in ESPORTS or info['league'] in NAME_ONLY) and target and not namematch(info['teams'][0 if s['side'] == 'yes' else 1], target.get('yes_sub_title')): target = None
             if not target: return dict(status='none', why='Kalshi event found but team contract not matched')
-            opts = [('BUY YES', target, fp(target['yes_ask_dollars']))]
-            other = m_no if s['side'] == 'yes' else m_yes
-            if other and len(ms) == 2: opts.append(('BUY NO', other, fp(other['no_ask_dollars'])))
-            opts = [o for o in opts if o[2] and o[2] > 0]
-            if not opts: return dict(status='none', why='Kalshi market matched but has no ask right now')
-            act, m, p = min(opts, key=lambda o: o[2])
+            # Prefer Yes on the backed team's own contract. Only use No on the
+            # opponent's contract when this team has no Yes ask.
+            yes_px = fp(target.get('yes_ask_dollars'))
+            if yes_px and yes_px > 0:
+                act, m, p = 'BUY YES', target, yes_px
+            else:
+                other = m_no if s['side'] == 'yes' else m_yes
+                no_px = fp(other.get('no_ask_dollars')) if other else None
+                if not (other and no_px and no_px > 0):
+                    return dict(status='none', why='Kalshi market matched but has no ask right now')
+                act, m, p = 'BUY NO', other, no_px
             peer = m_no if s['side'] == 'yes' else m_yes
             if peer:
                 opp_ticker = peer.get('ticker')
@@ -635,7 +640,7 @@ def kalshi(s):
     out = dict(status='ok', occ=m.get('occurrence_datetime'), action=act, price=p, ticker=m['ticker'], contract=sel, rule=rule[:260], url=f"https://kalshi.com/markets/{m['event_ticker'].split('-')[0].lower()}",
                 edge_vs_whales=edge, edge_vs_poly=round((s['price'] - p) * 100, 1),
                 light='green' if edge is not None and edge >= 0 else ('yellow' if edge is not None and edge >= -5 else 'red'),
-                yesAsk=yes_ask, noAsk=no_ask, marketTitle=event_title or market_title)
+                yesAsk=yes_ask, noAsk=no_ask, marketTitle=event_title or market_title, yesSubTitle=m.get('yes_sub_title'), noSubTitle=m.get('no_sub_title'))
     if event_title:
         out['eventTitle'] = event_title
         out['marketTitle'] = event_title
@@ -1289,7 +1294,7 @@ for s in CONS[:8] + GLUE[:2] + FUN[:3] + POLY[:3] + PROPS[:3] + LONGSHOTS[:3] + 
 # ---------- 13. Page embed (wallets kept for Polymarket profile links) ----------
 for b_ in BETS: b_.pop('_info', None)
 emb = json.loads(json.dumps(out))
-def kslim(k): return {kk: k.get(kk) for kk in ('status', 'why', 'action', 'price', 'contract', 'ticker', 'edge_vs_whales', 'slip', 'light', 'rule', 'yesAsk', 'noAsk', 'marketTitle', 'eventTitle', 'oppTicker', 'oppContract', 'oppAction', 'oppPrice') if k.get(kk) is not None}
+def kslim(k): return {kk: k.get(kk) for kk in ('status', 'why', 'action', 'price', 'contract', 'ticker', 'edge_vs_whales', 'slip', 'light', 'rule', 'yesAsk', 'noAsk', 'marketTitle', 'eventTitle', 'oppTicker', 'oppContract', 'oppAction', 'oppPrice', 'yesSubTitle', 'noSubTitle') if k.get(kk) is not None}
 for r_ in emb['bets'] + emb['buys']:
     r_['kalshi'] = kslim(r_['kalshi'])
     if r_['kalshi'].get('rule'): r_['kalshi']['rule'] = r_['kalshi']['rule'][:160]
