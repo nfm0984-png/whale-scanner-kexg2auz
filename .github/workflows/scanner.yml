@@ -1,12 +1,12 @@
 name: Scanner
-run-name: "${{ github.event_name == 'schedule' && (github.event.schedule == '0 * * * *' && 'scheduled refresh' || 'scheduled scan top 400') || github.event_name == 'workflow_dispatch' && (inputs.mode == 'scan' && format('scan top {0}', inputs.cappers) || 'refresh') || 'deploy site' }}"
+run-name: "${{ github.event_name == 'schedule' && (github.event.schedule == '0 * * * *' && 'scheduled refresh' || 'scheduled scan top 200') || github.event_name == 'workflow_dispatch' && (inputs.mode == 'scan' && format('scan top {0}', inputs.cappers) || 'refresh') || 'deploy site' }}"
 on:
   schedule:
     # Times are PST (UTC-8). During PDT they run one hour later on the clock.
-    - cron: "30 13 * * *"   # 5:30 AM PT — full top-400 scan
-    - cron: "30 18 * * *"   # 10:30 AM PT — full top-400 scan
-    - cron: "30 22 * * *"   # 2:30 PM PT — full top-400 scan
-    - cron: "30 2 * * *"    # 6:30 PM PT — full top-400 scan
+    - cron: "30 13 * * *"   # 5:30 AM PT — full top-200 scan
+    - cron: "30 18 * * *"   # 10:30 AM PT — full top-200 scan
+    - cron: "30 22 * * *"   # 2:30 PM PT — full top-200 scan
+    - cron: "30 2 * * *"    # 6:30 PM PT — full top-200 scan
     - cron: "0 * * * *"     # hourly at :00 PT — light refresh
   workflow_dispatch:
     inputs:
@@ -18,7 +18,7 @@ on:
       cappers:
         description: number of top all-time sports whales to scan
         type: string
-        default: "400"
+        default: "200"
   push:
     branches: [main]
 permissions:
@@ -67,18 +67,18 @@ jobs:
           if [ "$EVENT_NAME" = "schedule" ]; then
             if [ "$SCHEDULE" = "0 * * * *" ]; then
               MODE=refresh
-              CAPPERS=400
+              CAPPERS=200
             else
               MODE=scan
-              CAPPERS=400
+              CAPPERS=200
             fi
           else
             MODE="${INPUT_MODE:-refresh}"
-            CAPPERS="${INPUT_CAPPERS:-400}"
+            CAPPERS="${INPUT_CAPPERS:-200}"
           fi
           echo "MODE=$MODE" >> "$GITHUB_ENV"
           if [ "$MODE" = "scan" ]; then
-            N=$(printf '%s' "$CAPPERS" | tr -cd '0-9'); N=${N:-400}; [ "$N" -lt 1 ] && N=1; [ "$N" -gt 2000 ] && N=2000
+            N=$(printf '%s' "$CAPPERS" | tr -cd '0-9'); N=${N:-200}; [ "$N" -lt 1 ] && N=1; [ "$N" -gt 2000 ] && N=2000
             echo "Running scan top $N (event=$EVENT_NAME schedule=${SCHEDULE:-n/a})"
             python3 -u scan.py --cappers "$N"
           else

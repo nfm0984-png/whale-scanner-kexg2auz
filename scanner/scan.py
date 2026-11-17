@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """OrcaLayer whale scanner (snapshot). Whale data: OrcaLayer API only. Kalshi: contract match + price. ESPN: schedule/scores.
-Usage: python3 scan.py [--cappers 400 (any positive integer)] [--min 500]
+Usage: python3 scan.py [--cappers 200 (any positive integer)] [--min 500]
 Whales = top N sports whales by all-time P&L (OrcaLayer /api/v2/whales/leaderboard?sort=pnl; pnl-leaderboard only supports window=7|30), processed #1 first."""
 import json, time, math, re, sys, os, argparse, urllib.request, collections, datetime as dt, hashlib
 from concurrent.futures import ThreadPoolExecutor
 from orca import orca, CALLS
 HERE = os.path.dirname(os.path.abspath(__file__))
-ap = argparse.ArgumentParser(); ap.add_argument('--cappers', type=int, default=400); ap.add_argument('--min', type=float, default=500)
+ap = argparse.ArgumentParser(); ap.add_argument('--cappers', type=int, default=200); ap.add_argument('--min', type=float, default=500)
 ap.add_argument('--markets', type=int, default=60); ap.add_argument('--wallets', type=int, default=2); A = ap.parse_args()
-if A.cappers < 1: sys.exit('--cappers must be a positive integer')  # presets 20/40/60/80/100/200/400 or any custom number; default 400
+if A.cappers < 1: sys.exit('--cappers must be a positive integer')  # presets 20/40/60/80/100/200/400 or any custom number; default 200
 T0 = time.time(); NOW = int(T0)
 PT = dt.timezone(dt.timedelta(hours=-8))
 def pt(ts): return dt.datetime.fromtimestamp(ts, PT).strftime('%a %b %-d · %-I:%M %p PT')
@@ -181,14 +181,16 @@ try:
     _trk = json.load(open(os.path.join(HERE, 'tracked_cappers.json'))).get('wallets') or {}
 except Exception:
     _trk = {}
-_tw = [w for w in _trk if w not in cappers]
+# Every known proven-floor (eligible) capper is always scanned too, even outside the top-N.
+_tw = [w for w in list(_trk) + sorted(w for w, why in ELIG.items() if why == []) if w not in cappers]
+_tw = list(dict.fromkeys(_tw))
 for i in range(0, len(_tw), 20):
     _chunk = _tw[i:i + 20]
     _got = fetch_pos(_chunk, True) or {}
     for w in _chunk:
         ps = [p for p in (_got.get(w) or []) if not p.get('closed')]
         if not ps: continue
-        tr = _trk[w]
+        tr = _trk.get(w) or {}
         cappers[w] = dict(wallet=w, name=tr.get('name'), rank=len(cappers) + 1, rankAll=None, rank30=None, pnl30=None, total_pnl=None, total_volume=None,
                           win_rate=None, resolved_markets=0, wins=0, losses=None, sports_pct=None, trades=None, profit_factor=None, skill_badge=None,
                           skill_edge_cents=None, market_win_rate=None, last_trade_ts=None, avg_entry_price=None, tracked=True)
