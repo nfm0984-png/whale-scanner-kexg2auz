@@ -41,7 +41,6 @@ const STORE_KEY = "orca-scanner-cappers-v1";
 const BANKROLL_KEY = "orca-scanner-bankroll-v1";
 const DEFAULT_BANKROLL = "166";
 const STALE_BANKROLLS = ["225.06", "225", "160"];
-const DAILY_CAP = "Daily cap $40, stop after a losing reload; don't re-bet a pick you already lost today.";
 
 function decode<T>(c: Cols): T[] {
   return c.r.map((row: unknown[]) => {
@@ -2240,11 +2239,6 @@ function EliteCapperList() {
     </div>
   );
 }
-function DailyCap() {
-  const t = useGrokTheme();
-  return <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, margin: "0 0 14px" }}>{DAILY_CAP}</div>;
-}
-
 function ActionBtn(props: { ex: Explained; compact?: boolean; href?: string }) {
   const t = useGrokTheme();
   const yes = props.ex.ok && ((props.ex.act || "").indexOf("YES") >= 0 || (props.ex.act || "") === "BUY");
@@ -3998,8 +3992,6 @@ export default function App() {
           )}
           {bigOnly ? null : <TabSortBar value={sortOf("picks")} onChange={(v: string) => setSortOf(v, "picks")} />}
           <LeaguePills picks={bigOnly ? biggestAll : rankedAll} value={sportFilter} onChange={setSportFilter} />
-          <DailyCap />
-          <Text>One card per game, both sides, with Hot and Elite capper counts and each capper's ROI. Cards are ranked by capper count, then ROI (not dollars), unless you turn on Biggest bets. Tap a capper's name for week, month and year numbers and the sports they have been sharp in. Cappers must clear the proven floor first: 60+ day account, 30+ graded BIG bets (stake at least $500 and 1.5× their usual size — small fun bets are ignored), +5% big-bet ROI and $10k+ big-bet profit over that record, plus green 14d and 30d form, a profitable year, 50%+ of recent bets Kalshi-listed, and average entry under 90¢. ROI never qualifies a capper on its own. Market makers, bots and one-off jackpot records are dropped. Elite: 30+ graded big bets, +15% big-bet ROI, and +20% ROI in the sport (+10% at 100+ graded). No 12-bet small-sample path. Cards with one capper are labeled “1 capper” and ranked below multi-capper cards. Elites count from $300, everyone else $500. A pick can only be GOOD if that capper has 30+ graded bets in that sport and Kalshi is 45–92¢; otherwise the best is OK. If Kalshi's price plus its taker fee is 2¢ or more worse than the whale's entry, the pick is hidden. Buys older than about an hour are tagged Stale. The capper pool includes Polymarket's sports week, month and all-time leaderboards.</Text>
           <div data-pinned-proven="1" style={{ borderRadius: 16, padding: "10px 12px", background: "linear-gradient(180deg,#F5F0FF 0%, #EDE9FE 100%)", margin: "4px 0 12px", border: "1.5px solid #DDD6FE", boxShadow: "0 6px 16px rgba(124,58,237,0.08)" }}>
             <div style={{ fontSize: 15, fontWeight: 850, color: "#7C3AED" }}>{"📌 Proven Picks · " + provenGames.length + (PROVEN ? " · GOOD " + (PROVEN.counts.GOOD || 0) + " · OK " + (PROVEN.counts.OK || 0) : "")}</div>
             <div style={{ fontSize: 12, color: t.text.tertiary, margin: "2px 0 6px" }}>{"Elite cappers' own open bets, $300+, both sides on each game, with the Kalshi line on each side" + (provenRows.length > provenPinned.length ? " · " + (provenRows.length - provenPinned.length) + " smaller positions hidden" : "") + (PROVEN ? " · updated " + shortUpdatedAt(PROVEN.updatedAt) : "")}</div>
@@ -4054,7 +4046,6 @@ export default function App() {
           <Section heading="Bankroll" caption="Default $166 (from Pikkit). Saved on this device when you edit it. An old $160 or $225.06 default on this device is replaced automatically." defaultOpen={true}>
             <Input label="Bankroll ($)" type="number" value={bankrollText} onChange={(v: string) => setBankroll(v)} />
             <Text>Stakes: Small = 1% · Normal = 2% · Go big = 4% (max $10), rounded to the nearest dollar, minimum $1. Longshots are flat $1, or $2 for the strongest.</Text>
-            <DailyCap />
           </Section>
           <Section heading="Whale consensus" collapsible defaultOpen={false}>
             <Rows rows={allPicks.map((p: Pick) => ({ lead: p.league, title: matchup(p.q) + " — " + p.label, detail: p.whales + (p.whales === 1 ? " top whale, " : " top whales, ") + money(p.invested) + ". All wallets on this side: " + (p.totalBackers !== undefined && p.totalBackers !== null ? p.totalBackers.toLocaleString("en-US") : "n/a") + " with " + money(p.sideAll) + ".", meta: "Score " + p.score }))} />
@@ -4112,7 +4103,7 @@ export default function App() {
               { label: "Evidence score (buys, bets)", value: "Recency 25 · Capper record 20 · Independent agreement within 60 min 20 · Kalshi quote 20 · Kalshi price at or below the capper's 10" },
               { label: "Strong evidence only", value: "Golden capper, bought within 60 minutes, another whale agreeing within 60 minutes, verified Kalshi contract" },
               { label: "Confidence colors", value: "Green 65+, yellow 45–64, red under 45" },
-              { label: "Stake", value: "Small = 1% of bankroll, Normal = 2%, Go big = 4% (max $10), rounded to the nearest $1 with a $1 minimum. Longshots are flat $1, or $2 for the strongest, kept under the daily cap. Bankroll defaults to $166 and saves on this device. Daily cap $40, stop after a losing reload; don't re-bet a pick you already lost today. Each card has a short copyable pick ID for Pikkit grading." },
+              { label: "Stake", value: "Small = 1% of bankroll, Normal = 2%, Go big = 4% (max $10), rounded to the nearest $1 with a $1 minimum. Longshots are flat $1, or $2 for the strongest, kept under the daily cap. Bankroll defaults to $166 and saves on this device. Each card has a short copyable pick ID for Pikkit grading." },
               { label: "Chance to hit", value: "Polymarket price of the held side; market-implied, not a prediction" },
             ]} />
           </Section>
