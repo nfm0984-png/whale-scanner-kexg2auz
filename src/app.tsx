@@ -1570,6 +1570,21 @@ function resolveKalshiView(side: { label?: string | null; action?: string | null
       }
       return unmatched();
     }
+    // Spread picks ("Raptors +3.5"): Kalshi lists one row per team and line, "X wins by over N points".
+    // Backing T +N = No on the other team's row; backing T -N = Yes on T's own row. Team must match; never guess.
+    const sp = backing.match(/^(.*?)\s*([+-])\s*(\d+(?:\.\d+)?)\s*(?:or better.*)?$/i);
+    if (sp && sp[1] && /wins by over/i.test(ev.markets.map((m: KMarketDisp) => m.yes_sub_title || "").join(" "))) {
+      const tName = sp[1].trim();
+      const under = sp[2] === "+";
+      const line = sp[3];
+      const rows = ev.markets.filter((m: KMarketDisp) => { const mm = (m.yes_sub_title || "").match(/^(.*?)\s+wins by over\s+(\d+(?:\.\d+)?)\s+points?/i); return !!mm && mm[2] === line; });
+      const hit = rows.filter((m: KMarketDisp) => { const team = ((m.yes_sub_title || "").match(/^(.*?)\s+wins by over/i) || ["", ""])[1]; const same = kalshiNameHit(tName, team); return under ? !same : same; })[0] || null;
+      if (hit) {
+        const px = under ? hit.no_ask : hit.yes_ask;
+        if (px != null) return { backing, marketTitle, outcome: hit.yes_sub_title || backing, yesNo: under ? "No" : "Yes", price: px, ticker: hit.ticker, unmatched: false };
+      }
+      return unmatched();
+    }
     const own = findTeamMarket(ev.markets, name);
     if (own && kalshiNameHit(name, own.yes_sub_title || "")) {
       const wantYes = core.side !== "no";
