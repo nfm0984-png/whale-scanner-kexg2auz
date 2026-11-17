@@ -49,8 +49,8 @@ def slip_cents(kprice, entry):
         return None
 
 def too_expensive(kprice, entry):
-    s = slip_cents(kprice, entry)
-    return s is not None and s >= SLIP_CAP_CENTS
+    """Price check disabled (Noel, Nov 17): nothing is hidden for how far Kalshi is from the capper's entry."""
+    return False
 
 def load_stats():
     try:

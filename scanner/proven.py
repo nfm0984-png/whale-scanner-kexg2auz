@@ -349,10 +349,7 @@ def build(emb, store=None, write=True):
             clean_removed['cooling'] += 1
             continue
         slip = wf.slip_cents(kp, p.get('avg'))
-        if wf.too_expensive(kp, p.get('avg')):
-            # Hidden: Kalshi ask plus taker fee is 2c+ worse than the whale's entry
-            p['_slipHidden'] = True
-            continue
+        # Noel Nov 17: no price check; slip above is a note only.
         first_ts = _ts(p.get('firstTs')) or _ts(p.get('lastTs'))
         stale = bool(first_ts and (now - first_ts) > wf.STALE_SECS)
         if stale:

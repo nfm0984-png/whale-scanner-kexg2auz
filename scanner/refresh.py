@@ -453,7 +453,18 @@ try:
         kn = kalshi_now(tk)
         return kn
     WIN_END = NOW + 36 * 3600
-    emb['comingUp'] = _cu.refresh(emb.get('comingUp') or [], NOW, WIN_END, kalshi_now=_cu_px)
+    # Noel Nov 17: every refresh re-reads each proven-floor capper's open positions (Polymarket public API) so a new or days-out
+    # bet shows within the hour, then rebuilds Coming Up from them (7-day window). Falls back to re-pricing the old cards when
+    # the API could not be read for most cappers.
+    import floor_positions as _fp
+    _fl_all = _fp.floor_wallets(emb.get('capperHistory') or {})
+    _fl_rows, _fl_ok = _fp.build_rows(emb.get('capperHistory') or {}, NOW)
+    if _fl_all and len(_fl_ok) >= max(1, len(_fl_all) // 2):
+        emb['comingUp'] = _cu.build(_fl_rows, emb.get('capperHistory') or {}, NOW, NOW + _fp.WINDOW_DAYS * 86400, proven=emb.get('provenPicks'))
+        emb['missing_picks'] = _fp.check_missing(_fl_rows, emb['comingUp'], NOW)
+    else:
+        print('floor positions unavailable (%d of %d cappers read); re-pricing the previous Coming Up cards' % (len(_fl_ok), len(_fl_all)), flush=True)
+        emb['comingUp'] = _cu.refresh(emb.get('comingUp') or [], NOW, NOW + _fp.WINDOW_DAYS * 86400, kalshi_now=_cu_px)
     emb['totalComingUp'] = len(emb['comingUp'])
     emb['comingUpCappers'] = _cu.capper_count(emb['comingUp'])
     print('comingUp cards', emb['totalComingUp'], 'cappers', emb['comingUpCappers'], flush=True)

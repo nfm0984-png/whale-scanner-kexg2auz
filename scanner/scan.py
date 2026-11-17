@@ -496,6 +496,7 @@ def find_event(series, info, kind=None):
     best = None
     names = list(info.get('teams') or [])
     if info.get('team') and info['team'] not in names: names.append(info['team'])
+    if info.get('fav') and info['fav'] not in names: names.append(info['fav'])  # spread/total questions carry one team name only (Polymarket codes differ from Kalshi's)
     kind = kind or info.get('kind')
     esp = info['league'] in ESPORTS or info['league'] in NAME_ONLY
     window = 4 if esp else 1  # golf tournaments / race weekends can span a few days vs the Polymarket slug date
@@ -594,7 +595,7 @@ def kalshi(s):
         ev = find_event(spr, info)
         if not ev: return dict(status='none', why='No open Kalshi spread market for this game')
         ms = ev[2]; fc = info['favcode'].upper()
-        cand = [x for x in ms if fp(x.get('floor_strike')) == info['line'] and suffix(x).rstrip('0123456789') == fc]
+        cand = [x for x in ms if fp(x.get('floor_strike')) == info['line'] and (suffix(x).rstrip('0123456789') == fc or namematch(info['fav'], re.sub(r'\s+wins by over.*$', '', x.get('yes_sub_title') or '')))]
         if not cand: return dict(status='none', why=f"No Kalshi line for {info['fav']} by over {info['line']:g}")
         m = cand[0]; act = 'BUY YES' if s['side'] == 'yes' else 'BUY NO'; p = fp(m['yes_ask_dollars' if act == 'BUY YES' else 'no_ask_dollars'])
     elif info['kind'] == 'prop':
@@ -1172,7 +1173,7 @@ for s in ONK:
     n = len(s['backers']); band = s['price_band']; share = s['one_sided_share']
     if n >= A.wallets and band == 'glue':
         GLUE.append(s); _mk.add(s['market_id']); continue
-    if n >= A.wallets and band not in ('longshot', 'glue') and share >= 0.55 and not s['pricier'] and s.get('vet_tier', 2) < 2:
+    if n >= A.wallets and band not in ('longshot', 'glue') and share >= 0.55 and s.get('vet_tier', 2) < 2:  # Noel Nov 17: no price check (pricier stays a note only)
         CONS.append(s); _mk.add(s['market_id']); continue
 for s in ONK:
     if is_over(s) or s in CONS or s in GLUE or s['market_id'] in _mk or not s['backers'] or s['id'] in _pl or is_prop_sig(s) or is_long_sig(s): continue
@@ -1314,7 +1315,15 @@ except Exception as _e:
     print('proven picks failed:', _e)
 try:
     import coming_up as _cu
-    emb['comingUp'] = _cu.build(LEAN_BETS, emb.get('capperHistory') or {}, NOW, WIN_END, proven=emb.get('provenPicks'))
+    # Noel Nov 17: every floor capper's open $500+ pre-game position (games up to 7 days out) is read straight from Polymarket and
+    # matched to Kalshi with this file's own matcher; it replaces the scan-time LEAN_BETS rows for those cappers.
+    import floor_positions as _fp
+    _fl_rows, _fl_ok = _fp.build_rows(emb.get('capperHistory') or {}, NOW)
+    _fl_w = set(_fp.floor_wallets(emb.get('capperHistory') or {}))
+    _lean = [r_ for r_ in LEAN_BETS if (r_.get('wallet') or '').lower() not in _fl_ok] + _fl_rows
+    CU_END = NOW + _fp.WINDOW_DAYS * 86400
+    emb['comingUp'] = _cu.build(_lean, emb.get('capperHistory') or {}, NOW, CU_END, proven=emb.get('provenPicks'))
+    emb['missing_picks'] = _fp.check_missing(_fl_rows, emb['comingUp'], NOW)
     emb['totalComingUp'] = len(emb['comingUp'])
     emb['comingUpCappers'] = _cu.capper_count(emb['comingUp'])
     print('comingUp cards', emb['totalComingUp'], 'cappers', emb['comingUpCappers'], 'leanBets', len(LEAN_BETS), flush=True)

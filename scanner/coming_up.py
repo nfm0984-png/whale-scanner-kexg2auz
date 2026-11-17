@@ -163,9 +163,7 @@ def _in_window(b, now, win_end):
     ts0 = b.get('startTs') or 0
     last = b.get('lastTs') or b.get('firstTs') or 0
     # Stale pre-game buys no longer block (Noel, Nov 17); slip below is the freshness guard.
-    sl = wf.slip_cents(kp, b.get('avg')) if b.get('avg') is not None else None
-    if sl is not None and sl >= 2:
-        return False  # 2c+ worse than the capper's price after the Kalshi fee
+    # Noel Nov 17: no price check. How far Kalshi is from the capper's entry is shown on the card as a note, never a filter.
     ts = b.get('startTs') or 0
     if not ts or ts > win_end:
         return False
