@@ -38,7 +38,7 @@ SPORT_BAR_N = 10
 SPORT_BAR_ROI = 20.0
 SPORT_BAR_ROI_VOL = 10.0      # loosened Nov 15: +10% sport ROI for cappers with 100+ graded bets total
 SPORT_BAR_VOL_N = 100
-ELITE_MIN_BET = 250           # proven-floor / elite min on Proven (Noel, Nov 16); everyone else stays $500 on All Picks
+ELITE_MIN_BET = 500           # one $500 minimum for every pick on every tab (Noel, Nov 17); replaces the Nov 16 $250 floor-passer minimum
 SPORT_GOOD_N = 30             # a pick can only be GOOD if the capper has 30+ graded in THAT sport
 
 def sport_bar_roi(c):
@@ -393,7 +393,7 @@ def build(emb, store=None, write=True):
     slip_hidden = sum(1 for p in rows if p.get('_slipHidden'))
     res = {
         'updatedTs': int(now), 'updatedAt': pt(now),
-        'rule': 'Elite: 30+ graded BIG bets (stake >= max($500, 1.5x median)) over a 60+ day account, +15% big-bet ROI, Hot, and +20% ROI in the sport (+10% if 100+ graded). No 12-bet small-sample path. Fun/small bets are ignored. A pick is only GOOD if that capper has 30+ graded in that sport. Elites $300+, others $500+. Market makers/bots dropped. One-off jackpot records cannot be elite. Picks 2c+ worse than the whale entry (after Kalshi fee) are hidden. Buys older than 1 hour are tagged stale. Split games hidden.',
+        'rule': 'Elite: 30+ graded BIG bets (stake >= max($500, 1.5x median)) over a 60+ day account, +15% big-bet ROI, Hot, and +20% ROI in the sport (+10% if 100+ graded). No 12-bet small-sample path. Fun/small bets are ignored. A pick is only GOOD if that capper has 30+ graded in that sport. Every pick needs $500+. Market makers/bots dropped. One-off jackpot records cannot be elite. Picks 2c+ worse than the whale entry (after Kalshi fee) are hidden. Buys older than 1 hour are tagged stale. Split games hidden.',
         'filters': {'slipHidden': slip_hidden, 'stale': sum(1 for r in out if r.get('stale'))},
         'splitGames': sorted(split_events),
         'elite': [{'wallet': c['wallet'], 'name': c.get('name'), 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi'),

@@ -198,8 +198,8 @@ function provenIsStale(r: ProvenRow, now: number): boolean {
   return !!t && now - t > STALE_SECS;
 }
 
-// Proven-floor cappers (including elites) count from $250 on All Picks / Proven; everyone else stays $500+ (Noel, Nov 16).
-const FLOOR_MIN_BET = 250;
+// One minimum for every pick on every tab (All Picks, Proven, Elite, Coming Up, combos): $500 (Noel, Nov 17). Replaces the Nov 16 $250 floor-passer minimum.
+const FLOOR_MIN_BET = 500;
 const ELITE_MIN_BET = FLOOR_MIN_BET;
 const ELITE_FULL_N = 20;
 const OVERALL_ROI_FLOOR = 15;
@@ -3615,7 +3615,13 @@ function sortComingGames(games: ComingGame[], sort: string, now: number): Coming
   else rows.sort((a: ComingGame, b: ComingGame) => liveCmp(a, b) || bandCmp(a, b) || ((b.capperCount || 0) - (a.capperCount || 0)) || ((b.capperRoi != null ? b.capperRoi : -999) - (a.capperRoi != null ? a.capperRoi : -999)) || ((a.startTs || 0) - (b.startTs || 0)));
   return rows;
 }
-function fillGameStats(g: ComingGame): ComingGame {
+function fillGameStats(g0: ComingGame): ComingGame {
+  // $500 minimum on every pick: drop backers under FLOOR_MIN_BET from each side and re-total (guards old data between scans).
+  const g: ComingGame = { ...g0, markets: (g0.markets || []).map((m: ComingMarket) => ({ ...m, sides: (m.sides || []).map((s: ComingSide) => {
+    const keep = (s.backers || []).filter((b: ComingBacker) => (b.cost || 0) >= FLOOR_MIN_BET);
+    if (keep.length === (s.backers || []).length) return s;
+    return { ...s, backers: keep, cappers: keep.length, usd: keep.reduce((a: number, b: ComingBacker) => a + (b.cost || 0), 0), names: keep.map((b: ComingBacker) => b.name) };
+  }) })) };
   const seen: Record<string, ComingBacker> = {};
   const rois: number[] = [];
   (g.markets || []).forEach((m: ComingMarket) => {
@@ -3635,7 +3641,7 @@ function asComingGames(raw: ComingGame[] | ComingSide[] | unknown[]): ComingGame
   if (!arr.length) return [];
   const first = arr[0] || {};
   if (first.markets && Array.isArray((first as ComingGame).markets) && ((first as ComingGame).markets[0] || {} as ComingMarket).sides) {
-    return (arr as unknown as ComingGame[]).map(fillGameStats);
+    return (arr as unknown as ComingGame[]).map(fillGameStats).filter((g: ComingGame) => (g.capperCount || 0) > 0);
   }
   // Flat-list leftover from the previous Coming Up version: group into game cards.
   const groups: Record<string, Record<string, unknown>[]> = {};
@@ -4688,7 +4694,7 @@ export default function App() {
   const vb = (p: Pick): Backer[] => visibleBackers(p);
   const notHedged = (p: Pick): boolean => !pickHasCapperHedge(p);
   const provenRows: ProvenRow[] = sortProvenBy(mergeProvenRows(((PROVEN && PROVEN.picks) || []).filter((r: ProvenRow) => walletLongTermOk(r.wallet) && startStatus(r.startTs || 0, now, hintForComing({ id: "", game: r.game || "", league: r.league || "", startTs: r.startTs || 0, start: r.start || "", markets: [] })) !== "final" && !r.hedged && !isEliteSplitGame(r.slug) && !provenTooExpensive(r))), sortOf("proven"), now);
-  // Pinned Proven section hides sub-$250 throwaway positions (still counted in the CAUTION total).
+  // Pinned Proven section hides sub-$500 throwaway positions (still counted in the CAUTION total).
   const provenPinned: ProvenRow[] = provenRows.filter((r: ProvenRow) => r.verdict !== "CAUTION" || (r.cost || 0) >= FLOOR_MIN_BET);
   const provenComboPicks: Pick[] = provenRows.map((r: ProvenRow) => provenToPick(r)).filter((p: Pick | null): p is Pick => !!p);
   // GOOD first; fill remaining slots with the best OK Kalshi legs. Never CAUTION, no-Kalshi, hedges, or elite-split games.
@@ -4932,7 +4938,7 @@ export default function App() {
           <LeaguePills picks={bigOnly ? biggestAll : rankedAll} value={sportFilter} onChange={setSportFilter} />
           <div data-pinned-proven="1" style={{ borderRadius: 16, padding: "10px 12px", background: "linear-gradient(180deg,#F5F0FF 0%, #EDE9FE 100%)", margin: "4px 0 12px", border: "1.5px solid #DDD6FE", boxShadow: "0 6px 16px rgba(124,58,237,0.08)" }}>
             <div style={{ fontSize: 15, fontWeight: 850, color: "#7C3AED" }}>{"📌 Proven Picks · " + provenGames.length + (PROVEN ? " · GOOD " + (PROVEN.counts.GOOD || 0) + " · OK " + (PROVEN.counts.OK || 0) : "")}</div>
-            <div style={{ fontSize: 12, color: t.text.tertiary, margin: "2px 0 6px" }}>{"Elite cappers' own open bets, $300+, both sides on each game, with the Kalshi line on each side" + (provenRows.length > provenPinned.length ? " · " + (provenRows.length - provenPinned.length) + " smaller positions hidden" : "") + (PROVEN ? " · updated " + shortUpdatedAt(PROVEN.updatedAt) : "")}</div>
+            <div style={{ fontSize: 12, color: t.text.tertiary, margin: "2px 0 6px" }}>{"Elite cappers' own open bets, $500+, both sides on each game, with the Kalshi line on each side" + (provenRows.length > provenPinned.length ? " · " + (provenRows.length - provenPinned.length) + " smaller positions hidden" : "") + (PROVEN ? " · updated " + shortUpdatedAt(PROVEN.updatedAt) : "")}</div>
             <EliteCapperList />
             {provenGames.length === 0 ? <EmptyState title="No proven-capper picks yet" body={"No live or upcoming sports bets from elite cappers in the next 48 hours — " + nextScanLabel(now) + "."} /> : <ComingGroups games={provenGames} now={now} keyPrefix="P" onCapper={setPickProfile} limit={provenLimit} onMore={() => setProvenLimit(provenGames.length)} />}
           </div>

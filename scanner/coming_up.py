@@ -11,7 +11,7 @@ import wallet_flags as wf
 import capper_history as ch
 import kalshi_names as kn
 
-LEAN_MIN = 100
+LEAN_MIN = 500  # Noel Nov 17: $500 minimum on Coming Up / Elite / combos too
 LIVE_SECS = int(3.5 * 3600)
 STALE_SECS = wf.STALE_SECS
 SPORT_BAR_N = 10

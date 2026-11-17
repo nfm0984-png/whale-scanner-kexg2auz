@@ -227,7 +227,7 @@ for off in range(0, 500, 100):
 found_markets = len(mk); MK_ALL = {m['id']: m for m in mk}
 def ets(x): return dt.datetime.fromisoformat(x.replace(' ', 'T').replace('Z', '+00:00')).timestamp()
 WIN_H = 36  # Nov 15: was 12h; 36h keeps overnight/early-morning and next-day games (Asia, Europe, esports, tennis)
-LEAN_MIN = 100  # Coming Up lean view; pick lists still use A.min ($500)
+LEAN_MIN = 500  # Noel Nov 17: one $500 minimum everywhere (was 100 for Coming Up)
 WIN_END = NOW + WIN_H * 3600; WIN_START = NOW - 5 * 3600
 mk = [m for m in mk if re.search(r'-20\d\d-\d\d-\d\d', m['slug']) and WIN_START <= ets(m['end_date']) <= WIN_END]
 in_window = len(mk)
