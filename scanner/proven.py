@@ -257,8 +257,11 @@ def build(emb, store=None, write=True):
         ev = ev_info.get(p['eventSlug'] or p['slug']) or {}
         sp = by_pid.get(p['pid']) or {}
         ts = sp.get('startTs') or ev.get('ts')
+        gstate = ((sp.get('game') or {}) if isinstance(sp.get('game'), dict) else {}).get('state') or ev.get('state')
         if ts and ts <= now:
-            continue  # started
+            live = gstate == 'in' or (gstate != 'post' and (now - ts) <= int(3.5 * 3600))
+            if not live:
+                continue  # final
         if not ts and bf.slug_date(p['slug']) and dt.date.fromisoformat(bf.slug_date(p['slug'])) < today:
             continue
         k = p.get('k')

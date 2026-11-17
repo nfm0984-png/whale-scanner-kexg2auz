@@ -1026,6 +1026,19 @@ def is_started(s):
     ts = s.get('start_ts')
     if ts and ts <= NOW: return True
     return False
+LIVE_SECS = int(3.5 * 3600)
+def is_over(s):
+    """Final only: ESPN post, or started more than ~3.5 hours ago without an in-play state."""
+    g = s.get('game') or {}
+    r = s.get('refresh') or {}
+    if g.get('state') == 'post' or r.get('state') == 'post' or r.get('ended') or r.get('final'):
+        return True
+    if g.get('state') == 'in' or r.get('state') == 'in' or s.get('phase') == 'live':
+        return False
+    ts = s.get('start_ts') or s.get('startTs')
+    if ts and ts <= NOW and (NOW - ts) > LIVE_SECS:
+        return True
+    return False
 def one_share(s):
     tot = (s['invested'] or 0) + (s['opp_money'] or 0)
     return (s['invested'] / tot) if tot > 0 else 1.0
@@ -1128,31 +1141,31 @@ def is_long_sig(s):
     px = s.get('used_price')
     if px is None or px < 0.10 or px > 0.20: return False
     if len(s.get('backers') or []) < 2: return False
-    if is_started(s): return False
+    if is_over(s): return False
     if (s.get('one_sided_share') or 0) < 0.55: return False
     return True
 PROPS, LONGSHOTS, _pl = [], [], set()
 for s in signals:
-    if is_started(s) or not s['backers']: continue
+    if is_over(s) or not s['backers']: continue
     if is_long_sig(s):
         LONGSHOTS.append(s); _pl.add(s['id'])
     if is_prop_sig(s):
         PROPS.append(s); _pl.add(s['id'])
 PROPS.sort(key=rank_key); LONGSHOTS.sort(key=rank_key)
-BIGGEST = [x for x in signals if x.get('backers') and not is_started(x)]
+BIGGEST = [x for x in signals if x.get('backers') and not is_over(x)]
 BIGGEST.sort(key=lambda x: (-max((b.get('cost') or 0) for b in x['backers']), -(x.get('invested') or 0)))
 UPCOMING = [x for x in signals if x.get('backers') and not is_started(x) and x.get('start_ts') and NOW < x['start_ts'] <= NOW + 24 * 3600]
 UPCOMING.sort(key=lambda x: (x.get('start_ts') or 10**12, -(x.get('invested') or 0)))
 CONS, GLUE, FUN, _mk = [], [], [], set()
 for s in ONK:
-    if is_started(s) or not s['backers'] or s['market_id'] in _mk or s['id'] in _pl or is_prop_sig(s): continue
+    if is_over(s) or not s['backers'] or s['market_id'] in _mk or s['id'] in _pl or is_prop_sig(s): continue
     n = len(s['backers']); band = s['price_band']; share = s['one_sided_share']
     if n >= A.wallets and band == 'glue':
         GLUE.append(s); _mk.add(s['market_id']); continue
     if n >= A.wallets and band not in ('longshot', 'glue') and share >= 0.55 and not s['pricier'] and s.get('vet_tier', 2) < 2:
         CONS.append(s); _mk.add(s['market_id']); continue
 for s in ONK:
-    if is_started(s) or s in CONS or s in GLUE or s['market_id'] in _mk or not s['backers'] or s['id'] in _pl or is_prop_sig(s) or is_long_sig(s): continue
+    if is_over(s) or s in CONS or s in GLUE or s['market_id'] in _mk or not s['backers'] or s['id'] in _pl or is_prop_sig(s) or is_long_sig(s): continue
     FUN.append(s); _mk.add(s['market_id'])
 # Unvetted picks never make Top 20 (no padding). Keep only the top 20 on the Top 20 list; overflow eligible picks still show on Fun.
 if len(CONS) > 20:
@@ -1162,7 +1175,7 @@ if len(CONS) > 20:
 # A pick with a verified Kalshi contract is NEVER placed here (ONK / CONS / FUN / GLUE only).
 POLY, _pmk = [], set()
 for s in OFFK:
-    if is_started(s) or not s['backers']: continue
+    if is_over(s) or not s['backers']: continue
     if s['market_id'] in _mk or s['market_id'] in _pmk: continue  # already on a Kalshi tab, or weaker side of a poly market
     if s['id'] in _pl or is_prop_sig(s) or is_long_sig(s): continue  # Props / Longshots tabs own these
     POLY.append(s); _pmk.add(s['market_id'])

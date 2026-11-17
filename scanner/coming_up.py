@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """Coming Up tab: one card per upcoming game, both sides, Hot and Elite cappers only.
 
-$100+ open positions, next 36 hours, games not started. Market makers / bots
-and one-offs are excluded. Cards are ranked by hot-capper count, then capper ROI
-(not dollars). Separate from All Picks ($500/$300) pick rules.
+$100+ open positions, live games (started within ~3.5 hours, not final) plus
+the next 36 hours. Market makers / bots and one-offs are excluded. Cards are
+ranked by hot-capper count, then capper ROI (not dollars). Separate from All
+Picks ($500/$300) pick rules.
 """
 import collections, json, re, urllib.request
 import wallet_flags as wf
 
 LEAN_MIN = 100
+LIVE_SECS = int(3.5 * 3600)
 STALE_SECS = wf.STALE_SECS
 SPORT_BAR_N = 10
 SPORT_BAR_ROI = 20
@@ -127,6 +129,24 @@ def hot_wallets(capper_history, proven):
             out.setdefault(w, {'wallet': w})
     return out
 
+def _espn_final(b):
+    raw = b.get('game')
+    g = raw if isinstance(raw, dict) else {}
+    r = b.get('refresh') or {}
+    if g.get('state') == 'post' or b.get('state') == 'post' or r.get('state') == 'post' or r.get('ended') or r.get('final'):
+        return True
+    return False
+
+def _is_live(b, now):
+    if _espn_final(b):
+        return False
+    g = b.get('game') or {}
+    r = b.get('refresh') or {}
+    if g.get('state') == 'in' or r.get('state') == 'in' or b.get('phase') == 'live':
+        return True
+    ts = b.get('startTs') or 0
+    return bool(ts and ts <= now and (now - ts) <= LIVE_SECS)
+
 def _in_window(b, now, win_end):
     k = b.get('kalshi') or {}
     if k.get('status') != 'ok' or k.get('price') is None:
@@ -134,12 +154,11 @@ def _in_window(b, now, win_end):
     if (b.get('cost') or 0) < LEAN_MIN:
         return False
     ts = b.get('startTs') or 0
-    if not ts or ts <= now or ts > win_end:
+    if not ts or ts > win_end:
         return False
-    g = b.get('game') or {}
-    if g.get('state') in ('in', 'post') or b.get('phase') == 'live':
-        return False
-    return True
+    if ts > now:
+        return True
+    return _is_live(b, now)
 
 def _uniq(rows):
     best = {}
@@ -760,12 +779,23 @@ def _refresh_side(side, kalshi_now):
                 px = kn
     return apply_price(side, px)
 
+def _game_is_live(g, now):
+    if _espn_final(g):
+        return False
+    state = (g.get('game') or {}).get('state') if isinstance(g.get('game'), dict) else g.get('state')
+    if state == 'in' or g.get('phase') == 'live':
+        return True
+    ts = g.get('startTs') or 0
+    return bool(ts and ts <= now and (now - ts) <= LIVE_SECS)
+
 def refresh(games, now, win_end, kalshi_now=None):
-    """Drop started games and refresh Kalshi prices on each side."""
+    """Keep live (not final) and upcoming games; refresh Kalshi prices on each side."""
     out = []
     for g in games or []:
         ts = g.get('startTs') or 0
-        if not ts or ts <= now or ts > win_end:
+        if not ts or ts > win_end:
+            continue
+        if ts <= now and not _game_is_live(g, now):
             continue
         # Skip leftover flat-list rows; a new scan rebuilds cards.
         if not g.get('markets') and g.get('label'):

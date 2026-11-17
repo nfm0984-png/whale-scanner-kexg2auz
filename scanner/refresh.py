@@ -245,6 +245,18 @@ def has_started(p):
     ts = p.get('startTs')
     if ts and ts <= NOW: return True
     return False
+LIVE_SECS = int(3.5 * 3600)
+def is_final(p):
+    r = p.get('refresh') or {}
+    g = p.get('game') or {}
+    if r.get('state') == 'post' or g.get('state') == 'post' or r.get('ended') or r.get('final'):
+        return True
+    if r.get('state') == 'in' or g.get('state') == 'in':
+        return False
+    ts = p.get('startTs')
+    if ts and ts <= NOW and (NOW - ts) > LIVE_SECS:
+        return True
+    return False
 def enrich_row(p, do_wp=False, do_kalshi=False):
     global n_espn, n_k, n_filled
     e, why = find_game(p)
@@ -385,16 +397,16 @@ upcoming.sort(key=lambda p: (p.get('startTs') or 10**12, -(p.get('invested') or 
 emb['upcoming'] = upcoming[:30]
 emb['totalUpcoming'] = len(upcoming)
 # Ended games: W/L already written to the journal above; drop from every list including Bets/Buys.
-# Started (live) games: drop from Top 20, Fun, Polymarket, Glue, Props, Longshots, Biggest Bets and Upcoming; keep on Bets with a Live tag.
+# Final games: drop from Top 20, Fun, Polymarket, Glue, Props, Longshots, Biggest Bets. Live games stay (not final, or started within ~3.5 hours). Upcoming stays unstarted-only.
 ENDED = {p['id'].rsplit(':', 1)[0] for p in pick_lists() if (p.get('refresh') or {}).get('ended')}
 before = (len(emb['signals']), len(emb['fun']), len(emb['poly']), len(emb.get('glue') or []), len(emb.get('props') or []), len(emb.get('longshots') or []), len(emb.get('biggest') or []), len(emb.get('upcoming') or []), len(emb['bets']), len(emb['buys']))
-emb['signals'] = [p for p in emb['signals'] if not has_started(p)]
-emb['fun'] = [p for p in emb['fun'] if not has_started(p)]
-emb['poly'] = [p for p in emb['poly'] if not has_started(p)]
-emb['glue'] = [p for p in emb['glue'] if not has_started(p)]
-emb['props'] = [p for p in emb['props'] if not has_started(p)]
-emb['longshots'] = [p for p in emb['longshots'] if not has_started(p)]
-emb['biggest'] = [p for p in emb['biggest'] if not has_started(p)]
+emb['signals'] = [p for p in emb['signals'] if not is_final(p)]
+emb['fun'] = [p for p in emb['fun'] if not is_final(p)]
+emb['poly'] = [p for p in emb['poly'] if not is_final(p)]
+emb['glue'] = [p for p in emb['glue'] if not is_final(p)]
+emb['props'] = [p for p in emb['props'] if not is_final(p)]
+emb['longshots'] = [p for p in emb['longshots'] if not is_final(p)]
+emb['biggest'] = [p for p in emb['biggest'] if not is_final(p)]
 emb['upcoming'] = [p for p in emb['upcoming'] if not has_started(p) and (p.get('startTs') or 0) and NOW < p['startTs'] <= NOW + HORIZON]
 emb['bets'] = [b for b in emb['bets'] if b.get('cid') not in ENDED and (b.get('game') or {}).get('state') != 'post']
 emb['buys'] = [b for b in emb['buys'] if b.get('cid') not in ENDED and (b.get('game') or {}).get('state') != 'post']
