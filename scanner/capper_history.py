@@ -319,6 +319,8 @@ def summarize(store, traders=None, current_ids=None, windows=None):
             band = 2
         return (band, -(c['wr'] or 0), -(c['roi'] if c['roi'] is not None else -9999), -c['n'], -c['profit'])
     out.sort(key=sort_key)
+    # firstTs / big-bet record must be on the row before eligibility, proven.py, or the scan preload.
+    attach_track_record(out)
     return out
 
 def slim_for_page(cappers, updated_at=None):
@@ -1058,6 +1060,7 @@ def attach_track_record(caps, now=None):
         if ts:
             c['firstTs'] = int(ts)
             c['ageDays'] = round((now - float(ts)) / 86400.0, 1)
-        if not c.get('big') and (bf_w.get(w) or {}).get('big'):
+        # Always prefer the compact backfill big-bet record (90-day source of truth).
+        if (bf_w.get(w) or {}).get('big'):
             c['big'] = bf_w[w]['big']
     return caps

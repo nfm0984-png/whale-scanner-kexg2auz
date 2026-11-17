@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Backfill grading (Noel, Nov 15): every tracked whale's settled sports bets over the last 30 days,
+"""Backfill grading (Noel, Nov 15): every tracked whale's settled sports bets over the last 90 days,
 from Polymarket's public Data API v2 (no key), so capper records are not limited to what the scanner saw.
 
   GET /v2/positions?user=<w>&status=CLOSED|REDEEMABLE&sort_by=TIMESTAMP&start=<epoch>
@@ -10,8 +10,9 @@ Only sports game markets (slug like "<league>-<team>-<team>-YYYY-MM-DD...") and 
 Lookback is 90 days so big-bet records (stake >= max($500, 1.5x median)) can be graded over 60+ days.
 
 Incremental + cached: raw rows live in .cache/backfill_raw.json (gitignored, kept between Actions runs with
-actions/cache); each wallet is re-read from (last fetch - 3 days), at most every 3h, or the full 30 days when
-the cache is missing. Only compact per-wallet aggregates are committed (backfill.json):
+actions/cache); each wallet is re-read from (last fetch - 3 days), at most every 3h, or the full 90-day
+lookback when the cache is missing or does not yet reach ~90 days (e.g. an older 30-day cache). Only compact
+per-wallet aggregates are committed (backfill.json):
   cells["SPORT|day"] = [w, l, push, risked, profit, cw, cl, crisked, cprofit]   (day = epoch day, UTC)
   med/max bet size, n graded, and the 8 most recent graded bets for the capper detail.
 Raw rows: pid -> [cost, avg, result, ts, slug, outcome]
@@ -262,17 +263,30 @@ def refresh(wallets, force=False, workers=8, budget_s=600):
     now = time.time()
     t0 = now
     todo = []
+    want = now - DAYS * 86400
+
+    def _oldest(rec):
+        ts = [v[3] for v in (rec.get('bets') or {}).values() if isinstance(v, (list, tuple)) and len(v) > 3 and v[3]]
+        return min(ts) if ts else None
+
+    def _covered(rec):
+        # 'full' from a shorter lookback (the old 30-day cache) is not enough; need bets back to ~DAYS.
+        if not rec.get('full'):
+            return False
+        oldest = _oldest(rec)
+        return oldest is not None and oldest <= want + OVERLAP
+
     for w in dict.fromkeys(x.lower() for x in wallets if x):
         rec = ws.get(w) or {}
-        if force or now - rec.get('ts', 0) > MAX_AGE:
+        if force or now - rec.get('ts', 0) > MAX_AGE or not _covered(rec):
             todo.append(w)
-    # oldest first so a time budget still rotates through everyone
-    todo.sort(key=lambda w: (ws.get(w) or {}).get('ts', 0))
+    # shortest history first, then oldest fetch, so a time budget fills the 90-day gaps first
+    todo.sort(key=lambda w: (_oldest(ws.get(w) or {}) or now, (ws.get(w) or {}).get('ts', 0)))
     def job(w):
         if time.time() - t0 > budget_s:
             return w, None, False
         rec = ws.get(w) or {}
-        since = max(now - DAYS * 86400, (rec.get('ts') or 0) - OVERLAP) if rec.get('full') else now - DAYS * 86400
+        since = max(want, (rec.get('ts') or 0) - OVERLAP) if _covered(rec) else want
         bets, ok = fetch_wallet(w, since)
         return w, bets, ok
     n_ok = n_new = 0

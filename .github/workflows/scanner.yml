@@ -35,13 +35,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Restore backfill cache (raw 30-day whale bets, incremental)
+      - name: Restore backfill cache (raw 90-day whale bets, incremental)
         if: github.event_name == 'workflow_dispatch'
         uses: actions/cache@v4
         with:
           path: scanner/.cache/backfill_raw.json
-          key: backfill-raw-${{ github.run_id }}
-          restore-keys: backfill-raw-
+          key: backfill-raw-90d-${{ github.run_id }}
+          restore-keys: |
+            backfill-raw-90d-
+            backfill-raw-
       - name: Scan or refresh
         if: github.event_name == 'workflow_dispatch'
         working-directory: scanner

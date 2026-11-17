@@ -249,7 +249,7 @@ def build(emb, store=None, write=True):
         if p['k']:
             tick_need[p['k']['ticker']] = None
     with ThreadPoolExecutor(max_workers=8) as ex:
-        live = dict(zip(list(tick_need), ex.map(lambda t: _json('https://api.elections.kalshi.com/trade-api/v2/markets/' + t), list(tick_need))))
+        k_live = dict(zip(list(tick_need), ex.map(lambda t: _json('https://api.elections.kalshi.com/trade-api/v2/markets/' + t), list(tick_need))))
     hedge_events = set()
     for p in rows:
         if p.get('hedged'):
@@ -271,7 +271,10 @@ def build(emb, store=None, write=True):
             continue
         k = p.get('k')
         if k:
-            m = ((live.get(k['ticker']) or {}).get('market')) or {}
+            resp = k_live.get(k['ticker'])
+            m = (resp.get('market') or {}) if isinstance(resp, dict) else {}
+            if not isinstance(m, dict):
+                m = {}
             if m:
                 if m.get('status') not in ('active', 'open'):
                     k = None
