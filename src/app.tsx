@@ -5219,7 +5219,7 @@ export default function App() {
       <Floating edge="top" align="center" bar>
         <div data-tab-bar="1">
         <PillTabs
-          options={[{ value: "picks", label: "All Picks", count: bigOnly ? biggestTotal : allPickTotal }, { value: "elite", label: "Elite", count: eliteTabCount(now) }, { value: "kalshi", label: "Kalshi Cappers", count: ((kalshiCappersData().cappers || []).length) }, { value: "coming", label: "Coming Up", count: comingTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }]}
+          options={[{ value: "picks", label: "All Picks", count: bigOnly ? biggestTotal : allPickTotal }, { value: "elite", label: "Elite", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: comingTabCount(now) }, { value: "kalshi", label: "Kalshi Cappers", count: ((kalshiCappersData().cappers || []).length) }, { value: "cappers", label: "Cappers", count: capRows.length }]}
           value={tab}
           onChange={(v: string) => { setTab(v); setSportFilter(""); }}
         />
