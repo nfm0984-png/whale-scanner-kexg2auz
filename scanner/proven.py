@@ -255,6 +255,7 @@ def build(emb, store=None, write=True):
         if p.get('hedged'):
             hedge_events.add(evkey(p.get('eventSlug') or p.get('slug') or ''))
     out = []
+    clean_removed = {'resolved': 0, 'noKalshi': 0, 'cooling': 0, 'stale': 0}
     for p in rows:
         c = p.pop('_c', None) or p.get('_c')
         if p.get('hedged'):
@@ -264,7 +265,7 @@ def build(emb, store=None, write=True):
         ts = sp.get('startTs') or ev.get('ts')
         gstate = ((sp.get('game') or {}) if isinstance(sp.get('game'), dict) else {}).get('state') or ev.get('state')
         if ts and ts <= now:
-            live = gstate == 'in' or (gstate != 'post' and (now - ts) <= int(3.5 * 3600))
+            live = gstate == 'in' or (gstate != 'post' and (now - ts) <= int(3 * 3600))
             if not live:
                 continue  # final
         if not ts and bf.slug_date(p['slug']) and dt.date.fromisoformat(bf.slug_date(p['slug'])) < today:
@@ -336,6 +337,21 @@ def build(emb, store=None, write=True):
                 reasons.append('thin record in ' + sport)
             if kp is not None and not (GOOD_LO <= kp <= GOOD_HI):
                 reasons.append('Kalshi %d¢ outside 45-92¢' % round(kp * 100))
+        # Noel Nov 17 cleanup: resolved/finished, no-Kalshi, Cooling cappers and stale pre-game buys never show.
+        _px = [x for x in (kp, p.get('now')) if x is not None]
+        if any(x < 0.03 or x > 0.97 for x in _px):
+            clean_removed['resolved'] += 1
+            continue
+        if not k or kp is None:
+            clean_removed['noKalshi'] += 1
+            continue
+        if c.get('badge') == 'Cooling':
+            clean_removed['cooling'] += 1
+            continue
+        _buy_ts = _ts(p.get('lastTs')) or _ts(p.get('firstTs'))
+        if not (ts and ts <= now) and _buy_ts and (now - _buy_ts) > wf.STALE_SECS:
+            clean_removed['stale'] += 1
+            continue
         slip = wf.slip_cents(kp, p.get('avg'))
         if wf.too_expensive(kp, p.get('avg')):
             # Hidden: Kalshi ask plus taker fee is 2c+ worse than the whale's entry
@@ -394,7 +410,7 @@ def build(emb, store=None, write=True):
     res = {
         'updatedTs': int(now), 'updatedAt': pt(now),
         'rule': 'Elite: 30+ graded BIG bets (stake >= max($500, 1.5x median)) over a 60+ day account, +15% big-bet ROI, Hot, and +20% ROI in the sport (+10% if 100+ graded). No 12-bet small-sample path. Fun/small bets are ignored. A pick is only GOOD if that capper has 30+ graded in that sport. Every pick needs $500+. Market makers/bots dropped. One-off jackpot records cannot be elite. Picks 2c+ worse than the whale entry (after Kalshi fee) are hidden. Buys older than 1 hour are tagged stale. Split games hidden.',
-        'filters': {'slipHidden': slip_hidden, 'stale': sum(1 for r in out if r.get('stale'))},
+        'filters': {'slipHidden': slip_hidden, 'stale': sum(1 for r in out if r.get('stale')), 'cleanup': clean_removed},
         'splitGames': sorted(split_events),
         'elite': [{'wallet': c['wallet'], 'name': c.get('name'), 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi'),
                    'wr': c.get('cwr'), 'quality': c.get('quality'), 'rankScore': elite_rank_score(c), 'avgEntry': c.get('avgEntry'),

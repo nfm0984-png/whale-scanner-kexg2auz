@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Coming Up tab: one card per upcoming game, both sides, Hot and Elite cappers only.
 
-$100+ open positions, live games (started within ~3.5 hours, not final) plus
+$100+ open positions, live games (started within ~3 hours, not final) plus
 the next 36 hours. Market makers / bots and one-offs are excluded. Cards are
 ranked by hot-capper count, then capper ROI (not dollars). Separate from All
 Picks ($500/$300) pick rules.
@@ -12,7 +12,7 @@ import capper_history as ch
 import kalshi_names as kn
 
 LEAN_MIN = 500  # Noel Nov 17: $500 minimum on Coming Up / Elite / combos too
-LIVE_SECS = int(3.5 * 3600)
+LIVE_SECS = int(3 * 3600)
 STALE_SECS = wf.STALE_SECS
 SPORT_BAR_N = 10
 SPORT_BAR_ROI = 20
@@ -125,12 +125,14 @@ def hot_wallets(capper_history, proven):
             if w:
                 blocked.add(w)
             continue
+        if c.get('badge') == 'Cooling':
+            # Noel Nov 17: Cooling cappers never feed Coming Up or combos
+            if w:
+                blocked.add(w)
+            continue
         if is_hot_or_elite(c, elite) and w:
             out[w] = c
-    # Elites missing from capperHistory still count, unless already flagged mm/one-off.
-    for w in elite:
-        if w not in blocked:
-            out.setdefault(w, {'wallet': w})
+    # Noel Nov 17: no free pass for elites missing from capperHistory; the full proven floor applies to everyone.
     return out
 
 def _espn_final(b):
@@ -157,6 +159,16 @@ def _in_window(b, now, win_end):
         return False
     if (b.get('cost') or 0) < LEAN_MIN:
         return False
+    kp = k.get('price')
+    if kp < 0.03 or kp > 0.97:
+        return False  # resolved / priced out
+    ts0 = b.get('startTs') or 0
+    last = b.get('lastTs') or b.get('firstTs') or 0
+    if ts0 > now and last and (now - last) > STALE_SECS:
+        return False  # stale pre-game buy (over 1 hour old)
+    sl = wf.slip_cents(kp, b.get('avg')) if b.get('avg') is not None else None
+    if sl is not None and sl >= 2:
+        return False  # 2c+ worse than the capper's price after the Kalshi fee
     ts = b.get('startTs') or 0
     if not ts or ts > win_end:
         return False

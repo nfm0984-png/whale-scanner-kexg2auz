@@ -1031,7 +1031,7 @@ def is_started(s):
     ts = s.get('start_ts')
     if ts and ts <= NOW: return True
     return False
-LIVE_SECS = int(3.5 * 3600)
+LIVE_SECS = int(3 * 3600)
 def is_over(s):
     """Final only: ESPN post, or started more than ~3.5 hours ago without an in-play state."""
     g = s.get('game') or {}

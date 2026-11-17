@@ -245,7 +245,7 @@ def has_started(p):
     ts = p.get('startTs')
     if ts and ts <= NOW: return True
     return False
-LIVE_SECS = int(3.5 * 3600)
+LIVE_SECS = int(3 * 3600)
 def is_final(p):
     r = p.get('refresh') or {}
     g = p.get('game') or {}
