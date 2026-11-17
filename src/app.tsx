@@ -4171,7 +4171,7 @@ function mergeComingGames(lists: ComingGame[][]): ComingGame[] {
   return Object.keys(by).map((k: string) => fillGameStats(by[k]));
 }
 // Cleanup rules (Noel, Nov 17): applied after the $500 minimum.
-const FRONT_MIN = 3000;
+const FRONT_MIN = 600;
 const FRONT_MAX = 3;
 const GAME_MAX_SECS = 3 * 3600;
 interface CleanLog { resolved: number; noKalshi: number; floor: number; stale: number; slip: number }
@@ -4208,7 +4208,7 @@ function cleanGames(games: ComingGame[], now: number, requireKalshi: boolean): {
 function ptDayOf(ts: number): string {
   try { return new Date((ts || 0) * 1000).toLocaleDateString("en-US", { timeZone: "America/Los_Angeles" }); } catch (e) { return String(Math.floor((ts || 0) / 86400)); }
 }
-// Per capper per day: only the 3 biggest picks of $3,000+ stay up front; the rest go under "show more".
+// Per capper per day: only the 3 biggest picks of $600+ stay up front; the rest go under "show more".
 function frontKeySet(rows: { wallet: string; cost: number; day: string; key: string }[]): Record<string, boolean> {
   const by: Record<string, { cost: number; key: string }[]> = {};
   rows.forEach((r) => { const k = r.wallet + "|" + r.day; (by[k] = by[k] || []).push({ cost: r.cost, key: r.key }); });
@@ -4450,7 +4450,7 @@ function CapperSlateTab(props: { now: number; mode: "elite" | "coming" }) {
   const caption = eliteOnly
     ? ("Elite cappers' picks, live first" + (liveN ? " · " + liveN + " live" : ""))
     : ("Proven cappers' picks, live first" + (liveN ? " · " + liveN + " live" : ""));
-  const blurb = "$500+ with a Kalshi line only. Top 3 picks of $3,000+ per capper up front; the rest under Show more.";
+  const blurb = "$500+ with a Kalshi line only. Top 3 picks of $600+ per capper up front; the rest under Show more.";
   const emptyTitle = eliteOnly ? "No elite picks right now" : "No proven-capper games yet";
   const emptyBody = (eliteOnly
     ? "No live or upcoming sports bets from elite cappers right now. Live games stay until they finish — "
