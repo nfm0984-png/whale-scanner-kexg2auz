@@ -38,7 +38,7 @@ SPORT_BAR_N = 10
 SPORT_BAR_ROI = 20.0
 SPORT_BAR_ROI_VOL = 10.0      # loosened Nov 15: +10% sport ROI for cappers with 100+ graded bets total
 SPORT_BAR_VOL_N = 100
-ELITE_MIN_BET = 300           # loosened Nov 15: elites may bet $300+ (everyone else $500)
+ELITE_MIN_BET = 250           # proven-floor / elite min on Proven (Noel, Nov 16); everyone else stays $500 on All Picks
 SPORT_GOOD_N = 30             # a pick can only be GOOD if the capper has 30+ graded in THAT sport
 
 def sport_bar_roi(c):

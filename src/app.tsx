@@ -175,8 +175,9 @@ function provenIsStale(r: ProvenRow, now: number): boolean {
   return !!t && now - t > STALE_SECS;
 }
 
-// Loosened Nov 15: elites may bet $300+ (everyone else $500+); 12-19 graded elites are a small sample.
-const ELITE_MIN_BET = 300;
+// Proven-floor cappers (including elites) count from $250 on All Picks / Proven; everyone else stays $500+ (Noel, Nov 16).
+const FLOOR_MIN_BET = 250;
+const ELITE_MIN_BET = FLOOR_MIN_BET;
 const ELITE_FULL_N = 20;
 const OVERALL_ROI_FLOOR = 15;
 function sportRecOf(wallet: string | null | undefined, pid?: string): { sport: string; sr: { w: number; l: number; n: number; roi: number | null } } | null {
@@ -427,7 +428,7 @@ function backerVerdict(wallet: string | null | undefined, cost: number | null | 
   const cv = convOf(wallet, c, pid);
   let bet = "";
   if (cv.tag === "T") bet = "throwaway bet: " + (cv.mult != null && cv.mult <= 0.25 ? cv.mult + "x usual" : "tiny next to their biggest bets" + (cv.mult != null ? ", " + cv.mult + "x usual" : ""));
-  else if (c < (ELITE_W[(wallet || "").toLowerCase()] ? ELITE_MIN_BET : VET_MIN_BET)) bet = "small bet (" + money(c) + ")";
+  else if (c < ((ELITE_W[(wallet || "").toLowerCase()] || walletLongTermOk(wallet)) ? FLOOR_MIN_BET : VET_MIN_BET)) bet = "small bet (" + money(c) + ")";
   else if (cv.mult != null && cv.mult < VET_MIN_MULT) bet = "small bet (" + cv.mult + "x usual)";
   const n = rec ? (rec.cn || 0) : 0, w = rec ? (rec.cw || 0) : 0, l = rec ? (rec.cl || 0) : 0;
   const roi = rec && rec.croi != null ? rec.croi : null;
@@ -3739,7 +3740,8 @@ export default function App() {
   const bankroll = Math.max(0, Number(bankrollText) || 0);
   const minP = Number(minPos);
   const minW = Number(minWallets);
-  const visibleBackers = (p: Pick): Backer[] => p.backers.filter((b: Backer) => b.cost >= (minP <= 500 && ELITE_W[(b.wallet || "").toLowerCase()] ? ELITE_MIN_BET : minP) && hidden.indexOf((b.wallet || "").toLowerCase()) < 0);
+  const floorMin = (w: string | null | undefined): number => (minP <= 500 && (ELITE_W[(w || "").toLowerCase()] || walletLongTermOk(w)) ? FLOOR_MIN_BET : minP);
+  const visibleBackers = (p: Pick): Backer[] => p.backers.filter((b: Backer) => b.cost >= floorMin(b.wallet) && hidden.indexOf((b.wallet || "").toLowerCase()) < 0);
   const followOk = (p: Pick): boolean => !f.followedOnly || p.backers.some((b: Backer) => followed.indexOf((b.wallet || "").toLowerCase()) >= 0);
   // Started and ended games are dropped from Top 20, Upcoming, Fun, Polymarket, Props, Longshots and Biggest Bets. Live games stay on Bets.
   const finished = (p: Pick): boolean => (p.refresh && (p.refresh.state === "post" || !!p.refresh.final || !!p.refresh.ended)) || p.game.state === "post";
@@ -3750,8 +3752,8 @@ export default function App() {
   const vb = (p: Pick): Backer[] => visibleBackers(p);
   const notHedged = (p: Pick): boolean => !pickHasCapperHedge(p);
   const provenRows: ProvenRow[] = sortProvenBy(mergeProvenRows(((PROVEN && PROVEN.picks) || []).filter((r: ProvenRow) => walletLongTermOk(r.wallet) && startStatus(r.startTs || 0, now, hintForComing({ id: "", game: r.game || "", league: r.league || "", startTs: r.startTs || 0, start: r.start || "", markets: [] })) !== "final" && !r.hedged && !isEliteSplitGame(r.slug) && !provenTooExpensive(r))), sortOf("proven"), now);
-  // Pinned Proven section hides sub-$300 throwaway positions (still counted in the CAUTION total).
-  const provenPinned: ProvenRow[] = provenRows.filter((r: ProvenRow) => r.verdict !== "CAUTION" || (r.cost || 0) >= ELITE_MIN_BET);
+  // Pinned Proven section hides sub-$250 throwaway positions (still counted in the CAUTION total).
+  const provenPinned: ProvenRow[] = provenRows.filter((r: ProvenRow) => r.verdict !== "CAUTION" || (r.cost || 0) >= FLOOR_MIN_BET);
   const provenComboPicks: Pick[] = provenRows.map((r: ProvenRow) => provenToPick(r)).filter((p: Pick | null): p is Pick => !!p);
   // GOOD first; fill remaining slots with the best OK Kalshi legs. Never CAUTION, no-Kalshi, hedges, or elite-split games.
   const topCandidates = uniqueMergedPicks((DATA.signals || []).concat(DATA.fun || []).concat(DATA.biggest || []).concat(DATA.upcoming || []).concat(provenComboPicks)).filter((p: Pick) => {
