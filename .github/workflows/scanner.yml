@@ -1,6 +1,13 @@
 name: Scanner
-run-name: "${{ github.event_name == 'workflow_dispatch' && (inputs.mode == 'scan' && format('scan top {0}', inputs.cappers) || 'refresh') || 'deploy site' }}"
+run-name: "${{ github.event_name == 'schedule' && (github.event.schedule == '0 * * * *' && 'scheduled refresh' || 'scheduled scan top 400') || github.event_name == 'workflow_dispatch' && (inputs.mode == 'scan' && format('scan top {0}', inputs.cappers) || 'refresh') || 'deploy site' }}"
 on:
+  schedule:
+    # Times are PST (UTC-8). During PDT they run one hour later on the clock.
+    - cron: "30 13 * * *"   # 5:30 AM PT — full top-400 scan
+    - cron: "30 18 * * *"   # 10:30 AM PT — full top-400 scan
+    - cron: "30 22 * * *"   # 2:30 PM PT — full top-400 scan
+    - cron: "30 2 * * *"    # 6:30 PM PT — full top-400 scan
+    - cron: "0 * * * *"     # hourly at :00 PT — light refresh
   workflow_dispatch:
     inputs:
       mode:
@@ -36,7 +43,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Restore backfill cache (raw 90-day whale bets, incremental)
-        if: github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
         uses: actions/cache@v4
         with:
           path: scanner/.cache/backfill_raw.json
@@ -45,23 +52,41 @@ jobs:
             backfill-raw-90d-
             backfill-raw-
       - name: Scan or refresh
-        if: github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
         working-directory: scanner
         env:
           ORCA_API_KEY: ${{ secrets.ORCA_API_KEY }}
-          MODE: ${{ inputs.mode }}
-          CAPPERS: ${{ inputs.cappers }}
+          EVENT_NAME: ${{ github.event_name }}
+          SCHEDULE: ${{ github.event.schedule }}
+          INPUT_MODE: ${{ inputs.mode }}
+          INPUT_CAPPERS: ${{ inputs.cappers }}
         run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "schedule" ]; then
+            if [ "$SCHEDULE" = "0 * * * *" ]; then
+              MODE=refresh
+              CAPPERS=400
+            else
+              MODE=scan
+              CAPPERS=400
+            fi
+          else
+            MODE="${INPUT_MODE:-refresh}"
+            CAPPERS="${INPUT_CAPPERS:-400}"
+          fi
+          echo "MODE=$MODE" >> "$GITHUB_ENV"
           if [ "$MODE" = "scan" ]; then
             N=$(printf '%s' "$CAPPERS" | tr -cd '0-9'); N=${N:-400}; [ "$N" -lt 1 ] && N=1; [ "$N" -gt 2000 ] && N=2000
+            echo "Running scan top $N (event=$EVENT_NAME schedule=${SCHEDULE:-n/a})"
             python3 -u scan.py --cappers "$N"
           else
+            echo "Running refresh (event=$EVENT_NAME schedule=${SCHEDULE:-n/a})"
             python3 -u refresh.py
           fi
       - name: Commit new data
-        if: github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
         env:
-          MODE: ${{ inputs.mode }}
+          MODE: ${{ env.MODE }}
         run: |
           set -euo pipefail
           git config user.name "whale-scanner-bot"
@@ -69,6 +94,11 @@ jobs:
 
           # Data/site outputs only. Never add .trigger_token or scanner/.orca_api_key.
           outs=(data.json proven_picks.json scanner/history.json scanner/page_embed.json scanner/capper_history.json scanner/whale_windows.json scanner/tracked_cappers.json scanner/backfill.json scanner/proven_picks.json scanner/wallet_stats.json)
+
+          validate_outs() {
+            python3 scanner/validate_json.py "$1" "${outs[@]}"
+          }
+
           save_outs() {
             mkdir -p /tmp/scanner-out
             for f in "${outs[@]}"; do
@@ -87,12 +117,13 @@ jobs:
             [ -f /tmp/scanner-out/wallet_stats.json ] && cp -f /tmp/scanner-out/wallet_stats.json scanner/wallet_stats.json
           }
           commit_outs() {
+            validate_outs "pre-commit" || { echo "ERROR: refusing to commit invalid JSON"; return 1; }
             git add -- "${outs[@]}"
             if git diff --cached --quiet; then
               echo "no changes to commit"
               return 0
             fi
-            git commit -m "${MODE} $(TZ=America/Los_Angeles date '+%a %b %-d %-I:%M %p PT')"
+            git commit -m "${MODE:-update} $(TZ=America/Los_Angeles date '+%a %b %-d %-I:%M %p PT')"
           }
 
           save_outs
@@ -106,12 +137,15 @@ jobs:
           pushed=0
           for i in 1 2 3 4 5; do
             git fetch origin main
-            if git rebase -X theirs origin/main && git push origin HEAD:main; then
-              pushed=1
-              break
+            if git pull --rebase -X theirs origin main && validate_outs "post-rebase"; then
+              if git push origin HEAD:main; then
+                pushed=1
+                break
+              fi
+            else
+              echo "rebase or JSON validation failed on attempt $i"
+              git rebase --abort || true
             fi
-            echo "rebase/push attempt $i failed, retrying"
-            git rebase --abort || true
             sleep $((i * 3))
           done
 
@@ -122,7 +156,7 @@ jobs:
             git reset --hard origin/main
             restore_outs
             commit_outs
-            if git push origin HEAD:main; then
+            if validate_outs "post-restore" && git push origin HEAD:main; then
               pushed=1
             fi
           fi

@@ -965,12 +965,18 @@ function Chip(props: { children: ReactNode; bg: string; color: string; border?: 
 }
 
 function nextScanLabel(now: number): string {
-  const d = new Date(now * 1000);
-  const target = new Date(d);
-  target.setHours(5, 50, 0, 0);
-  if (d.getTime() >= target.getTime()) target.setDate(target.getDate() + 1);
-  const sameDay = target.getDate() === d.getDate() && target.getMonth() === d.getMonth() && target.getFullYear() === d.getFullYear();
-  return "next scan " + (sameDay ? "today" : "tomorrow") + " 5:50 AM PT";
+  // Full top-400 scans: 5:30 AM, 10:30 AM, 2:30 PM, 6:30 PM America/Los_Angeles.
+  const slots = [5 * 60 + 30, 10 * 60 + 30, 14 * 60 + 30, 18 * 60 + 30];
+  const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(new Date(now * 1000));
+  const get = (t: string) => (parts.find((p) => p.type === t) || { value: "0" }).value;
+  const curMin = parseInt(get("hour"), 10) * 60 + parseInt(get("minute"), 10);
+  let sameDay = true;
+  let slot = slots.find((s: number) => s > curMin);
+  if (slot == null) { slot = slots[0]; sameDay = false; }
+  const h = Math.floor(slot / 60);
+  const m = slot % 60;
+  const time = (h % 12 || 12) + ":" + String(m).padStart(2, "0") + " " + (h < 12 ? "AM" : "PM") + " PT";
+  return "next scan " + (sameDay ? "today" : "tomorrow") + " " + time;
 }
 
 function journalWL(): { wins: number; losses: number } {
