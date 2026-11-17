@@ -1254,30 +1254,168 @@ function Hero(props: { top: number; fun: number; buys: number; bets: number; act
   );
 }
 
-function KalshiBox(props: { act: string | null; price: number | null; contract: string | null; edge: number | null; why: string | null; label: string; entry: number | null; now: number | null; compact?: boolean; ticker?: string | null }) {
+function buyPillLabel(act: string | null | undefined): string {
+  const s = (act || "").toUpperCase().replace(/\s+/g, " ").trim();
+  if (s.indexOf("YES") >= 0) return "Buy YES";
+  if (s.indexOf("NO") >= 0) return "Buy NO";
+  return act || "";
+}
+interface KalshiLineView {
+  key: string;
+  marketId: string;
+  sideId: string;
+  kind: string;
+  marketName: string;
+  label: string;
+  action: string | null;
+  price: number | null;
+  ticker: string | null;
+  contract: string | null;
+  slip: number | null;
+  eliteN: number;
+  provenN: number;
+  usd: number;
+}
+function isEliteBacker(b: ComingBacker): boolean {
+  return !!ELITE_W[(b.wallet || "").toLowerCase()];
+}
+function bigBetRoiOf(wallet: string | null | undefined, fallback: number | null): number {
+  const rec = QMAP[(wallet || "").toLowerCase()];
+  if (rec && rec.big && rec.big.roi != null) return rec.big.roi;
+  if (fallback != null) return fallback;
+  if (rec && rec.roi != null) return rec.roi;
+  return -999;
+}
+function cleanKalshiName(line: { marketName?: string | null; contract?: string | null; label?: string | null; kind?: string | null }): string {
+  const base = (line.marketName || line.contract || line.label || "").trim();
+  const label = (line.label || "").trim();
+  if (label && base && base.toLowerCase().indexOf(label.toLowerCase()) < 0) return base + " · " + label;
+  if (base) return base;
+  const kind = line.kind ? kindWord(line.kind) : "Market";
+  return label ? kind + " · " + label : kind;
+}
+function kalshiLinesOfGame(g: ComingGame): KalshiLineView[] {
+  const lines: KalshiLineView[] = [];
+  (g.markets || []).forEach((m: ComingMarket) => {
+    const rel = relabelMarketSides(m, g.game || "");
+    (rel.sides || []).forEach((s: ComingSide) => {
+      if (s.kPrice == null && !s.action) return;
+      const backers = s.backers || [];
+      if (s.kPrice == null || !backers.length) return;
+      lines.push({
+        key: s.id || ((m.id || "") + ":" + (s.side || s.label)),
+        marketId: m.id,
+        sideId: s.id,
+        kind: m.kind || "moneyline",
+        marketName: s.marketTitle || s.contract || s.label,
+        label: s.label,
+        action: s.action || null,
+        price: s.kPrice,
+        ticker: s.ticker || null,
+        contract: s.contract || null,
+        slip: s.slip != null ? s.slip : null,
+        eliteN: backers.filter(isEliteBacker).length,
+        provenN: backers.length,
+        usd: s.usd || 0,
+      });
+    });
+  });
+  return lines;
+}
+function pickBestKalshiKey(lines: KalshiLineView[]): string | null {
+  if (!lines.length) return null;
+  const ranked = lines.slice().sort((a: KalshiLineView, b: KalshiLineView) => {
+    if (b.eliteN !== a.eliteN) return b.eliteN - a.eliteN;
+    if (b.provenN !== a.provenN) return b.provenN - a.provenN;
+    const sa = a.slip == null ? 999 : a.slip;
+    const sb = b.slip == null ? 999 : b.slip;
+    if (sa !== sb) return sa - sb;
+    return (b.price || 0) - (a.price || 0);
+  });
+  return ranked[0].key;
+}
+function KalshiGreenBox(props: { marketName: string; action: string | null; price: number | null; ticker?: string | null; badge?: "best" | null; compact?: boolean; why?: string | null; onPick?: (() => void) | null; selected?: boolean }) {
   const t = useGrokTheme();
-  const ok = props.act !== null;
-  const yes = ok && (props.act || "").indexOf("YES") >= 0;
-  const good = props.edge !== null && props.edge >= 0;
+  const ok = !!(props.action && props.price != null);
+  const yes = ok && (props.action || "").toUpperCase().indexOf("YES") >= 0;
+  const pillBg = yes ? GREEN : (ok ? RED : "#9CA3AF");
+  const clickable = !!props.onPick;
   return (
-    <div style={{ borderRadius: 16, border: `1.5px solid ${ok ? (yes ? GREEN : RED) : t.border.default}`, padding: props.compact ? 10 : 14, background: t.bg.base }}>
-      <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: t.text.tertiary }}>KALSHI — WHAT TO SELECT</div>
+    <div
+      data-kalshi-box={props.badge === "best" ? "best" : (ok ? "ok" : "none")}
+      data-best-bet={props.badge === "best" ? "1" : undefined}
+      role={clickable ? "button" : undefined}
+      onClick={clickable ? props.onPick! : undefined}
+      style={{
+        borderRadius: props.compact ? 12 : 16,
+        border: "1.5px solid " + (props.badge === "best" ? GREEN : ok ? "#86EFAC" : t.border.default),
+        background: ok ? (props.badge === "best" ? "linear-gradient(180deg, #BBF7D0 0%, #DCFCE7 100%)" : "linear-gradient(180deg, #ECFDF3 0%, #D1FAE5 100%)") : t.bg.subtle,
+        padding: props.compact ? "8px 10px" : "12px 12px",
+        boxShadow: props.badge === "best" ? "0 6px 16px rgba(22,163,74,0.18)" : "none",
+        cursor: clickable ? "pointer" : "default",
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, flexWrap: "wrap" }}>
+        <div style={{ fontSize: 11, fontWeight: 850, letterSpacing: "0.12em", color: GREEN, textTransform: "uppercase" }}>Kalshi</div>
+        {props.badge === "best" ? (
+          <span data-best-bet-badge="1" style={{ display: "inline-flex", alignItems: "center", padding: "3px 9px", borderRadius: 999, background: GREEN, color: "#FFFFFF", fontSize: 10, fontWeight: 850, letterSpacing: "0.05em", textTransform: "uppercase" }}>BEST BET · Submit this</span>
+        ) : null}
+        {props.selected ? <Chip bg={BRAND} color="#FFFFFF">In parlay</Chip> : null}
+      </div>
       {ok ? (
         <div>
-          <div style={{ fontSize: props.compact ? 20 : 28, lineHeight: props.compact ? "24px" : "32px", fontWeight: 850, marginTop: 6, overflowWrap: "anywhere" }}>{(props.contract || props.label).toUpperCase()}</div>
-          {props.ticker ? <div style={{ fontSize: 12, lineHeight: "16px", color: t.text.tertiary, marginTop: 4, fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace" }}>{props.ticker}</div> : null}
-          <div style={{ ...BTN(yes ? GREEN : RED, "#FFFFFF"), marginTop: 8, height: 48, justifyContent: "space-between", gap: 12, cursor: "default" }}>
-            <span style={{ fontSize: 17, fontWeight: 850 }}>{props.act}</span>
-            <span style={{ fontSize: 20, fontWeight: 850, fontVariantNumeric: "tabular-nums" }}>{cents(props.price)}</span>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginTop: 8 }}>
-            <Chip bg={good ? GREEN : AMBER} color="#FFFFFF">{good ? "Value" : "Pricier"} {props.edge !== null ? (props.edge >= 0 ? "+" : "") + props.edge + "¢" : ""}</Chip>
-            <span style={{ fontSize: 12, lineHeight: "17px", color: t.text.secondary }}>Verified contract match · whale paid {cents(props.entry)} · Polymarket now {cents(props.now)}</span>
+          <div style={{ fontSize: props.compact ? 13 : 15, fontWeight: 800, lineHeight: props.compact ? "18px" : "20px", marginTop: 6, color: t.text.primary, overflowWrap: "anywhere" }}>{props.marketName}</div>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, marginTop: 8 }}>
+            <span style={{ display: "inline-flex", alignItems: "center", padding: props.compact ? "4px 9px" : "6px 12px", borderRadius: 999, background: pillBg, color: "#FFFFFF", fontSize: props.compact ? 12 : 14, fontWeight: 850 }}>{buyPillLabel(props.action)}</span>
+            <span style={{ fontSize: props.compact ? 22 : 32, fontWeight: 850, fontVariantNumeric: "tabular-nums", color: t.text.primary, letterSpacing: "-0.03em", lineHeight: 1 }}>{cents(props.price)}</span>
           </div>
         </div>
       ) : (
-        <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 6 }}><span style={{ fontWeight: 700, color: t.text.primary }}>Not on Kalshi.</span> {props.why || "No verified Kalshi equivalent"}. No side is guessed.</div>
+        <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 6 }}><span style={{ fontWeight: 700, color: t.text.primary }}>Not on Kalshi.</span> {props.why || "No verified contract for this pick."}</div>
       )}
+    </div>
+  );
+}
+function KalshiGameLines(props: { game: ComingGame; onPick?: (marketId: string, sideId: string) => void; selectedId?: string | null }) {
+  const lines = kalshiLinesOfGame(props.game);
+  if (!lines.length) return <div style={{ margin: "8px 0 10px" }}><KalshiGreenBox marketName="" action={null} price={null} why="No verified Kalshi contract on a backed side." /></div>;
+  const bestKey = pickBestKalshiKey(lines);
+  const showBadge = lines.length > 1;
+  const best = lines.find((l: KalshiLineView) => l.key === bestKey) || lines[0];
+  const others = lines.filter((l: KalshiLineView) => l.key !== best.key);
+  const box = (l: KalshiLineView, compact: boolean, badge: "best" | null) => (
+    <KalshiGreenBox
+      key={l.key}
+      marketName={cleanKalshiName(l)}
+      action={l.action}
+      price={l.price}
+      ticker={l.ticker}
+      badge={badge}
+      compact={compact}
+      selected={!!props.selectedId && props.selectedId === l.sideId}
+      onPick={props.onPick ? () => props.onPick!(l.marketId, l.sideId) : null}
+    />
+  );
+  return (
+    <div data-kalshi-game="1" style={{ display: "flex", flexDirection: "column", gap: 8, margin: "8px 0 10px" }}>
+      {box(best, false, showBadge ? "best" : null)}
+      {others.map((l: KalshiLineView) => box(l, true, null))}
+    </div>
+  );
+}
+function KalshiBox(props: { act: string | null; price: number | null; contract: string | null; edge: number | null; why: string | null; label: string; entry: number | null; now: number | null; compact?: boolean; ticker?: string | null; marketTitle?: string | null }) {
+  const ok = props.act !== null;
+  const good = props.edge !== null && props.edge >= 0;
+  const t = useGrokTheme();
+  return (
+    <div>
+      <KalshiGreenBox marketName={cleanKalshiName({ marketName: props.marketTitle || props.contract, contract: props.contract, label: props.label })} action={props.act} price={props.price} ticker={props.ticker} compact={props.compact} why={props.why} />
+      {ok && (props.edge != null || props.entry != null) ? (
+        <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginTop: 8 }}>
+          {props.edge !== null ? <Chip bg={good ? GREEN : AMBER} color="#FFFFFF">{good ? "Value" : "Pricier"} {(props.edge >= 0 ? "+" : "") + props.edge + "¢"}</Chip> : null}
+          <span style={{ fontSize: 12, lineHeight: "17px", color: t.text.secondary }}>whale paid {cents(props.entry)} · Polymarket now {cents(props.now)}</span>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -2931,7 +3069,7 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; longshot?: boo
               <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 8 }}>Not on Kalshi{k.why ? ": " + k.why : ""}. Whale paid {cents(p.avgEntry)} · Polymarket now {cents(p.price)}.</div>
             </div>
           ) : (
-            <KalshiBox act={ok ? (k.action || null) : null} price={k.price === undefined ? null : k.price} contract={k.contract || null} edge={k.edge_vs_whales === undefined ? null : k.edge_vs_whales} why={k.why || null} label={ex.headline} entry={p.avgEntry} now={p.price} ticker={k.ticker || null} />
+            <KalshiBox act={ok ? (k.action || null) : null} price={k.price === undefined ? null : k.price} contract={k.contract || null} edge={k.edge_vs_whales === undefined ? null : k.edge_vs_whales} why={k.why || null} label={ex.headline} entry={p.avgEntry} now={p.price} ticker={k.ticker || null} marketTitle={k.marketTitle || k.eventTitle || null} />
           )}
           <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 8 }}>
             Now {cents(info.px)} · whales entered at {cents(p.avgEntry)}{info.over != null ? (info.over > 0 ? " · +" + info.over.toFixed(1).replace(/\.0$/, "") + "¢ vs entry" : " · " + info.over.toFixed(1).replace(/\.0$/, "") + "¢ vs entry") : ""}
@@ -3521,6 +3659,7 @@ function SidesGameCard(props: { g: ComingGame; now: number; rank?: number; sugge
           {props.suggested ? <Chip bg={GREEN} color="#FFFFFF">Suggested</Chip> : null}
         </div>
         <div style={{ fontSize: 20, lineHeight: "25px", fontWeight: 850, marginTop: 8, overflowWrap: "anywhere" }}>{g.game}</div>
+        <KalshiGameLines game={g} onPick={props.onSelectSide ? (marketId: string, sideId: string) => { const s = findComingSide(g, sideId); if (s) props.onSelectSide!(g, s); } : undefined} selectedId={props.selectedSideId || null} />
         {(g.markets || []).map((raw: ComingMarket, mi: number) => {
           const m = relabelMarketSides(raw, g.game || "");
           const shown = (m.sides || []).slice(0, 2);
@@ -3538,9 +3677,6 @@ function SidesGameCard(props: { g: ComingGame; now: number; rank?: number; sugge
                   <div key={side.id} data-coming-side={side.id} onClick={clickable ? () => props.onSelectSide && props.onSelectSide(g, side) : undefined} style={{ borderRadius: 14, border: sel ? "2px solid " + BRAND : isPick ? "1.5px solid " + GREEN : "1.5px solid " + t.border.default, background: sel ? "#F5F0FF" : isPick ? "#ECFDF3" : t.bg.subtle, padding: 10, cursor: clickable ? "pointer" : "default", minWidth: 0, boxShadow: sel ? "0 4px 12px rgba(124,58,237,0.16)" : "none" }}>
                     <div><SideTag pick={isPick} /></div>
                     <div style={{ fontSize: 15, fontWeight: 850, lineHeight: "20px", overflowWrap: "anywhere" }}>{side.label}</div>
-                    <div data-kalshi-line="1" style={{ fontSize: 14, fontWeight: 850, marginTop: 6, padding: "7px 8px", borderRadius: 8, background: t.bg.base, border: "1.5px solid " + (isPick ? GREEN : t.border.default), color: t.text.primary, lineHeight: "18px", overflowWrap: "anywhere" }}>
-                      {kalshiHowLine(side)}
-                    </div>
                     <div style={{ fontSize: 16, fontWeight: 850, marginTop: 8, color: side.cappers ? t.text.primary : t.text.tertiary }}>{comingCaps(side.cappers || 0)}</div>
                     {side.cappers ? <div style={{ fontSize: 11, color: t.text.tertiary, marginTop: 1 }}>{money(side.usd)}</div> : null}
                     {side.avgEntry != null || side.slip != null ? <div style={{ fontSize: 11, fontWeight: 700, marginTop: 3, color: t.text.tertiary }}>{[side.avgEntry != null ? "entry " + cents(side.avgEntry) : "", side.slip != null ? ((side.slip >= 0 ? "+" : "") + side.slip.toFixed(1) + "¢ fee") : ""].filter(Boolean).join(" · ")}</div> : null}
@@ -3601,17 +3737,238 @@ function ComingGroups(props: { games: ComingGame[]; now: number; keyPrefix: stri
   );
 }
 
-function ComingUpTab(props: { now: number }) {
+function parlayCombined(prices: number[]): number | null {
+  if (!prices.length) return null;
+  return prices.reduce((a: number, p: number) => a * p, 1);
+}
+function comingGameKey(g: ComingGame): string {
+  const id = evKey(g.id);
+  if (id) return id;
+  return (g.league || "") + "|" + (g.startTs || 0) + "|" + (g.game || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+function mergeBackerLists(a: ComingBacker[], b: ComingBacker[]): ComingBacker[] {
+  const seen: Record<string, ComingBacker> = {};
+  (a || []).concat(b || []).forEach((x: ComingBacker) => {
+    const w = (x.wallet || x.name || "").toLowerCase();
+    if (!w) return;
+    const prev = seen[w];
+    if (!prev || (x.cost || 0) > (prev.cost || 0)) seen[w] = prev ? { ...prev, ...x, cost: Math.max(prev.cost || 0, x.cost || 0) } : x;
+  });
+  return Object.keys(seen).map((k: string) => seen[k]);
+}
+function mergeComingSides(a: ComingSide, b: ComingSide): ComingSide {
+  const backers = mergeBackerLists(a.backers || [], b.backers || []);
+  const usd = backers.reduce((s: number, x: ComingBacker) => s + (x.cost || 0), 0);
+  const inv = backers.reduce((s: number, x: ComingBacker) => s + (x.cost || 0) * (x.avg || 0), 0);
+  const avg = usd && inv ? inv / usd : (a.avgEntry != null ? a.avgEntry : b.avgEntry);
+  const kPrice = a.kPrice != null ? a.kPrice : b.kPrice;
+  return {
+    ...a, ...b,
+    label: a.label && a.label !== "Other side" ? a.label : b.label,
+    kPrice,
+    action: a.action || b.action,
+    contract: a.contract || b.contract,
+    ticker: a.ticker || b.ticker,
+    marketTitle: a.marketTitle || b.marketTitle,
+    avgEntry: avg,
+    slip: slipCents(kPrice, avg),
+    backers,
+    cappers: backers.length,
+    usd: Math.round(usd),
+    names: backers.map((x: ComingBacker) => x.name),
+    lastTs: Math.max(a.lastTs || 0, b.lastTs || 0) || null,
+  };
+}
+function sideMergeKey(s: ComingSide): string {
+  if (s.ticker && (s.action || s.side)) return (s.ticker + "|" + (s.action || s.side || "")).toLowerCase();
+  return ((s.id || "") + "|" + (s.side || "") + "|" + (s.label || "")).toLowerCase();
+}
+function mergeComingGames(lists: ComingGame[][]): ComingGame[] {
+  const by: Record<string, ComingGame> = {};
+  lists.forEach((list: ComingGame[]) => {
+    (list || []).forEach((g: ComingGame) => {
+      const k = comingGameKey(g);
+      const cur = by[k];
+      if (!cur) { by[k] = { ...g, markets: (g.markets || []).slice() }; return; }
+      const markets = (cur.markets || []).slice();
+      (g.markets || []).forEach((m: ComingMarket) => {
+        const idx = markets.findIndex((x: ComingMarket) => x.id === m.id || ((x.kind || "") === (m.kind || "") && (x.q || "") === (m.q || "")));
+        if (idx < 0) { markets.push(m); return; }
+        const prev = markets[idx];
+        const sides = (prev.sides || []).slice();
+        (m.sides || []).forEach((s: ComingSide) => {
+          const si = sides.findIndex((x: ComingSide) => x.id === s.id || sideMergeKey(x) === sideMergeKey(s) || !!(x.label && s.label && x.label.toLowerCase() === s.label.toLowerCase()));
+          if (si < 0) sides.push(s);
+          else sides[si] = mergeComingSides(sides[si], s);
+        });
+        markets[idx] = { ...prev, kind: prev.kind || m.kind, q: prev.q || m.q, sides };
+      });
+      by[k] = fillGameStats({
+        ...cur,
+        game: (cur.game && cur.game.length >= (g.game || "").length) ? cur.game : (g.game || cur.game),
+        start: cur.start || g.start,
+        startTs: cur.startTs || g.startTs,
+        league: cur.league || g.league,
+        markets,
+      });
+    });
+  });
+  return Object.keys(by).map((k: string) => fillGameStats(by[k]));
+}
+function openSlateGames(): ComingGame[] {
+  const coming = asComingGames((DATA.comingUp || []) as ComingGame[]);
+  const proven = provenToGameCards(((PROVEN && PROVEN.picks) || []) as ProvenRow[]);
+  const catalogSrc: Pick[] = ([] as Pick[]).concat(DATA.signals || [], DATA.upcoming || [], DATA.biggest || [], DATA.poly || []);
+  return mergeComingGames([coming, proven, picksToGameCards(catalogSrc)]).filter((g: ComingGame) => (g.capperCount || 0) > 0);
+}
+interface ComboLeg { game: ComingGame; market: ComingMarket; side: ComingSide; eliteN: number; provenN: number; bestRoi: number }
+interface ComboPick { legs: ComboLeg[]; combined: number }
+function comboLegEligible(g: ComingGame, s: ComingSide, now: number): boolean {
+  if (comingStatus(g, now) !== "upcoming") return false;
+  if (s.kPrice == null || s.kPrice < 0.20 || s.kPrice > 0.90) return false;
+  if (s.slip != null && s.slip >= SLIP_CAP_CENTS) return false;
+  if (s.lastTs && now - s.lastTs > STALE_SECS) return false;
+  return true;
+}
+function suggestCombos(games: ComingGame[], now: number, eliteOnly: boolean, want = 3): ComboPick[] {
+  const legs: ComboLeg[] = [];
+  games.forEach((g: ComingGame) => {
+    if (comingStatus(g, now) === "final") return;
+    const cands: ComboLeg[] = [];
+    (g.markets || []).forEach((m: ComingMarket) => {
+      const rel = relabelMarketSides(m, g.game || "");
+      (rel.sides || []).forEach((s: ComingSide) => {
+        const backs = (s.backers || []).filter((b: ComingBacker) => eliteOnly ? isEliteBacker(b) : true);
+        if (!backs.length || !comboLegEligible(g, s, now)) return;
+        cands.push({
+          game: g,
+          market: rel,
+          side: s,
+          eliteN: (s.backers || []).filter(isEliteBacker).length,
+          provenN: backs.length,
+          bestRoi: Math.max(-999, ...backs.map((b: ComingBacker) => bigBetRoiOf(b.wallet, comingRoiOf(b)))),
+        });
+      });
+    });
+    if (!cands.length) return;
+    cands.sort((a: ComboLeg, b: ComboLeg) => (b.eliteN - a.eliteN) || (b.provenN - a.provenN) || (b.bestRoi - a.bestRoi) || ((a.side.slip == null ? 999 : a.side.slip) - (b.side.slip == null ? 999 : b.side.slip)) || ((b.side.kPrice || 0) - (a.side.kPrice || 0)));
+    legs.push(cands[0]);
+  });
+  legs.sort((a: ComboLeg, b: ComboLeg) => (b.eliteN - a.eliteN) || (b.provenN - a.provenN) || (b.bestRoi - a.bestRoi) || ((a.side.slip == null ? 999 : a.side.slip) - (b.side.slip == null ? 999 : b.side.slip)));
+  const combos: ComboPick[] = [];
+  const used: Record<string, boolean> = {};
+  const pool = legs.slice();
+  while (pool.length >= 1 && combos.length < want) {
+    const a = pool.shift() as ComboLeg;
+    if (used[a.game.id]) continue;
+    const j = pool.findIndex((b: ComboLeg) => b.game.id !== a.game.id && !used[b.game.id]);
+    if (j < 0) continue;
+    const b = pool.splice(j, 1)[0];
+    const combined = parlayCombined([a.side.kPrice as number, b.side.kPrice as number]);
+    if (combined == null) continue;
+    used[a.game.id] = true;
+    used[b.game.id] = true;
+    combos.push({ legs: [a, b], combined });
+  }
+  if (combos.length < Math.min(2, want) && legs.length >= 2) {
+    for (let i = 0; i < legs.length && combos.length < want; i++) {
+      for (let j = i + 1; j < legs.length && combos.length < want; j++) {
+        if (legs[i].game.id === legs[j].game.id) continue;
+        const ids2 = [legs[i].side.id, legs[j].side.id].slice().sort().join("|");
+        const same = combos.some((c: ComboPick) => c.legs.map((l: ComboLeg) => l.side.id).slice().sort().join("|") === ids2);
+        if (same) continue;
+        const combined = parlayCombined([legs[i].side.kPrice as number, legs[j].side.kPrice as number]);
+        if (combined == null) continue;
+        combos.push({ legs: [legs[i], legs[j]], combined });
+      }
+    }
+  }
+  return combos.slice(0, want);
+}
+interface CapperPickRow { wallet: string; name: string; cost: number; game: ComingGame; market: ComingMarket; side: ComingSide; bothSides: boolean }
+function capperPicksFromGames(games: ComingGame[], pred: (b: ComingBacker) => boolean): CapperPickRow[] {
+  const out: CapperPickRow[] = [];
+  games.forEach((g: ComingGame) => {
+    (g.markets || []).forEach((m: ComingMarket) => {
+      const rel = relabelMarketSides(m, g.game || "");
+      const bothSides = (rel.sides || []).filter((s: ComingSide) => (s.backers || []).some(pred)).length >= 2;
+      (rel.sides || []).forEach((s: ComingSide) => {
+        (s.backers || []).forEach((b: ComingBacker) => {
+          if (!pred(b) || !b.wallet) return;
+          out.push({ wallet: (b.wallet || "").toLowerCase(), name: nameOf(b.name, b.wallet || ""), cost: b.cost || 0, game: g, market: rel, side: s, bothSides });
+        });
+      });
+    });
+  });
+  const seen: Record<string, CapperPickRow> = {};
+  out.forEach((r: CapperPickRow) => {
+    const k = r.wallet + "|" + r.side.id;
+    if (!seen[k] || r.cost > seen[k].cost) seen[k] = r;
+  });
+  return Object.keys(seen).map((k: string) => seen[k]);
+}
+interface CapperGroup { wallet: string; name: string; rec: CapperRec | undefined; bigRoi: number | null; picks: CapperPickRow[]; hasLive: boolean; nextTs: number }
+function groupCapperPicks(rows: CapperPickRow[], now: number): CapperGroup[] {
+  const by: Record<string, CapperPickRow[]> = {};
+  rows.forEach((r: CapperPickRow) => { (by[r.wallet] = by[r.wallet] || []).push(r); });
+  const statusRank = (g: ComingGame) => { const s = comingStatus(g, now); return s === "live" ? 0 : s === "upcoming" ? 1 : 2; };
+  return Object.keys(by).map((w: string) => {
+    const picks = by[w].filter((p: CapperPickRow) => comingStatus(p.game, now) !== "final").slice().sort((a: CapperPickRow, b: CapperPickRow) => {
+      if (statusRank(a.game) !== statusRank(b.game)) return statusRank(a.game) - statusRank(b.game);
+      return (a.game.startTs || 0) - (b.game.startTs || 0);
+    });
+    const rec = QMAP[w];
+    const bigRoi = rec && rec.big && rec.big.roi != null ? rec.big.roi : (rec && rec.roi != null ? rec.roi : null);
+    return {
+      wallet: w,
+      name: rec ? nameOf(rec.name, rec.wallet) : (picks[0] ? picks[0].name : shortWallet(w)),
+      rec,
+      bigRoi,
+      picks,
+      hasLive: picks.some((p: CapperPickRow) => comingStatus(p.game, now) === "live"),
+      nextTs: picks.length ? Math.min(...picks.map((p: CapperPickRow) => p.game.startTs || 9e15)) : 9e15,
+    };
+  }).filter((g: CapperGroup) => g.picks.length).sort((a: CapperGroup, b: CapperGroup) => {
+    if (a.hasLive !== b.hasLive) return a.hasLive ? -1 : 1;
+    if (a.nextTs !== b.nextTs) return a.nextTs - b.nextTs;
+    return (b.bigRoi || -999) - (a.bigRoi || -999);
+  });
+}
+function bundleCapperGames(picks: CapperPickRow[]): { game: ComingGame; picks: CapperPickRow[] }[] {
+  const order: string[] = [];
+  const by: Record<string, CapperPickRow[]> = {};
+  picks.forEach((p: CapperPickRow) => {
+    if (!by[p.game.id]) { order.push(p.game.id); by[p.game.id] = []; }
+    by[p.game.id].push(p);
+  });
+  return order.map((id: string) => ({ game: by[id][0].game, picks: by[id] }));
+}
+function eliteTabCount(now: number): number {
+  const games = openSlateGames().filter((g: ComingGame) => comingStatus(g, now) !== "final");
+  return groupCapperPicks(capperPicksFromGames(games, isEliteBacker), now).length;
+}
+function findComingSide(g: ComingGame, sideId: string): ComingSide | null {
+  let hit: ComingSide | null = null;
+  (g.markets || []).forEach((m: ComingMarket) => (m.sides || []).forEach((s: ComingSide) => { if (s.id === sideId) hit = s; }));
+  return hit;
+}
+
+function CapperSlateTab(props: { now: number; mode: "elite" | "coming" }) {
   const t = useGrokTheme();
-  const games = sortComingGames(asComingGames((DATA.comingUp || []) as ComingGame[]), "start", props.now);
-  const liveN = partitionComing(games, props.now).live.length;
+  const eliteOnly = props.mode === "elite";
+  const allGames = openSlateGames().filter((g: ComingGame) => comingStatus(g, props.now) !== "final");
+  const pred = eliteOnly ? isEliteBacker : ((b: ComingBacker) => !!b.wallet);
+  const groups = groupCapperPicks(capperPicksFromGames(allGames, pred), props.now);
+  const liveN = groups.filter((g: CapperGroup) => g.hasLive).length;
+  const pickN = groups.reduce((n: number, g: CapperGroup) => n + g.picks.length, 0);
+  const gamesN = (() => { const s: Record<string, boolean> = {}; groups.forEach((g: CapperGroup) => g.picks.forEach((p: CapperPickRow) => { s[p.game.id] = true; })); return Object.keys(s).length; })();
+  const combos = suggestCombos(allGames, props.now, eliteOnly, 3);
   const [sel, setSel] = useState<{ gameId: string; sideId: string }[]>([]);
   const [stakeText, setStakeText] = useState<string>("2");
   const [profile, setProfile] = useState<string>("");
-  const suggested = suggestComing(games, props.now);
   const byId: Record<string, ComingGame> = {};
   const sideOf: Record<string, ComingSide> = {};
-  games.forEach((g: ComingGame) => {
+  allGames.forEach((g: ComingGame) => {
     byId[g.id] = g;
     (g.markets || []).forEach((m: ComingMarket) => (m.sides || []).forEach((s: ComingSide) => { sideOf[s.id] = s; }));
   });
@@ -3621,24 +3978,61 @@ function ComingUpTab(props: { now: number }) {
     if (withoutGame.length >= 3) return;
     setSel(withoutGame.concat([{ gameId: g.id, sideId: s.id }]));
   };
+  const onKalshiPick = (g: ComingGame, _marketId: string, sideId: string) => {
+    const s = findComingSide(g, sideId);
+    if (s) toggleSide(g, s);
+  };
   const stake = Math.max(0, Number(stakeText) || 0);
   const selectedSides: { g: ComingGame; s: ComingSide }[] = [];
   sel.forEach((x) => { if (byId[x.gameId] && sideOf[x.sideId]) selectedSides.push({ g: byId[x.gameId], s: sideOf[x.sideId] }); });
   const prices = selectedSides.map((x) => x.s.kPrice).filter((p: number | null): p is number => p != null && p > 0);
   const combined = prices.length === selectedSides.length && selectedSides.length >= 1 ? parlayCombined(prices) : null;
   const payout = combined && stake > 0 && combined > 0 ? stake / combined : null;
-  const useSuggested = () => setSel(suggested.slice());
   const stakeLabel = "$" + (stake % 1 ? stake.toFixed(2) : String(stake));
   let parlayLine = "No legs yet";
   if (selectedSides.length === 1) parlayLine = "Add 1 or 2 more legs";
   else if (selectedSides.length >= 2 && combined != null) parlayLine = selectedSides.length + "-leg · " + cents(combined) + (payout != null ? " · " + stakeLabel + " pays $" + payout.toFixed(2) + " if all hit" : "");
   else if (selectedSides.length >= 2) parlayLine = "Need a Kalshi price on every leg";
-  const capN = DATA.comingUpCappers || 0;
-  const selSideOf = (g: ComingGame): string => { const hit = sel.find((x) => x.gameId === g.id); return hit ? hit.sideId : ""; };
+  const useCombo = (c: ComboPick) => setSel(c.legs.map((l: ComboLeg) => ({ gameId: l.game.id, sideId: l.side.id })));
+  const heading = eliteOnly
+    ? ("Elite · " + groups.length)
+    : ("Coming Up · " + gamesN);
+  const caption = eliteOnly
+    ? ("Today's picks from elite cappers, grouped by capper · live first · 2–3 ready $2 combos when they clear the bar" + (liveN ? " · " + liveN + " live" : ""))
+    : ("Today's picks from proven-floor cappers (60+ day accounts, 30+ big bets, +5% big-bet ROI, $10k+ big-bet profit), grouped by capper · live first, then start time" + (liveN ? " · " + liveN + " live" : ""));
+  const blurb = eliteOnly
+    ? "Each elite capper's live and upcoming bets, with the Polymarket size and the Kalshi line to submit. When a game has more than one Kalshi contract (winner vs spread), the one to submit is marked BEST BET — most elite backing, then the smallest slip vs their entry, then the higher win probability. Ready-made two-leg $2 combos use Kalshi prices, skip stale or 2¢+ slip legs, and stay on different games. Tap a line to add it to the parlay builder (one leg per game)."
+    : "Each proven-floor capper's live and upcoming bets, with the Polymarket size and the Kalshi line to submit. PICK and OPPOSITE stay on a game when both sides are backed. When a game has more than one Kalshi contract (winner vs spread), the one to submit is marked BEST BET. Ready-made two-leg $2 combos prefer more proven backing and a better big-bet ROI, and they skip stale or 2¢+ slip legs. Tap a line to add it to the parlay builder (one leg per game). This is a lean view — not a GOOD or OK verdict.";
+  const emptyTitle = eliteOnly ? "No elite picks right now" : "No proven-capper games yet";
+  const emptyBody = (eliteOnly
+    ? "No live or upcoming sports bets from elite cappers right now. Live games stay until they finish — "
+    : "Nothing live or upcoming from proven-floor cappers right now. Live games stay until they finish — ") + nextScanLabel(props.now) + ".";
   return (
-    <Section heading={"Coming Up · " + games.length} caption={"One card per game · proven cappers only (60+ day accounts, 30+ big bets, +5% big-bet ROI, $10k+ big-bet profit) · $100+ · live first, multi-capper cards above 1-capper, then start time" + (liveN ? " · " + liveN + " live" : "") + (capN ? " · " + capN + " cappers" : "")}>
-      <Text>Each card shows both sides of the game and how many Hot or Elite cappers are on each one, with a PICK or OPPOSITE label and the exact Kalshi market, Buy YES or NO, and price at the top of each side. Tap a name for week, month and year numbers and the sports they have been sharp in. Tap a side to add it to a $2 parlay (one leg per game). Games that have already started stay in Live now until they are final (or about 3.5 hours in). Market makers, bots and one-off jackpot records are left out. This is a lean view — smaller bets than All Picks can show, and it is not a GOOD or OK verdict.</Text>
-      <RecordStrip wins={journalWL().wins} losses={journalWL().losses} tiles={[{ label: "Games", value: String(games.length) }, { label: "Live", value: String(liveN), color: liveN ? RED : undefined }]} />
+    <Section heading={heading} caption={caption}>
+      <Text>{blurb}</Text>
+      <RecordStrip wins={journalWL().wins} losses={journalWL().losses} tiles={[{ label: eliteOnly ? "Cappers" : "Games", value: String(eliteOnly ? groups.length : gamesN) }, { label: "Picks", value: String(pickN) }, { label: "Live", value: String(liveN), color: liveN ? RED : undefined }]} />
+      <div data-combo-list="1" style={{ margin: "4px 0 14px" }}>
+        <div style={{ fontSize: 16, fontWeight: 850, color: t.text.primary, marginBottom: 8 }}>Suggested $2 combos</div>
+        {combos.length ? combos.map((c: ComboPick, i: number) => {
+          const pay = c.combined > 0 ? 2 / c.combined : null;
+          return (
+            <div key={c.legs.map((l: ComboLeg) => l.side.id).join("+")} data-combo={String(i + 1)} style={{ borderRadius: 18, border: "1.5px solid #86EFAC", background: "linear-gradient(180deg,#ECFDF3 0%, #FFFFFF 100%)", padding: "12px 14px", marginBottom: 10, boxShadow: "0 6px 16px rgba(22,163,74,0.10)" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                <div style={{ fontSize: 15, fontWeight: 850, color: GREEN }}>Combo {i + 1} · 2-leg · $2</div>
+                <button type="button" data-combo-use={String(i + 1)} onClick={() => useCombo(c)} style={{ padding: "7px 14px", borderRadius: 999, border: "none", background: GREEN, color: "#FFFFFF", fontWeight: 800, fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>Use this combo</button>
+              </div>
+              {c.legs.map((l: ComboLeg, li: number) => (
+                <div key={l.side.id} style={{ marginTop: 10 }}>
+                  <div style={{ fontSize: 13, fontWeight: 800, color: t.text.secondary }}>{(li + 1) + ". " + l.game.league + " · " + l.game.game + " — " + l.side.label}</div>
+                  <KalshiGreenBox marketName={cleanKalshiName({ marketName: l.side.marketTitle || l.side.contract, contract: l.side.contract, label: l.side.label, kind: l.market.kind })} action={l.side.action || null} price={l.side.kPrice} ticker={l.side.ticker} compact={true} />
+                </div>
+              ))}
+              <div style={{ fontSize: 20, fontWeight: 850, marginTop: 10, fontVariantNumeric: "tabular-nums" }}>{"Combined " + cents(c.combined) + (pay != null ? " · $2 pays $" + pay.toFixed(2) + " if both hit" : "")}</div>
+              <div style={{ fontSize: 12, color: t.text.tertiary, marginTop: 2 }}>Product of the current Kalshi ask prices, before fees. Actual payout may be a bit less.</div>
+            </div>
+          );
+        }) : <div style={{ fontSize: 13, color: t.text.secondary, padding: "10px 12px", borderRadius: 14, background: t.bg.subtle }}>No 2-leg combo clears the bar right now (Kalshi price, under 2¢ slip, different upcoming games, not stale).</div>}
+      </div>
       <div data-parlay-builder="1" style={{ borderRadius: 18, border: "1.5px solid " + BRAND, padding: "12px 14px", background: "linear-gradient(180deg,#F5F0FF 0%, #EDE9FE 100%)", margin: "4px 0 14px", boxShadow: "0 6px 16px rgba(124,58,237,0.10)" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
           <div style={{ fontSize: 16, fontWeight: 850, color: BRAND }}>Parlay builder</div>
@@ -3647,7 +4041,7 @@ function ComingUpTab(props: { now: number }) {
             <input data-parlay-stake="1" type="number" min="0.01" step="1" value={stakeText} onChange={(e) => setStakeText(e.target.value)} style={{ width: 72, height: 36, borderRadius: 10, border: "1px solid " + t.border.default, padding: "0 8px", fontSize: 16, fontWeight: 800, fontFamily: "inherit" }} />
           </div>
         </div>
-        {selectedSides.length === 0 ? <div style={{ fontSize: 13, color: t.text.secondary, marginTop: 8 }}>Tap a side below, or use the suggested 2-leg.</div> : (
+        {selectedSides.length === 0 ? <div style={{ fontSize: 13, color: t.text.secondary, marginTop: 8 }}>Tap a Kalshi line below, or use a suggested combo.</div> : (
           <div style={{ marginTop: 8 }}>
             {selectedSides.map((x, i: number) => (
               <div key={x.s.id} style={{ fontSize: 14, lineHeight: "20px", fontWeight: 700, marginTop: 2 }}>{(i + 1) + ". " + x.g.game + " — " + x.s.label + (x.s.kPrice != null ? " @ " + cents(x.s.kPrice) : "")}</div>
@@ -3658,16 +4052,65 @@ function ComingUpTab(props: { now: number }) {
         {combined != null && selectedSides.length >= 2 ? <div style={{ fontSize: 12, color: t.text.tertiary, marginTop: 2 }}>Product of the current Kalshi ask prices, before fees. Actual payout may be a bit less.</div> : null}
         {sel.length >= 3 ? <div style={{ fontSize: 12, color: AMBER, marginTop: 4, fontWeight: 700 }}>Max 3 legs. Unselect one to swap.</div> : null}
         <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 10 }}>
-          <button type="button" data-parlay-suggest="1" onClick={useSuggested} disabled={suggested.length < 2} style={{ padding: "8px 14px", borderRadius: 999, border: "none", background: suggested.length >= 2 ? BRAND : t.border.default, color: "#FFFFFF", fontWeight: 800, fontSize: 14, cursor: suggested.length >= 2 ? "pointer" : "default", fontFamily: "inherit" }}>Use suggested 2-leg{suggested.length >= 2 ? "" : " (need 2 sides)"}</button>
           {sel.length ? <button type="button" onClick={() => setSel([])} style={{ padding: "8px 14px", borderRadius: 999, border: "1px solid " + t.border.default, background: t.bg.base, color: t.text.primary, fontWeight: 800, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>Clear</button> : null}
         </div>
       </div>
-      {games.length === 0 ? <EmptyState title="No proven-capper games yet" body={"Nothing live or upcoming from proven cappers right now. Live games stay until they finish — " + nextScanLabel(props.now) + "."} /> : <ComingGroups games={games} now={props.now} keyPrefix="" onCapper={setProfile} suggested={suggested} selSideOf={selSideOf} onSelectSide={toggleSide} />}
+      {groups.length === 0 ? <EmptyState title={emptyTitle} body={emptyBody} /> : groups.map((cg: CapperGroup) => {
+        const rec = cg.rec;
+        const big = rec && rec.big;
+        const recLine = [
+          big && big.n ? ((big.w || 0) + "–" + (big.l || 0) + " big") : (rec && rec.n ? (rec.w + "–" + rec.l) : ""),
+          cg.bigRoi != null ? pct(cg.bigRoi) + " big-bet ROI" : "",
+        ].filter(Boolean).join(" · ");
+        return (
+          <div key={cg.wallet} data-capper-slate={cg.wallet} style={{ borderRadius: 20, border: "1.5px solid " + t.border.default, background: t.bg.base, boxShadow: "0 6px 18px rgba(76,29,149,0.10)", overflow: "hidden", marginBottom: 16, fontFamily: t.font.family }}>
+            <div style={{ height: 6, background: cg.hasLive ? "linear-gradient(90deg,#DC2626,#F97316)" : "linear-gradient(90deg," + BRAND + "," + BRAND2 + ")" }} />
+            <div style={{ padding: "12px 14px 6px", display: "flex", gap: 10, alignItems: "center" }}>
+              <Face name={cg.name} size={44} />
+              <button type="button" onClick={() => setProfile(cg.wallet)} style={{ flex: 1, minWidth: 0, textAlign: "left", border: "none", background: "transparent", padding: 0, cursor: "pointer", fontFamily: "inherit" }}>
+                <div style={{ fontSize: 18, fontWeight: 850, color: t.text.primary, overflowWrap: "anywhere" }}>{cg.name}</div>
+                <div style={{ fontSize: 13, fontWeight: 700, color: (cg.bigRoi || 0) >= 0 ? GREEN : RED, marginTop: 2 }}>{recLine || "Record n/a"}</div>
+              </button>
+              {eliteOnly ? <Chip bg={GREEN} color="#FFFFFF">Elite</Chip> : (ELITE_W[cg.wallet] ? <Chip bg={GREEN} color="#FFFFFF">Elite</Chip> : <Chip bg={t.bg.subtle} color={t.text.primary}>Proven</Chip>)}
+              <Chip bg={t.bg.subtle} color={t.text.secondary}>{cg.picks.length === 1 ? "1 pick" : cg.picks.length + " picks"}</Chip>
+            </div>
+            {bundleCapperGames(cg.picks).map((bundle) => {
+              const g = bundle.game;
+              const live = comingStatus(g, props.now) === "live";
+              const selectedSide = (sel.find((x) => x.gameId === g.id) || { sideId: "" }).sideId;
+              const leadSide = pickSideId((bundle.picks[0].market.sides || []).slice());
+              return (
+                <div key={cg.wallet + g.id} data-capper-game={g.id} style={{ padding: "4px 14px 14px", borderTop: "1px solid " + t.border.default, marginTop: 8 }}>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center", marginTop: 10 }}>
+                    {live ? <Chip bg={RED} color="#FFFFFF">LIVE</Chip> : null}
+                    <Chip bg={BRAND} color="#FFFFFF">{g.league}</Chip>
+                    <Chip bg={t.bg.subtle} color={t.text.primary}>{g.start || ptTime(g.startTs)}</Chip>
+                  </div>
+                  <div style={{ fontSize: 18, lineHeight: "23px", fontWeight: 850, marginTop: 6, overflowWrap: "anywhere" }}>{g.game}</div>
+                  {bundle.picks.map((row: CapperPickRow) => (
+                    <div key={row.side.id} style={{ marginTop: 8 }}>
+                      {row.bothSides ? <SideTag pick={!!(leadSide && row.side.id === leadSide)} /> : null}
+                      <div style={{ fontSize: 15, fontWeight: 850, color: t.text.primary }}>{row.side.label + " · " + money(row.cost) + " on Polymarket"}</div>
+                      {row.side.avgEntry != null || row.side.slip != null ? <div style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary, marginTop: 2 }}>{[row.side.avgEntry != null ? "entry " + cents(row.side.avgEntry) : "", row.side.slip != null ? ((row.side.slip >= 0 ? "+" : "") + row.side.slip.toFixed(1) + "¢ vs entry") : ""].filter(Boolean).join(" · ")}</div> : null}
+                    </div>
+                  ))}
+                  <KalshiGameLines game={g} onPick={(marketId: string, sideId: string) => onKalshiPick(g, marketId, sideId)} selectedId={selectedSide || null} />
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
       {profile ? <CapperProfile wallet={profile} onClose={() => setProfile("")} /> : null}
     </Section>
   );
 }
-
+function EliteTab(props: { now: number }) {
+  return <CapperSlateTab now={props.now} mode="elite" />;
+}
+function ComingUpTab(props: { now: number }) {
+  return <CapperSlateTab now={props.now} mode="coming" />;
+}
 
 export default function App() {
   const t = useGrokTheme();
@@ -3868,7 +4311,7 @@ export default function App() {
     return !!(b && b.sport === sportFilter);
   }) : hotCapAll;
   const hotCapRows = sortHotCappers(hotCapVisible, sortOf("hot"));
-  const tabRecord = tab === "top" ? "Top 20: " + wlTop.text : tab === "longfun" ? "Longshots: " + wlLong.text + " · Fun: " + wlFun.text : tab === "fun" ? "Fun: " + wlFun.text : tab === "poly" ? "Polymarket: " + wlPoly.text : tab === "props" ? "Player Props: " + wlProps.text : tab === "longshots" ? "Longshots: " + wlLong.text : tab === "biggest" ? "Biggest Bets: " + wlBig.text : tab === "upcoming" ? "Upcoming: " + wlUp.text : tab === "cappers" ? "Cappers: " + capWlW + "-" + capWlL + " (per capper; a shared pick can count more than once)" : tab === "picks" || tab === "coming" ? "Journal: " + wins + "–" + (graded.length - wins) + (graded.length ? "  ·  " + Math.round((100 * wins) / graded.length) + "%  ·  " : "  ·  ") + nextScanLabel(now) : tab === "more" ? "Top 20 " + wlTop.text + " · Fun " + wlFun.text + " · Polymarket " + wlPoly.text + (wlGlue.w + wlGlue.l ? " · Glue " + wlGlue.text : "") + (wlProps.w + wlProps.l ? " · Props " + wlProps.text : "") + (wlLong.w + wlLong.l ? " · Longshots " + wlLong.text : "") + (wlBig.w + wlBig.l ? " · Biggest " + wlBig.text : "") + (wlUp.w + wlUp.l ? " · Upcoming " + wlUp.text : "") : "";
+  const tabRecord = tab === "top" ? "Top 20: " + wlTop.text : tab === "longfun" ? "Longshots: " + wlLong.text + " · Fun: " + wlFun.text : tab === "fun" ? "Fun: " + wlFun.text : tab === "poly" ? "Polymarket: " + wlPoly.text : tab === "props" ? "Player Props: " + wlProps.text : tab === "longshots" ? "Longshots: " + wlLong.text : tab === "biggest" ? "Biggest Bets: " + wlBig.text : tab === "upcoming" ? "Upcoming: " + wlUp.text : tab === "cappers" ? "Cappers: " + capWlW + "-" + capWlL + " (per capper; a shared pick can count more than once)" : tab === "picks" || tab === "coming" || tab === "elite" ? "Journal: " + wins + "–" + (graded.length - wins) + (graded.length ? "  ·  " + Math.round((100 * wins) / graded.length) + "%  ·  " : "  ·  ") + nextScanLabel(now) : tab === "more" ? "Top 20 " + wlTop.text + " · Fun " + wlFun.text + " · Polymarket " + wlPoly.text + (wlGlue.w + wlGlue.l ? " · Glue " + wlGlue.text : "") + (wlProps.w + wlProps.l ? " · Props " + wlProps.text : "") + (wlLong.w + wlLong.l ? " · Longshots " + wlLong.text : "") + (wlBig.w + wlBig.l ? " · Biggest " + wlBig.text : "") + (wlUp.w + wlUp.l ? " · Upcoming " + wlUp.text : "") : "";
   const tabCaution = tab === "poly" && wlPoly.l > wlPoly.w ? "Caution: the Polymarket tab is losing so far (" + wlPoly.text + "). Bet smaller or skip until the record turns around." : "";
 
   const journalRows = DATA.history.filter((h: Hist) => journal === "all" || (journal === "won" && h.result === "W") || (journal === "lost" && h.result === "L") || (journal === "pending" && !h.result) || (journal === "top" && (h.tier === "top" || !h.tier)) || (journal === "fun" && h.tier === "fun") || (journal === "poly" && h.tier === "poly") || (journal === "glue" && h.tier === "glue") || (journal === "props" && h.tier === "props") || (journal === "longshots" && h.tier === "longshots") || (journal === "biggest" && h.tier === "biggest") || (journal === "upcoming" && h.tier === "upcoming"));
@@ -4041,6 +4484,7 @@ export default function App() {
         </Section>
       ) : null}
 
+      {tab === "elite" ? <EliteTab now={now} /> : null}
       {tab === "coming" ? <ComingUpTab now={now} /> : null}
 
       {(
@@ -4134,7 +4578,7 @@ export default function App() {
       <Floating edge="top" align="center" bar>
         <div data-tab-bar="1">
         <PillTabs
-          options={[{ value: "picks", label: "All Picks", count: bigOnly ? biggestAll.length : rankedAll.length }, { value: "coming", label: "Coming Up", count: sortComingGames(asComingGames((DATA.comingUp || []) as ComingGame[]), "best", now).length }, { value: "cappers", label: "Cappers", count: capRows.length }]}
+          options={[{ value: "picks", label: "All Picks", count: bigOnly ? biggestAll.length : rankedAll.length }, { value: "elite", label: "Elite", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: sortComingGames(asComingGames((DATA.comingUp || []) as ComingGame[]), "best", now).length }, { value: "cappers", label: "Cappers", count: capRows.length }]}
           value={tab}
           onChange={(v: string) => { setTab(v); setSportFilter(""); }}
         />
