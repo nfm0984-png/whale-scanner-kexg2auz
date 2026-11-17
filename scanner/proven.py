@@ -337,7 +337,7 @@ def build(emb, store=None, write=True):
                 reasons.append('thin record in ' + sport)
             if kp is not None and not (GOOD_LO <= kp <= GOOD_HI):
                 reasons.append('Kalshi %d¢ outside 45-92¢' % round(kp * 100))
-        # Noel Nov 17 cleanup: resolved/finished, no-Kalshi, Cooling cappers and stale pre-game buys never show.
+        # Noel Nov 17 cleanup: resolved/finished, no-Kalshi, and Cooling cappers never show (stale pre-game buys no longer block).
         _px = [x for x in (kp, p.get('now')) if x is not None]
         if any(x < 0.03 or x > 0.97 for x in _px):
             clean_removed['resolved'] += 1
@@ -347,10 +347,6 @@ def build(emb, store=None, write=True):
             continue
         if c.get('badge') == 'Cooling':
             clean_removed['cooling'] += 1
-            continue
-        _buy_ts = _ts(p.get('lastTs')) or _ts(p.get('firstTs'))
-        if not (ts and ts <= now) and _buy_ts and (now - _buy_ts) > wf.STALE_SECS:
-            clean_removed['stale'] += 1
             continue
         slip = wf.slip_cents(kp, p.get('avg'))
         if wf.too_expensive(kp, p.get('avg')):

@@ -4208,7 +4208,7 @@ function cleanGames(games: ComingGame[], now: number, requireKalshi: boolean): {
         if (requireKalshi && s.kPrice == null) { log.noKalshi++; return false; }
         const rec = QMAP[w];
         if (!w || !walletLongTermOk(w) || (rec && rec.badge === "Cooling")) { log.floor++; return false; }
-        if (pre && b.lastTs && now - b.lastTs > STALE_SECS) { log.stale++; return false; }
+        // Stale pre-game buys no longer block (Noel, Nov 17); the Stale chip stays as a small note.
         if (s.kPrice != null && b.avg != null) { const sl = slipCents(s.kPrice, b.avg); if (sl != null && sl >= SLIP_CAP_CENTS) { log.slip++; return false; } }
         return true;
       });
@@ -4263,7 +4263,6 @@ function comboLegEligible(g: ComingGame, s: ComingSide, now: number): boolean {
   if (comingStatus(g, now) !== "upcoming") return false;
   if (s.kPrice == null || s.kPrice < 0.20 || s.kPrice > 0.90) return false;
   if (s.slip != null && s.slip >= SLIP_CAP_CENTS) return false;
-  if (s.lastTs && now - s.lastTs > STALE_SECS) return false;
   return true;
 }
 function suggestCombos(games: ComingGame[], now: number, eliteOnly: boolean, want = 3): ComboPick[] {
@@ -4494,7 +4493,7 @@ function CapperSlateTab(props: { now: number; mode: "elite" | "coming" }) {
               <div style={{ fontSize: 12, color: t.text.tertiary, marginTop: 2 }}>Product of the current Kalshi ask prices, before fees. Actual payout may be a bit less.</div>
             </div>
           );
-        }) : <div style={{ fontSize: 13, color: t.text.secondary, padding: "10px 12px", borderRadius: 14, background: t.bg.subtle }}>No 2-leg combo clears the bar right now (Kalshi price, under 2¢ slip, different upcoming games, not stale).</div>}
+        }) : <div style={{ fontSize: 13, color: t.text.secondary, padding: "10px 12px", borderRadius: 14, background: t.bg.subtle }}>No 2-leg combo clears the bar right now (Kalshi price, under 2¢ slip, different upcoming games).</div>}
       </div>
       <div data-parlay-builder="1" style={{ borderRadius: 18, border: "1.5px solid " + BRAND, padding: "12px 14px", background: "linear-gradient(180deg,#F5F0FF 0%, #EDE9FE 100%)", margin: "4px 0 14px", boxShadow: "0 6px 16px rgba(124,58,237,0.10)" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
@@ -4670,7 +4669,7 @@ function KalshiCappersTab(props: { now: number }) {
               <div style={{ fontSize: 12, color: t.text.tertiary, marginTop: 2 }}>Product of the current Kalshi ask prices, before fees. Actual payout may be a bit less.</div>
             </div>
           );
-        }) : <div style={{ fontSize: 13, color: t.text.secondary, padding: "10px 12px", borderRadius: 14, background: t.bg.subtle }}>No 2-leg combo clears the bar right now (Kalshi price, under 2¢ slip, different upcoming games, not stale).</div>}
+        }) : <div style={{ fontSize: 13, color: t.text.secondary, padding: "10px 12px", borderRadius: 14, background: t.bg.subtle }}>No 2-leg combo clears the bar right now (Kalshi price, under 2¢ slip, different upcoming games).</div>}
       </div>
       <div data-parlay-builder="1" style={{ borderRadius: 18, border: "1.5px solid " + BRAND, padding: "12px 14px", background: "linear-gradient(180deg,#F5F0FF 0%, #EDE9FE 100%)", margin: "4px 0 14px", boxShadow: "0 6px 16px rgba(124,58,237,0.10)" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap" }}>

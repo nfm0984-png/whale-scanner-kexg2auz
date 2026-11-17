@@ -38,6 +38,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          # Always start from the latest main, never the commit that queued this run (a queued refresh used to roll scan data back).
+          ref: main
           fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
@@ -126,6 +128,31 @@ jobs:
             git commit -m "${MODE:-update} $(TZ=America/Los_Angeles date '+%a %b %-d %-I:%M %p PT')"
           }
 
+          # Never roll newer data back: if main already holds a newer scan (or a newer refresh of the same scan)
+          # than this run produced, drop this run's output and publish the latest main instead.
+          fresh_key='import json,sys; d=json.load(open(sys.argv[1])); e=json.load(open(sys.argv[2])); print(int(d.get("ts",0)), int(e.get("refreshTs",0)))'
+          main_is_newer() {
+            git fetch origin main || return 1
+            git show origin/main:data.json > /tmp/remote_data.json 2>/dev/null || return 1
+            git show origin/main:scanner/page_embed.json > /tmp/remote_embed.json 2>/dev/null || echo '{}' > /tmp/remote_embed.json
+            local r l
+            r=$(python3 -c "$fresh_key" /tmp/remote_data.json /tmp/remote_embed.json 2>/dev/null) || return 1
+            l=$(python3 -c "$fresh_key" data.json scanner/page_embed.json 2>/dev/null) || return 1
+            local rt=${r% *} rr=${r#* } lt=${l% *} lr=${l#* }
+            if [ "$rt" -gt "$lt" ] || { [ "$rt" -eq "$lt" ] && [ "$rr" -gt "$lr" ]; }; then
+              echo "main already has newer data (scan $rt/refresh $rr > scan $lt/refresh $lr)"
+              return 0
+            fi
+            return 1
+          }
+          discard_and_exit() {
+            echo "discarding this run's output; publishing latest main"
+            git rebase --abort || true
+            git reset --hard origin/main
+            exit 0
+          }
+          if main_is_newer; then discard_and_exit; fi
+
           save_outs
           commit_outs
 
@@ -137,6 +164,7 @@ jobs:
           pushed=0
           for i in 1 2 3 4 5; do
             git fetch origin main
+            if main_is_newer; then discard_and_exit; fi
             if git pull --rebase -X theirs origin main && validate_outs "post-rebase"; then
               if git push origin HEAD:main; then
                 pushed=1
