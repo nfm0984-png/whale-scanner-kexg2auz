@@ -3815,11 +3815,11 @@ function mergeComingGames(lists: ComingGame[][]): ComingGame[] {
   });
   return Object.keys(by).map((k: string) => fillGameStats(by[k]));
 }
-function openSlateGames(): ComingGame[] {
+function openSlateGames(eliteOnly: boolean): ComingGame[] {
   const coming = asComingGames((DATA.comingUp || []) as ComingGame[]);
+  if (!eliteOnly) return coming.filter((g: ComingGame) => (g.capperCount || 0) > 0);
   const proven = provenToGameCards(((PROVEN && PROVEN.picks) || []) as ProvenRow[]);
-  const catalogSrc: Pick[] = ([] as Pick[]).concat(DATA.signals || [], DATA.upcoming || [], DATA.biggest || [], DATA.poly || []);
-  return mergeComingGames([coming, proven, picksToGameCards(catalogSrc)]).filter((g: ComingGame) => (g.capperCount || 0) > 0);
+  return mergeComingGames([coming, proven]).filter((g: ComingGame) => (g.capperCount || 0) > 0);
 }
 interface ComboLeg { game: ComingGame; market: ComingMarket; side: ComingSide; eliteN: number; provenN: number; bestRoi: number }
 interface ComboPick { legs: ComboLeg[]; combined: number }
@@ -3944,7 +3944,7 @@ function bundleCapperGames(picks: CapperPickRow[]): { game: ComingGame; picks: C
   return order.map((id: string) => ({ game: by[id][0].game, picks: by[id] }));
 }
 function eliteTabCount(now: number): number {
-  const games = openSlateGames().filter((g: ComingGame) => comingStatus(g, now) !== "final");
+  const games = openSlateGames(true).filter((g: ComingGame) => comingStatus(g, now) !== "final");
   return groupCapperPicks(capperPicksFromGames(games, isEliteBacker), now).length;
 }
 function findComingSide(g: ComingGame, sideId: string): ComingSide | null {
@@ -3956,7 +3956,7 @@ function findComingSide(g: ComingGame, sideId: string): ComingSide | null {
 function CapperSlateTab(props: { now: number; mode: "elite" | "coming" }) {
   const t = useGrokTheme();
   const eliteOnly = props.mode === "elite";
-  const allGames = openSlateGames().filter((g: ComingGame) => comingStatus(g, props.now) !== "final");
+  const allGames = openSlateGames(eliteOnly).filter((g: ComingGame) => comingStatus(g, props.now) !== "final");
   const pred = eliteOnly ? isEliteBacker : ((b: ComingBacker) => !!b.wallet);
   const groups = groupCapperPicks(capperPicksFromGames(allGames, pred), props.now);
   const liveN = groups.filter((g: CapperGroup) => g.hasLive).length;
