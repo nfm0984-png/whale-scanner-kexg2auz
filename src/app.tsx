@@ -34,14 +34,9 @@ interface KalshiCapper {
   markets?: number; avgEntry?: number | null; medStake?: number | null; floor?: number; shortRecord?: boolean;
   recordLine?: string; formPnl?: number | null; score?: number; picks: KalshiCapperPick[];
 }
-interface KalshiComboLeg {
-  nickname: string; pickId: string; game: string; league: string; label: string; price: number | null;
-  ticker?: string; action?: string; marketTitle?: string; backing?: string; yesNo?: string;
-  yesSubTitle?: string; noSubTitle?: string; contractTitle?: string;
-}
 interface KalshiCappersData {
   updatedAt?: string; updatedTs?: number; blocklist?: string[]; coverage?: Record<string, number | string | string[] | Record<string, number>>;
-  cappers?: KalshiCapper[]; combos?: { combined: number; legs: KalshiComboLeg[] }[];
+  cappers?: KalshiCapper[];
 }
 interface HotCapper { wallet: string; name: string; w7: number; l7: number; n7: number; wr7: number; pnl7: number; w30: number; l30: number; pnl30: number }
 interface HotWeekData { ts?: number; cappers?: HotCapper[]; games?: ComingGame[] }
@@ -151,7 +146,7 @@ function eligibilityOf(rec: CapperRec | null | undefined): string[] {
   if (!rec.n || rec.roi == null || rec.roi <= 0) why.push("Cold 30d");
   if (!longTermOk(rec)) why.push("Year down");
   if (rec.kShare == null) why.push("Kalshi share unknown"); else if (rec.kShare < 0.5) why.push("Mostly non-Kalshi");
-  if (rec.avgEntry != null && rec.avgEntry >= 0.9) why.push("90¢+ favorites");
+  if (rec.avgEntry != null && rec.avgEntry >= 0.9) why.push("heavy favorites (pays under 1.1x)");
   if (rec.mm) why.push("market maker / bot");
   if (rec.oneOff) why.push("one-off");
   const age = ageDaysOf(rec);
@@ -200,7 +195,7 @@ function provenIsStale(r: ProvenRow, now: number): boolean {
   return !!t && now - t > STALE_SECS;
 }
 
-// One minimum for every pick on every tab (All Picks, Proven, Elite, Coming Up, combos): $500 (Noel, Nov 17). Replaces the Nov 16 $250 floor-passer minimum.
+// One minimum for every pick on every tab (All Picks, Proven, Elite, Coming Up): $500 (Noel, Nov 17). Replaces the Nov 16 $250 floor-passer minimum.
 const FLOOR_MIN_BET = 500;
 const ELITE_MIN_BET = FLOOR_MIN_BET;
 const ELITE_FULL_N = 20;
@@ -280,7 +275,7 @@ function pickVerdictOf(p: Pick, backers?: Backer[]): { verdict: "GOOD" | "OK" | 
     } else {
       if (cv.mult != null && cv.mult < 1) okWhy.push(cv.mult + "x usual (under 1x)");
       if (!winning) okWhy.push("thin record in " + ((info && info.sport) || "this sport"));
-      if (kp != null && !(kp >= GOOD_LO && kp <= GOOD_HI)) okWhy.push("Kalshi " + Math.round(kp * 100) + "¢ outside 45-92¢");
+      if (kp != null && !(kp >= GOOD_LO && kp <= GOOD_HI)) okWhy.push("Kalshi pays " + cents(kp) + ", outside 1.1–2.2x");
     }
   });
   if (!hasK) return anyEliteBar || anyReal ? { verdict: "CAUTION", why: ["no Kalshi market"] } : { verdict: "", why: [] };
@@ -576,18 +571,18 @@ function BetAmt(props: { n: number | null | undefined }) {
 }
 function slipWords(slip: number | null | undefined, entry?: number | null): string | null {
   const bits: string[] = [];
-  if (entry != null) bits.push("capper paid " + cents(entry));
+  if (entry != null) bits.push("capper got " + cents(entry));
   if (slip != null) {
-    const amt = Math.abs(slip).toFixed(1).replace(/\.0$/, "") + "¢";
-    if (slip > 0.05) bits.push(amt + " worse than capper's price");
-    else if (slip < -0.05) bits.push(amt + " better than capper's price");
+    if (slip > 0.05) bits.push("pays less than the capper got");
+    else if (slip < -0.05) bits.push("pays more than the capper got");
     else bits.push("about the same as capper's price");
   }
   return bits.length ? bits.join(" · ") : null;
 }
 
 const kMoney = (n: number): string => (Math.abs(n) >= 1000000 ? (n < 0 ? "-$" : "$") + (Math.abs(n) / 1000000).toFixed(Math.abs(n) >= 10000000 ? 1 : 2).replace(/\.?0+$/, "") + "M" : Math.abs(n) >= 10000 ? (n < 0 ? "-$" : "$") + (Math.abs(n) / 1000).toFixed(Math.abs(n) >= 100000 ? 0 : 1) + "k" : money(n));
-const cents = (p: number | null | undefined): string => (p === null || p === undefined ? "n/a" : Math.round(p * 1000) / 10 + "¢");
+// Payout multiplier for a price: 1 / price, one decimal ("1.7x"). Cards show payouts, never cents.
+const cents = (p: number | null | undefined): string => (p === null || p === undefined || !(p > 0) ? "n/a" : (1 / Math.min(p, 1)).toFixed(1) + "x");
 const ptTime = (ts: number): string => new Date(ts * 1000).toLocaleString("en-US", { timeZone: "America/Los_Angeles", weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) + " PT";
 const ago = (ts: number, now: number): string => {
   const s = Math.max(0, now - ts);
@@ -1067,15 +1062,16 @@ function Pct(props: { v: number | null | undefined }) {
 
 const BTN = (bg: string, color: string, border?: string): Record<string, string | number> => ({ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, boxSizing: "border-box", height: 48, padding: "0 16px", borderRadius: 14, border: border ? "1.5px solid " + border : "none", background: bg, color: color, fontSize: 16, fontWeight: 800, lineHeight: 1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", textDecoration: "none", cursor: "pointer", minWidth: 0 });
 
-function PillTabs(props: { options: { value: string; label: string; count?: number }[]; value: string; onChange: (v: string) => void }) {
+function PillTabs(props: { options: { value: string; label: string; count?: number }[]; value: string; onChange: (v: string) => void; bare?: boolean }) {
   const t = useGrokTheme();
+  const H = props.bare ? 34 : 40;
   return (
-    <div style={{ position: "sticky", top: 0, zIndex: 20, width: "100%", background: "rgba(244,240,255,0.94)", boxShadow: "0 4px 14px rgba(124,58,237,0.12)", padding: "8px 0", borderBottom: "1px solid #DDD6FE" }}>
-      <div style={{ display: "flex", flexWrap: "nowrap", gap: 8, overflowX: "auto", padding: "0 12px", WebkitOverflowScrolling: "touch", scrollbarWidth: "none" }}>
+    <div style={props.bare ? { width: "100%" } : { position: "sticky", top: 0, zIndex: 20, width: "100%", background: "rgba(244,240,255,0.94)", boxShadow: "0 4px 14px rgba(124,58,237,0.12)", padding: "8px 0", borderBottom: "1px solid #DDD6FE" }}>
+      <div style={{ display: "flex", flexWrap: "nowrap", gap: 8, overflowX: "auto", padding: props.bare ? "0 12px 0 0" : "0 12px", WebkitOverflowScrolling: "touch", scrollbarWidth: "none" }}>
         {props.options.map((o: { value: string; label: string; count?: number }) => {
           const on = o.value === props.value;
           return (
-            <button key={o.value} onClick={() => props.onChange(o.value)} style={{ flex: "0 0 auto", display: "inline-flex", alignItems: "center", gap: 6, height: 40, padding: "0 16px", borderRadius: 999, border: on ? "1.5px solid " + BRAND : "1.5px solid " + t.border.default, background: on ? BRAND : t.bg.subtle, color: on ? "#FFFFFF" : t.text.secondary, fontFamily: t.font.family, fontSize: 15, fontWeight: on ? 800 : 600, whiteSpace: "nowrap", cursor: "pointer" }}>
+            <button key={o.value} onClick={() => props.onChange(o.value)} style={{ flex: "0 0 auto", display: "inline-flex", alignItems: "center", gap: 6, height: H, padding: props.bare ? "0 13px" : "0 16px", borderRadius: 999, border: on ? "1.5px solid " + BRAND : "1.5px solid " + t.border.default, background: on ? BRAND : t.bg.subtle, color: on ? "#FFFFFF" : t.text.secondary, fontFamily: t.font.family, fontSize: props.bare ? 14 : 15, fontWeight: on ? 800 : 600, whiteSpace: "nowrap", cursor: "pointer" }}>
               {o.label}{o.count !== undefined ? <span style={{ fontSize: 12, fontWeight: 800, minWidth: 20, height: 20, padding: "0 6px", boxSizing: "border-box", borderRadius: 999, display: "inline-flex", alignItems: "center", justifyContent: "center", background: on ? "rgba(255,255,255,0.25)" : t.bg.base, color: on ? "#FFFFFF" : t.text.secondary }}>{o.count}</span> : null}
             </button>
           );
@@ -1729,17 +1725,13 @@ function KalshiGreenBox(props: { view: KalshiView; badge?: "best" | null; compac
           {props.badge === "best" ? (
             <span data-best-bet-badge="1" style={{ display: "inline-flex", alignItems: "center", padding: "3px 9px", borderRadius: 999, background: GREEN, color: "#FFFFFF", fontSize: 10, fontWeight: 850, letterSpacing: "0.05em", textTransform: "uppercase" }}>BEST BET · Submit this</span>
           ) : null}
-          {props.selected ? <Chip bg={BRAND} color="#FFFFFF">In parlay</Chip> : null}
         </div>
         {ok ? (
           <div>
             {v.marketTitle ? <div data-k-title="1" style={{ fontSize: c ? 13 : 15, fontWeight: 800, lineHeight: c ? "18px" : "20px", marginTop: 6, color: t.text.primary, overflowWrap: "anywhere" }}>{v.marketTitle}</div> : null}
-            <div data-k-outcome="1" style={{ marginTop: 8, padding: c ? "6px 10px" : "9px 12px", borderRadius: 12, background: "#FFFFFF", border: "1.5px solid " + t.border.default, fontSize: c ? 14 : 16, fontWeight: 850, color: t.text.primary, overflowWrap: "anywhere", lineHeight: c ? "19px" : "21px" }}>{v.outcome}</div>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, marginTop: 8 }}>
-              <span data-k-yesno="1" style={{ display: "inline-flex", alignItems: "center", padding: c ? "4px 14px" : "6px 18px", borderRadius: 999, background: pillBg, color: "#FFFFFF", fontSize: c ? 14 : 16, fontWeight: 850 }}>{v.yesNo}</span>
-              <span data-k-price="1" style={{ fontSize: c ? 24 : 34, fontWeight: 850, fontVariantNumeric: "tabular-nums", color: t.text.primary, letterSpacing: "-0.03em", lineHeight: 1 }}>{cents(v.price)}</span>
-            </div>
-            <div data-k-stake="1" style={{ marginTop: 8, fontSize: c ? 12 : 13, fontWeight: 800, color: GREEN }}>{"Suggested stake $2–4"}</div>
+            {v.outcome && !/^(yes|no)$/i.test(v.outcome) ? <div data-k-outcome="1" style={{ marginTop: 6, fontSize: c ? 14 : 16, fontWeight: 800, color: t.text.secondary, overflowWrap: "anywhere", lineHeight: c ? "19px" : "21px" }}>{v.outcome}</div> : null}
+            <div style={{ marginTop: 8 }}><KalshiBuyButton view={v} size={c ? 18 : 22} /></div>
+            <div data-k-stake="1" style={{ marginTop: 6, fontSize: c ? 12 : 13, fontWeight: 800, color: GREEN }}>{"Suggested stake $2–4"}</div>
           </div>
         ) : (
           <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 6 }}><span style={{ fontWeight: 700, color: t.text.primary }}>{unmatched ? "Kalshi line not matched." : "Not on Kalshi."}</span> {unmatched ? "The backed team does not match this contract's Yes line, so no button is shown." : (props.why || "No verified contract for this pick.")}</div>
@@ -1749,12 +1741,12 @@ function KalshiGreenBox(props: { view: KalshiView; badge?: "best" | null; compac
     </div>
   );
 }
-function MoreBetsRow(props: { n: number; open: boolean; onToggle: () => void }) {
+function MoreBetsRow(props: { n: number; open: boolean; onToggle: () => void; noun?: string }) {
   const t = useGrokTheme();
   if (props.n <= 0) return null;
   return (
     <button type="button" data-more-bets="1" aria-expanded={props.open} onClick={props.onToggle} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", margin: "2px 0 8px", padding: "8px 12px", borderRadius: 12, border: "1px solid " + t.border.default, background: t.bg.subtle, color: BRAND, fontWeight: 800, fontSize: 14, cursor: "pointer", fontFamily: "inherit", textAlign: "left" }}>
-      <span>{(props.open ? "▴ Hide " : "▾ ") + props.n + " more bet" + (props.n === 1 ? "" : "s") + (props.open ? "" : " on this game")}</span>
+      <span>{(props.open ? "▴ Hide " : "▾ ") + props.n + " more bet" + (props.n === 1 ? "" : "s") + (props.open ? "" : " on this " + (props.noun || "game"))}</span>
       <span style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary }}>{props.open ? "Collapse" : "Tap to expand"}</span>
     </button>
   );
@@ -1798,8 +1790,8 @@ function KalshiBox(props: { act: string | null; price: number | null; contract: 
       <KalshiGreenBox view={view} compact={props.compact} why={props.why} />
       {ok && (props.edge != null || props.entry != null) ? (
         <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginTop: 8 }}>
-          {props.edge !== null ? <Chip bg={good ? GREEN : AMBER} color="#FFFFFF">{props.edge > 0.05 ? Math.abs(props.edge) + "¢ worse than capper's price" : props.edge < -0.05 ? Math.abs(props.edge) + "¢ better than capper's price" : "About the same as capper's price"}</Chip> : null}
-          <span style={{ fontSize: 12, lineHeight: "17px", color: t.text.secondary }}>{props.entry != null ? "capper paid " + cents(props.entry) : ""}{props.now != null ? (props.entry != null ? " · " : "") + "Polymarket now " + cents(props.now) : ""}</span>
+          {props.edge !== null ? <Chip bg={good ? GREEN : AMBER} color="#FFFFFF">{props.edge > 0.05 ? "Pays less than the capper got" : props.edge < -0.05 ? "Pays more than the capper got" : "Pays about what the capper got"}</Chip> : null}
+          <span style={{ fontSize: 12, lineHeight: "17px", color: t.text.secondary }}>{props.entry != null ? "capper got " + cents(props.entry) : ""}{props.now != null ? (props.entry != null ? " · " : "") + "Polymarket now " + cents(props.now) : ""}</span>
         </div>
       ) : null}
     </div>
@@ -2826,7 +2818,7 @@ function BuyCard(props: { l: Line; now: number; rank: number; bankroll: number; 
         <Chip bg={t.bg.subtle} color={t.text.primary}>{l.league}</Chip>
         <Chip bg={t.bg.subtle} color={t.text.secondary}>{kindWord(l.kind)}</Chip>
         <Chip bg={live ? RED : t.bg.subtle} color={live ? "#FFFFFF" : t.text.primary}>{live ? "LIVE" : until(l.startTs || 0, now, l.start)}</Chip>
-        {band === "best" ? <Chip bg={GREEN} color="#FFFFFF">65–84¢</Chip> : null}
+        {band === "best" ? <Chip bg={GREEN} color="#FFFFFF">pays 1.2–1.5x</Chip> : null}
         {l.hedged ? <Chip bg={AMBER} color="#FFFFFF">Hedged</Chip> : null}
         {fol ? <Chip bg={BRAND} color="#FFFFFF">★ Following</Chip> : null}
         <CopyId id={pickIdOf({ id: l.q + "|" + l.label, q: l.q, label: l.label, slug: "" } as Pick)} />
@@ -2866,7 +2858,7 @@ function BuyCard(props: { l: Line; now: number; rank: number; bankroll: number; 
       {open ? (
         <div style={{ marginTop: 12 }}>
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: t.text.tertiary, marginTop: 4 }}>VALUE NOW · BEFORE FEES</div>
-          <div style={{ fontSize: 13, lineHeight: "20px", color: t.text.secondary, marginTop: 4 }}>Capper paid {cents(l.entry)} · Polymarket now {cents(l.now)} · Kalshi buy {cents(l.kPrice)}{delta !== null ? " · " + (delta > 0.05 ? (Math.abs(delta) + "¢ worse than capper's price") : delta < -0.05 ? (Math.abs(delta) + "¢ better than capper's price") : "about the same as capper's price") : ""}</div>
+          <div style={{ fontSize: 13, lineHeight: "20px", color: t.text.secondary, marginTop: 4 }}>Capper got {cents(l.entry)} · Polymarket now {cents(l.now)} · Kalshi buy {cents(l.kPrice)}{delta !== null ? " · " + (delta > 0.05 ? "pays less than the capper got" : delta < -0.05 ? "pays more than the capper got" : "pays about what the capper got") : ""}</div>
           <div style={{ fontSize: 13, lineHeight: "20px", color: t.text.secondary }}>Chance to hit (market-implied): {chance !== null ? chance + "%" : "n/a"}. Not a win probability.</div>
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: t.text.tertiary, marginTop: 12 }}>POSITION</div>
           <div style={{ fontSize: 13, lineHeight: "20px", color: t.text.secondary, marginTop: 4 }}>
@@ -3129,7 +3121,7 @@ function CapperCard(props: { rec: CapperRec; trader?: Trader; now: number; bankr
           {rec.bf && rec.bf.recent && rec.bf.recent.length ? (
             <div style={{ marginTop: 16 }}>
               <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: t.text.tertiary }}>{"LATEST GRADED FROM THE " + rec.bf.days + "-DAY POLYMARKET BACKFILL ($500+ SPORTS BETS · " + rec.bf.n + " GRADED)"}</div>
-              {rec.bf.recent.map((r: (string | number)[], i: number) => <div key={i} style={{ fontSize: 13, lineHeight: "19px", marginTop: 4, color: t.text.secondary }}><span style={{ fontWeight: 800, color: r[4] === "W" ? GREEN : r[4] === "L" ? RED : t.text.tertiary }}>{r[4] === "W" ? "HIT" : r[4] === "L" ? "MISSED" : "PUSH"}</span>{" · " + String(r[0]).split("-")[0].toUpperCase() + " · " + r[1] + " (" + String(r[0]).replace(/-\d{4}-\d{2}-\d{2}.*$/, "").split("-").slice(1).join(" vs ").toUpperCase() + ") · " + money(Number(r[2])) + " at " + Math.round(Number(r[3]) * 100) + "¢"}</div>)}
+              {rec.bf.recent.map((r: (string | number)[], i: number) => <div key={i} style={{ fontSize: 13, lineHeight: "19px", marginTop: 4, color: t.text.secondary }}><span style={{ fontWeight: 800, color: r[4] === "W" ? GREEN : r[4] === "L" ? RED : t.text.tertiary }}>{r[4] === "W" ? "HIT" : r[4] === "L" ? "MISSED" : "PUSH"}</span>{" · " + String(r[0]).split("-")[0].toUpperCase() + " · " + r[1] + " (" + String(r[0]).replace(/-\d{4}-\d{2}-\d{2}.*$/, "").split("-").slice(1).join(" vs ").toUpperCase() + ") · " + money(Number(r[2])) + " at " + cents(Number(r[3]))}</div>)}
             </div>
           ) : null}
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", color: t.text.tertiary, marginTop: 16 }}>EVERY PICK WE'VE TRACKED · BIGGEST BET FIRST · HIT / MISSED / PUSH / OPEN</div>
@@ -3310,12 +3302,12 @@ function ProvenCard(props: { r: ProvenRow; rank: number; now: number }) {
       <div style={{ fontSize: 18, lineHeight: "23px", fontWeight: 850, marginTop: 6 }}>{r.game}</div>
       {r.market && r.market !== r.game ? <div style={{ fontSize: 13, color: t.text.secondary, marginTop: 2 }}>{r.market}</div> : null}
       <div style={{ fontSize: 15, lineHeight: "21px", fontWeight: 800, marginTop: 6, color: k ? t.text.primary : RED }}>
-        {k ? "Kalshi: " + k.action + " " + (k.contract || r.pick) + (k.price != null ? " at " + Math.round(k.price * 100) + "¢" : "") + (r.avg != null ? " · whale entry " + Math.round(r.avg * 100) + "¢" : "") + (k.live ? "" : " (last scan price)") : "No Kalshi market found for this bet"}
+        {k ? "Kalshi: " + k.action + " " + (k.contract || r.pick) + (k.price != null ? " · pays " + cents(k.price) : "") + (r.avg != null ? " · whale got " + cents(r.avg) : "") + (k.live ? "" : " (last scan price)") : "No Kalshi market found for this bet"}
       </div>
       {k ? <div style={{ fontSize: 11, color: t.text.tertiary }}>{k.ticker}</div> : null}
       <div style={{ fontSize: 13, lineHeight: "19px", marginTop: 6, color: t.text.secondary }}>
         <span style={{ fontWeight: 800, color: t.text.primary }}>{group.length > 1 ? (group.length + " elite cappers") : nameOf(r.name, r.wallet)}</span>
-        {" back" + (group.length > 1 ? "" : "s") + " " + r.pick + " · " + (group.length > 1 ? "biggest " : "") + money(r.cost) + " at " + Math.round(r.avg * 100) + "¢" + (r.mult != null && group.length === 1 ? " = " + r.mult + "x usual (" + money(r.usual) + ")" : "")}
+        {" back" + (group.length > 1 ? "" : "s") + " " + r.pick + " · " + (group.length > 1 ? "biggest " : "") + money(r.cost) + " · got " + cents(r.avg) + (r.mult != null && group.length === 1 ? " = " + r.mult + "x usual (" + money(r.usual) + ")" : "")}
       </div>
       {group.length === 1 ? (
       <div style={{ fontSize: 13, lineHeight: "19px", marginTop: 2, color: t.text.secondary }}>
@@ -3390,7 +3382,7 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; longshot?: boo
           {info.glue ? <Chip bg={AMBER} color="#FFFFFF">Small, glue leg only</Chip> : null}
           {info.split ? <Chip bg={AMBER} color="#FFFFFF">Split</Chip> : null}
           {info.pricier ? <Chip bg={AMBER} color="#FFFFFF">Pricier</Chip> : null}
-          {info.band === "best" ? <Chip bg={GREEN} color="#FFFFFF">65–84¢</Chip> : null}
+          {info.band === "best" ? <Chip bg={GREEN} color="#FFFFFF">pays 1.2–1.5x</Chip> : null}
           <Chip bg={t.bg.subtle} color={t.text.primary}>{p.league}</Chip>
           <Chip bg={t.bg.subtle} color={t.text.secondary}>{kindWord(p.kind)}</Chip>
           <Chip bg={live ? RED : t.bg.subtle} color={live ? "#FFFFFF" : t.text.primary}><Icon name="clock" color={live ? "#FFFFFF" : t.text.secondary} size={12} />{live ? "LIVE" : until(p.startTs, now, p.game && p.game.start)}</Chip>
@@ -3451,7 +3443,7 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; longshot?: boo
           {poly ? (
             <div>
               {marketHref ? <a href={marketHref} target="_blank" rel="noopener noreferrer" style={{ ...BTN(BRAND2, "#FFFFFF"), textDecoration: "none", marginTop: 0 }}>Open this market on Polymarket ↗</a> : null}
-              <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 8 }}>Not on Kalshi{k.why ? ": " + k.why : ""}. Whale paid {cents(p.avgEntry)} · Polymarket now {cents(p.price)}.</div>
+              <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 8 }}>Not on Kalshi{k.why ? ": " + k.why : ""}. Whale got {cents(p.avgEntry)} · Polymarket now {cents(p.price)}.</div>
             </div>
           ) : (
             <KalshiBox act={ok ? (k.action || null) : null} price={k.price === undefined ? null : k.price} contract={k.contract || null} edge={k.edge_vs_whales === undefined ? null : k.edge_vs_whales} why={k.why || null} label={ex.headline} entry={p.avgEntry} now={p.price} ticker={k.ticker || null} marketTitle={k.marketTitle || k.eventTitle || null} />
@@ -3989,7 +3981,7 @@ function kalshiActionWords(act?: string | null): string {
 }
 function kalshiHowLine(side: ComingSide): string {
   const act = kalshiActionWords(side.action);
-  const price = side.kPrice != null ? cents(side.kPrice) : "price not loaded";
+  const price = side.kPrice != null ? "pays " + cents(side.kPrice) : "payout not loaded";
   const contract = (side.contract || "").trim();
   const market = ((side.marketTitle || "").trim()) || contract;
   if (contract && market && market.toLowerCase() !== contract.toLowerCase() && /winner/i.test(market)) {
@@ -4077,7 +4069,6 @@ function SidesGameCard(props: { g: ComingGame; now: number; rank?: number; sugge
                     {side.cappers ? <div style={{ marginTop: 4 }}><BetAmt n={side.usd} /></div> : null}
                     {slipWords(side.slip, side.avgEntry) ? <div style={{ fontSize: 12, fontWeight: 700, marginTop: 3, color: t.text.tertiary }}>{slipWords(side.slip, side.avgEntry)}</div> : null}
                     {stale ? <div style={{ marginTop: 6 }}><Chip bg={AMBER} color="#FFFFFF">Stale</Chip></div> : null}
-                    {sel ? <div style={{ marginTop: 6 }}><Chip bg={BRAND} color="#FFFFFF">In parlay</Chip></div> : null}
                     <div style={{ marginTop: 8 }} onClick={(e) => e.stopPropagation()}>
                       {(side.backers || []).length ? (side.backers || []).map((b: ComingBacker, i: number) => {
                         const roi = comingRoiOf(b);
@@ -4133,10 +4124,6 @@ function ComingGroups(props: { games: ComingGame[]; now: number; keyPrefix: stri
   );
 }
 
-function parlayCombined(prices: number[]): number | null {
-  if (!prices.length) return null;
-  return prices.reduce((a: number, p: number) => a * p, 1);
-}
 function comingGameKey(g: ComingGame): string {
   const id = evKey(g.id);
   if (id) return id;
@@ -4282,68 +4269,6 @@ function openSlateGames(eliteOnly: boolean, now: number, source?: ComingGame[]):
   const c = cleanGames(base, now, true);
   return { games: c.games.filter((g: ComingGame) => comingStatus(g, now) !== "final"), log: c.log };
 }
-interface ComboLeg { game: ComingGame; market: ComingMarket; side: ComingSide; eliteN: number; provenN: number; bestRoi: number }
-interface ComboPick { legs: ComboLeg[]; combined: number }
-function comboLegEligible(g: ComingGame, s: ComingSide, now: number): boolean {
-  if (comingStatus(g, now) !== "upcoming") return false;
-  if (s.kPrice == null || s.kPrice < 0.20 || s.kPrice > 0.90) return false;
-  return true; // Noel Nov 17: no slip check; the 20-90c band only keeps suggested combos worth a $2 parlay
-}
-function suggestCombos(games: ComingGame[], now: number, eliteOnly: boolean, want = 3): ComboPick[] {
-  const legs: ComboLeg[] = [];
-  games.forEach((g: ComingGame) => {
-    if (comingStatus(g, now) === "final") return;
-    const cands: ComboLeg[] = [];
-    (g.markets || []).forEach((m: ComingMarket) => {
-      const rel = relabelMarketSides(m, g.game || "");
-      (rel.sides || []).forEach((s: ComingSide) => {
-        const backs = (s.backers || []).filter((b: ComingBacker) => eliteOnly ? isEliteBacker(b) : true);
-        if (!backs.length || !comboLegEligible(g, s, now)) return;
-        cands.push({
-          game: g,
-          market: rel,
-          side: s,
-          eliteN: (s.backers || []).filter(isEliteBacker).length,
-          provenN: backs.length,
-          bestRoi: Math.max(-999, ...backs.map((b: ComingBacker) => bigBetRoiOf(b.wallet, comingRoiOf(b)))),
-        });
-      });
-    });
-    if (!cands.length) return;
-    cands.sort((a: ComboLeg, b: ComboLeg) => (b.eliteN - a.eliteN) || (b.provenN - a.provenN) || (b.bestRoi - a.bestRoi) || ((a.side.slip == null ? 999 : a.side.slip) - (b.side.slip == null ? 999 : b.side.slip)) || ((b.side.kPrice || 0) - (a.side.kPrice || 0)));
-    legs.push(cands[0]);
-  });
-  legs.sort((a: ComboLeg, b: ComboLeg) => (b.eliteN - a.eliteN) || (b.provenN - a.provenN) || (b.bestRoi - a.bestRoi) || ((a.side.slip == null ? 999 : a.side.slip) - (b.side.slip == null ? 999 : b.side.slip)));
-  const combos: ComboPick[] = [];
-  const used: Record<string, boolean> = {};
-  const pool = legs.slice();
-  while (pool.length >= 1 && combos.length < want) {
-    const a = pool.shift() as ComboLeg;
-    if (used[a.game.id]) continue;
-    const j = pool.findIndex((b: ComboLeg) => b.game.id !== a.game.id && !used[b.game.id]);
-    if (j < 0) continue;
-    const b = pool.splice(j, 1)[0];
-    const combined = parlayCombined([a.side.kPrice as number, b.side.kPrice as number]);
-    if (combined == null) continue;
-    used[a.game.id] = true;
-    used[b.game.id] = true;
-    combos.push({ legs: [a, b], combined });
-  }
-  if (combos.length < Math.min(2, want) && legs.length >= 2) {
-    for (let i = 0; i < legs.length && combos.length < want; i++) {
-      for (let j = i + 1; j < legs.length && combos.length < want; j++) {
-        if (legs[i].game.id === legs[j].game.id) continue;
-        const ids2 = [legs[i].side.id, legs[j].side.id].slice().sort().join("|");
-        const same = combos.some((c: ComboPick) => c.legs.map((l: ComboLeg) => l.side.id).slice().sort().join("|") === ids2);
-        if (same) continue;
-        const combined = parlayCombined([legs[i].side.kPrice as number, legs[j].side.kPrice as number]);
-        if (combined == null) continue;
-        combos.push({ legs: [legs[i], legs[j]], combined });
-      }
-    }
-  }
-  return combos.slice(0, want);
-}
 interface CapperPickRow { wallet: string; name: string; cost: number; game: ComingGame; market: ComingMarket; side: ComingSide; bothSides: boolean }
 function capperPicksFromGames(games: ComingGame[], pred: (b: ComingBacker) => boolean): CapperPickRow[] {
   const out: CapperPickRow[] = [];
@@ -4480,38 +4405,8 @@ function CapperSlateTab(props: { now: number; mode: "elite" | "coming" }) {
   const liveN = groups.filter((g: CapperGroup) => g.hasLive).length;
   const pickN = groups.reduce((n: number, g: CapperGroup) => n + g.picks.length, 0);
   const gamesN = (() => { const s: Record<string, boolean> = {}; groups.forEach((g: CapperGroup) => g.picks.forEach((p: CapperPickRow) => { s[p.game.id] = true; })); return Object.keys(s).length; })();
-  const combos = suggestCombos(allGames, props.now, eliteOnly, 3);
-  const [sel, setSel] = useState<{ gameId: string; sideId: string }[]>([]);
-  const [stakeText, setStakeText] = useState<string>("2");
   const [profile, setProfile] = useState<string>("");
-  const byId: Record<string, ComingGame> = {};
-  const sideOf: Record<string, ComingSide> = {};
-  allGames.forEach((g: ComingGame) => {
-    byId[g.id] = g;
-    (g.markets || []).forEach((m: ComingMarket) => (m.sides || []).forEach((s: ComingSide) => { sideOf[s.id] = s; }));
-  });
-  const toggleSide = (g: ComingGame, s: ComingSide) => {
-    if (sel.some((x) => x.sideId === s.id)) { setSel(sel.filter((x) => x.sideId !== s.id)); return; }
-    const withoutGame = sel.filter((x) => x.gameId !== g.id);
-    if (withoutGame.length >= 3) return;
-    setSel(withoutGame.concat([{ gameId: g.id, sideId: s.id }]));
-  };
-  const onKalshiPick = (g: ComingGame, _marketId: string, sideId: string) => {
-    const s = findComingSide(g, sideId);
-    if (s) toggleSide(g, s);
-  };
-  const stake = Math.max(0, Number(stakeText) || 0);
-  const selectedSides: { g: ComingGame; s: ComingSide }[] = [];
-  sel.forEach((x) => { if (byId[x.gameId] && sideOf[x.sideId]) selectedSides.push({ g: byId[x.gameId], s: sideOf[x.sideId] }); });
-  const prices = selectedSides.map((x) => x.s.kPrice).filter((p: number | null): p is number => p != null && p > 0);
-  const combined = prices.length === selectedSides.length && selectedSides.length >= 1 ? parlayCombined(prices) : null;
-  const payout = combined && stake > 0 && combined > 0 ? stake / combined : null;
-  const stakeLabel = "$" + (stake % 1 ? stake.toFixed(2) : String(stake));
-  let parlayLine = "No legs yet";
-  if (selectedSides.length === 1) parlayLine = "Add 1 or 2 more legs";
-  else if (selectedSides.length >= 2 && combined != null) parlayLine = selectedSides.length + "-leg · " + cents(combined) + (payout != null ? " · " + stakeLabel + " pays $" + payout.toFixed(2) + " if all hit" : "");
-  else if (selectedSides.length >= 2) parlayLine = "Need a Kalshi price on every leg";
-  const useCombo = (c: ComboPick) => setSel(c.legs.map((l: ComboLeg) => ({ gameId: l.game.id, sideId: l.side.id })));
+  const onKalshiPick = (_g: ComingGame, _marketId: string, _sideId: string) => {};
   const heading = eliteOnly
     ? ("Elite · " + groups.length)
     : ("Coming Up · " + gamesN);
@@ -4527,29 +4422,6 @@ function CapperSlateTab(props: { now: number; mode: "elite" | "coming" }) {
     <Section heading={heading} caption={caption}>
       <Text>{blurb}</Text>
       <RecordStrip wins={journalWL().wins} losses={journalWL().losses} tiles={[{ label: eliteOnly ? "Cappers" : "Games", value: String(eliteOnly ? groups.length : gamesN) }, { label: "Picks", value: String(pickN) }, { label: "Live", value: String(liveN), color: liveN ? RED : undefined }]} />
-      <CombosBlock combos={combos} onUse={useCombo} />
-      <div data-parlay-builder="1" style={{ borderRadius: 18, border: "1.5px solid " + BRAND, padding: "12px 14px", background: "linear-gradient(180deg,#F5F0FF 0%, #EDE9FE 100%)", margin: "4px 0 14px", boxShadow: "0 6px 16px rgba(124,58,237,0.10)" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-          <div style={{ fontSize: 16, fontWeight: 850, color: BRAND }}>Parlay builder</div>
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <span style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary }}>Stake $</span>
-            <input data-parlay-stake="1" type="number" min="0.01" step="1" value={stakeText} onChange={(e) => setStakeText(e.target.value)} style={{ width: 72, height: 36, borderRadius: 10, border: "1px solid " + t.border.default, padding: "0 8px", fontSize: 16, fontWeight: 800, fontFamily: "inherit" }} />
-          </div>
-        </div>
-        {selectedSides.length === 0 ? <div style={{ fontSize: 13, color: t.text.secondary, marginTop: 8 }}>Tap a Kalshi line below, or use a suggested combo.</div> : (
-          <div style={{ marginTop: 8 }}>
-            {selectedSides.map((x, i: number) => (
-              <div key={x.s.id} style={{ fontSize: 14, lineHeight: "20px", fontWeight: 700, marginTop: 2 }}>{(i + 1) + ". " + x.g.game + " — " + x.s.label + (x.s.kPrice != null ? " @ " + cents(x.s.kPrice) : "")}</div>
-            ))}
-          </div>
-        )}
-        <div style={{ fontSize: 20, fontWeight: 850, marginTop: 10, fontVariantNumeric: "tabular-nums" }}>{parlayLine}</div>
-        {combined != null && selectedSides.length >= 2 ? <div style={{ fontSize: 12, color: t.text.tertiary, marginTop: 2 }}>Product of the current Kalshi ask prices, before fees. Actual payout may be a bit less.</div> : null}
-        {sel.length >= 3 ? <div style={{ fontSize: 12, color: AMBER, marginTop: 4, fontWeight: 700 }}>Max 3 legs. Unselect one to swap.</div> : null}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 10 }}>
-          {sel.length ? <button type="button" onClick={() => setSel([])} style={{ padding: "8px 14px", borderRadius: 999, border: "1px solid " + t.border.default, background: t.bg.base, color: t.text.primary, fontWeight: 800, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>Clear</button> : null}
-        </div>
-      </div>
       {groups.length === 0 ? <EmptyState title={emptyTitle} body={emptyBody} /> : groups.map((cg: CapperGroup) => {
         const rec = cg.rec;
         const big = rec && rec.big;
@@ -4578,7 +4450,7 @@ function CapperSlateTab(props: { now: number; mode: "elite" | "coming" }) {
               const renderBundles = (picks: CapperPickRow[]) => bundleCapperGames(picks).map((bundle) => {
               const g = bundle.game;
               const live = comingStatus(g, props.now) === "live";
-              const selectedSide = (sel.find((x) => x.gameId === g.id) || { sideId: "" }).sideId;
+              const selectedSide = "";
               const leadSide = pickSideId((bundle.picks[0].market.sides || []).slice());
               return (
                 <CapperGameBlock key={cg.wallet + g.id} wallet={cg.wallet} g={g} live={live} picks={bundle.picks} leadSide={leadSide} onKalshiPick={onKalshiPick} selectedSide={selectedSide} />
@@ -4606,33 +4478,6 @@ function CapperSlateTab(props: { now: number; mode: "elite" | "coming" }) {
 }
 function EliteTab(props: { now: number }) {
   return <CapperSlateTab now={props.now} mode="elite" />;
-}
-function CombosBlock(props: { combos: ComboPick[]; onUse?: (c: ComboPick) => void }) {
-  const t = useGrokTheme();
-  return (
-  <div data-combo-list="1" style={{ margin: "4px 0 14px" }}>
-    <div style={{ fontSize: 16, fontWeight: 850, color: t.text.primary, marginBottom: 8 }}>Suggested $2 combos</div>
-    {props.combos.length ? props.combos.map((c: ComboPick, i: number) => {
-      const pay = c.combined > 0 ? 2 / c.combined : null;
-      return (
-        <div key={c.legs.map((l: ComboLeg) => l.side.id).join("+")} data-combo={String(i + 1)} style={{ borderRadius: 18, border: "1.5px solid #86EFAC", background: "linear-gradient(180deg,#ECFDF3 0%, #FFFFFF 100%)", padding: "12px 14px", marginBottom: 10, boxShadow: "0 6px 16px rgba(22,163,74,0.10)" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-            <div style={{ fontSize: 15, fontWeight: 850, color: GREEN }}>Combo {i + 1} · 2-leg · $2</div>
-            {props.onUse ? <button type="button" data-combo-use={String(i + 1)} onClick={() => props.onUse!(c)} style={{ padding: "7px 14px", borderRadius: 999, border: "none", background: GREEN, color: "#FFFFFF", fontWeight: 800, fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>Use this combo</button> : null}
-          </div>
-          {c.legs.map((l: ComboLeg, li: number) => (
-            <div key={l.side.id} style={{ marginTop: 10 }}>
-              <div style={{ fontSize: 13, fontWeight: 800, color: t.text.secondary }}>{(li + 1) + ". " + l.game.league + " · " + l.game.game + " — " + l.side.label}</div>
-              <KalshiGreenBox view={resolveKalshiView(applyResolvedSide(l.side))} compact={true} />
-            </div>
-          ))}
-          <div style={{ fontSize: 20, fontWeight: 850, marginTop: 10, fontVariantNumeric: "tabular-nums" }}>{"Combined " + cents(c.combined) + (pay != null ? " · $2 pays $" + pay.toFixed(2) + " if both hit" : "")}</div>
-          <div style={{ fontSize: 12, color: t.text.tertiary, marginTop: 2 }}>Product of the current Kalshi ask prices, before fees. Actual payout may be a bit less.</div>
-        </div>
-      );
-    }) : <div style={{ fontSize: 13, color: t.text.secondary, padding: "10px 12px", borderRadius: 14, background: t.bg.subtle }}>No 2-leg combo clears the bar right now (Kalshi price 20–90¢, different upcoming games).</div>}
-  </div>
-  );
 }
 
 // ---------- Compiled picks (Coming Up) and ranked cappers (Cappers tab), Noel Nov 17 ----------
@@ -4823,24 +4668,11 @@ function MorePickGroups(props: { groups: PickGroup[] }) {
   );
 }
 function ComingUpTab(props: { now: number }) {
-  const t = useGrokTheme();
-  const c = compiledForTab(props.now);
-  const sp = splitGroupsByGame(c.groups);
-  const front = sp.front;
-  const more = sp.more;
-  const gameN = new Set(c.groups.map((g: PickGroup) => g.game.id)).size;
-  const liveN = c.groups.filter((g: PickGroup) => g.live).length;
-  const allGames = openSlateGames(false, props.now).games;
-  const combos = suggestCombos(allGames, props.now, false, 3);
-  const hiddenN = cleanTotal(c.log);
+  const n = combinedPicks(props.now).length;
   return (
-    <Section heading={"Coming Up · " + c.groups.length} caption={"All proven cappers' picks, grouped · " + gameN + " game" + (gameN === 1 ? "" : "s") + " · best pick per game, tap to expand · live first" + (liveN ? " · " + liveN + " live" : "")}>
-      <Text>{"$500+ with a Kalshi line. Top 3 picks of $600+ per capper up front; the rest under Show more."}</Text>
-      <RecordStrip wins={journalWL().wins} losses={journalWL().losses} tiles={[{ label: "Picks", value: String(c.groups.length) }, { label: "Cappers", value: String(new Set(c.groups.reduce((a: string[], g: PickGroup) => a.concat(g.backers.map((b: PickBackerRow) => b.wallet)), [] as string[])).size) }, { label: "Live", value: String(liveN), color: liveN ? RED : undefined }]} />
-      <CombosBlock combos={combos} />
-      {c.groups.length === 0 ? <EmptyState title="No proven-capper picks yet" body={"Nothing live or upcoming from proven-floor cappers right now. " + nextScanLabel(props.now) + "."} /> : <GroupedByGame groups={front} />}
-      <MorePickGroups groups={more} />
-      <HiddenCount log={c.log} total={hiddenN} />
+    <Section heading={"Coming Up · " + n} caption={"The same picks as All Picks, sorted by game start · soonest first · live first"}>
+      <Text>{"Every open $500+ pick with a Kalshi line from proven, Elite, Hot This Week and Politics & Econ cappers. Long-game picks (no start time) go last, by settle date."}</Text>
+      <CombinedList now={props.now} mode="start" />
     </Section>
   );
 }
@@ -4873,6 +4705,220 @@ function HotWeekTab(props: { now: number }) {
       </details>
       {groups.length === 0 ? <EmptyState title="No hot-capper picks open" body={"No hot capper has an open pre-game $500+ bet with a Kalshi line right now. " + nextScanLabel(props.now) + "."} /> : <GroupedByGame groups={groups} />}
     </Section>
+  );
+}
+// ---------- Combined pick log (Noel Nov 17): every good capper's picks on one list; Politics & Econ tab ----------
+interface PEBacker { wallet: string; name: string; cost: number; avg?: number | null; best?: string; cats?: Record<string, { month: number; all: number }> }
+interface PEPick { id: string; ticker: string; eventTicker: string; eventTitle: string; marketTitle: string; outcome: string; yesNo: "Yes" | "No"; kPrice: number; settleTs: number; polyTitle?: string; polyPrice?: number | null; gap?: number | null; backers: PEBacker[]; total: number; n: number; cat?: string }
+interface PEData { ts?: number; fullTs?: number; cappers?: { wallet: string; name: string; best: string; cats: Record<string, { month: number; all: number }> }[]; picks?: PEPick[]; stats?: Record<string, number> }
+const PE_DATA: PEData = ((DATA as any).politicsEcon || { picks: [], cappers: [] }) as PEData;
+const PE_CAP: Record<string, { best: string; cats: Record<string, { month: number; all: number }> }> = (() => { const m: Record<string, any> = {}; (PE_DATA.cappers || []).forEach((c) => { m[(c.wallet || "").toLowerCase()] = c; }); return m; })();
+const PE_CAT_LABEL: Record<string, string> = { politics: "Politics", economics: "Econ", finance: "Finance" };
+interface UBacker { wallet: string; name: string; cost: number; avg: number | null; tags: string[]; score: number; line: string }
+interface UPick { key: string; kind: "sports" | "pe"; view: KalshiView; big: string; sub: string; league: string; gameId: string; startTs: number; settleTs: number; live: boolean; backers: UBacker[]; total: number; tags: string[]; score: number; entryNote: string | null; note: string | null }
+const U_TAG_ORDER = ["Proven", "Elite", "🔥 Hot", "Politics-Econ"];
+function shortName(n: string, max = 16): string { return n.length > max ? n.slice(0, max - 1) + "…" : n; }
+function capperScoreOf(w: string): number {
+  const pe = PE_CAP[w];
+  if (!QMAP[w] && pe) { const b = pe.cats[pe.best] || { month: 0, all: 0 }; return Math.min(60, b.all / 25000) + (b.month >= 0 ? 4 : -4); }
+  const r = capperRecs(w);
+  const sg = (x: number | null) => (x == null ? 0 : x >= 0 ? 4 : -4);
+  return (r.bigRoi || 0) + (r.bigProfit || 0) / 5000 + sg(r.year.pnl != null ? r.year.pnl : r.year.roi) + sg(r.month.pnl != null ? r.month.pnl : r.month.roi) + sg(r.d30.roi) + sg(r.week.pnl != null ? r.week.pnl : r.week.roi);
+}
+function backerRecordLine(w: string, name: string): string {
+  const rec = QMAP[w];
+  const parts: string[] = [shortName(name)];
+  if (rec) {
+    const big = rec.big || {};
+    if (big.n) parts.push((big.w || 0) + "-" + (big.l || 0)); else if (rec.n) parts.push(rec.w + "-" + rec.l);
+    const pr = big.profit != null ? big.profit : rec.profit;
+    if (pr != null) parts.push(signedK(pr));
+    const wk = rec.win && rec.win.week;
+    if (wk && wk.rec && wk.rec.length >= 2) parts.push("wk " + wk.rec[0] + "-" + wk.rec[1]); else if (wk && wk.pnl != null) parts.push("wk " + signedK(wk.pnl));
+    return parts.join(" · ");
+  }
+  const pe = PE_CAP[w];
+  if (pe) { const b = pe.cats[pe.best]; if (b) { parts.push(PE_CAT_LABEL[pe.best] + " " + signedK(b.month) + " mo"); parts.push(signedK(b.all) + " all"); } }
+  return parts.join(" · ");
+}
+function tagsOfWallet(w: string): string[] {
+  const t: string[] = [];
+  if (ELITE_W[w]) t.push("Elite");
+  if (HOT_W[w]) t.push("🔥 Hot");
+  if (PE_CAP[w]) t.push("Politics-Econ");
+  return t;
+}
+function combinedPicks(now: number): UPick[] {
+  const by: Record<string, UPick> = {};
+  const addGroup = (g: PickGroup) => {
+    let p = by[g.key];
+    if (!p) {
+      p = by[g.key] = { key: g.key, kind: "sports", view: g.view, big: g.label || g.view.outcome, sub: g.game.game, league: g.game.league, gameId: g.game.id, startTs: g.game.startTs || 0, settleTs: g.game.startTs || 0, live: g.live, backers: [], total: 0, tags: [], score: 0, entryNote: g.avgEntry != null && g.view.price != null ? slipWords(slipCents(g.view.price, g.avgEntry), g.avgEntry) : null, note: null };
+    }
+    g.backers.forEach((b: PickBackerRow) => {
+      if (p!.backers.some((x: UBacker) => x.wallet === b.wallet)) return;
+      const tags = ["Proven"].concat(tagsOfWallet(b.wallet).filter((x: string) => x !== "Politics-Econ"));
+      p!.backers.push({ wallet: b.wallet, name: b.name, cost: b.cost, avg: b.avg, tags, score: capperScoreOf(b.wallet), line: backerRecordLine(b.wallet, b.name) });
+    });
+  };
+  const upcoming = (games: ComingGame[]) => games.filter((g: ComingGame) => comingStatus(g, now) !== "final");
+  compiledGroups(upcoming(openSlateGames(false, now).games), now).forEach(addGroup);
+  compiledGroups(upcoming(openSlateGames(true, now).games), now).forEach(addGroup);
+  hotGroups(now).forEach(addGroup);
+  (PE_DATA.picks || []).forEach((q: PEPick) => {
+    if (q.settleTs < now) return;
+    const key = q.ticker + "|" + q.yesNo;
+    const view: KalshiView = { backing: q.outcome, marketTitle: q.marketTitle, outcome: q.outcome, yesNo: q.yesNo, price: q.kPrice, ticker: q.ticker };
+    const binary = /^(yes|no)$/i.test(q.outcome) || q.marketTitle.toLowerCase().indexOf(q.outcome.toLowerCase()) >= 0;
+    let p = by[key];
+    if (!p) {
+      const gap = q.gap != null ? Math.round(q.gap * 100) : null;
+      p = by[key] = { key, kind: "pe", view, big: binary ? q.marketTitle : q.outcome, sub: binary ? "" : q.marketTitle, league: (q.cat || "Politics"), gameId: q.eventTicker, startTs: 0, settleTs: q.settleTs, live: false, backers: [], total: 0, tags: [], score: 0, entryNote: null,
+        note: gap == null ? null : (gap === 0 ? "Same price on Polymarket" : "Kalshi pays " + (gap > 0 ? "less" : "more") + " than Polymarket (" + cents(q.polyPrice as number) + ")") };
+    }
+    q.backers.forEach((b: PEBacker) => {
+      const w = b.wallet.toLowerCase();
+      if (p!.backers.some((x: UBacker) => x.wallet === w)) return;
+      p!.backers.push({ wallet: w, name: b.name, cost: b.cost, avg: b.avg != null ? b.avg : null, tags: ["Politics-Econ"].concat(tagsOfWallet(w).filter((x: string) => x !== "Politics-Econ")), score: capperScoreOf(w), line: backerRecordLine(w, b.name) });
+    });
+  });
+  const out = Object.keys(by).map((k: string) => by[k]).filter((p: UPick) => p.backers.length);
+  out.forEach((p: UPick) => {
+    p.backers.sort((a: UBacker, b: UBacker) => b.score - a.score);
+    p.total = p.backers.reduce((a: number, b: UBacker) => a + b.cost, 0);
+    const tg: Record<string, boolean> = {};
+    p.backers.forEach((b: UBacker) => b.tags.forEach((x: string) => { tg[x] = true; }));
+    p.tags = U_TAG_ORDER.filter((x: string) => tg[x]);
+    p.score = (p.backers[0] ? p.backers[0].score : 0) + (p.backers.length - 1) * 1.5 + Math.log10(Math.max(1, p.total));
+  });
+  return out;
+}
+function orderUnits(picks: UPick[], mode: "rank" | "start" | "settle"): { id: string; picks: UPick[] }[] {
+  const by: Record<string, UPick[]> = {};
+  const order: string[] = [];
+  picks.forEach((p: UPick) => { if (!by[p.gameId]) { by[p.gameId] = []; order.push(p.gameId); } by[p.gameId].push(p); });
+  const units = order.map((id: string) => ({ id, picks: by[id].slice().sort((a: UPick, b: UPick) => (b.score - a.score) || (b.total - a.total)) }));
+  const startKey = (u: { picks: UPick[] }) => (u.picks[0].kind === "pe" ? 1e12 + u.picks[0].settleTs : (u.picks[0].live ? 0 : u.picks[0].startTs || 1e11));
+  if (mode === "rank") units.sort((a, b) => b.picks[0].score - a.picks[0].score);
+  else if (mode === "start") units.sort((a, b) => startKey(a) - startKey(b));
+  else units.sort((a, b) => Math.min.apply(null, a.picks.map((p: UPick) => p.settleTs)) - Math.min.apply(null, b.picks.map((p: UPick) => p.settleTs)));
+  if (mode === "settle") units.forEach((u) => u.picks.sort((a: UPick, b: UPick) => (a.settleTs - b.settleTs) || (b.total - a.total)));
+  return units;
+}
+function settlesIn(ts: number, now: number): string {
+  const d = Math.max(0, Math.round((ts - now) / 86400));
+  return d === 0 ? "settles today" : "settles in " + d + " day" + (d === 1 ? "" : "s");
+}
+function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNode; sourceTags?: boolean }) {
+  const t = useGrokTheme();
+  const p = props.p;
+  const v = p.view;
+  const yes = v.yesNo === "Yes";
+  const top = p.backers.slice(0, 3);
+  const rest = p.backers.slice(3);
+  const kinds = p.tags;
+  const colorOf = (x: string): string[] => (({ Proven: ["#EDE9FE", "#6D28D9"], Elite: ["#FEF3C7", "#92400E"], "🔥 Hot": ["#FFEDD5", "#C2410C"], "Politics-Econ": ["#DBEAFE", "#1D4ED8"] } as Record<string, string[]>)[x] || [t.bg.subtle, t.text.primary]);
+  return (
+    <div data-ucard={p.key} data-ucard-kind={p.kind} style={{ borderRadius: 18, border: "1.5px solid " + t.border.default, background: t.bg.base, boxShadow: "0 4px 14px rgba(76,29,149,0.08)", overflow: "hidden", marginBottom: 10, fontFamily: t.font.family }}>
+      <div style={{ padding: "12px 14px 12px" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center", marginBottom: 6 }}>
+          {p.live ? <Chip bg={RED} color="#FFFFFF">LIVE</Chip> : null}
+          {kinds.map((x: string) => <span key={x} data-src-tag={x}><Chip bg={colorOf(x)[0]} color={colorOf(x)[1]}>{x}</Chip></span>)}
+          <span style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary }}>{p.league + " · " + (p.kind === "pe" ? settlesIn(p.settleTs, props.now) : (p.startTs ? ptTime(p.startTs) : ""))}</span>
+        </div>
+        <div data-ucard-big="1" style={{ fontSize: 22, lineHeight: "27px", fontWeight: 850, letterSpacing: "-0.01em", overflowWrap: "anywhere" }}>{p.big}</div>
+        {p.sub ? <div style={{ fontSize: 14, lineHeight: "19px", fontWeight: 600, color: t.text.secondary, marginTop: 2, overflowWrap: "anywhere" }}>{p.sub}</div> : null}
+        {props.moreRow}
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 10 }}>
+          <div style={{ flex: 1 }}><KalshiBuyButton view={v} size={20} /></div>
+          <div data-k-stake="1" style={{ fontSize: 14, fontWeight: 800, color: GREEN, lineHeight: "17px" }}>{"Stake"}<br />{props.stake}</div>
+        </div>
+        <div data-ucard-sum="1" style={{ fontSize: 14, fontWeight: 800, marginTop: 10, color: t.text.primary }}>{p.backers.length + " capper" + (p.backers.length === 1 ? "" : "s") + " · " + kMoney(p.total) + (p.tags.length ? " · " + p.tags.join(", ") : "")}</div>
+        {top.map((b: UBacker) => <div key={b.wallet} data-ucard-rec={b.wallet} style={{ fontSize: 14, lineHeight: "20px", fontWeight: 650, color: t.text.secondary, marginTop: 2, overflowWrap: "anywhere" }}>{b.line}</div>)}
+        <details data-ucard-more="1" style={{ marginTop: 8 }}>
+          <summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 14, color: BRAND }}>{rest.length ? "Details · +" + rest.length + " more" : "Details"}</summary>
+          <div style={{ fontSize: 13, color: t.text.tertiary, marginTop: 6, overflowWrap: "anywhere" }}>{"Kalshi: " + v.marketTitle + (v.outcome && !/^(yes|no)$/i.test(v.outcome) ? " — " + v.outcome : "")}</div>
+          {p.note ? <div style={{ fontSize: 13, fontWeight: 700, color: AMBER, marginTop: 4 }}>{p.note}</div> : null}
+          {p.entryNote ? <div style={{ fontSize: 13, fontWeight: 700, color: t.text.tertiary, marginTop: 4 }}>{p.entryNote}</div> : null}
+          {p.backers.map((b: UBacker, i: number) => (
+            <div key={b.wallet} style={{ borderTop: "1px solid " + t.border.default, marginTop: 8, paddingTop: 8 }}>
+              <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 8, flexWrap: "wrap" }}>
+                <span style={{ fontSize: 15, fontWeight: 850, overflowWrap: "anywhere" }}>{b.name}</span>
+                <span><span style={{ fontSize: 16, fontWeight: 850, fontVariantNumeric: "tabular-nums" }}>{money(b.cost)}</span><span style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary }}>{b.avg != null ? " @ " + cents(b.avg) : ""}</span></span>
+              </div>
+              {i >= 3 ? <div style={{ fontSize: 13, fontWeight: 650, color: t.text.secondary }}>{b.line}</div> : null}
+              {PE_CAP[b.wallet] ? (
+                <div style={{ fontSize: 13, color: t.text.secondary, marginTop: 2 }}>{Object.keys(PE_CAP[b.wallet].cats).filter((c: string) => PE_CAP[b.wallet].cats[c].month || PE_CAP[b.wallet].cats[c].all).map((c: string) => PE_CAT_LABEL[c] + " " + signedK(PE_CAP[b.wallet].cats[c].month) + " mo · " + signedK(PE_CAP[b.wallet].cats[c].all) + " all").join("  |  ")}</div>
+              ) : <RecTiles recs={capperRecs(b.wallet)} small={true} />}
+            </div>
+          ))}
+        </details>
+      </div>
+    </div>
+  );
+}
+function UnitList(props: { units: { id: string; picks: UPick[] }[]; now: number; stake: string; noun: string }) {
+  const [open, setOpen] = useState<Record<string, boolean>>({});
+  return (
+    <div data-unit-list="1">
+      {props.units.map((u: { id: string; picks: UPick[] }) => {
+        const rest = u.picks.slice(1);
+        const isOpen = !!open[u.id];
+        return (
+          <div key={u.id} data-game-block={u.id}>
+            <UCard p={u.picks[0]} now={props.now} stake={props.stake} moreRow={rest.length ? <MoreBetsRow noun={props.noun} n={rest.length} open={isOpen} onToggle={() => setOpen({ ...open, [u.id]: !isOpen })} /> : undefined} />
+            {isOpen && rest.length ? <div data-game-more="1" style={{ marginLeft: 10, paddingLeft: 8, borderLeft: "3px solid " + BRAND }}>{rest.map((q: UPick) => <UCard key={q.key} p={q} now={props.now} stake={props.stake} />)}</div> : null}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+function CombinedList(props: { now: number; mode: "rank" | "start" }) {
+  const picks = combinedPicks(props.now);
+  const units = orderUnits(picks, props.mode);
+  const cappers: Record<string, boolean> = {};
+  picks.forEach((p: UPick) => p.backers.forEach((b: UBacker) => { cappers[b.wallet] = true; }));
+  const liveN = picks.filter((p: UPick) => p.live).length;
+  return (
+    <div data-combined-list={props.mode}>
+      <div data-combined-summary="1" style={{ fontSize: 14, fontWeight: 750, color: "#52525B", margin: "2px 2px 12px" }}>{picks.length + " picks · " + units.length + (props.mode === "start" ? " games" : " games") + " · " + Object.keys(cappers).length + " cappers" + (liveN ? " · " + liveN + " live" : "") + " · Journal " + journalWL().wins + "–" + journalWL().losses}</div>
+      {picks.length === 0 ? <EmptyState title="No picks from tracked cappers yet" body={"Nothing open from proven, Elite, Hot or Politics & Econ cappers right now. " + nextScanLabel(props.now) + "."} /> : <UnitList units={units} now={props.now} stake="$2–4" noun="game" />}
+    </div>
+  );
+}
+function peTabCount(now: number): number { return combinedPicks(now).filter((p: UPick) => p.kind === "pe").length; }
+function PoliticsEconTab(props: { now: number }) {
+  const t = useGrokTheme();
+  const picks = combinedPicks(props.now).filter((p: UPick) => p.kind === "pe");
+  const units = orderUnits(picks, "settle");
+  const caps = PE_DATA.cappers || [];
+  const used: Record<string, boolean> = {};
+  picks.forEach((p: UPick) => p.backers.forEach((b: UBacker) => { used[b.wallet] = true; }));
+  return (
+    <Section heading={"Politics & Econ · " + picks.length} caption={"Long game · soonest settle first · " + Object.keys(used).length + " cappers with an open bet · " + caps.length + " established cappers"}>
+      <Text>{"Suggested $1–2 per pick. Budget about $5–10 a day out of the $40. Only established politics, economics and finance wallets (profitable before this month, not market makers) with a $500+ open position and the same outcome and side on Kalshi."}</Text>
+      {picks.length === 0 ? <EmptyState title="No Kalshi-matched picks right now" body={"None of the established politics, economics or finance cappers has an open $500+ bet that matches a Kalshi market. " + nextScanLabel(props.now) + "."} /> : <UnitList units={units} now={props.now} stake="$1–2" noun="event" />}
+      <details data-pe-cappers="1" style={{ margin: "10px 0 12px" }}>
+        <summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 15, color: BRAND }}>{"Established cappers · " + caps.length}</summary>
+        {caps.map((c) => (
+          <div key={c.wallet} style={{ borderTop: "1px solid " + t.border.default, marginTop: 8, paddingTop: 8 }}>
+            <div style={{ fontSize: 15, fontWeight: 850, overflowWrap: "anywhere" }}>{nameOf(c.name, c.wallet)}</div>
+            <div style={{ fontSize: 13, color: t.text.secondary }}>{Object.keys(c.cats).filter((k: string) => c.cats[k].month || c.cats[k].all).map((k: string) => PE_CAT_LABEL[k] + " " + signedK(c.cats[k].month) + " mo · " + signedK(c.cats[k].all) + " all").join("  |  ")}</div>
+          </div>
+        ))}
+      </details>
+    </Section>
+  );
+}
+function KalshiBuyButton(props: { view: KalshiView; size?: number }) {
+  const v = props.view;
+  const ok = !v.unmatched && !!v.yesNo && v.price != null;
+  const yes = v.yesNo === "Yes";
+  return (
+    <div data-k-yesno="1" data-k-side={ok ? v.yesNo : undefined} style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "100%", boxSizing: "border-box", padding: "12px 14px", borderRadius: 14, background: ok ? (yes ? GREEN : RED) : "#9CA3AF", color: "#FFFFFF", fontSize: props.size || 20, fontWeight: 850, fontVariantNumeric: "tabular-nums", letterSpacing: "-0.01em", lineHeight: 1.1 }}>
+      <span data-k-price="1">{ok ? (v.yesNo + " · pays " + cents(v.price)) : "No Kalshi line"}</span>
+    </div>
   );
 }
 function CappersRanked(props: { now: number }) {
@@ -4957,12 +5003,12 @@ function kalshiBlocked(nick: string, data: KalshiCappersData | undefined): boole
   return ((data && data.blocklist) || ["Wiseandstrong"]).some((x: string) => (x || "").toLowerCase() === n);
 }
 function kalshiCappersData(): KalshiCappersData {
-  const raw = ((DATA as ScanData).kalshiCappers || { cappers: [], combos: [], blocklist: ["Wiseandstrong"] }) as KalshiCappersData;
+  const raw = ((DATA as ScanData).kalshiCappers || { cappers: [], blocklist: ["Wiseandstrong"] }) as KalshiCappersData;
   const blocked = new Set(((raw.blocklist && raw.blocklist.length) ? raw.blocklist : ["Wiseandstrong"]).map((x: string) => (x || "").toLowerCase()));
   const cappers = ((raw.cappers || []) as KalshiCapper[]).filter((c: KalshiCapper) => c && c.nickname && !blocked.has(c.nickname.toLowerCase()) && (c.picks || []).length);
   return { ...raw, cappers };
 }
-function kalshiPickView(p: KalshiCapperPick | KalshiComboLeg): { backing: string; marketTitle: string; outcome: string; yesNo: "Yes" | "No" | null; price: number | null; ticker: string | null } {
+function kalshiPickView(p: KalshiCapperPick): { backing: string; marketTitle: string; outcome: string; yesNo: "Yes" | "No" | null; price: number | null; ticker: string | null } {
   const backing = (p.backing || p.label || "").trim();
   const yesNoRaw = (p as any).yesNo || "";
   const yes = yesNoRaw ? yesNoRaw === "Yes" : ((p as any).action || "").toUpperCase().indexOf("YES") >= 0;
@@ -4976,81 +5022,13 @@ function KalshiCappersTab(props: { now: number }) {
   const cappers = (data.cappers || []).slice();
   const pickN = cappers.reduce((n: number, c: KalshiCapper) => n + (c.picks || []).length, 0);
   const liveN = cappers.filter((c: KalshiCapper) => (c.picks || []).some((p: KalshiCapperPick) => p.state === "live" || (!!p.startTs && (p.startTs as number) <= props.now && p.state !== "final"))).length;
-  const [sel, setSel] = useState<string[]>([]);
-  const [stakeText, setStakeText] = useState<string>("2");
   const pickById: Record<string, KalshiCapperPick> = {};
   cappers.forEach((c: KalshiCapper) => (c.picks || []).forEach((p: KalshiCapperPick) => { pickById[p.id] = p; }));
-  const togglePick = (p: KalshiCapperPick) => {
-    if (sel.indexOf(p.id) >= 0) { setSel(sel.filter((x: string) => x !== p.id)); return; }
-    const ev = p.eventTicker || p.ticker;
-    const withoutGame = sel.filter((id: string) => {
-      const o = pickById[id];
-      return !o || (o.eventTicker || o.ticker) !== ev;
-    });
-    if (withoutGame.length >= 3) return;
-    setSel(withoutGame.concat([p.id]));
-  };
-  const selected = sel.map((id: string) => pickById[id]).filter(Boolean);
-  const prices = selected.map((p: KalshiCapperPick) => p.price).filter((x: number | null | undefined): x is number => x != null && x > 0);
-  const combined = prices.length === selected.length && selected.length >= 1 ? parlayCombined(prices) : null;
-  const stake = Math.max(0, Number(stakeText) || 0);
-  const payout = combined && stake > 0 && combined > 0 ? stake / combined : null;
-  const stakeLabel = "$" + (stake % 1 ? stake.toFixed(2) : String(stake));
-  let parlayLine = "No legs yet";
-  if (selected.length === 1) parlayLine = "Add 1 or 2 more legs";
-  else if (selected.length >= 2 && combined != null) parlayLine = selected.length + "-leg · " + cents(combined) + (payout != null ? " · " + stakeLabel + " pays $" + payout.toFixed(2) + " if all hit" : "");
-  else if (selected.length >= 2) parlayLine = "Need a Kalshi price on every leg";
-  const combos = (data.combos || []).filter((c) => (c.legs || []).every((l: KalshiComboLeg) => pickById[l.pickId]));
-  const useCombo = (c: { legs: KalshiComboLeg[] }) => setSel(c.legs.map((l: KalshiComboLeg) => l.pickId));
   const emptyTitle = "No Kalshi capper picks right now";
   const emptyBody = "No public Sports-leaderboard cappers cleared the long-term record bar with a qualifying open bet right now — " + nextScanLabel(props.now) + ".";
   return (
     <Section heading={"Kalshi Cappers · " + cappers.length} caption={"Public Kalshi cappers · live first, then start time" + (liveN ? " · " + liveN + " live" : "")}>
       <RecordStrip wins={journalWL().wins} losses={journalWL().losses} tiles={[{ label: "Cappers", value: String(cappers.length) }, { label: "Picks", value: String(pickN) }, { label: "Live", value: String(liveN), color: liveN ? RED : undefined }]} />
-      <div data-combo-list="1" style={{ margin: "4px 0 14px" }}>
-        <div style={{ fontSize: 16, fontWeight: 850, color: t.text.primary, marginBottom: 8 }}>Suggested $2 combos</div>
-        {combos.length ? combos.map((c, i: number) => {
-          const pay = c.combined > 0 ? 2 / c.combined : null;
-          return (
-            <div key={c.legs.map((l: KalshiComboLeg) => l.pickId).join("+")} data-combo={String(i + 1)} style={{ borderRadius: 18, border: "1.5px solid #86EFAC", background: "linear-gradient(180deg,#ECFDF3 0%, #FFFFFF 100%)", padding: "12px 14px", marginBottom: 10, boxShadow: "0 6px 16px rgba(22,163,74,0.10)" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-                <div style={{ fontSize: 15, fontWeight: 850, color: GREEN }}>Combo {i + 1} · 2-leg · $2</div>
-                <button type="button" data-combo-use={String(i + 1)} onClick={() => useCombo(c)} style={{ padding: "7px 14px", borderRadius: 999, border: "none", background: GREEN, color: "#FFFFFF", fontWeight: 800, fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>Use this combo</button>
-              </div>
-              {c.legs.map((l: KalshiComboLeg, li: number) => (
-                <div key={l.pickId} style={{ marginTop: 10 }}>
-                  <div style={{ fontSize: 13, fontWeight: 800, color: t.text.secondary }}>{(li + 1) + ". " + l.league + " · " + l.game + " — " + l.label + (l.nickname ? " · " + l.nickname : "")}</div>
-                  <KalshiGreenBox view={kalshiPickView(l)} compact={true} />
-                </div>
-              ))}
-              <div style={{ fontSize: 20, fontWeight: 850, marginTop: 10, fontVariantNumeric: "tabular-nums" }}>{"Combined " + cents(c.combined) + (pay != null ? " · $2 pays $" + pay.toFixed(2) + " if both hit" : "")}</div>
-              <div style={{ fontSize: 12, color: t.text.tertiary, marginTop: 2 }}>Product of the current Kalshi ask prices, before fees. Actual payout may be a bit less.</div>
-            </div>
-          );
-        }) : <div style={{ fontSize: 13, color: t.text.secondary, padding: "10px 12px", borderRadius: 14, background: t.bg.subtle }}>No 2-leg combo clears the bar right now (Kalshi price, under 2¢ slip, different upcoming games).</div>}
-      </div>
-      <div data-parlay-builder="1" style={{ borderRadius: 18, border: "1.5px solid " + BRAND, padding: "12px 14px", background: "linear-gradient(180deg,#F5F0FF 0%, #EDE9FE 100%)", margin: "4px 0 14px", boxShadow: "0 6px 16px rgba(124,58,237,0.10)" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-          <div style={{ fontSize: 16, fontWeight: 850, color: BRAND }}>Parlay builder</div>
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <span style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary }}>Stake $</span>
-            <input data-parlay-stake="1" type="number" min="0.01" step="1" value={stakeText} onChange={(e) => setStakeText(e.target.value)} style={{ width: 72, height: 36, borderRadius: 10, border: "1px solid " + t.border.default, padding: "0 8px", fontSize: 16, fontWeight: 800, fontFamily: "inherit" }} />
-          </div>
-        </div>
-        {selected.length === 0 ? <div style={{ fontSize: 13, color: t.text.secondary, marginTop: 8 }}>Tap a Kalshi line below, or use a suggested combo.</div> : (
-          <div style={{ marginTop: 8 }}>
-            {selected.map((p: KalshiCapperPick, i: number) => (
-              <div key={p.id} style={{ fontSize: 14, lineHeight: "20px", fontWeight: 700, marginTop: 2 }}>{(i + 1) + ". " + p.game + " — " + p.label + (p.price != null ? " @ " + cents(p.price) : "")}</div>
-            ))}
-          </div>
-        )}
-        <div style={{ fontSize: 20, fontWeight: 850, marginTop: 10, fontVariantNumeric: "tabular-nums" }}>{parlayLine}</div>
-        {combined != null && selected.length >= 2 ? <div style={{ fontSize: 12, color: t.text.tertiary, marginTop: 2 }}>Product of the current Kalshi ask prices, before fees. Actual payout may be a bit less.</div> : null}
-        {sel.length >= 3 ? <div style={{ fontSize: 12, color: AMBER, marginTop: 4, fontWeight: 700 }}>Max 3 legs. Unselect one to swap.</div> : null}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 10 }}>
-          {sel.length ? <button type="button" onClick={() => setSel([])} style={{ padding: "8px 14px", borderRadius: 999, border: "1px solid " + t.border.default, background: t.bg.base, color: t.text.primary, fontWeight: 800, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>Clear</button> : null}
-        </div>
-      </div>
       {cappers.length === 0 ? <EmptyState title={emptyTitle} body={emptyBody} /> : cappers.map((c: KalshiCapper) => {
         const hasLive = (c.picks || []).some((p: KalshiCapperPick) => p.state === "live");
         return (
@@ -5068,7 +5046,7 @@ function KalshiCappersTab(props: { now: number }) {
             {(c.picks || []).map((p: KalshiCapperPick) => {
               const live = p.state === "live";
               const stale = !!(p.stale || (p.lastTs && props.now - p.lastTs > 3600));
-              const selectedOn = sel.indexOf(p.id) >= 0;
+              const selectedOn = false;
               return (
                 <div key={p.id} data-kalshi-pick={p.id} style={{ padding: "4px 14px 14px", borderTop: "1px solid " + t.border.default, marginTop: 8 }}>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center", marginTop: 10 }}>
@@ -5083,7 +5061,7 @@ function KalshiCappersTab(props: { now: number }) {
                   <div style={{ marginTop: 4, display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}><BetAmt n={p.cost} /><span style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary }}>on Kalshi</span></div>
                   {slipWords(p.slip, p.entry) ? <div style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary, marginTop: 2 }}>{slipWords(p.slip, p.entry)}</div> : null}
                   <div style={{ margin: "8px 0 0" }}>
-                    <KalshiGreenBox view={kalshiPickView(p)} selected={selectedOn} onPick={() => togglePick(p)} />
+                    <KalshiGreenBox view={kalshiPickView(p)} />
                   </div>
                 </div>
               );
@@ -5304,7 +5282,7 @@ export default function App() {
     return !!(b && b.sport === sportFilter);
   }) : hotCapAll;
   const hotCapRows = sortHotCappers(hotCapVisible, sortOf("hot"));
-  const tabRecord = tab === "top" ? "Top 20: " + wlTop.text : tab === "longfun" ? "Longshots: " + wlLong.text + " · Fun: " + wlFun.text : tab === "fun" ? "Fun: " + wlFun.text : tab === "poly" ? "Polymarket: " + wlPoly.text : tab === "props" ? "Player Props: " + wlProps.text : tab === "longshots" ? "Longshots: " + wlLong.text : tab === "biggest" ? "Biggest Bets: " + wlBig.text : tab === "upcoming" ? "Upcoming: " + wlUp.text : tab === "cappers" ? "Cappers: " + capWlW + "-" + capWlL + " (per capper; a shared pick can count more than once)" : tab === "picks" || tab === "coming" || tab === "elite" || tab === "kalshi" || tab === "hot" ? "Journal: " + wins + "–" + (graded.length - wins) + (graded.length ? "  ·  " + Math.round((100 * wins) / graded.length) + "%  ·  " : "  ·  ") + nextScanLabel(now) : tab === "more" ? "Top 20 " + wlTop.text + " · Fun " + wlFun.text + " · Polymarket " + wlPoly.text + (wlGlue.w + wlGlue.l ? " · Glue " + wlGlue.text : "") + (wlProps.w + wlProps.l ? " · Props " + wlProps.text : "") + (wlLong.w + wlLong.l ? " · Longshots " + wlLong.text : "") + (wlBig.w + wlBig.l ? " · Biggest " + wlBig.text : "") + (wlUp.w + wlUp.l ? " · Upcoming " + wlUp.text : "") : "";
+  const tabRecord = tab === "top" ? "Top 20: " + wlTop.text : tab === "longfun" ? "Longshots: " + wlLong.text + " · Fun: " + wlFun.text : tab === "fun" ? "Fun: " + wlFun.text : tab === "poly" ? "Polymarket: " + wlPoly.text : tab === "props" ? "Player Props: " + wlProps.text : tab === "longshots" ? "Longshots: " + wlLong.text : tab === "biggest" ? "Biggest Bets: " + wlBig.text : tab === "upcoming" ? "Upcoming: " + wlUp.text : tab === "cappers" ? "Cappers: " + capWlW + "-" + capWlL + " (per capper; a shared pick can count more than once)" : tab === "picks" || tab === "coming" || tab === "elite" || tab === "kalshi" || tab === "hot" || tab === "pe" ? "Journal: " + wins + "–" + (graded.length - wins) + (graded.length ? "  ·  " + Math.round((100 * wins) / graded.length) + "%  ·  " : "  ·  ") + nextScanLabel(now) : tab === "more" ? "Top 20 " + wlTop.text + " · Fun " + wlFun.text + " · Polymarket " + wlPoly.text + (wlGlue.w + wlGlue.l ? " · Glue " + wlGlue.text : "") + (wlProps.w + wlProps.l ? " · Props " + wlProps.text : "") + (wlLong.w + wlLong.l ? " · Longshots " + wlLong.text : "") + (wlBig.w + wlBig.l ? " · Biggest " + wlBig.text : "") + (wlUp.w + wlUp.l ? " · Upcoming " + wlUp.text : "") : "";
   const tabCaution = tab === "poly" && wlPoly.l > wlPoly.w ? "Caution: the Polymarket tab is losing so far (" + wlPoly.text + "). Bet smaller or skip until the record turns around." : "";
 
   const journalRows = DATA.history.filter((h: Hist) => journal === "all" || (journal === "won" && h.result === "W") || (journal === "lost" && h.result === "L") || (journal === "pending" && !h.result) || (journal === "top" && (h.tier === "top" || !h.tier)) || (journal === "fun" && h.tier === "fun") || (journal === "poly" && h.tier === "poly") || (journal === "glue" && h.tier === "glue") || (journal === "props" && h.tier === "props") || (journal === "longshots" && h.tier === "longshots") || (journal === "biggest" && h.tier === "biggest") || (journal === "upcoming" && h.tier === "upcoming"));
@@ -5421,9 +5399,12 @@ export default function App() {
       </Section>
 
       {tab === "picks" ? (
-        <Section heading={"All Picks · " + (bigOnly ? biggestTotal : allPickTotal)}>
+        <Section heading={"All Picks · " + combinedPicks(now).length}>
           <MissingPicksNote />
-          <RecordStrip wins={wins} losses={graded.length - wins} tiles={[{ label: "Open", value: String(bigOnly ? biggestTotal : allPickTotal) }, { label: "Proven", value: String(provenTotal), color: provenTotal ? GREEN : undefined }]} />
+          <Text>{"Every open $500+ pick with a Kalshi line from proven, Elite, Hot This Week and Politics & Econ cappers, best to worst by capper history. One card per pick; tap the arrow to see the other bets on that game."}</Text>
+          <CombinedList now={now} mode="rank" />
+          <details data-old-allpicks="1" style={{ margin: "14px 0" }}>
+            <summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 15, color: BRAND }}>{"Whale signals (old All Picks view) · " + (bigOnly ? biggestTotal : allPickTotal)}</summary>
           {bigOnly ? null : (
             <div data-sort-quick="1" style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center", margin: "0 0 10px" }}>
               {[["best", "★ Best first"], ["start", "⏱ Soonest"]].map((o: string[]) => { const on = sortOf("picks") === o[0]; return <button key={o[0]} type="button" data-sort-btn={o[0]} onClick={() => setSortOf(o[0], "picks")} style={{ padding: "8px 16px", borderRadius: 999, border: on ? "none" : "1px solid " + t.border.default, background: on ? BRAND : t.bg.base, color: on ? "#FFFFFF" : t.text.primary, fontWeight: 800, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>{o[1]}</button>; })}
@@ -5456,6 +5437,7 @@ export default function App() {
               <HiddenCount log={allPickClean.log} total={cleanTotal(allPickClean.log)} />
             </Fragment>
           )}
+          </details>
           {pickProfile ? <CapperProfile wallet={pickProfile} onClose={() => setPickProfile("")} /> : null}
         </Section>
       ) : null}
@@ -5463,6 +5445,7 @@ export default function App() {
       {tab === "cappers" ? (
         <Section heading={"Cappers · " + capRows.length}>
           <CappersRanked now={now} />
+          <details data-kalshi-in-cappers="1" style={{ margin: "6px 0 12px" }}><summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 15, color: BRAND }}>{"Kalshi cappers · " + ((kalshiCappersData().cappers || []).length)}</summary><KalshiCappersTab now={now} /></details>
           <details data-capper-directory="1" style={{ margin: "6px 0 12px" }}><summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 15, color: BRAND }}>{"All tracked cappers · " + capRows.length}</summary>
           <RecordStrip wins={capWlW} losses={capWlL} tiles={[{ label: "Shown", value: String(capRows.length) }, { label: "Hot", value: String(hotCapAll.length), color: hotCapAll.length ? GREEN : undefined }]} />
           <TabSortBar value={sortOf("cappers")} onChange={(v: string) => setSortOf(v, "cappers")} options={CAPPER_SORT_OPTS} label="Sort cappers" />
@@ -5489,7 +5472,7 @@ export default function App() {
       {tab === "elite" ? <EliteTab now={now} /> : null}
       {tab === "coming" ? <ComingUpTab now={now} /> : null}
       {tab === "hot" ? <HotWeekTab now={now} /> : null}
-      {tab === "kalshi" ? <KalshiCappersTab now={now} /> : null}
+      {tab === "pe" ? <PoliticsEconTab now={now} /> : null}
 
       {(
         <Section heading="More · bankroll, record, scan details" collapsible defaultOpen={false}>
@@ -5580,12 +5563,27 @@ export default function App() {
       )}
 
       <Floating edge="top" align="center" bar>
-        <div data-tab-bar="1">
-        <PillTabs
-          options={[{ value: "picks", label: "All Picks", count: bigOnly ? biggestTotal : allPickTotal }, { value: "elite", label: "Elite", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: comingTabCount(now) }, { value: "kalshi", label: "Kalshi Cappers", count: ((kalshiCappersData().cappers || []).length) }, { value: "cappers", label: "Cappers", count: capRows.length }, { value: "hot", label: "Hot This Week", count: hotTabCount(now) }]}
-          value={tab}
-          onChange={(v: string) => { setTab(v); setSportFilter(""); }}
-        />
+        <div data-tab-bar="1" style={{ padding: "6px 0 6px 10px" }}>
+        <div data-tab-group="today" style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <span style={{ fontSize: 11, fontWeight: 850, letterSpacing: "0.08em", textTransform: "uppercase", color: "#7C3AED", width: 38, flex: "none", lineHeight: "12px" }}>Today</span>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <PillTabs bare
+              options={[{ value: "picks", label: "All Picks", count: combinedPicks(now).length }, { value: "elite", label: "Elite", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: combinedPicks(now).length }, { value: "hot", label: "Hot This Week", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }]}
+              value={tab === "pe" ? "" : tab}
+              onChange={(v: string) => { setTab(v); setSportFilter(""); }}
+            />
+          </div>
+        </div>
+        <div data-tab-group="long" style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 6 }}>
+          <span style={{ fontSize: 11, fontWeight: 850, letterSpacing: "0.08em", textTransform: "uppercase", color: "#1D4ED8", width: 38, flex: "none", lineHeight: "12px" }}>Long game</span>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <PillTabs bare
+              options={[{ value: "pe", label: "Politics & Econ", count: peTabCount(now) }]}
+              value={tab === "pe" ? "pe" : ""}
+              onChange={(v: string) => { setTab(v); setSportFilter(""); }}
+            />
+          </div>
+        </div>
         </div>
       </Floating>
     </Page>

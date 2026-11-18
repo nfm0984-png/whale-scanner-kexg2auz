@@ -1,5 +1,6 @@
 """Distinctive-token Kalshi team matching. Never pick a contract by list order."""
 import re
+import unicodedata
 
 GENERIC = {
     "esports", "esport", "gaming", "team", "teams", "club", "clubs", "academy", "clan",
@@ -77,8 +78,20 @@ _UNDER = re.compile(r"^\s*under\b|\bunder\s+\d", re.I)
 _LINE = re.compile(r"(\d+(?:\.\d+)?)")
 
 
+def _fold(s):
+    return unicodedata.normalize("NFKD", s or "").encode("ascii", "ignore").decode()
+
+
 def raw(s):
-    return re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).strip()
+    return re.sub(r"[^a-z0-9]+", " ", _fold(s).lower()).strip()
+
+
+# A reserve / academy / women's side is a different team: "Spirit" must never match "Spirit Academy" (GENERIC drops the word otherwise).
+QUAL = {"academy", "junior", "juniors", "youth", "women", "female", "fe", "ladies", "reserves", "reserve", "ii", "u19", "u21", "u23"}
+
+
+def _qual(s):
+    return {w for w in raw(s).split() if w in QUAL}
 
 
 def tokens(s):
@@ -131,6 +144,8 @@ def _token_hit(a, b):
 
 
 def name_hit(a, b):
+    if _qual(a) != _qual(b):
+        return False
     ra, rb = raw(a), raw(b)
     if ra and rb and ra == rb:
         return True

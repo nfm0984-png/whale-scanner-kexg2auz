@@ -30,7 +30,6 @@ MAX_TRADE_PAGES = 50
 MIN_BIG = 500
 MAX_ENTRY = 0.90
 STALE_SEC = 3600
-SLIP_COMBO_MAX = 2.0
 FORM_DAYS = 14
 MIN_AGE_DAYS = 60
 MIN_GRADED = 30
@@ -973,59 +972,6 @@ def build(now=None):
     cov["shown"] = len(cappers)
     cov["picks"] = sum(len(c["picks"]) for c in cappers)
 
-    # Suggested $2 two-leg combos from upcoming, non-stale, <2¢ slip, different events
-    legs = []
-    for c in cappers:
-        for p in c["picks"]:
-            if p.get("state") != "upcoming":
-                continue
-            if p.get("stale"):
-                continue
-            if p.get("slip") is not None and p["slip"] >= SLIP_COMBO_MAX:
-                continue
-            if not p.get("price"):
-                continue
-            legs.append((c, p))
-    legs.sort(key=lambda x: (-(x[0].get("score") or 0), -(x[1].get("price") or 0), -(x[1].get("cost") or 0)))
-    combos = []
-    used_events = set()
-    used_pair = set()
-    for i in range(len(legs)):
-        if len(combos) >= 3:
-            break
-        c1, p1 = legs[i]
-        ev1 = p1.get("eventTicker") or p1.get("ticker")
-        if ev1 in used_events:
-            continue
-        for j in range(i + 1, len(legs)):
-            c2, p2 = legs[j]
-            ev2 = p2.get("eventTicker") or p2.get("ticker")
-            if ev2 == ev1 or ev2 in used_events:
-                continue
-            key = tuple(sorted([p1["id"], p2["id"]]))
-            if key in used_pair:
-                continue
-            combined = (p1["price"] or 0) * (p2["price"] or 0)
-            if combined <= 0:
-                continue
-            used_pair.add(key)
-            used_events.add(ev1)
-            used_events.add(ev2)
-            combos.append({
-                "combined": round(combined, 4),
-                "legs": [
-                    {"nickname": c1["nickname"], "pickId": p1["id"], "game": p1["game"], "league": p1["league"],
-                     "label": p1["label"], "price": p1["price"], "ticker": p1["ticker"], "action": p1["action"],
-                     "marketTitle": p1["marketTitle"], "backing": p1["backing"], "yesNo": p1["yesNo"],
-                     "yesSubTitle": p1["yesSubTitle"], "noSubTitle": p1["noSubTitle"], "contractTitle": p1["contractTitle"]},
-                    {"nickname": c2["nickname"], "pickId": p2["id"], "game": p2["game"], "league": p2["league"],
-                     "label": p2["label"], "price": p2["price"], "ticker": p2["ticker"], "action": p2["action"],
-                     "marketTitle": p2["marketTitle"], "backing": p2["backing"], "yesNo": p2["yesNo"],
-                     "yesSubTitle": p2["yesSubTitle"], "noSubTitle": p2["noSubTitle"], "contractTitle": p2["contractTitle"]},
-                ],
-            })
-            break
-
     cov["calls"] = http.calls
     cov["retries429"] = http.retries_429
     cov["secs"] = round(time.time() - t0, 1)
@@ -1035,7 +981,6 @@ def build(now=None):
         "blocklist": cfg["blocklist"],
         "coverage": cov,
         "cappers": cappers,
-        "combos": combos,
     }
     print(
         "kalshiCappers visible {visible} hidden {hidden} blocked {blocked} mm {mmDropped} "
@@ -1057,7 +1002,6 @@ def attach(emb, now=None):
             "blocklist": load_config()["blocklist"],
             "coverage": {"error": str(e)},
             "cappers": [],
-            "combos": [],
         }
     emb["kalshiCappers"] = data
     return data

@@ -260,6 +260,8 @@ def parse(m):
         info['dogcode'] = codes[0] if info['favcode'] == codes[-1] else codes[-1]
     elif tail == '' and len(teams) == 2:
         info.update(kind='moneyline', yes=teams[0], no=teams[1])
+    elif league in ESPORTS and re.fullmatch(r'game(\d+)', tail) and len(teams) == 2 and re.search(r'(?i)\b(map|game)\s*\d+\s*winner', q):
+        info.update(kind='map', mapno=int(tail[4:]), yes=teams[0], no=teams[1])  # Map N winner: Kalshi lists these as KX<GAME>MAP series
     elif tail == 'draw':
         info.update(kind='draw', yes='DRAW', no='NO DRAW')
     elif re.fullmatch(r'[a-z0-9]+', tail or '') and q.lower().startswith('will '):
@@ -631,6 +633,33 @@ def kalshi(s):
         m = cands[0]
         act = 'BUY YES' if s['side'] == 'yes' else 'BUY NO'
         p = fp(m['yes_ask_dollars' if act == 'BUY YES' else 'no_ask_dollars'])
+    elif info['kind'] == 'map':
+        MAPSER = {'cs2': 'KXCS2MAP', 'dota2': 'KXDOTA2MAP', 'val': 'KXVALORANTMAP', 'lol': 'KXLOLMAP'}
+        mser = MAPSER.get(info['league'])
+        if not mser: return dict(status='none', why='Kalshi has no map-winner series for ' + info['league'].upper())
+        pd = dt.date.fromisoformat(info['date']); tms = list(info.get('teams') or [])
+        evs = collections.defaultdict(list)
+        for x in kmarkets(mser): evs[x['event_ticker']].append(x)
+        pick = None
+        for e, ms in evs.items():
+            if not e.endswith('-%d' % info['mapno']): continue
+            kd = kdate(e) or occ_date(ms)
+            if not kd or abs((kd - pd).days) > 4: continue
+            sub = lambda t: next((x for x in ms if namematch(t, x.get('yes_sub_title'))), None)
+            a_, b_ = sub(tms[0]), sub(tms[1])
+            if a_ and b_ and a_ is not b_: pick = (a_, b_); break
+        if not pick: return dict(status='none', why='No open Kalshi map winner market for this map')
+        m_yes, m_no = pick
+        target = m_yes if s['side'] == 'yes' else m_no
+        other = m_no if s['side'] == 'yes' else m_yes
+        yes_px = fp(target.get('yes_ask_dollars'))
+        if yes_px and yes_px > 0: act, m, p = 'BUY YES', target, yes_px
+        else:
+            no_px = fp(other.get('no_ask_dollars'))
+            if not (no_px and no_px > 0): return dict(status='none', why='Kalshi market matched but has no ask right now')
+            act, m, p = 'BUY NO', other, no_px
+        opp_ticker = other.get('ticker'); opp_contract = other.get('yes_sub_title'); opp_action = 'BUY YES'; opp_price = fp(other.get('yes_ask_dollars'))
+        event_title = (m_yes.get('yes_sub_title') or tms[0]) + ' vs ' + (m_no.get('yes_sub_title') or tms[1]) + ' map %d winner' % info['mapno']
     else:
         return dict(status='none', why='Market type has no Kalshi equivalent')
     if not p: return dict(status='none', why='Kalshi market matched but has no ask right now')
@@ -829,7 +858,7 @@ def slug_date(slug):
 def bet_kind(info, q):
     k = info.get('kind')
     if k == 'prop': return 'prop'
-    if k in ('moneyline', 'teamwin', 'draw'): return 'moneyline'
+    if k in ('moneyline', 'teamwin', 'draw', 'map'): return 'moneyline'
     if k in ('spread', 'total'): return k
     if is_btts(q): return 'other'
     if re.search(r'(?i)spread|handicap', q): return 'spread'
@@ -1345,11 +1374,17 @@ except Exception as _e:
     print('comingUp failed:', _e)
     emb.setdefault('comingUp', []); emb.setdefault('totalComingUp', 0)
 try:
+    import politics_econ as _pe
+    emb['politicsEcon'] = _pe.build(emb.get('politicsEcon'), NOW, full=True, log=print)
+except Exception as _e:
+    print('politicsEcon failed, keeping previous:', _e)
+    emb.setdefault('politicsEcon', dict(ts=int(NOW), cappers=[], picks=[]))
+try:
     import kalshi_cappers as _kc
     _kc.attach(emb, NOW)
 except Exception as _e:
     print('kalshiCappers failed:', _e, flush=True)
-    emb.setdefault('kalshiCappers', {'cappers': [], 'combos': [], 'coverage': {}, 'blocklist': ['Wiseandstrong']})
+    emb.setdefault('kalshiCappers', {'cappers': [], 'coverage': {}, 'blocklist': ['Wiseandstrong']})
 json.dump(emb, open(os.path.join(HERE, 'page_embed.json'), 'w'), separators=(',', ':'))
 open(os.path.join(HERE, 'page_data_line.txt'), 'w').write('const DATA: ScanData = ' + json.dumps(emb, separators=(',', ':')) + ';')
 print('embed bytes', len(json.dumps(emb, separators=(',', ':'))))

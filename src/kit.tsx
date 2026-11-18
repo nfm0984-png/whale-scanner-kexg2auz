@@ -15,7 +15,7 @@ const TONE: Record<string, [string, string]> = { success: ["#DCFCE7", "#166534"]
 
 export function Page(p: { title?: string; summary?: string; record?: string; caution?: string; children?: React.ReactNode }) {
   return (
-    <div style={{ maxWidth: 760, margin: "0 auto", padding: "68px 12px 56px", fontFamily: FONT, color: theme.text.primary, minHeight: "100vh", background: "#F4F0FF" }}>
+    <div style={{ maxWidth: 760, margin: "0 auto", padding: "100px 12px 56px", fontFamily: FONT, color: theme.text.primary, minHeight: "100vh", background: "#F4F0FF" }}>
       {p.title ? <h1 style={{ fontSize: 24, lineHeight: "30px", margin: "6px 2px 4px", fontWeight: 850, letterSpacing: "-0.02em" }}>{p.title}</h1> : null}
       {p.summary ? <p style={{ fontSize: 13, lineHeight: "18px", color: theme.text.tertiary, margin: "0 2px 8px" }}>{p.summary}</p> : null}
       {p.record ? <p style={{ fontSize: 14, lineHeight: "18px", fontWeight: 800, color: theme.text.primary, margin: "0 2px 6px" }}>{p.record}</p> : null}
