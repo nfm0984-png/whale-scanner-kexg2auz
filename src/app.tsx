@@ -4531,7 +4531,7 @@ function RecTiles(props: { recs: CapRecs; small?: boolean; avg?: boolean }) {
   );
 }
 interface PickBackerRow { wallet: string; name: string; cost: number; avg: number | null }
-interface PickGroup { key: string; view: KalshiView; game: ComingGame; label: string; backers: PickBackerRow[]; total: number; n: number; avgBet: number; avgEntry: number | null; live: boolean; startTs: number; front: boolean; best: boolean }
+interface PickGroup { key: string; view: KalshiView; game: ComingGame; label: string; backers: PickBackerRow[]; total: number; n: number; avgBet: number; avgEntry: number | null; live: boolean; startTs: number; front: boolean; best: boolean; mid?: string }
 function compiledGroups(games: ComingGame[], now: number): PickGroup[] {
   const by: Record<string, PickGroup> = {};
   const frontRows: { wallet: string; cost: number; day: string; key: string }[] = [];
@@ -4546,7 +4546,7 @@ function compiledGroups(games: ComingGame[], now: number): PickGroup[] {
         const view = resolveKalshiView(raw);
         if (view.unmatched || view.price == null || !view.yesNo) return;
         const gk = (view.ticker || raw.ticker || raw.id) + "|" + view.yesNo;
-        if (!by[gk]) by[gk] = { key: gk, view, game: g, label: raw.label, backers: [], total: 0, n: 0, avgBet: 0, avgEntry: null, live, startTs: g.startTs || 0, front: false, best: false };
+        if (!by[gk]) by[gk] = { key: gk, view, game: g, label: raw.label, backers: [], total: 0, n: 0, avgBet: 0, avgEntry: null, live, startTs: g.startTs || 0, front: false, best: false, mid: m.id };
         const grp = by[gk];
         backers.forEach((b: ComingBacker) => {
           const w = (b.wallet || "").toLowerCase();
@@ -4709,7 +4709,7 @@ const PE_DATA: PEData = ((DATA as any).politicsEcon || { picks: [], cappers: [] 
 const PE_CAP: Record<string, { best: string; cats: Record<string, { month: number; all: number }> }> = (() => { const m: Record<string, any> = {}; (PE_DATA.cappers || []).forEach((c) => { m[(c.wallet || "").toLowerCase()] = c; }); return m; })();
 const PE_CAT_LABEL: Record<string, string> = { politics: "Politics", economics: "Econ", finance: "Finance" };
 interface UBacker { wallet: string; name: string; cost: number; avg: number | null; tags: string[]; score: number; line: string }
-interface UPick { key: string; kind: "sports" | "pe"; view: KalshiView; big: string; sub: string; league: string; gameId: string; startTs: number; settleTs: number; live: boolean; backers: UBacker[]; total: number; tags: string[]; score: number; entryNote: string | null; note: string | null }
+interface UPick { key: string; mid: string; kind: "sports" | "pe"; view: KalshiView; big: string; sub: string; league: string; gameId: string; startTs: number; settleTs: number; live: boolean; backers: UBacker[]; total: number; tags: string[]; score: number; entryNote: string | null; note: string | null }
 const U_TAG_ORDER = ["Proven", "Elite", "🔥 Hot", "Politics-Econ", "Tracked"];
 function shortName(n: string, max = 16): string { return n.length > max ? n.slice(0, max - 1) + "…" : n; }
 function capperScoreOf(w: string): number {
@@ -4747,7 +4747,7 @@ function combinedPicks(now: number): UPick[] {
   const addGroup = (g: PickGroup) => {
     let p = by[g.key];
     if (!p) {
-      p = by[g.key] = { key: g.key, kind: "sports", view: g.view, big: g.label || g.view.outcome, sub: g.game.game, league: g.game.league, gameId: g.game.id, startTs: g.game.startTs || 0, settleTs: g.game.startTs || 0, live: g.live, backers: [], total: 0, tags: [], score: 0, entryNote: g.avgEntry != null && g.view.price != null ? slipWords(slipCents(g.view.price, g.avgEntry), g.avgEntry) : null, note: null };
+      p = by[g.key] = { key: g.key, mid: g.mid || "", kind: "sports", view: g.view, big: g.label || g.view.outcome, sub: g.game.game, league: g.game.league, gameId: g.game.id, startTs: g.game.startTs || 0, settleTs: g.game.startTs || 0, live: g.live, backers: [], total: 0, tags: [], score: 0, entryNote: g.avgEntry != null && g.view.price != null ? slipWords(slipCents(g.view.price, g.avgEntry), g.avgEntry) : null, note: null };
     }
     g.backers.forEach((b: PickBackerRow) => {
       if (p!.backers.some((x: UBacker) => x.wallet === b.wallet)) return;
@@ -4767,7 +4767,7 @@ function combinedPicks(now: number): UPick[] {
     let p = by[key];
     if (!p) {
       const gap = q.gap != null ? Math.round(q.gap * 100) : null;
-      p = by[key] = { key, kind: "pe", view, big: binary ? q.marketTitle : q.outcome, sub: binary ? "" : q.marketTitle, league: (q.cat || "Politics"), gameId: q.eventTicker, startTs: 0, settleTs: q.settleTs, live: false, backers: [], total: 0, tags: [], score: 0, entryNote: null,
+      p = by[key] = { key, mid: q.ticker, kind: "pe", view, big: binary ? q.marketTitle : q.outcome, sub: binary ? "" : q.marketTitle, league: (q.cat || "Politics"), gameId: q.eventTicker, startTs: 0, settleTs: q.settleTs, live: false, backers: [], total: 0, tags: [], score: 0, entryNote: null,
         note: gap == null ? null : (gap === 0 ? "Same price on Polymarket" : "Kalshi pays " + (gap > 0 ? "less" : "more") + " than Polymarket (" + cents(q.polyPrice as number) + ")") };
     }
     q.backers.forEach((b: PEBacker) => {
@@ -4830,7 +4830,45 @@ function OnKalshiBox(props: { view: KalshiView }) {
     </div>
   );
 }
-function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNode; sourceTags?: boolean }) {
+// Tracked cappers on the other side of the same market (same pool, same filters: every pick here already passed them).
+function oppositeOf(p: UPick, all: UPick[]): UPick[] {
+  if (!p.mid) return [];
+  return all.filter((q: UPick) => q.key !== p.key && q.gameId === p.gameId && q.mid === p.mid && q.view.yesNo !== null);
+}
+function OtherSide(props: { p: UPick; opp: UPick[] }) {
+  const t = useGrokTheme();
+  const p = props.p;
+  const backers: (UBacker & { pickBig: string })[] = [];
+  props.opp.forEach((q: UPick) => q.backers.forEach((b: UBacker) => { if (!backers.some((x) => x.wallet === b.wallet)) backers.push({ ...b, pickBig: q.big }); }));
+  backers.sort((a, b) => b.cost - a.cost);
+  const oTotal = backers.reduce((a: number, b: UBacker) => a + b.cost, 0);
+  const cap = (n: number) => n + " capper" + (n === 1 ? "" : "s");
+  const none = backers.length === 0;
+  const lead = p.total >= oTotal;
+  return (
+    <div data-other-side="1" style={{ marginTop: 10, padding: "10px 12px", borderRadius: 14, border: "1.5px solid " + (none ? t.border.default : "#F59E0B"), background: none ? t.bg.subtle : "#FFFBEB" }}>
+      <div style={{ fontSize: 11, fontWeight: 850, letterSpacing: "0.08em", textTransform: "uppercase", color: "#B45309" }}>Other side</div>
+      {none ? <div data-other-none="1" style={{ fontSize: 14, fontWeight: 700, color: t.text.secondary, marginTop: 4 }}>No tracked cappers on the other side</div> : (
+        <>
+          <div data-other-vs="1" style={{ display: "flex", flexWrap: "wrap", alignItems: "baseline", gap: 6, marginTop: 4, fontSize: 15, fontWeight: 850, fontVariantNumeric: "tabular-nums" }}>
+            <span style={{ color: lead ? GREEN : t.text.primary }}>{cap(p.backers.length) + " · " + kMoney(p.total)}</span>
+            <span style={{ color: t.text.tertiary, fontWeight: 700 }}>vs</span>
+            <span style={{ color: lead ? t.text.primary : RED }}>{cap(backers.length) + " · " + kMoney(oTotal)}</span>
+          </div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary, marginTop: 2 }}>{"They bet: " + Array.from(new Set(backers.map((b) => b.pickBig))).join(" / ")}</div>
+          {backers.slice(0, 4).map((b) => (
+            <div key={b.wallet} data-other-capper={b.wallet} style={{ display: "flex", justifyContent: "space-between", gap: 8, marginTop: 6, paddingTop: 6, borderTop: "1px solid " + t.border.default }}>
+              <span style={{ fontSize: 13, lineHeight: "18px", fontWeight: 650, color: t.text.secondary, overflowWrap: "anywhere" }}>{b.line}</span>
+              <span style={{ fontSize: 15, fontWeight: 850, whiteSpace: "nowrap", fontVariantNumeric: "tabular-nums" }}>{money(b.cost)}</span>
+            </div>
+          ))}
+          {backers.length > 4 ? <div style={{ fontSize: 13, fontWeight: 700, color: t.text.tertiary, marginTop: 6 }}>{"+" + (backers.length - 4) + " more"}</div> : null}
+        </>
+      )}
+    </div>
+  );
+}
+function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNode; sourceTags?: boolean; opp?: UPick[] }) {
   const t = useGrokTheme();
   const p = props.p;
   const v = p.view;
@@ -4860,6 +4898,7 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
         </div>
         <OnKalshiBox view={v} />
         {top.map((b: UBacker) => <div key={b.wallet} data-ucard-rec={b.wallet} style={{ fontSize: 14, lineHeight: "20px", fontWeight: 650, color: t.text.secondary, marginTop: 2, overflowWrap: "anywhere" }}>{b.line}</div>)}
+        {props.opp ? <OtherSide p={p} opp={props.opp} /> : null}
         <details data-ucard-more="1" style={{ marginTop: 8 }}>
           <summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 14, color: BRAND }}>{rest.length ? "Details · +" + rest.length + " more" : "Details"}</summary>
           {p.note ? <div style={{ fontSize: 13, fontWeight: 700, color: AMBER, marginTop: 4 }}>{p.note}</div> : null}
@@ -4881,7 +4920,7 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
     </div>
   );
 }
-function UnitList(props: { units: { id: string; picks: UPick[] }[]; now: number; stake: string; noun: string }) {
+function UnitList(props: { units: { id: string; picks: UPick[] }[]; now: number; stake: string; noun: string; all?: UPick[] }) {
   const [open, setOpen] = useState<Record<string, boolean>>({});
   return (
     <div data-unit-list="1">
@@ -4890,8 +4929,8 @@ function UnitList(props: { units: { id: string; picks: UPick[] }[]; now: number;
         const isOpen = !!open[u.id];
         return (
           <div key={u.id} data-game-block={u.id}>
-            <UCard p={u.picks[0]} now={props.now} stake={props.stake} moreRow={rest.length ? <MoreBetsRow noun={props.noun} n={rest.length} open={isOpen} onToggle={() => setOpen({ ...open, [u.id]: !isOpen })} /> : undefined} />
-            {isOpen && rest.length ? <div data-game-more="1" style={{ marginLeft: 10, paddingLeft: 8, borderLeft: "3px solid " + BRAND }}>{rest.map((q: UPick) => <UCard key={q.key} p={q} now={props.now} stake={props.stake} />)}</div> : null}
+            <UCard p={u.picks[0]} opp={props.all ? oppositeOf(u.picks[0], props.all) : undefined} now={props.now} stake={props.stake} moreRow={rest.length ? <MoreBetsRow noun={props.noun} n={rest.length} open={isOpen} onToggle={() => setOpen({ ...open, [u.id]: !isOpen })} /> : undefined} />
+            {isOpen && rest.length ? <div data-game-more="1" style={{ marginLeft: 10, paddingLeft: 8, borderLeft: "3px solid " + BRAND }}>{rest.map((q: UPick) => <UCard key={q.key} p={q} opp={props.all ? oppositeOf(q, props.all) : undefined} now={props.now} stake={props.stake} />)}</div> : null}
           </div>
         );
       })}
@@ -4907,7 +4946,7 @@ function CombinedList(props: { now: number; mode: "rank" | "start" }) {
   return (
     <div data-combined-list={props.mode}>
       <div data-combined-summary="1" style={{ fontSize: 14, fontWeight: 750, color: "#52525B", margin: "2px 2px 12px" }}>{picks.length + " picks · " + units.length + (props.mode === "start" ? " games" : " games") + " · " + Object.keys(cappers).length + " cappers" + (liveN ? " · " + liveN + " live" : "") + " · Journal " + journalWL().wins + "–" + journalWL().losses}</div>
-      {picks.length === 0 ? <EmptyState title="No picks from tracked cappers yet" body={"Nothing open from proven, Elite, Hot or Politics & Econ cappers right now. " + nextScanLabel(props.now) + "."} /> : <UnitList units={units} now={props.now} stake="$2–4" noun="game" />}
+      {picks.length === 0 ? <EmptyState title="No picks from tracked cappers yet" body={"Nothing open from proven, Elite, Hot or Politics & Econ cappers right now. " + nextScanLabel(props.now) + "."} /> : <UnitList units={units} all={picks} now={props.now} stake="$2–4" noun="game" />}
     </div>
   );
 }
