@@ -4220,7 +4220,8 @@ function cleanGames(games: ComingGame[], now: number, requireKalshi: boolean): {
         if (old || status === "final" || outOfRange) { log.resolved++; return false; }
         if (requireKalshi && s.kPrice == null) { log.noKalshi++; return false; }
         const rec = QMAP[w];
-        if (!w || !walletLongTermOk(w) || (rec && rec.badge === "Cooling")) { log.floor++; return false; }
+        // Noel Nov 18: every tracked capper with a positive profit counts (Cooling, market makers and one-off records stay out).
+        if (!w || !rec || !(rec.profit > 0) || rec.mm || rec.oneOff || rec.badge === "Cooling") { log.floor++; return false; }
         // Noel Nov 17: no stale or price check. Both stay as small notes on the card.
         return true;
       });
@@ -4257,7 +4258,9 @@ function splitGamesFront(games: ComingGame[]): { front: ComingGame[]; more: Comi
   });
   return { front, more };
 }
-function openSlateGames(eliteOnly: boolean, now: number, source?: ComingGame[]): { games: ComingGame[]; log: CleanLog } {
+// Pick lists only show games that are live or start within 24 hours; later games stay on the capper cards in the Cappers tab.
+const PICK_WINDOW_SECS = 24 * 3600;
+function openSlateGames(eliteOnly: boolean, now: number, source?: ComingGame[], windowed: boolean = true): { games: ComingGame[]; log: CleanLog } {
   const coming = asComingGames((source || DATA.comingUp || []) as ComingGame[]);
   let base: ComingGame[];
   if (!eliteOnly) base = coming.filter((g: ComingGame) => (g.capperCount || 0) > 0);
@@ -4267,7 +4270,7 @@ function openSlateGames(eliteOnly: boolean, now: number, source?: ComingGame[]):
   }
   if (eliteOnly) base = base.map((g: ComingGame) => ({ ...g, markets: (g.markets || []).map((m: ComingMarket) => ({ ...m, sides: (m.sides || []).map((s: ComingSide) => { const keep = (s.backers || []).filter(isEliteBacker); return keep.length === (s.backers || []).length ? s : { ...s, backers: keep, cappers: keep.length, usd: keep.reduce((a: number, b: ComingBacker) => a + (b.cost || 0), 0), names: keep.map((b: ComingBacker) => b.name) }; }) })) })).map(fillGameStats).filter((g: ComingGame) => (g.capperCount || 0) > 0);
   const c = cleanGames(base, now, true);
-  return { games: c.games.filter((g: ComingGame) => comingStatus(g, now) !== "final"), log: c.log };
+  return { games: c.games.filter((g: ComingGame) => comingStatus(g, now) !== "final" && (!windowed || !g.startTs || g.startTs <= now + PICK_WINDOW_SECS)), log: c.log };
 }
 interface CapperPickRow { wallet: string; name: string; cost: number; game: ComingGame; market: ComingMarket; side: ComingSide; bothSides: boolean }
 function capperPicksFromGames(games: ComingGame[], pred: (b: ComingBacker) => boolean): CapperPickRow[] {
@@ -4716,7 +4719,7 @@ const PE_CAP: Record<string, { best: string; cats: Record<string, { month: numbe
 const PE_CAT_LABEL: Record<string, string> = { politics: "Politics", economics: "Econ", finance: "Finance" };
 interface UBacker { wallet: string; name: string; cost: number; avg: number | null; tags: string[]; score: number; line: string }
 interface UPick { key: string; kind: "sports" | "pe"; view: KalshiView; big: string; sub: string; league: string; gameId: string; startTs: number; settleTs: number; live: boolean; backers: UBacker[]; total: number; tags: string[]; score: number; entryNote: string | null; note: string | null }
-const U_TAG_ORDER = ["Proven", "Elite", "🔥 Hot", "Politics-Econ"];
+const U_TAG_ORDER = ["Proven", "Elite", "🔥 Hot", "Politics-Econ", "Tracked"];
 function shortName(n: string, max = 16): string { return n.length > max ? n.slice(0, max - 1) + "…" : n; }
 function capperScoreOf(w: string): number {
   const pe = PE_CAP[w];
@@ -4757,7 +4760,7 @@ function combinedPicks(now: number): UPick[] {
     }
     g.backers.forEach((b: PickBackerRow) => {
       if (p!.backers.some((x: UBacker) => x.wallet === b.wallet)) return;
-      const tags = ["Proven"].concat(tagsOfWallet(b.wallet).filter((x: string) => x !== "Politics-Econ"));
+      const tags = [QMAP[b.wallet] && QMAP[b.wallet].proven ? "Proven" : "Tracked"].concat(tagsOfWallet(b.wallet).filter((x: string) => x !== "Politics-Econ"));
       p!.backers.push({ wallet: b.wallet, name: b.name, cost: b.cost, avg: b.avg, tags, score: capperScoreOf(b.wallet), line: backerRecordLine(b.wallet, b.name) });
     });
   };
@@ -4766,7 +4769,7 @@ function combinedPicks(now: number): UPick[] {
   compiledGroups(upcoming(openSlateGames(true, now).games), now).forEach(addGroup);
   hotGroups(now).forEach(addGroup);
   (PE_DATA.picks || []).forEach((q: PEPick) => {
-    if (q.settleTs < now) return;
+    if (q.settleTs < now || q.settleTs > now + PICK_WINDOW_SECS) return;
     const key = q.ticker + "|" + q.yesNo;
     const view: KalshiView = { backing: q.outcome, marketTitle: q.marketTitle, outcome: q.outcome, yesNo: q.yesNo, price: q.kPrice, ticker: q.ticker };
     const binary = /^(yes|no)$/i.test(q.outcome) || q.marketTitle.toLowerCase().indexOf(q.outcome.toLowerCase()) >= 0;
@@ -4817,7 +4820,7 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
   const top = p.backers.slice(0, 3);
   const rest = p.backers.slice(3);
   const kinds = p.tags;
-  const colorOf = (x: string): string[] => (({ Proven: ["#EDE9FE", "#6D28D9"], Elite: ["#FEF3C7", "#92400E"], "🔥 Hot": ["#FFEDD5", "#C2410C"], "Politics-Econ": ["#DBEAFE", "#1D4ED8"] } as Record<string, string[]>)[x] || [t.bg.subtle, t.text.primary]);
+  const colorOf = (x: string): string[] => (({ Proven: ["#EDE9FE", "#6D28D9"], Elite: ["#FEF3C7", "#92400E"], "🔥 Hot": ["#FFEDD5", "#C2410C"], "Politics-Econ": ["#DBEAFE", "#1D4ED8"], Tracked: ["#F3F4F6", "#4B5563"] } as Record<string, string[]>)[x] || [t.bg.subtle, t.text.primary]);
   return (
     <div data-ucard={p.key} data-ucard-kind={p.kind} style={{ borderRadius: 18, border: "1.5px solid " + t.border.default, background: t.bg.base, boxShadow: "0 4px 14px rgba(76,29,149,0.08)", overflow: "hidden", marginBottom: 10, fontFamily: t.font.family }}>
       <div style={{ padding: "12px 14px 12px" }}>
@@ -4896,19 +4899,35 @@ function PoliticsEconTab(props: { now: number }) {
   const used: Record<string, boolean> = {};
   picks.forEach((p: UPick) => p.backers.forEach((b: UBacker) => { used[b.wallet] = true; }));
   return (
-    <Section heading={"Politics & Econ · " + picks.length} caption={"Long game · soonest settle first · " + Object.keys(used).length + " cappers with an open bet · " + caps.length + " established cappers"}>
+    <Section heading={"Politics & Econ · " + picks.length} caption={"Settles within 24 hours · soonest first · " + Object.keys(used).length + " cappers with an open bet · " + caps.length + " established cappers"}>
       <Text>{"Suggested $1–2 per pick. Budget about $5–10 a day out of the $40. Only established politics, economics and finance wallets (profitable before this month, not market makers) with a $500+ open position and the same outcome and side on Kalshi."}</Text>
-      {picks.length === 0 ? <EmptyState title="No Kalshi-matched picks right now" body={"None of the established politics, economics or finance cappers has an open $500+ bet that matches a Kalshi market. " + nextScanLabel(props.now) + "."} /> : <UnitList units={units} now={props.now} stake="$1–2" noun="event" />}
-      <details data-pe-cappers="1" style={{ margin: "10px 0 12px" }}>
-        <summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 15, color: BRAND }}>{"Established cappers · " + caps.length}</summary>
-        {caps.map((c) => (
+      {picks.length === 0 ? <EmptyState title="No Kalshi-matched picks right now" body={"None of the established politics, economics or finance cappers has a $500+ bet that matches a Kalshi market and settles within 24 hours. Later ones are under Cappers. " + nextScanLabel(props.now) + "."} /> : <UnitList units={units} now={props.now} stake="$1–2" noun="event" />}
+      <Text>{"Only picks settling within 24 hours show here. Later ones (and every established capper) are under Cappers → Politics & Econ cappers."}</Text>
+    </Section>
+  );
+}
+function PECappersList(props: { now: number }) {
+  const t = useGrokTheme();
+  const caps = PE_DATA.cappers || [];
+  const byW: Record<string, PEPick[]> = {};
+  (PE_DATA.picks || []).forEach((q: PEPick) => { if (q.settleTs < props.now) return; q.backers.forEach((b: PEBacker) => { (byW[b.wallet.toLowerCase()] = byW[b.wallet.toLowerCase()] || []).push(q); }); });
+  const rows = caps.slice().sort((a, b) => (byW[b.wallet.toLowerCase()] || []).length - (byW[a.wallet.toLowerCase()] || []).length);
+  return (
+    <details data-pe-cappers="1" style={{ margin: "6px 0 12px" }}>
+      <summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 15, color: BRAND }}>{"Politics & Econ cappers · " + caps.length}</summary>
+      {rows.map((c) => {
+        const mine = (byW[c.wallet.toLowerCase()] || []).slice().sort((a: PEPick, b: PEPick) => a.settleTs - b.settleTs);
+        return (
           <div key={c.wallet} style={{ borderTop: "1px solid " + t.border.default, marginTop: 8, paddingTop: 8 }}>
             <div style={{ fontSize: 15, fontWeight: 850, overflowWrap: "anywhere" }}>{nameOf(c.name, c.wallet)}</div>
             <div style={{ fontSize: 13, color: t.text.secondary }}>{Object.keys(c.cats).filter((k: string) => c.cats[k].month || c.cats[k].all).map((k: string) => PE_CAT_LABEL[k] + " " + signedK(c.cats[k].month) + " mo · " + signedK(c.cats[k].all) + " all").join("  |  ")}</div>
+            {mine.length ? mine.map((q: PEPick) => (
+              <div key={q.id} style={{ fontSize: 13, marginTop: 4, lineHeight: "18px" }}><b>{(q.yesNo + " · pays " + cents(q.kPrice))}</b>{" · " + (q.marketTitle || q.polyTitle) + " · " + settlesIn(q.settleTs, props.now) + (q.settleTs > props.now + PICK_WINDOW_SECS ? " (not in pick lists yet)" : "")}</div>
+            )) : <div style={{ fontSize: 13, marginTop: 4, color: t.text.tertiary }}>No open Kalshi-matched pick right now</div>}
           </div>
-        ))}
-      </details>
-    </Section>
+        );
+      })}
+    </details>
   );
 }
 function KalshiBuyButton(props: { view: KalshiView; size?: number }) {
@@ -4923,7 +4942,7 @@ function KalshiBuyButton(props: { view: KalshiView; size?: number }) {
 }
 function CappersRanked(props: { now: number }) {
   const t = useGrokTheme();
-  const slate = openSlateGames(false, props.now);
+  const slate = openSlateGames(false, props.now, undefined, false);
   const rows = capperPicksFromGames(slate.games, (b: ComingBacker) => !!b.wallet);
   const byW: Record<string, CapperPickRow[]> = {};
   rows.forEach((r: CapperPickRow) => { if (comingStatus(r.game, props.now) !== "final") (byW[r.wallet] = byW[r.wallet] || []).push(r); });
@@ -5401,7 +5420,7 @@ export default function App() {
       {tab === "picks" ? (
         <Section heading={"All Picks · " + combinedPicks(now).length}>
           <MissingPicksNote />
-          <Text>{"Every open $500+ pick with a Kalshi line from proven, Elite, Hot This Week and Politics & Econ cappers, best to worst by capper history. One card per pick; tap the arrow to see the other bets on that game."}</Text>
+          <Text>{"Every open $500+ pick with a Kalshi line from every tracked capper with a positive profit (not Cooling) plus Politics & Econ cappers that starts or settles within 24 hours, best to worst by capper history. One card per pick; tap the arrow to see the other bets on that game."}</Text>
           <CombinedList now={now} mode="rank" />
           <details data-old-allpicks="1" style={{ margin: "14px 0" }}>
             <summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 15, color: BRAND }}>{"Whale signals (old All Picks view) · " + (bigOnly ? biggestTotal : allPickTotal)}</summary>
@@ -5445,6 +5464,7 @@ export default function App() {
       {tab === "cappers" ? (
         <Section heading={"Cappers · " + capRows.length}>
           <CappersRanked now={now} />
+          <PECappersList now={now} />
           <details data-kalshi-in-cappers="1" style={{ margin: "6px 0 12px" }}><summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 15, color: BRAND }}>{"Kalshi cappers · " + ((kalshiCappersData().cappers || []).length)}</summary><KalshiCappersTab now={now} /></details>
           <details data-capper-directory="1" style={{ margin: "6px 0 12px" }}><summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 15, color: BRAND }}>{"All tracked cappers · " + capRows.length}</summary>
           <RecordStrip wins={capWlW} losses={capWlL} tiles={[{ label: "Shown", value: String(capRows.length) }, { label: "Hot", value: String(hotCapAll.length), color: hotCapAll.length ? GREEN : undefined }]} />

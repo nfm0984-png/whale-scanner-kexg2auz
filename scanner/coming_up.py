@@ -106,12 +106,11 @@ def elite_wallets(proven):
     return out
 
 def is_hot_or_elite(c, elite):
-    if not c or c.get('mm') or c.get('oneOff'):
+    """Noel Nov 18: every tracked capper with a positive profit feeds Coming Up / All Picks (not only the proven floor).
+    Market makers, one-off records and Cooling cappers stay out."""
+    if not c or c.get('mm') or c.get('oneOff') or c.get('badge') == 'Cooling':
         return False
-    if ch.eligibility(c):
-        return False
-    # Noel Nov 17: the proven floor (eligibility above) is the only capper gate; no Hot 55% win-rate / elite-only rule.
-    return True
+    return (c.get('profit') or 0) > 0
 
 def hot_wallets(capper_history, proven):
     elite = elite_wallets(proven)

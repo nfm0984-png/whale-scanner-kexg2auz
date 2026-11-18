@@ -154,7 +154,7 @@ def _locate_fallback(ns, info, kal, cid, event_slug, g, ts):
 
 
 def floor_wallets(capper_history):
-    """Proven-floor cappers that are not Cooling, market makers or one-off records: {wallet: capper record}."""
+    """Cappers with a positive profit that are not Cooling, market makers or one-off records: {wallet: capper record}."""
     import coming_up as cu
     out = {}
     for c in (capper_history or {}).get('cappers') or []:
@@ -177,7 +177,7 @@ def build_rows(capper_history, now=None, positions=None, log=print, wallets=None
     d_hi = dt.datetime.fromtimestamp(wins_end, ns['ET']).date()
     ns['WIN_END'] = wins_end
     if positions is None:
-        with ThreadPoolExecutor(max_workers=4) as ex:
+        with ThreadPoolExecutor(max_workers=8) as ex:
             positions = dict(zip(list(fl), ex.map(fetch_positions, list(fl))))
     ok = {w for w, p in positions.items() if p is not None}
     rows = []
