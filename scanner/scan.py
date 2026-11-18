@@ -1327,6 +1327,18 @@ try:
     emb['comingUp'] = _cu.build(_lean, emb.get('capperHistory') or {}, NOW, CU_END, proven=emb.get('provenPicks'))
     emb['missing_picks'] = _fp.check_missing(_fl_rows, emb['comingUp'], NOW)
     emb['totalComingUp'] = len(emb['comingUp'])
+    try:
+        import hot_week as _hw
+        emb['hotWeek'] = _hw.build(emb, NOW)
+        _hot = _hw.hot_wallet_set(emb['hotWeek'])
+        for _g in emb['comingUp']:
+            for _m in _g.get('markets') or []:
+                for _s in _m.get('sides') or []:
+                    for _b in _s.get('backers') or []:
+                        _b['hot'] = (_b.get('wallet') or '').lower() in _hot
+    except Exception as _e:
+        print('hot week failed:', _e)
+        emb.setdefault('hotWeek', dict(ts=int(NOW), cappers=[], games=[]))
     emb['comingUpCappers'] = _cu.capper_count(emb['comingUp'])
     print('comingUp cards', emb['totalComingUp'], 'cappers', emb['comingUpCappers'], 'leanBets', len(LEAN_BETS), flush=True)
 except Exception as _e:

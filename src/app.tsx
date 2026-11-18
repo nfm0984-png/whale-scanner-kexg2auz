@@ -43,7 +43,9 @@ interface KalshiCappersData {
   updatedAt?: string; updatedTs?: number; blocklist?: string[]; coverage?: Record<string, number | string | string[] | Record<string, number>>;
   cappers?: KalshiCapper[]; combos?: { combined: number; legs: KalshiComboLeg[] }[];
 }
-interface ScanData { scannedAt: string; ts: number; secs: number; settings: { cappers: number; min: number; wallets: number; markets: number; windowH: number }; coverage: { cappers: number; qualified: number; golden: number; marketsFound: number; marketsInWindow: number; marketsScanned: number; hedgedExcluded: number; twoSidedExcluded: number; walletsLoaded: number; positionsLoaded: number; bets: number; buysRaw: number; buys: number; orcaCalls: number; orcaErrors: string[]; kalshiSeries: number; kalshiMatched: number; espnLeagues: number; lb30?: { asOf: string | null; start: string | null; end: string | null; scanned: number; deepestRank: number; skippedNonSports: number; skippedNoPositions: number; endpoint?: string; params?: string }; lbAll?: { asOf: string | null; start: string | null; end: string | null; scanned: number; deepestRank: number; skippedNonSports: number; skippedNoPositions: number; endpoint?: string; params?: string }; notOnKalshi?: number }; signals: Pick[]; totalSignals: number; fun: Pick[]; totalFun: number; poly?: Pick[]; totalPoly?: number; glue?: Pick[]; totalGlue?: number; props?: Pick[]; totalProps?: number; longshots?: Pick[]; totalLongshots?: number; biggest?: Pick[]; totalBiggest?: number; upcoming?: Pick[]; totalUpcoming?: number; history: Hist[]; scans: Scan[]; buysC: Cols; betsC: Cols; tradersC: Cols; partNames: string[]; refreshedAt?: string; refreshTs?: number; capperHistory?: CapperHistory; provenPicks?: ProvenData; comingUp?: ComingGame[];
+interface HotCapper { wallet: string; name: string; w7: number; l7: number; n7: number; wr7: number; pnl7: number; w30: number; l30: number; pnl30: number }
+interface HotWeekData { ts?: number; cappers?: HotCapper[]; games?: ComingGame[] }
+interface ScanData { scannedAt: string; ts: number; secs: number; settings: { cappers: number; min: number; wallets: number; markets: number; windowH: number }; coverage: { cappers: number; qualified: number; golden: number; marketsFound: number; marketsInWindow: number; marketsScanned: number; hedgedExcluded: number; twoSidedExcluded: number; walletsLoaded: number; positionsLoaded: number; bets: number; buysRaw: number; buys: number; orcaCalls: number; orcaErrors: string[]; kalshiSeries: number; kalshiMatched: number; espnLeagues: number; lb30?: { asOf: string | null; start: string | null; end: string | null; scanned: number; deepestRank: number; skippedNonSports: number; skippedNoPositions: number; endpoint?: string; params?: string }; lbAll?: { asOf: string | null; start: string | null; end: string | null; scanned: number; deepestRank: number; skippedNonSports: number; skippedNoPositions: number; endpoint?: string; params?: string }; notOnKalshi?: number }; signals: Pick[]; totalSignals: number; fun: Pick[]; totalFun: number; poly?: Pick[]; totalPoly?: number; glue?: Pick[]; totalGlue?: number; props?: Pick[]; totalProps?: number; longshots?: Pick[]; totalLongshots?: number; biggest?: Pick[]; totalBiggest?: number; upcoming?: Pick[]; totalUpcoming?: number; history: Hist[]; scans: Scan[]; buysC: Cols; betsC: Cols; tradersC: Cols; partNames: string[]; refreshedAt?: string; refreshTs?: number; capperHistory?: CapperHistory; provenPicks?: ProvenData; comingUp?: ComingGame[]; hotWeek?: HotWeekData;
   missing_picks?: { wallet?: string; name?: string; q?: string; label?: string; cost?: number; reason?: string }[]; totalComingUp?: number; comingUpCappers?: number; kalshiCappers?: KalshiCappersData }
 interface BuyRaw { ts: number; firstTs: number; fills: number; wallet: string; name: string; wr: number | null; wpnl: number; top100: boolean; rank: number | null; golden: boolean; q: string; side: string; label: string; kind: string; league: string; price: number | null; now: number | null; usd: number; shares: number | null; posCost: number; hedged: boolean; agree60: number; agreeAll: number; score: number; parts: number[]; kAct: string | null; kPrice: number | null; kContract: string | null; kEdge: number | null; kWhy: string | null; start: string; src: string; startTs: number | null; phase: string; gDetail: string; gScore: string; rank30?: number | null; rankAll?: number | null; gName?: string }
 interface BetRaw { firstTs: number | null; lastBuyTs: number | null; wallet: string; name: string; wr: number | null; resolved: number | null; cpnl: number; rank: number | null; golden: boolean; skill: boolean; top100: boolean; src: string; q: string; side: string; label: string; outcome: string; kind: string; league: string; shares: number | null; avg: number | null; now: number | null; cost: number; value: number | null; upnl: number | null; upct: number | null; consYes: number | null; consNo: number | null; agree60: number; agreeAll: number; score: number; parts: number[]; kAct: string | null; kPrice: number | null; kContract: string | null; kEdge: number | null; kWhy: string | null; start: string; src2: string; startTs: number | null; phase: string; gDetail: string; gScore: string; rank30?: number | null; rankAll?: number | null; gName?: string }
@@ -82,6 +84,7 @@ const QMAP: Record<string, CapperRec> = (() => {
   return m;
 })();
 const PROVEN: ProvenData | undefined = DATA.provenPicks;
+const HOT_W: Record<string, HotCapper> = (() => { const m: Record<string, HotCapper> = {}; ((DATA.hotWeek && DATA.hotWeek.cappers) || []).forEach((c: HotCapper) => { m[(c.wallet || "").toLowerCase()] = c; }); return m; })();
 const ELITE_W: Record<string, boolean> = (() => { const m: Record<string, boolean> = {}; ((PROVEN && PROVEN.elite) || []).forEach((e) => { m[(e.wallet || "").toLowerCase()] = true; }); return m; })();
 // Per-sport records (Noel, Nov 15): league code -> sport bucket (same mapping as scanner/backfill.py)
 const SPORT_MAP: Record<string, string> = (DATA.capperHistory && DATA.capperHistory.sportMap) || {};
@@ -1746,7 +1749,22 @@ function KalshiGreenBox(props: { view: KalshiView; badge?: "best" | null; compac
     </div>
   );
 }
-function KalshiGameLines(props: { game: ComingGame; onPick?: (marketId: string, sideId: string) => void; selectedId?: string | null }) {
+function MoreBetsRow(props: { n: number; open: boolean; onToggle: () => void }) {
+  const t = useGrokTheme();
+  if (props.n <= 0) return null;
+  return (
+    <button type="button" data-more-bets="1" aria-expanded={props.open} onClick={props.onToggle} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", margin: "2px 0 8px", padding: "8px 12px", borderRadius: 12, border: "1px solid " + t.border.default, background: t.bg.subtle, color: BRAND, fontWeight: 800, fontSize: 14, cursor: "pointer", fontFamily: "inherit", textAlign: "left" }}>
+      <span>{(props.open ? "▴ Hide " : "▾ ") + props.n + " more bet" + (props.n === 1 ? "" : "s") + (props.open ? "" : " on this game")}</span>
+      <span style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary }}>{props.open ? "Collapse" : "Tap to expand"}</span>
+    </button>
+  );
+}
+function bestLineOf(lines: KalshiLineView[]): KalshiLineView | null {
+  if (!lines.length) return null;
+  const k = pickBestKalshiKey(lines);
+  return lines.find((l: KalshiLineView) => l.key === k) || lines[0];
+}
+function KalshiGameLines(props: { game: ComingGame; onPick?: (marketId: string, sideId: string) => void; selectedId?: string | null; bestOnly?: boolean }) {
   const lines = kalshiLinesOfGame(props.game);
   if (!lines.length) return <div style={{ margin: "8px 0 10px" }}><KalshiGreenBox view={{ backing: "", marketTitle: "", outcome: "", yesNo: null, price: null, ticker: null }} why="No verified Kalshi contract on a backed side." /></div>;
   const bestKey = pickBestKalshiKey(lines);
@@ -1766,7 +1784,7 @@ function KalshiGameLines(props: { game: ComingGame; onPick?: (marketId: string, 
   return (
     <div data-kalshi-game="1" style={{ display: "flex", flexDirection: "column", gap: 8, margin: "8px 0 10px" }}>
       {box(best, false, showBadge ? "best" : null)}
-      {others.map((l: KalshiLineView) => box(l, true, null))}
+      {props.bestOnly ? null : others.map((l: KalshiLineView) => box(l, true, null))}
     </div>
   );
 }
@@ -4016,6 +4034,11 @@ function SidesGameCard(props: { g: ComingGame; now: number; rank?: number; sugge
   const on = !!props.selectedSideId;
   const live = comingIsLive(g, props.now);
   const liveIn = until(g.startTs, props.now, g.start);
+  const [open, setOpen] = useState<boolean>(false);
+  const gLines = kalshiLinesOfGame(g);
+  const gBest = bestLineOf(gLines);
+  const moreN = Math.max(0, gLines.length - 1);
+  const collapsed = moreN > 0 && !open;
   return (
     <div data-coming-game={g.id} data-coming-selected={on ? "1" : "0"} data-coming-live={live ? "1" : "0"} style={{ borderRadius: 20, border: on ? "2px solid " + BRAND : "1.5px solid " + (live ? "#FECACA" : t.border.default), background: t.bg.base, boxShadow: on ? "0 8px 22px rgba(124,58,237,0.18)" : live ? "0 8px 22px rgba(220,38,38,0.14)" : "0 6px 18px rgba(76,29,149,0.10)", overflow: "hidden", marginBottom: 14, fontFamily: t.font.family }}>
       <div style={{ height: 6, background: live ? "linear-gradient(90deg,#DC2626,#F97316)" : "linear-gradient(90deg," + BRAND + "," + BRAND2 + ")" }} />
@@ -4031,8 +4054,9 @@ function SidesGameCard(props: { g: ComingGame; now: number; rank?: number; sugge
           {props.suggested ? <Chip bg={GREEN} color="#FFFFFF">Suggested</Chip> : null}
         </div>
         <div style={{ fontSize: 20, lineHeight: "25px", fontWeight: 850, marginTop: 8, overflowWrap: "anywhere" }}>{g.game}</div>
-        <KalshiGameLines game={g} onPick={props.onSelectSide ? (marketId: string, sideId: string) => { const s = findComingSide(g, sideId); if (s) props.onSelectSide!(g, s); } : undefined} selectedId={props.selectedSideId || null} />
-        {(g.markets || []).map((raw: ComingMarket, mi: number) => {
+        <MoreBetsRow n={moreN} open={open} onToggle={() => setOpen(!open)} />
+        <KalshiGameLines bestOnly={collapsed} game={g} onPick={props.onSelectSide ? (marketId: string, sideId: string) => { const s = findComingSide(g, sideId); if (s) props.onSelectSide!(g, s); } : undefined} selectedId={props.selectedSideId || null} />
+        {(g.markets || []).filter((raw: ComingMarket) => !collapsed || !gBest || raw.id === gBest.marketId).map((raw: ComingMarket, mi: number) => {
           const m = relabelMarketSides(raw, g.game || "");
           const shown = (m.sides || []).slice(0, 2);
           const leadId = pickSideId(shown);
@@ -4246,8 +4270,8 @@ function splitGamesFront(games: ComingGame[]): { front: ComingGame[]; more: Comi
   });
   return { front, more };
 }
-function openSlateGames(eliteOnly: boolean, now: number): { games: ComingGame[]; log: CleanLog } {
-  const coming = asComingGames((DATA.comingUp || []) as ComingGame[]);
+function openSlateGames(eliteOnly: boolean, now: number, source?: ComingGame[]): { games: ComingGame[]; log: CleanLog } {
+  const coming = asComingGames((source || DATA.comingUp || []) as ComingGame[]);
   let base: ComingGame[];
   if (!eliteOnly) base = coming.filter((g: ComingGame) => (g.capperCount || 0) > 0);
   else {
@@ -4414,6 +4438,36 @@ function MoreGames(props: { games: ComingGame[]; now: number; keyPrefix: string;
     </div>
   );
 }
+function CapperGameBlock(props: { wallet: string; g: ComingGame; live: boolean; picks: CapperPickRow[]; leadSide: string | null; onKalshiPick: (g: ComingGame, marketId: string, sideId: string) => void; selectedSide: string }) {
+  const t = useGrokTheme();
+  const [open, setOpen] = useState<boolean>(false);
+  const g = props.g;
+  const lines = kalshiLinesOfGame(g);
+  const moreN = Math.max(lines.length - 1, props.picks.length - 1, 0);
+  const collapsed = moreN > 0 && !open;
+  const picks = props.picks.slice().sort((a: CapperPickRow, b: CapperPickRow) => b.cost - a.cost);
+  const shownPicks = collapsed ? picks.slice(0, 1) : props.picks;
+  return (
+    <div data-capper-game={g.id} style={{ padding: "4px 14px 14px", borderTop: "1px solid " + t.border.default, marginTop: 8 }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center", marginTop: 10 }}>
+        {props.live ? <Chip bg={RED} color="#FFFFFF">LIVE</Chip> : null}
+        <Chip bg={BRAND} color="#FFFFFF">{g.league}</Chip>
+        <Chip bg={t.bg.subtle} color={t.text.primary}>{g.start || ptTime(g.startTs)}</Chip>
+      </div>
+      <div style={{ fontSize: 18, lineHeight: "23px", fontWeight: 850, margin: "6px 0 8px", overflowWrap: "anywhere" }}>{g.game}</div>
+      <MoreBetsRow n={moreN} open={open} onToggle={() => setOpen(!open)} />
+      {shownPicks.map((row: CapperPickRow) => (
+        <div key={row.side.id} style={{ marginTop: 8 }}>
+          {row.bothSides ? <SideTag pick={!!(props.leadSide && row.side.id === props.leadSide)} /> : null}
+          <div style={{ fontSize: 16, fontWeight: 850, color: t.text.primary }}>{row.side.label}</div>
+          <div style={{ marginTop: 4, display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}><BetAmt n={row.cost} /><span style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary }}>on Polymarket</span></div>
+          {slipWords(applyResolvedSide(row.side).slip, row.side.avgEntry) ? <div style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary, marginTop: 2 }}>{slipWords(applyResolvedSide(row.side).slip, row.side.avgEntry)}</div> : null}
+        </div>
+      ))}
+      <KalshiGameLines bestOnly={collapsed} game={g} onPick={(marketId: string, sideId: string) => props.onKalshiPick(g, marketId, sideId)} selectedId={props.selectedSide || null} />
+    </div>
+  );
+}
 function CapperSlateTab(props: { now: number; mode: "elite" | "coming" }) {
   const t = useGrokTheme();
   const eliteOnly = props.mode === "elite";
@@ -4527,23 +4581,7 @@ function CapperSlateTab(props: { now: number; mode: "elite" | "coming" }) {
               const selectedSide = (sel.find((x) => x.gameId === g.id) || { sideId: "" }).sideId;
               const leadSide = pickSideId((bundle.picks[0].market.sides || []).slice());
               return (
-                <div key={cg.wallet + g.id} data-capper-game={g.id} style={{ padding: "4px 14px 14px", borderTop: "1px solid " + t.border.default, marginTop: 8 }}>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center", marginTop: 10 }}>
-                    {live ? <Chip bg={RED} color="#FFFFFF">LIVE</Chip> : null}
-                    <Chip bg={BRAND} color="#FFFFFF">{g.league}</Chip>
-                    <Chip bg={t.bg.subtle} color={t.text.primary}>{g.start || ptTime(g.startTs)}</Chip>
-                  </div>
-                  <div style={{ fontSize: 18, lineHeight: "23px", fontWeight: 850, marginTop: 6, overflowWrap: "anywhere" }}>{g.game}</div>
-                  {bundle.picks.map((row: CapperPickRow) => (
-                    <div key={row.side.id} style={{ marginTop: 8 }}>
-                      {row.bothSides ? <SideTag pick={!!(leadSide && row.side.id === leadSide)} /> : null}
-                      <div style={{ fontSize: 16, fontWeight: 850, color: t.text.primary }}>{row.side.label}</div>
-                      <div style={{ marginTop: 4, display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}><BetAmt n={row.cost} /><span style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary }}>on Polymarket</span></div>
-                      {slipWords(applyResolvedSide(row.side).slip, row.side.avgEntry) ? <div style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary, marginTop: 2 }}>{slipWords(applyResolvedSide(row.side).slip, row.side.avgEntry)}</div> : null}
-                    </div>
-                  ))}
-                  <KalshiGameLines game={g} onPick={(marketId: string, sideId: string) => onKalshiPick(g, marketId, sideId)} selectedId={selectedSide || null} />
-                </div>
+                <CapperGameBlock key={cg.wallet + g.id} wallet={cg.wallet} g={g} live={live} picks={bundle.picks} leadSide={leadSide} onKalshiPick={onKalshiPick} selectedSide={selectedSide} />
               );
               });
               return (
@@ -4701,9 +4739,10 @@ function compiledForTab(now: number): { groups: PickGroup[]; log: CleanLog } {
   const slate = openSlateGames(false, now);
   return { groups: compiledGroups(slate.games, now), log: slate.log };
 }
-function PickGroupCard(props: { g: PickGroup }) {
+function PickGroupCard(props: { g: PickGroup; moreRow?: ReactNode }) {
   const t = useGrokTheme();
   const g = props.g;
+  const hotN = g.backers.filter((b: PickBackerRow) => !!HOT_W[b.wallet]).length;
   const recs = avgRecs(g.backers.map((b: PickBackerRow) => b.wallet));
   const entryNote = g.avgEntry != null && g.view.price != null ? slipWords(slipCents(g.view.price, g.avgEntry), g.avgEntry) : null;
   return (
@@ -4714,8 +4753,10 @@ function PickGroupCard(props: { g: PickGroup }) {
           {g.live ? <Chip bg={RED} color="#FFFFFF">LIVE</Chip> : null}
           <Chip bg={BRAND} color="#FFFFFF">{g.game.league}</Chip>
           <Chip bg={t.bg.subtle} color={t.text.primary}>{g.game.start || ptTime(g.game.startTs)}</Chip>
+          {hotN ? <span data-hot-tag="1"><Chip bg="#FFEDD5" color="#C2410C">{"🔥 hot" + (hotN > 1 ? " · " + hotN : "")}</Chip></span> : null}
         </div>
         <div style={{ fontSize: 18, lineHeight: "23px", fontWeight: 850, margin: "6px 0 10px", overflowWrap: "anywhere" }}>{g.game.game}</div>
+        {props.moreRow}
         <KalshiGreenBox view={g.view} badge={g.best ? "best" : null} />
         <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 0.8fr", gap: 8, marginTop: 12, alignItems: "end" }}>
           <div><div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.06em", textTransform: "uppercase", color: t.text.tertiary }}>Total</div><span data-group-total="1" style={{ fontSize: 26, lineHeight: "30px", fontWeight: 850, fontVariantNumeric: "tabular-nums", letterSpacing: "-0.02em" }}>{money(g.total)}</span></div>
@@ -4730,7 +4771,7 @@ function PickGroupCard(props: { g: PickGroup }) {
           {g.backers.map((b: PickBackerRow) => (
             <div key={b.wallet} data-group-capper={b.wallet} style={{ borderTop: "1px solid " + t.border.default, marginTop: 8, paddingTop: 8 }}>
               <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 8, flexWrap: "wrap" }}>
-                <span style={{ fontSize: 15, fontWeight: 850, overflowWrap: "anywhere" }}>{b.name}</span>
+                <span style={{ fontSize: 15, fontWeight: 850, overflowWrap: "anywhere" }}>{b.name}{HOT_W[b.wallet] ? <span style={{ fontSize: 12, fontWeight: 800, color: "#C2410C" }}>{"  🔥 7d " + HOT_W[b.wallet].w7 + "–" + HOT_W[b.wallet].l7 + " · " + signedK(HOT_W[b.wallet].pnl7)}</span> : null}</span>
                 <span><span style={{ fontSize: 18, fontWeight: 850, fontVariantNumeric: "tabular-nums" }}>{money(b.cost)}</span><span style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary }}>{b.avg != null ? " @ " + cents(b.avg) : ""}</span></span>
               </div>
               <RecTiles recs={capperRecs(b.wallet)} small={true} />
@@ -4741,6 +4782,35 @@ function PickGroupCard(props: { g: PickGroup }) {
     </div>
   );
 }
+function bestOfGame(l: PickGroup[]): PickGroup[] {
+  return l.slice().sort((a: PickGroup, b: PickGroup) => (b.n - a.n) || (b.total - a.total));
+}
+function splitGroupsByGame(groups: PickGroup[]): { front: PickGroup[]; more: PickGroup[] } {
+  const frontIds: Record<string, boolean> = {};
+  groups.forEach((g: PickGroup) => { if (g.front) frontIds[g.game.id] = true; });
+  return { front: groups.filter((g: PickGroup) => frontIds[g.game.id]), more: groups.filter((g: PickGroup) => !frontIds[g.game.id]) };
+}
+function GroupedByGame(props: { groups: PickGroup[] }) {
+  const [open, setOpen] = useState<Record<string, boolean>>({});
+  const order: string[] = [];
+  const by: Record<string, PickGroup[]> = {};
+  props.groups.forEach((g: PickGroup) => { const id = g.game.id; if (!by[id]) { by[id] = []; order.push(id); } by[id].push(g); });
+  return (
+    <div data-by-game="1">
+      {order.map((id: string) => {
+        const l = bestOfGame(by[id]);
+        const rest = l.slice(1);
+        const isOpen = !!open[id];
+        return (
+          <div key={id} data-game-block={id}>
+            <PickGroupCard g={l[0]} moreRow={rest.length ? <MoreBetsRow n={rest.length} open={isOpen} onToggle={() => setOpen({ ...open, [id]: !isOpen })} /> : undefined} />
+            {isOpen && rest.length ? <div data-game-more="1" style={{ marginLeft: 10, paddingLeft: 8, borderLeft: "3px solid " + BRAND }}>{rest.map((g: PickGroup) => <PickGroupCard key={g.key} g={g} />)}</div> : null}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 function MorePickGroups(props: { groups: PickGroup[] }) {
   const [open, setOpen] = useState<boolean>(false);
   const t = useGrokTheme();
@@ -4748,27 +4818,60 @@ function MorePickGroups(props: { groups: PickGroup[] }) {
   return (
     <div data-more-groups="1" style={{ margin: "8px 0 12px" }}>
       <button type="button" onClick={() => setOpen(!open)} style={{ padding: "8px 14px", borderRadius: 999, border: "1px solid " + t.border.default, background: t.bg.base, color: t.text.primary, fontWeight: 800, fontSize: 14, cursor: "pointer", fontFamily: "inherit" }}>{open ? "Hide " + props.groups.length + " more" : "Show more · " + props.groups.length}</button>
-      {open ? <div style={{ marginTop: 12 }}>{props.groups.map((g: PickGroup) => <PickGroupCard key={g.key} g={g} />)}</div> : null}
+      {open ? <div style={{ marginTop: 12 }}><GroupedByGame groups={props.groups} /></div> : null}
     </div>
   );
 }
 function ComingUpTab(props: { now: number }) {
   const t = useGrokTheme();
   const c = compiledForTab(props.now);
-  const front = c.groups.filter((g: PickGroup) => g.front);
-  const more = c.groups.filter((g: PickGroup) => !g.front);
+  const sp = splitGroupsByGame(c.groups);
+  const front = sp.front;
+  const more = sp.more;
+  const gameN = new Set(c.groups.map((g: PickGroup) => g.game.id)).size;
   const liveN = c.groups.filter((g: PickGroup) => g.live).length;
   const allGames = openSlateGames(false, props.now).games;
   const combos = suggestCombos(allGames, props.now, false, 3);
   const hiddenN = cleanTotal(c.log);
   return (
-    <Section heading={"Coming Up · " + c.groups.length} caption={"All proven cappers' picks, grouped · live first" + (liveN ? " · " + liveN + " live" : "")}>
+    <Section heading={"Coming Up · " + c.groups.length} caption={"All proven cappers' picks, grouped · " + gameN + " game" + (gameN === 1 ? "" : "s") + " · best pick per game, tap to expand · live first" + (liveN ? " · " + liveN + " live" : "")}>
       <Text>{"$500+ with a Kalshi line. Top 3 picks of $600+ per capper up front; the rest under Show more."}</Text>
       <RecordStrip wins={journalWL().wins} losses={journalWL().losses} tiles={[{ label: "Picks", value: String(c.groups.length) }, { label: "Cappers", value: String(new Set(c.groups.reduce((a: string[], g: PickGroup) => a.concat(g.backers.map((b: PickBackerRow) => b.wallet)), [] as string[])).size) }, { label: "Live", value: String(liveN), color: liveN ? RED : undefined }]} />
       <CombosBlock combos={combos} />
-      {c.groups.length === 0 ? <EmptyState title="No proven-capper picks yet" body={"Nothing live or upcoming from proven-floor cappers right now. " + nextScanLabel(props.now) + "."} /> : front.map((g: PickGroup) => <PickGroupCard key={g.key} g={g} />)}
+      {c.groups.length === 0 ? <EmptyState title="No proven-capper picks yet" body={"Nothing live or upcoming from proven-floor cappers right now. " + nextScanLabel(props.now) + "."} /> : <GroupedByGame groups={front} />}
       <MorePickGroups groups={more} />
       <HiddenCount log={c.log} total={hiddenN} />
+    </Section>
+  );
+}
+function hotGroups(now: number): PickGroup[] {
+  const slate = openSlateGames(false, now, ((DATA.hotWeek && DATA.hotWeek.games) || []) as ComingGame[]);
+  return compiledGroups(slate.games.filter((g: ComingGame) => comingStatus(g, now) === "upcoming"), now).filter((g: PickGroup) => g.backers.some((b: PickBackerRow) => !!HOT_W[b.wallet]));
+}
+function hotTabCount(now: number): number { return hotGroups(now).length; }
+function HotWeekTab(props: { now: number }) {
+  const t = useGrokTheme();
+  const groups = hotGroups(props.now);
+  const hot = ((DATA.hotWeek && DATA.hotWeek.cappers) || []) as HotCapper[];
+  const gameN = new Set(groups.map((g: PickGroup) => g.game.id)).size;
+  const picksBy: Record<string, number> = {};
+  groups.forEach((g: PickGroup) => g.backers.forEach((b: PickBackerRow) => { picksBy[b.wallet] = (picksBy[b.wallet] || 0) + 1; }));
+  return (
+    <Section heading={"Hot This Week · " + groups.length} caption={"Open pre-game picks from cappers on a heater · " + hot.length + " hot cappers · " + gameN + " game" + (gameN === 1 ? "" : "s")}>
+      <Text>{"A capper is hot with 8+ settled $500+ bets in the last 7 days, a 60%+ win rate, and positive profit over both 7 and 30 days. Market makers, one-off records, new accounts and Cooling cappers are left out. $500+ with a Kalshi line only; live and finished games are not shown."}</Text>
+      <details data-hot-list="1" style={{ margin: "6px 0 12px" }}>
+        <summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 15, color: BRAND }}>{"Hot cappers · " + hot.length}</summary>
+        {hot.map((c: HotCapper) => (
+          <div key={c.wallet} style={{ borderTop: "1px solid " + t.border.default, marginTop: 8, paddingTop: 8 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", gap: 8, flexWrap: "wrap", alignItems: "baseline" }}>
+              <span style={{ fontSize: 15, fontWeight: 850, overflowWrap: "anywhere" }}>{nameOf(c.name, c.wallet)}</span>
+              <span style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary }}>{(picksBy[c.wallet] || 0) + " open pick" + ((picksBy[c.wallet] || 0) === 1 ? "" : "s")}</span>
+            </div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary, marginTop: 2 }}>{"7d " + c.w7 + "–" + c.l7 + " (" + Math.round(c.wr7) + "%) · " + signedK(c.pnl7) + "  ·  30d " + c.w30 + "–" + c.l30 + " · " + signedK(c.pnl30)}</div>
+          </div>
+        ))}
+      </details>
+      {groups.length === 0 ? <EmptyState title="No hot-capper picks open" body={"No hot capper has an open pre-game $500+ bet with a Kalshi line right now. " + nextScanLabel(props.now) + "."} /> : <GroupedByGame groups={groups} />}
     </Section>
   );
 }
@@ -5201,7 +5304,7 @@ export default function App() {
     return !!(b && b.sport === sportFilter);
   }) : hotCapAll;
   const hotCapRows = sortHotCappers(hotCapVisible, sortOf("hot"));
-  const tabRecord = tab === "top" ? "Top 20: " + wlTop.text : tab === "longfun" ? "Longshots: " + wlLong.text + " · Fun: " + wlFun.text : tab === "fun" ? "Fun: " + wlFun.text : tab === "poly" ? "Polymarket: " + wlPoly.text : tab === "props" ? "Player Props: " + wlProps.text : tab === "longshots" ? "Longshots: " + wlLong.text : tab === "biggest" ? "Biggest Bets: " + wlBig.text : tab === "upcoming" ? "Upcoming: " + wlUp.text : tab === "cappers" ? "Cappers: " + capWlW + "-" + capWlL + " (per capper; a shared pick can count more than once)" : tab === "picks" || tab === "coming" || tab === "elite" || tab === "kalshi" ? "Journal: " + wins + "–" + (graded.length - wins) + (graded.length ? "  ·  " + Math.round((100 * wins) / graded.length) + "%  ·  " : "  ·  ") + nextScanLabel(now) : tab === "more" ? "Top 20 " + wlTop.text + " · Fun " + wlFun.text + " · Polymarket " + wlPoly.text + (wlGlue.w + wlGlue.l ? " · Glue " + wlGlue.text : "") + (wlProps.w + wlProps.l ? " · Props " + wlProps.text : "") + (wlLong.w + wlLong.l ? " · Longshots " + wlLong.text : "") + (wlBig.w + wlBig.l ? " · Biggest " + wlBig.text : "") + (wlUp.w + wlUp.l ? " · Upcoming " + wlUp.text : "") : "";
+  const tabRecord = tab === "top" ? "Top 20: " + wlTop.text : tab === "longfun" ? "Longshots: " + wlLong.text + " · Fun: " + wlFun.text : tab === "fun" ? "Fun: " + wlFun.text : tab === "poly" ? "Polymarket: " + wlPoly.text : tab === "props" ? "Player Props: " + wlProps.text : tab === "longshots" ? "Longshots: " + wlLong.text : tab === "biggest" ? "Biggest Bets: " + wlBig.text : tab === "upcoming" ? "Upcoming: " + wlUp.text : tab === "cappers" ? "Cappers: " + capWlW + "-" + capWlL + " (per capper; a shared pick can count more than once)" : tab === "picks" || tab === "coming" || tab === "elite" || tab === "kalshi" || tab === "hot" ? "Journal: " + wins + "–" + (graded.length - wins) + (graded.length ? "  ·  " + Math.round((100 * wins) / graded.length) + "%  ·  " : "  ·  ") + nextScanLabel(now) : tab === "more" ? "Top 20 " + wlTop.text + " · Fun " + wlFun.text + " · Polymarket " + wlPoly.text + (wlGlue.w + wlGlue.l ? " · Glue " + wlGlue.text : "") + (wlProps.w + wlProps.l ? " · Props " + wlProps.text : "") + (wlLong.w + wlLong.l ? " · Longshots " + wlLong.text : "") + (wlBig.w + wlBig.l ? " · Biggest " + wlBig.text : "") + (wlUp.w + wlUp.l ? " · Upcoming " + wlUp.text : "") : "";
   const tabCaution = tab === "poly" && wlPoly.l > wlPoly.w ? "Caution: the Polymarket tab is losing so far (" + wlPoly.text + "). Bet smaller or skip until the record turns around." : "";
 
   const journalRows = DATA.history.filter((h: Hist) => journal === "all" || (journal === "won" && h.result === "W") || (journal === "lost" && h.result === "L") || (journal === "pending" && !h.result) || (journal === "top" && (h.tier === "top" || !h.tier)) || (journal === "fun" && h.tier === "fun") || (journal === "poly" && h.tier === "poly") || (journal === "glue" && h.tier === "glue") || (journal === "props" && h.tier === "props") || (journal === "longshots" && h.tier === "longshots") || (journal === "biggest" && h.tier === "biggest") || (journal === "upcoming" && h.tier === "upcoming"));
@@ -5385,6 +5488,7 @@ export default function App() {
 
       {tab === "elite" ? <EliteTab now={now} /> : null}
       {tab === "coming" ? <ComingUpTab now={now} /> : null}
+      {tab === "hot" ? <HotWeekTab now={now} /> : null}
       {tab === "kalshi" ? <KalshiCappersTab now={now} /> : null}
 
       {(
@@ -5478,7 +5582,7 @@ export default function App() {
       <Floating edge="top" align="center" bar>
         <div data-tab-bar="1">
         <PillTabs
-          options={[{ value: "picks", label: "All Picks", count: bigOnly ? biggestTotal : allPickTotal }, { value: "elite", label: "Elite", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: comingTabCount(now) }, { value: "kalshi", label: "Kalshi Cappers", count: ((kalshiCappersData().cappers || []).length) }, { value: "cappers", label: "Cappers", count: capRows.length }]}
+          options={[{ value: "picks", label: "All Picks", count: bigOnly ? biggestTotal : allPickTotal }, { value: "elite", label: "Elite", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: comingTabCount(now) }, { value: "kalshi", label: "Kalshi Cappers", count: ((kalshiCappersData().cappers || []).length) }, { value: "cappers", label: "Cappers", count: capRows.length }, { value: "hot", label: "Hot This Week", count: hotTabCount(now) }]}
           value={tab}
           onChange={(v: string) => { setTab(v); setSportFilter(""); }}
         />

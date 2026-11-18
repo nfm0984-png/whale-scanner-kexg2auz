@@ -447,9 +447,9 @@ def _sort_key(g):
     roi = g.get('capperRoi')
     return (-n, -(roi if roi is not None else -999), g.get('startTs') or 10**12)
 
-def build(lean_bets, capper_history, now, win_end, proven=None):
+def build(lean_bets, capper_history, now, win_end, proven=None, hot_override=None):
     """Return one card per upcoming game, both sides, ranked by capper count then ROI."""
-    hot = hot_wallets(capper_history, proven)
+    hot = hot_override if hot_override is not None else hot_wallets(capper_history, proven)
     sport_map = (capper_history or {}).get('sportMap')
     if not isinstance(sport_map, dict):
         sport_map = {}

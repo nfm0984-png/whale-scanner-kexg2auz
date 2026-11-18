@@ -466,6 +466,18 @@ try:
         print('floor positions unavailable (%d of %d cappers read); re-pricing the previous Coming Up cards' % (len(_fl_ok), len(_fl_all)), flush=True)
         emb['comingUp'] = _cu.refresh(emb.get('comingUp') or [], NOW, NOW + _fp.WINDOW_DAYS * 86400, kalshi_now=_cu_px)
     emb['totalComingUp'] = len(emb['comingUp'])
+    try:
+        import hot_week as _hw
+        emb['hotWeek'] = _hw.build(emb, NOW)
+        _hot = _hw.hot_wallet_set(emb['hotWeek'])
+        for _g in emb['comingUp']:
+            for _m in _g.get('markets') or []:
+                for _s in _m.get('sides') or []:
+                    for _b in _s.get('backers') or []:
+                        _b['hot'] = (_b.get('wallet') or '').lower() in _hot
+    except Exception as _e:
+        print('hot week failed:', _e)
+        emb.setdefault('hotWeek', dict(ts=int(NOW), cappers=[], games=[]))
     emb['comingUpCappers'] = _cu.capper_count(emb['comingUp'])
     print('comingUp cards', emb['totalComingUp'], 'cappers', emb['comingUpCappers'], flush=True)
 except Exception as _e:

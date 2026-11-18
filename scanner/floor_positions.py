@@ -80,7 +80,20 @@ def _get(url, tries=6):
     return None
 
 
+_POS_CACHE = {}
+
+
 def fetch_positions(wallet, max_pages=3):
+    """Cached per process (the hot-week list re-uses the floor reads)."""
+    if wallet in _POS_CACHE:
+        return _POS_CACHE[wallet]
+    r = _fetch_positions(wallet, max_pages)
+    if r is not None:
+        _POS_CACHE[wallet] = r
+    return r
+
+
+def _fetch_positions(wallet, max_pages=3):
     """Open positions for one wallet, or None when the API could not be read (never an empty list on failure)."""
     rows, cur = [], None
     for _ in range(max_pages):
@@ -151,14 +164,14 @@ def floor_wallets(capper_history):
     return out
 
 
-def build_rows(capper_history, now=None, positions=None, log=print):
+def build_rows(capper_history, now=None, positions=None, log=print, wallets=None, label='floor'):
     """Lean-bet rows (same shape scan.py builds) for every floor capper's open $500+ position, games up to 7 days out.
 
     Returns (rows, ok_wallets). Wallets whose positions could not be read are left out of ok_wallets so callers can keep
     their previous rows instead of dropping them."""
     now = now or time.time()
     ns = scan_ns(now)
-    fl = floor_wallets(capper_history)
+    fl = wallets if wallets is not None else floor_wallets(capper_history)
     wins_end = int(now + WINDOW_DAYS * 86400)
     d_lo = (dt.datetime.fromtimestamp(now, ns['ET']) - dt.timedelta(days=1)).date()
     d_hi = dt.datetime.fromtimestamp(wins_end, ns['ET']).date()
@@ -214,7 +227,7 @@ def build_rows(capper_history, now=None, positions=None, log=print):
                 shares=round(p.get('current_size') or 0, 1), avg=avg, now=cp, cost=round(cost), value=round(p.get('current_value') or 0),
                 upnl=round(p.get('unrealized_pnl') or 0), upct=p.get('percent_pnl'), firstTs=p.get('first_entry_at'), cons={}, top100=True,
                 src='floor positions', kalshi=kal, game=g, startTs=int(ts) if ts else None, phase=ns['phase'](g, ts)))
-    log(f'floor positions: {len(fl)} floor cappers, {len(ok)} read, {len(rows)} open $500+ bets with a game inside {WINDOW_DAYS} days')
+    log(f'{label} positions: {len(fl)} cappers, {len(ok)} read, {len(rows)} open $500+ bets with a game inside {WINDOW_DAYS} days')
     return rows, ok
 
 
