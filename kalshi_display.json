@@ -1,5 +1,27 @@
 {
   "events": {
+    "KXATPCHALLENGERMATCH-26NOV18GIUGUL": {
+      "title": "Giustino vs Gulin",
+      "sub_title": "Giustino vs Gulin (Nov 18)",
+      "markets": [
+        {
+          "ticker": "KXATPCHALLENGERMATCH-26NOV18GIUGUL-GIU",
+          "title": "Lorenzo Giustino wins",
+          "yes_sub_title": "Lorenzo Giustino",
+          "no_sub_title": "Lorenzo Giustino",
+          "yes_ask": 0.49,
+          "no_ask": 0.52
+        },
+        {
+          "ticker": "KXATPCHALLENGERMATCH-26NOV18GIUGUL-GUL",
+          "title": "Svyatoslav Gulin wins",
+          "yes_sub_title": "Svyatoslav Gulin",
+          "no_sub_title": "Svyatoslav Gulin",
+          "yes_ask": 0.52,
+          "no_ask": 0.49
+        }
+      ]
+    },
     "KXATPMATCH-26NOV17ALCMED": {
       "title": "Alcaraz vs Medvedev",
       "sub_title": "Alcaraz vs Medvedev (Nov 17)",
@@ -10,7 +32,7 @@
           "yes_sub_title": "Carlos Alcaraz",
           "no_sub_title": "Carlos Alcaraz",
           "yes_ask": 0.8,
-          "no_ask": 0.22
+          "no_ask": 0.21
         },
         {
           "ticker": "KXATPMATCH-26NOV17ALCMED-MED",
@@ -129,8 +151,8 @@
           "title": "Iberian Soul wins",
           "yes_sub_title": "Iberian Soul",
           "no_sub_title": "Iberian Soul",
-          "yes_ask": 0.56,
-          "no_ask": 0.45
+          "yes_ask": 0.57,
+          "no_ask": 0.44
         },
         {
           "ticker": "KXCS2GAME-26NOV180500ISNXS-NXS",
@@ -139,6 +161,28 @@
           "no_sub_title": "Nexus",
           "yes_ask": 0.45,
           "no_ask": 0.56
+        }
+      ]
+    },
+    "KXCS2GAME-26NOV180630G2AFORZER": {
+      "title": "G2 Ares vs. FORZE Reload",
+      "sub_title": "G2 Ares vs. FORZE Reload (Nov 18)",
+      "markets": [
+        {
+          "ticker": "KXCS2GAME-26NOV180630G2AFORZER-G2A",
+          "title": "G2 Ares wins",
+          "yes_sub_title": "G2 Ares",
+          "no_sub_title": "G2 Ares",
+          "yes_ask": 0.27,
+          "no_ask": 0.76
+        },
+        {
+          "ticker": "KXCS2GAME-26NOV180630G2AFORZER-FORZER",
+          "title": "FORZE Reload wins",
+          "yes_sub_title": "FORZE Reload",
+          "no_sub_title": "FORZE Reload",
+          "yes_ask": 0.76,
+          "no_ask": 0.27
         }
       ]
     },
@@ -195,8 +239,8 @@
           "title": "GamerLegion wins",
           "yes_sub_title": "GamerLegion",
           "no_sub_title": "GamerLegion",
-          "yes_ask": 0.75,
-          "no_ask": 0.26
+          "yes_ask": 0.73,
+          "no_ask": 0.28
         },
         {
           "ticker": "KXCS2GAME-26NOV180830GLUNITY-UNITY",
@@ -217,8 +261,8 @@
           "title": "Alliance wins",
           "yes_sub_title": "Alliance",
           "no_sub_title": "Alliance",
-          "yes_ask": 0.4,
-          "no_ask": 0.63
+          "yes_ask": 0.41,
+          "no_ask": 0.62
         },
         {
           "ticker": "KXCS2GAME-26NOV181100ALLSIN-SIN",
@@ -274,6 +318,440 @@
         }
       ]
     },
+    "KXCS2GAME-26NOV181400ENVYBBL": {
+      "title": "Envy vs. BBL",
+      "sub_title": "Envy vs. BBL (Nov 18)",
+      "markets": [
+        {
+          "ticker": "KXCS2GAME-26NOV181400ENVYBBL-ENVY",
+          "title": "Envy wins",
+          "yes_sub_title": "Envy",
+          "no_sub_title": "Envy",
+          "yes_ask": 0.54,
+          "no_ask": 0.48
+        },
+        {
+          "ticker": "KXCS2GAME-26NOV181400ENVYBBL-BBL",
+          "title": "BBL wins",
+          "yes_sub_title": "BBL",
+          "no_sub_title": "BBL",
+          "yes_ask": 0.48,
+          "no_ask": 0.54
+        }
+      ]
+    },
+    "KXDCMORATORIUMSTATES-28": {
+      "title": "Which states will enact data center moratoriums before 2028?",
+      "sub_title": "Before Jan 1, 2028",
+      "markets": [
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-AL",
+          "title": "Will Alabama enact a data center moratorium before 2028?",
+          "yes_sub_title": "Alabama",
+          "no_sub_title": "Alabama",
+          "yes_ask": 0.08,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-AK",
+          "title": "Will Alaska enact a data center moratorium before 2028?",
+          "yes_sub_title": "Alaska",
+          "no_sub_title": "Alaska",
+          "yes_ask": 0.1,
+          "no_ask": 0.98
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-AZ",
+          "title": "Will Arizona enact a data center moratorium before 2028?",
+          "yes_sub_title": "Arizona",
+          "no_sub_title": "Arizona",
+          "yes_ask": 0.14,
+          "no_ask": 0.94
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-AR",
+          "title": "Will Arkansas enact a data center moratorium before 2028?",
+          "yes_sub_title": "Arkansas",
+          "no_sub_title": "Arkansas",
+          "yes_ask": 0.07,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-CA",
+          "title": "Will California enact a data center moratorium before 2028?",
+          "yes_sub_title": "California",
+          "no_sub_title": "California",
+          "yes_ask": 0.31,
+          "no_ask": 0.74
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-CO",
+          "title": "Will Colorado enact a data center moratorium before 2028?",
+          "yes_sub_title": "Colorado",
+          "no_sub_title": "Colorado",
+          "yes_ask": 0.13,
+          "no_ask": 0.96
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-CT",
+          "title": "Will Connecticut enact a data center moratorium before 2028?",
+          "yes_sub_title": "Connecticut",
+          "no_sub_title": "Connecticut",
+          "yes_ask": 0.1,
+          "no_ask": 0.98
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-DE",
+          "title": "Will Delaware enact a data center moratorium before 2028?",
+          "yes_sub_title": "Delaware",
+          "no_sub_title": "Delaware",
+          "yes_ask": 0.12,
+          "no_ask": 0.97
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-FL",
+          "title": "Will Florida enact a data center moratorium before 2028?",
+          "yes_sub_title": "Florida",
+          "no_sub_title": "Florida",
+          "yes_ask": 0.12,
+          "no_ask": 0.97
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-GA",
+          "title": "Will Georgia enact a data center moratorium before 2028?",
+          "yes_sub_title": "Georgia",
+          "no_sub_title": "Georgia",
+          "yes_ask": 0.47,
+          "no_ask": 0.61
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-HI",
+          "title": "Will Hawaii enact a data center moratorium before 2028?",
+          "yes_sub_title": "Hawaii",
+          "no_sub_title": "Hawaii",
+          "yes_ask": 0.13,
+          "no_ask": 0.96
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-ID",
+          "title": "Will Idaho enact a data center moratorium before 2028?",
+          "yes_sub_title": "Idaho",
+          "no_sub_title": "Idaho",
+          "yes_ask": 0.07,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-IL",
+          "title": "Will Illinois enact a data center moratorium before 2028?",
+          "yes_sub_title": "Illinois",
+          "no_sub_title": "Illinois",
+          "yes_ask": 0.11,
+          "no_ask": 0.92
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-IN",
+          "title": "Will Indiana enact a data center moratorium before 2028?",
+          "yes_sub_title": "Indiana",
+          "no_sub_title": "Indiana",
+          "yes_ask": 0.32,
+          "no_ask": 0.77
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-IA",
+          "title": "Will Iowa enact a data center moratorium before 2028?",
+          "yes_sub_title": "Iowa",
+          "no_sub_title": "Iowa",
+          "yes_ask": 0.25,
+          "no_ask": 0.85
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-KS",
+          "title": "Will Kansas enact a data center moratorium before 2028?",
+          "yes_sub_title": "Kansas",
+          "no_sub_title": "Kansas",
+          "yes_ask": 0.14,
+          "no_ask": 0.95
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-KY",
+          "title": "Will Kentucky enact a data center moratorium before 2028?",
+          "yes_sub_title": "Kentucky",
+          "no_sub_title": "Kentucky",
+          "yes_ask": 0.08,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-LA",
+          "title": "Will Louisiana enact a data center moratorium before 2028?",
+          "yes_sub_title": "Louisiana",
+          "no_sub_title": "Louisiana",
+          "yes_ask": 0.17,
+          "no_ask": 0.93
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-ME",
+          "title": "Will Maine enact a data center moratorium before 2028?",
+          "yes_sub_title": "Maine",
+          "no_sub_title": "Maine",
+          "yes_ask": 0.85,
+          "no_ask": 0.25
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-MD",
+          "title": "Will Maryland enact a data center moratorium before 2028?",
+          "yes_sub_title": "Maryland",
+          "no_sub_title": "Maryland",
+          "yes_ask": 0.35,
+          "no_ask": 0.75
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-MA",
+          "title": "Will Massachusetts enact a data center moratorium before 2028?",
+          "yes_sub_title": "Massachusetts",
+          "no_sub_title": "Massachusetts",
+          "yes_ask": 0.1,
+          "no_ask": 0.94
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-MI",
+          "title": "Will Michigan enact a data center moratorium before 2028?",
+          "yes_sub_title": "Michigan",
+          "no_sub_title": "Michigan",
+          "yes_ask": 0.5,
+          "no_ask": 0.58
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-MN",
+          "title": "Will Minnesota enact a data center moratorium before 2028?",
+          "yes_sub_title": "Minnesota",
+          "no_sub_title": "Minnesota",
+          "yes_ask": 0.14,
+          "no_ask": 0.89
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-MS",
+          "title": "Will Mississippi enact a data center moratorium before 2028?",
+          "yes_sub_title": "Mississippi",
+          "no_sub_title": "Mississippi",
+          "yes_ask": 0.07,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-MO",
+          "title": "Will Missouri enact a data center moratorium before 2028?",
+          "yes_sub_title": "Missouri",
+          "no_sub_title": "Missouri",
+          "yes_ask": 0.15,
+          "no_ask": 0.91
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-MT",
+          "title": "Will Montana enact a data center moratorium before 2028?",
+          "yes_sub_title": "Montana",
+          "no_sub_title": "Montana",
+          "yes_ask": 0.08,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-NE",
+          "title": "Will Nebraska enact a data center moratorium before 2028?",
+          "yes_sub_title": "Nebraska",
+          "no_sub_title": "Nebraska",
+          "yes_ask": 0.08,
+          "no_ask": 0.98
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-NV",
+          "title": "Will Nevada enact a data center moratorium before 2028?",
+          "yes_sub_title": "Nevada",
+          "no_sub_title": "Nevada",
+          "yes_ask": 0.09,
+          "no_ask": 0.98
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-NH",
+          "title": "Will New Hampshire enact a data center moratorium before 2028?",
+          "yes_sub_title": "New Hampshire",
+          "no_sub_title": "New Hampshire",
+          "yes_ask": 0.63,
+          "no_ask": 0.47
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-NJ",
+          "title": "Will New Jersey enact a data center moratorium before 2028?",
+          "yes_sub_title": "New Jersey",
+          "no_sub_title": "New Jersey",
+          "yes_ask": 0.15,
+          "no_ask": 0.9
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-NM",
+          "title": "Will New Mexico enact a data center moratorium before 2028?",
+          "yes_sub_title": "New Mexico",
+          "no_sub_title": "New Mexico",
+          "yes_ask": 0.75,
+          "no_ask": 0.35
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-NC",
+          "title": "Will North Carolina enact a data center moratorium before 2028?",
+          "yes_sub_title": "North Carolina",
+          "no_sub_title": "North Carolina",
+          "yes_ask": 0.32,
+          "no_ask": 0.78
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-ND",
+          "title": "Will North Dakota enact a data center moratorium before 2028?",
+          "yes_sub_title": "North Dakota",
+          "no_sub_title": "North Dakota",
+          "yes_ask": 0.07,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-OH",
+          "title": "Will Ohio enact a data center moratorium before 2028?",
+          "yes_sub_title": "Ohio",
+          "no_sub_title": "Ohio",
+          "yes_ask": 0.26,
+          "no_ask": 0.82
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-OK",
+          "title": "Will Oklahoma enact a data center moratorium before 2028?",
+          "yes_sub_title": "Oklahoma",
+          "no_sub_title": "Oklahoma",
+          "yes_ask": 0.22,
+          "no_ask": 0.87
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-OR",
+          "title": "Will Oregon enact a data center moratorium before 2028?",
+          "yes_sub_title": "Oregon",
+          "no_sub_title": "Oregon",
+          "yes_ask": 1.0,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-PA",
+          "title": "Will Pennsylvania enact a data center moratorium before 2028?",
+          "yes_sub_title": "Pennsylvania",
+          "no_sub_title": "Pennsylvania",
+          "yes_ask": 0.13,
+          "no_ask": 0.95
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-RI",
+          "title": "Will Rhode Island enact a data center moratorium before 2028?",
+          "yes_sub_title": "Rhode Island",
+          "no_sub_title": "Rhode Island",
+          "yes_ask": 0.2,
+          "no_ask": 0.9
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-SC",
+          "title": "Will South Carolina enact a data center moratorium before 2028?",
+          "yes_sub_title": "South Carolina",
+          "no_sub_title": "South Carolina",
+          "yes_ask": 0.11,
+          "no_ask": 0.97
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-SD",
+          "title": "Will South Dakota enact a data center moratorium before 2028?",
+          "yes_sub_title": "South Dakota",
+          "no_sub_title": "South Dakota",
+          "yes_ask": 0.09,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-TN",
+          "title": "Will Tennessee enact a data center moratorium before 2028?",
+          "yes_sub_title": "Tennessee",
+          "no_sub_title": "Tennessee",
+          "yes_ask": 0.14,
+          "no_ask": 0.94
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-UT",
+          "title": "Will Utah enact a data center moratorium before 2028?",
+          "yes_sub_title": "Utah",
+          "no_sub_title": "Utah",
+          "yes_ask": 0.07,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-VT",
+          "title": "Will Vermont enact a data center moratorium before 2028?",
+          "yes_sub_title": "Vermont",
+          "no_sub_title": "Vermont",
+          "yes_ask": 0.13,
+          "no_ask": 0.96
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-VA",
+          "title": "Will Virginia enact a data center moratorium before 2028?",
+          "yes_sub_title": "Virginia",
+          "no_sub_title": "Virginia",
+          "yes_ask": 0.17,
+          "no_ask": 0.93
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-WA",
+          "title": "Will Washington enact a data center moratorium before 2028?",
+          "yes_sub_title": "Washington",
+          "no_sub_title": "Washington",
+          "yes_ask": 0.14,
+          "no_ask": 0.95
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-WV",
+          "title": "Will West Virginia enact a data center moratorium before 2028?",
+          "yes_sub_title": "West Virginia",
+          "no_sub_title": "West Virginia",
+          "yes_ask": 0.07,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-WI",
+          "title": "Will Wisconsin enact a data center moratorium before 2028?",
+          "yes_sub_title": "Wisconsin",
+          "no_sub_title": "Wisconsin",
+          "yes_ask": 0.37,
+          "no_ask": 0.73
+        },
+        {
+          "ticker": "KXDCMORATORIUMSTATES-28-WY",
+          "title": "Will Wyoming enact a data center moratorium before 2028?",
+          "yes_sub_title": "Wyoming",
+          "no_sub_title": "Wyoming",
+          "yes_ask": 0.07,
+          "no_ask": 1.0
+        }
+      ]
+    },
+    "KXDOTA2GAME-26NOV180700PARIAUR": {
+      "title": "PARIVISION vs. Aurora",
+      "sub_title": "PARIVISION vs. Aurora (Nov 18)",
+      "markets": [
+        {
+          "ticker": "KXDOTA2GAME-26NOV180700PARIAUR-PARI",
+          "title": "PARIVISION wins",
+          "yes_sub_title": "PARIVISION",
+          "no_sub_title": "PARIVISION",
+          "yes_ask": 0.85,
+          "no_ask": 0.16
+        },
+        {
+          "ticker": "KXDOTA2GAME-26NOV180700PARIAUR-AUR",
+          "title": "Aurora wins",
+          "yes_sub_title": "Aurora",
+          "no_sub_title": "Aurora",
+          "yes_ask": 0.15,
+          "no_ask": 0.86
+        }
+      ]
+    },
     "KXEPLGAME-26NOV21MCIFUL": {
       "title": "Manchester City vs Fulham",
       "sub_title": "MCI vs FUL (Nov 21)",
@@ -304,24 +782,330 @@
         }
       ]
     },
-    "KXNBAGAME-26NOV17CHALAL": {
-      "title": "Charlotte vs Los Angeles L",
-      "sub_title": "CHA vs LAL (Nov 17)",
+    "KXFEDDECISION-26DEC": {
+      "title": "Fed decision in Dec 2026?",
+      "sub_title": "On Dec 9, 2026",
       "markets": [
         {
-          "ticker": "KXNBAGAME-26NOV17CHALAL-CHA",
-          "title": "Charlotte wins",
-          "yes_sub_title": "Charlotte",
-          "no_sub_title": "Charlotte",
-          "yes_ask": 1.0,
+          "ticker": "KXFEDDECISION-26DEC-C26",
+          "title": "Will the Federal Reserve Cut rates by >25bps at their December 2026 meeting?",
+          "yes_sub_title": "Cut >25bps",
+          "no_sub_title": "Cut >25bps",
+          "yes_ask": 0.01,
           "no_ask": 1.0
         },
         {
-          "ticker": "KXNBAGAME-26NOV17CHALAL-LAL",
-          "title": "Los Angeles L wins",
-          "yes_sub_title": "Los Angeles L",
-          "no_sub_title": "Los Angeles L",
-          "yes_ask": 1.0,
+          "ticker": "KXFEDDECISION-26DEC-C25",
+          "title": "Will the Federal Reserve Cut rates by 25bps at their December 2026 meeting?",
+          "yes_sub_title": "Cut 25bps",
+          "no_sub_title": "Cut 25bps",
+          "yes_ask": 0.01,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXFEDDECISION-26DEC-H0",
+          "title": "Will the Federal Reserve Hike rates by 0bps at their December 2026 meeting?",
+          "yes_sub_title": "Fed maintains rate",
+          "no_sub_title": "Fed maintains rate",
+          "yes_ask": 0.05,
+          "no_ask": 0.96
+        },
+        {
+          "ticker": "KXFEDDECISION-26DEC-H25",
+          "title": "Will the Federal Reserve Hike rates by 25bps at their December 2026 meeting?",
+          "yes_sub_title": "Hike 25bps",
+          "no_sub_title": "Hike 25bps",
+          "yes_ask": 0.93,
+          "no_ask": 0.08
+        },
+        {
+          "ticker": "KXFEDDECISION-26DEC-H26",
+          "title": "Will the Federal Reserve Hike rates by >25bps at their December 2026 meeting?",
+          "yes_sub_title": "Hike >25bps",
+          "no_sub_title": "Hike >25bps",
+          "yes_ask": 0.05,
+          "no_ask": 0.96
+        }
+      ]
+    },
+    "KXFEDDECISION-27APR": {
+      "title": "Fed decision in Apr 2027?",
+      "sub_title": "On Apr 28, 2027",
+      "markets": [
+        {
+          "ticker": "KXFEDDECISION-27APR-C26",
+          "title": "Will the Federal Reserve Cut rates by >25bps at their April 2027 meeting?",
+          "yes_sub_title": "Cut >25bps",
+          "no_sub_title": "Cut >25bps",
+          "yes_ask": 0.06,
+          "no_ask": 0.97
+        },
+        {
+          "ticker": "KXFEDDECISION-27APR-C25",
+          "title": "Will the Federal Reserve Cut rates by 25bps at their April 2027 meeting?",
+          "yes_sub_title": "Cut 25bps",
+          "no_sub_title": "Cut 25bps",
+          "yes_ask": 0.11,
+          "no_ask": 0.91
+        },
+        {
+          "ticker": "KXFEDDECISION-27APR-H0",
+          "title": "Will the Federal Reserve Hike rates by 0bps at their April 2027 meeting?",
+          "yes_sub_title": "Fed maintains rate",
+          "no_sub_title": "Fed maintains rate",
+          "yes_ask": 0.63,
+          "no_ask": 0.4
+        },
+        {
+          "ticker": "KXFEDDECISION-27APR-H25",
+          "title": "Will the Federal Reserve Hike rates by 25bps at their April 2027 meeting?",
+          "yes_sub_title": "Hike 25bps",
+          "no_sub_title": "Hike 25bps",
+          "yes_ask": 0.26,
+          "no_ask": 0.78
+        },
+        {
+          "ticker": "KXFEDDECISION-27APR-H26",
+          "title": "Will the Federal Reserve Hike rates by >25bps at their April 2027 meeting?",
+          "yes_sub_title": "Hike >25bps",
+          "no_sub_title": "Hike >25bps",
+          "yes_ask": 0.02,
+          "no_ask": 1.0
+        }
+      ]
+    },
+    "KXFEDDECISION-27JAN": {
+      "title": "Fed decision in Jan 2027?",
+      "sub_title": "On Jan 27, 2027",
+      "markets": [
+        {
+          "ticker": "KXFEDDECISION-27JAN-C26",
+          "title": "Will the Federal Reserve Cut rates by >25bps at their January 2027 meeting?",
+          "yes_sub_title": "Cut >25bps",
+          "no_sub_title": "Cut >25bps",
+          "yes_ask": 0.01,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXFEDDECISION-27JAN-C25",
+          "title": "Will the Federal Reserve Cut rates by 25bps at their January 2027 meeting?",
+          "yes_sub_title": "Cut 25bps",
+          "no_sub_title": "Cut 25bps",
+          "yes_ask": 0.02,
+          "no_ask": 0.99
+        },
+        {
+          "ticker": "KXFEDDECISION-27JAN-H0",
+          "title": "Will the Federal Reserve Hike rates by 0bps at their January 2027 meeting?",
+          "yes_sub_title": "Fed maintains rate",
+          "no_sub_title": "Fed maintains rate",
+          "yes_ask": 0.38,
+          "no_ask": 0.64
+        },
+        {
+          "ticker": "KXFEDDECISION-27JAN-H25",
+          "title": "Will the Federal Reserve Hike rates by 25bps at their January 2027 meeting?",
+          "yes_sub_title": "Hike 25bps",
+          "no_sub_title": "Hike 25bps",
+          "yes_ask": 0.63,
+          "no_ask": 0.4
+        },
+        {
+          "ticker": "KXFEDDECISION-27JAN-H26",
+          "title": "Will the Federal Reserve Hike rates by >25bps at their January 2027 meeting?",
+          "yes_sub_title": "Hike >25bps",
+          "no_sub_title": "Hike >25bps",
+          "yes_ask": 0.02,
+          "no_ask": 0.99
+        }
+      ]
+    },
+    "KXHEGSETHIMPEACH-27JUL01": {
+      "title": "Will Pete Hegseth be impeached?",
+      "sub_title": "Before Jul 1, 2027",
+      "markets": [
+        {
+          "ticker": "KXHEGSETHIMPEACH-27JUL01-26NOV21",
+          "title": "Will Pete Hegseth be impeached before Nov 21, 2026?",
+          "yes_sub_title": "Before Nov 21, 2026",
+          "no_sub_title": "Before Nov 21, 2026",
+          "yes_ask": 0.01,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXHEGSETHIMPEACH-27JUL01-27JAN01",
+          "title": "Will Pete Hegseth be impeached before Jan 1, 2027?",
+          "yes_sub_title": "Before Jan 1, 2027",
+          "no_sub_title": "Before Jan 1, 2027",
+          "yes_ask": 0.02,
+          "no_ask": 0.99
+        },
+        {
+          "ticker": "KXHEGSETHIMPEACH-27JUL01-27FEB01",
+          "title": "Will Pete Hegseth be impeached before Feb 1, 2027?",
+          "yes_sub_title": "Before Feb 1, 2027",
+          "no_sub_title": "Before Feb 1, 2027",
+          "yes_ask": 0.24,
+          "no_ask": 0.8
+        },
+        {
+          "ticker": "KXHEGSETHIMPEACH-27JUL01-27MAR01",
+          "title": "Will Pete Hegseth be impeached before Mar 1, 2027?",
+          "yes_sub_title": "Before Mar 1, 2027",
+          "no_sub_title": "Before Mar 1, 2027",
+          "yes_ask": 0.49,
+          "no_ask": 0.55
+        },
+        {
+          "ticker": "KXHEGSETHIMPEACH-27JUL01-27APR01",
+          "title": "Will Pete Hegseth be impeached before Apr 1, 2027?",
+          "yes_sub_title": "Before Apr 1, 2027",
+          "no_sub_title": "Before Apr 1, 2027",
+          "yes_ask": 0.52,
+          "no_ask": 0.52
+        },
+        {
+          "ticker": "KXHEGSETHIMPEACH-27JUL01-27JUL01",
+          "title": "Will Pete Hegseth be impeached before Jul 1, 2027?",
+          "yes_sub_title": "Before Jul 1, 2027",
+          "no_sub_title": "Before Jul 1, 2027",
+          "yes_ask": 0.64,
+          "no_ask": 0.39
+        }
+      ]
+    },
+    "KXITFMATCH-26NOV18KARREJ": {
+      "title": "Karthik vs Rejchtman Vinciguerra",
+      "sub_title": "Karthik vs Rejchtman Vinciguerra (Nov 18)",
+      "markets": [
+        {
+          "ticker": "KXITFMATCH-26NOV18KARREJ-KAR",
+          "title": "Pranav Karthik wins",
+          "yes_sub_title": "Pranav Karthik",
+          "no_sub_title": "Pranav Karthik",
+          "yes_ask": 0.05,
+          "no_ask": 0.96
+        },
+        {
+          "ticker": "KXITFMATCH-26NOV18KARREJ-REJ",
+          "title": "William Rejchtman Vinciguerra wins",
+          "yes_sub_title": "William Rejchtman Vinciguerra",
+          "no_sub_title": "William Rejchtman Vinciguerra",
+          "yes_ask": 0.96,
+          "no_ask": 0.05
+        }
+      ]
+    },
+    "KXITFMATCH-26NOV18UJVPOP": {
+      "title": "Ujvary vs Popko",
+      "sub_title": "Ujvary vs Popko (Nov 18)",
+      "markets": [
+        {
+          "ticker": "KXITFMATCH-26NOV18UJVPOP-UJV",
+          "title": "Matthias Ujvary wins",
+          "yes_sub_title": "Matthias Ujvary",
+          "no_sub_title": "Matthias Ujvary",
+          "yes_ask": 0.23,
+          "no_ask": 0.79
+        },
+        {
+          "ticker": "KXITFMATCH-26NOV18UJVPOP-POP",
+          "title": "Dmitry Popko wins",
+          "yes_sub_title": "Dmitry Popko",
+          "no_sub_title": "Dmitry Popko",
+          "yes_ask": 0.79,
+          "no_ask": 0.23
+        }
+      ]
+    },
+    "KXLEAVEOPEC-27": {
+      "title": "Will another country leave OPEC in 2026?",
+      "sub_title": "Before Jan 1, 2027",
+      "markets": [
+        {
+          "ticker": "KXLEAVEOPEC-27",
+          "title": "Will another country leave OPEC in 2026?",
+          "yes_sub_title": "Yes",
+          "no_sub_title": "Yes",
+          "yes_ask": 0.07,
+          "no_ask": 0.96
+        }
+      ]
+    },
+    "KXLJUBLJANAMAYOR-26NOV15": {
+      "title": "Ljubljana mayoral election winner?",
+      "sub_title": "November 15, 2026",
+      "markets": [
+        {
+          "ticker": "KXLJUBLJANAMAYOR-26NOV15-ZJAN",
+          "title": "Will Zoran Jankovi\u0107 win the 2026 Ljubljana mayoral election?",
+          "yes_sub_title": "Zoran Jankovi\u0107",
+          "no_sub_title": "Zoran Jankovi\u0107",
+          "yes_ask": 0.69,
+          "no_ask": 0.35
+        },
+        {
+          "ticker": "KXLJUBLJANAMAYOR-26NOV15-LMES",
+          "title": "Will Luka Mesec win the 2026 Ljubljana mayoral election?",
+          "yes_sub_title": "Luka Mesec",
+          "no_sub_title": "Luka Mesec",
+          "yes_ask": 0.33,
+          "no_ask": 0.7
+        },
+        {
+          "ticker": "KXLJUBLJANAMAYOR-26NOV15-AROP",
+          "title": "Will Anton Rop win the 2026 Ljubljana mayoral election?",
+          "yes_sub_title": "Anton Rop",
+          "no_sub_title": "Anton Rop",
+          "yes_ask": 0.01,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXLJUBLJANAMAYOR-26NOV15-APRI",
+          "title": "Will Ale\u0161 Primc win the 2026 Ljubljana mayoral election?",
+          "yes_sub_title": "Ale\u0161 Primc",
+          "no_sub_title": "Ale\u0161 Primc",
+          "yes_ask": 0.01,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXLJUBLJANAMAYOR-26NOV15-JFER",
+          "title": "Will Jasmin Feratovi\u0107 win the 2026 Ljubljana mayoral election?",
+          "yes_sub_title": "Jasmin Feratovi\u0107",
+          "no_sub_title": "Jasmin Feratovi\u0107",
+          "yes_ask": 0.01,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXLJUBLJANAMAYOR-26NOV15-GNOV",
+          "title": "Will Gregor Novak win the 2026 Ljubljana mayoral election?",
+          "yes_sub_title": "Gregor Novak",
+          "no_sub_title": "Gregor Novak",
+          "yes_ask": 0.01,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXLJUBLJANAMAYOR-26NOV15-MJAR",
+          "title": "Will Mihael Jarc win the 2026 Ljubljana mayoral election?",
+          "yes_sub_title": "Mihael Jarc",
+          "no_sub_title": "Mihael Jarc",
+          "yes_ask": 0.01,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXLJUBLJANAMAYOR-26NOV15-ASIM",
+          "title": "Will Apolonija Simon win the 2026 Ljubljana mayoral election?",
+          "yes_sub_title": "Apolonija Simon",
+          "no_sub_title": "Apolonija Simon",
+          "yes_ask": 0.01,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXLJUBLJANAMAYOR-26NOV15-AREP",
+          "title": "Will Aleksandar Repi\u0107 win the 2026 Ljubljana mayoral election?",
+          "yes_sub_title": "Aleksandar Repi\u0107",
+          "no_sub_title": "Aleksandar Repi\u0107",
+          "yes_ask": 0.01,
           "no_ask": 1.0
         }
       ]
@@ -357,8 +1141,8 @@
           "title": "Houston wins",
           "yes_sub_title": "Houston",
           "no_sub_title": "Houston",
-          "yes_ask": 0.74,
-          "no_ask": 0.27
+          "yes_ask": 0.73,
+          "no_ask": 0.28
         },
         {
           "ticker": "KXNBAGAME-26NOV18HOUIND-IND",
@@ -423,16 +1207,16 @@
           "title": "Philadelphia wins",
           "yes_sub_title": "Philadelphia",
           "no_sub_title": "Philadelphia",
-          "yes_ask": 0.54,
-          "no_ask": 0.47
+          "yes_ask": 0.55,
+          "no_ask": 0.46
         },
         {
           "ticker": "KXNBAGAME-26NOV18PHIORL-ORL",
           "title": "Orlando wins",
           "yes_sub_title": "Orlando",
           "no_sub_title": "Orlando",
-          "yes_ask": 0.47,
-          "no_ask": 0.54
+          "yes_ask": 0.46,
+          "no_ask": 0.55
         }
       ]
     },
@@ -445,7 +1229,7 @@
           "title": "Phoenix wins",
           "yes_sub_title": "Phoenix",
           "no_sub_title": "Phoenix",
-          "yes_ask": 0.7,
+          "yes_ask": 0.71,
           "no_ask": 0.31
         },
         {
@@ -467,1080 +1251,16 @@
           "title": "Utah wins",
           "yes_sub_title": "Utah",
           "no_sub_title": "Utah",
-          "yes_ask": 0.21,
-          "no_ask": 0.8
+          "yes_ask": 0.22,
+          "no_ask": 0.79
         },
         {
           "ticker": "KXNBAGAME-26NOV18UTALAL-LAL",
           "title": "Los Angeles L wins",
           "yes_sub_title": "Los Angeles L",
           "no_sub_title": "Los Angeles L",
-          "yes_ask": 0.8,
-          "no_ask": 0.21
-        }
-      ]
-    },
-    "KXNBASPREAD-26NOV17CHALAL": {
-      "title": "Charlotte vs Los Angeles L: Spread",
-      "sub_title": "CHA vs LAL (Nov 17)",
-      "markets": [
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL35",
-          "title": "Los Angeles L wins by over 34.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 34.5 points",
-          "no_sub_title": "Los Angeles L wins by over 34.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL33",
-          "title": "Los Angeles L wins by over 32.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 32.5 points",
-          "no_sub_title": "Los Angeles L wins by over 32.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL31",
-          "title": "Los Angeles L wins by over 30.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 30.5 points",
-          "no_sub_title": "Los Angeles L wins by over 30.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL29",
-          "title": "Los Angeles L wins by over 28.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 28.5 points",
-          "no_sub_title": "Los Angeles L wins by over 28.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL27",
-          "title": "Los Angeles L wins by over 26.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 26.5 points",
-          "no_sub_title": "Los Angeles L wins by over 26.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL25",
-          "title": "Los Angeles L wins by over 24.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 24.5 points",
-          "no_sub_title": "Los Angeles L wins by over 24.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL23",
-          "title": "Los Angeles L wins by over 22.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 22.5 points",
-          "no_sub_title": "Los Angeles L wins by over 22.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL21",
-          "title": "Los Angeles L wins by over 20.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 20.5 points",
-          "no_sub_title": "Los Angeles L wins by over 20.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL19",
-          "title": "Los Angeles L wins by over 18.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 18.5 points",
-          "no_sub_title": "Los Angeles L wins by over 18.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL17",
-          "title": "Los Angeles L wins by over 16.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 16.5 points",
-          "no_sub_title": "Los Angeles L wins by over 16.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL15",
-          "title": "Los Angeles L wins by over 14.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 14.5 points",
-          "no_sub_title": "Los Angeles L wins by over 14.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL14",
-          "title": "Los Angeles L wins by over 13.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 13.5 points",
-          "no_sub_title": "Los Angeles L wins by over 13.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL13",
-          "title": "Los Angeles L wins by over 12.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 12.5 points",
-          "no_sub_title": "Los Angeles L wins by over 12.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL12",
-          "title": "Los Angeles L wins by over 11.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 11.5 points",
-          "no_sub_title": "Los Angeles L wins by over 11.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL11",
-          "title": "Los Angeles L wins by over 10.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 10.5 points",
-          "no_sub_title": "Los Angeles L wins by over 10.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL10",
-          "title": "Los Angeles L wins by over 9.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 9.5 points",
-          "no_sub_title": "Los Angeles L wins by over 9.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL9",
-          "title": "Los Angeles L wins by over 8.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 8.5 points",
-          "no_sub_title": "Los Angeles L wins by over 8.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL8",
-          "title": "Los Angeles L wins by over 7.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 7.5 points",
-          "no_sub_title": "Los Angeles L wins by over 7.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL7",
-          "title": "Los Angeles L wins by over 6.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 6.5 points",
-          "no_sub_title": "Los Angeles L wins by over 6.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL6",
-          "title": "Los Angeles L wins by over 5.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 5.5 points",
-          "no_sub_title": "Los Angeles L wins by over 5.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL5",
-          "title": "Los Angeles L wins by over 4.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 4.5 points",
-          "no_sub_title": "Los Angeles L wins by over 4.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL4",
-          "title": "Los Angeles L wins by over 3.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 3.5 points",
-          "no_sub_title": "Los Angeles L wins by over 3.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL3",
-          "title": "Los Angeles L wins by over 2.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 2.5 points",
-          "no_sub_title": "Los Angeles L wins by over 2.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-LAL2",
-          "title": "Los Angeles L wins by over 1.5 points",
-          "yes_sub_title": "Los Angeles L wins by over 1.5 points",
-          "no_sub_title": "Los Angeles L wins by over 1.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-CHA2",
-          "title": "Charlotte wins by over 1.5 points",
-          "yes_sub_title": "Charlotte wins by over 1.5 points",
-          "no_sub_title": "Charlotte wins by over 1.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-CHA4",
-          "title": "Charlotte wins by over 3.5 points",
-          "yes_sub_title": "Charlotte wins by over 3.5 points",
-          "no_sub_title": "Charlotte wins by over 3.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-CHA6",
-          "title": "Charlotte wins by over 5.5 points",
-          "yes_sub_title": "Charlotte wins by over 5.5 points",
-          "no_sub_title": "Charlotte wins by over 5.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-CHA8",
-          "title": "Charlotte wins by over 7.5 points",
-          "yes_sub_title": "Charlotte wins by over 7.5 points",
-          "no_sub_title": "Charlotte wins by over 7.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-CHA10",
-          "title": "Charlotte wins by over 9.5 points",
-          "yes_sub_title": "Charlotte wins by over 9.5 points",
-          "no_sub_title": "Charlotte wins by over 9.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-CHA12",
-          "title": "Charlotte wins by over 11.5 points",
-          "yes_sub_title": "Charlotte wins by over 11.5 points",
-          "no_sub_title": "Charlotte wins by over 11.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-CHA14",
-          "title": "Charlotte wins by over 13.5 points",
-          "yes_sub_title": "Charlotte wins by over 13.5 points",
-          "no_sub_title": "Charlotte wins by over 13.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-CHA16",
-          "title": "Charlotte wins by over 15.5 points",
-          "yes_sub_title": "Charlotte wins by over 15.5 points",
-          "no_sub_title": "Charlotte wins by over 15.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV17CHALAL-CHA18",
-          "title": "Charlotte wins by over 17.5 points",
-          "yes_sub_title": "Charlotte wins by over 17.5 points",
-          "no_sub_title": "Charlotte wins by over 17.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        }
-      ]
-    },
-    "KXNBASPREAD-26NOV18MILMIA": {
-      "title": "Milwaukee vs Miami: Spread",
-      "sub_title": "MIL vs MIA (Nov 18)",
-      "markets": [
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA39",
-          "title": "Miami wins by over 38.5 points",
-          "yes_sub_title": "Miami wins by over 38.5 points",
-          "no_sub_title": "Miami wins by over 38.5 points",
-          "yes_ask": 0.05,
-          "no_ask": 0.98
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA37",
-          "title": "Miami wins by over 36.5 points",
-          "yes_sub_title": "Miami wins by over 36.5 points",
-          "no_sub_title": "Miami wins by over 36.5 points",
-          "yes_ask": 0.06,
-          "no_ask": 0.97
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA35",
-          "title": "Miami wins by over 34.5 points",
-          "yes_sub_title": "Miami wins by over 34.5 points",
-          "no_sub_title": "Miami wins by over 34.5 points",
-          "yes_ask": 0.06,
-          "no_ask": 0.96
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA33",
-          "title": "Miami wins by over 32.5 points",
-          "yes_sub_title": "Miami wins by over 32.5 points",
-          "no_sub_title": "Miami wins by over 32.5 points",
-          "yes_ask": 0.08,
-          "no_ask": 0.95
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA31",
-          "title": "Miami wins by over 30.5 points",
-          "yes_sub_title": "Miami wins by over 30.5 points",
-          "no_sub_title": "Miami wins by over 30.5 points",
-          "yes_ask": 0.09,
-          "no_ask": 0.93
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA29",
-          "title": "Miami wins by over 28.5 points",
-          "yes_sub_title": "Miami wins by over 28.5 points",
-          "no_sub_title": "Miami wins by over 28.5 points",
-          "yes_ask": 0.13,
-          "no_ask": 0.9
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA27",
-          "title": "Miami wins by over 26.5 points",
-          "yes_sub_title": "Miami wins by over 26.5 points",
-          "no_sub_title": "Miami wins by over 26.5 points",
-          "yes_ask": 0.16,
-          "no_ask": 0.87
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA25",
-          "title": "Miami wins by over 24.5 points",
-          "yes_sub_title": "Miami wins by over 24.5 points",
-          "no_sub_title": "Miami wins by over 24.5 points",
-          "yes_ask": 0.2,
-          "no_ask": 0.82
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA23",
-          "title": "Miami wins by over 22.5 points",
-          "yes_sub_title": "Miami wins by over 22.5 points",
-          "no_sub_title": "Miami wins by over 22.5 points",
-          "yes_ask": 0.23,
-          "no_ask": 0.79
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA21",
-          "title": "Miami wins by over 20.5 points",
-          "yes_sub_title": "Miami wins by over 20.5 points",
-          "no_sub_title": "Miami wins by over 20.5 points",
-          "yes_ask": 0.29,
-          "no_ask": 0.74
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA19",
-          "title": "Miami wins by over 18.5 points",
-          "yes_sub_title": "Miami wins by over 18.5 points",
-          "no_sub_title": "Miami wins by over 18.5 points",
-          "yes_ask": 0.34,
-          "no_ask": 0.69
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA18",
-          "title": "Miami wins by over 17.5 points",
-          "yes_sub_title": "Miami wins by over 17.5 points",
-          "no_sub_title": "Miami wins by over 17.5 points",
-          "yes_ask": 0.37,
-          "no_ask": 0.66
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA17",
-          "title": "Miami wins by over 16.5 points",
-          "yes_sub_title": "Miami wins by over 16.5 points",
-          "no_sub_title": "Miami wins by over 16.5 points",
-          "yes_ask": 0.4,
-          "no_ask": 0.63
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA16",
-          "title": "Miami wins by over 15.5 points",
-          "yes_sub_title": "Miami wins by over 15.5 points",
-          "no_sub_title": "Miami wins by over 15.5 points",
-          "yes_ask": 0.42,
-          "no_ask": 0.6
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA15",
-          "title": "Miami wins by over 14.5 points",
-          "yes_sub_title": "Miami wins by over 14.5 points",
-          "no_sub_title": "Miami wins by over 14.5 points",
-          "yes_ask": 0.46,
-          "no_ask": 0.56
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA14",
-          "title": "Miami wins by over 13.5 points",
-          "yes_sub_title": "Miami wins by over 13.5 points",
-          "no_sub_title": "Miami wins by over 13.5 points",
-          "yes_ask": 0.48,
-          "no_ask": 0.53
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA13",
-          "title": "Miami wins by over 12.5 points",
-          "yes_sub_title": "Miami wins by over 12.5 points",
-          "no_sub_title": "Miami wins by over 12.5 points",
-          "yes_ask": 0.53,
-          "no_ask": 0.48
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA12",
-          "title": "Miami wins by over 11.5 points",
-          "yes_sub_title": "Miami wins by over 11.5 points",
-          "no_sub_title": "Miami wins by over 11.5 points",
-          "yes_ask": 0.57,
-          "no_ask": 0.44
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA11",
-          "title": "Miami wins by over 10.5 points",
-          "yes_sub_title": "Miami wins by over 10.5 points",
-          "no_sub_title": "Miami wins by over 10.5 points",
-          "yes_ask": 0.6,
-          "no_ask": 0.41
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA10",
-          "title": "Miami wins by over 9.5 points",
-          "yes_sub_title": "Miami wins by over 9.5 points",
-          "no_sub_title": "Miami wins by over 9.5 points",
-          "yes_ask": 0.63,
-          "no_ask": 0.39
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA9",
-          "title": "Miami wins by over 8.5 points",
-          "yes_sub_title": "Miami wins by over 8.5 points",
-          "no_sub_title": "Miami wins by over 8.5 points",
-          "yes_ask": 0.65,
-          "no_ask": 0.36
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA8",
-          "title": "Miami wins by over 7.5 points",
-          "yes_sub_title": "Miami wins by over 7.5 points",
-          "no_sub_title": "Miami wins by over 7.5 points",
-          "yes_ask": 0.68,
-          "no_ask": 0.33
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA7",
-          "title": "Miami wins by over 6.5 points",
-          "yes_sub_title": "Miami wins by over 6.5 points",
-          "no_sub_title": "Miami wins by over 6.5 points",
-          "yes_ask": 0.72,
-          "no_ask": 0.3
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA5",
-          "title": "Miami wins by over 4.5 points",
-          "yes_sub_title": "Miami wins by over 4.5 points",
-          "no_sub_title": "Miami wins by over 4.5 points",
-          "yes_ask": 0.77,
-          "no_ask": 0.24
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA3",
-          "title": "Miami wins by over 2.5 points",
-          "yes_sub_title": "Miami wins by over 2.5 points",
-          "no_sub_title": "Miami wins by over 2.5 points",
-          "yes_ask": 0.81,
-          "no_ask": 0.2
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA2",
-          "title": "Miami wins by over 1.5 points",
-          "yes_sub_title": "Miami wins by over 1.5 points",
-          "no_sub_title": "Miami wins by over 1.5 points",
-          "yes_ask": 0.84,
-          "no_ask": 0.17
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIL2",
-          "title": "Milwaukee wins by over 1.5 points",
-          "yes_sub_title": "Milwaukee wins by over 1.5 points",
-          "no_sub_title": "Milwaukee wins by over 1.5 points",
-          "yes_ask": 0.14,
-          "no_ask": 0.88
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIL4",
-          "title": "Milwaukee wins by over 3.5 points",
-          "yes_sub_title": "Milwaukee wins by over 3.5 points",
-          "no_sub_title": "Milwaukee wins by over 3.5 points",
-          "yes_ask": 0.11,
-          "no_ask": 0.91
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIL6",
-          "title": "Milwaukee wins by over 5.5 points",
-          "yes_sub_title": "Milwaukee wins by over 5.5 points",
-          "no_sub_title": "Milwaukee wins by over 5.5 points",
-          "yes_ask": 0.09,
-          "no_ask": 0.94
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIL8",
-          "title": "Milwaukee wins by over 7.5 points",
-          "yes_sub_title": "Milwaukee wins by over 7.5 points",
-          "no_sub_title": "Milwaukee wins by over 7.5 points",
-          "yes_ask": 0.07,
-          "no_ask": 0.96
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIL10",
-          "title": "Milwaukee wins by over 9.5 points",
-          "yes_sub_title": "Milwaukee wins by over 9.5 points",
-          "no_sub_title": "Milwaukee wins by over 9.5 points",
-          "yes_ask": 0.05,
-          "no_ask": 0.97
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIL12",
-          "title": "Milwaukee wins by over 11.5 points",
-          "yes_sub_title": "Milwaukee wins by over 11.5 points",
-          "no_sub_title": "Milwaukee wins by over 11.5 points",
-          "yes_ask": 0.04,
-          "no_ask": 0.99
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18MILMIA-MIL14",
-          "title": "Milwaukee wins by over 13.5 points",
-          "yes_sub_title": "Milwaukee wins by over 13.5 points",
-          "no_sub_title": "Milwaukee wins by over 13.5 points",
-          "yes_ask": 0.03,
-          "no_ask": 0.99
-        }
-      ]
-    },
-    "KXNBASPREAD-26NOV18PHIORL": {
-      "title": "Philadelphia vs Orlando: Spread",
-      "sub_title": "PHI vs ORL (Nov 18)",
-      "markets": [
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-ORL27",
-          "title": "Orlando wins by over 26.5 points",
-          "yes_sub_title": "Orlando wins by over 26.5 points",
-          "no_sub_title": "Orlando wins by over 26.5 points",
-          "yes_ask": 0.04,
-          "no_ask": 0.99
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-ORL25",
-          "title": "Orlando wins by over 24.5 points",
-          "yes_sub_title": "Orlando wins by over 24.5 points",
-          "no_sub_title": "Orlando wins by over 24.5 points",
-          "yes_ask": 0.04,
-          "no_ask": 0.98
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-ORL23",
-          "title": "Orlando wins by over 22.5 points",
-          "yes_sub_title": "Orlando wins by over 22.5 points",
-          "no_sub_title": "Orlando wins by over 22.5 points",
-          "yes_ask": 0.05,
-          "no_ask": 0.98
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-ORL21",
-          "title": "Orlando wins by over 20.5 points",
-          "yes_sub_title": "Orlando wins by over 20.5 points",
-          "no_sub_title": "Orlando wins by over 20.5 points",
-          "yes_ask": 0.06,
-          "no_ask": 0.97
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-ORL19",
-          "title": "Orlando wins by over 18.5 points",
-          "yes_sub_title": "Orlando wins by over 18.5 points",
-          "no_sub_title": "Orlando wins by over 18.5 points",
-          "yes_ask": 0.08,
-          "no_ask": 0.95
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-ORL17",
-          "title": "Orlando wins by over 16.5 points",
-          "yes_sub_title": "Orlando wins by over 16.5 points",
-          "no_sub_title": "Orlando wins by over 16.5 points",
-          "yes_ask": 0.11,
-          "no_ask": 0.93
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-ORL15",
-          "title": "Orlando wins by over 14.5 points",
-          "yes_sub_title": "Orlando wins by over 14.5 points",
-          "no_sub_title": "Orlando wins by over 14.5 points",
-          "yes_ask": 0.13,
-          "no_ask": 0.89
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-ORL13",
-          "title": "Orlando wins by over 12.5 points",
-          "yes_sub_title": "Orlando wins by over 12.5 points",
-          "no_sub_title": "Orlando wins by over 12.5 points",
-          "yes_ask": 0.16,
-          "no_ask": 0.86
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-ORL11",
-          "title": "Orlando wins by over 10.5 points",
-          "yes_sub_title": "Orlando wins by over 10.5 points",
-          "no_sub_title": "Orlando wins by over 10.5 points",
-          "yes_ask": 0.21,
-          "no_ask": 0.82
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-ORL9",
-          "title": "Orlando wins by over 8.5 points",
-          "yes_sub_title": "Orlando wins by over 8.5 points",
-          "no_sub_title": "Orlando wins by over 8.5 points",
-          "yes_ask": 0.24,
-          "no_ask": 0.77
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-ORL7",
-          "title": "Orlando wins by over 6.5 points",
-          "yes_sub_title": "Orlando wins by over 6.5 points",
-          "no_sub_title": "Orlando wins by over 6.5 points",
-          "yes_ask": 0.29,
-          "no_ask": 0.72
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-ORL6",
-          "title": "Orlando wins by over 5.5 points",
-          "yes_sub_title": "Orlando wins by over 5.5 points",
-          "no_sub_title": "Orlando wins by over 5.5 points",
-          "yes_ask": 0.32,
-          "no_ask": 0.69
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-ORL5",
-          "title": "Orlando wins by over 4.5 points",
-          "yes_sub_title": "Orlando wins by over 4.5 points",
-          "no_sub_title": "Orlando wins by over 4.5 points",
-          "yes_ask": 0.35,
-          "no_ask": 0.66
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-ORL4",
-          "title": "Orlando wins by over 3.5 points",
-          "yes_sub_title": "Orlando wins by over 3.5 points",
-          "no_sub_title": "Orlando wins by over 3.5 points",
-          "yes_ask": 0.4,
-          "no_ask": 0.61
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-ORL3",
-          "title": "Orlando wins by over 2.5 points",
-          "yes_sub_title": "Orlando wins by over 2.5 points",
-          "no_sub_title": "Orlando wins by over 2.5 points",
-          "yes_ask": 0.42,
-          "no_ask": 0.6
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-ORL2",
-          "title": "Orlando wins by over 1.5 points",
-          "yes_sub_title": "Orlando wins by over 1.5 points",
-          "no_sub_title": "Orlando wins by over 1.5 points",
-          "yes_ask": 0.45,
-          "no_ask": 0.56
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-PHI2",
-          "title": "Philadelphia wins by over 1.5 points",
-          "yes_sub_title": "Philadelphia wins by over 1.5 points",
-          "no_sub_title": "Philadelphia wins by over 1.5 points",
-          "yes_ask": 0.52,
-          "no_ask": 0.49
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-PHI3",
-          "title": "Philadelphia wins by over 2.5 points",
-          "yes_sub_title": "Philadelphia wins by over 2.5 points",
-          "no_sub_title": "Philadelphia wins by over 2.5 points",
-          "yes_ask": 0.48,
-          "no_ask": 0.54
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-PHI4",
-          "title": "Philadelphia wins by over 3.5 points",
-          "yes_sub_title": "Philadelphia wins by over 3.5 points",
-          "no_sub_title": "Philadelphia wins by over 3.5 points",
-          "yes_ask": 0.45,
-          "no_ask": 0.57
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-PHI5",
-          "title": "Philadelphia wins by over 4.5 points",
-          "yes_sub_title": "Philadelphia wins by over 4.5 points",
-          "no_sub_title": "Philadelphia wins by over 4.5 points",
-          "yes_ask": 0.42,
-          "no_ask": 0.6
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-PHI6",
-          "title": "Philadelphia wins by over 5.5 points",
-          "yes_sub_title": "Philadelphia wins by over 5.5 points",
-          "no_sub_title": "Philadelphia wins by over 5.5 points",
-          "yes_ask": 0.38,
-          "no_ask": 0.64
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-PHI7",
-          "title": "Philadelphia wins by over 6.5 points",
-          "yes_sub_title": "Philadelphia wins by over 6.5 points",
-          "no_sub_title": "Philadelphia wins by over 6.5 points",
-          "yes_ask": 0.34,
-          "no_ask": 0.67
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-PHI8",
-          "title": "Philadelphia wins by over 7.5 points",
-          "yes_sub_title": "Philadelphia wins by over 7.5 points",
-          "no_sub_title": "Philadelphia wins by over 7.5 points",
-          "yes_ask": 0.31,
-          "no_ask": 0.7
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-PHI10",
-          "title": "Philadelphia wins by over 9.5 points",
-          "yes_sub_title": "Philadelphia wins by over 9.5 points",
-          "no_sub_title": "Philadelphia wins by over 9.5 points",
-          "yes_ask": 0.26,
-          "no_ask": 0.76
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-PHI12",
-          "title": "Philadelphia wins by over 11.5 points",
-          "yes_sub_title": "Philadelphia wins by over 11.5 points",
-          "no_sub_title": "Philadelphia wins by over 11.5 points",
-          "yes_ask": 0.21,
-          "no_ask": 0.81
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-PHI14",
-          "title": "Philadelphia wins by over 13.5 points",
-          "yes_sub_title": "Philadelphia wins by over 13.5 points",
-          "no_sub_title": "Philadelphia wins by over 13.5 points",
-          "yes_ask": 0.16,
-          "no_ask": 0.85
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-PHI16",
-          "title": "Philadelphia wins by over 15.5 points",
-          "yes_sub_title": "Philadelphia wins by over 15.5 points",
-          "no_sub_title": "Philadelphia wins by over 15.5 points",
-          "yes_ask": 0.14,
-          "no_ask": 0.89
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-PHI18",
-          "title": "Philadelphia wins by over 17.5 points",
-          "yes_sub_title": "Philadelphia wins by over 17.5 points",
-          "no_sub_title": "Philadelphia wins by over 17.5 points",
-          "yes_ask": 0.11,
-          "no_ask": 0.92
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-PHI20",
-          "title": "Philadelphia wins by over 19.5 points",
-          "yes_sub_title": "Philadelphia wins by over 19.5 points",
-          "no_sub_title": "Philadelphia wins by over 19.5 points",
-          "yes_ask": 0.08,
-          "no_ask": 0.94
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-PHI22",
-          "title": "Philadelphia wins by over 21.5 points",
-          "yes_sub_title": "Philadelphia wins by over 21.5 points",
-          "no_sub_title": "Philadelphia wins by over 21.5 points",
-          "yes_ask": 0.07,
-          "no_ask": 0.96
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-PHI24",
-          "title": "Philadelphia wins by over 23.5 points",
-          "yes_sub_title": "Philadelphia wins by over 23.5 points",
-          "no_sub_title": "Philadelphia wins by over 23.5 points",
-          "yes_ask": 0.05,
-          "no_ask": 0.97
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-PHI26",
-          "title": "Philadelphia wins by over 25.5 points",
-          "yes_sub_title": "Philadelphia wins by over 25.5 points",
-          "no_sub_title": "Philadelphia wins by over 25.5 points",
-          "yes_ask": 0.04,
-          "no_ask": 0.98
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV18PHIORL-PHI28",
-          "title": "Philadelphia wins by over 27.5 points",
-          "yes_sub_title": "Philadelphia wins by over 27.5 points",
-          "no_sub_title": "Philadelphia wins by over 27.5 points",
-          "yes_ask": 0.04,
-          "no_ask": 0.99
-        }
-      ]
-    },
-    "KXNBATOTAL-26NOV17CHALAL": {
-      "title": "Charlotte vs Los Angeles L: Total Points",
-      "sub_title": "CHA vs LAL (Nov 17)",
-      "markets": [
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-191",
-          "title": "Full Game: Over 190.5 points scored",
-          "yes_sub_title": "Over 190.5 points",
-          "no_sub_title": "Over 190.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-193",
-          "title": "Full Game: Over 192.5 points scored",
-          "yes_sub_title": "Over 192.5 points",
-          "no_sub_title": "Over 192.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-195",
-          "title": "Full Game: Over 194.5 points scored",
-          "yes_sub_title": "Over 194.5 points",
-          "no_sub_title": "Over 194.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-197",
-          "title": "Full Game: Over 196.5 points scored",
-          "yes_sub_title": "Over 196.5 points",
-          "no_sub_title": "Over 196.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-199",
-          "title": "Full Game: Over 198.5 points scored",
-          "yes_sub_title": "Over 198.5 points",
-          "no_sub_title": "Over 198.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-201",
-          "title": "Full Game: Over 200.5 points scored",
-          "yes_sub_title": "Over 200.5 points",
-          "no_sub_title": "Over 200.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-203",
-          "title": "Full Game: Over 202.5 points scored",
-          "yes_sub_title": "Over 202.5 points",
-          "no_sub_title": "Over 202.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-205",
-          "title": "Full Game: Over 204.5 points scored",
-          "yes_sub_title": "Over 204.5 points",
-          "no_sub_title": "Over 204.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-207",
-          "title": "Full Game: Over 206.5 points scored",
-          "yes_sub_title": "Over 206.5 points",
-          "no_sub_title": "Over 206.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-209",
-          "title": "Full Game: Over 208.5 points scored",
-          "yes_sub_title": "Over 208.5 points",
-          "no_sub_title": "Over 208.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-211",
-          "title": "Full Game: Over 210.5 points scored",
-          "yes_sub_title": "Over 210.5 points",
-          "no_sub_title": "Over 210.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-213",
-          "title": "Full Game: Over 212.5 points scored",
-          "yes_sub_title": "Over 212.5 points",
-          "no_sub_title": "Over 212.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-215",
-          "title": "Full Game: Over 214.5 points scored",
-          "yes_sub_title": "Over 214.5 points",
-          "no_sub_title": "Over 214.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-217",
-          "title": "Full Game: Over 216.5 points scored",
-          "yes_sub_title": "Over 216.5 points",
-          "no_sub_title": "Over 216.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-219",
-          "title": "Full Game: Over 218.5 points scored",
-          "yes_sub_title": "Over 218.5 points",
-          "no_sub_title": "Over 218.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-221",
-          "title": "Full Game: Over 220.5 points scored",
-          "yes_sub_title": "Over 220.5 points",
-          "no_sub_title": "Over 220.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-223",
-          "title": "Full Game: Over 222.5 points scored",
-          "yes_sub_title": "Over 222.5 points",
-          "no_sub_title": "Over 222.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-225",
-          "title": "Full Game: Over 224.5 points scored",
-          "yes_sub_title": "Over 224.5 points",
-          "no_sub_title": "Over 224.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-227",
-          "title": "Full Game: Over 226.5 points scored",
-          "yes_sub_title": "Over 226.5 points",
-          "no_sub_title": "Over 226.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-229",
-          "title": "Full Game: Over 228.5 points scored",
-          "yes_sub_title": "Over 228.5 points",
-          "no_sub_title": "Over 228.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-231",
-          "title": "Full Game: Over 230.5 points scored",
-          "yes_sub_title": "Over 230.5 points",
-          "no_sub_title": "Over 230.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-233",
-          "title": "Full Game: Over 232.5 points scored",
-          "yes_sub_title": "Over 232.5 points",
-          "no_sub_title": "Over 232.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-235",
-          "title": "Full Game: Over 234.5 points scored",
-          "yes_sub_title": "Over 234.5 points",
-          "no_sub_title": "Over 234.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-237",
-          "title": "Full Game: Over 236.5 points scored",
-          "yes_sub_title": "Over 236.5 points",
-          "no_sub_title": "Over 236.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-239",
-          "title": "Full Game: Over 238.5 points scored",
-          "yes_sub_title": "Over 238.5 points",
-          "no_sub_title": "Over 238.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-241",
-          "title": "Full Game: Over 240.5 points scored",
-          "yes_sub_title": "Over 240.5 points",
-          "no_sub_title": "Over 240.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-243",
-          "title": "Full Game: Over 242.5 points scored",
-          "yes_sub_title": "Over 242.5 points",
-          "no_sub_title": "Over 242.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-245",
-          "title": "Full Game: Over 244.5 points scored",
-          "yes_sub_title": "Over 244.5 points",
-          "no_sub_title": "Over 244.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-247",
-          "title": "Full Game: Over 246.5 points scored",
-          "yes_sub_title": "Over 246.5 points",
-          "no_sub_title": "Over 246.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-249",
-          "title": "Full Game: Over 248.5 points scored",
-          "yes_sub_title": "Over 248.5 points",
-          "no_sub_title": "Over 248.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBATOTAL-26NOV17CHALAL-251",
-          "title": "Full Game: Over 250.5 points scored",
-          "yes_sub_title": "Over 250.5 points",
-          "no_sub_title": "Over 250.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
+          "yes_ask": 0.79,
+          "no_ask": 0.22
         }
       ]
     },
@@ -1799,7 +1519,7 @@
           "title": "Full Game: Over 197.5 points scored",
           "yes_sub_title": "Over 197.5 points",
           "no_sub_title": "Over 197.5 points",
-          "yes_ask": 0.95,
+          "yes_ask": 0.94,
           "no_ask": 0.09
         },
         {
@@ -1807,7 +1527,7 @@
           "title": "Full Game: Over 199.5 points scored",
           "yes_sub_title": "Over 199.5 points",
           "no_sub_title": "Over 199.5 points",
-          "yes_ask": 0.93,
+          "yes_ask": 0.92,
           "no_ask": 0.11
         },
         {
@@ -1815,7 +1535,7 @@
           "title": "Full Game: Over 201.5 points scored",
           "yes_sub_title": "Over 201.5 points",
           "no_sub_title": "Over 201.5 points",
-          "yes_ask": 0.91,
+          "yes_ask": 0.9,
           "no_ask": 0.13
         },
         {
@@ -1823,7 +1543,7 @@
           "title": "Full Game: Over 203.5 points scored",
           "yes_sub_title": "Over 203.5 points",
           "no_sub_title": "Over 203.5 points",
-          "yes_ask": 0.87,
+          "yes_ask": 0.88,
           "no_ask": 0.16
         },
         {
@@ -1831,7 +1551,7 @@
           "title": "Full Game: Over 205.5 points scored",
           "yes_sub_title": "Over 205.5 points",
           "no_sub_title": "Over 205.5 points",
-          "yes_ask": 0.86,
+          "yes_ask": 0.85,
           "no_ask": 0.17
         },
         {
@@ -1839,7 +1559,7 @@
           "title": "Full Game: Over 207.5 points scored",
           "yes_sub_title": "Over 207.5 points",
           "no_sub_title": "Over 207.5 points",
-          "yes_ask": 0.83,
+          "yes_ask": 0.82,
           "no_ask": 0.21
         },
         {
@@ -1855,7 +1575,7 @@
           "title": "Full Game: Over 211.5 points scored",
           "yes_sub_title": "Over 211.5 points",
           "no_sub_title": "Over 211.5 points",
-          "yes_ask": 0.76,
+          "yes_ask": 0.75,
           "no_ask": 0.27
         },
         {
@@ -1872,7 +1592,7 @@
           "yes_sub_title": "Over 215.5 points",
           "no_sub_title": "Over 215.5 points",
           "yes_ask": 0.65,
-          "no_ask": 0.36
+          "no_ask": 0.37
         },
         {
           "ticker": "KXNBATOTAL-26NOV18PHIORL-218",
@@ -1912,7 +1632,7 @@
           "yes_sub_title": "Over 225.5 points",
           "no_sub_title": "Over 225.5 points",
           "yes_ask": 0.43,
-          "no_ask": 0.59
+          "no_ask": 0.6
         },
         {
           "ticker": "KXNBATOTAL-26NOV18PHIORL-228",
@@ -1927,7 +1647,7 @@
           "title": "Full Game: Over 229.5 points scored",
           "yes_sub_title": "Over 229.5 points",
           "no_sub_title": "Over 229.5 points",
-          "yes_ask": 0.35,
+          "yes_ask": 0.36,
           "no_ask": 0.66
         },
         {
@@ -1967,7 +1687,7 @@
           "title": "Full Game: Over 239.5 points scored",
           "yes_sub_title": "Over 239.5 points",
           "no_sub_title": "Over 239.5 points",
-          "yes_ask": 0.18,
+          "yes_ask": 0.17,
           "no_ask": 0.86
         },
         {
@@ -2016,7 +1736,7 @@
           "yes_sub_title": "Over 251.5 points",
           "no_sub_title": "Over 251.5 points",
           "yes_ask": 0.07,
-          "no_ask": 0.96
+          "no_ask": 0.97
         }
       ]
     },
@@ -2085,7 +1805,7 @@
           "title": "Detroit wins by over 10.5 points?",
           "yes_sub_title": "Detroit wins by over 10.5 points",
           "no_sub_title": "Detroit wins by over 10.5 points",
-          "yes_ask": 0.41,
+          "yes_ask": 0.4,
           "no_ask": 0.61
         },
         {
@@ -2101,8 +1821,8 @@
           "title": "Detroit wins by over 7.5 points?",
           "yes_sub_title": "Detroit wins by over 7.5 points",
           "no_sub_title": "Detroit wins by over 7.5 points",
-          "yes_ask": 0.48,
-          "no_ask": 0.53
+          "yes_ask": 0.47,
+          "no_ask": 0.54
         },
         {
           "ticker": "KXNFLSPREAD-26NOV22TBDET-DET7",
@@ -2126,7 +1846,7 @@
           "yes_sub_title": "Detroit wins by over 4.5 points",
           "no_sub_title": "Detroit wins by over 4.5 points",
           "yes_ask": 0.61,
-          "no_ask": 0.4
+          "no_ask": 0.41
         },
         {
           "ticker": "KXNFLSPREAD-26NOV22TBDET-DET4",
@@ -2173,8 +1893,8 @@
           "title": "Tampa Bay wins by over 3.5 points?",
           "yes_sub_title": "Tampa Bay wins by over 3.5 points",
           "no_sub_title": "Tampa Bay wins by over 3.5 points",
-          "yes_ask": 0.18,
-          "no_ask": 0.84
+          "yes_ask": 0.17,
+          "no_ask": 0.85
         },
         {
           "ticker": "KXNFLSPREAD-26NOV22TBDET-TB5",
@@ -2267,8 +1987,8 @@
           "title": "Cincinnati wins by over 20.5 points?",
           "yes_sub_title": "Cincinnati wins by over 20.5 points",
           "no_sub_title": "Cincinnati wins by over 20.5 points",
-          "yes_ask": 0.16,
-          "no_ask": 0.86
+          "yes_ask": 0.15,
+          "no_ask": 0.87
         },
         {
           "ticker": "KXNFLSPREAD-26NOV23CINWAS-CIN18",
@@ -2284,7 +2004,7 @@
           "yes_sub_title": "Cincinnati wins by over 16.5 points",
           "no_sub_title": "Cincinnati wins by over 16.5 points",
           "yes_ask": 0.23,
-          "no_ask": 0.79
+          "no_ask": 0.78
         },
         {
           "ticker": "KXNFLSPREAD-26NOV23CINWAS-CIN15",
@@ -2308,7 +2028,7 @@
           "yes_sub_title": "Cincinnati wins by over 10.5 points",
           "no_sub_title": "Cincinnati wins by over 10.5 points",
           "yes_ask": 0.35,
-          "no_ask": 0.67
+          "no_ask": 0.66
         },
         {
           "ticker": "KXNFLSPREAD-26NOV23CINWAS-CIN10",
@@ -2316,7 +2036,7 @@
           "yes_sub_title": "Cincinnati wins by over 9.5 points",
           "no_sub_title": "Cincinnati wins by over 9.5 points",
           "yes_ask": 0.39,
-          "no_ask": 0.63
+          "no_ask": 0.62
         },
         {
           "ticker": "KXNFLSPREAD-26NOV23CINWAS-CIN8",
@@ -2324,7 +2044,7 @@
           "yes_sub_title": "Cincinnati wins by over 7.5 points",
           "no_sub_title": "Cincinnati wins by over 7.5 points",
           "yes_ask": 0.43,
-          "no_ask": 0.59
+          "no_ask": 0.58
         },
         {
           "ticker": "KXNFLSPREAD-26NOV23CINWAS-CIN7",
@@ -2356,7 +2076,7 @@
           "yes_sub_title": "Cincinnati wins by over 3.5 points",
           "no_sub_title": "Cincinnati wins by over 3.5 points",
           "yes_ask": 0.59,
-          "no_ask": 0.42
+          "no_ask": 0.43
         },
         {
           "ticker": "KXNFLSPREAD-26NOV23CINWAS-CIN3",
@@ -2371,7 +2091,7 @@
           "title": "Cincinnati wins by over 1.5 points?",
           "yes_sub_title": "Cincinnati wins by over 1.5 points",
           "no_sub_title": "Cincinnati wins by over 1.5 points",
-          "yes_ask": 0.71,
+          "yes_ask": 0.7,
           "no_ask": 0.31
         },
         {
@@ -2388,7 +2108,7 @@
           "yes_sub_title": "Washington wins by over 2.5 points",
           "no_sub_title": "Washington wins by over 2.5 points",
           "yes_ask": 0.25,
-          "no_ask": 0.78
+          "no_ask": 0.77
         },
         {
           "ticker": "KXNFLSPREAD-26NOV23CINWAS-WAS4",
@@ -2396,15 +2116,15 @@
           "yes_sub_title": "Washington wins by over 3.5 points",
           "no_sub_title": "Washington wins by over 3.5 points",
           "yes_ask": 0.19,
-          "no_ask": 0.85
+          "no_ask": 0.83
         },
         {
           "ticker": "KXNFLSPREAD-26NOV23CINWAS-WAS5",
           "title": "Washington wins by over 4.5 points?",
           "yes_sub_title": "Washington wins by over 4.5 points",
           "no_sub_title": "Washington wins by over 4.5 points",
-          "yes_ask": 0.16,
-          "no_ask": 0.86
+          "yes_ask": 0.17,
+          "no_ask": 0.84
         },
         {
           "ticker": "KXNFLSPREAD-26NOV23CINWAS-WAS6",
@@ -2482,7 +2202,7 @@
           "yes_sub_title": "Over 28.5 points",
           "no_sub_title": "Over 28.5 points",
           "yes_ask": 0.93,
-          "no_ask": 0.1
+          "no_ask": 0.12
         },
         {
           "ticker": "KXNFLTOTAL-26NOV22TBDET-32",
@@ -2663,7 +2383,7 @@
           "title": "Full Game: over 43.5 points scored?",
           "yes_sub_title": "Over 43.5 points",
           "no_sub_title": "Over 43.5 points",
-          "yes_ask": 0.8,
+          "yes_ask": 0.79,
           "no_ask": 0.23
         },
         {
@@ -2672,7 +2392,7 @@
           "yes_sub_title": "Over 46.5 points",
           "no_sub_title": "Over 46.5 points",
           "yes_ask": 0.72,
-          "no_ask": 0.29
+          "no_ask": 0.3
         },
         {
           "ticker": "KXNFLTOTAL-26NOV23CINWAS-50",
@@ -2720,7 +2440,7 @@
           "yes_sub_title": "Over 54.5 points",
           "no_sub_title": "Over 54.5 points",
           "yes_ask": 0.48,
-          "no_ask": 0.54
+          "no_ask": 0.53
         },
         {
           "ticker": "KXNFLTOTAL-26NOV23CINWAS-56",
@@ -2728,7 +2448,7 @@
           "yes_sub_title": "Over 55.5 points",
           "no_sub_title": "Over 55.5 points",
           "yes_ask": 0.45,
-          "no_ask": 0.57
+          "no_ask": 0.56
         },
         {
           "ticker": "KXNFLTOTAL-26NOV23CINWAS-59",
@@ -2736,7 +2456,7 @@
           "yes_sub_title": "Over 58.5 points",
           "no_sub_title": "Over 58.5 points",
           "yes_ask": 0.38,
-          "no_ask": 0.66
+          "no_ask": 0.65
         },
         {
           "ticker": "KXNFLTOTAL-26NOV23CINWAS-62",
@@ -2744,15 +2464,15 @@
           "yes_sub_title": "Over 61.5 points",
           "no_sub_title": "Over 61.5 points",
           "yes_ask": 0.3,
-          "no_ask": 0.73
+          "no_ask": 0.72
         },
         {
           "ticker": "KXNFLTOTAL-26NOV23CINWAS-65",
           "title": "Full Game: over 64.5 points scored?",
           "yes_sub_title": "Over 64.5 points",
           "no_sub_title": "Over 64.5 points",
-          "yes_ask": 0.23,
-          "no_ask": 0.8
+          "yes_ask": 0.25,
+          "no_ask": 0.79
         },
         {
           "ticker": "KXNFLTOTAL-26NOV23CINWAS-68",
@@ -2780,38 +2500,1424 @@
         }
       ]
     },
-    "KXUCLWGAME-26NOV19BARSER": {
-      "title": "Barcelona vs Servette Chenois",
-      "sub_title": "BAR vs SER (Nov 19)",
+    "KXONTLIBLEAD-26NOV21": {
+      "title": "Ontario Liberal Party leadership election winner?",
+      "sub_title": "in 2026",
       "markets": [
         {
-          "ticker": "KXUCLWGAME-26NOV19BARSER-BAR",
-          "title": "Barcelona wins",
-          "yes_sub_title": "Barcelona",
-          "no_sub_title": "Barcelona",
-          "yes_ask": 0.98,
-          "no_ask": 0.03
+          "ticker": "KXONTLIBLEAD-26NOV21-NBAI",
+          "title": "Will Navdeep Bains win the 2026 Ontario Liberal Party leadership election?",
+          "yes_sub_title": "Navdeep Bains",
+          "no_sub_title": "Navdeep Bains",
+          "yes_ask": 0.2,
+          "no_ask": 0.84
         },
         {
-          "ticker": "KXUCLWGAME-26NOV19BARSER-SER",
-          "title": "Servette Chenois wins",
-          "yes_sub_title": "Servette Chenois",
-          "no_sub_title": "Servette Chenois",
+          "ticker": "KXONTLIBLEAD-26NOV21-SBOW",
+          "title": "Will Stephanie Bowman win the 2026 Ontario Liberal Party leadership election?",
+          "yes_sub_title": "Stephanie Bowman",
+          "no_sub_title": "Stephanie Bowman",
+          "yes_ask": 0.01,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXONTLIBLEAD-26NOV21-LFAI",
+          "title": "Will Lee Fairclough win the 2026 Ontario Liberal Party leadership election?",
+          "yes_sub_title": "Lee Fairclough",
+          "no_sub_title": "Lee Fairclough",
+          "yes_ask": 0.8,
+          "no_ask": 0.25
+        },
+        {
+          "ticker": "KXONTLIBLEAD-26NOV21-ELOM",
+          "title": "Will Eric Lombardi win the 2026 Ontario Liberal Party leadership election?",
+          "yes_sub_title": "Eric Lombardi",
+          "no_sub_title": "Eric Lombardi",
+          "yes_ask": 0.01,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXONTLIBLEAD-26NOV21-DMAR",
+          "title": "Will Dylan Marando win the 2026 Ontario Liberal Party leadership election?",
+          "yes_sub_title": "Dylan Marando",
+          "no_sub_title": "Dylan Marando",
+          "yes_ask": 0.01,
+          "no_ask": 1.0
+        }
+      ]
+    },
+    "KXOPENAIANOTHERMILLENNIUM-28": {
+      "title": "Will OpenAI announce another Millennium Prize solution?",
+      "sub_title": "Before Jan 1, 2028",
+      "markets": [
+        {
+          "ticker": "KXOPENAIANOTHERMILLENNIUM-28-27JAN01",
+          "title": "Will OpenAI announce another Millennium Prize solution before Jan 1, 2027?",
+          "yes_sub_title": "Before Jan 1, 2027",
+          "no_sub_title": "Before Jan 1, 2027",
+          "yes_ask": 0.08,
+          "no_ask": 0.94
+        },
+        {
+          "ticker": "KXOPENAIANOTHERMILLENNIUM-28-28JAN01",
+          "title": "Will OpenAI announce another Millennium Prize solution before Jan 1, 2028?",
+          "yes_sub_title": "Before Jan 1, 2028",
+          "no_sub_title": "Before Jan 1, 2028",
+          "yes_ask": 0.52,
+          "no_ask": 0.53
+        }
+      ]
+    },
+    "KXPRESNOMD-28": {
+      "title": "2028 Democratic presidential nominee",
+      "sub_title": "In 2028",
+      "markets": [
+        {
+          "ticker": "KXPRESNOMD-28-HBID",
+          "title": "Will Hunter Biden be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Hunter Biden",
+          "no_sub_title": "Hunter Biden",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESNOMD-28-JTAL",
+          "title": "Will James Talarico be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "James Talarico",
+          "no_sub_title": "James Talarico",
+          "yes_ask": 0.021,
+          "no_ask": 0.98
+        },
+        {
+          "ticker": "KXPRESNOMD-28-RGAL",
+          "title": "Will Ruben Gallego be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Ruben Gallego",
+          "no_sub_title": "Ruben Gallego",
+          "yes_ask": 0.008,
+          "no_ask": 0.993
+        },
+        {
+          "ticker": "KXPRESNOMD-28-RKHA",
+          "title": "Will Ro Khanna be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Ro Khanna",
+          "no_sub_title": "Ro Khanna",
+          "yes_ask": 0.018,
+          "no_ask": 0.983
+        },
+        {
+          "ticker": "KXPRESNOMD-28-CMUR",
+          "title": "Will Chris Murphy be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Chris Murphy",
+          "no_sub_title": "Chris Murphy",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMD-28-ZMAM",
+          "title": "Will Zohran Mamdani be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Zohran Mamdani",
+          "no_sub_title": "Zohran Mamdani",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMD-28-KH",
+          "title": "Will Kamala Harris be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Kamala Harris",
+          "no_sub_title": "Kamala Harris",
+          "yes_ask": 0.049,
+          "no_ask": 0.952
+        },
+        {
+          "ticker": "KXPRESNOMD-28-GN",
+          "title": "Will Gavin Newsom be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Gavin Newsom",
+          "no_sub_title": "Gavin Newsom",
+          "yes_ask": 0.11,
+          "no_ask": 0.9
+        },
+        {
+          "ticker": "KXPRESNOMD-28-GW",
+          "title": "Will Gretchen Whitmer be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Gretchen Whitmer",
+          "no_sub_title": "Gretchen Whitmer",
+          "yes_ask": 0.006,
+          "no_ask": 0.995
+        },
+        {
+          "ticker": "KXPRESNOMD-28-JS",
+          "title": "Will Josh Shapiro be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Josh Shapiro",
+          "no_sub_title": "Josh Shapiro",
+          "yes_ask": 0.048,
+          "no_ask": 0.953
+        },
+        {
+          "ticker": "KXPRESNOMD-28-TW",
+          "title": "Will Tim Walz be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Tim Walz",
+          "no_sub_title": "Tim Walz",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-AOC",
+          "title": "Will Alexandria Ocasio-Cortez be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Alexandria Ocasio-Cortez",
+          "no_sub_title": "Alexandria Ocasio-Cortez",
+          "yes_ask": 0.15,
+          "no_ask": 0.86
+        },
+        {
+          "ticker": "KXPRESNOMD-28-MC",
+          "title": "Will Mark Cuban be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Mark Cuban",
+          "no_sub_title": "Mark Cuban",
+          "yes_ask": 0.008,
+          "no_ask": 0.993
+        },
+        {
+          "ticker": "KXPRESNOMD-28-PB",
+          "title": "Will Pete Buttigieg be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Pete Buttigieg",
+          "no_sub_title": "Pete Buttigieg",
+          "yes_ask": 0.053,
+          "no_ask": 0.948
+        },
+        {
+          "ticker": "KXPRESNOMD-28-WM",
+          "title": "Will Wes Moore be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Wes Moore",
+          "no_sub_title": "Wes Moore",
+          "yes_ask": 0.022,
+          "no_ask": 0.979
+        },
+        {
+          "ticker": "KXPRESNOMD-28-AB",
+          "title": "Will Andy Beshear be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Andy Beshear",
+          "no_sub_title": "Andy Beshear",
+          "yes_ask": 0.039,
+          "no_ask": 0.963
+        },
+        {
+          "ticker": "KXPRESNOMD-28-RC",
+          "title": "Will Roy Cooper be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Roy Cooper",
+          "no_sub_title": "Roy Cooper",
+          "yes_ask": 0.002,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-JBP",
+          "title": "Will J.B. Pritzker be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "J.B. Pritzker",
+          "no_sub_title": "J.B. Pritzker",
+          "yes_ask": 0.027,
+          "no_ask": 0.974
+        },
+        {
+          "ticker": "KXPRESNOMD-28-JF",
+          "title": "Will John Fetterman be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "John Fetterman",
+          "no_sub_title": "John Fetterman",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-RW",
+          "title": "Will Raphael Warnock be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Raphael Warnock",
+          "no_sub_title": "Raphael Warnock",
+          "yes_ask": 0.036,
+          "no_ask": 0.965
+        },
+        {
+          "ticker": "KXPRESNOMD-28-MO",
+          "title": "Will Michelle Obama be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Michelle Obama",
+          "no_sub_title": "Michelle Obama",
+          "yes_ask": 0.008,
+          "no_ask": 0.993
+        },
+        {
+          "ticker": "KXPRESNOMD-28-SAS",
+          "title": "Will Stephen A. Smith be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Stephen A. Smith",
+          "no_sub_title": "Stephen A. Smith",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESNOMD-28-MK",
+          "title": "Will Mark Kelly be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Mark Kelly",
+          "no_sub_title": "Mark Kelly",
+          "yes_ask": 0.035,
+          "no_ask": 0.966
+        },
+        {
+          "ticker": "KXPRESNOMD-28-JP",
+          "title": "Will Jared Polis be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Jared Polis",
+          "no_sub_title": "Jared Polis",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-REMA",
+          "title": "Will Rahm Emanuel be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Rahm Emanuel",
+          "no_sub_title": "Rahm Emanuel",
+          "yes_ask": 0.026,
+          "no_ask": 0.975
+        },
+        {
+          "ticker": "KXPRESNOMD-28-JSTE",
+          "title": "Will Jon Stewart be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Jon Stewart",
+          "no_sub_title": "Jon Stewart",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESNOMD-28-BOBA",
+          "title": "Will Barack Obama be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Barack Obama",
+          "no_sub_title": "Barack Obama",
+          "yes_ask": 0.004,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESNOMD-28-HCLI",
+          "title": "Will Hillary Clinton be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Hillary Clinton",
+          "no_sub_title": "Hillary Clinton",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-CBOO",
+          "title": "Will Cory Booker be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Cory Booker",
+          "no_sub_title": "Cory Booker",
+          "yes_ask": 0.007,
+          "no_ask": 0.994
+        },
+        {
+          "ticker": "KXPRESNOMD-28-LC",
+          "title": "Will Liz Cheney be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Liz Cheney",
+          "no_sub_title": "Liz Cheney",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-BS",
+          "title": "Will Bernie Sanders be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Bernie Sanders",
+          "no_sub_title": "Bernie Sanders",
+          "yes_ask": 0.005,
+          "no_ask": 0.996
+        },
+        {
+          "ticker": "KXPRESNOMD-28-JOSS",
+          "title": "Will Jon Ossoff be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Jon Ossoff",
+          "no_sub_title": "Jon Ossoff",
+          "yes_ask": 0.27,
+          "no_ask": 0.74
+        },
+        {
+          "ticker": "KXPRESNOMD-28-GR",
+          "title": "Will Gina Raimondo be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Gina Raimondo",
+          "no_sub_title": "Gina Raimondo",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-PHI",
+          "title": "Will Phil Murphy be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Phil Murphy",
+          "no_sub_title": "Phil Murphy",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-LJAM",
+          "title": "Will LeBron James be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "LeBron James",
+          "no_sub_title": "LeBron James",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-AKLO",
+          "title": "Will Amy Klobuchar be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Amy Klobuchar",
+          "no_sub_title": "Amy Klobuchar",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESNOMD-28-JAM",
+          "title": "Will Jamie Dimon be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Jamie Dimon",
+          "no_sub_title": "Jamie Dimon",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMD-28-ESLO",
+          "title": "Will Elissa Slotkin be the Democratic Presidential nominee in 2028?",
+          "yes_sub_title": "Elissa Slotkin",
+          "no_sub_title": "Elissa Slotkin",
+          "yes_ask": 0.008,
+          "no_ask": 0.994
+        },
+        {
+          "ticker": "KXPRESNOMD-28-DJOH",
+          "title": "Will Dwayne Johnson be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Dwayne Johnson",
+          "no_sub_title": "Dwayne Johnson",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-AYAN",
+          "title": "Will Andrew Yang be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Andrew Yang",
+          "no_sub_title": "Andrew Yang",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMD-28-JCRO",
+          "title": "Will Jasmine Crockett be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Jasmine Crockett",
+          "no_sub_title": "Jasmine Crockett",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-BORO",
+          "title": "Will Beto O'Rourke be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Beto O'Rourke",
+          "no_sub_title": "Beto O'Rourke",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMD-28-GPLA",
+          "title": "Will Graham Platner be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Graham Platner",
+          "no_sub_title": "Graham Platner",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-EWAR",
+          "title": "Will Elizabeth Warren be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Elizabeth Warren",
+          "no_sub_title": "Elizabeth Warren",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMD-28-MLAN",
+          "title": "Will Mitch Landrieu be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Mitch Landrieu",
+          "no_sub_title": "Mitch Landrieu",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-AELS",
+          "title": "Will Abdul El-Sayed be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Abdul El-Sayed",
+          "no_sub_title": "Abdul El-Sayed",
+          "yes_ask": 0.008,
+          "no_ask": 0.993
+        },
+        {
+          "ticker": "KXPRESNOMD-28-SFAI",
+          "title": "Will Shawn Fain be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Shawn Fain",
+          "no_sub_title": "Shawn Fain",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMD-28-CHOL",
+          "title": "Will Chris Van Hollen be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Chris Van Hollen",
+          "no_sub_title": "Chris Van Hollen",
+          "yes_ask": 0.006,
+          "no_ask": 0.995
+        },
+        {
+          "ticker": "KXPRESNOMD-28-DJOL",
+          "title": "Will David Jolly be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "David Jolly",
+          "no_sub_title": "David Jolly",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-HJEF",
+          "title": "Will Hakeem Jeffries be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Hakeem Jeffries",
+          "no_sub_title": "Hakeem Jeffries",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMD-28-SBRO",
+          "title": "Will Sherrod Brown be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Sherrod Brown",
+          "no_sub_title": "Sherrod Brown",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESNOMD-28-MPEL",
+          "title": "Will Mary Peltola be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Mary Peltola",
+          "no_sub_title": "Mary Peltola",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-AHAM",
+          "title": "Will Adam Hamilton be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Adam Hamilton",
+          "no_sub_title": "Adam Hamilton",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESNOMD-28-SCOL",
+          "title": "Will Scott Colom be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Scott Colom",
+          "no_sub_title": "Scott Colom",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-DPHI",
+          "title": "Will Dean Phillips be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Dean Phillips",
+          "no_sub_title": "Dean Phillips",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-MSHE",
+          "title": "Will Mikie Sherrill be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Mikie Sherrill",
+          "no_sub_title": "Mikie Sherrill",
+          "yes_ask": 0.003,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMD-28-ASPA",
+          "title": "Will Abigail Spanberger be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Abigail Spanberger",
+          "no_sub_title": "Abigail Spanberger",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-AAND",
+          "title": "Will Annie Andrews be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Annie Andrews",
+          "no_sub_title": "Annie Andrews",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-AFOR",
+          "title": "Will Aaron Ford be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Aaron Ford",
+          "no_sub_title": "Aaron Ford",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-CPAP",
+          "title": "Will Chris Pappas be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Chris Pappas",
+          "no_sub_title": "Chris Pappas",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMD-28-JWIL",
+          "title": "Will Jimmy Williams Jr. be the nominee for the Presidency for the Democratic party?",
+          "yes_sub_title": "Jimmy Williams Jr.",
+          "no_sub_title": "Jimmy Williams Jr.",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        }
+      ]
+    },
+    "KXPRESNOMR-28": {
+      "title": "2028 Republican presidential nominee",
+      "sub_title": "In 2028",
+      "markets": [
+        {
+          "ticker": "KXPRESNOMR-28-TMAS",
+          "title": "Will Thomas Massie be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Thomas Massie",
+          "no_sub_title": "Thomas Massie",
+          "yes_ask": 0.021,
+          "no_ask": 0.98
+        },
+        {
+          "ticker": "KXPRESNOMR-28-NH",
+          "title": "Will Nikki Haley be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Nikki Haley",
+          "no_sub_title": "Nikki Haley",
+          "yes_ask": 0.006,
+          "no_ask": 0.995
+        },
+        {
+          "ticker": "KXPRESNOMR-28-SHS",
+          "title": "Will Sarah Huckabee Sanders be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Sarah Huckabee Sanders",
+          "no_sub_title": "Sarah Huckabee Sanders",
+          "yes_ask": 0.007,
+          "no_ask": 0.994
+        },
+        {
+          "ticker": "KXPRESNOMR-28-GA",
+          "title": "Will Greg Abbott be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Greg Abbott",
+          "no_sub_title": "Greg Abbott",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMR-28-JDV",
+          "title": "Will J.D. Vance be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "J.D. Vance",
+          "no_sub_title": "J.D. Vance",
+          "yes_ask": 0.37,
+          "no_ask": 0.64
+        },
+        {
+          "ticker": "KXPRESNOMR-28-RDS",
+          "title": "Will Ron DeSantis be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Ron DeSantis",
+          "no_sub_title": "Ron DeSantis",
+          "yes_ask": 0.16,
+          "no_ask": 0.85
+        },
+        {
+          "ticker": "KXPRESNOMR-28-GY",
+          "title": "Will Glenn Youngkin be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Glenn Youngkin",
+          "no_sub_title": "Glenn Youngkin",
+          "yes_ask": 0.03,
+          "no_ask": 0.971
+        },
+        {
+          "ticker": "KXPRESNOMR-28-RFK",
+          "title": "Will Robert F. Kennedy Jr. be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Robert F. Kennedy Jr.",
+          "no_sub_title": "Robert F. Kennedy Jr.",
+          "yes_ask": 0.006,
+          "no_ask": 0.995
+        },
+        {
+          "ticker": "KXPRESNOMR-28-VR",
+          "title": "Will Vivek Ramaswamy be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Vivek Ramaswamy",
+          "no_sub_title": "Vivek Ramaswamy",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMR-28-DJT",
+          "title": "Will Donald J. Trump be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Donald J. Trump",
+          "no_sub_title": "Donald J. Trump",
+          "yes_ask": 0.016,
+          "no_ask": 0.985
+        },
+        {
+          "ticker": "KXPRESNOMR-28-DJTJR",
+          "title": "Will Donald J. Trump Jr. be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Donald J. Trump Jr.",
+          "no_sub_title": "Donald J. Trump Jr.",
+          "yes_ask": 0.01,
+          "no_ask": 0.991
+        },
+        {
+          "ticker": "KXPRESNOMR-28-EM",
+          "title": "Will Elon Musk be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Elon Musk",
+          "no_sub_title": "Elon Musk",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMR-28-BK",
+          "title": "Will Brian Kemp be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Brian Kemp",
+          "no_sub_title": "Brian Kemp",
+          "yes_ask": 0.021,
+          "no_ask": 0.98
+        },
+        {
+          "ticker": "KXPRESNOMR-28-MG",
+          "title": "Will Matt Gaetz be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Matt Gaetz",
+          "no_sub_title": "Matt Gaetz",
+          "yes_ask": 0.002,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMR-28-BD",
+          "title": "Will Byron Donalds be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Byron Donalds",
+          "no_sub_title": "Byron Donalds",
+          "yes_ask": 0.005,
+          "no_ask": 0.996
+        },
+        {
+          "ticker": "KXPRESNOMR-28-ES",
+          "title": "Will Elise Stefanik be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Elise Stefanik",
+          "no_sub_title": "Elise Stefanik",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESNOMR-28-JH",
+          "title": "Will Josh Hawley be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Josh Hawley",
+          "no_sub_title": "Josh Hawley",
+          "yes_ask": 0.007,
+          "no_ask": 0.994
+        },
+        {
+          "ticker": "KXPRESNOMR-28-TC",
+          "title": "Will Ted Cruz be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Ted Cruz",
+          "no_sub_title": "Ted Cruz",
+          "yes_ask": 0.027,
+          "no_ask": 0.974
+        },
+        {
+          "ticker": "KXPRESNOMR-28-KB",
+          "title": "Will Katie Britt be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Katie Britt",
+          "no_sub_title": "Katie Britt",
+          "yes_ask": 0.005,
+          "no_ask": 0.996
+        },
+        {
+          "ticker": "KXPRESNOMR-28-JT",
+          "title": "Will John Thune be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "John Thune",
+          "no_sub_title": "John Thune",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMR-28-MR",
+          "title": "Will Marco Rubio be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Marco Rubio",
+          "no_sub_title": "Marco Rubio",
+          "yes_ask": 0.17,
+          "no_ask": 0.84
+        },
+        {
+          "ticker": "KXPRESNOMR-28-TG",
+          "title": "Will Tulsi Gabbard be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Tulsi Gabbard",
+          "no_sub_title": "Tulsi Gabbard",
+          "yes_ask": 0.004,
+          "no_ask": 0.997
+        },
+        {
+          "ticker": "KXPRESNOMR-28-KNOE",
+          "title": "Will Kristi Noem be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Kristi Noem",
+          "no_sub_title": "Kristi Noem",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMR-28-MPEN",
+          "title": "Will Mike Pence be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Mike Pence",
+          "no_sub_title": "Mike Pence",
+          "yes_ask": 0.004,
+          "no_ask": 0.997
+        },
+        {
+          "ticker": "KXPRESNOMR-28-STE",
+          "title": "Will Steve Bannon be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Steve Bannon",
+          "no_sub_title": "Steve Bannon",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESNOMR-28-EKIR",
+          "title": "Will Erika Kirk be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Erika Kirk",
+          "no_sub_title": "Erika Kirk",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMR-28-TCAR",
+          "title": "Will Tucker Carlson be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Tucker Carlson",
+          "no_sub_title": "Tucker Carlson",
+          "yes_ask": 0.031,
+          "no_ask": 0.97
+        },
+        {
+          "ticker": "KXPRESNOMR-28-MTG",
+          "title": "Will Marjorie Taylor Greene be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Marjorie Taylor Greene",
+          "no_sub_title": "Marjorie Taylor Greene",
+          "yes_ask": 0.007,
+          "no_ask": 0.994
+        },
+        {
+          "ticker": "KXPRESNOMR-28-NMIN",
+          "title": "Will Nicki Minaj be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Nicki Minaj",
+          "no_sub_title": "Nicki Minaj",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMR-28-TCOT",
+          "title": "Will Tom Cotton be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Tom Cotton",
+          "no_sub_title": "Tom Cotton",
+          "yes_ask": 0.006,
+          "no_ask": 0.995
+        },
+        {
+          "ticker": "KXPRESNOMR-28-RPAU",
+          "title": "Will Rand Paul be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Rand Paul",
+          "no_sub_title": "Rand Paul",
+          "yes_ask": 0.006,
+          "no_ask": 0.995
+        },
+        {
+          "ticker": "KXPRESNOMR-28-ITRU",
+          "title": "Will Ivanka Trump be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Ivanka Trump",
+          "no_sub_title": "Ivanka Trump",
+          "yes_ask": 0.009,
+          "no_ask": 0.992
+        },
+        {
+          "ticker": "KXPRESNOMR-28-ETRU",
+          "title": "Will Eric Trump be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Eric Trump",
+          "no_sub_title": "Eric Trump",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMR-28-PHEG",
+          "title": "Will Pete Hegseth be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Pete Hegseth",
+          "no_sub_title": "Pete Hegseth",
+          "yes_ask": 0.004,
+          "no_ask": 0.997
+        },
+        {
+          "ticker": "KXPRESNOMR-28-LTRU",
+          "title": "Will Lara Trump be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Lara Trump",
+          "no_sub_title": "Lara Trump",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMR-28-SPRA",
+          "title": "Will Spencer Pratt be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Spencer Pratt",
+          "no_sub_title": "Spencer Pratt",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESNOMR-28-JBZ",
+          "title": "Will Jeff Bezos be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Jeff Bezos",
+          "no_sub_title": "Jeff Bezos",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMR-28-COWE",
+          "title": "Will Candace Owens be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Candace Owens",
+          "no_sub_title": "Candace Owens",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESNOMR-28-CCHR",
+          "title": "Will Chris Christie be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Chris Christie",
+          "no_sub_title": "Chris Christie",
+          "yes_ask": 0.005,
+          "no_ask": 0.996
+        },
+        {
+          "ticker": "KXPRESNOMR-28-JKEN",
+          "title": "Will John Kennedy be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "John Kennedy",
+          "no_sub_title": "John Kennedy",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESNOMR-28-DBUR",
+          "title": "Will Doug Burgum be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Doug Burgum",
+          "no_sub_title": "Doug Burgum",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMR-28-BSHA",
+          "title": "Will Ben Shapiro be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Ben Shapiro",
+          "no_sub_title": "Ben Shapiro",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMR-28-WHUN",
+          "title": "Will Wesley Hunt be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Wesley Hunt",
+          "no_sub_title": "Wesley Hunt",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMR-28-CSUN",
+          "title": "Will Chris Sununu be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Chris Sununu",
+          "no_sub_title": "Chris Sununu",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMR-28-TSCO",
+          "title": "Will Tim Scott be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Tim Scott",
+          "no_sub_title": "Tim Scott",
+          "yes_ask": 0.004,
+          "no_ask": 0.997
+        },
+        {
+          "ticker": "KXPRESNOMR-28-JKENT",
+          "title": "Will Joe Kent be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Joe Kent",
+          "no_sub_title": "Joe Kent",
+          "yes_ask": 0.005,
+          "no_ask": 0.996
+        },
+        {
+          "ticker": "KXPRESNOMR-28-GBOV",
+          "title": "Will Gregory Bovino be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Gregory Bovino",
+          "no_sub_title": "Gregory Bovino",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMR-28-JMCE",
+          "title": "Will John McEntee be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "John McEntee",
+          "no_sub_title": "John McEntee",
+          "yes_ask": 0.032,
+          "no_ask": 0.969
+        },
+        {
+          "ticker": "KXPRESNOMR-28-LHOG",
+          "title": "Will Larry Hogan be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Larry Hogan",
+          "no_sub_title": "Larry Hogan",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMR-28-JKUS",
+          "title": "Will Jared Kushner be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Jared Kushner",
+          "no_sub_title": "Jared Kushner",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMR-28-MPOM",
+          "title": "Will Mike Pompeo be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Mike Pompeo",
+          "no_sub_title": "Mike Pompeo",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESNOMR-28-MJOH",
+          "title": "Will Mike Johnson be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Mike Johnson",
+          "no_sub_title": "Mike Johnson",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESNOMR-28-DMCC",
+          "title": "Will Dave McCormick be the nominee for the Presidency for the Republican party?",
+          "yes_sub_title": "Dave McCormick",
+          "no_sub_title": "Dave McCormick",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        }
+      ]
+    },
+    "KXPRESPERSON-28": {
+      "title": "2028 U.S. Presidential Election winner?",
+      "sub_title": "In 2028",
+      "markets": [
+        {
+          "ticker": "KXPRESPERSON-28-GNEWS",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Gavin Newsom",
+          "no_sub_title": "Gavin Newsom",
+          "yes_ask": 0.081,
+          "no_ask": 0.92
+        },
+        {
+          "ticker": "KXPRESPERSON-28-AOCA",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Alexandria Ocasio-Cortez",
+          "no_sub_title": "Alexandria Ocasio-Cortez",
+          "yes_ask": 0.091,
+          "no_ask": 0.91
+        },
+        {
+          "ticker": "KXPRESPERSON-28-PBUT",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Pete Buttigieg",
+          "no_sub_title": "Pete Buttigieg",
+          "yes_ask": 0.03,
+          "no_ask": 0.971
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JSHA",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Josh Shapiro",
+          "no_sub_title": "Josh Shapiro",
+          "yes_ask": 0.027,
+          "no_ask": 0.974
+        },
+        {
+          "ticker": "KXPRESPERSON-28-KHAR",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Kamala Harris",
+          "no_sub_title": "Kamala Harris",
+          "yes_ask": 0.034,
+          "no_ask": 0.967
+        },
+        {
+          "ticker": "KXPRESPERSON-28-WMOO",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Wes Moore",
+          "no_sub_title": "Wes Moore",
+          "yes_ask": 0.018,
+          "no_ask": 0.983
+        },
+        {
+          "ticker": "KXPRESPERSON-28-SSMI",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Stephen A. Smith",
+          "no_sub_title": "Stephen A. Smith",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESPERSON-28-GWHI",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Gretchen Whitmer",
+          "no_sub_title": "Gretchen Whitmer",
+          "yes_ask": 0.006,
+          "no_ask": 0.995
+        },
+        {
+          "ticker": "KXPRESPERSON-28-ABES",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Andy Beshear",
+          "no_sub_title": "Andy Beshear",
+          "yes_ask": 0.027,
+          "no_ask": 0.974
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JPRI",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "J.B. Pritzker",
+          "no_sub_title": "J.B. Pritzker",
           "yes_ask": 0.02,
+          "no_ask": 0.981
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JVAN",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "J.D. Vance",
+          "no_sub_title": "J.D. Vance",
+          "yes_ask": 0.14,
+          "no_ask": 0.87
+        },
+        {
+          "ticker": "KXPRESPERSON-28-TGAB",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Tulsi Gabbard",
+          "no_sub_title": "Tulsi Gabbard",
+          "yes_ask": 0.005,
+          "no_ask": 0.997
+        },
+        {
+          "ticker": "KXPRESPERSON-28-DTRU",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Donald J. Trump",
+          "no_sub_title": "Donald J. Trump",
+          "yes_ask": 0.011,
           "no_ask": 0.99
         },
         {
-          "ticker": "KXUCLWGAME-26NOV19BARSER-TIE",
-          "title": "Tie is the result",
-          "yes_sub_title": "Tie",
-          "no_sub_title": "Tie",
-          "yes_ask": 0.02,
+          "ticker": "KXPRESPERSON-28-MRUB",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Marco Rubio",
+          "no_sub_title": "Marco Rubio",
+          "yes_ask": 0.088,
+          "no_ask": 0.913
+        },
+        {
+          "ticker": "KXPRESPERSON-28-GYOU",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Glenn Youngkin",
+          "no_sub_title": "Glenn Youngkin",
+          "yes_ask": 0.007,
+          "no_ask": 0.996
+        },
+        {
+          "ticker": "KXPRESPERSON-28-DTRUJR",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Donald J. Trump Jr.",
+          "no_sub_title": "Donald J. Trump Jr.",
+          "yes_ask": 0.005,
+          "no_ask": 0.996
+        },
+        {
+          "ticker": "KXPRESPERSON-28-NHAL",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Nikki Haley",
+          "no_sub_title": "Nikki Haley",
+          "yes_ask": 0.005,
+          "no_ask": 0.996
+        },
+        {
+          "ticker": "KXPRESPERSON-28-RDES",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Ron DeSantis",
+          "no_sub_title": "Ron DeSantis",
+          "yes_ask": 0.057,
+          "no_ask": 0.946
+        },
+        {
+          "ticker": "KXPRESPERSON-28-VRAM",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Vivek Ramaswamy",
+          "no_sub_title": "Vivek Ramaswamy",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESPERSON-28-GABB",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Greg Abbott",
+          "no_sub_title": "Greg Abbott",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESPERSON-28-TWAL",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Tim Walz",
+          "no_sub_title": "Tim Walz",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JDIM",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Jamie Dimon",
+          "no_sub_title": "Jamie Dimon",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JOSS",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Jon Ossoff",
+          "no_sub_title": "Jon Ossoff",
+          "yes_ask": 0.18,
+          "no_ask": 0.83
+        },
+        {
+          "ticker": "KXPRESPERSON-28-MKEL",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Mark Kelly",
+          "no_sub_title": "Mark Kelly",
+          "yes_ask": 0.022,
+          "no_ask": 0.979
+        },
+        {
+          "ticker": "KXPRESPERSON-28-TCAR",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Tucker Carlson",
+          "no_sub_title": "Tucker Carlson",
+          "yes_ask": 0.011,
+          "no_ask": 0.991
+        },
+        {
+          "ticker": "KXPRESPERSON-28-TMAS",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Thomas Massie",
+          "no_sub_title": "Thomas Massie",
+          "yes_ask": 0.013,
           "no_ask": 0.99
+        },
+        {
+          "ticker": "KXPRESPERSON-28-REMA",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Rahm Emanuel",
+          "no_sub_title": "Rahm Emanuel",
+          "yes_ask": 0.014,
+          "no_ask": 0.987
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JTAL",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "James Talarico",
+          "no_sub_title": "James Talarico",
+          "yes_ask": 0.012,
+          "no_ask": 0.989
+        },
+        {
+          "ticker": "KXPRESPERSON-28-HBID",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Hunter Biden",
+          "no_sub_title": "Hunter Biden",
+          "yes_ask": 0.002,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-RKHA",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Ro Khanna",
+          "no_sub_title": "Ro Khanna",
+          "yes_ask": 0.01,
+          "no_ask": 0.991
+        },
+        {
+          "ticker": "KXPRESPERSON-28-TCRU",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Ted Cruz",
+          "no_sub_title": "Ted Cruz",
+          "yes_ask": 0.012,
+          "no_ask": 0.99
+        },
+        {
+          "ticker": "KXPRESPERSON-28-DBUR",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Doug Burgum",
+          "no_sub_title": "Doug Burgum",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-RCOO",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Roy Cooper",
+          "no_sub_title": "Roy Cooper",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESPERSON-28-BKEM",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Brian Kemp",
+          "no_sub_title": "Brian Kemp",
+          "yes_ask": 0.007,
+          "no_ask": 0.994
+        },
+        {
+          "ticker": "KXPRESPERSON-28-CBOO",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Cory Booker",
+          "no_sub_title": "Cory Booker",
+          "yes_ask": 0.008,
+          "no_ask": 0.995
+        },
+        {
+          "ticker": "KXPRESPERSON-28-RWAR",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Raphael Warnock",
+          "no_sub_title": "Raphael Warnock",
+          "yes_ask": 0.024,
+          "no_ask": 0.979
+        },
+        {
+          "ticker": "KXPRESPERSON-28-AELS",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Abdul El-Sayed",
+          "no_sub_title": "Abdul El-Sayed",
+          "yes_ask": 0.006,
+          "no_ask": 0.995
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JKEN",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Joe Kent",
+          "no_sub_title": "Joe Kent",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESPERSON-28-GBOV",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Gregory Bovino",
+          "no_sub_title": "Gregory Bovino",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JMCE",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "John McEntee",
+          "no_sub_title": "John McEntee",
+          "yes_ask": 0.014,
+          "no_ask": 0.99
+        },
+        {
+          "ticker": "KXPRESPERSON-28-LHOG",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Larry Hogan",
+          "no_sub_title": "Larry Hogan",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JKUS",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Jared Kushner",
+          "no_sub_title": "Jared Kushner",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-MTAY",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Marjorie Taylor Greene",
+          "no_sub_title": "Marjorie Taylor Greene",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESPERSON-28-BDON",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Byron Donalds",
+          "no_sub_title": "Byron Donalds",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESPERSON-28-ITRU",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Ivanka Trump",
+          "no_sub_title": "Ivanka Trump",
+          "yes_ask": 0.005,
+          "no_ask": 0.996
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JHAW",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Josh Hawley",
+          "no_sub_title": "Josh Hawley",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESPERSON-28-RPAU",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Rand Paul",
+          "no_sub_title": "Rand Paul",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESPERSON-28-DPHI",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Dean Phillips",
+          "no_sub_title": "Dean Phillips",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-MSHE",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Mikie Sherrill",
+          "no_sub_title": "Mikie Sherrill",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-ASPA",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Abigail Spanberger",
+          "no_sub_title": "Abigail Spanberger",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-MOBA",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Michelle Obama",
+          "no_sub_title": "Michelle Obama",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESPERSON-28-CHOL",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Chris Van Hollen",
+          "no_sub_title": "Chris Van Hollen",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
         }
       ]
     }
   },
   "byTicker": {
+    "KXATPCHALLENGERMATCH-26NOV18GIUGUL-GIU": "KXATPCHALLENGERMATCH-26NOV18GIUGUL",
+    "KXATPCHALLENGERMATCH-26NOV18GIUGUL-GUL": "KXATPCHALLENGERMATCH-26NOV18GIUGUL",
     "KXATPMATCH-26NOV17ALCMED-ALC": "KXATPMATCH-26NOV17ALCMED",
     "KXATPMATCH-26NOV17ALCMED-MED": "KXATPMATCH-26NOV17ALCMED",
     "KXATPMATCH-26NOV17COBTIA-COB": "KXATPMATCH-26NOV17COBTIA",
@@ -2826,6 +3932,8 @@
     "KXCS2GAME-26NOV180400EYEGOT-GOT": "KXCS2GAME-26NOV180400EYEGOT",
     "KXCS2GAME-26NOV180500ISNXS-IS": "KXCS2GAME-26NOV180500ISNXS",
     "KXCS2GAME-26NOV180500ISNXS-NXS": "KXCS2GAME-26NOV180500ISNXS",
+    "KXCS2GAME-26NOV180630G2AFORZER-G2A": "KXCS2GAME-26NOV180630G2AFORZER",
+    "KXCS2GAME-26NOV180630G2AFORZER-FORZER": "KXCS2GAME-26NOV180630G2AFORZER",
     "KXCS2GAME-26NOV180800MZPPHA-MZP": "KXCS2GAME-26NOV180800MZPPHA",
     "KXCS2GAME-26NOV180800MZPPHA-PHA": "KXCS2GAME-26NOV180800MZPPHA",
     "KXCS2GAME-26NOV180830BIGAPOGEE-BIG": "KXCS2GAME-26NOV180830BIGAPOGEE",
@@ -2838,11 +3946,96 @@
     "KXCS2GAME-26NOV181330LGNIP-NIP": "KXCS2GAME-26NOV181330LGNIP",
     "KXCS2GAME-26NOV181330SNGICE-SNG": "KXCS2GAME-26NOV181330SNGICE",
     "KXCS2GAME-26NOV181330SNGICE-ICE": "KXCS2GAME-26NOV181330SNGICE",
+    "KXCS2GAME-26NOV181400ENVYBBL-ENVY": "KXCS2GAME-26NOV181400ENVYBBL",
+    "KXCS2GAME-26NOV181400ENVYBBL-BBL": "KXCS2GAME-26NOV181400ENVYBBL",
+    "KXDCMORATORIUMSTATES-28-AL": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-AK": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-AZ": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-AR": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-CA": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-CO": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-CT": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-DE": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-FL": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-GA": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-HI": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-ID": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-IL": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-IN": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-IA": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-KS": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-KY": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-LA": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-ME": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-MD": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-MA": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-MI": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-MN": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-MS": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-MO": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-MT": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-NE": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-NV": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-NH": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-NJ": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-NM": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-NC": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-ND": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-OH": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-OK": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-OR": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-PA": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-RI": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-SC": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-SD": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-TN": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-UT": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-VT": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-VA": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-WA": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-WV": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-WI": "KXDCMORATORIUMSTATES-28",
+    "KXDCMORATORIUMSTATES-28-WY": "KXDCMORATORIUMSTATES-28",
+    "KXDOTA2GAME-26NOV180700PARIAUR-PARI": "KXDOTA2GAME-26NOV180700PARIAUR",
+    "KXDOTA2GAME-26NOV180700PARIAUR-AUR": "KXDOTA2GAME-26NOV180700PARIAUR",
     "KXEPLGAME-26NOV21MCIFUL-MCI": "KXEPLGAME-26NOV21MCIFUL",
     "KXEPLGAME-26NOV21MCIFUL-FUL": "KXEPLGAME-26NOV21MCIFUL",
     "KXEPLGAME-26NOV21MCIFUL-TIE": "KXEPLGAME-26NOV21MCIFUL",
-    "KXNBAGAME-26NOV17CHALAL-CHA": "KXNBAGAME-26NOV17CHALAL",
-    "KXNBAGAME-26NOV17CHALAL-LAL": "KXNBAGAME-26NOV17CHALAL",
+    "KXFEDDECISION-26DEC-C26": "KXFEDDECISION-26DEC",
+    "KXFEDDECISION-26DEC-C25": "KXFEDDECISION-26DEC",
+    "KXFEDDECISION-26DEC-H0": "KXFEDDECISION-26DEC",
+    "KXFEDDECISION-26DEC-H25": "KXFEDDECISION-26DEC",
+    "KXFEDDECISION-26DEC-H26": "KXFEDDECISION-26DEC",
+    "KXFEDDECISION-27APR-C26": "KXFEDDECISION-27APR",
+    "KXFEDDECISION-27APR-C25": "KXFEDDECISION-27APR",
+    "KXFEDDECISION-27APR-H0": "KXFEDDECISION-27APR",
+    "KXFEDDECISION-27APR-H25": "KXFEDDECISION-27APR",
+    "KXFEDDECISION-27APR-H26": "KXFEDDECISION-27APR",
+    "KXFEDDECISION-27JAN-C26": "KXFEDDECISION-27JAN",
+    "KXFEDDECISION-27JAN-C25": "KXFEDDECISION-27JAN",
+    "KXFEDDECISION-27JAN-H0": "KXFEDDECISION-27JAN",
+    "KXFEDDECISION-27JAN-H25": "KXFEDDECISION-27JAN",
+    "KXFEDDECISION-27JAN-H26": "KXFEDDECISION-27JAN",
+    "KXHEGSETHIMPEACH-27JUL01-26NOV21": "KXHEGSETHIMPEACH-27JUL01",
+    "KXHEGSETHIMPEACH-27JUL01-27JAN01": "KXHEGSETHIMPEACH-27JUL01",
+    "KXHEGSETHIMPEACH-27JUL01-27FEB01": "KXHEGSETHIMPEACH-27JUL01",
+    "KXHEGSETHIMPEACH-27JUL01-27MAR01": "KXHEGSETHIMPEACH-27JUL01",
+    "KXHEGSETHIMPEACH-27JUL01-27APR01": "KXHEGSETHIMPEACH-27JUL01",
+    "KXHEGSETHIMPEACH-27JUL01-27JUL01": "KXHEGSETHIMPEACH-27JUL01",
+    "KXITFMATCH-26NOV18KARREJ-KAR": "KXITFMATCH-26NOV18KARREJ",
+    "KXITFMATCH-26NOV18KARREJ-REJ": "KXITFMATCH-26NOV18KARREJ",
+    "KXITFMATCH-26NOV18UJVPOP-UJV": "KXITFMATCH-26NOV18UJVPOP",
+    "KXITFMATCH-26NOV18UJVPOP-POP": "KXITFMATCH-26NOV18UJVPOP",
+    "KXLEAVEOPEC-27": "KXLEAVEOPEC-27",
+    "KXLJUBLJANAMAYOR-26NOV15-ZJAN": "KXLJUBLJANAMAYOR-26NOV15",
+    "KXLJUBLJANAMAYOR-26NOV15-LMES": "KXLJUBLJANAMAYOR-26NOV15",
+    "KXLJUBLJANAMAYOR-26NOV15-AROP": "KXLJUBLJANAMAYOR-26NOV15",
+    "KXLJUBLJANAMAYOR-26NOV15-APRI": "KXLJUBLJANAMAYOR-26NOV15",
+    "KXLJUBLJANAMAYOR-26NOV15-JFER": "KXLJUBLJANAMAYOR-26NOV15",
+    "KXLJUBLJANAMAYOR-26NOV15-GNOV": "KXLJUBLJANAMAYOR-26NOV15",
+    "KXLJUBLJANAMAYOR-26NOV15-MJAR": "KXLJUBLJANAMAYOR-26NOV15",
+    "KXLJUBLJANAMAYOR-26NOV15-ASIM": "KXLJUBLJANAMAYOR-26NOV15",
+    "KXLJUBLJANAMAYOR-26NOV15-AREP": "KXLJUBLJANAMAYOR-26NOV15",
     "KXNBAGAME-26NOV18DETNOP-DET": "KXNBAGAME-26NOV18DETNOP",
     "KXNBAGAME-26NOV18DETNOP-NOP": "KXNBAGAME-26NOV18DETNOP",
     "KXNBAGAME-26NOV18HOUIND-HOU": "KXNBAGAME-26NOV18HOUIND",
@@ -2857,137 +4050,6 @@
     "KXNBAGAME-26NOV18PHXSAC-SAC": "KXNBAGAME-26NOV18PHXSAC",
     "KXNBAGAME-26NOV18UTALAL-UTA": "KXNBAGAME-26NOV18UTALAL",
     "KXNBAGAME-26NOV18UTALAL-LAL": "KXNBAGAME-26NOV18UTALAL",
-    "KXNBAPTS-26NOV17CHALAL-CHARKALKBRENNER11-5": "KXNBAPTS-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL35": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL33": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL31": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL29": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL27": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL25": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL23": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL21": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL19": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL17": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL15": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL14": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL13": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL12": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL11": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL10": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL9": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL8": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL7": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL6": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL5": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL4": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL3": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-LAL2": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-CHA2": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-CHA4": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-CHA6": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-CHA8": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-CHA10": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-CHA12": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-CHA14": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-CHA16": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV17CHALAL-CHA18": "KXNBASPREAD-26NOV17CHALAL",
-    "KXNBASPREAD-26NOV18MILMIA-MIA39": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA37": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA35": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA33": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA31": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA29": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA27": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA25": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA23": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA21": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA19": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA18": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA17": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA16": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA15": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA14": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA13": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA12": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA11": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA10": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA9": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA8": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA7": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA5": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA3": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIA2": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIL2": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIL4": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIL6": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIL8": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIL10": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIL12": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18MILMIA-MIL14": "KXNBASPREAD-26NOV18MILMIA",
-    "KXNBASPREAD-26NOV18PHIORL-ORL27": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-ORL25": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-ORL23": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-ORL21": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-ORL19": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-ORL17": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-ORL15": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-ORL13": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-ORL11": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-ORL9": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-ORL7": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-ORL6": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-ORL5": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-ORL4": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-ORL3": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-ORL2": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-PHI2": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-PHI3": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-PHI4": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-PHI5": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-PHI6": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-PHI7": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-PHI8": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-PHI10": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-PHI12": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-PHI14": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-PHI16": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-PHI18": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-PHI20": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-PHI22": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-PHI24": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-PHI26": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBASPREAD-26NOV18PHIORL-PHI28": "KXNBASPREAD-26NOV18PHIORL",
-    "KXNBATOTAL-26NOV17CHALAL-191": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-193": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-195": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-197": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-199": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-201": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-203": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-205": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-207": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-209": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-211": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-213": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-215": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-217": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-219": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-221": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-223": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-225": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-227": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-229": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-231": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-233": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-235": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-237": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-239": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-241": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-243": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-245": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-247": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-249": "KXNBATOTAL-26NOV17CHALAL",
-    "KXNBATOTAL-26NOV17CHALAL-251": "KXNBATOTAL-26NOV17CHALAL",
     "KXNBATOTAL-26NOV18HOUIND-197": "KXNBATOTAL-26NOV18HOUIND",
     "KXNBATOTAL-26NOV18HOUIND-199": "KXNBATOTAL-26NOV18HOUIND",
     "KXNBATOTAL-26NOV18HOUIND-201": "KXNBATOTAL-26NOV18HOUIND",
@@ -3138,8 +4200,178 @@
     "KXNFLTOTAL-26NOV23CINWAS-68": "KXNFLTOTAL-26NOV23CINWAS",
     "KXNFLTOTAL-26NOV23CINWAS-71": "KXNFLTOTAL-26NOV23CINWAS",
     "KXNFLTOTAL-26NOV23CINWAS-74": "KXNFLTOTAL-26NOV23CINWAS",
-    "KXUCLWGAME-26NOV19BARSER-BAR": "KXUCLWGAME-26NOV19BARSER",
-    "KXUCLWGAME-26NOV19BARSER-SER": "KXUCLWGAME-26NOV19BARSER",
-    "KXUCLWGAME-26NOV19BARSER-TIE": "KXUCLWGAME-26NOV19BARSER"
+    "KXONTLIBLEAD-26NOV21-NBAI": "KXONTLIBLEAD-26NOV21",
+    "KXONTLIBLEAD-26NOV21-SBOW": "KXONTLIBLEAD-26NOV21",
+    "KXONTLIBLEAD-26NOV21-LFAI": "KXONTLIBLEAD-26NOV21",
+    "KXONTLIBLEAD-26NOV21-ELOM": "KXONTLIBLEAD-26NOV21",
+    "KXONTLIBLEAD-26NOV21-DMAR": "KXONTLIBLEAD-26NOV21",
+    "KXOPENAIANOTHERMILLENNIUM-28-27JAN01": "KXOPENAIANOTHERMILLENNIUM-28",
+    "KXOPENAIANOTHERMILLENNIUM-28-28JAN01": "KXOPENAIANOTHERMILLENNIUM-28",
+    "KXPRESNOMD-28-HBID": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-JTAL": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-RGAL": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-RKHA": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-CMUR": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-ZMAM": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-KH": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-GN": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-GW": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-JS": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-TW": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-AOC": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-MC": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-PB": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-WM": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-AB": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-RC": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-JBP": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-JF": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-RW": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-MO": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-SAS": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-MK": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-JP": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-REMA": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-JSTE": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-BOBA": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-HCLI": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-CBOO": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-LC": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-BS": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-JOSS": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-GR": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-PHI": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-LJAM": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-AKLO": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-JAM": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-ESLO": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-DJOH": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-AYAN": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-JCRO": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-BORO": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-GPLA": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-EWAR": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-MLAN": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-AELS": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-SFAI": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-CHOL": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-DJOL": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-HJEF": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-SBRO": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-MPEL": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-AHAM": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-SCOL": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-DPHI": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-MSHE": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-ASPA": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-AAND": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-AFOR": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-CPAP": "KXPRESNOMD-28",
+    "KXPRESNOMD-28-JWIL": "KXPRESNOMD-28",
+    "KXPRESNOMR-28-TMAS": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-NH": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-SHS": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-GA": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-JDV": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-RDS": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-GY": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-RFK": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-VR": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-DJT": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-DJTJR": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-EM": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-BK": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-MG": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-BD": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-ES": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-JH": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-TC": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-KB": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-JT": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-MR": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-TG": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-KNOE": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-MPEN": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-STE": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-EKIR": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-TCAR": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-MTG": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-NMIN": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-TCOT": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-RPAU": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-ITRU": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-ETRU": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-PHEG": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-LTRU": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-SPRA": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-JBZ": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-COWE": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-CCHR": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-JKEN": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-DBUR": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-BSHA": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-WHUN": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-CSUN": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-TSCO": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-JKENT": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-GBOV": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-JMCE": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-LHOG": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-JKUS": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-MPOM": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-MJOH": "KXPRESNOMR-28",
+    "KXPRESNOMR-28-DMCC": "KXPRESNOMR-28",
+    "KXPRESPERSON-28-GNEWS": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-AOCA": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-PBUT": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JSHA": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-KHAR": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-WMOO": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-SSMI": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-GWHI": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-ABES": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JPRI": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JVAN": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-TGAB": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-DTRU": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-MRUB": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-GYOU": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-DTRUJR": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-NHAL": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-RDES": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-VRAM": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-GABB": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-TWAL": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JDIM": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JOSS": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-MKEL": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-TCAR": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-TMAS": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-REMA": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JTAL": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-HBID": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-RKHA": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-TCRU": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-DBUR": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-RCOO": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-BKEM": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-CBOO": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-RWAR": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-AELS": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JKEN": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-GBOV": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JMCE": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-LHOG": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JKUS": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-MTAY": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-BDON": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-ITRU": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JHAW": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-RPAU": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-DPHI": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-MSHE": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-ASPA": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-MOBA": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-CHOL": "KXPRESPERSON-28"
   }
 }
