@@ -27528,7 +27528,10 @@
    "first_seen": 1794892260,
    "scans": 3,
    "first_score": 20,
-   "result": null
+   "result": null,
+   "ended": 1794967443,
+   "finalScore": "CHI 0 \u2013 COL 0",
+   "active": false
   },
   "0x7f721bf357a5d45bb752df377f6bf003eb877e0e8609b43489759fbcc8c3bd47:yes": {
    "tier": "top",
@@ -29014,7 +29017,10 @@
    "first_seen": 1794934994,
    "scans": 6,
    "first_score": 66,
-   "result": null
+   "result": null,
+   "ended": 1794967443,
+   "finalScore": "ECU 2 \u2013 BOL 0",
+   "active": false
   },
   "0x8460ced08469f9f70b88ca9ae1d6d921aff8436684ffae490bb8e1d816fce502:no": {
    "tier": "poly",
@@ -31453,7 +31459,10 @@
    "first_seen": 1794944238,
    "scans": 2,
    "first_score": 20,
-   "result": null
+   "result": null,
+   "ended": 1794967443,
+   "finalScore": "ECU 2 \u2013 BOL 0",
+   "active": false
   },
   "0x5a0f5d9fe61995f5be0d507ba01d04d13a777af579dc8185c291dfcdbeb5e8ea:no": {
    "tier": "top",
@@ -31803,7 +31812,11 @@
    "first_seen": 1794957580,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1794967443,
+   "ended": 1794967443,
+   "finalScore": "SIU 78 \u2013 LIB 87",
+   "active": false
   },
   "0x5f4e21f34597c079df687ae179646582b8cc4f3d6d964fa0fba5335b633a6a26:no": {
    "tier": "fun",
@@ -31822,7 +31835,11 @@
    "first_seen": 1794957580,
    "scans": 1,
    "first_score": 21,
-   "result": null
+   "result": "W",
+   "graded": 1794967443,
+   "ended": 1794967443,
+   "finalScore": "",
+   "active": false
   },
   "0x85b1b9241e3253609ac1b9b9c955df87cfa41e4bb5b04342ac51a4df6b34d91a:no": {
    "tier": "fun",
@@ -32053,7 +32070,10 @@
    "first_seen": 1794957580,
    "scans": 1,
    "first_score": 22,
-   "result": null
+   "result": null,
+   "ended": 1794967443,
+   "finalScore": "URU 5 \u2013 DOM 0",
+   "active": false
   },
   "0x6539864ddede40ce34e6838c69a61f39a6c035426cf27d2d0fa8384a2acad40a:yes": {
    "tier": "poly",
@@ -32091,7 +32111,10 @@
    "first_seen": 1794957580,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": null,
+   "ended": 1794967443,
+   "finalScore": "CHI 0 \u2013 COL 0",
+   "active": false
   },
   "0x18d624d5cd5f64c0d19e57385a6ef419523723fe595958dfed445f1bb14e0c4a:no": {
    "tier": "poly",
