@@ -1,27 +1,5 @@
 {
   "events": {
-    "KXATPCHALLENGERMATCH-26NOV18MELBAR": {
-      "title": "Meligeni Alves vs Barrena",
-      "sub_title": "Meligeni Alves vs Barrena (Nov 18)",
-      "markets": [
-        {
-          "ticker": "KXATPCHALLENGERMATCH-26NOV18MELBAR-MEL",
-          "title": "Felipe Meligeni Alves wins",
-          "yes_sub_title": "Felipe Meligeni Alves",
-          "no_sub_title": "Felipe Meligeni Alves",
-          "yes_ask": 0.41,
-          "no_ask": 0.6
-        },
-        {
-          "ticker": "KXATPCHALLENGERMATCH-26NOV18MELBAR-BAR",
-          "title": "Alex Barrena wins",
-          "yes_sub_title": "Alex Barrena",
-          "no_sub_title": "Alex Barrena",
-          "yes_ask": 0.6,
-          "no_ask": 0.41
-        }
-      ]
-    },
     "KXATPCHALLENGERMATCH-26NOV18TARBAR": {
       "title": "Tarvet vs Baris",
       "sub_title": "Tarvet vs Baris (Nov 18)",
@@ -31,16 +9,16 @@
           "title": "Oliver Tarvet wins",
           "yes_sub_title": "Oliver Tarvet",
           "no_sub_title": "Oliver Tarvet",
-          "yes_ask": 0.47,
-          "no_ask": 0.54
+          "yes_ask": 0.37,
+          "no_ask": 0.64
         },
         {
           "ticker": "KXATPCHALLENGERMATCH-26NOV18TARBAR-BAR",
           "title": "Ozan Baris wins",
           "yes_sub_title": "Ozan Baris",
           "no_sub_title": "Ozan Baris",
-          "yes_ask": 0.54,
-          "no_ask": 0.47
+          "yes_ask": 0.64,
+          "no_ask": 0.37
         }
       ]
     },
@@ -53,16 +31,16 @@
           "title": "Flavio Cobolli wins",
           "yes_sub_title": "Flavio Cobolli",
           "no_sub_title": "Flavio Cobolli",
-          "yes_ask": 0.44,
-          "no_ask": 0.57
+          "yes_ask": 0.65,
+          "no_ask": 0.36
         },
         {
           "ticker": "KXATPMATCH-26NOV17COBTIA-TIA",
           "title": "Frances Tiafoe wins",
           "yes_sub_title": "Frances Tiafoe",
           "no_sub_title": "Frances Tiafoe",
-          "yes_ask": 0.57,
-          "no_ask": 0.44
+          "yes_ask": 0.36,
+          "no_ask": 0.65
         }
       ]
     },
@@ -227,7 +205,7 @@
           "title": "Will over 0.5 goals be scored?",
           "yes_sub_title": "Over 0.5 goals scored",
           "no_sub_title": "Over 0.5 goals scored",
-          "yes_ask": 0.97,
+          "yes_ask": 0.98,
           "no_ask": 0.04
         },
         {
@@ -267,30 +245,8 @@
           "title": "Will over 5.5 goals be scored?",
           "yes_sub_title": "Over 5.5 goals scored",
           "no_sub_title": "Over 5.5 goals scored",
-          "yes_ask": 0.13,
-          "no_ask": 0.88
-        }
-      ]
-    },
-    "KXCS2GAME-26NOV181100ALLSIN": {
-      "title": "Alliance vs. Sinners",
-      "sub_title": "Alliance vs. Sinners (Nov 18)",
-      "markets": [
-        {
-          "ticker": "KXCS2GAME-26NOV181100ALLSIN-ALL",
-          "title": "Alliance wins",
-          "yes_sub_title": "Alliance",
-          "no_sub_title": "Alliance",
-          "yes_ask": 0.25,
-          "no_ask": 0.76
-        },
-        {
-          "ticker": "KXCS2GAME-26NOV181100ALLSIN-SIN",
-          "title": "Sinners wins",
-          "yes_sub_title": "Sinners",
-          "no_sub_title": "Sinners",
-          "yes_ask": 0.76,
-          "no_ask": 0.26
+          "yes_ask": 0.12,
+          "no_ask": 0.89
         }
       ]
     },
@@ -303,38 +259,16 @@
           "title": "Luminosity wins",
           "yes_sub_title": "Luminosity",
           "no_sub_title": "Luminosity",
-          "yes_ask": 0.37,
-          "no_ask": 0.64
+          "yes_ask": 0.62,
+          "no_ask": 0.4
         },
         {
           "ticker": "KXCS2GAME-26NOV181330LGNIP-NIP",
           "title": "NIP wins",
           "yes_sub_title": "NIP",
           "no_sub_title": "NIP",
-          "yes_ask": 0.64,
-          "no_ask": 0.37
-        }
-      ]
-    },
-    "KXCS2GAME-26NOV181330SNGICE": {
-      "title": "Sangal vs. Inner Circle Esports",
-      "sub_title": "Sangal vs. Inner Circle Esports (Nov 18)",
-      "markets": [
-        {
-          "ticker": "KXCS2GAME-26NOV181330SNGICE-SNG",
-          "title": "Sangal wins",
-          "yes_sub_title": "Sangal",
-          "no_sub_title": "Sangal",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXCS2GAME-26NOV181330SNGICE-ICE",
-          "title": "Inner Circle Esports wins",
-          "yes_sub_title": "Inner Circle Esports",
-          "no_sub_title": "Inner Circle Esports",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
+          "yes_ask": 0.39,
+          "no_ask": 0.62
         }
       ]
     },
@@ -347,38 +281,60 @@
           "title": "Envy wins",
           "yes_sub_title": "Envy",
           "no_sub_title": "Envy",
-          "yes_ask": 0.55,
-          "no_ask": 0.48
+          "yes_ask": 0.64,
+          "no_ask": 0.39
         },
         {
           "ticker": "KXCS2GAME-26NOV181400ENVYBBL-BBL",
           "title": "BBL wins",
           "yes_sub_title": "BBL",
           "no_sub_title": "BBL",
-          "yes_ask": 0.47,
-          "no_ask": 0.54
+          "yes_ask": 0.37,
+          "no_ask": 0.64
         }
       ]
     },
-    "KXCS2MAP-26NOV181330SNGICE-2": {
-      "title": "Sangal vs. Inner Circle Esports: Map 2 Winner",
-      "sub_title": "Map 2: SNG vs. ICE (Nov 18)",
+    "KXCS2MAP-26NOV181400ENVYBBL-1": {
+      "title": "Envy vs. BBL: Map 1 Winner",
+      "sub_title": "Map 1: ENVY vs. BBL (Nov 18)",
       "markets": [
         {
-          "ticker": "KXCS2MAP-26NOV181330SNGICE-2-SNG",
-          "title": "Sangal wins map 2",
-          "yes_sub_title": "Sangal",
-          "no_sub_title": "Sangal",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
+          "ticker": "KXCS2MAP-26NOV181400ENVYBBL-1-ENVY",
+          "title": "Envy wins map 1",
+          "yes_sub_title": "Envy",
+          "no_sub_title": "Envy",
+          "yes_ask": 0.73,
+          "no_ask": 0.3
         },
         {
-          "ticker": "KXCS2MAP-26NOV181330SNGICE-2-ICE",
-          "title": "Inner Circle Esports wins map 2",
-          "yes_sub_title": "Inner Circle Esports",
-          "no_sub_title": "Inner Circle Esports",
-          "yes_ask": 1.0,
-          "no_ask": 1.0
+          "ticker": "KXCS2MAP-26NOV181400ENVYBBL-1-BBL",
+          "title": "BBL wins map 1",
+          "yes_sub_title": "BBL",
+          "no_sub_title": "BBL",
+          "yes_ask": 0.3,
+          "no_ask": 0.73
+        }
+      ]
+    },
+    "KXCS2MAP-26NOV181400ENVYBBL-2": {
+      "title": "Envy vs. BBL: Map 2 Winner",
+      "sub_title": "Map 2: ENVY vs. BBL (Nov 18)",
+      "markets": [
+        {
+          "ticker": "KXCS2MAP-26NOV181400ENVYBBL-2-ENVY",
+          "title": "Envy wins map 2",
+          "yes_sub_title": "Envy",
+          "no_sub_title": "Envy",
+          "yes_ask": 0.47,
+          "no_ask": 0.55
+        },
+        {
+          "ticker": "KXCS2MAP-26NOV181400ENVYBBL-2-BBL",
+          "title": "BBL wins map 2",
+          "yes_sub_title": "BBL",
+          "no_sub_title": "BBL",
+          "yes_ask": 0.54,
+          "no_ask": 0.47
         }
       ]
     },
@@ -584,7 +540,7 @@
           "yes_sub_title": "Missouri",
           "no_sub_title": "Missouri",
           "yes_ask": 0.14,
-          "no_ask": 0.94
+          "no_ask": 0.91
         },
         {
           "ticker": "KXDCMORATORIUMSTATES-28-MT",
@@ -772,50 +728,6 @@
         }
       ]
     },
-    "KXDOTA2GAME-26NOV181100PARITS": {
-      "title": "PARIVISION vs. Team Spirit",
-      "sub_title": "PARIVISION vs. Team Spirit (Nov 18)",
-      "markets": [
-        {
-          "ticker": "KXDOTA2GAME-26NOV181100PARITS-PARI",
-          "title": "PARIVISION wins",
-          "yes_sub_title": "PARIVISION",
-          "no_sub_title": "PARIVISION",
-          "yes_ask": 0.83,
-          "no_ask": 0.2
-        },
-        {
-          "ticker": "KXDOTA2GAME-26NOV181100PARITS-TS",
-          "title": "Team Spirit wins",
-          "yes_sub_title": "Team Spirit",
-          "no_sub_title": "Team Spirit",
-          "yes_ask": 0.18,
-          "no_ask": 0.83
-        }
-      ]
-    },
-    "KXDOTA2MAP-26NOV181200ICCH-2": {
-      "title": "Inner Circle vs. CyberHero: Map 2 Winner",
-      "sub_title": "Map 2: IC vs. CH (Nov 18)",
-      "markets": [
-        {
-          "ticker": "KXDOTA2MAP-26NOV181200ICCH-2-IC",
-          "title": "Inner Circle wins map 2",
-          "yes_sub_title": "Inner Circle",
-          "no_sub_title": "Inner Circle",
-          "yes_ask": 0.44,
-          "no_ask": 0.57
-        },
-        {
-          "ticker": "KXDOTA2MAP-26NOV181200ICCH-2-CH",
-          "title": "CyberHero wins map 2",
-          "yes_sub_title": "CyberHero",
-          "no_sub_title": "CyberHero",
-          "yes_ask": 0.59,
-          "no_ask": 0.44
-        }
-      ]
-    },
     "KXEPLGAME-26NOV21AVLSUN": {
       "title": "Aston Villa vs Sunderland",
       "sub_title": "AVL vs SUN (Nov 21)",
@@ -901,24 +813,24 @@
           "title": "Will the Federal Reserve Hike rates by 0bps at their December 2026 meeting?",
           "yes_sub_title": "Fed maintains rate",
           "no_sub_title": "Fed maintains rate",
-          "yes_ask": 0.04,
-          "no_ask": 0.97
+          "yes_ask": 0.03,
+          "no_ask": 0.98
         },
         {
           "ticker": "KXFEDDECISION-26DEC-H25",
           "title": "Will the Federal Reserve Hike rates by 25bps at their December 2026 meeting?",
           "yes_sub_title": "Hike 25bps",
           "no_sub_title": "Hike 25bps",
-          "yes_ask": 0.93,
-          "no_ask": 0.08
+          "yes_ask": 0.92,
+          "no_ask": 0.09
         },
         {
           "ticker": "KXFEDDECISION-26DEC-H26",
           "title": "Will the Federal Reserve Hike rates by >25bps at their December 2026 meeting?",
           "yes_sub_title": "Hike >25bps",
           "no_sub_title": "Hike >25bps",
-          "yes_ask": 0.07,
-          "no_ask": 0.94
+          "yes_ask": 0.08,
+          "no_ask": 0.93
         }
       ]
     },
@@ -1002,7 +914,7 @@
           "yes_sub_title": "Hike 25bps",
           "no_sub_title": "Hike 25bps",
           "yes_ask": 0.61,
-          "no_ask": 0.41
+          "no_ask": 0.4
         },
         {
           "ticker": "KXFEDDECISION-27JAN-H26",
@@ -1039,7 +951,7 @@
           "title": "Will Pete Hegseth be impeached before Feb 1, 2027?",
           "yes_sub_title": "Before Feb 1, 2027",
           "no_sub_title": "Before Feb 1, 2027",
-          "yes_ask": 0.24,
+          "yes_ask": 0.25,
           "no_ask": 0.78
         },
         {
@@ -1056,7 +968,7 @@
           "yes_sub_title": "Before Apr 1, 2027",
           "no_sub_title": "Before Apr 1, 2027",
           "yes_ask": 0.53,
-          "no_ask": 0.5
+          "no_ask": 0.51
         },
         {
           "ticker": "KXHEGSETHIMPEACH-27JUL01-27JUL01",
@@ -1065,6 +977,28 @@
           "no_sub_title": "Before Jul 1, 2027",
           "yes_ask": 0.64,
           "no_ask": 0.37
+        }
+      ]
+    },
+    "KXITFMATCH-26NOV18VALLUN": {
+      "title": "Valente vs Luna",
+      "sub_title": "Valente vs Luna (Nov 18)",
+      "markets": [
+        {
+          "ticker": "KXITFMATCH-26NOV18VALLUN-VAL",
+          "title": "Rocco Valente wins",
+          "yes_sub_title": "Rocco Valente",
+          "no_sub_title": "Rocco Valente",
+          "yes_ask": 0.75,
+          "no_ask": 0.27
+        },
+        {
+          "ticker": "KXITFMATCH-26NOV18VALLUN-LUN",
+          "title": "Tomas Luna wins",
+          "yes_sub_title": "Tomas Luna",
+          "no_sub_title": "Tomas Luna",
+          "yes_ask": 0.28,
+          "no_ask": 0.75
         }
       ]
     },
@@ -1077,16 +1011,16 @@
           "title": "Esther Adeshina wins",
           "yes_sub_title": "Esther Adeshina",
           "no_sub_title": "Esther Adeshina",
-          "yes_ask": 0.91,
-          "no_ask": 0.1
+          "yes_ask": 0.32,
+          "no_ask": 0.69
         },
         {
           "ticker": "KXITFWMATCH-26NOV18ADEZAN-ZAN",
           "title": "Camilla Zanolini wins",
           "yes_sub_title": "Camilla Zanolini",
           "no_sub_title": "Camilla Zanolini",
-          "yes_ask": 0.09,
-          "no_ask": 0.92
+          "yes_ask": 0.69,
+          "no_ask": 0.32
         }
       ]
     },
@@ -1129,7 +1063,7 @@
           "title": "Will another country leave OPEC in 2026?",
           "yes_sub_title": "Yes",
           "no_sub_title": "Yes",
-          "yes_ask": 0.08,
+          "yes_ask": 0.09,
           "no_ask": 0.96
         }
       ]
@@ -1143,8 +1077,8 @@
           "title": "Will Zoran Jankovi\u0107 win the 2026 Ljubljana mayoral election?",
           "yes_sub_title": "Zoran Jankovi\u0107",
           "no_sub_title": "Zoran Jankovi\u0107",
-          "yes_ask": 0.69,
-          "no_ask": 0.34
+          "yes_ask": 0.66,
+          "no_ask": 0.36
         },
         {
           "ticker": "KXLJUBLJANAMAYOR-26NOV15-LMES",
@@ -1152,7 +1086,7 @@
           "yes_sub_title": "Luka Mesec",
           "no_sub_title": "Luka Mesec",
           "yes_ask": 0.35,
-          "no_ask": 0.69
+          "no_ask": 0.67
         },
         {
           "ticker": "KXLJUBLJANAMAYOR-26NOV15-AROP",
@@ -1212,6 +1146,300 @@
         }
       ]
     },
+    "KXNBAAST-26NOV18DETNOP": {
+      "title": "Detroit vs New Orleans: Assists",
+      "sub_title": "DET vs NOP (Nov 18)",
+      "markets": [
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-NOPHJONES2-2",
+          "title": "Herbert Jones: 2+ assists",
+          "yes_sub_title": "Herbert Jones: 2+",
+          "no_sub_title": "Herbert Jones: 2+",
+          "yes_ask": 0.59,
+          "no_ask": 0.42
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-NOPHJONES2-4",
+          "title": "Herbert Jones: 4+ assists",
+          "yes_sub_title": "Herbert Jones: 4+",
+          "no_sub_title": "Herbert Jones: 4+",
+          "yes_ask": 0.16,
+          "no_ask": 0.87
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-NOPHJONES2-6",
+          "title": "Herbert Jones: 6+ assists",
+          "yes_sub_title": "Herbert Jones: 6+",
+          "no_sub_title": "Herbert Jones: 6+",
+          "yes_ask": 0.05,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETCCUNNINGHAM2-4",
+          "title": "Cade Cunningham: 4+ assists",
+          "yes_sub_title": "Cade Cunningham: 4+",
+          "no_sub_title": "Cade Cunningham: 4+",
+          "yes_ask": 0.97,
+          "no_ask": 0.08
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETCCUNNINGHAM2-6",
+          "title": "Cade Cunningham: 6+ assists",
+          "yes_sub_title": "Cade Cunningham: 6+",
+          "no_sub_title": "Cade Cunningham: 6+",
+          "yes_ask": 0.81,
+          "no_ask": 0.22
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETCCUNNINGHAM2-8",
+          "title": "Cade Cunningham: 8+ assists",
+          "yes_sub_title": "Cade Cunningham: 8+",
+          "no_sub_title": "Cade Cunningham: 8+",
+          "yes_ask": 0.57,
+          "no_ask": 0.45
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETCCUNNINGHAM2-10",
+          "title": "Cade Cunningham: 10+ assists",
+          "yes_sub_title": "Cade Cunningham: 10+",
+          "no_sub_title": "Cade Cunningham: 10+",
+          "yes_ask": 0.35,
+          "no_ask": 0.69
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETCCUNNINGHAM2-12",
+          "title": "Cade Cunningham: 12+ assists",
+          "yes_sub_title": "Cade Cunningham: 12+",
+          "no_sub_title": "Cade Cunningham: 12+",
+          "yes_ask": 0.17,
+          "no_ask": 0.86
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-NOPYMISSI21-2",
+          "title": "Yves Missi: 2+ assists",
+          "yes_sub_title": "Yves Missi: 2+",
+          "no_sub_title": "Yves Missi: 2+",
+          "yes_ask": 0.47,
+          "no_ask": 0.55
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-NOPYMISSI21-4",
+          "title": "Yves Missi: 4+ assists",
+          "yes_sub_title": "Yves Missi: 4+",
+          "no_sub_title": "Yves Missi: 4+",
+          "yes_ask": 0.1,
+          "no_ask": 0.92
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-NOPYMISSI21-6",
+          "title": "Yves Missi: 6+ assists",
+          "yes_sub_title": "Yves Missi: 6+",
+          "no_sub_title": "Yves Missi: 6+",
+          "yes_ask": 0.04,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-NOPZWILLIAMSON1-2",
+          "title": "Zion Williamson: 2+ assists",
+          "yes_sub_title": "Zion Williamson: 2+",
+          "no_sub_title": "Zion Williamson: 2+",
+          "yes_ask": 0.82,
+          "no_ask": 0.19
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-NOPZWILLIAMSON1-4",
+          "title": "Zion Williamson: 4+ assists",
+          "yes_sub_title": "Zion Williamson: 4+",
+          "no_sub_title": "Zion Williamson: 4+",
+          "yes_ask": 0.36,
+          "no_ask": 0.65
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-NOPZWILLIAMSON1-6",
+          "title": "Zion Williamson: 6+ assists",
+          "yes_sub_title": "Zion Williamson: 6+",
+          "no_sub_title": "Zion Williamson: 6+",
+          "yes_ask": 0.14,
+          "no_ask": 0.89
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-NOPZWILLIAMSON1-8",
+          "title": "Zion Williamson: 8+ assists",
+          "yes_sub_title": "Zion Williamson: 8+",
+          "no_sub_title": "Zion Williamson: 8+",
+          "yes_ask": 0.05,
+          "no_ask": 0.99
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETKHUERTERSF-2",
+          "title": "Kevin Huerter: 2+ assists",
+          "yes_sub_title": "Kevin Huerter: 2+",
+          "no_sub_title": "Kevin Huerter: 2+",
+          "yes_ask": 0.89,
+          "no_ask": 0.14
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETKHUERTERSF-4",
+          "title": "Kevin Huerter: 4+ assists",
+          "yes_sub_title": "Kevin Huerter: 4+",
+          "no_sub_title": "Kevin Huerter: 4+",
+          "yes_ask": 0.56,
+          "no_ask": 0.46
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETKHUERTERSF-6",
+          "title": "Kevin Huerter: 6+ assists",
+          "yes_sub_title": "Kevin Huerter: 6+",
+          "no_sub_title": "Kevin Huerter: 6+",
+          "yes_ask": 0.2,
+          "no_ask": 0.81
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETKHUERTERSF-8",
+          "title": "Kevin Huerter: 8+ assists",
+          "yes_sub_title": "Kevin Huerter: 8+",
+          "no_sub_title": "Kevin Huerter: 8+",
+          "yes_ask": 0.11,
+          "no_ask": 0.94
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETATHOMPSON9-2",
+          "title": "Ausar Thompson: 2+ assists",
+          "yes_sub_title": "Ausar Thompson: 2+",
+          "no_sub_title": "Ausar Thompson: 2+",
+          "yes_ask": 0.99,
+          "no_ask": 0.14
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETATHOMPSON9-4",
+          "title": "Ausar Thompson: 4+ assists",
+          "yes_sub_title": "Ausar Thompson: 4+",
+          "no_sub_title": "Ausar Thompson: 4+",
+          "yes_ask": 0.86,
+          "no_ask": 0.15
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETATHOMPSON9-6",
+          "title": "Ausar Thompson: 6+ assists",
+          "yes_sub_title": "Ausar Thompson: 6+",
+          "no_sub_title": "Ausar Thompson: 6+",
+          "yes_ask": 0.62,
+          "no_ask": 0.41
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETATHOMPSON9-8",
+          "title": "Ausar Thompson: 8+ assists",
+          "yes_sub_title": "Ausar Thompson: 8+",
+          "no_sub_title": "Ausar Thompson: 8+",
+          "yes_ask": 0.35,
+          "no_ask": 0.66
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETATHOMPSON9-10",
+          "title": "Ausar Thompson: 10+ assists",
+          "yes_sub_title": "Ausar Thompson: 10+",
+          "no_sub_title": "Ausar Thompson: 10+",
+          "yes_ask": null,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETDJENKINS24-2",
+          "title": "Daniss Jenkins: 2+ assists",
+          "yes_sub_title": "Daniss Jenkins: 2+",
+          "no_sub_title": "Daniss Jenkins: 2+",
+          "yes_ask": 0.97,
+          "no_ask": 0.04
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETDJENKINS24-4",
+          "title": "Daniss Jenkins: 4+ assists",
+          "yes_sub_title": "Daniss Jenkins: 4+",
+          "no_sub_title": "Daniss Jenkins: 4+",
+          "yes_ask": 0.91,
+          "no_ask": 0.1
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETDJENKINS24-6",
+          "title": "Daniss Jenkins: 6+ assists",
+          "yes_sub_title": "Daniss Jenkins: 6+",
+          "no_sub_title": "Daniss Jenkins: 6+",
+          "yes_ask": 0.67,
+          "no_ask": 0.34
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETDJENKINS24-8",
+          "title": "Daniss Jenkins: 8+ assists",
+          "yes_sub_title": "Daniss Jenkins: 8+",
+          "no_sub_title": "Daniss Jenkins: 8+",
+          "yes_ask": 0.44,
+          "no_ask": 0.57
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-DETDJENKINS24-10",
+          "title": "Daniss Jenkins: 10+ assists",
+          "yes_sub_title": "Daniss Jenkins: 10+",
+          "no_sub_title": "Daniss Jenkins: 10+",
+          "yes_ask": 0.25,
+          "no_ask": 0.8
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-NOPSBEY41-2",
+          "title": "Saddiq Bey: 2+ assists",
+          "yes_sub_title": "Saddiq Bey: 2+",
+          "no_sub_title": "Saddiq Bey: 2+",
+          "yes_ask": 0.71,
+          "no_ask": 0.32
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-NOPSBEY41-4",
+          "title": "Saddiq Bey: 4+ assists",
+          "yes_sub_title": "Saddiq Bey: 4+",
+          "no_sub_title": "Saddiq Bey: 4+",
+          "yes_ask": 0.26,
+          "no_ask": 0.76
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-NOPSBEY41-6",
+          "title": "Saddiq Bey: 6+ assists",
+          "yes_sub_title": "Saddiq Bey: 6+",
+          "no_sub_title": "Saddiq Bey: 6+",
+          "yes_ask": 0.08,
+          "no_ask": 0.95
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-NOPJFEARS0-4",
+          "title": "Jeremiah Fears: 4+ assists",
+          "yes_sub_title": "Jeremiah Fears: 4+",
+          "no_sub_title": "Jeremiah Fears: 4+",
+          "yes_ask": 0.9,
+          "no_ask": 0.12
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-NOPJFEARS0-6",
+          "title": "Jeremiah Fears: 6+ assists",
+          "yes_sub_title": "Jeremiah Fears: 6+",
+          "no_sub_title": "Jeremiah Fears: 6+",
+          "yes_ask": 0.66,
+          "no_ask": 0.36
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-NOPJFEARS0-8",
+          "title": "Jeremiah Fears: 8+ assists",
+          "yes_sub_title": "Jeremiah Fears: 8+",
+          "no_sub_title": "Jeremiah Fears: 8+",
+          "yes_ask": 0.38,
+          "no_ask": 0.63
+        },
+        {
+          "ticker": "KXNBAAST-26NOV18DETNOP-NOPJFEARS0-10",
+          "title": "Jeremiah Fears: 10+ assists",
+          "yes_sub_title": "Jeremiah Fears: 10+",
+          "no_sub_title": "Jeremiah Fears: 10+",
+          "yes_ask": 0.21,
+          "no_ask": 0.82
+        }
+      ]
+    },
     "KXNBAGAME-26NOV18ATLOKC": {
       "title": "Atlanta vs Oklahoma City",
       "sub_title": "ATL vs OKC (Nov 18)",
@@ -1221,16 +1449,16 @@
           "title": "Atlanta wins",
           "yes_sub_title": "Atlanta",
           "no_sub_title": "Atlanta",
-          "yes_ask": 0.3,
-          "no_ask": 0.71
+          "yes_ask": 0.31,
+          "no_ask": 0.7
         },
         {
           "ticker": "KXNBAGAME-26NOV18ATLOKC-OKC",
           "title": "Oklahoma City wins",
           "yes_sub_title": "Oklahoma City",
           "no_sub_title": "Oklahoma City",
-          "yes_ask": 0.71,
-          "no_ask": 0.3
+          "yes_ask": 0.7,
+          "no_ask": 0.31
         }
       ]
     },
@@ -1287,16 +1515,16 @@
           "title": "Detroit wins",
           "yes_sub_title": "Detroit",
           "no_sub_title": "Detroit",
-          "yes_ask": 0.71,
-          "no_ask": 0.31
+          "yes_ask": 0.65,
+          "no_ask": 0.36
         },
         {
           "ticker": "KXNBAGAME-26NOV18DETNOP-NOP",
           "title": "New Orleans wins",
           "yes_sub_title": "New Orleans",
           "no_sub_title": "New Orleans",
-          "yes_ask": 0.31,
-          "no_ask": 0.7
+          "yes_ask": 0.36,
+          "no_ask": 0.65
         }
       ]
     },
@@ -1344,28 +1572,6 @@
         }
       ]
     },
-    "KXNBAGAME-26NOV18MEMCLE": {
-      "title": "Memphis vs Cleveland",
-      "sub_title": "MEM vs CLE (Nov 18)",
-      "markets": [
-        {
-          "ticker": "KXNBAGAME-26NOV18MEMCLE-MEM",
-          "title": "Memphis wins",
-          "yes_sub_title": "Memphis",
-          "no_sub_title": "Memphis",
-          "yes_ask": 0.37,
-          "no_ask": 0.64
-        },
-        {
-          "ticker": "KXNBAGAME-26NOV18MEMCLE-CLE",
-          "title": "Cleveland wins",
-          "yes_sub_title": "Cleveland",
-          "no_sub_title": "Cleveland",
-          "yes_ask": 0.64,
-          "no_ask": 0.37
-        }
-      ]
-    },
     "KXNBAGAME-26NOV18MILMIA": {
       "title": "Milwaukee vs Miami",
       "sub_title": "MIL vs MIA (Nov 18)",
@@ -1397,16 +1603,16 @@
           "title": "Philadelphia wins",
           "yes_sub_title": "Philadelphia",
           "no_sub_title": "Philadelphia",
-          "yes_ask": 0.51,
-          "no_ask": 0.5
+          "yes_ask": 0.49,
+          "no_ask": 0.52
         },
         {
           "ticker": "KXNBAGAME-26NOV18PHIORL-ORL",
           "title": "Orlando wins",
           "yes_sub_title": "Orlando",
           "no_sub_title": "Orlando",
-          "yes_ask": 0.5,
-          "no_ask": 0.51
+          "yes_ask": 0.51,
+          "no_ask": 0.5
         }
       ]
     },
@@ -1464,7 +1670,7 @@
           "yes_sub_title": "Charlotte",
           "no_sub_title": "Charlotte",
           "yes_ask": 0.36,
-          "no_ask": 0.66
+          "no_ask": 0.67
         },
         {
           "ticker": "KXNBAGAME-26NOV20CHAATL-ATL",
@@ -1493,8 +1699,8 @@
           "title": "Denver wins",
           "yes_sub_title": "Denver",
           "no_sub_title": "Denver",
-          "yes_ask": 0.53,
-          "no_ask": 0.5
+          "yes_ask": 0.54,
+          "no_ask": 0.49
         }
       ]
     },
@@ -1516,7 +1722,7 @@
           "yes_sub_title": "Brooklyn",
           "no_sub_title": "Brooklyn",
           "yes_ask": 0.36,
-          "no_ask": 0.66
+          "no_ask": 0.65
         }
       ]
     },
@@ -1545,7 +1751,7 @@
           "title": "Oklahoma City wins by over 29.5 points",
           "yes_sub_title": "Oklahoma City wins by over 29.5 points",
           "no_sub_title": "Oklahoma City wins by over 29.5 points",
-          "yes_ask": 0.06,
+          "yes_ask": 0.05,
           "no_ask": 0.97
         },
         {
@@ -1561,7 +1767,7 @@
           "title": "Oklahoma City wins by over 25.5 points",
           "yes_sub_title": "Oklahoma City wins by over 25.5 points",
           "no_sub_title": "Oklahoma City wins by over 25.5 points",
-          "yes_ask": 0.09,
+          "yes_ask": 0.08,
           "no_ask": 0.94
         },
         {
@@ -1609,7 +1815,7 @@
           "title": "Oklahoma City wins by over 13.5 points",
           "yes_sub_title": "Oklahoma City wins by over 13.5 points",
           "no_sub_title": "Oklahoma City wins by over 13.5 points",
-          "yes_ask": 0.29,
+          "yes_ask": 0.28,
           "no_ask": 0.73
         },
         {
@@ -1625,15 +1831,15 @@
           "title": "Oklahoma City wins by over 11.5 points",
           "yes_sub_title": "Oklahoma City wins by over 11.5 points",
           "no_sub_title": "Oklahoma City wins by over 11.5 points",
-          "yes_ask": 0.34,
-          "no_ask": 0.68
+          "yes_ask": 0.33,
+          "no_ask": 0.69
         },
         {
           "ticker": "KXNBASPREAD-26NOV18ATLOKC-OKC11",
           "title": "Oklahoma City wins by over 10.5 points",
           "yes_sub_title": "Oklahoma City wins by over 10.5 points",
           "no_sub_title": "Oklahoma City wins by over 10.5 points",
-          "yes_ask": 0.37,
+          "yes_ask": 0.36,
           "no_ask": 0.65
         },
         {
@@ -1641,8 +1847,8 @@
           "title": "Oklahoma City wins by over 9.5 points",
           "yes_sub_title": "Oklahoma City wins by over 9.5 points",
           "no_sub_title": "Oklahoma City wins by over 9.5 points",
-          "yes_ask": 0.4,
-          "no_ask": 0.62
+          "yes_ask": 0.39,
+          "no_ask": 0.63
         },
         {
           "ticker": "KXNBASPREAD-26NOV18ATLOKC-OKC9",
@@ -1650,7 +1856,7 @@
           "yes_sub_title": "Oklahoma City wins by over 8.5 points",
           "no_sub_title": "Oklahoma City wins by over 8.5 points",
           "yes_ask": 0.42,
-          "no_ask": 0.59
+          "no_ask": 0.6
         },
         {
           "ticker": "KXNBASPREAD-26NOV18ATLOKC-OKC8",
@@ -1666,7 +1872,7 @@
           "yes_sub_title": "Oklahoma City wins by over 6.5 points",
           "no_sub_title": "Oklahoma City wins by over 6.5 points",
           "yes_ask": 0.49,
-          "no_ask": 0.52
+          "no_ask": 0.53
         },
         {
           "ticker": "KXNBASPREAD-26NOV18ATLOKC-OKC6",
@@ -1714,7 +1920,7 @@
           "yes_sub_title": "Atlanta wins by over 1.5 points",
           "no_sub_title": "Atlanta wins by over 1.5 points",
           "yes_ask": 0.29,
-          "no_ask": 0.73
+          "no_ask": 0.72
         },
         {
           "ticker": "KXNBASPREAD-26NOV18ATLOKC-ATL3",
@@ -1730,22 +1936,22 @@
           "yes_sub_title": "Atlanta wins by over 4.5 points",
           "no_sub_title": "Atlanta wins by over 4.5 points",
           "yes_ask": 0.23,
-          "no_ask": 0.79
+          "no_ask": 0.78
         },
         {
           "ticker": "KXNBASPREAD-26NOV18ATLOKC-ATL7",
           "title": "Atlanta wins by over 6.5 points",
           "yes_sub_title": "Atlanta wins by over 6.5 points",
           "no_sub_title": "Atlanta wins by over 6.5 points",
-          "yes_ask": 0.18,
-          "no_ask": 0.84
+          "yes_ask": 0.19,
+          "no_ask": 0.83
         },
         {
           "ticker": "KXNBASPREAD-26NOV18ATLOKC-ATL9",
           "title": "Atlanta wins by over 8.5 points",
           "yes_sub_title": "Atlanta wins by over 8.5 points",
           "no_sub_title": "Atlanta wins by over 8.5 points",
-          "yes_ask": 0.14,
+          "yes_ask": 0.15,
           "no_ask": 0.88
         },
         {
@@ -1831,7 +2037,7 @@
           "title": "Denver wins by over 17.5 points",
           "yes_sub_title": "Denver wins by over 17.5 points",
           "no_sub_title": "Denver wins by over 17.5 points",
-          "yes_ask": 0.09,
+          "yes_ask": 0.08,
           "no_ask": 0.94
         },
         {
@@ -1847,8 +2053,8 @@
           "title": "Denver wins by over 13.5 points",
           "yes_sub_title": "Denver wins by over 13.5 points",
           "no_sub_title": "Denver wins by over 13.5 points",
-          "yes_ask": 0.13,
-          "no_ask": 0.89
+          "yes_ask": 0.14,
+          "no_ask": 0.88
         },
         {
           "ticker": "KXNBASPREAD-26NOV18BOSDEN-DEN12",
@@ -1872,7 +2078,7 @@
           "yes_sub_title": "Denver wins by over 7.5 points",
           "no_sub_title": "Denver wins by over 7.5 points",
           "yes_ask": 0.25,
-          "no_ask": 0.77
+          "no_ask": 0.76
         },
         {
           "ticker": "KXNBASPREAD-26NOV18BOSDEN-DEN6",
@@ -1888,7 +2094,7 @@
           "yes_sub_title": "Denver wins by over 4.5 points",
           "no_sub_title": "Denver wins by over 4.5 points",
           "yes_ask": 0.33,
-          "no_ask": 0.69
+          "no_ask": 0.68
         },
         {
           "ticker": "KXNBASPREAD-26NOV18BOSDEN-DEN4",
@@ -1903,8 +2109,8 @@
           "title": "Denver wins by over 2.5 points",
           "yes_sub_title": "Denver wins by over 2.5 points",
           "no_sub_title": "Denver wins by over 2.5 points",
-          "yes_ask": 0.39,
-          "no_ask": 0.63
+          "yes_ask": 0.4,
+          "no_ask": 0.62
         },
         {
           "ticker": "KXNBASPREAD-26NOV18BOSDEN-DEN2",
@@ -1920,14 +2126,14 @@
           "yes_sub_title": "Boston wins by over 1.5 points",
           "no_sub_title": "Boston wins by over 1.5 points",
           "yes_ask": 0.55,
-          "no_ask": 0.46
+          "no_ask": 0.47
         },
         {
           "ticker": "KXNBASPREAD-26NOV18BOSDEN-BOS3",
           "title": "Boston wins by over 2.5 points",
           "yes_sub_title": "Boston wins by over 2.5 points",
           "no_sub_title": "Boston wins by over 2.5 points",
-          "yes_ask": 0.5,
+          "yes_ask": 0.51,
           "no_ask": 0.51
         },
         {
@@ -1943,8 +2149,8 @@
           "title": "Boston wins by over 4.5 points",
           "yes_sub_title": "Boston wins by over 4.5 points",
           "no_sub_title": "Boston wins by over 4.5 points",
-          "yes_ask": 0.43,
-          "no_ask": 0.58
+          "yes_ask": 0.42,
+          "no_ask": 0.59
         },
         {
           "ticker": "KXNBASPREAD-26NOV18BOSDEN-BOS6",
@@ -2007,7 +2213,7 @@
           "title": "Boston wins by over 16.5 points",
           "yes_sub_title": "Boston wins by over 16.5 points",
           "no_sub_title": "Boston wins by over 16.5 points",
-          "yes_ask": 0.16,
+          "yes_ask": 0.15,
           "no_ask": 0.87
         },
         {
@@ -2015,7 +2221,7 @@
           "title": "Boston wins by over 18.5 points",
           "yes_sub_title": "Boston wins by over 18.5 points",
           "no_sub_title": "Boston wins by over 18.5 points",
-          "yes_ask": 0.13,
+          "yes_ask": 0.12,
           "no_ask": 0.89
         },
         {
@@ -2031,7 +2237,7 @@
           "title": "Boston wins by over 22.5 points",
           "yes_sub_title": "Boston wins by over 22.5 points",
           "no_sub_title": "Boston wins by over 22.5 points",
-          "yes_ask": 0.08,
+          "yes_ask": 0.07,
           "no_ask": 0.94
         },
         {
@@ -2070,7 +2276,7 @@
           "yes_sub_title": "Brooklyn wins by over 28.5 points",
           "no_sub_title": "Brooklyn wins by over 28.5 points",
           "yes_ask": 0.04,
-          "no_ask": 0.99
+          "no_ask": 0.98
         },
         {
           "ticker": "KXNBASPREAD-26NOV18CHIBKN-BKN27",
@@ -2093,7 +2299,7 @@
           "title": "Brooklyn wins by over 22.5 points",
           "yes_sub_title": "Brooklyn wins by over 22.5 points",
           "no_sub_title": "Brooklyn wins by over 22.5 points",
-          "yes_ask": 0.08,
+          "yes_ask": 0.07,
           "no_ask": 0.94
         },
         {
@@ -2101,7 +2307,7 @@
           "title": "Brooklyn wins by over 20.5 points",
           "yes_sub_title": "Brooklyn wins by over 20.5 points",
           "no_sub_title": "Brooklyn wins by over 20.5 points",
-          "yes_ask": 0.1,
+          "yes_ask": 0.09,
           "no_ask": 0.92
         },
         {
@@ -2117,7 +2323,7 @@
           "title": "Brooklyn wins by over 16.5 points",
           "yes_sub_title": "Brooklyn wins by over 16.5 points",
           "no_sub_title": "Brooklyn wins by over 16.5 points",
-          "yes_ask": 0.16,
+          "yes_ask": 0.15,
           "no_ask": 0.87
         },
         {
@@ -2125,7 +2331,7 @@
           "title": "Brooklyn wins by over 14.5 points",
           "yes_sub_title": "Brooklyn wins by over 14.5 points",
           "no_sub_title": "Brooklyn wins by over 14.5 points",
-          "yes_ask": 0.19,
+          "yes_ask": 0.18,
           "no_ask": 0.84
         },
         {
@@ -2142,7 +2348,7 @@
           "yes_sub_title": "Brooklyn wins by over 10.5 points",
           "no_sub_title": "Brooklyn wins by over 10.5 points",
           "yes_ask": 0.26,
-          "no_ask": 0.76
+          "no_ask": 0.75
         },
         {
           "ticker": "KXNBASPREAD-26NOV18CHIBKN-BKN9",
@@ -2150,7 +2356,7 @@
           "yes_sub_title": "Brooklyn wins by over 8.5 points",
           "no_sub_title": "Brooklyn wins by over 8.5 points",
           "yes_ask": 0.31,
-          "no_ask": 0.71
+          "no_ask": 0.7
         },
         {
           "ticker": "KXNBASPREAD-26NOV18CHIBKN-BKN8",
@@ -2158,22 +2364,22 @@
           "yes_sub_title": "Brooklyn wins by over 7.5 points",
           "no_sub_title": "Brooklyn wins by over 7.5 points",
           "yes_ask": 0.34,
-          "no_ask": 0.68
+          "no_ask": 0.67
         },
         {
           "ticker": "KXNBASPREAD-26NOV18CHIBKN-BKN7",
           "title": "Brooklyn wins by over 6.5 points",
           "yes_sub_title": "Brooklyn wins by over 6.5 points",
           "no_sub_title": "Brooklyn wins by over 6.5 points",
-          "yes_ask": 0.38,
-          "no_ask": 0.63
+          "yes_ask": 0.39,
+          "no_ask": 0.62
         },
         {
           "ticker": "KXNBASPREAD-26NOV18CHIBKN-BKN6",
           "title": "Brooklyn wins by over 5.5 points",
           "yes_sub_title": "Brooklyn wins by over 5.5 points",
           "no_sub_title": "Brooklyn wins by over 5.5 points",
-          "yes_ask": 0.4,
+          "yes_ask": 0.41,
           "no_ask": 0.61
         },
         {
@@ -2269,7 +2475,7 @@
           "title": "Chicago wins by over 11.5 points",
           "yes_sub_title": "Chicago wins by over 11.5 points",
           "no_sub_title": "Chicago wins by over 11.5 points",
-          "yes_ask": 0.18,
+          "yes_ask": 0.17,
           "no_ask": 0.85
         },
         {
@@ -2277,15 +2483,15 @@
           "title": "Chicago wins by over 13.5 points",
           "yes_sub_title": "Chicago wins by over 13.5 points",
           "no_sub_title": "Chicago wins by over 13.5 points",
-          "yes_ask": 0.14,
-          "no_ask": 0.87
+          "yes_ask": 0.13,
+          "no_ask": 0.88
         },
         {
           "ticker": "KXNBASPREAD-26NOV18CHIBKN-CHI16",
           "title": "Chicago wins by over 15.5 points",
           "yes_sub_title": "Chicago wins by over 15.5 points",
           "no_sub_title": "Chicago wins by over 15.5 points",
-          "yes_ask": 0.12,
+          "yes_ask": 0.11,
           "no_ask": 0.91
         },
         {
@@ -2293,7 +2499,7 @@
           "title": "Chicago wins by over 17.5 points",
           "yes_sub_title": "Chicago wins by over 17.5 points",
           "no_sub_title": "Chicago wins by over 17.5 points",
-          "yes_ask": 0.09,
+          "yes_ask": 0.08,
           "no_ask": 0.94
         },
         {
@@ -2339,7 +2545,7 @@
           "title": "New Orleans wins by over 17.5 points",
           "yes_sub_title": "New Orleans wins by over 17.5 points",
           "no_sub_title": "New Orleans wins by over 17.5 points",
-          "yes_ask": 0.05,
+          "yes_ask": 0.06,
           "no_ask": 0.97
         },
         {
@@ -2347,256 +2553,256 @@
           "title": "New Orleans wins by over 15.5 points",
           "yes_sub_title": "New Orleans wins by over 15.5 points",
           "no_sub_title": "New Orleans wins by over 15.5 points",
-          "yes_ask": 0.06,
-          "no_ask": 0.96
+          "yes_ask": 0.07,
+          "no_ask": 0.95
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-NOP14",
           "title": "New Orleans wins by over 13.5 points",
           "yes_sub_title": "New Orleans wins by over 13.5 points",
           "no_sub_title": "New Orleans wins by over 13.5 points",
-          "yes_ask": 0.08,
-          "no_ask": 0.94
+          "yes_ask": 0.1,
+          "no_ask": 0.93
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-NOP12",
           "title": "New Orleans wins by over 11.5 points",
           "yes_sub_title": "New Orleans wins by over 11.5 points",
           "no_sub_title": "New Orleans wins by over 11.5 points",
-          "yes_ask": 0.1,
-          "no_ask": 0.92
+          "yes_ask": 0.13,
+          "no_ask": 0.9
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-NOP10",
           "title": "New Orleans wins by over 9.5 points",
           "yes_sub_title": "New Orleans wins by over 9.5 points",
           "no_sub_title": "New Orleans wins by over 9.5 points",
-          "yes_ask": 0.13,
-          "no_ask": 0.9
+          "yes_ask": 0.16,
+          "no_ask": 0.86
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-NOP8",
           "title": "New Orleans wins by over 7.5 points",
           "yes_sub_title": "New Orleans wins by over 7.5 points",
           "no_sub_title": "New Orleans wins by over 7.5 points",
-          "yes_ask": 0.15,
-          "no_ask": 0.86
+          "yes_ask": 0.2,
+          "no_ask": 0.81
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-NOP6",
           "title": "New Orleans wins by over 5.5 points",
           "yes_sub_title": "New Orleans wins by over 5.5 points",
           "no_sub_title": "New Orleans wins by over 5.5 points",
-          "yes_ask": 0.2,
-          "no_ask": 0.82
+          "yes_ask": 0.25,
+          "no_ask": 0.76
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-NOP4",
           "title": "New Orleans wins by over 3.5 points",
           "yes_sub_title": "New Orleans wins by over 3.5 points",
           "no_sub_title": "New Orleans wins by over 3.5 points",
-          "yes_ask": 0.25,
-          "no_ask": 0.78
+          "yes_ask": 0.3,
+          "no_ask": 0.71
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-NOP2",
           "title": "New Orleans wins by over 1.5 points",
           "yes_sub_title": "New Orleans wins by over 1.5 points",
           "no_sub_title": "New Orleans wins by over 1.5 points",
-          "yes_ask": 0.28,
-          "no_ask": 0.74
+          "yes_ask": 0.34,
+          "no_ask": 0.67
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET2",
           "title": "Detroit wins by over 1.5 points",
           "yes_sub_title": "Detroit wins by over 1.5 points",
           "no_sub_title": "Detroit wins by over 1.5 points",
-          "yes_ask": 0.68,
-          "no_ask": 0.34
+          "yes_ask": 0.61,
+          "no_ask": 0.41
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET3",
           "title": "Detroit wins by over 2.5 points",
           "yes_sub_title": "Detroit wins by over 2.5 points",
           "no_sub_title": "Detroit wins by over 2.5 points",
-          "yes_ask": 0.64,
-          "no_ask": 0.38
+          "yes_ask": 0.58,
+          "no_ask": 0.43
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET4",
           "title": "Detroit wins by over 3.5 points",
           "yes_sub_title": "Detroit wins by over 3.5 points",
           "no_sub_title": "Detroit wins by over 3.5 points",
-          "yes_ask": 0.62,
-          "no_ask": 0.4
+          "yes_ask": 0.55,
+          "no_ask": 0.46
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET5",
           "title": "Detroit wins by over 4.5 points",
           "yes_sub_title": "Detroit wins by over 4.5 points",
           "no_sub_title": "Detroit wins by over 4.5 points",
-          "yes_ask": 0.58,
-          "no_ask": 0.44
+          "yes_ask": 0.51,
+          "no_ask": 0.5
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET6",
           "title": "Detroit wins by over 5.5 points",
           "yes_sub_title": "Detroit wins by over 5.5 points",
           "no_sub_title": "Detroit wins by over 5.5 points",
-          "yes_ask": 0.55,
-          "no_ask": 0.46
+          "yes_ask": 0.47,
+          "no_ask": 0.54
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET7",
           "title": "Detroit wins by over 6.5 points",
           "yes_sub_title": "Detroit wins by over 6.5 points",
           "no_sub_title": "Detroit wins by over 6.5 points",
-          "yes_ask": 0.5,
-          "no_ask": 0.51
+          "yes_ask": 0.44,
+          "no_ask": 0.57
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET8",
           "title": "Detroit wins by over 7.5 points",
           "yes_sub_title": "Detroit wins by over 7.5 points",
           "no_sub_title": "Detroit wins by over 7.5 points",
-          "yes_ask": 0.45,
-          "no_ask": 0.56
+          "yes_ask": 0.4,
+          "no_ask": 0.61
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET9",
           "title": "Detroit wins by over 8.5 points",
           "yes_sub_title": "Detroit wins by over 8.5 points",
           "no_sub_title": "Detroit wins by over 8.5 points",
-          "yes_ask": 0.43,
-          "no_ask": 0.59
+          "yes_ask": 0.39,
+          "no_ask": 0.62
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET10",
           "title": "Detroit wins by over 9.5 points",
           "yes_sub_title": "Detroit wins by over 9.5 points",
           "no_sub_title": "Detroit wins by over 9.5 points",
-          "yes_ask": 0.4,
-          "no_ask": 0.62
+          "yes_ask": 0.35,
+          "no_ask": 0.66
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET11",
           "title": "Detroit wins by over 10.5 points",
           "yes_sub_title": "Detroit wins by over 10.5 points",
           "no_sub_title": "Detroit wins by over 10.5 points",
-          "yes_ask": 0.38,
-          "no_ask": 0.64
+          "yes_ask": 0.32,
+          "no_ask": 0.7
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET12",
           "title": "Detroit wins by over 11.5 points",
           "yes_sub_title": "Detroit wins by over 11.5 points",
           "no_sub_title": "Detroit wins by over 11.5 points",
-          "yes_ask": 0.35,
-          "no_ask": 0.67
+          "yes_ask": 0.29,
+          "no_ask": 0.73
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET13",
           "title": "Detroit wins by over 12.5 points",
           "yes_sub_title": "Detroit wins by over 12.5 points",
           "no_sub_title": "Detroit wins by over 12.5 points",
-          "yes_ask": 0.32,
-          "no_ask": 0.7
+          "yes_ask": 0.27,
+          "no_ask": 0.75
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET14",
           "title": "Detroit wins by over 13.5 points",
           "yes_sub_title": "Detroit wins by over 13.5 points",
           "no_sub_title": "Detroit wins by over 13.5 points",
-          "yes_ask": 0.29,
-          "no_ask": 0.73
+          "yes_ask": 0.24,
+          "no_ask": 0.78
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET15",
           "title": "Detroit wins by over 14.5 points",
           "yes_sub_title": "Detroit wins by over 14.5 points",
           "no_sub_title": "Detroit wins by over 14.5 points",
-          "yes_ask": 0.27,
-          "no_ask": 0.76
+          "yes_ask": 0.22,
+          "no_ask": 0.8
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET17",
           "title": "Detroit wins by over 16.5 points",
           "yes_sub_title": "Detroit wins by over 16.5 points",
           "no_sub_title": "Detroit wins by over 16.5 points",
-          "yes_ask": 0.22,
-          "no_ask": 0.81
+          "yes_ask": 0.18,
+          "no_ask": 0.85
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET19",
           "title": "Detroit wins by over 18.5 points",
           "yes_sub_title": "Detroit wins by over 18.5 points",
           "no_sub_title": "Detroit wins by over 18.5 points",
-          "yes_ask": 0.17,
-          "no_ask": 0.85
+          "yes_ask": 0.14,
+          "no_ask": 0.88
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET21",
           "title": "Detroit wins by over 20.5 points",
           "yes_sub_title": "Detroit wins by over 20.5 points",
           "no_sub_title": "Detroit wins by over 20.5 points",
-          "yes_ask": 0.15,
-          "no_ask": 0.87
+          "yes_ask": 0.11,
+          "no_ask": 0.9
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET23",
           "title": "Detroit wins by over 22.5 points",
           "yes_sub_title": "Detroit wins by over 22.5 points",
           "no_sub_title": "Detroit wins by over 22.5 points",
-          "yes_ask": 0.13,
-          "no_ask": 0.9
+          "yes_ask": 0.09,
+          "no_ask": 0.94
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET25",
           "title": "Detroit wins by over 24.5 points",
           "yes_sub_title": "Detroit wins by over 24.5 points",
           "no_sub_title": "Detroit wins by over 24.5 points",
-          "yes_ask": 0.1,
-          "no_ask": 0.93
+          "yes_ask": 0.07,
+          "no_ask": 0.95
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET27",
           "title": "Detroit wins by over 26.5 points",
           "yes_sub_title": "Detroit wins by over 26.5 points",
           "no_sub_title": "Detroit wins by over 26.5 points",
-          "yes_ask": 0.08,
-          "no_ask": 0.94
+          "yes_ask": 0.05,
+          "no_ask": 0.97
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET29",
           "title": "Detroit wins by over 28.5 points",
           "yes_sub_title": "Detroit wins by over 28.5 points",
           "no_sub_title": "Detroit wins by over 28.5 points",
-          "yes_ask": 0.06,
-          "no_ask": 0.96
+          "yes_ask": 0.04,
+          "no_ask": 0.98
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET31",
           "title": "Detroit wins by over 30.5 points",
           "yes_sub_title": "Detroit wins by over 30.5 points",
           "no_sub_title": "Detroit wins by over 30.5 points",
-          "yes_ask": 0.05,
-          "no_ask": 0.97
+          "yes_ask": 0.04,
+          "no_ask": 0.99
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET33",
           "title": "Detroit wins by over 32.5 points",
           "yes_sub_title": "Detroit wins by over 32.5 points",
           "no_sub_title": "Detroit wins by over 32.5 points",
-          "yes_ask": 0.04,
-          "no_ask": 0.98
+          "yes_ask": 0.03,
+          "no_ask": 1.0
         },
         {
           "ticker": "KXNBASPREAD-26NOV18DETNOP-DET35",
           "title": "Detroit wins by over 34.5 points",
           "yes_sub_title": "Detroit wins by over 34.5 points",
           "no_sub_title": "Detroit wins by over 34.5 points",
-          "yes_ask": 0.04,
-          "no_ask": 0.99
+          "yes_ask": 0.03,
+          "no_ask": 1.0
         }
       ]
     },
@@ -2609,7 +2815,7 @@
           "title": "Dallas wins by over 30.5 points",
           "yes_sub_title": "Dallas wins by over 30.5 points",
           "no_sub_title": "Dallas wins by over 30.5 points",
-          "yes_ask": 0.06,
+          "yes_ask": 0.05,
           "no_ask": 1.0
         },
         {
@@ -2625,7 +2831,7 @@
           "title": "Dallas wins by over 26.5 points",
           "yes_sub_title": "Dallas wins by over 26.5 points",
           "no_sub_title": "Dallas wins by over 26.5 points",
-          "yes_ask": 0.06,
+          "yes_ask": 0.05,
           "no_ask": 0.97
         },
         {
@@ -2633,7 +2839,7 @@
           "title": "Dallas wins by over 24.5 points",
           "yes_sub_title": "Dallas wins by over 24.5 points",
           "no_sub_title": "Dallas wins by over 24.5 points",
-          "yes_ask": 0.08,
+          "yes_ask": 0.07,
           "no_ask": 0.94
         },
         {
@@ -2657,7 +2863,7 @@
           "title": "Dallas wins by over 18.5 points",
           "yes_sub_title": "Dallas wins by over 18.5 points",
           "no_sub_title": "Dallas wins by over 18.5 points",
-          "yes_ask": 0.15,
+          "yes_ask": 0.14,
           "no_ask": 0.87
         },
         {
@@ -2666,7 +2872,7 @@
           "yes_sub_title": "Dallas wins by over 16.5 points",
           "no_sub_title": "Dallas wins by over 16.5 points",
           "yes_ask": 0.19,
-          "no_ask": 0.82
+          "no_ask": 0.83
         },
         {
           "ticker": "KXNBASPREAD-26NOV18GSWDAL-DAL15",
@@ -2682,14 +2888,14 @@
           "yes_sub_title": "Dallas wins by over 12.5 points",
           "no_sub_title": "Dallas wins by over 12.5 points",
           "yes_ask": 0.28,
-          "no_ask": 0.75
+          "no_ask": 0.74
         },
         {
           "ticker": "KXNBASPREAD-26NOV18GSWDAL-DAL11",
           "title": "Dallas wins by over 10.5 points",
           "yes_sub_title": "Dallas wins by over 10.5 points",
           "no_sub_title": "Dallas wins by over 10.5 points",
-          "yes_ask": 0.32,
+          "yes_ask": 0.33,
           "no_ask": 0.69
         },
         {
@@ -2705,8 +2911,8 @@
           "title": "Dallas wins by over 8.5 points",
           "yes_sub_title": "Dallas wins by over 8.5 points",
           "no_sub_title": "Dallas wins by over 8.5 points",
-          "yes_ask": 0.38,
-          "no_ask": 0.65
+          "yes_ask": 0.39,
+          "no_ask": 0.63
         },
         {
           "ticker": "KXNBASPREAD-26NOV18GSWDAL-DAL8",
@@ -2722,7 +2928,7 @@
           "yes_sub_title": "Dallas wins by over 6.5 points",
           "no_sub_title": "Dallas wins by over 6.5 points",
           "yes_ask": 0.44,
-          "no_ask": 0.58
+          "no_ask": 0.57
         },
         {
           "ticker": "KXNBASPREAD-26NOV18GSWDAL-DAL6",
@@ -2730,7 +2936,7 @@
           "yes_sub_title": "Dallas wins by over 5.5 points",
           "no_sub_title": "Dallas wins by over 5.5 points",
           "yes_ask": 0.47,
-          "no_ask": 0.54
+          "no_ask": 0.55
         },
         {
           "ticker": "KXNBASPREAD-26NOV18GSWDAL-DAL5",
@@ -2769,7 +2975,7 @@
           "title": "Golden State wins by over 1.5 points",
           "yes_sub_title": "Golden State wins by over 1.5 points",
           "no_sub_title": "Golden State wins by over 1.5 points",
-          "yes_ask": 0.35,
+          "yes_ask": 0.34,
           "no_ask": 0.67
         },
         {
@@ -2849,8 +3055,8 @@
           "title": "Golden State wins by over 19.5 points",
           "yes_sub_title": "Golden State wins by over 19.5 points",
           "no_sub_title": "Golden State wins by over 19.5 points",
-          "yes_ask": 0.04,
-          "no_ask": 0.99
+          "yes_ask": 0.05,
+          "no_ask": 0.98
         },
         {
           "ticker": "KXNBASPREAD-26NOV18GSWDAL-GSW22",
@@ -2865,8 +3071,278 @@
           "title": "Golden State wins by over 23.5 points",
           "yes_sub_title": "Golden State wins by over 23.5 points",
           "no_sub_title": "Golden State wins by over 23.5 points",
-          "yes_ask": 0.05,
+          "yes_ask": 0.04,
           "no_ask": 1.0
+        }
+      ]
+    },
+    "KXNBASPREAD-26NOV18MEMCLE": {
+      "title": "Memphis vs Cleveland: Spread",
+      "sub_title": "MEM vs CLE (Nov 18)",
+      "markets": [
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE32",
+          "title": "Cleveland wins by over 31.5 points",
+          "yes_sub_title": "Cleveland wins by over 31.5 points",
+          "no_sub_title": "Cleveland wins by over 31.5 points",
+          "yes_ask": 0.04,
+          "no_ask": 0.99
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE30",
+          "title": "Cleveland wins by over 29.5 points",
+          "yes_sub_title": "Cleveland wins by over 29.5 points",
+          "no_sub_title": "Cleveland wins by over 29.5 points",
+          "yes_ask": 0.04,
+          "no_ask": 0.98
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE28",
+          "title": "Cleveland wins by over 27.5 points",
+          "yes_sub_title": "Cleveland wins by over 27.5 points",
+          "no_sub_title": "Cleveland wins by over 27.5 points",
+          "yes_ask": 0.06,
+          "no_ask": 0.97
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE26",
+          "title": "Cleveland wins by over 25.5 points",
+          "yes_sub_title": "Cleveland wins by over 25.5 points",
+          "no_sub_title": "Cleveland wins by over 25.5 points",
+          "yes_ask": 0.07,
+          "no_ask": 0.96
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE24",
+          "title": "Cleveland wins by over 23.5 points",
+          "yes_sub_title": "Cleveland wins by over 23.5 points",
+          "no_sub_title": "Cleveland wins by over 23.5 points",
+          "yes_ask": 0.08,
+          "no_ask": 0.93
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE22",
+          "title": "Cleveland wins by over 21.5 points",
+          "yes_sub_title": "Cleveland wins by over 21.5 points",
+          "no_sub_title": "Cleveland wins by over 21.5 points",
+          "yes_ask": 0.11,
+          "no_ask": 0.92
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE20",
+          "title": "Cleveland wins by over 19.5 points",
+          "yes_sub_title": "Cleveland wins by over 19.5 points",
+          "no_sub_title": "Cleveland wins by over 19.5 points",
+          "yes_ask": 0.14,
+          "no_ask": 0.88
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE18",
+          "title": "Cleveland wins by over 17.5 points",
+          "yes_sub_title": "Cleveland wins by over 17.5 points",
+          "no_sub_title": "Cleveland wins by over 17.5 points",
+          "yes_ask": 0.17,
+          "no_ask": 0.85
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE16",
+          "title": "Cleveland wins by over 15.5 points",
+          "yes_sub_title": "Cleveland wins by over 15.5 points",
+          "no_sub_title": "Cleveland wins by over 15.5 points",
+          "yes_ask": 0.21,
+          "no_ask": 0.81
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE14",
+          "title": "Cleveland wins by over 13.5 points",
+          "yes_sub_title": "Cleveland wins by over 13.5 points",
+          "no_sub_title": "Cleveland wins by over 13.5 points",
+          "yes_ask": 0.24,
+          "no_ask": 0.77
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE12",
+          "title": "Cleveland wins by over 11.5 points",
+          "yes_sub_title": "Cleveland wins by over 11.5 points",
+          "no_sub_title": "Cleveland wins by over 11.5 points",
+          "yes_ask": 0.29,
+          "no_ask": 0.73
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE11",
+          "title": "Cleveland wins by over 10.5 points",
+          "yes_sub_title": "Cleveland wins by over 10.5 points",
+          "no_sub_title": "Cleveland wins by over 10.5 points",
+          "yes_ask": 0.32,
+          "no_ask": 0.7
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE10",
+          "title": "Cleveland wins by over 9.5 points",
+          "yes_sub_title": "Cleveland wins by over 9.5 points",
+          "no_sub_title": "Cleveland wins by over 9.5 points",
+          "yes_ask": 0.35,
+          "no_ask": 0.67
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE9",
+          "title": "Cleveland wins by over 8.5 points",
+          "yes_sub_title": "Cleveland wins by over 8.5 points",
+          "no_sub_title": "Cleveland wins by over 8.5 points",
+          "yes_ask": 0.37,
+          "no_ask": 0.64
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE8",
+          "title": "Cleveland wins by over 7.5 points",
+          "yes_sub_title": "Cleveland wins by over 7.5 points",
+          "no_sub_title": "Cleveland wins by over 7.5 points",
+          "yes_ask": 0.41,
+          "no_ask": 0.61
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE7",
+          "title": "Cleveland wins by over 6.5 points",
+          "yes_sub_title": "Cleveland wins by over 6.5 points",
+          "no_sub_title": "Cleveland wins by over 6.5 points",
+          "yes_ask": 0.44,
+          "no_ask": 0.57
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE6",
+          "title": "Cleveland wins by over 5.5 points",
+          "yes_sub_title": "Cleveland wins by over 5.5 points",
+          "no_sub_title": "Cleveland wins by over 5.5 points",
+          "yes_ask": 0.47,
+          "no_ask": 0.54
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE5",
+          "title": "Cleveland wins by over 4.5 points",
+          "yes_sub_title": "Cleveland wins by over 4.5 points",
+          "no_sub_title": "Cleveland wins by over 4.5 points",
+          "yes_ask": 0.51,
+          "no_ask": 0.5
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE4",
+          "title": "Cleveland wins by over 3.5 points",
+          "yes_sub_title": "Cleveland wins by over 3.5 points",
+          "no_sub_title": "Cleveland wins by over 3.5 points",
+          "yes_ask": 0.56,
+          "no_ask": 0.45
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE3",
+          "title": "Cleveland wins by over 2.5 points",
+          "yes_sub_title": "Cleveland wins by over 2.5 points",
+          "no_sub_title": "Cleveland wins by over 2.5 points",
+          "yes_ask": 0.59,
+          "no_ask": 0.43
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-CLE2",
+          "title": "Cleveland wins by over 1.5 points",
+          "yes_sub_title": "Cleveland wins by over 1.5 points",
+          "no_sub_title": "Cleveland wins by over 1.5 points",
+          "yes_ask": 0.62,
+          "no_ask": 0.4
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-MEM2",
+          "title": "Memphis wins by over 1.5 points",
+          "yes_sub_title": "Memphis wins by over 1.5 points",
+          "no_sub_title": "Memphis wins by over 1.5 points",
+          "yes_ask": 0.36,
+          "no_ask": 0.66
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-MEM3",
+          "title": "Memphis wins by over 2.5 points",
+          "yes_sub_title": "Memphis wins by over 2.5 points",
+          "no_sub_title": "Memphis wins by over 2.5 points",
+          "yes_ask": 0.33,
+          "no_ask": 0.69
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-MEM5",
+          "title": "Memphis wins by over 4.5 points",
+          "yes_sub_title": "Memphis wins by over 4.5 points",
+          "no_sub_title": "Memphis wins by over 4.5 points",
+          "yes_ask": 0.26,
+          "no_ask": 0.75
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-MEM7",
+          "title": "Memphis wins by over 6.5 points",
+          "yes_sub_title": "Memphis wins by over 6.5 points",
+          "no_sub_title": "Memphis wins by over 6.5 points",
+          "yes_ask": 0.23,
+          "no_ask": 0.79
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-MEM9",
+          "title": "Memphis wins by over 8.5 points",
+          "yes_sub_title": "Memphis wins by over 8.5 points",
+          "no_sub_title": "Memphis wins by over 8.5 points",
+          "yes_ask": 0.18,
+          "no_ask": 0.84
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-MEM11",
+          "title": "Memphis wins by over 10.5 points",
+          "yes_sub_title": "Memphis wins by over 10.5 points",
+          "no_sub_title": "Memphis wins by over 10.5 points",
+          "yes_ask": 0.14,
+          "no_ask": 0.88
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-MEM13",
+          "title": "Memphis wins by over 12.5 points",
+          "yes_sub_title": "Memphis wins by over 12.5 points",
+          "no_sub_title": "Memphis wins by over 12.5 points",
+          "yes_ask": 0.11,
+          "no_ask": 0.91
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-MEM15",
+          "title": "Memphis wins by over 14.5 points",
+          "yes_sub_title": "Memphis wins by over 14.5 points",
+          "no_sub_title": "Memphis wins by over 14.5 points",
+          "yes_ask": 0.09,
+          "no_ask": 0.93
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-MEM17",
+          "title": "Memphis wins by over 16.5 points",
+          "yes_sub_title": "Memphis wins by over 16.5 points",
+          "no_sub_title": "Memphis wins by over 16.5 points",
+          "yes_ask": 0.07,
+          "no_ask": 0.96
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-MEM19",
+          "title": "Memphis wins by over 18.5 points",
+          "yes_sub_title": "Memphis wins by over 18.5 points",
+          "no_sub_title": "Memphis wins by over 18.5 points",
+          "yes_ask": 0.06,
+          "no_ask": 0.97
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-MEM21",
+          "title": "Memphis wins by over 20.5 points",
+          "yes_sub_title": "Memphis wins by over 20.5 points",
+          "no_sub_title": "Memphis wins by over 20.5 points",
+          "yes_ask": 0.04,
+          "no_ask": 0.99
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV18MEMCLE-MEM23",
+          "title": "Memphis wins by over 22.5 points",
+          "yes_sub_title": "Memphis wins by over 22.5 points",
+          "no_sub_title": "Memphis wins by over 22.5 points",
+          "yes_ask": 0.04,
+          "no_ask": 0.98
         }
       ]
     },
@@ -2911,15 +3387,15 @@
           "title": "Miami wins by over 30.5 points",
           "yes_sub_title": "Miami wins by over 30.5 points",
           "no_sub_title": "Miami wins by over 30.5 points",
-          "yes_ask": 0.09,
-          "no_ask": 0.92
+          "yes_ask": 0.08,
+          "no_ask": 0.93
         },
         {
           "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA29",
           "title": "Miami wins by over 28.5 points",
           "yes_sub_title": "Miami wins by over 28.5 points",
           "no_sub_title": "Miami wins by over 28.5 points",
-          "yes_ask": 0.12,
+          "yes_ask": 0.11,
           "no_ask": 0.9
         },
         {
@@ -2928,14 +3404,14 @@
           "yes_sub_title": "Miami wins by over 26.5 points",
           "no_sub_title": "Miami wins by over 26.5 points",
           "yes_ask": 0.15,
-          "no_ask": 0.87
+          "no_ask": 0.86
         },
         {
           "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA25",
           "title": "Miami wins by over 24.5 points",
           "yes_sub_title": "Miami wins by over 24.5 points",
           "no_sub_title": "Miami wins by over 24.5 points",
-          "yes_ask": 0.2,
+          "yes_ask": 0.19,
           "no_ask": 0.82
         },
         {
@@ -2951,7 +3427,7 @@
           "title": "Miami wins by over 20.5 points",
           "yes_sub_title": "Miami wins by over 20.5 points",
           "no_sub_title": "Miami wins by over 20.5 points",
-          "yes_ask": 0.27,
+          "yes_ask": 0.26,
           "no_ask": 0.75
         },
         {
@@ -3015,8 +3491,8 @@
           "title": "Miami wins by over 11.5 points",
           "yes_sub_title": "Miami wins by over 11.5 points",
           "no_sub_title": "Miami wins by over 11.5 points",
-          "yes_ask": 0.52,
-          "no_ask": 0.49
+          "yes_ask": 0.53,
+          "no_ask": 0.48
         },
         {
           "ticker": "KXNBASPREAD-26NOV18MILMIA-MIA11",
@@ -3047,7 +3523,7 @@
           "title": "Miami wins by over 7.5 points",
           "yes_sub_title": "Miami wins by over 7.5 points",
           "no_sub_title": "Miami wins by over 7.5 points",
-          "yes_ask": 0.66,
+          "yes_ask": 0.67,
           "no_ask": 0.35
         },
         {
@@ -3055,7 +3531,7 @@
           "title": "Miami wins by over 6.5 points",
           "yes_sub_title": "Miami wins by over 6.5 points",
           "no_sub_title": "Miami wins by over 6.5 points",
-          "yes_ask": 0.7,
+          "yes_ask": 0.71,
           "no_ask": 0.31
         },
         {
@@ -3063,7 +3539,7 @@
           "title": "Miami wins by over 4.5 points",
           "yes_sub_title": "Miami wins by over 4.5 points",
           "no_sub_title": "Miami wins by over 4.5 points",
-          "yes_ask": 0.75,
+          "yes_ask": 0.76,
           "no_ask": 0.26
         },
         {
@@ -3079,7 +3555,7 @@
           "title": "Miami wins by over 1.5 points",
           "yes_sub_title": "Miami wins by over 1.5 points",
           "no_sub_title": "Miami wins by over 1.5 points",
-          "yes_ask": 0.83,
+          "yes_ask": 0.82,
           "no_ask": 0.19
         },
         {
@@ -3136,7 +3612,7 @@
           "yes_sub_title": "Milwaukee wins by over 13.5 points",
           "no_sub_title": "Milwaukee wins by over 13.5 points",
           "yes_ask": 0.04,
-          "no_ask": 0.99
+          "no_ask": 0.98
         }
       ]
     },
@@ -3230,14 +3706,14 @@
           "yes_sub_title": "Sacramento wins by over 1.5 points",
           "no_sub_title": "Sacramento wins by over 1.5 points",
           "yes_ask": 0.29,
-          "no_ask": 0.74
+          "no_ask": 0.73
         },
         {
           "ticker": "KXNBASPREAD-26NOV18PHXSAC-PHX2",
           "title": "Phoenix wins by over 1.5 points",
           "yes_sub_title": "Phoenix wins by over 1.5 points",
           "no_sub_title": "Phoenix wins by over 1.5 points",
-          "yes_ask": 0.69,
+          "yes_ask": 0.68,
           "no_ask": 0.33
         },
         {
@@ -3245,7 +3721,7 @@
           "title": "Phoenix wins by over 2.5 points",
           "yes_sub_title": "Phoenix wins by over 2.5 points",
           "no_sub_title": "Phoenix wins by over 2.5 points",
-          "yes_ask": 0.65,
+          "yes_ask": 0.64,
           "no_ask": 0.37
         },
         {
@@ -3293,7 +3769,7 @@
           "title": "Phoenix wins by over 8.5 points",
           "yes_sub_title": "Phoenix wins by over 8.5 points",
           "no_sub_title": "Phoenix wins by over 8.5 points",
-          "yes_ask": 0.46,
+          "yes_ask": 0.45,
           "no_ask": 0.56
         },
         {
@@ -3302,7 +3778,7 @@
           "yes_sub_title": "Phoenix wins by over 9.5 points",
           "no_sub_title": "Phoenix wins by over 9.5 points",
           "yes_ask": 0.42,
-          "no_ask": 0.59
+          "no_ask": 0.6
         },
         {
           "ticker": "KXNBASPREAD-26NOV18PHXSAC-PHX11",
@@ -3326,7 +3802,7 @@
           "yes_sub_title": "Phoenix wins by over 12.5 points",
           "no_sub_title": "Phoenix wins by over 12.5 points",
           "yes_ask": 0.33,
-          "no_ask": 0.69
+          "no_ask": 0.68
         },
         {
           "ticker": "KXNBASPREAD-26NOV18PHXSAC-PHX15",
@@ -3358,7 +3834,7 @@
           "yes_sub_title": "Phoenix wins by over 20.5 points",
           "no_sub_title": "Phoenix wins by over 20.5 points",
           "yes_ask": 0.16,
-          "no_ask": 0.87
+          "no_ask": 0.86
         },
         {
           "ticker": "KXNBASPREAD-26NOV18PHXSAC-PHX23",
@@ -3420,7 +3896,7 @@
           "yes_sub_title": "Los Angeles L wins by over 38.5 points",
           "no_sub_title": "Los Angeles L wins by over 38.5 points",
           "yes_ask": 0.04,
-          "no_ask": 1.0
+          "no_ask": 0.99
         },
         {
           "ticker": "KXNBASPREAD-26NOV18UTALAL-LAL37",
@@ -3428,14 +3904,14 @@
           "yes_sub_title": "Los Angeles L wins by over 36.5 points",
           "no_sub_title": "Los Angeles L wins by over 36.5 points",
           "yes_ask": 0.04,
-          "no_ask": 0.99
+          "no_ask": 0.98
         },
         {
           "ticker": "KXNBASPREAD-26NOV18UTALAL-LAL35",
           "title": "Los Angeles L wins by over 34.5 points",
           "yes_sub_title": "Los Angeles L wins by over 34.5 points",
           "no_sub_title": "Los Angeles L wins by over 34.5 points",
-          "yes_ask": 0.06,
+          "yes_ask": 0.05,
           "no_ask": 0.97
         },
         {
@@ -3451,7 +3927,7 @@
           "title": "Los Angeles L wins by over 30.5 points",
           "yes_sub_title": "Los Angeles L wins by over 30.5 points",
           "no_sub_title": "Los Angeles L wins by over 30.5 points",
-          "yes_ask": 0.08,
+          "yes_ask": 0.07,
           "no_ask": 0.94
         },
         {
@@ -3459,7 +3935,7 @@
           "title": "Los Angeles L wins by over 28.5 points",
           "yes_sub_title": "Los Angeles L wins by over 28.5 points",
           "no_sub_title": "Los Angeles L wins by over 28.5 points",
-          "yes_ask": 0.1,
+          "yes_ask": 0.09,
           "no_ask": 0.92
         },
         {
@@ -3467,7 +3943,7 @@
           "title": "Los Angeles L wins by over 26.5 points",
           "yes_sub_title": "Los Angeles L wins by over 26.5 points",
           "no_sub_title": "Los Angeles L wins by over 26.5 points",
-          "yes_ask": 0.12,
+          "yes_ask": 0.13,
           "no_ask": 0.9
         },
         {
@@ -3475,7 +3951,7 @@
           "title": "Los Angeles L wins by over 24.5 points",
           "yes_sub_title": "Los Angeles L wins by over 24.5 points",
           "no_sub_title": "Los Angeles L wins by over 24.5 points",
-          "yes_ask": 0.15,
+          "yes_ask": 0.16,
           "no_ask": 0.87
         },
         {
@@ -3484,14 +3960,14 @@
           "yes_sub_title": "Los Angeles L wins by over 22.5 points",
           "no_sub_title": "Los Angeles L wins by over 22.5 points",
           "yes_ask": 0.19,
-          "no_ask": 0.84
+          "no_ask": 0.83
         },
         {
           "ticker": "KXNBASPREAD-26NOV18UTALAL-LAL21",
           "title": "Los Angeles L wins by over 20.5 points",
           "yes_sub_title": "Los Angeles L wins by over 20.5 points",
           "no_sub_title": "Los Angeles L wins by over 20.5 points",
-          "yes_ask": 0.22,
+          "yes_ask": 0.23,
           "no_ask": 0.8
         },
         {
@@ -3507,8 +3983,8 @@
           "title": "Los Angeles L wins by over 17.5 points",
           "yes_sub_title": "Los Angeles L wins by over 17.5 points",
           "no_sub_title": "Los Angeles L wins by over 17.5 points",
-          "yes_ask": 0.29,
-          "no_ask": 0.72
+          "yes_ask": 0.3,
+          "no_ask": 0.73
         },
         {
           "ticker": "KXNBASPREAD-26NOV18UTALAL-LAL17",
@@ -3524,7 +4000,7 @@
           "yes_sub_title": "Los Angeles L wins by over 15.5 points",
           "no_sub_title": "Los Angeles L wins by over 15.5 points",
           "yes_ask": 0.35,
-          "no_ask": 0.67
+          "no_ask": 0.68
         },
         {
           "ticker": "KXNBASPREAD-26NOV18UTALAL-LAL15",
@@ -3540,7 +4016,7 @@
           "yes_sub_title": "Los Angeles L wins by over 13.5 points",
           "no_sub_title": "Los Angeles L wins by over 13.5 points",
           "yes_ask": 0.4,
-          "no_ask": 0.62
+          "no_ask": 0.61
         },
         {
           "ticker": "KXNBASPREAD-26NOV18UTALAL-LAL13",
@@ -3563,7 +4039,7 @@
           "title": "Los Angeles L wins by over 10.5 points",
           "yes_sub_title": "Los Angeles L wins by over 10.5 points",
           "no_sub_title": "Los Angeles L wins by over 10.5 points",
-          "yes_ask": 0.49,
+          "yes_ask": 0.5,
           "no_ask": 0.52
         },
         {
@@ -3571,7 +4047,7 @@
           "title": "Los Angeles L wins by over 9.5 points",
           "yes_sub_title": "Los Angeles L wins by over 9.5 points",
           "no_sub_title": "Los Angeles L wins by over 9.5 points",
-          "yes_ask": 0.53,
+          "yes_ask": 0.54,
           "no_ask": 0.48
         },
         {
@@ -3603,7 +4079,7 @@
           "title": "Los Angeles L wins by over 4.5 points",
           "yes_sub_title": "Los Angeles L wins by over 4.5 points",
           "no_sub_title": "Los Angeles L wins by over 4.5 points",
-          "yes_ask": 0.7,
+          "yes_ask": 0.69,
           "no_ask": 0.32
         },
         {
@@ -3689,7 +4165,7 @@
           "title": "Toronto wins by over 33.5 points",
           "yes_sub_title": "Toronto wins by over 33.5 points",
           "no_sub_title": "Toronto wins by over 33.5 points",
-          "yes_ask": 0.03,
+          "yes_ask": 0.04,
           "no_ask": 0.99
         },
         {
@@ -3705,7 +4181,7 @@
           "title": "Toronto wins by over 29.5 points",
           "yes_sub_title": "Toronto wins by over 29.5 points",
           "no_sub_title": "Toronto wins by over 29.5 points",
-          "yes_ask": 0.05,
+          "yes_ask": 0.04,
           "no_ask": 0.98
         },
         {
@@ -3713,7 +4189,7 @@
           "title": "Toronto wins by over 27.5 points",
           "yes_sub_title": "Toronto wins by over 27.5 points",
           "no_sub_title": "Toronto wins by over 27.5 points",
-          "yes_ask": 0.06,
+          "yes_ask": 0.05,
           "no_ask": 0.97
         },
         {
@@ -3729,7 +4205,7 @@
           "title": "Toronto wins by over 23.5 points",
           "yes_sub_title": "Toronto wins by over 23.5 points",
           "no_sub_title": "Toronto wins by over 23.5 points",
-          "yes_ask": 0.09,
+          "yes_ask": 0.08,
           "no_ask": 0.94
         },
         {
@@ -3737,7 +4213,7 @@
           "title": "Toronto wins by over 21.5 points",
           "yes_sub_title": "Toronto wins by over 21.5 points",
           "no_sub_title": "Toronto wins by over 21.5 points",
-          "yes_ask": 0.11,
+          "yes_ask": 0.1,
           "no_ask": 0.91
         },
         {
@@ -3745,7 +4221,7 @@
           "title": "Toronto wins by over 19.5 points",
           "yes_sub_title": "Toronto wins by over 19.5 points",
           "no_sub_title": "Toronto wins by over 19.5 points",
-          "yes_ask": 0.14,
+          "yes_ask": 0.13,
           "no_ask": 0.89
         },
         {
@@ -3753,8 +4229,8 @@
           "title": "Toronto wins by over 17.5 points",
           "yes_sub_title": "Toronto wins by over 17.5 points",
           "no_sub_title": "Toronto wins by over 17.5 points",
-          "yes_ask": 0.16,
-          "no_ask": 0.86
+          "yes_ask": 0.17,
+          "no_ask": 0.85
         },
         {
           "ticker": "KXNBASPREAD-26NOV18WASTOR-TOR16",
@@ -3777,7 +4253,7 @@
           "title": "Toronto wins by over 12.5 points",
           "yes_sub_title": "Toronto wins by over 12.5 points",
           "no_sub_title": "Toronto wins by over 12.5 points",
-          "yes_ask": 0.28,
+          "yes_ask": 0.27,
           "no_ask": 0.75
         },
         {
@@ -3785,7 +4261,7 @@
           "title": "Toronto wins by over 11.5 points",
           "yes_sub_title": "Toronto wins by over 11.5 points",
           "no_sub_title": "Toronto wins by over 11.5 points",
-          "yes_ask": 0.31,
+          "yes_ask": 0.3,
           "no_ask": 0.72
         },
         {
@@ -3793,8 +4269,8 @@
           "title": "Toronto wins by over 10.5 points",
           "yes_sub_title": "Toronto wins by over 10.5 points",
           "no_sub_title": "Toronto wins by over 10.5 points",
-          "yes_ask": 0.32,
-          "no_ask": 0.7
+          "yes_ask": 0.33,
+          "no_ask": 0.69
         },
         {
           "ticker": "KXNBASPREAD-26NOV18WASTOR-TOR10",
@@ -3841,8 +4317,8 @@
           "title": "Toronto wins by over 4.5 points",
           "yes_sub_title": "Toronto wins by over 4.5 points",
           "no_sub_title": "Toronto wins by over 4.5 points",
-          "yes_ask": 0.51,
-          "no_ask": 0.5
+          "yes_ask": 0.52,
+          "no_ask": 0.49
         },
         {
           "ticker": "KXNBASPREAD-26NOV18WASTOR-TOR4",
@@ -3850,7 +4326,7 @@
           "yes_sub_title": "Toronto wins by over 3.5 points",
           "no_sub_title": "Toronto wins by over 3.5 points",
           "yes_ask": 0.55,
-          "no_ask": 0.47
+          "no_ask": 0.46
         },
         {
           "ticker": "KXNBASPREAD-26NOV18WASTOR-TOR3",
@@ -3865,23 +4341,23 @@
           "title": "Toronto wins by over 1.5 points",
           "yes_sub_title": "Toronto wins by over 1.5 points",
           "no_sub_title": "Toronto wins by over 1.5 points",
-          "yes_ask": 0.61,
-          "no_ask": 0.41
+          "yes_ask": 0.62,
+          "no_ask": 0.4
         },
         {
           "ticker": "KXNBASPREAD-26NOV18WASTOR-WAS2",
           "title": "Washington wins by over 1.5 points",
           "yes_sub_title": "Washington wins by over 1.5 points",
           "no_sub_title": "Washington wins by over 1.5 points",
-          "yes_ask": 0.34,
-          "no_ask": 0.67
+          "yes_ask": 0.35,
+          "no_ask": 0.66
         },
         {
           "ticker": "KXNBASPREAD-26NOV18WASTOR-WAS3",
           "title": "Washington wins by over 2.5 points",
           "yes_sub_title": "Washington wins by over 2.5 points",
           "no_sub_title": "Washington wins by over 2.5 points",
-          "yes_ask": 0.33,
+          "yes_ask": 0.31,
           "no_ask": 0.7
         },
         {
@@ -3890,7 +4366,7 @@
           "yes_sub_title": "Washington wins by over 4.5 points",
           "no_sub_title": "Washington wins by over 4.5 points",
           "yes_ask": 0.27,
-          "no_ask": 0.74
+          "no_ask": 0.75
         },
         {
           "ticker": "KXNBASPREAD-26NOV18WASTOR-WAS7",
@@ -3905,8 +4381,8 @@
           "title": "Washington wins by over 8.5 points",
           "yes_sub_title": "Washington wins by over 8.5 points",
           "no_sub_title": "Washington wins by over 8.5 points",
-          "yes_ask": 0.18,
-          "no_ask": 0.84
+          "yes_ask": 0.17,
+          "no_ask": 0.85
         },
         {
           "ticker": "KXNBASPREAD-26NOV18WASTOR-WAS11",
@@ -3929,7 +4405,7 @@
           "title": "Washington wins by over 14.5 points",
           "yes_sub_title": "Washington wins by over 14.5 points",
           "no_sub_title": "Washington wins by over 14.5 points",
-          "yes_ask": 0.09,
+          "yes_ask": 0.08,
           "no_ask": 0.94
         },
         {
@@ -3937,8 +4413,8 @@
           "title": "Washington wins by over 16.5 points",
           "yes_sub_title": "Washington wins by over 16.5 points",
           "no_sub_title": "Washington wins by over 16.5 points",
-          "yes_ask": 0.06,
-          "no_ask": 0.95
+          "yes_ask": 0.07,
+          "no_ask": 0.96
         },
         {
           "ticker": "KXNBASPREAD-26NOV18WASTOR-WAS19",
@@ -3984,7 +4460,7 @@
           "yes_sub_title": "Over 203.5 points",
           "no_sub_title": "Over 203.5 points",
           "yes_ask": 0.94,
-          "no_ask": 0.08
+          "no_ask": 0.09
         },
         {
           "ticker": "KXNBATOTAL-26NOV18ATLOKC-206",
@@ -4048,7 +4524,7 @@
           "yes_sub_title": "Over 219.5 points",
           "no_sub_title": "Over 219.5 points",
           "yes_ask": 0.7,
-          "no_ask": 0.31
+          "no_ask": 0.32
         },
         {
           "ticker": "KXNBATOTAL-26NOV18ATLOKC-222",
@@ -4104,7 +4580,7 @@
           "yes_sub_title": "Over 233.5 points",
           "no_sub_title": "Over 233.5 points",
           "yes_ask": 0.41,
-          "no_ask": 0.62
+          "no_ask": 0.61
         },
         {
           "ticker": "KXNBATOTAL-26NOV18ATLOKC-236",
@@ -4128,7 +4604,7 @@
           "yes_sub_title": "Over 239.5 points",
           "no_sub_title": "Over 239.5 points",
           "yes_ask": 0.28,
-          "no_ask": 0.75
+          "no_ask": 0.74
         },
         {
           "ticker": "KXNBATOTAL-26NOV18ATLOKC-242",
@@ -4136,7 +4612,7 @@
           "yes_sub_title": "Over 241.5 points",
           "no_sub_title": "Over 241.5 points",
           "yes_ask": 0.24,
-          "no_ask": 0.79
+          "no_ask": 0.78
         },
         {
           "ticker": "KXNBATOTAL-26NOV18ATLOKC-244",
@@ -4151,15 +4627,15 @@
           "title": "Full Game: Over 245.5 points scored",
           "yes_sub_title": "Over 245.5 points",
           "no_sub_title": "Over 245.5 points",
-          "yes_ask": 0.19,
-          "no_ask": 0.84
+          "yes_ask": 0.18,
+          "no_ask": 0.85
         },
         {
           "ticker": "KXNBATOTAL-26NOV18ATLOKC-248",
           "title": "Full Game: Over 247.5 points scored",
           "yes_sub_title": "Over 247.5 points",
           "no_sub_title": "Over 247.5 points",
-          "yes_ask": 0.16,
+          "yes_ask": 0.15,
           "no_ask": 0.87
         },
         {
@@ -4167,7 +4643,7 @@
           "title": "Full Game: Over 249.5 points scored",
           "yes_sub_title": "Over 249.5 points",
           "no_sub_title": "Over 249.5 points",
-          "yes_ask": 0.14,
+          "yes_ask": 0.13,
           "no_ask": 0.89
         },
         {
@@ -4175,7 +4651,7 @@
           "title": "Full Game: Over 251.5 points scored",
           "yes_sub_title": "Over 251.5 points",
           "no_sub_title": "Over 251.5 points",
-          "yes_ask": 0.12,
+          "yes_ask": 0.11,
           "no_ask": 0.91
         },
         {
@@ -4205,7 +4681,7 @@
           "title": "Full Game: Over 194.5 points scored",
           "yes_sub_title": "Over 194.5 points",
           "no_sub_title": "Over 194.5 points",
-          "yes_ask": 0.95,
+          "yes_ask": 0.96,
           "no_ask": 0.06
         },
         {
@@ -4221,7 +4697,7 @@
           "title": "Full Game: Over 198.5 points scored",
           "yes_sub_title": "Over 198.5 points",
           "no_sub_title": "Over 198.5 points",
-          "yes_ask": 0.93,
+          "yes_ask": 0.92,
           "no_ask": 0.1
         },
         {
@@ -4230,7 +4706,7 @@
           "yes_sub_title": "Over 200.5 points",
           "no_sub_title": "Over 200.5 points",
           "yes_ask": 0.89,
-          "no_ask": 0.13
+          "no_ask": 0.12
         },
         {
           "ticker": "KXNBATOTAL-26NOV18BOSDEN-203",
@@ -4253,8 +4729,8 @@
           "title": "Full Game: Over 206.5 points scored",
           "yes_sub_title": "Over 206.5 points",
           "no_sub_title": "Over 206.5 points",
-          "yes_ask": 0.81,
-          "no_ask": 0.2
+          "yes_ask": 0.8,
+          "no_ask": 0.21
         },
         {
           "ticker": "KXNBATOTAL-26NOV18BOSDEN-209",
@@ -4262,22 +4738,22 @@
           "yes_sub_title": "Over 208.5 points",
           "no_sub_title": "Over 208.5 points",
           "yes_ask": 0.77,
-          "no_ask": 0.24
+          "no_ask": 0.25
         },
         {
           "ticker": "KXNBATOTAL-26NOV18BOSDEN-211",
           "title": "Full Game: Over 210.5 points scored",
           "yes_sub_title": "Over 210.5 points",
           "no_sub_title": "Over 210.5 points",
-          "yes_ask": 0.74,
-          "no_ask": 0.28
+          "yes_ask": 0.72,
+          "no_ask": 0.29
         },
         {
           "ticker": "KXNBATOTAL-26NOV18BOSDEN-213",
           "title": "Full Game: Over 212.5 points scored",
           "yes_sub_title": "Over 212.5 points",
           "no_sub_title": "Over 212.5 points",
-          "yes_ask": 0.69,
+          "yes_ask": 0.68,
           "no_ask": 0.33
         },
         {
@@ -4301,7 +4777,7 @@
           "title": "Full Game: Over 218.5 points scored",
           "yes_sub_title": "Over 218.5 points",
           "no_sub_title": "Over 218.5 points",
-          "yes_ask": 0.55,
+          "yes_ask": 0.56,
           "no_ask": 0.46
         },
         {
@@ -4334,7 +4810,7 @@
           "yes_sub_title": "Over 226.5 points",
           "no_sub_title": "Over 226.5 points",
           "yes_ask": 0.38,
-          "no_ask": 0.64
+          "no_ask": 0.65
         },
         {
           "ticker": "KXNBATOTAL-26NOV18BOSDEN-229",
@@ -4349,32 +4825,32 @@
           "title": "Full Game: Over 230.5 points scored",
           "yes_sub_title": "Over 230.5 points",
           "no_sub_title": "Over 230.5 points",
-          "yes_ask": 0.3,
-          "no_ask": 0.71
+          "yes_ask": 0.29,
+          "no_ask": 0.72
         },
         {
           "ticker": "KXNBATOTAL-26NOV18BOSDEN-233",
           "title": "Full Game: Over 232.5 points scored",
           "yes_sub_title": "Over 232.5 points",
           "no_sub_title": "Over 232.5 points",
-          "yes_ask": 0.26,
-          "no_ask": 0.76
+          "yes_ask": 0.25,
+          "no_ask": 0.77
         },
         {
           "ticker": "KXNBATOTAL-26NOV18BOSDEN-235",
           "title": "Full Game: Over 234.5 points scored",
           "yes_sub_title": "Over 234.5 points",
           "no_sub_title": "Over 234.5 points",
-          "yes_ask": 0.21,
-          "no_ask": 0.81
+          "yes_ask": 0.22,
+          "no_ask": 0.8
         },
         {
           "ticker": "KXNBATOTAL-26NOV18BOSDEN-237",
           "title": "Full Game: Over 236.5 points scored",
           "yes_sub_title": "Over 236.5 points",
           "no_sub_title": "Over 236.5 points",
-          "yes_ask": 0.2,
-          "no_ask": 0.82
+          "yes_ask": 0.19,
+          "no_ask": 0.83
         },
         {
           "ticker": "KXNBATOTAL-26NOV18BOSDEN-239",
@@ -4382,14 +4858,14 @@
           "yes_sub_title": "Over 238.5 points",
           "no_sub_title": "Over 238.5 points",
           "yes_ask": 0.16,
-          "no_ask": 0.85
+          "no_ask": 0.86
         },
         {
           "ticker": "KXNBATOTAL-26NOV18BOSDEN-241",
           "title": "Full Game: Over 240.5 points scored",
           "yes_sub_title": "Over 240.5 points",
           "no_sub_title": "Over 240.5 points",
-          "yes_ask": 0.12,
+          "yes_ask": 0.13,
           "no_ask": 0.89
         },
         {
@@ -4397,24 +4873,24 @@
           "title": "Full Game: Over 242.5 points scored",
           "yes_sub_title": "Over 242.5 points",
           "no_sub_title": "Over 242.5 points",
-          "yes_ask": 0.12,
-          "no_ask": 0.9
+          "yes_ask": 0.11,
+          "no_ask": 0.91
         },
         {
           "ticker": "KXNBATOTAL-26NOV18BOSDEN-245",
           "title": "Full Game: Over 244.5 points scored",
           "yes_sub_title": "Over 244.5 points",
           "no_sub_title": "Over 244.5 points",
-          "yes_ask": 0.11,
-          "no_ask": 0.91
+          "yes_ask": 0.09,
+          "no_ask": 0.93
         },
         {
           "ticker": "KXNBATOTAL-26NOV18BOSDEN-247",
           "title": "Full Game: Over 246.5 points scored",
           "yes_sub_title": "Over 246.5 points",
           "no_sub_title": "Over 246.5 points",
-          "yes_ask": 0.1,
-          "no_ask": 0.93
+          "yes_ask": 0.08,
+          "no_ask": 0.94
         },
         {
           "ticker": "KXNBATOTAL-26NOV18BOSDEN-249",
@@ -4435,7 +4911,7 @@
           "title": "Full Game: Over 208.5 points scored",
           "yes_sub_title": "Over 208.5 points",
           "no_sub_title": "Over 208.5 points",
-          "yes_ask": 0.96,
+          "yes_ask": 0.97,
           "no_ask": 0.05
         },
         {
@@ -4484,7 +4960,7 @@
           "yes_sub_title": "Over 220.5 points",
           "no_sub_title": "Over 220.5 points",
           "yes_ask": 0.87,
-          "no_ask": 0.14
+          "no_ask": 0.15
         },
         {
           "ticker": "KXNBATOTAL-26NOV18CHIBKN-223",
@@ -4492,7 +4968,7 @@
           "yes_sub_title": "Over 222.5 points",
           "no_sub_title": "Over 222.5 points",
           "yes_ask": 0.85,
-          "no_ask": 0.18
+          "no_ask": 0.17
         },
         {
           "ticker": "KXNBATOTAL-26NOV18CHIBKN-225",
@@ -4532,7 +5008,7 @@
           "yes_sub_title": "Over 232.5 points",
           "no_sub_title": "Over 232.5 points",
           "yes_ask": 0.67,
-          "no_ask": 0.35
+          "no_ask": 0.34
         },
         {
           "ticker": "KXNBATOTAL-26NOV18CHIBKN-235",
@@ -4556,7 +5032,7 @@
           "yes_sub_title": "Over 238.5 points",
           "no_sub_title": "Over 238.5 points",
           "yes_ask": 0.54,
-          "no_ask": 0.47
+          "no_ask": 0.48
         },
         {
           "ticker": "KXNBATOTAL-26NOV18CHIBKN-241",
@@ -4595,8 +5071,8 @@
           "title": "Full Game: Over 248.5 points scored",
           "yes_sub_title": "Over 248.5 points",
           "no_sub_title": "Over 248.5 points",
-          "yes_ask": 0.33,
-          "no_ask": 0.69
+          "yes_ask": 0.32,
+          "no_ask": 0.7
         },
         {
           "ticker": "KXNBATOTAL-26NOV18CHIBKN-251",
@@ -4673,8 +5149,8 @@
           "title": "Full Game: Over 201.5 points scored",
           "yes_sub_title": "Over 201.5 points",
           "no_sub_title": "Over 201.5 points",
-          "yes_ask": 0.95,
-          "no_ask": 0.07
+          "yes_ask": 0.94,
+          "no_ask": 0.08
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-204",
@@ -4682,223 +5158,223 @@
           "yes_sub_title": "Over 203.5 points",
           "no_sub_title": "Over 203.5 points",
           "yes_ask": 0.93,
-          "no_ask": 0.09
+          "no_ask": 0.1
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-206",
           "title": "Full Game: Over 205.5 points scored",
           "yes_sub_title": "Over 205.5 points",
           "no_sub_title": "Over 205.5 points",
-          "yes_ask": 0.92,
-          "no_ask": 0.11
+          "yes_ask": 0.9,
+          "no_ask": 0.12
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-208",
           "title": "Full Game: Over 207.5 points scored",
           "yes_sub_title": "Over 207.5 points",
           "no_sub_title": "Over 207.5 points",
-          "yes_ask": 0.89,
-          "no_ask": 0.12
+          "yes_ask": 0.88,
+          "no_ask": 0.14
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-210",
           "title": "Full Game: Over 209.5 points scored",
           "yes_sub_title": "Over 209.5 points",
           "no_sub_title": "Over 209.5 points",
-          "yes_ask": 0.87,
-          "no_ask": 0.16
+          "yes_ask": 0.85,
+          "no_ask": 0.17
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-212",
           "title": "Full Game: Over 211.5 points scored",
           "yes_sub_title": "Over 211.5 points",
           "no_sub_title": "Over 211.5 points",
-          "yes_ask": 0.84,
-          "no_ask": 0.19
+          "yes_ask": 0.82,
+          "no_ask": 0.21
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-214",
           "title": "Full Game: Over 213.5 points scored",
           "yes_sub_title": "Over 213.5 points",
           "no_sub_title": "Over 213.5 points",
-          "yes_ask": 0.81,
-          "no_ask": 0.22
+          "yes_ask": 0.78,
+          "no_ask": 0.25
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-216",
           "title": "Full Game: Over 215.5 points scored",
           "yes_sub_title": "Over 215.5 points",
           "no_sub_title": "Over 215.5 points",
-          "yes_ask": 0.78,
-          "no_ask": 0.24
+          "yes_ask": 0.75,
+          "no_ask": 0.28
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-218",
           "title": "Full Game: Over 217.5 points scored",
           "yes_sub_title": "Over 217.5 points",
           "no_sub_title": "Over 217.5 points",
-          "yes_ask": 0.74,
-          "no_ask": 0.29
+          "yes_ask": 0.7,
+          "no_ask": 0.32
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-220",
           "title": "Full Game: Over 219.5 points scored",
           "yes_sub_title": "Over 219.5 points",
           "no_sub_title": "Over 219.5 points",
-          "yes_ask": 0.69,
-          "no_ask": 0.32
+          "yes_ask": 0.65,
+          "no_ask": 0.37
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-222",
           "title": "Full Game: Over 221.5 points scored",
           "yes_sub_title": "Over 221.5 points",
           "no_sub_title": "Over 221.5 points",
-          "yes_ask": 0.66,
-          "no_ask": 0.35
+          "yes_ask": 0.6,
+          "no_ask": 0.41
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-224",
           "title": "Full Game: Over 223.5 points scored",
           "yes_sub_title": "Over 223.5 points",
           "no_sub_title": "Over 223.5 points",
-          "yes_ask": 0.61,
-          "no_ask": 0.4
+          "yes_ask": 0.57,
+          "no_ask": 0.45
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-226",
           "title": "Full Game: Over 225.5 points scored",
           "yes_sub_title": "Over 225.5 points",
           "no_sub_title": "Over 225.5 points",
-          "yes_ask": 0.56,
-          "no_ask": 0.45
+          "yes_ask": 0.53,
+          "no_ask": 0.49
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-228",
           "title": "Full Game: Over 227.5 points scored",
           "yes_sub_title": "Over 227.5 points",
           "no_sub_title": "Over 227.5 points",
-          "yes_ask": 0.52,
-          "no_ask": 0.49
+          "yes_ask": 0.48,
+          "no_ask": 0.53
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-230",
           "title": "Full Game: Over 229.5 points scored",
           "yes_sub_title": "Over 229.5 points",
           "no_sub_title": "Over 229.5 points",
-          "yes_ask": 0.46,
-          "no_ask": 0.55
+          "yes_ask": 0.41,
+          "no_ask": 0.6
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-232",
           "title": "Full Game: Over 231.5 points scored",
           "yes_sub_title": "Over 231.5 points",
           "no_sub_title": "Over 231.5 points",
-          "yes_ask": 0.41,
-          "no_ask": 0.6
+          "yes_ask": 0.38,
+          "no_ask": 0.64
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-234",
           "title": "Full Game: Over 233.5 points scored",
           "yes_sub_title": "Over 233.5 points",
           "no_sub_title": "Over 233.5 points",
-          "yes_ask": 0.39,
-          "no_ask": 0.63
+          "yes_ask": 0.34,
+          "no_ask": 0.68
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-236",
           "title": "Full Game: Over 235.5 points scored",
           "yes_sub_title": "Over 235.5 points",
           "no_sub_title": "Over 235.5 points",
-          "yes_ask": 0.35,
-          "no_ask": 0.67
+          "yes_ask": 0.31,
+          "no_ask": 0.71
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-238",
           "title": "Full Game: Over 237.5 points scored",
           "yes_sub_title": "Over 237.5 points",
           "no_sub_title": "Over 237.5 points",
-          "yes_ask": 0.31,
-          "no_ask": 0.71
+          "yes_ask": 0.27,
+          "no_ask": 0.74
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-240",
           "title": "Full Game: Over 239.5 points scored",
           "yes_sub_title": "Over 239.5 points",
           "no_sub_title": "Over 239.5 points",
-          "yes_ask": 0.28,
-          "no_ask": 0.75
+          "yes_ask": 0.25,
+          "no_ask": 0.77
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-242",
           "title": "Full Game: Over 241.5 points scored",
           "yes_sub_title": "Over 241.5 points",
           "no_sub_title": "Over 241.5 points",
-          "yes_ask": 0.24,
-          "no_ask": 0.79
+          "yes_ask": 0.19,
+          "no_ask": 0.83
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-244",
           "title": "Full Game: Over 243.5 points scored",
           "yes_sub_title": "Over 243.5 points",
           "no_sub_title": "Over 243.5 points",
-          "yes_ask": 0.21,
-          "no_ask": 0.82
+          "yes_ask": 0.16,
+          "no_ask": 0.86
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-246",
           "title": "Full Game: Over 245.5 points scored",
           "yes_sub_title": "Over 245.5 points",
           "no_sub_title": "Over 245.5 points",
-          "yes_ask": 0.18,
-          "no_ask": 0.85
+          "yes_ask": 0.15,
+          "no_ask": 0.88
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-248",
           "title": "Full Game: Over 247.5 points scored",
           "yes_sub_title": "Over 247.5 points",
           "no_sub_title": "Over 247.5 points",
-          "yes_ask": 0.15,
-          "no_ask": 0.88
+          "yes_ask": 0.11,
+          "no_ask": 0.91
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-250",
           "title": "Full Game: Over 249.5 points scored",
           "yes_sub_title": "Over 249.5 points",
           "no_sub_title": "Over 249.5 points",
-          "yes_ask": 0.13,
-          "no_ask": 0.9
+          "yes_ask": 0.1,
+          "no_ask": 0.93
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-252",
           "title": "Full Game: Over 251.5 points scored",
           "yes_sub_title": "Over 251.5 points",
           "no_sub_title": "Over 251.5 points",
-          "yes_ask": 0.11,
-          "no_ask": 0.92
+          "yes_ask": 0.09,
+          "no_ask": 0.94
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-254",
           "title": "Full Game: Over 253.5 points scored",
           "yes_sub_title": "Over 253.5 points",
           "no_sub_title": "Over 253.5 points",
-          "yes_ask": 0.09,
-          "no_ask": 0.93
+          "yes_ask": 0.07,
+          "no_ask": 0.96
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-256",
           "title": "Full Game: Over 255.5 points scored",
           "yes_sub_title": "Over 255.5 points",
           "no_sub_title": "Over 255.5 points",
-          "yes_ask": 0.08,
-          "no_ask": 0.95
+          "yes_ask": 0.06,
+          "no_ask": 0.97
         },
         {
           "ticker": "KXNBATOTAL-26NOV18DETNOP-258",
           "title": "Full Game: Over 257.5 points scored",
           "yes_sub_title": "Over 257.5 points",
           "no_sub_title": "Over 257.5 points",
-          "yes_ask": 0.07,
-          "no_ask": 0.96
+          "yes_ask": 0.05,
+          "no_ask": 0.98
         }
       ]
     },
@@ -4912,14 +5388,14 @@
           "yes_sub_title": "Over 196.5 points",
           "no_sub_title": "Over 196.5 points",
           "yes_ask": 0.97,
-          "no_ask": 0.05
+          "no_ask": 0.06
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-199",
           "title": "Full Game: Over 198.5 points scored",
           "yes_sub_title": "Over 198.5 points",
           "no_sub_title": "Over 198.5 points",
-          "yes_ask": 0.95,
+          "yes_ask": 0.96,
           "no_ask": 0.07
         },
         {
@@ -4928,7 +5404,7 @@
           "yes_sub_title": "Over 200.5 points",
           "no_sub_title": "Over 200.5 points",
           "yes_ask": 0.93,
-          "no_ask": 0.1
+          "no_ask": 0.09
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-203",
@@ -4936,7 +5412,7 @@
           "yes_sub_title": "Over 202.5 points",
           "no_sub_title": "Over 202.5 points",
           "yes_ask": 0.92,
-          "no_ask": 0.11
+          "no_ask": 0.1
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-205",
@@ -4944,15 +5420,15 @@
           "yes_sub_title": "Over 204.5 points",
           "no_sub_title": "Over 204.5 points",
           "yes_ask": 0.89,
-          "no_ask": 0.14
+          "no_ask": 0.13
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-207",
           "title": "Full Game: Over 206.5 points scored",
           "yes_sub_title": "Over 206.5 points",
           "no_sub_title": "Over 206.5 points",
-          "yes_ask": 0.87,
-          "no_ask": 0.16
+          "yes_ask": 0.88,
+          "no_ask": 0.15
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-209",
@@ -4960,22 +5436,22 @@
           "yes_sub_title": "Over 208.5 points",
           "no_sub_title": "Over 208.5 points",
           "yes_ask": 0.84,
-          "no_ask": 0.19
+          "no_ask": 0.18
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-211",
           "title": "Full Game: Over 210.5 points scored",
           "yes_sub_title": "Over 210.5 points",
           "no_sub_title": "Over 210.5 points",
-          "yes_ask": 0.8,
-          "no_ask": 0.23
+          "yes_ask": 0.81,
+          "no_ask": 0.21
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-213",
           "title": "Full Game: Over 212.5 points scored",
           "yes_sub_title": "Over 212.5 points",
           "no_sub_title": "Over 212.5 points",
-          "yes_ask": 0.75,
+          "yes_ask": 0.76,
           "no_ask": 0.26
         },
         {
@@ -4983,23 +5459,23 @@
           "title": "Full Game: Over 214.5 points scored",
           "yes_sub_title": "Over 214.5 points",
           "no_sub_title": "Over 214.5 points",
-          "yes_ask": 0.73,
-          "no_ask": 0.3
+          "yes_ask": 0.74,
+          "no_ask": 0.29
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-217",
           "title": "Full Game: Over 216.5 points scored",
           "yes_sub_title": "Over 216.5 points",
           "no_sub_title": "Over 216.5 points",
-          "yes_ask": 0.69,
-          "no_ask": 0.34
+          "yes_ask": 0.7,
+          "no_ask": 0.33
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-219",
           "title": "Full Game: Over 218.5 points scored",
           "yes_sub_title": "Over 218.5 points",
           "no_sub_title": "Over 218.5 points",
-          "yes_ask": 0.66,
+          "yes_ask": 0.65,
           "no_ask": 0.37
         },
         {
@@ -5007,16 +5483,16 @@
           "title": "Full Game: Over 220.5 points scored",
           "yes_sub_title": "Over 220.5 points",
           "no_sub_title": "Over 220.5 points",
-          "yes_ask": 0.62,
-          "no_ask": 0.4
+          "yes_ask": 0.61,
+          "no_ask": 0.41
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-223",
           "title": "Full Game: Over 222.5 points scored",
           "yes_sub_title": "Over 222.5 points",
           "no_sub_title": "Over 222.5 points",
-          "yes_ask": 0.58,
-          "no_ask": 0.44
+          "yes_ask": 0.56,
+          "no_ask": 0.45
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-225",
@@ -5031,16 +5507,16 @@
           "title": "Full Game: Over 226.5 points scored",
           "yes_sub_title": "Over 226.5 points",
           "no_sub_title": "Over 226.5 points",
-          "yes_ask": 0.48,
-          "no_ask": 0.53
+          "yes_ask": 0.47,
+          "no_ask": 0.54
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-229",
           "title": "Full Game: Over 228.5 points scored",
           "yes_sub_title": "Over 228.5 points",
           "no_sub_title": "Over 228.5 points",
-          "yes_ask": 0.44,
-          "no_ask": 0.58
+          "yes_ask": 0.43,
+          "no_ask": 0.59
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-231",
@@ -5048,15 +5524,15 @@
           "yes_sub_title": "Over 230.5 points",
           "no_sub_title": "Over 230.5 points",
           "yes_ask": 0.4,
-          "no_ask": 0.62
+          "no_ask": 0.63
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-233",
           "title": "Full Game: Over 232.5 points scored",
           "yes_sub_title": "Over 232.5 points",
           "no_sub_title": "Over 232.5 points",
-          "yes_ask": 0.36,
-          "no_ask": 0.66
+          "yes_ask": 0.35,
+          "no_ask": 0.68
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-235",
@@ -5071,23 +5547,23 @@
           "title": "Full Game: Over 236.5 points scored",
           "yes_sub_title": "Over 236.5 points",
           "no_sub_title": "Over 236.5 points",
-          "yes_ask": 0.28,
-          "no_ask": 0.74
+          "yes_ask": 0.27,
+          "no_ask": 0.75
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-239",
           "title": "Full Game: Over 238.5 points scored",
           "yes_sub_title": "Over 238.5 points",
           "no_sub_title": "Over 238.5 points",
-          "yes_ask": 0.25,
-          "no_ask": 0.78
+          "yes_ask": 0.23,
+          "no_ask": 0.79
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-241",
           "title": "Full Game: Over 240.5 points scored",
           "yes_sub_title": "Over 240.5 points",
           "no_sub_title": "Over 240.5 points",
-          "yes_ask": 0.21,
+          "yes_ask": 0.2,
           "no_ask": 0.82
         },
         {
@@ -5112,14 +5588,14 @@
           "yes_sub_title": "Over 246.5 points",
           "no_sub_title": "Over 246.5 points",
           "yes_ask": 0.13,
-          "no_ask": 0.9
+          "no_ask": 0.89
         },
         {
           "ticker": "KXNBATOTAL-26NOV18GSWDAL-249",
           "title": "Full Game: Over 248.5 points scored",
           "yes_sub_title": "Over 248.5 points",
           "no_sub_title": "Over 248.5 points",
-          "yes_ask": 0.12,
+          "yes_ask": 0.11,
           "no_ask": 0.91
         },
         {
@@ -5127,7 +5603,7 @@
           "title": "Full Game: Over 250.5 points scored",
           "yes_sub_title": "Over 250.5 points",
           "no_sub_title": "Over 250.5 points",
-          "yes_ask": 0.1,
+          "yes_ask": 0.09,
           "no_ask": 0.93
         },
         {
@@ -5135,8 +5611,8 @@
           "title": "Full Game: Over 252.5 points scored",
           "yes_sub_title": "Over 252.5 points",
           "no_sub_title": "Over 252.5 points",
-          "yes_ask": 0.09,
-          "no_ask": 0.94
+          "yes_ask": 0.08,
+          "no_ask": 0.95
         }
       ]
     },
@@ -5150,7 +5626,7 @@
           "yes_sub_title": "Over 196.5 points",
           "no_sub_title": "Over 196.5 points",
           "yes_ask": 0.97,
-          "no_ask": 0.05
+          "no_ask": 0.06
         },
         {
           "ticker": "KXNBATOTAL-26NOV18HOUIND-199",
@@ -5166,7 +5642,7 @@
           "yes_sub_title": "Over 200.5 points",
           "no_sub_title": "Over 200.5 points",
           "yes_ask": 0.94,
-          "no_ask": 0.09
+          "no_ask": 0.08
         },
         {
           "ticker": "KXNBATOTAL-26NOV18HOUIND-203",
@@ -5174,7 +5650,7 @@
           "yes_sub_title": "Over 202.5 points",
           "no_sub_title": "Over 202.5 points",
           "yes_ask": 0.93,
-          "no_ask": 0.09
+          "no_ask": 0.1
         },
         {
           "ticker": "KXNBATOTAL-26NOV18HOUIND-205",
@@ -5182,14 +5658,14 @@
           "yes_sub_title": "Over 204.5 points",
           "no_sub_title": "Over 204.5 points",
           "yes_ask": 0.91,
-          "no_ask": 0.12
+          "no_ask": 0.11
         },
         {
           "ticker": "KXNBATOTAL-26NOV18HOUIND-207",
           "title": "Full Game: Over 206.5 points scored",
           "yes_sub_title": "Over 206.5 points",
           "no_sub_title": "Over 206.5 points",
-          "yes_ask": 0.88,
+          "yes_ask": 0.89,
           "no_ask": 0.14
         },
         {
@@ -5213,7 +5689,7 @@
           "title": "Full Game: Over 212.5 points scored",
           "yes_sub_title": "Over 212.5 points",
           "no_sub_title": "Over 212.5 points",
-          "yes_ask": 0.79,
+          "yes_ask": 0.8,
           "no_ask": 0.23
         },
         {
@@ -5261,8 +5737,8 @@
           "title": "Full Game: Over 224.5 points scored",
           "yes_sub_title": "Over 224.5 points",
           "no_sub_title": "Over 224.5 points",
-          "yes_ask": 0.52,
-          "no_ask": 0.49
+          "yes_ask": 0.51,
+          "no_ask": 0.5
         },
         {
           "ticker": "KXNBATOTAL-26NOV18HOUIND-227",
@@ -5277,7 +5753,7 @@
           "title": "Full Game: Over 228.5 points scored",
           "yes_sub_title": "Over 228.5 points",
           "no_sub_title": "Over 228.5 points",
-          "yes_ask": 0.44,
+          "yes_ask": 0.43,
           "no_ask": 0.58
         },
         {
@@ -5285,7 +5761,7 @@
           "title": "Full Game: Over 230.5 points scored",
           "yes_sub_title": "Over 230.5 points",
           "no_sub_title": "Over 230.5 points",
-          "yes_ask": 0.41,
+          "yes_ask": 0.4,
           "no_ask": 0.61
         },
         {
@@ -5293,7 +5769,7 @@
           "title": "Full Game: Over 232.5 points scored",
           "yes_sub_title": "Over 232.5 points",
           "no_sub_title": "Over 232.5 points",
-          "yes_ask": 0.37,
+          "yes_ask": 0.35,
           "no_ask": 0.66
         },
         {
@@ -5301,7 +5777,7 @@
           "title": "Full Game: Over 234.5 points scored",
           "yes_sub_title": "Over 234.5 points",
           "no_sub_title": "Over 234.5 points",
-          "yes_ask": 0.33,
+          "yes_ask": 0.32,
           "no_ask": 0.69
         },
         {
@@ -5309,7 +5785,7 @@
           "title": "Full Game: Over 236.5 points scored",
           "yes_sub_title": "Over 236.5 points",
           "no_sub_title": "Over 236.5 points",
-          "yes_ask": 0.29,
+          "yes_ask": 0.28,
           "no_ask": 0.74
         },
         {
@@ -5318,14 +5794,14 @@
           "yes_sub_title": "Over 238.5 points",
           "no_sub_title": "Over 238.5 points",
           "yes_ask": 0.25,
-          "no_ask": 0.77
+          "no_ask": 0.78
         },
         {
           "ticker": "KXNBATOTAL-26NOV18HOUIND-241",
           "title": "Full Game: Over 240.5 points scored",
           "yes_sub_title": "Over 240.5 points",
           "no_sub_title": "Over 240.5 points",
-          "yes_ask": 0.23,
+          "yes_ask": 0.21,
           "no_ask": 0.8
         },
         {
@@ -5333,7 +5809,7 @@
           "title": "Full Game: Over 242.5 points scored",
           "yes_sub_title": "Over 242.5 points",
           "no_sub_title": "Over 242.5 points",
-          "yes_ask": 0.2,
+          "yes_ask": 0.18,
           "no_ask": 0.83
         },
         {
@@ -5342,14 +5818,14 @@
           "yes_sub_title": "Over 244.5 points",
           "no_sub_title": "Over 244.5 points",
           "yes_ask": 0.16,
-          "no_ask": 0.86
+          "no_ask": 0.87
         },
         {
           "ticker": "KXNBATOTAL-26NOV18HOUIND-247",
           "title": "Full Game: Over 246.5 points scored",
           "yes_sub_title": "Over 246.5 points",
           "no_sub_title": "Over 246.5 points",
-          "yes_ask": 0.14,
+          "yes_ask": 0.13,
           "no_ask": 0.89
         },
         {
@@ -5357,7 +5833,7 @@
           "title": "Full Game: Over 248.5 points scored",
           "yes_sub_title": "Over 248.5 points",
           "no_sub_title": "Over 248.5 points",
-          "yes_ask": 0.12,
+          "yes_ask": 0.11,
           "no_ask": 0.91
         },
         {
@@ -5366,7 +5842,7 @@
           "yes_sub_title": "Over 250.5 points",
           "no_sub_title": "Over 250.5 points",
           "yes_ask": 0.1,
-          "no_ask": 0.92
+          "no_ask": 0.93
         },
         {
           "ticker": "KXNBATOTAL-26NOV18HOUIND-253",
@@ -5374,6 +5850,244 @@
           "yes_sub_title": "Over 252.5 points",
           "no_sub_title": "Over 252.5 points",
           "yes_ask": 0.08,
+          "no_ask": 0.95
+        }
+      ]
+    },
+    "KXNBATOTAL-26NOV18MEMCLE": {
+      "title": "Memphis vs Cleveland: Total Points",
+      "sub_title": "MEM vs CLE (Nov 18)",
+      "markets": [
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-208",
+          "title": "Full Game: Over 207.5 points scored",
+          "yes_sub_title": "Over 207.5 points",
+          "no_sub_title": "Over 207.5 points",
+          "yes_ask": 0.97,
+          "no_ask": 0.05
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-210",
+          "title": "Full Game: Over 209.5 points scored",
+          "yes_sub_title": "Over 209.5 points",
+          "no_sub_title": "Over 209.5 points",
+          "yes_ask": 0.95,
+          "no_ask": 0.07
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-212",
+          "title": "Full Game: Over 211.5 points scored",
+          "yes_sub_title": "Over 211.5 points",
+          "no_sub_title": "Over 211.5 points",
+          "yes_ask": 0.94,
+          "no_ask": 0.08
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-214",
+          "title": "Full Game: Over 213.5 points scored",
+          "yes_sub_title": "Over 213.5 points",
+          "no_sub_title": "Over 213.5 points",
+          "yes_ask": 0.93,
+          "no_ask": 0.09
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-216",
+          "title": "Full Game: Over 215.5 points scored",
+          "yes_sub_title": "Over 215.5 points",
+          "no_sub_title": "Over 215.5 points",
+          "yes_ask": 0.92,
+          "no_ask": 0.11
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-218",
+          "title": "Full Game: Over 217.5 points scored",
+          "yes_sub_title": "Over 217.5 points",
+          "no_sub_title": "Over 217.5 points",
+          "yes_ask": 0.88,
+          "no_ask": 0.13
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-220",
+          "title": "Full Game: Over 219.5 points scored",
+          "yes_sub_title": "Over 219.5 points",
+          "no_sub_title": "Over 219.5 points",
+          "yes_ask": 0.86,
+          "no_ask": 0.16
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-222",
+          "title": "Full Game: Over 221.5 points scored",
+          "yes_sub_title": "Over 221.5 points",
+          "no_sub_title": "Over 221.5 points",
+          "yes_ask": 0.83,
+          "no_ask": 0.19
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-224",
+          "title": "Full Game: Over 223.5 points scored",
+          "yes_sub_title": "Over 223.5 points",
+          "no_sub_title": "Over 223.5 points",
+          "yes_ask": 0.79,
+          "no_ask": 0.22
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-226",
+          "title": "Full Game: Over 225.5 points scored",
+          "yes_sub_title": "Over 225.5 points",
+          "no_sub_title": "Over 225.5 points",
+          "yes_ask": 0.76,
+          "no_ask": 0.26
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-228",
+          "title": "Full Game: Over 227.5 points scored",
+          "yes_sub_title": "Over 227.5 points",
+          "no_sub_title": "Over 227.5 points",
+          "yes_ask": 0.72,
+          "no_ask": 0.3
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-230",
+          "title": "Full Game: Over 229.5 points scored",
+          "yes_sub_title": "Over 229.5 points",
+          "no_sub_title": "Over 229.5 points",
+          "yes_ask": 0.67,
+          "no_ask": 0.34
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-232",
+          "title": "Full Game: Over 231.5 points scored",
+          "yes_sub_title": "Over 231.5 points",
+          "no_sub_title": "Over 231.5 points",
+          "yes_ask": 0.63,
+          "no_ask": 0.38
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-234",
+          "title": "Full Game: Over 233.5 points scored",
+          "yes_sub_title": "Over 233.5 points",
+          "no_sub_title": "Over 233.5 points",
+          "yes_ask": 0.59,
+          "no_ask": 0.42
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-236",
+          "title": "Full Game: Over 235.5 points scored",
+          "yes_sub_title": "Over 235.5 points",
+          "no_sub_title": "Over 235.5 points",
+          "yes_ask": 0.55,
+          "no_ask": 0.46
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-238",
+          "title": "Full Game: Over 237.5 points scored",
+          "yes_sub_title": "Over 237.5 points",
+          "no_sub_title": "Over 237.5 points",
+          "yes_ask": 0.5,
+          "no_ask": 0.51
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-240",
+          "title": "Full Game: Over 239.5 points scored",
+          "yes_sub_title": "Over 239.5 points",
+          "no_sub_title": "Over 239.5 points",
+          "yes_ask": 0.45,
+          "no_ask": 0.56
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-242",
+          "title": "Full Game: Over 241.5 points scored",
+          "yes_sub_title": "Over 241.5 points",
+          "no_sub_title": "Over 241.5 points",
+          "yes_ask": 0.42,
+          "no_ask": 0.61
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-244",
+          "title": "Full Game: Over 243.5 points scored",
+          "yes_sub_title": "Over 243.5 points",
+          "no_sub_title": "Over 243.5 points",
+          "yes_ask": 0.37,
+          "no_ask": 0.64
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-246",
+          "title": "Full Game: Over 245.5 points scored",
+          "yes_sub_title": "Over 245.5 points",
+          "no_sub_title": "Over 245.5 points",
+          "yes_ask": 0.33,
+          "no_ask": 0.69
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-248",
+          "title": "Full Game: Over 247.5 points scored",
+          "yes_sub_title": "Over 247.5 points",
+          "no_sub_title": "Over 247.5 points",
+          "yes_ask": 0.29,
+          "no_ask": 0.72
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-250",
+          "title": "Full Game: Over 249.5 points scored",
+          "yes_sub_title": "Over 249.5 points",
+          "no_sub_title": "Over 249.5 points",
+          "yes_ask": 0.26,
+          "no_ask": 0.77
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-252",
+          "title": "Full Game: Over 251.5 points scored",
+          "yes_sub_title": "Over 251.5 points",
+          "no_sub_title": "Over 251.5 points",
+          "yes_ask": 0.23,
+          "no_ask": 0.8
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-254",
+          "title": "Full Game: Over 253.5 points scored",
+          "yes_sub_title": "Over 253.5 points",
+          "no_sub_title": "Over 253.5 points",
+          "yes_ask": 0.19,
+          "no_ask": 0.83
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-256",
+          "title": "Full Game: Over 255.5 points scored",
+          "yes_sub_title": "Over 255.5 points",
+          "no_sub_title": "Over 255.5 points",
+          "yes_ask": 0.16,
+          "no_ask": 0.87
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-258",
+          "title": "Full Game: Over 257.5 points scored",
+          "yes_sub_title": "Over 257.5 points",
+          "no_sub_title": "Over 257.5 points",
+          "yes_ask": 0.14,
+          "no_ask": 0.88
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-260",
+          "title": "Full Game: Over 259.5 points scored",
+          "yes_sub_title": "Over 259.5 points",
+          "no_sub_title": "Over 259.5 points",
+          "yes_ask": 0.12,
+          "no_ask": 0.9
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-262",
+          "title": "Full Game: Over 261.5 points scored",
+          "yes_sub_title": "Over 261.5 points",
+          "no_sub_title": "Over 261.5 points",
+          "yes_ask": 0.11,
+          "no_ask": 0.92
+        },
+        {
+          "ticker": "KXNBATOTAL-26NOV18MEMCLE-264",
+          "title": "Full Game: Over 263.5 points scored",
+          "yes_sub_title": "Over 263.5 points",
+          "no_sub_title": "Over 263.5 points",
+          "yes_ask": 0.09,
           "no_ask": 0.94
         }
       ]
@@ -5419,15 +6133,15 @@
           "title": "Full Game: Over 216.5 points scored",
           "yes_sub_title": "Over 216.5 points",
           "no_sub_title": "Over 216.5 points",
-          "yes_ask": 0.91,
-          "no_ask": 0.12
+          "yes_ask": 0.9,
+          "no_ask": 0.13
         },
         {
           "ticker": "KXNBATOTAL-26NOV18MILMIA-219",
           "title": "Full Game: Over 218.5 points scored",
           "yes_sub_title": "Over 218.5 points",
           "no_sub_title": "Over 218.5 points",
-          "yes_ask": 0.87,
+          "yes_ask": 0.86,
           "no_ask": 0.15
         },
         {
@@ -5444,15 +6158,15 @@
           "yes_sub_title": "Over 222.5 points",
           "no_sub_title": "Over 222.5 points",
           "yes_ask": 0.81,
-          "no_ask": 0.21
+          "no_ask": 0.22
         },
         {
           "ticker": "KXNBATOTAL-26NOV18MILMIA-225",
           "title": "Full Game: Over 224.5 points scored",
           "yes_sub_title": "Over 224.5 points",
           "no_sub_title": "Over 224.5 points",
-          "yes_ask": 0.77,
-          "no_ask": 0.24
+          "yes_ask": 0.76,
+          "no_ask": 0.25
         },
         {
           "ticker": "KXNBATOTAL-26NOV18MILMIA-227",
@@ -5499,15 +6213,15 @@
           "title": "Full Game: Over 236.5 points scored",
           "yes_sub_title": "Over 236.5 points",
           "no_sub_title": "Over 236.5 points",
-          "yes_ask": 0.51,
-          "no_ask": 0.5
+          "yes_ask": 0.5,
+          "no_ask": 0.51
         },
         {
           "ticker": "KXNBATOTAL-26NOV18MILMIA-239",
           "title": "Full Game: Over 238.5 points scored",
           "yes_sub_title": "Over 238.5 points",
           "no_sub_title": "Over 238.5 points",
-          "yes_ask": 0.47,
+          "yes_ask": 0.46,
           "no_ask": 0.55
         },
         {
@@ -5515,7 +6229,7 @@
           "title": "Full Game: Over 240.5 points scored",
           "yes_sub_title": "Over 240.5 points",
           "no_sub_title": "Over 240.5 points",
-          "yes_ask": 0.43,
+          "yes_ask": 0.42,
           "no_ask": 0.59
         },
         {
@@ -5579,7 +6293,7 @@
           "title": "Full Game: Over 256.5 points scored",
           "yes_sub_title": "Over 256.5 points",
           "no_sub_title": "Over 256.5 points",
-          "yes_ask": 0.16,
+          "yes_ask": 0.15,
           "no_ask": 0.88
         },
         {
@@ -5603,15 +6317,15 @@
           "title": "Full Game: Over 262.5 points scored",
           "yes_sub_title": "Over 262.5 points",
           "no_sub_title": "Over 262.5 points",
-          "yes_ask": 0.1,
-          "no_ask": 0.93
+          "yes_ask": 0.09,
+          "no_ask": 0.94
         },
         {
           "ticker": "KXNBATOTAL-26NOV18MILMIA-265",
           "title": "Full Game: Over 264.5 points scored",
           "yes_sub_title": "Over 264.5 points",
           "no_sub_title": "Over 264.5 points",
-          "yes_ask": 0.08,
+          "yes_ask": 0.07,
           "no_ask": 0.96
         }
       ]
@@ -5689,7 +6403,7 @@
           "title": "Full Game: Over 211.5 points scored",
           "yes_sub_title": "Over 211.5 points",
           "no_sub_title": "Over 211.5 points",
-          "yes_ask": 0.73,
+          "yes_ask": 0.74,
           "no_ask": 0.28
         },
         {
@@ -5754,14 +6468,14 @@
           "yes_sub_title": "Over 227.5 points",
           "no_sub_title": "Over 227.5 points",
           "yes_ask": 0.38,
-          "no_ask": 0.63
+          "no_ask": 0.64
         },
         {
           "ticker": "KXNBATOTAL-26NOV18PHIORL-230",
           "title": "Full Game: Over 229.5 points scored",
           "yes_sub_title": "Over 229.5 points",
           "no_sub_title": "Over 229.5 points",
-          "yes_ask": 0.34,
+          "yes_ask": 0.33,
           "no_ask": 0.68
         },
         {
@@ -5769,7 +6483,7 @@
           "title": "Full Game: Over 231.5 points scored",
           "yes_sub_title": "Over 231.5 points",
           "no_sub_title": "Over 231.5 points",
-          "yes_ask": 0.31,
+          "yes_ask": 0.3,
           "no_ask": 0.71
         },
         {
@@ -5777,7 +6491,7 @@
           "title": "Full Game: Over 233.5 points scored",
           "yes_sub_title": "Over 233.5 points",
           "no_sub_title": "Over 233.5 points",
-          "yes_ask": 0.27,
+          "yes_ask": 0.26,
           "no_ask": 0.75
         },
         {
@@ -5785,7 +6499,7 @@
           "title": "Full Game: Over 235.5 points scored",
           "yes_sub_title": "Over 235.5 points",
           "no_sub_title": "Over 235.5 points",
-          "yes_ask": 0.24,
+          "yes_ask": 0.23,
           "no_ask": 0.79
         },
         {
@@ -5793,7 +6507,7 @@
           "title": "Full Game: Over 237.5 points scored",
           "yes_sub_title": "Over 237.5 points",
           "no_sub_title": "Over 237.5 points",
-          "yes_ask": 0.2,
+          "yes_ask": 0.19,
           "no_ask": 0.82
         },
         {
@@ -5801,7 +6515,7 @@
           "title": "Full Game: Over 239.5 points scored",
           "yes_sub_title": "Over 239.5 points",
           "no_sub_title": "Over 239.5 points",
-          "yes_ask": 0.17,
+          "yes_ask": 0.16,
           "no_ask": 0.85
         },
         {
@@ -5810,31 +6524,31 @@
           "yes_sub_title": "Over 241.5 points",
           "no_sub_title": "Over 241.5 points",
           "yes_ask": 0.14,
-          "no_ask": 0.87
+          "no_ask": 0.88
         },
         {
           "ticker": "KXNBATOTAL-26NOV18PHIORL-244",
           "title": "Full Game: Over 243.5 points scored",
           "yes_sub_title": "Over 243.5 points",
           "no_sub_title": "Over 243.5 points",
-          "yes_ask": 0.13,
-          "no_ask": 0.89
+          "yes_ask": 0.12,
+          "no_ask": 0.9
         },
         {
           "ticker": "KXNBATOTAL-26NOV18PHIORL-246",
           "title": "Full Game: Over 245.5 points scored",
           "yes_sub_title": "Over 245.5 points",
           "no_sub_title": "Over 245.5 points",
-          "yes_ask": 0.11,
-          "no_ask": 0.91
+          "yes_ask": 0.1,
+          "no_ask": 0.92
         },
         {
           "ticker": "KXNBATOTAL-26NOV18PHIORL-248",
           "title": "Full Game: Over 247.5 points scored",
           "yes_sub_title": "Over 247.5 points",
           "no_sub_title": "Over 247.5 points",
-          "yes_ask": 0.1,
-          "no_ask": 0.92
+          "yes_ask": 0.09,
+          "no_ask": 0.93
         },
         {
           "ticker": "KXNBATOTAL-26NOV18PHIORL-250",
@@ -5849,7 +6563,7 @@
           "title": "Full Game: Over 251.5 points scored",
           "yes_sub_title": "Over 251.5 points",
           "no_sub_title": "Over 251.5 points",
-          "yes_ask": 0.07,
+          "yes_ask": 0.06,
           "no_ask": 0.96
         }
       ]
@@ -5887,7 +6601,7 @@
           "title": "Full Game: Over 207.5 points scored",
           "yes_sub_title": "Over 207.5 points",
           "no_sub_title": "Over 207.5 points",
-          "yes_ask": 0.89,
+          "yes_ask": 0.88,
           "no_ask": 0.14
         },
         {
@@ -5904,14 +6618,14 @@
           "yes_sub_title": "Over 211.5 points",
           "no_sub_title": "Over 211.5 points",
           "yes_ask": 0.83,
-          "no_ask": 0.2
+          "no_ask": 0.19
         },
         {
           "ticker": "KXNBATOTAL-26NOV18PHXSAC-214",
           "title": "Full Game: Over 213.5 points scored",
           "yes_sub_title": "Over 213.5 points",
           "no_sub_title": "Over 213.5 points",
-          "yes_ask": 0.8,
+          "yes_ask": 0.79,
           "no_ask": 0.23
         },
         {
@@ -5959,7 +6673,7 @@
           "title": "Full Game: Over 225.5 points scored",
           "yes_sub_title": "Over 225.5 points",
           "no_sub_title": "Over 225.5 points",
-          "yes_ask": 0.55,
+          "yes_ask": 0.54,
           "no_ask": 0.47
         },
         {
@@ -5968,7 +6682,7 @@
           "yes_sub_title": "Over 227.5 points",
           "no_sub_title": "Over 227.5 points",
           "yes_ask": 0.48,
-          "no_ask": 0.54
+          "no_ask": 0.53
         },
         {
           "ticker": "KXNBATOTAL-26NOV18PHXSAC-230",
@@ -5991,7 +6705,7 @@
           "title": "Full Game: Over 233.5 points scored",
           "yes_sub_title": "Over 233.5 points",
           "no_sub_title": "Over 233.5 points",
-          "yes_ask": 0.36,
+          "yes_ask": 0.37,
           "no_ask": 0.65
         },
         {
@@ -5999,8 +6713,8 @@
           "title": "Full Game: Over 235.5 points scored",
           "yes_sub_title": "Over 235.5 points",
           "no_sub_title": "Over 235.5 points",
-          "yes_ask": 0.33,
-          "no_ask": 0.69
+          "yes_ask": 0.32,
+          "no_ask": 0.7
         },
         {
           "ticker": "KXNBATOTAL-26NOV18PHXSAC-238",
@@ -6092,6 +6806,244 @@
         }
       ]
     },
+    "KXNCAAFSPREAD-26NOV18AKRMASS": {
+      "title": "Akron vs UMass: Spread",
+      "sub_title": "AKR vs MASS (Nov 18)",
+      "markets": [
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-MASS21",
+          "title": "UMass wins by over 20.5 points",
+          "yes_sub_title": "UMass wins by over 20.5 points",
+          "no_sub_title": "UMass wins by over 20.5 points",
+          "yes_ask": 0.12,
+          "no_ask": 0.89
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-MASS18",
+          "title": "UMass wins by over 17.5 points",
+          "yes_sub_title": "UMass wins by over 17.5 points",
+          "no_sub_title": "UMass wins by over 17.5 points",
+          "yes_ask": 0.17,
+          "no_ask": 0.84
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-MASS17",
+          "title": "UMass wins by over 16.5 points",
+          "yes_sub_title": "UMass wins by over 16.5 points",
+          "no_sub_title": "UMass wins by over 16.5 points",
+          "yes_ask": 0.19,
+          "no_ask": 0.82
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-MASS15",
+          "title": "UMass wins by over 14.5 points",
+          "yes_sub_title": "UMass wins by over 14.5 points",
+          "no_sub_title": "UMass wins by over 14.5 points",
+          "yes_ask": 0.21,
+          "no_ask": 0.8
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-MASS14",
+          "title": "UMass wins by over 13.5 points",
+          "yes_sub_title": "UMass wins by over 13.5 points",
+          "no_sub_title": "UMass wins by over 13.5 points",
+          "yes_ask": 0.25,
+          "no_ask": 0.77
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-MASS12",
+          "title": "UMass wins by over 11.5 points",
+          "yes_sub_title": "UMass wins by over 11.5 points",
+          "no_sub_title": "UMass wins by over 11.5 points",
+          "yes_ask": 0.27,
+          "no_ask": 0.74
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-MASS11",
+          "title": "UMass wins by over 10.5 points",
+          "yes_sub_title": "UMass wins by over 10.5 points",
+          "no_sub_title": "UMass wins by over 10.5 points",
+          "yes_ask": 0.29,
+          "no_ask": 0.72
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-MASS10",
+          "title": "UMass wins by over 9.5 points",
+          "yes_sub_title": "UMass wins by over 9.5 points",
+          "no_sub_title": "UMass wins by over 9.5 points",
+          "yes_ask": 0.33,
+          "no_ask": 0.68
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-MASS8",
+          "title": "UMass wins by over 7.5 points",
+          "yes_sub_title": "UMass wins by over 7.5 points",
+          "no_sub_title": "UMass wins by over 7.5 points",
+          "yes_ask": 0.36,
+          "no_ask": 0.65
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-MASS7",
+          "title": "UMass wins by over 6.5 points",
+          "yes_sub_title": "UMass wins by over 6.5 points",
+          "no_sub_title": "UMass wins by over 6.5 points",
+          "yes_ask": 0.42,
+          "no_ask": 0.59
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-MASS6",
+          "title": "UMass wins by over 5.5 points",
+          "yes_sub_title": "UMass wins by over 5.5 points",
+          "no_sub_title": "UMass wins by over 5.5 points",
+          "yes_ask": 0.45,
+          "no_ask": 0.56
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-MASS5",
+          "title": "UMass wins by over 4.5 points",
+          "yes_sub_title": "UMass wins by over 4.5 points",
+          "no_sub_title": "UMass wins by over 4.5 points",
+          "yes_ask": 0.46,
+          "no_ask": 0.55
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-MASS4",
+          "title": "UMass wins by over 3.5 points",
+          "yes_sub_title": "UMass wins by over 3.5 points",
+          "no_sub_title": "UMass wins by over 3.5 points",
+          "yes_ask": 0.5,
+          "no_ask": 0.51
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-MASS3",
+          "title": "UMass wins by over 2.5 points",
+          "yes_sub_title": "UMass wins by over 2.5 points",
+          "no_sub_title": "UMass wins by over 2.5 points",
+          "yes_ask": 0.58,
+          "no_ask": 0.43
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-MASS2",
+          "title": "UMass wins by over 1.5 points",
+          "yes_sub_title": "UMass wins by over 1.5 points",
+          "no_sub_title": "UMass wins by over 1.5 points",
+          "yes_ask": 0.6,
+          "no_ask": 0.42
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-AKR2",
+          "title": "Akron wins by over 1.5 points",
+          "yes_sub_title": "Akron wins by over 1.5 points",
+          "no_sub_title": "Akron wins by over 1.5 points",
+          "yes_ask": 0.38,
+          "no_ask": 0.64
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-AKR3",
+          "title": "Akron wins by over 2.5 points",
+          "yes_sub_title": "Akron wins by over 2.5 points",
+          "no_sub_title": "Akron wins by over 2.5 points",
+          "yes_ask": 0.35,
+          "no_ask": 0.67
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-AKR4",
+          "title": "Akron wins by over 3.5 points",
+          "yes_sub_title": "Akron wins by over 3.5 points",
+          "no_sub_title": "Akron wins by over 3.5 points",
+          "yes_ask": 0.3,
+          "no_ask": 0.71
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-AKR5",
+          "title": "Akron wins by over 4.5 points",
+          "yes_sub_title": "Akron wins by over 4.5 points",
+          "no_sub_title": "Akron wins by over 4.5 points",
+          "yes_ask": 0.28,
+          "no_ask": 0.74
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-AKR6",
+          "title": "Akron wins by over 5.5 points",
+          "yes_sub_title": "Akron wins by over 5.5 points",
+          "no_sub_title": "Akron wins by over 5.5 points",
+          "yes_ask": 0.26,
+          "no_ask": 0.76
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-AKR7",
+          "title": "Akron wins by over 6.5 points",
+          "yes_sub_title": "Akron wins by over 6.5 points",
+          "no_sub_title": "Akron wins by over 6.5 points",
+          "yes_ask": 0.23,
+          "no_ask": 0.78
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-AKR8",
+          "title": "Akron wins by over 7.5 points",
+          "yes_sub_title": "Akron wins by over 7.5 points",
+          "no_sub_title": "Akron wins by over 7.5 points",
+          "yes_ask": 0.19,
+          "no_ask": 0.82
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-AKR10",
+          "title": "Akron wins by over 9.5 points",
+          "yes_sub_title": "Akron wins by over 9.5 points",
+          "no_sub_title": "Akron wins by over 9.5 points",
+          "yes_ask": 0.17,
+          "no_ask": 0.84
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-AKR11",
+          "title": "Akron wins by over 10.5 points",
+          "yes_sub_title": "Akron wins by over 10.5 points",
+          "no_sub_title": "Akron wins by over 10.5 points",
+          "yes_ask": 0.14,
+          "no_ask": 0.87
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-AKR12",
+          "title": "Akron wins by over 11.5 points",
+          "yes_sub_title": "Akron wins by over 11.5 points",
+          "no_sub_title": "Akron wins by over 11.5 points",
+          "yes_ask": 0.14,
+          "no_ask": 0.87
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-AKR14",
+          "title": "Akron wins by over 13.5 points",
+          "yes_sub_title": "Akron wins by over 13.5 points",
+          "no_sub_title": "Akron wins by over 13.5 points",
+          "yes_ask": 0.12,
+          "no_ask": 0.9
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-AKR15",
+          "title": "Akron wins by over 14.5 points",
+          "yes_sub_title": "Akron wins by over 14.5 points",
+          "no_sub_title": "Akron wins by over 14.5 points",
+          "yes_ask": 0.1,
+          "no_ask": 0.91
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-AKR17",
+          "title": "Akron wins by over 16.5 points",
+          "yes_sub_title": "Akron wins by over 16.5 points",
+          "no_sub_title": "Akron wins by over 16.5 points",
+          "yes_ask": 0.08,
+          "no_ask": 0.93
+        },
+        {
+          "ticker": "KXNCAAFSPREAD-26NOV18AKRMASS-AKR18",
+          "title": "Akron wins by over 17.5 points",
+          "yes_sub_title": "Akron wins by over 17.5 points",
+          "no_sub_title": "Akron wins by over 17.5 points",
+          "yes_ask": 0.07,
+          "no_ask": 0.94
+        }
+      ]
+    },
     "KXNCAAFSPREAD-26NOV18CMUBUFF": {
       "title": "Central Michigan vs Buffalo: Spread",
       "sub_title": "CMU vs BUFF (Nov 18)",
@@ -6134,7 +7086,7 @@
           "yes_sub_title": "Buffalo wins by over 13.5 points",
           "no_sub_title": "Buffalo wins by over 13.5 points",
           "yes_ask": 0.21,
-          "no_ask": 0.8
+          "no_ask": 0.81
         },
         {
           "ticker": "KXNCAAFSPREAD-26NOV18CMUBUFF-BUFF12",
@@ -6150,23 +7102,23 @@
           "yes_sub_title": "Buffalo wins by over 10.5 points",
           "no_sub_title": "Buffalo wins by over 10.5 points",
           "yes_ask": 0.25,
-          "no_ask": 0.76
+          "no_ask": 0.77
         },
         {
           "ticker": "KXNCAAFSPREAD-26NOV18CMUBUFF-BUFF10",
           "title": "Buffalo wins by over 9.5 points",
           "yes_sub_title": "Buffalo wins by over 9.5 points",
           "no_sub_title": "Buffalo wins by over 9.5 points",
-          "yes_ask": 0.29,
-          "no_ask": 0.73
+          "yes_ask": 0.28,
+          "no_ask": 0.74
         },
         {
           "ticker": "KXNCAAFSPREAD-26NOV18CMUBUFF-BUFF8",
           "title": "Buffalo wins by over 7.5 points",
           "yes_sub_title": "Buffalo wins by over 7.5 points",
           "no_sub_title": "Buffalo wins by over 7.5 points",
-          "yes_ask": 0.32,
-          "no_ask": 0.69
+          "yes_ask": 0.31,
+          "no_ask": 0.7
         },
         {
           "ticker": "KXNCAAFSPREAD-26NOV18CMUBUFF-BUFF7",
@@ -6181,7 +7133,7 @@
           "title": "Buffalo wins by over 5.5 points",
           "yes_sub_title": "Buffalo wins by over 5.5 points",
           "no_sub_title": "Buffalo wins by over 5.5 points",
-          "yes_ask": 0.4,
+          "yes_ask": 0.39,
           "no_ask": 0.62
         },
         {
@@ -6197,7 +7149,7 @@
           "title": "Buffalo wins by over 3.5 points",
           "yes_sub_title": "Buffalo wins by over 3.5 points",
           "no_sub_title": "Buffalo wins by over 3.5 points",
-          "yes_ask": 0.45,
+          "yes_ask": 0.44,
           "no_ask": 0.57
         },
         {
@@ -6213,15 +7165,15 @@
           "title": "Buffalo wins by over 1.5 points",
           "yes_sub_title": "Buffalo wins by over 1.5 points",
           "no_sub_title": "Buffalo wins by over 1.5 points",
-          "yes_ask": 0.55,
-          "no_ask": 0.46
+          "yes_ask": 0.54,
+          "no_ask": 0.47
         },
         {
           "ticker": "KXNCAAFSPREAD-26NOV18CMUBUFF-CMU2",
           "title": "Central Michigan wins by over 1.5 points",
           "yes_sub_title": "Central Michigan wins by over 1.5 points",
           "no_sub_title": "Central Michigan wins by over 1.5 points",
-          "yes_ask": 0.42,
+          "yes_ask": 0.43,
           "no_ask": 0.59
         },
         {
@@ -6229,7 +7181,7 @@
           "title": "Central Michigan wins by over 2.5 points",
           "yes_sub_title": "Central Michigan wins by over 2.5 points",
           "no_sub_title": "Central Michigan wins by over 2.5 points",
-          "yes_ask": 0.4,
+          "yes_ask": 0.39,
           "no_ask": 0.62
         },
         {
@@ -6310,15 +7262,15 @@
           "yes_sub_title": "Central Michigan wins by over 14.5 points",
           "no_sub_title": "Central Michigan wins by over 14.5 points",
           "yes_ask": 0.11,
-          "no_ask": 0.91
+          "no_ask": 0.9
         },
         {
           "ticker": "KXNCAAFSPREAD-26NOV18CMUBUFF-CMU17",
           "title": "Central Michigan wins by over 16.5 points",
           "yes_sub_title": "Central Michigan wins by over 16.5 points",
           "no_sub_title": "Central Michigan wins by over 16.5 points",
-          "yes_ask": 0.09,
-          "no_ask": 0.92
+          "yes_ask": 0.1,
+          "no_ask": 0.91
         },
         {
           "ticker": "KXNCAAFSPREAD-26NOV18CMUBUFF-CMU18",
@@ -6326,7 +7278,7 @@
           "yes_sub_title": "Central Michigan wins by over 17.5 points",
           "no_sub_title": "Central Michigan wins by over 17.5 points",
           "yes_ask": 0.08,
-          "no_ask": 0.94
+          "no_ask": 0.93
         }
       ]
     },
@@ -6361,16 +7313,16 @@
           "title": "Florida wins",
           "yes_sub_title": "Florida",
           "no_sub_title": "Florida",
-          "yes_ask": 0.54,
-          "no_ask": 0.47
+          "yes_ask": 0.53,
+          "no_ask": 0.48
         },
         {
           "ticker": "KXNCAAMBGAME-26NOV18HOUFLA-HOU",
           "title": "Houston wins",
           "yes_sub_title": "Houston",
           "no_sub_title": "Houston",
-          "yes_ask": 0.47,
-          "no_ask": 0.54
+          "yes_ask": 0.48,
+          "no_ask": 0.53
         }
       ]
     },
@@ -6383,16 +7335,16 @@
           "title": "Notre Dame wins",
           "yes_sub_title": "Notre Dame",
           "no_sub_title": "Notre Dame",
-          "yes_ask": 0.59,
-          "no_ask": 0.42
+          "yes_ask": 0.74,
+          "no_ask": 0.27
         },
         {
           "ticker": "KXNCAAMBGAME-26NOV18RUTGND-RUTG",
           "title": "Rutgers wins",
           "yes_sub_title": "Rutgers",
           "no_sub_title": "Rutgers",
-          "yes_ask": 0.42,
-          "no_ask": 0.59
+          "yes_ask": 0.27,
+          "no_ask": 0.74
         }
       ]
     },
@@ -6405,8 +7357,8 @@
           "title": "Full Game: Over 120.5 points scored",
           "yes_sub_title": "Over 120.5 points",
           "no_sub_title": "Over 120.5 points",
-          "yes_ask": 0.96,
-          "no_ask": 0.06
+          "yes_ask": 0.95,
+          "no_ask": 0.07
         },
         {
           "ticker": "KXNCAAMBTOTAL-26NOV18HOUFLA-123",
@@ -6430,14 +7382,14 @@
           "yes_sub_title": "Over 128.5 points",
           "no_sub_title": "Over 128.5 points",
           "yes_ask": 0.87,
-          "no_ask": 0.15
+          "no_ask": 0.16
         },
         {
           "ticker": "KXNCAAMBTOTAL-26NOV18HOUFLA-133",
           "title": "Full Game: Over 132.5 points scored",
           "yes_sub_title": "Over 132.5 points",
           "no_sub_title": "Over 132.5 points",
-          "yes_ask": 0.81,
+          "yes_ask": 0.8,
           "no_ask": 0.22
         },
         {
@@ -6462,7 +7414,7 @@
           "yes_sub_title": "Over 142.5 points",
           "no_sub_title": "Over 142.5 points",
           "yes_ask": 0.58,
-          "no_ask": 0.44
+          "no_ask": 0.43
         },
         {
           "ticker": "KXNCAAMBTOTAL-26NOV18HOUFLA-146",
@@ -6470,14 +7422,14 @@
           "yes_sub_title": "Over 145.5 points",
           "no_sub_title": "Over 145.5 points",
           "yes_ask": 0.51,
-          "no_ask": 0.51
+          "no_ask": 0.5
         },
         {
           "ticker": "KXNCAAMBTOTAL-26NOV18HOUFLA-148",
           "title": "Full Game: Over 147.5 points scored",
           "yes_sub_title": "Over 147.5 points",
           "no_sub_title": "Over 147.5 points",
-          "yes_ask": 0.43,
+          "yes_ask": 0.44,
           "no_ask": 0.58
         },
         {
@@ -6501,7 +7453,7 @@
           "title": "Full Game: Over 150.5 points scored",
           "yes_sub_title": "Over 150.5 points",
           "no_sub_title": "Over 150.5 points",
-          "yes_ask": 0.37,
+          "yes_ask": 0.38,
           "no_ask": 0.64
         },
         {
@@ -6533,8 +7485,8 @@
           "title": "Full Game: Over 159.5 points scored",
           "yes_sub_title": "Over 159.5 points",
           "no_sub_title": "Over 159.5 points",
-          "yes_ask": 0.19,
-          "no_ask": 0.82
+          "yes_ask": 0.2,
+          "no_ask": 0.81
         },
         {
           "ticker": "KXNCAAMBTOTAL-26NOV18HOUFLA-163",
@@ -6549,7 +7501,7 @@
           "title": "Full Game: Over 166.5 points scored",
           "yes_sub_title": "Over 166.5 points",
           "no_sub_title": "Over 166.5 points",
-          "yes_ask": 0.11,
+          "yes_ask": 0.12,
           "no_ask": 0.91
         },
         {
@@ -6557,7 +7509,7 @@
           "title": "Full Game: Over 170.5 points scored",
           "yes_sub_title": "Over 170.5 points",
           "no_sub_title": "Over 170.5 points",
-          "yes_ask": 0.09,
+          "yes_ask": 0.08,
           "no_ask": 0.94
         },
         {
@@ -6565,7 +7517,7 @@
           "title": "Full Game: Over 174.5 points scored",
           "yes_sub_title": "Over 174.5 points",
           "no_sub_title": "Over 174.5 points",
-          "yes_ask": 0.06,
+          "yes_ask": 0.07,
           "no_ask": 0.96
         }
       ]
@@ -6595,8 +7547,8 @@
           "title": "Full Game: Over 131.5 points scored",
           "yes_sub_title": "Over 131.5 points",
           "no_sub_title": "Over 131.5 points",
-          "yes_ask": 0.87,
-          "no_ask": 0.17
+          "yes_ask": 0.86,
+          "no_ask": 0.16
         },
         {
           "ticker": "KXNCAAMBTOTAL-26NOV18OAKASU-133",
@@ -6619,7 +7571,7 @@
           "title": "Full Game: Over 141.5 points scored",
           "yes_sub_title": "Over 141.5 points",
           "no_sub_title": "Over 141.5 points",
-          "yes_ask": 0.67,
+          "yes_ask": 0.66,
           "no_ask": 0.36
         },
         {
@@ -6635,15 +7587,15 @@
           "title": "Full Game: Over 148.5 points scored",
           "yes_sub_title": "Over 148.5 points",
           "no_sub_title": "Over 148.5 points",
-          "yes_ask": 0.47,
-          "no_ask": 0.54
+          "yes_ask": 0.46,
+          "no_ask": 0.55
         },
         {
           "ticker": "KXNCAAMBTOTAL-26NOV18OAKASU-152",
           "title": "Full Game: Over 151.5 points scored",
           "yes_sub_title": "Over 151.5 points",
           "no_sub_title": "Over 151.5 points",
-          "yes_ask": 0.41,
+          "yes_ask": 0.4,
           "no_ask": 0.61
         },
         {
@@ -6659,7 +7611,7 @@
           "title": "Full Game: Over 155.5 points scored",
           "yes_sub_title": "Over 155.5 points",
           "no_sub_title": "Over 155.5 points",
-          "yes_ask": 0.32,
+          "yes_ask": 0.31,
           "no_ask": 0.7
         },
         {
@@ -6675,7 +7627,7 @@
           "title": "Full Game: Over 161.5 points scored",
           "yes_sub_title": "Over 161.5 points",
           "no_sub_title": "Over 161.5 points",
-          "yes_ask": 0.2,
+          "yes_ask": 0.21,
           "no_ask": 0.82
         },
         {
@@ -6700,7 +7652,7 @@
           "yes_sub_title": "Over 174.5 points",
           "no_sub_title": "Over 174.5 points",
           "yes_ask": 0.07,
-          "no_ask": 0.95
+          "no_ask": 0.94
         }
       ]
     },
@@ -6743,8 +7695,8 @@
           "title": "Tampa Bay wins",
           "yes_sub_title": "Tampa Bay",
           "no_sub_title": "Tampa Bay",
-          "yes_ask": 0.26,
-          "no_ask": 0.75
+          "yes_ask": 0.25,
+          "no_ask": 0.76
         }
       ]
     },
@@ -6790,7 +7742,7 @@
           "yes_sub_title": "Houston wins by over 17.5 points",
           "no_sub_title": "Houston wins by over 17.5 points",
           "yes_ask": 0.34,
-          "no_ask": 0.68
+          "no_ask": 0.67
         },
         {
           "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU17",
@@ -6838,7 +7790,7 @@
           "yes_sub_title": "Houston wins by over 7.5 points",
           "no_sub_title": "Houston wins by over 7.5 points",
           "yes_ask": 0.63,
-          "no_ask": 0.39
+          "no_ask": 0.38
         },
         {
           "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU7",
@@ -6853,7 +7805,7 @@
           "title": "Houston wins by over 5.5 points?",
           "yes_sub_title": "Houston wins by over 5.5 points",
           "no_sub_title": "Houston wins by over 5.5 points",
-          "yes_ask": 0.72,
+          "yes_ask": 0.71,
           "no_ask": 0.3
         },
         {
@@ -6941,8 +7893,8 @@
           "title": "Indianapolis wins by over 7.5 points?",
           "yes_sub_title": "Indianapolis wins by over 7.5 points",
           "no_sub_title": "Indianapolis wins by over 7.5 points",
-          "yes_ask": 0.05,
-          "no_ask": 0.98
+          "yes_ask": 0.04,
+          "no_ask": 0.97
         },
         {
           "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND10",
@@ -7043,7 +7995,7 @@
           "title": "Carolina wins by over 3.5 points?",
           "yes_sub_title": "Carolina wins by over 3.5 points",
           "no_sub_title": "Carolina wins by over 3.5 points",
-          "yes_ask": 0.42,
+          "yes_ask": 0.43,
           "no_ask": 0.59
         },
         {
@@ -7100,7 +8052,7 @@
           "yes_sub_title": "Baltimore wins by over 5.5 points",
           "no_sub_title": "Baltimore wins by over 5.5 points",
           "yes_ask": 0.27,
-          "no_ask": 0.75
+          "no_ask": 0.76
         },
         {
           "ticker": "KXNFLSPREAD-26NOV22BALCAR-BAL7",
@@ -7139,7 +8091,7 @@
           "title": "Baltimore wins by over 13.5 points?",
           "yes_sub_title": "Baltimore wins by over 13.5 points",
           "no_sub_title": "Baltimore wins by over 13.5 points",
-          "yes_ask": 0.12,
+          "yes_ask": 0.13,
           "no_ask": 0.91
         },
         {
@@ -7147,7 +8099,7 @@
           "title": "Baltimore wins by over 14.5 points?",
           "yes_sub_title": "Baltimore wins by over 14.5 points",
           "no_sub_title": "Baltimore wins by over 14.5 points",
-          "yes_ask": 0.11,
+          "yes_ask": 0.12,
           "no_ask": 0.94
         },
         {
@@ -7177,7 +8129,7 @@
           "title": "Detroit wins by over 23.5 points?",
           "yes_sub_title": "Detroit wins by over 23.5 points",
           "no_sub_title": "Detroit wins by over 23.5 points",
-          "yes_ask": 0.12,
+          "yes_ask": 0.13,
           "no_ask": 0.89
         },
         {
@@ -7209,7 +8161,7 @@
           "title": "Detroit wins by over 14.5 points?",
           "yes_sub_title": "Detroit wins by over 14.5 points",
           "no_sub_title": "Detroit wins by over 14.5 points",
-          "yes_ask": 0.29,
+          "yes_ask": 0.28,
           "no_ask": 0.73
         },
         {
@@ -7225,7 +8177,7 @@
           "title": "Detroit wins by over 10.5 points?",
           "yes_sub_title": "Detroit wins by over 10.5 points",
           "no_sub_title": "Detroit wins by over 10.5 points",
-          "yes_ask": 0.39,
+          "yes_ask": 0.38,
           "no_ask": 0.63
         },
         {
@@ -7241,7 +8193,7 @@
           "title": "Detroit wins by over 7.5 points?",
           "yes_sub_title": "Detroit wins by over 7.5 points",
           "no_sub_title": "Detroit wins by over 7.5 points",
-          "yes_ask": 0.46,
+          "yes_ask": 0.47,
           "no_ask": 0.55
         },
         {
@@ -7281,7 +8233,7 @@
           "title": "Detroit wins by over 2.5 points?",
           "yes_sub_title": "Detroit wins by over 2.5 points",
           "no_sub_title": "Detroit wins by over 2.5 points",
-          "yes_ask": 0.7,
+          "yes_ask": 0.71,
           "no_ask": 0.31
         },
         {
@@ -7535,7 +8487,7 @@
           "title": "Washington wins by over 3.5 points?",
           "yes_sub_title": "Washington wins by over 3.5 points",
           "no_sub_title": "Washington wins by over 3.5 points",
-          "yes_ask": 0.2,
+          "yes_ask": 0.19,
           "no_ask": 0.83
         },
         {
@@ -7559,7 +8511,7 @@
           "title": "Washington wins by over 6.5 points?",
           "yes_sub_title": "Washington wins by over 6.5 points",
           "no_sub_title": "Washington wins by over 6.5 points",
-          "yes_ask": 0.13,
+          "yes_ask": 0.14,
           "no_ask": 0.91
         },
         {
@@ -7591,7 +8543,7 @@
           "title": "Washington wins by over 13.5 points?",
           "yes_sub_title": "Washington wins by over 13.5 points",
           "no_sub_title": "Washington wins by over 13.5 points",
-          "yes_ask": 0.06,
+          "yes_ask": 0.07,
           "no_ask": 0.98
         },
         {
@@ -7758,7 +8710,7 @@
           "yes_sub_title": "Over 67.5 points",
           "no_sub_title": "Over 67.5 points",
           "yes_ask": 0.07,
-          "no_ask": 0.97
+          "no_ask": 0.98
         }
       ]
     },
@@ -7788,7 +8740,7 @@
           "yes_sub_title": "Over 37.5 points",
           "no_sub_title": "Over 37.5 points",
           "yes_ask": 0.92,
-          "no_ask": 0.12
+          "no_ask": 0.13
         },
         {
           "ticker": "KXNFLTOTAL-26NOV23CINWAS-41",
@@ -7828,7 +8780,7 @@
           "yes_sub_title": "Over 50.5 points",
           "no_sub_title": "Over 50.5 points",
           "yes_ask": 0.62,
-          "no_ask": 0.41
+          "no_ask": 0.42
         },
         {
           "ticker": "KXNFLTOTAL-26NOV23CINWAS-52",
@@ -7851,8 +8803,8 @@
           "title": "Full Game: over 53.5 points scored?",
           "yes_sub_title": "Over 53.5 points",
           "no_sub_title": "Over 53.5 points",
-          "yes_ask": 0.52,
-          "no_ask": 0.49
+          "yes_ask": 0.53,
+          "no_ask": 0.48
         },
         {
           "ticker": "KXNFLTOTAL-26NOV23CINWAS-55",
@@ -7981,8 +8933,8 @@
           "title": "Anaheim wins",
           "yes_sub_title": "Anaheim",
           "no_sub_title": "Anaheim",
-          "yes_ask": 0.42,
-          "no_ask": 0.6
+          "yes_ask": 0.43,
+          "no_ask": 0.59
         }
       ]
     },
@@ -7995,7 +8947,7 @@
           "title": "Chicago wins",
           "yes_sub_title": "Chicago",
           "no_sub_title": "Chicago",
-          "yes_ask": 0.43,
+          "yes_ask": 0.42,
           "no_ask": 0.59
         },
         {
@@ -8061,8 +9013,8 @@
           "title": "Full Game: Over 1.5 goals scored",
           "yes_sub_title": "Over 1.5 goals scored",
           "no_sub_title": "Over 1.5 goals scored",
-          "yes_ask": 1.0,
-          "no_ask": 0.03
+          "yes_ask": 0.99,
+          "no_ask": 0.02
         },
         {
           "ticker": "KXNHLTOTAL-26NOV18MTLNJ-3",
@@ -8109,7 +9061,7 @@
           "title": "Full Game: Over 7.5 goals scored",
           "yes_sub_title": "Over 7.5 goals scored",
           "no_sub_title": "Over 7.5 goals scored",
-          "yes_ask": 0.26,
+          "yes_ask": 0.25,
           "no_ask": 0.76
         },
         {
@@ -8185,8 +9137,8 @@
           "title": "Will OpenAI announce another Millennium Prize solution before Jan 1, 2027?",
           "yes_sub_title": "Before Jan 1, 2027",
           "no_sub_title": "Before Jan 1, 2027",
-          "yes_ask": 0.09,
-          "no_ask": 0.93
+          "yes_ask": 0.08,
+          "no_ask": 0.95
         },
         {
           "ticker": "KXOPENAIANOTHERMILLENNIUM-28-28JAN01",
@@ -8207,23 +9159,23 @@
           "title": "Alianza Atletico wins",
           "yes_sub_title": "Alianza Atletico",
           "no_sub_title": "Alianza Atletico",
-          "yes_ask": 0.56,
-          "no_ask": 0.45
+          "yes_ask": 0.5,
+          "no_ask": 0.51
         },
         {
           "ticker": "KXPERLIGA1GAME-26NOV18AATMEL-MEL",
           "title": "Melgar wins",
           "yes_sub_title": "Melgar",
           "no_sub_title": "Melgar",
-          "yes_ask": 0.2,
-          "no_ask": 0.82
+          "yes_ask": 0.26,
+          "no_ask": 0.75
         },
         {
           "ticker": "KXPERLIGA1GAME-26NOV18AATMEL-TIE",
           "title": "Tie is the result",
           "yes_sub_title": "Tie",
           "no_sub_title": "Tie",
-          "yes_ask": 0.27,
+          "yes_ask": 0.28,
           "no_ask": 0.74
         }
       ]
@@ -8341,7 +9293,7 @@
           "title": "Will Pete Buttigieg be the Democratic Presidential nominee in 2028?",
           "yes_sub_title": "Pete Buttigieg",
           "no_sub_title": "Pete Buttigieg",
-          "yes_ask": 0.052,
+          "yes_ask": 0.053,
           "no_ask": 0.949
         },
         {
@@ -8358,7 +9310,7 @@
           "yes_sub_title": "Andy Beshear",
           "no_sub_title": "Andy Beshear",
           "yes_ask": 0.038,
-          "no_ask": 0.963
+          "no_ask": 0.964
         },
         {
           "ticker": "KXPRESNOMD-28-RC",
@@ -9052,7 +10004,7 @@
           "yes_sub_title": "Doug Burgum",
           "no_sub_title": "Doug Burgum",
           "yes_ask": 0.004,
-          "no_ask": 0.999
+          "no_ask": 0.998
         },
         {
           "ticker": "KXPRESNOMR-28-BSHA",
@@ -9161,8 +10113,8 @@
           "title": "Who will win the next presidential election?",
           "yes_sub_title": "Gavin Newsom",
           "no_sub_title": "Gavin Newsom",
-          "yes_ask": 0.081,
-          "no_ask": 0.921
+          "yes_ask": 0.082,
+          "no_ask": 0.919
         },
         {
           "ticker": "KXPRESPERSON-28-AOCA",
@@ -9354,7 +10306,7 @@
           "yes_sub_title": "Tucker Carlson",
           "no_sub_title": "Tucker Carlson",
           "yes_ask": 0.011,
-          "no_ask": 0.99
+          "no_ask": 0.991
         },
         {
           "ticker": "KXPRESPERSON-28-TMAS",
@@ -9474,7 +10426,7 @@
           "yes_sub_title": "John McEntee",
           "no_sub_title": "John McEntee",
           "yes_ask": 0.013,
-          "no_ask": 0.993
+          "no_ask": 0.992
         },
         {
           "ticker": "KXPRESPERSON-28-LHOG",
@@ -9621,7 +10573,7 @@
           "title": "Udinese wins",
           "yes_sub_title": "Udinese",
           "no_sub_title": "Udinese",
-          "yes_ask": 0.19,
+          "yes_ask": 0.2,
           "no_ask": 0.82
         },
         {
@@ -9630,36 +10582,6 @@
           "yes_sub_title": "Tie",
           "no_sub_title": "Tie",
           "yes_ask": 0.26,
-          "no_ask": 0.76
-        }
-      ]
-    },
-    "KXUCLWGAME-26NOV18HACMCI": {
-      "title": "Hacken Gothenburg vs Manchester City",
-      "sub_title": "HAC vs MCI (Nov 18)",
-      "markets": [
-        {
-          "ticker": "KXUCLWGAME-26NOV18HACMCI-HAC",
-          "title": "Hacken Gothenburg wins",
-          "yes_sub_title": "Hacken Gothenburg",
-          "no_sub_title": "Hacken Gothenburg",
-          "yes_ask": 0.09,
-          "no_ask": 0.92
-        },
-        {
-          "ticker": "KXUCLWGAME-26NOV18HACMCI-MCI",
-          "title": "Manchester City wins",
-          "yes_sub_title": "Manchester City",
-          "no_sub_title": "Manchester City",
-          "yes_ask": 0.68,
-          "no_ask": 0.33
-        },
-        {
-          "ticker": "KXUCLWGAME-26NOV18HACMCI-TIE",
-          "title": "Tie is the result",
-          "yes_sub_title": "Tie",
-          "no_sub_title": "Tie",
-          "yes_ask": 0.25,
           "no_ask": 0.76
         }
       ]
@@ -9673,8 +10595,8 @@
           "title": "Juventus wins",
           "yes_sub_title": "Juventus",
           "no_sub_title": "Juventus",
-          "yes_ask": 0.81,
-          "no_ask": 0.2
+          "yes_ask": 0.82,
+          "no_ask": 0.19
         },
         {
           "ticker": "KXUCLWGAME-26NOV18JUVOHL-OHL",
@@ -9703,24 +10625,24 @@
           "title": "Real Madrid wins",
           "yes_sub_title": "Real Madrid",
           "no_sub_title": "Real Madrid",
-          "yes_ask": 0.83,
-          "no_ask": 0.18
+          "yes_ask": 1.0,
+          "no_ask": 1.0
         },
         {
           "ticker": "KXUCLWGAME-26NOV18RMAINT-INT",
           "title": "Inter Milano wins",
           "yes_sub_title": "Inter Milano",
           "no_sub_title": "Inter Milano",
-          "yes_ask": 0.05,
-          "no_ask": 0.96
+          "yes_ask": 1.0,
+          "no_ask": 1.0
         },
         {
           "ticker": "KXUCLWGAME-26NOV18RMAINT-TIE",
           "title": "Tie is the result",
           "yes_sub_title": "Tie",
           "no_sub_title": "Tie",
-          "yes_ask": 0.13,
-          "no_ask": 0.88
+          "yes_ask": 1.0,
+          "no_ask": 1.0
         }
       ]
     },
@@ -9753,11 +10675,31 @@
           "no_ask": 0.98
         }
       ]
+    },
+    "KXWTACHALLENGERMATCH-26NOV18ROMPOD": {
+      "title": "Romero Gormaz vs Podoroska",
+      "sub_title": "Romero Gormaz vs Podoroska (Nov 18)",
+      "markets": [
+        {
+          "ticker": "KXWTACHALLENGERMATCH-26NOV18ROMPOD-ROM",
+          "title": "Leyre Romero Gormaz wins",
+          "yes_sub_title": "Leyre Romero Gormaz",
+          "no_sub_title": "Leyre Romero Gormaz",
+          "yes_ask": 0.87,
+          "no_ask": 0.14
+        },
+        {
+          "ticker": "KXWTACHALLENGERMATCH-26NOV18ROMPOD-POD",
+          "title": "Nadia Podoroska wins",
+          "yes_sub_title": "Nadia Podoroska",
+          "no_sub_title": "Nadia Podoroska",
+          "yes_ask": 0.14,
+          "no_ask": 0.87
+        }
+      ]
     }
   },
   "byTicker": {
-    "KXATPCHALLENGERMATCH-26NOV18MELBAR-MEL": "KXATPCHALLENGERMATCH-26NOV18MELBAR",
-    "KXATPCHALLENGERMATCH-26NOV18MELBAR-BAR": "KXATPCHALLENGERMATCH-26NOV18MELBAR",
     "KXATPCHALLENGERMATCH-26NOV18TARBAR-TAR": "KXATPCHALLENGERMATCH-26NOV18TARBAR",
     "KXATPCHALLENGERMATCH-26NOV18TARBAR-BAR": "KXATPCHALLENGERMATCH-26NOV18TARBAR",
     "KXATPMATCH-26NOV17COBTIA-COB": "KXATPMATCH-26NOV17COBTIA",
@@ -9784,16 +10726,14 @@
     "KXBRASILEIROTOTAL-26NOV18FLACAP-4": "KXBRASILEIROTOTAL-26NOV18FLACAP",
     "KXBRASILEIROTOTAL-26NOV18FLACAP-5": "KXBRASILEIROTOTAL-26NOV18FLACAP",
     "KXBRASILEIROTOTAL-26NOV18FLACAP-6": "KXBRASILEIROTOTAL-26NOV18FLACAP",
-    "KXCS2GAME-26NOV181100ALLSIN-ALL": "KXCS2GAME-26NOV181100ALLSIN",
-    "KXCS2GAME-26NOV181100ALLSIN-SIN": "KXCS2GAME-26NOV181100ALLSIN",
     "KXCS2GAME-26NOV181330LGNIP-LG": "KXCS2GAME-26NOV181330LGNIP",
     "KXCS2GAME-26NOV181330LGNIP-NIP": "KXCS2GAME-26NOV181330LGNIP",
-    "KXCS2GAME-26NOV181330SNGICE-SNG": "KXCS2GAME-26NOV181330SNGICE",
-    "KXCS2GAME-26NOV181330SNGICE-ICE": "KXCS2GAME-26NOV181330SNGICE",
     "KXCS2GAME-26NOV181400ENVYBBL-ENVY": "KXCS2GAME-26NOV181400ENVYBBL",
     "KXCS2GAME-26NOV181400ENVYBBL-BBL": "KXCS2GAME-26NOV181400ENVYBBL",
-    "KXCS2MAP-26NOV181330SNGICE-2-SNG": "KXCS2MAP-26NOV181330SNGICE-2",
-    "KXCS2MAP-26NOV181330SNGICE-2-ICE": "KXCS2MAP-26NOV181330SNGICE-2",
+    "KXCS2MAP-26NOV181400ENVYBBL-1-ENVY": "KXCS2MAP-26NOV181400ENVYBBL-1",
+    "KXCS2MAP-26NOV181400ENVYBBL-1-BBL": "KXCS2MAP-26NOV181400ENVYBBL-1",
+    "KXCS2MAP-26NOV181400ENVYBBL-2-ENVY": "KXCS2MAP-26NOV181400ENVYBBL-2",
+    "KXCS2MAP-26NOV181400ENVYBBL-2-BBL": "KXCS2MAP-26NOV181400ENVYBBL-2",
     "KXDCMORATORIUMSTATES-28-AL": "KXDCMORATORIUMSTATES-28",
     "KXDCMORATORIUMSTATES-28-AK": "KXDCMORATORIUMSTATES-28",
     "KXDCMORATORIUMSTATES-28-AZ": "KXDCMORATORIUMSTATES-28",
@@ -9842,10 +10782,6 @@
     "KXDCMORATORIUMSTATES-28-WV": "KXDCMORATORIUMSTATES-28",
     "KXDCMORATORIUMSTATES-28-WI": "KXDCMORATORIUMSTATES-28",
     "KXDCMORATORIUMSTATES-28-WY": "KXDCMORATORIUMSTATES-28",
-    "KXDOTA2GAME-26NOV181100PARITS-PARI": "KXDOTA2GAME-26NOV181100PARITS",
-    "KXDOTA2GAME-26NOV181100PARITS-TS": "KXDOTA2GAME-26NOV181100PARITS",
-    "KXDOTA2MAP-26NOV181200ICCH-2-IC": "KXDOTA2MAP-26NOV181200ICCH-2",
-    "KXDOTA2MAP-26NOV181200ICCH-2-CH": "KXDOTA2MAP-26NOV181200ICCH-2",
     "KXEPLGAME-26NOV21AVLSUN-AVL": "KXEPLGAME-26NOV21AVLSUN",
     "KXEPLGAME-26NOV21AVLSUN-SUN": "KXEPLGAME-26NOV21AVLSUN",
     "KXEPLGAME-26NOV21AVLSUN-TIE": "KXEPLGAME-26NOV21AVLSUN",
@@ -9873,6 +10809,8 @@
     "KXHEGSETHIMPEACH-27JUL01-27MAR01": "KXHEGSETHIMPEACH-27JUL01",
     "KXHEGSETHIMPEACH-27JUL01-27APR01": "KXHEGSETHIMPEACH-27JUL01",
     "KXHEGSETHIMPEACH-27JUL01-27JUL01": "KXHEGSETHIMPEACH-27JUL01",
+    "KXITFMATCH-26NOV18VALLUN-VAL": "KXITFMATCH-26NOV18VALLUN",
+    "KXITFMATCH-26NOV18VALLUN-LUN": "KXITFMATCH-26NOV18VALLUN",
     "KXITFWMATCH-26NOV18ADEZAN-ADE": "KXITFWMATCH-26NOV18ADEZAN",
     "KXITFWMATCH-26NOV18ADEZAN-ZAN": "KXITFWMATCH-26NOV18ADEZAN",
     "KXLALIGAGAME-26NOV22BARVIL-BAR": "KXLALIGAGAME-26NOV22BARVIL",
@@ -9888,6 +10826,42 @@
     "KXLJUBLJANAMAYOR-26NOV15-MJAR": "KXLJUBLJANAMAYOR-26NOV15",
     "KXLJUBLJANAMAYOR-26NOV15-ASIM": "KXLJUBLJANAMAYOR-26NOV15",
     "KXLJUBLJANAMAYOR-26NOV15-AREP": "KXLJUBLJANAMAYOR-26NOV15",
+    "KXNBAAST-26NOV18DETNOP-NOPHJONES2-2": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-NOPHJONES2-4": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-NOPHJONES2-6": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETCCUNNINGHAM2-4": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETCCUNNINGHAM2-6": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETCCUNNINGHAM2-8": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETCCUNNINGHAM2-10": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETCCUNNINGHAM2-12": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-NOPYMISSI21-2": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-NOPYMISSI21-4": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-NOPYMISSI21-6": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-NOPZWILLIAMSON1-2": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-NOPZWILLIAMSON1-4": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-NOPZWILLIAMSON1-6": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-NOPZWILLIAMSON1-8": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETKHUERTERSF-2": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETKHUERTERSF-4": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETKHUERTERSF-6": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETKHUERTERSF-8": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETATHOMPSON9-2": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETATHOMPSON9-4": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETATHOMPSON9-6": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETATHOMPSON9-8": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETATHOMPSON9-10": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETDJENKINS24-2": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETDJENKINS24-4": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETDJENKINS24-6": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETDJENKINS24-8": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-DETDJENKINS24-10": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-NOPSBEY41-2": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-NOPSBEY41-4": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-NOPSBEY41-6": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-NOPJFEARS0-4": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-NOPJFEARS0-6": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-NOPJFEARS0-8": "KXNBAAST-26NOV18DETNOP",
+    "KXNBAAST-26NOV18DETNOP-NOPJFEARS0-10": "KXNBAAST-26NOV18DETNOP",
     "KXNBAGAME-26NOV18ATLOKC-ATL": "KXNBAGAME-26NOV18ATLOKC",
     "KXNBAGAME-26NOV18ATLOKC-OKC": "KXNBAGAME-26NOV18ATLOKC",
     "KXNBAGAME-26NOV18BOSDEN-BOS": "KXNBAGAME-26NOV18BOSDEN",
@@ -9900,8 +10874,6 @@
     "KXNBAGAME-26NOV18GSWDAL-DAL": "KXNBAGAME-26NOV18GSWDAL",
     "KXNBAGAME-26NOV18HOUIND-HOU": "KXNBAGAME-26NOV18HOUIND",
     "KXNBAGAME-26NOV18HOUIND-IND": "KXNBAGAME-26NOV18HOUIND",
-    "KXNBAGAME-26NOV18MEMCLE-MEM": "KXNBAGAME-26NOV18MEMCLE",
-    "KXNBAGAME-26NOV18MEMCLE-CLE": "KXNBAGAME-26NOV18MEMCLE",
     "KXNBAGAME-26NOV18MILMIA-MIL": "KXNBAGAME-26NOV18MILMIA",
     "KXNBAGAME-26NOV18MILMIA-MIA": "KXNBAGAME-26NOV18MILMIA",
     "KXNBAGAME-26NOV18PHIORL-PHI": "KXNBAGAME-26NOV18PHIORL",
@@ -10081,6 +11053,39 @@
     "KXNBASPREAD-26NOV18GSWDAL-GSW20": "KXNBASPREAD-26NOV18GSWDAL",
     "KXNBASPREAD-26NOV18GSWDAL-GSW22": "KXNBASPREAD-26NOV18GSWDAL",
     "KXNBASPREAD-26NOV18GSWDAL-GSW24": "KXNBASPREAD-26NOV18GSWDAL",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE32": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE30": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE28": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE26": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE24": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE22": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE20": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE18": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE16": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE14": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE12": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE11": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE10": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE9": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE8": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE7": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE6": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE5": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE4": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE3": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-CLE2": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-MEM2": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-MEM3": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-MEM5": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-MEM7": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-MEM9": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-MEM11": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-MEM13": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-MEM15": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-MEM17": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-MEM19": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-MEM21": "KXNBASPREAD-26NOV18MEMCLE",
+    "KXNBASPREAD-26NOV18MEMCLE-MEM23": "KXNBASPREAD-26NOV18MEMCLE",
     "KXNBASPREAD-26NOV18MILMIA-MIA39": "KXNBASPREAD-26NOV18MILMIA",
     "KXNBASPREAD-26NOV18MILMIA-MIA37": "KXNBASPREAD-26NOV18MILMIA",
     "KXNBASPREAD-26NOV18MILMIA-MIA35": "KXNBASPREAD-26NOV18MILMIA",
@@ -10387,6 +11392,35 @@
     "KXNBATOTAL-26NOV18HOUIND-249": "KXNBATOTAL-26NOV18HOUIND",
     "KXNBATOTAL-26NOV18HOUIND-251": "KXNBATOTAL-26NOV18HOUIND",
     "KXNBATOTAL-26NOV18HOUIND-253": "KXNBATOTAL-26NOV18HOUIND",
+    "KXNBATOTAL-26NOV18MEMCLE-208": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-210": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-212": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-214": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-216": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-218": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-220": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-222": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-224": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-226": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-228": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-230": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-232": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-234": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-236": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-238": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-240": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-242": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-244": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-246": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-248": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-250": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-252": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-254": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-256": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-258": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-260": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-262": "KXNBATOTAL-26NOV18MEMCLE",
+    "KXNBATOTAL-26NOV18MEMCLE-264": "KXNBATOTAL-26NOV18MEMCLE",
     "KXNBATOTAL-26NOV18MILMIA-209": "KXNBATOTAL-26NOV18MILMIA",
     "KXNBATOTAL-26NOV18MILMIA-211": "KXNBATOTAL-26NOV18MILMIA",
     "KXNBATOTAL-26NOV18MILMIA-213": "KXNBATOTAL-26NOV18MILMIA",
@@ -10474,6 +11508,35 @@
     "KXNBATOTAL-26NOV18PHXSAC-254": "KXNBATOTAL-26NOV18PHXSAC",
     "KXNBATOTAL-26NOV18PHXSAC-256": "KXNBATOTAL-26NOV18PHXSAC",
     "KXNBATOTAL-26NOV18PHXSAC-258": "KXNBATOTAL-26NOV18PHXSAC",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-MASS21": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-MASS18": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-MASS17": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-MASS15": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-MASS14": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-MASS12": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-MASS11": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-MASS10": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-MASS8": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-MASS7": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-MASS6": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-MASS5": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-MASS4": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-MASS3": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-MASS2": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-AKR2": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-AKR3": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-AKR4": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-AKR5": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-AKR6": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-AKR7": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-AKR8": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-AKR10": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-AKR11": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-AKR12": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-AKR14": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-AKR15": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-AKR17": "KXNCAAFSPREAD-26NOV18AKRMASS",
+    "KXNCAAFSPREAD-26NOV18AKRMASS-AKR18": "KXNCAAFSPREAD-26NOV18AKRMASS",
     "KXNCAAFSPREAD-26NOV18CMUBUFF-BUFF21": "KXNCAAFSPREAD-26NOV18CMUBUFF",
     "KXNCAAFSPREAD-26NOV18CMUBUFF-BUFF18": "KXNCAAFSPREAD-26NOV18CMUBUFF",
     "KXNCAAFSPREAD-26NOV18CMUBUFF-BUFF17": "KXNCAAFSPREAD-26NOV18CMUBUFF",
@@ -10895,9 +11958,6 @@
     "KXSERIEAGAME-26NOV22BFCUDI-BFC": "KXSERIEAGAME-26NOV22BFCUDI",
     "KXSERIEAGAME-26NOV22BFCUDI-UDI": "KXSERIEAGAME-26NOV22BFCUDI",
     "KXSERIEAGAME-26NOV22BFCUDI-TIE": "KXSERIEAGAME-26NOV22BFCUDI",
-    "KXUCLWGAME-26NOV18HACMCI-HAC": "KXUCLWGAME-26NOV18HACMCI",
-    "KXUCLWGAME-26NOV18HACMCI-MCI": "KXUCLWGAME-26NOV18HACMCI",
-    "KXUCLWGAME-26NOV18HACMCI-TIE": "KXUCLWGAME-26NOV18HACMCI",
     "KXUCLWGAME-26NOV18JUVOHL-JUV": "KXUCLWGAME-26NOV18JUVOHL",
     "KXUCLWGAME-26NOV18JUVOHL-OHL": "KXUCLWGAME-26NOV18JUVOHL",
     "KXUCLWGAME-26NOV18JUVOHL-TIE": "KXUCLWGAME-26NOV18JUVOHL",
@@ -10906,6 +11966,8 @@
     "KXUCLWGAME-26NOV18RMAINT-TIE": "KXUCLWGAME-26NOV18RMAINT",
     "KXUCLWGAME-26NOV19BARSER-BAR": "KXUCLWGAME-26NOV19BARSER",
     "KXUCLWGAME-26NOV19BARSER-SER": "KXUCLWGAME-26NOV19BARSER",
-    "KXUCLWGAME-26NOV19BARSER-TIE": "KXUCLWGAME-26NOV19BARSER"
+    "KXUCLWGAME-26NOV19BARSER-TIE": "KXUCLWGAME-26NOV19BARSER",
+    "KXWTACHALLENGERMATCH-26NOV18ROMPOD-ROM": "KXWTACHALLENGERMATCH-26NOV18ROMPOD",
+    "KXWTACHALLENGERMATCH-26NOV18ROMPOD-POD": "KXWTACHALLENGERMATCH-26NOV18ROMPOD"
   }
 }
