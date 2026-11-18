@@ -4670,15 +4670,6 @@ function MorePickGroups(props: { groups: PickGroup[] }) {
     </div>
   );
 }
-function ComingUpTab(props: { now: number }) {
-  const n = combinedPicks(props.now).length;
-  return (
-    <Section heading={"Coming Up · " + n} caption={"The same picks as All Picks, sorted by game start · soonest first · live first"}>
-      <Text>{"Every open $500+ pick with a Kalshi line from proven, Elite, Hot This Week and Politics & Econ cappers. Long-game picks (no start time) go last, by settle date."}</Text>
-      <CombinedList now={props.now} mode="start" />
-    </Section>
-  );
-}
 function hotGroups(now: number): PickGroup[] {
   const slate = openSlateGames(false, now, ((DATA.hotWeek && DATA.hotWeek.games) || []) as ComingGame[]);
   return compiledGroups(slate.games.filter((g: ComingGame) => comingStatus(g, now) === "upcoming"), now).filter((g: PickGroup) => g.backers.some((b: PickBackerRow) => !!HOT_W[b.wallet]));
@@ -4812,6 +4803,33 @@ function settlesIn(ts: number, now: number): string {
   const d = Math.max(0, Math.round((ts - now) / 86400));
   return d === 0 ? "settles today" : "settles in " + d + " day" + (d === 1 ? "" : "s");
 }
+function kalshiUrlOf(ticker: string | null | undefined): string | null {
+  const ev = eventTickerOf(ticker || null);
+  return ev ? "https://kalshi.com/markets/" + ev.toLowerCase() : null;
+}
+// "On Kalshi" box: what Noel sees on Kalshi (event title, the row to tap, then Yes/No). Separate from the payout button.
+function OnKalshiBox(props: { view: KalshiView }) {
+  const t = useGrokTheme();
+  const v = props.view;
+  if (v.unmatched || !v.yesNo || !v.marketTitle) return null;
+  const yes = v.yesNo === "Yes";
+  const plain = !v.outcome || /^(yes|no)$/i.test(v.outcome) || v.marketTitle.toLowerCase().indexOf(v.outcome.toLowerCase()) >= 0 && /^(will|who|what|which|is|are|does|do)\b/i.test(v.marketTitle);
+  const url = kalshiUrlOf(v.ticker);
+  const col = yes ? GREEN : RED;
+  return (
+    <div data-on-kalshi="1" style={{ marginTop: 10, padding: "10px 12px", borderRadius: 14, border: "1.5px dashed " + BRAND, background: "#FAF7FF" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+        <span style={{ fontSize: 11, fontWeight: 850, letterSpacing: "0.08em", textTransform: "uppercase", color: BRAND }}>On Kalshi</span>
+        {url ? <a data-kalshi-link="1" href={url} target="_blank" rel="noreferrer" style={{ fontSize: 13, fontWeight: 800, color: BRAND, textDecoration: "none" }}>Open on Kalshi ↗</a> : null}
+      </div>
+      <div data-ok-title="1" style={{ fontSize: 15, lineHeight: "20px", fontWeight: 750, color: t.text.primary, marginTop: 4, overflowWrap: "anywhere" }}>{v.marketTitle}</div>
+      <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 6, marginTop: 6, fontSize: 15, fontWeight: 700, color: t.text.secondary }}>
+        {plain ? <span>{"Tap"}</span> : <><span>{"Tap"}</span><b data-ok-option="1" style={{ color: t.text.primary, overflowWrap: "anywhere" }}>{"“" + v.outcome + "”"}</b><span>{"→"}</span></>}
+        <span data-ok-side="1" style={{ display: "inline-block", padding: "1px 12px", borderRadius: 999, background: col, color: "#FFFFFF", fontWeight: 850, fontSize: 15 }}>{v.yesNo}</span>
+      </div>
+    </div>
+  );
+}
 function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNode; sourceTags?: boolean }) {
   const t = useGrokTheme();
   const p = props.p;
@@ -4826,21 +4844,24 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
       <div style={{ padding: "12px 14px 12px" }}>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center", marginBottom: 6 }}>
           {p.live ? <Chip bg={RED} color="#FFFFFF">LIVE</Chip> : null}
-          {kinds.map((x: string) => <span key={x} data-src-tag={x}><Chip bg={colorOf(x)[0]} color={colorOf(x)[1]}>{x}</Chip></span>)}
           <span style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary }}>{p.league + " · " + (p.kind === "pe" ? settlesIn(p.settleTs, props.now) : (p.startTs ? ptTime(p.startTs) : ""))}</span>
         </div>
         <div data-ucard-big="1" style={{ fontSize: 22, lineHeight: "27px", fontWeight: 850, letterSpacing: "-0.01em", overflowWrap: "anywhere" }}>{p.big}</div>
         {p.sub ? <div style={{ fontSize: 14, lineHeight: "19px", fontWeight: 600, color: t.text.secondary, marginTop: 2, overflowWrap: "anywhere" }}>{p.sub}</div> : null}
+        <div data-ucard-sum="1" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 8, marginTop: 10 }}>
+          <span data-ucard-total="1" style={{ display: "inline-block", padding: "3px 12px", borderRadius: 12, background: "#4C1D95", color: "#FFFFFF", fontSize: 28, lineHeight: "34px", fontWeight: 900, letterSpacing: "-0.02em", fontVariantNumeric: "tabular-nums" }}>{kMoney(p.total)}</span>
+          <span data-ucard-count="1" style={{ display: "inline-block", padding: "4px 10px", borderRadius: 999, background: "#E0E7FF", color: "#3730A3", fontSize: 15, fontWeight: 850 }}>{p.backers.length + " capper" + (p.backers.length === 1 ? "" : "s")}</span>
+          {kinds.map((x: string) => <span key={x} data-sum-tag={x} style={{ display: "inline-block", padding: "3px 9px", borderRadius: 999, background: colorOf(x)[0], color: colorOf(x)[1], fontSize: 13, fontWeight: 850, border: "1.5px solid " + colorOf(x)[1] }}>{x}</span>)}
+        </div>
         {props.moreRow}
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 10 }}>
           <div style={{ flex: 1 }}><KalshiBuyButton view={v} size={20} /></div>
           <div data-k-stake="1" style={{ fontSize: 14, fontWeight: 800, color: GREEN, lineHeight: "17px" }}>{"Stake"}<br />{props.stake}</div>
         </div>
-        <div data-ucard-sum="1" style={{ fontSize: 14, fontWeight: 800, marginTop: 10, color: t.text.primary }}>{p.backers.length + " capper" + (p.backers.length === 1 ? "" : "s") + " · " + kMoney(p.total) + (p.tags.length ? " · " + p.tags.join(", ") : "")}</div>
+        <OnKalshiBox view={v} />
         {top.map((b: UBacker) => <div key={b.wallet} data-ucard-rec={b.wallet} style={{ fontSize: 14, lineHeight: "20px", fontWeight: 650, color: t.text.secondary, marginTop: 2, overflowWrap: "anywhere" }}>{b.line}</div>)}
         <details data-ucard-more="1" style={{ marginTop: 8 }}>
           <summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 14, color: BRAND }}>{rest.length ? "Details · +" + rest.length + " more" : "Details"}</summary>
-          <div style={{ fontSize: 13, color: t.text.tertiary, marginTop: 6, overflowWrap: "anywhere" }}>{"Kalshi: " + v.marketTitle + (v.outcome && !/^(yes|no)$/i.test(v.outcome) ? " — " + v.outcome : "")}</div>
           {p.note ? <div style={{ fontSize: 13, fontWeight: 700, color: AMBER, marginTop: 4 }}>{p.note}</div> : null}
           {p.entryNote ? <div style={{ fontSize: 13, fontWeight: 700, color: t.text.tertiary, marginTop: 4 }}>{p.entryNote}</div> : null}
           {p.backers.map((b: UBacker, i: number) => (
@@ -4888,6 +4909,15 @@ function CombinedList(props: { now: number; mode: "rank" | "start" }) {
       <div data-combined-summary="1" style={{ fontSize: 14, fontWeight: 750, color: "#52525B", margin: "2px 2px 12px" }}>{picks.length + " picks · " + units.length + (props.mode === "start" ? " games" : " games") + " · " + Object.keys(cappers).length + " cappers" + (liveN ? " · " + liveN + " live" : "") + " · Journal " + journalWL().wins + "–" + journalWL().losses}</div>
       {picks.length === 0 ? <EmptyState title="No picks from tracked cappers yet" body={"Nothing open from proven, Elite, Hot or Politics & Econ cappers right now. " + nextScanLabel(props.now) + "."} /> : <UnitList units={units} now={props.now} stake="$2–4" noun="game" />}
     </div>
+  );
+}
+function ComingUpTab(props: { now: number }) {
+  const n = combinedPicks(props.now).length;
+  return (
+    <Section heading={"Coming Up · " + n} caption={"Soonest start first · live first · starts or settles within 24 hours"}>
+      <Text>{"Every open $500+ pick with a Kalshi line from every tracked capper with a positive profit (not Cooling) plus Politics & Econ cappers, grouped by game and sorted by start time. Long-game picks (no start time) go last."}</Text>
+      <CombinedList now={props.now} mode="start" />
+    </Section>
   );
 }
 function peTabCount(now: number): number { return combinedPicks(now).filter((p: UPick) => p.kind === "pe").length; }
@@ -5094,7 +5124,7 @@ function KalshiCappersTab(props: { now: number }) {
 
 export default function App() {
   const t = useGrokTheme();
-  const [tab, setTab] = useState<string>("picks");
+  const [tab, setTab] = useState<string>("coming");
   const [bigOnly, setBigOnly] = useState<boolean>(false);
   const [provenLimit, setProvenLimit] = useState<number>(5);
   const [rankedLimit, setRankedLimit] = useState<number>(30);
@@ -5588,7 +5618,7 @@ export default function App() {
           <span style={{ fontSize: 11, fontWeight: 850, letterSpacing: "0.08em", textTransform: "uppercase", color: "#7C3AED", width: 38, flex: "none", lineHeight: "12px" }}>Today</span>
           <div style={{ flex: 1, minWidth: 0 }}>
             <PillTabs bare
-              options={[{ value: "picks", label: "All Picks", count: combinedPicks(now).length }, { value: "elite", label: "Elite", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: combinedPicks(now).length }, { value: "hot", label: "Hot This Week", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }]}
+              options={[{ value: "coming", label: "Coming Up", count: combinedPicks(now).length }, { value: "elite", label: "Elite", count: eliteTabCount(now) }, { value: "hot", label: "Hot This Week", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }]}
               value={tab === "pe" ? "" : tab}
               onChange={(v: string) => { setTab(v); setSportFilter(""); }}
             />
