@@ -1,27 +1,5 @@
 {
   "events": {
-    "KXATPCHALLENGERMATCH-26NOV19NARJAC": {
-      "title": "Nardi vs Jacquet",
-      "sub_title": "Nardi vs Jacquet (Nov 19)",
-      "markets": [
-        {
-          "ticker": "KXATPCHALLENGERMATCH-26NOV19NARJAC-NAR",
-          "title": "Luca Nardi wins",
-          "yes_sub_title": "Luca Nardi",
-          "no_sub_title": "Luca Nardi",
-          "yes_ask": 0.56,
-          "no_ask": 0.45
-        },
-        {
-          "ticker": "KXATPCHALLENGERMATCH-26NOV19NARJAC-JAC",
-          "title": "Kyrian Jacquet wins",
-          "yes_sub_title": "Kyrian Jacquet",
-          "no_sub_title": "Kyrian Jacquet",
-          "yes_ask": 0.45,
-          "no_ask": 0.56
-        }
-      ]
-    },
     "KXBRASILEIROGAME-26NOV19VDGINT": {
       "title": "Vasco da Gama vs Internacional",
       "sub_title": "VDG vs INT (Nov 19)",
@@ -39,7 +17,7 @@
           "title": "Internacional wins",
           "yes_sub_title": "Internacional",
           "no_sub_title": "Internacional",
-          "yes_ask": 0.155,
+          "yes_ask": 0.16,
           "no_ask": 0.85
         },
         {
@@ -48,7 +26,7 @@
           "yes_sub_title": "Tie",
           "no_sub_title": "Tie",
           "yes_ask": 0.22,
-          "no_ask": 0.785
+          "no_ask": 0.79
         }
       ]
     },
@@ -61,24 +39,24 @@
           "title": "Palmeiras wins",
           "yes_sub_title": "Palmeiras",
           "no_sub_title": "Palmeiras",
-          "yes_ask": 0.315,
-          "no_ask": 0.69
+          "yes_ask": 0.29,
+          "no_ask": 0.725
         },
         {
           "ticker": "KXBRASILEIROGAME-26NOV21PALFLA-FLA",
           "title": "Flamengo wins",
           "yes_sub_title": "Flamengo",
           "no_sub_title": "Flamengo",
-          "yes_ask": 0.41,
-          "no_ask": 0.595
+          "yes_ask": 0.44,
+          "no_ask": 0.57
         },
         {
           "ticker": "KXBRASILEIROGAME-26NOV21PALFLA-TIE",
           "title": "Tie is the result",
           "yes_sub_title": "Tie",
           "no_sub_title": "Tie",
-          "yes_ask": 0.29,
-          "no_ask": 0.715
+          "yes_ask": 0.285,
+          "no_ask": 0.725
         }
       ]
     },
@@ -198,14 +176,14 @@
           "yes_sub_title": "Nexus",
           "no_sub_title": "Nexus",
           "yes_ask": 0.79,
-          "no_ask": 0.23
+          "no_ask": 0.22
         },
         {
           "ticker": "KXCS2GAME-26NOV191300NXSAIM-AIM",
           "title": "aimclub wins",
           "yes_sub_title": "aimclub",
           "no_sub_title": "aimclub",
-          "yes_ask": 0.23,
+          "yes_ask": 0.22,
           "no_ask": 0.79
         }
       ]
@@ -219,16 +197,16 @@
           "title": "Luminosity wins map 1",
           "yes_sub_title": "Luminosity",
           "no_sub_title": "Luminosity",
-          "yes_ask": 0.56,
-          "no_ask": 0.48
+          "yes_ask": 0.55,
+          "no_ask": 0.47
         },
         {
           "ticker": "KXCS2MAP-26NOV191100LGSNG-1-SNG",
           "title": "Sangal wins map 1",
           "yes_sub_title": "Sangal",
           "no_sub_title": "Sangal",
-          "yes_ask": 0.46,
-          "no_ask": 0.58
+          "yes_ask": 0.45,
+          "no_ask": 0.57
         }
       ]
     },
@@ -242,7 +220,7 @@
           "yes_sub_title": "Luminosity",
           "no_sub_title": "Luminosity",
           "yes_ask": 0.57,
-          "no_ask": 0.47
+          "no_ask": 0.46
         },
         {
           "ticker": "KXCS2MAP-26NOV191100LGSNG-2-SNG",
@@ -675,7 +653,7 @@
           "title": "DO KONCA wins",
           "yes_sub_title": "DO KONCA",
           "no_sub_title": "DO KONCA",
-          "yes_ask": 0.33,
+          "yes_ask": 0.34,
           "no_ask": 0.7
         },
         {
@@ -697,16 +675,16 @@
           "title": "HULIGANI wins map 2",
           "yes_sub_title": "HULIGANI",
           "no_sub_title": "HULIGANI",
-          "yes_ask": 0.97,
-          "no_ask": 0.11
+          "yes_ask": 0.96,
+          "no_ask": 0.08
         },
         {
           "ticker": "KXDOTA2MAP-26NOV190830HULFRO-2-FRO",
           "title": "Froglings wins map 2",
           "yes_sub_title": "Froglings",
           "no_sub_title": "Froglings",
-          "yes_ask": 0.09,
-          "no_ask": 0.96
+          "yes_ask": 0.07,
+          "no_ask": 0.98
         }
       ]
     },
@@ -855,8 +833,8 @@
           "title": "Will the Federal Reserve Hike rates by 0bps at their December 2026 meeting?",
           "yes_sub_title": "Fed maintains rate",
           "no_sub_title": "Fed maintains rate",
-          "yes_ask": 0.03,
-          "no_ask": 0.98
+          "yes_ask": 0.04,
+          "no_ask": 0.97
         },
         {
           "ticker": "KXFEDDECISION-26DEC-H25",
@@ -1031,16 +1009,16 @@
           "title": "Giovanni Branchetti wins",
           "yes_sub_title": "Giovanni Branchetti",
           "no_sub_title": "Giovanni Branchetti",
-          "yes_ask": 0.16,
-          "no_ask": 0.85
+          "yes_ask": 0.22,
+          "no_ask": 0.79
         },
         {
           "ticker": "KXITFMATCH-26NOV19BRADEL-DEL",
           "title": "Mateo Del Pino wins",
           "yes_sub_title": "Mateo Del Pino",
           "no_sub_title": "Mateo Del Pino",
-          "yes_ask": 0.85,
-          "no_ask": 0.16
+          "yes_ask": 0.79,
+          "no_ask": 0.22
         }
       ]
     },
@@ -1053,16 +1031,16 @@
           "title": "Luna Maria Cinalli wins",
           "yes_sub_title": "Luna Maria Cinalli",
           "no_sub_title": "Luna Maria Cinalli",
-          "yes_ask": 0.4,
-          "no_ask": 0.61
+          "yes_ask": 0.24,
+          "no_ask": 0.77
         },
         {
           "ticker": "KXITFWMATCH-26NOV19CINMIX-MIX",
           "title": "Lan Mi wins",
           "yes_sub_title": "Lan Mi",
           "no_sub_title": "Lan Mi",
-          "yes_ask": 0.62,
-          "no_ask": 0.39
+          "yes_ask": 0.77,
+          "no_ask": 0.24
         }
       ]
     },
@@ -1105,7 +1083,7 @@
           "title": "Will another country leave OPEC in 2026?",
           "yes_sub_title": "Yes",
           "no_sub_title": "Yes",
-          "yes_ask": 0.08,
+          "yes_ask": 0.07,
           "no_ask": 0.96
         }
       ]
@@ -1120,7 +1098,7 @@
           "yes_sub_title": "Zoran Jankovi\u0107",
           "no_sub_title": "Zoran Jankovi\u0107",
           "yes_ask": 0.61,
-          "no_ask": 0.42
+          "no_ask": 0.41
         },
         {
           "ticker": "KXLJUBLJANAMAYOR-26NOV15-LMES",
@@ -1197,7 +1175,7 @@
           "title": "Golden State wins",
           "yes_sub_title": "Golden State",
           "no_sub_title": "Golden State",
-          "yes_ask": 0.33,
+          "yes_ask": 0.32,
           "no_ask": 0.69
         },
         {
@@ -1316,7 +1294,7 @@
           "yes_sub_title": "Memphis wins by over 32.5 points",
           "no_sub_title": "Memphis wins by over 32.5 points",
           "yes_ask": 0.05,
-          "no_ask": 1.0
+          "no_ask": 0.99
         },
         {
           "ticker": "KXNBASPREAD-26NOV19GSWMEM-MEM31",
@@ -1419,8 +1397,8 @@
           "title": "Memphis wins by over 10.5 points",
           "yes_sub_title": "Memphis wins by over 10.5 points",
           "no_sub_title": "Memphis wins by over 10.5 points",
-          "yes_ask": 0.39,
-          "no_ask": 0.63
+          "yes_ask": 0.38,
+          "no_ask": 0.64
         },
         {
           "ticker": "KXNBASPREAD-26NOV19GSWMEM-MEM10",
@@ -1460,7 +1438,7 @@
           "yes_sub_title": "Memphis wins by over 5.5 points",
           "no_sub_title": "Memphis wins by over 5.5 points",
           "yes_ask": 0.55,
-          "no_ask": 0.47
+          "no_ask": 0.46
         },
         {
           "ticker": "KXNBASPREAD-26NOV19GSWMEM-MEM5",
@@ -1484,7 +1462,7 @@
           "yes_sub_title": "Memphis wins by over 2.5 points",
           "no_sub_title": "Memphis wins by over 2.5 points",
           "yes_ask": 0.64,
-          "no_ask": 0.38
+          "no_ask": 0.39
         },
         {
           "ticker": "KXNBASPREAD-26NOV19GSWMEM-MEM2",
@@ -1753,7 +1731,7 @@
           "title": "San Antonio wins by over 10.5 points",
           "yes_sub_title": "San Antonio wins by over 10.5 points",
           "no_sub_title": "San Antonio wins by over 10.5 points",
-          "yes_ask": 0.66,
+          "yes_ask": 0.67,
           "no_ask": 0.36
         },
         {
@@ -1817,7 +1795,7 @@
           "title": "Los Angeles C wins by over 5.5 points",
           "yes_sub_title": "Los Angeles C wins by over 5.5 points",
           "no_sub_title": "Los Angeles C wins by over 5.5 points",
-          "yes_ask": 0.07,
+          "yes_ask": 0.06,
           "no_ask": 0.95
         },
         {
@@ -1943,7 +1921,7 @@
           "title": "Minnesota wins by over 4.5 points",
           "yes_sub_title": "Minnesota wins by over 4.5 points",
           "no_sub_title": "Minnesota wins by over 4.5 points",
-          "yes_ask": 0.37,
+          "yes_ask": 0.38,
           "no_ask": 0.64
         },
         {
@@ -1967,7 +1945,7 @@
           "title": "Minnesota wins by over 1.5 points",
           "yes_sub_title": "Minnesota wins by over 1.5 points",
           "no_sub_title": "Minnesota wins by over 1.5 points",
-          "yes_ask": 0.47,
+          "yes_ask": 0.46,
           "no_ask": 0.55
         },
         {
@@ -2047,8 +2025,8 @@
           "title": "New York wins by over 13.5 points",
           "yes_sub_title": "New York wins by over 13.5 points",
           "no_sub_title": "New York wins by over 13.5 points",
-          "yes_ask": 0.19,
-          "no_ask": 0.85
+          "yes_ask": 0.18,
+          "no_ask": 0.84
         },
         {
           "ticker": "KXNBASPREAD-26NOV19NYKMIN-NYK16",
@@ -2134,7 +2112,7 @@
           "yes_sub_title": "Over 201.5 points",
           "no_sub_title": "Over 201.5 points",
           "yes_ask": 0.94,
-          "no_ask": 0.09
+          "no_ask": 0.08
         },
         {
           "ticker": "KXNBATOTAL-26NOV19GSWMEM-204",
@@ -2181,7 +2159,7 @@
           "title": "Full Game: Over 213.5 points scored",
           "yes_sub_title": "Over 213.5 points",
           "no_sub_title": "Over 213.5 points",
-          "yes_ask": 0.77,
+          "yes_ask": 0.78,
           "no_ask": 0.25
         },
         {
@@ -2205,7 +2183,7 @@
           "title": "Full Game: Over 219.5 points scored",
           "yes_sub_title": "Over 219.5 points",
           "no_sub_title": "Over 219.5 points",
-          "yes_ask": 0.65,
+          "yes_ask": 0.66,
           "no_ask": 0.37
         },
         {
@@ -2294,7 +2272,7 @@
           "yes_sub_title": "Over 241.5 points",
           "no_sub_title": "Over 241.5 points",
           "yes_ask": 0.19,
-          "no_ask": 0.85
+          "no_ask": 0.84
         },
         {
           "ticker": "KXNBATOTAL-26NOV19GSWMEM-244",
@@ -2326,7 +2304,7 @@
           "yes_sub_title": "Over 249.5 points",
           "no_sub_title": "Over 249.5 points",
           "yes_ask": 0.1,
-          "no_ask": 0.92
+          "no_ask": 0.93
         },
         {
           "ticker": "KXNBATOTAL-26NOV19GSWMEM-252",
@@ -2387,8 +2365,8 @@
           "title": "Full Game: Over 205.5 points scored",
           "yes_sub_title": "Over 205.5 points",
           "no_sub_title": "Over 205.5 points",
-          "yes_ask": 0.9,
-          "no_ask": 0.12
+          "yes_ask": 0.91,
+          "no_ask": 0.13
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-208",
@@ -2404,7 +2382,7 @@
           "yes_sub_title": "Over 209.5 points",
           "no_sub_title": "Over 209.5 points",
           "yes_ask": 0.85,
-          "no_ask": 0.17
+          "no_ask": 0.18
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-212",
@@ -2412,14 +2390,14 @@
           "yes_sub_title": "Over 211.5 points",
           "no_sub_title": "Over 211.5 points",
           "yes_ask": 0.8,
-          "no_ask": 0.21
+          "no_ask": 0.22
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-214",
           "title": "Full Game: Over 213.5 points scored",
           "yes_sub_title": "Over 213.5 points",
           "no_sub_title": "Over 213.5 points",
-          "yes_ask": 0.78,
+          "yes_ask": 0.77,
           "no_ask": 0.25
         },
         {
@@ -2468,7 +2446,7 @@
           "yes_sub_title": "Over 225.5 points",
           "no_sub_title": "Over 225.5 points",
           "yes_ask": 0.51,
-          "no_ask": 0.5
+          "no_ask": 0.51
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-228",
@@ -2524,7 +2502,7 @@
           "yes_sub_title": "Over 239.5 points",
           "no_sub_title": "Over 239.5 points",
           "yes_ask": 0.23,
-          "no_ask": 0.8
+          "no_ask": 0.81
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-242",
@@ -2563,8 +2541,8 @@
           "title": "Full Game: Over 249.5 points scored",
           "yes_sub_title": "Over 249.5 points",
           "no_sub_title": "Over 249.5 points",
-          "yes_ask": 0.1,
-          "no_ask": 0.92
+          "yes_ask": 0.11,
+          "no_ask": 0.93
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-252",
@@ -2713,8 +2691,8 @@
           "title": "Full Game: Over 219.5 points scored",
           "yes_sub_title": "Over 219.5 points",
           "no_sub_title": "Over 219.5 points",
-          "yes_ask": 0.44,
-          "no_ask": 0.58
+          "yes_ask": 0.45,
+          "no_ask": 0.57
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-222",
@@ -2722,7 +2700,7 @@
           "yes_sub_title": "Over 221.5 points",
           "no_sub_title": "Over 221.5 points",
           "yes_ask": 0.39,
-          "no_ask": 0.63
+          "no_ask": 0.62
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-224",
@@ -3095,7 +3073,7 @@
           "title": "Jacksonville wins",
           "yes_sub_title": "Jacksonville",
           "no_sub_title": "Jacksonville",
-          "yes_ask": 0.57,
+          "yes_ask": 0.58,
           "no_ask": 0.44
         },
         {
@@ -3127,6 +3105,220 @@
           "no_sub_title": "Indianapolis",
           "yes_ask": 0.16,
           "no_ask": 0.85
+        }
+      ]
+    },
+    "KXNFLSPREAD-26NOV19INDHOU": {
+      "title": "Indianapolis vs Houston: Spread",
+      "sub_title": "IND vs HOU (Nov 19)",
+      "markets": [
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU31",
+          "title": "Houston wins by over 30.5 points?",
+          "yes_sub_title": "Houston wins by over 30.5 points",
+          "no_sub_title": "Houston wins by over 30.5 points",
+          "yes_ask": 0.08,
+          "no_ask": 0.93
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU28",
+          "title": "Houston wins by over 27.5 points?",
+          "yes_sub_title": "Houston wins by over 27.5 points",
+          "no_sub_title": "Houston wins by over 27.5 points",
+          "yes_ask": 0.12,
+          "no_ask": 0.89
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU24",
+          "title": "Houston wins by over 23.5 points?",
+          "yes_sub_title": "Houston wins by over 23.5 points",
+          "no_sub_title": "Houston wins by over 23.5 points",
+          "yes_ask": 0.2,
+          "no_ask": 0.81
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU21",
+          "title": "Houston wins by over 20.5 points?",
+          "yes_sub_title": "Houston wins by over 20.5 points",
+          "no_sub_title": "Houston wins by over 20.5 points",
+          "yes_ask": 0.27,
+          "no_ask": 0.75
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU18",
+          "title": "Houston wins by over 17.5 points?",
+          "yes_sub_title": "Houston wins by over 17.5 points",
+          "no_sub_title": "Houston wins by over 17.5 points",
+          "yes_ask": 0.34,
+          "no_ask": 0.67
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU17",
+          "title": "Houston wins by over 16.5 points?",
+          "yes_sub_title": "Houston wins by over 16.5 points",
+          "no_sub_title": "Houston wins by over 16.5 points",
+          "yes_ask": 0.38,
+          "no_ask": 0.63
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU15",
+          "title": "Houston wins by over 14.5 points?",
+          "yes_sub_title": "Houston wins by over 14.5 points",
+          "no_sub_title": "Houston wins by over 14.5 points",
+          "yes_ask": 0.41,
+          "no_ask": 0.6
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU14",
+          "title": "Houston wins by over 13.5 points?",
+          "yes_sub_title": "Houston wins by over 13.5 points",
+          "no_sub_title": "Houston wins by over 13.5 points",
+          "yes_ask": 0.46,
+          "no_ask": 0.55
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU11",
+          "title": "Houston wins by over 10.5 points?",
+          "yes_sub_title": "Houston wins by over 10.5 points",
+          "no_sub_title": "Houston wins by over 10.5 points",
+          "yes_ask": 0.55,
+          "no_ask": 0.46
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU10",
+          "title": "Houston wins by over 9.5 points?",
+          "yes_sub_title": "Houston wins by over 9.5 points",
+          "no_sub_title": "Houston wins by over 9.5 points",
+          "yes_ask": 0.59,
+          "no_ask": 0.42
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU8",
+          "title": "Houston wins by over 7.5 points?",
+          "yes_sub_title": "Houston wins by over 7.5 points",
+          "no_sub_title": "Houston wins by over 7.5 points",
+          "yes_ask": 0.63,
+          "no_ask": 0.38
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU7",
+          "title": "Houston wins by over 6.5 points?",
+          "yes_sub_title": "Houston wins by over 6.5 points",
+          "no_sub_title": "Houston wins by over 6.5 points",
+          "yes_ask": 0.69,
+          "no_ask": 0.32
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU6",
+          "title": "Houston wins by over 5.5 points?",
+          "yes_sub_title": "Houston wins by over 5.5 points",
+          "no_sub_title": "Houston wins by over 5.5 points",
+          "yes_ask": 0.72,
+          "no_ask": 0.29
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU5",
+          "title": "Houston wins by over 4.5 points?",
+          "yes_sub_title": "Houston wins by over 4.5 points",
+          "no_sub_title": "Houston wins by over 4.5 points",
+          "yes_ask": 0.74,
+          "no_ask": 0.27
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU4",
+          "title": "Houston wins by over 3.5 points?",
+          "yes_sub_title": "Houston wins by over 3.5 points",
+          "no_sub_title": "Houston wins by over 3.5 points",
+          "yes_ask": 0.77,
+          "no_ask": 0.24
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU3",
+          "title": "Houston wins by over 2.5 points?",
+          "yes_sub_title": "Houston wins by over 2.5 points",
+          "no_sub_title": "Houston wins by over 2.5 points",
+          "yes_ask": 0.83,
+          "no_ask": 0.19
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU2",
+          "title": "Houston wins by over 1.5 points?",
+          "yes_sub_title": "Houston wins by over 1.5 points",
+          "no_sub_title": "Houston wins by over 1.5 points",
+          "yes_ask": 0.85,
+          "no_ask": 0.17
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND2",
+          "title": "Indianapolis wins by over 1.5 points?",
+          "yes_sub_title": "Indianapolis wins by over 1.5 points",
+          "no_sub_title": "Indianapolis wins by over 1.5 points",
+          "yes_ask": 0.15,
+          "no_ask": 0.86
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND3",
+          "title": "Indianapolis wins by over 2.5 points?",
+          "yes_sub_title": "Indianapolis wins by over 2.5 points",
+          "no_sub_title": "Indianapolis wins by over 2.5 points",
+          "yes_ask": 0.14,
+          "no_ask": 0.87
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND4",
+          "title": "Indianapolis wins by over 3.5 points?",
+          "yes_sub_title": "Indianapolis wins by over 3.5 points",
+          "no_sub_title": "Indianapolis wins by over 3.5 points",
+          "yes_ask": 0.1,
+          "no_ask": 0.91
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND5",
+          "title": "Indianapolis wins by over 4.5 points?",
+          "yes_sub_title": "Indianapolis wins by over 4.5 points",
+          "no_sub_title": "Indianapolis wins by over 4.5 points",
+          "yes_ask": 0.09,
+          "no_ask": 0.92
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND6",
+          "title": "Indianapolis wins by over 5.5 points?",
+          "yes_sub_title": "Indianapolis wins by over 5.5 points",
+          "no_sub_title": "Indianapolis wins by over 5.5 points",
+          "yes_ask": 0.08,
+          "no_ask": 0.93
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND7",
+          "title": "Indianapolis wins by over 6.5 points?",
+          "yes_sub_title": "Indianapolis wins by over 6.5 points",
+          "no_sub_title": "Indianapolis wins by over 6.5 points",
+          "yes_ask": 0.06,
+          "no_ask": 0.95
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND8",
+          "title": "Indianapolis wins by over 7.5 points?",
+          "yes_sub_title": "Indianapolis wins by over 7.5 points",
+          "no_sub_title": "Indianapolis wins by over 7.5 points",
+          "yes_ask": 0.05,
+          "no_ask": 0.96
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND10",
+          "title": "Indianapolis wins by over 9.5 points?",
+          "yes_sub_title": "Indianapolis wins by over 9.5 points",
+          "no_sub_title": "Indianapolis wins by over 9.5 points",
+          "yes_ask": 0.04,
+          "no_ask": 0.97
+        },
+        {
+          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND11",
+          "title": "Indianapolis wins by over 10.5 points?",
+          "yes_sub_title": "Indianapolis wins by over 10.5 points",
+          "no_sub_title": "Indianapolis wins by over 10.5 points",
+          "yes_ask": 0.03,
+          "no_ask": 0.98
         }
       ]
     },
@@ -3591,8 +3783,8 @@
           "title": "Cincinnati wins by over 23.5 points?",
           "yes_sub_title": "Cincinnati wins by over 23.5 points",
           "no_sub_title": "Cincinnati wins by over 23.5 points",
-          "yes_ask": 0.14,
-          "no_ask": 0.92
+          "yes_ask": 0.13,
+          "no_ask": 0.91
         },
         {
           "ticker": "KXNFLSPREAD-26NOV23CINWAS-CIN21",
@@ -3813,7 +4005,7 @@
           "title": "Full Game: over 26.5 points scored?",
           "yes_sub_title": "Over 26.5 points",
           "no_sub_title": "Over 26.5 points",
-          "yes_ask": 0.94,
+          "yes_ask": 0.95,
           "no_ask": 0.07
         },
         {
@@ -3830,7 +4022,7 @@
           "yes_sub_title": "Over 32.5 points",
           "no_sub_title": "Over 32.5 points",
           "yes_ask": 0.85,
-          "no_ask": 0.16
+          "no_ask": 0.17
         },
         {
           "ticker": "KXNFLTOTAL-26NOV19INDHOU-36",
@@ -3933,8 +4125,8 @@
           "title": "Full Game: over 59.5 points scored?",
           "yes_sub_title": "Over 59.5 points",
           "no_sub_title": "Over 59.5 points",
-          "yes_ask": 0.11,
-          "no_ask": 0.9
+          "yes_ask": 0.12,
+          "no_ask": 0.89
         },
         {
           "ticker": "KXNFLTOTAL-26NOV19INDHOU-63",
@@ -3949,8 +4141,8 @@
           "title": "Full Game: over 65.5 points scored?",
           "yes_sub_title": "Over 65.5 points",
           "no_sub_title": "Over 65.5 points",
-          "yes_ask": 0.07,
-          "no_ask": 0.95
+          "yes_ask": 0.06,
+          "no_ask": 0.96
         }
       ]
     },
@@ -4209,7 +4401,7 @@
           "title": "Pittsburgh wins",
           "yes_sub_title": "Pittsburgh",
           "no_sub_title": "Pittsburgh",
-          "yes_ask": 0.49,
+          "yes_ask": 0.5,
           "no_ask": 0.52
         },
         {
@@ -5230,7 +5422,7 @@
           "yes_sub_title": "John McEntee",
           "no_sub_title": "John McEntee",
           "yes_ask": 0.034,
-          "no_ask": 0.968
+          "no_ask": 0.967
         },
         {
           "ticker": "KXPRESNOMR-28-LHOG",
@@ -5287,6 +5479,428 @@
           "no_sub_title": "Stephen Miller",
           "yes_ask": 0.003,
           "no_ask": 1.0
+        }
+      ]
+    },
+    "KXPRESPERSON-28": {
+      "title": "2028 U.S. Presidential Election winner?",
+      "sub_title": "In 2028",
+      "markets": [
+        {
+          "ticker": "KXPRESPERSON-28-GNEWS",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Gavin Newsom",
+          "no_sub_title": "Gavin Newsom",
+          "yes_ask": 0.082,
+          "no_ask": 0.919
+        },
+        {
+          "ticker": "KXPRESPERSON-28-AOCA",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Alexandria Ocasio-Cortez",
+          "no_sub_title": "Alexandria Ocasio-Cortez",
+          "yes_ask": 0.091,
+          "no_ask": 0.91
+        },
+        {
+          "ticker": "KXPRESPERSON-28-PBUT",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Pete Buttigieg",
+          "no_sub_title": "Pete Buttigieg",
+          "yes_ask": 0.03,
+          "no_ask": 0.971
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JSHA",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Josh Shapiro",
+          "no_sub_title": "Josh Shapiro",
+          "yes_ask": 0.027,
+          "no_ask": 0.974
+        },
+        {
+          "ticker": "KXPRESPERSON-28-KHAR",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Kamala Harris",
+          "no_sub_title": "Kamala Harris",
+          "yes_ask": 0.033,
+          "no_ask": 0.968
+        },
+        {
+          "ticker": "KXPRESPERSON-28-WMOO",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Wes Moore",
+          "no_sub_title": "Wes Moore",
+          "yes_ask": 0.018,
+          "no_ask": 0.983
+        },
+        {
+          "ticker": "KXPRESPERSON-28-SSMI",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Stephen A. Smith",
+          "no_sub_title": "Stephen A. Smith",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESPERSON-28-GWHI",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Gretchen Whitmer",
+          "no_sub_title": "Gretchen Whitmer",
+          "yes_ask": 0.005,
+          "no_ask": 0.996
+        },
+        {
+          "ticker": "KXPRESPERSON-28-ABES",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Andy Beshear",
+          "no_sub_title": "Andy Beshear",
+          "yes_ask": 0.028,
+          "no_ask": 0.974
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JPRI",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "J.B. Pritzker",
+          "no_sub_title": "J.B. Pritzker",
+          "yes_ask": 0.02,
+          "no_ask": 0.981
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JVAN",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "J.D. Vance",
+          "no_sub_title": "J.D. Vance",
+          "yes_ask": 0.14,
+          "no_ask": 0.87
+        },
+        {
+          "ticker": "KXPRESPERSON-28-TGAB",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Tulsi Gabbard",
+          "no_sub_title": "Tulsi Gabbard",
+          "yes_ask": 0.004,
+          "no_ask": 0.997
+        },
+        {
+          "ticker": "KXPRESPERSON-28-DTRU",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Donald J. Trump",
+          "no_sub_title": "Donald J. Trump",
+          "yes_ask": 0.009,
+          "no_ask": 0.992
+        },
+        {
+          "ticker": "KXPRESPERSON-28-MRUB",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Marco Rubio",
+          "no_sub_title": "Marco Rubio",
+          "yes_ask": 0.089,
+          "no_ask": 0.912
+        },
+        {
+          "ticker": "KXPRESPERSON-28-GYOU",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Glenn Youngkin",
+          "no_sub_title": "Glenn Youngkin",
+          "yes_ask": 0.006,
+          "no_ask": 0.995
+        },
+        {
+          "ticker": "KXPRESPERSON-28-DTRUJR",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Donald J. Trump Jr.",
+          "no_sub_title": "Donald J. Trump Jr.",
+          "yes_ask": 0.005,
+          "no_ask": 0.996
+        },
+        {
+          "ticker": "KXPRESPERSON-28-NHAL",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Nikki Haley",
+          "no_sub_title": "Nikki Haley",
+          "yes_ask": 0.005,
+          "no_ask": 0.996
+        },
+        {
+          "ticker": "KXPRESPERSON-28-RDES",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Ron DeSantis",
+          "no_sub_title": "Ron DeSantis",
+          "yes_ask": 0.057,
+          "no_ask": 0.944
+        },
+        {
+          "ticker": "KXPRESPERSON-28-VRAM",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Vivek Ramaswamy",
+          "no_sub_title": "Vivek Ramaswamy",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESPERSON-28-GABB",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Greg Abbott",
+          "no_sub_title": "Greg Abbott",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESPERSON-28-TWAL",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Tim Walz",
+          "no_sub_title": "Tim Walz",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JDIM",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Jamie Dimon",
+          "no_sub_title": "Jamie Dimon",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JOSS",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Jon Ossoff",
+          "no_sub_title": "Jon Ossoff",
+          "yes_ask": 0.18,
+          "no_ask": 0.83
+        },
+        {
+          "ticker": "KXPRESPERSON-28-MKEL",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Mark Kelly",
+          "no_sub_title": "Mark Kelly",
+          "yes_ask": 0.022,
+          "no_ask": 0.979
+        },
+        {
+          "ticker": "KXPRESPERSON-28-TCAR",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Tucker Carlson",
+          "no_sub_title": "Tucker Carlson",
+          "yes_ask": 0.01,
+          "no_ask": 0.991
+        },
+        {
+          "ticker": "KXPRESPERSON-28-TMAS",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Thomas Massie",
+          "no_sub_title": "Thomas Massie",
+          "yes_ask": 0.012,
+          "no_ask": 0.99
+        },
+        {
+          "ticker": "KXPRESPERSON-28-REMA",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Rahm Emanuel",
+          "no_sub_title": "Rahm Emanuel",
+          "yes_ask": 0.013,
+          "no_ask": 0.988
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JTAL",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "James Talarico",
+          "no_sub_title": "James Talarico",
+          "yes_ask": 0.011,
+          "no_ask": 0.99
+        },
+        {
+          "ticker": "KXPRESPERSON-28-HBID",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Hunter Biden",
+          "no_sub_title": "Hunter Biden",
+          "yes_ask": 0.002,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-RKHA",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Ro Khanna",
+          "no_sub_title": "Ro Khanna",
+          "yes_ask": 0.01,
+          "no_ask": 0.991
+        },
+        {
+          "ticker": "KXPRESPERSON-28-TCRU",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Ted Cruz",
+          "no_sub_title": "Ted Cruz",
+          "yes_ask": 0.011,
+          "no_ask": 0.99
+        },
+        {
+          "ticker": "KXPRESPERSON-28-DBUR",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Doug Burgum",
+          "no_sub_title": "Doug Burgum",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-RCOO",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Roy Cooper",
+          "no_sub_title": "Roy Cooper",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESPERSON-28-BKEM",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Brian Kemp",
+          "no_sub_title": "Brian Kemp",
+          "yes_ask": 0.006,
+          "no_ask": 0.995
+        },
+        {
+          "ticker": "KXPRESPERSON-28-CBOO",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Cory Booker",
+          "no_sub_title": "Cory Booker",
+          "yes_ask": 0.009,
+          "no_ask": 0.995
+        },
+        {
+          "ticker": "KXPRESPERSON-28-RWAR",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Raphael Warnock",
+          "no_sub_title": "Raphael Warnock",
+          "yes_ask": 0.024,
+          "no_ask": 0.978
+        },
+        {
+          "ticker": "KXPRESPERSON-28-AELS",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Abdul El-Sayed",
+          "no_sub_title": "Abdul El-Sayed",
+          "yes_ask": 0.006,
+          "no_ask": 0.995
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JKEN",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Joe Kent",
+          "no_sub_title": "Joe Kent",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESPERSON-28-GBOV",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Gregory Bovino",
+          "no_sub_title": "Gregory Bovino",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JMCE",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "John McEntee",
+          "no_sub_title": "John McEntee",
+          "yes_ask": 0.009,
+          "no_ask": 0.993
+        },
+        {
+          "ticker": "KXPRESPERSON-28-LHOG",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Larry Hogan",
+          "no_sub_title": "Larry Hogan",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JKUS",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Jared Kushner",
+          "no_sub_title": "Jared Kushner",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-MTAY",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Marjorie Taylor Greene",
+          "no_sub_title": "Marjorie Taylor Greene",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESPERSON-28-BDON",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Byron Donalds",
+          "no_sub_title": "Byron Donalds",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESPERSON-28-ITRU",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Ivanka Trump",
+          "no_sub_title": "Ivanka Trump",
+          "yes_ask": 0.005,
+          "no_ask": 0.996
+        },
+        {
+          "ticker": "KXPRESPERSON-28-JHAW",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Josh Hawley",
+          "no_sub_title": "Josh Hawley",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESPERSON-28-RPAU",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Rand Paul",
+          "no_sub_title": "Rand Paul",
+          "yes_ask": 0.002,
+          "no_ask": 0.999
+        },
+        {
+          "ticker": "KXPRESPERSON-28-DPHI",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Dean Phillips",
+          "no_sub_title": "Dean Phillips",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-MSHE",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Mikie Sherrill",
+          "no_sub_title": "Mikie Sherrill",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-ASPA",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Abigail Spanberger",
+          "no_sub_title": "Abigail Spanberger",
+          "yes_ask": 0.001,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXPRESPERSON-28-MOBA",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Michelle Obama",
+          "no_sub_title": "Michelle Obama",
+          "yes_ask": 0.003,
+          "no_ask": 0.998
+        },
+        {
+          "ticker": "KXPRESPERSON-28-CHOL",
+          "title": "Who will win the next presidential election?",
+          "yes_sub_title": "Chris Van Hollen",
+          "no_sub_title": "Chris Van Hollen",
+          "yes_ask": 0.004,
+          "no_ask": 0.997
         }
       ]
     },
@@ -5377,6 +5991,36 @@
           "no_sub_title": "Tie",
           "yes_ask": 0.17,
           "no_ask": 0.84
+        }
+      ]
+    },
+    "KXUCLWGAME-26NOV19BARSER": {
+      "title": "Barcelona vs Servette Chenois",
+      "sub_title": "BAR vs SER (Nov 19)",
+      "markets": [
+        {
+          "ticker": "KXUCLWGAME-26NOV19BARSER-BAR",
+          "title": "Barcelona wins",
+          "yes_sub_title": "Barcelona",
+          "no_sub_title": "Barcelona",
+          "yes_ask": 0.98,
+          "no_ask": 0.03
+        },
+        {
+          "ticker": "KXUCLWGAME-26NOV19BARSER-SER",
+          "title": "Servette Chenois wins",
+          "yes_sub_title": "Servette Chenois",
+          "no_sub_title": "Servette Chenois",
+          "yes_ask": 0.02,
+          "no_ask": 0.99
+        },
+        {
+          "ticker": "KXUCLWGAME-26NOV19BARSER-TIE",
+          "title": "Tie is the result",
+          "yes_sub_title": "Tie",
+          "no_sub_title": "Tie",
+          "yes_ask": 0.02,
+          "no_ask": 0.99
         }
       ]
     },
@@ -5471,16 +6115,16 @@
           "title": "Lucia Bronzetti wins",
           "yes_sub_title": "Lucia Bronzetti",
           "no_sub_title": "Lucia Bronzetti",
-          "yes_ask": 0.78,
-          "no_ask": 0.23
+          "yes_ask": 0.61,
+          "no_ask": 0.4
         },
         {
           "ticker": "KXWTACHALLENGERMATCH-26NOV19BROMON-MON",
           "title": "Carole Monnet wins",
           "yes_sub_title": "Carole Monnet",
           "no_sub_title": "Carole Monnet",
-          "yes_ask": 0.23,
-          "no_ask": 0.78
+          "yes_ask": 0.4,
+          "no_ask": 0.61
         }
       ]
     },
@@ -5508,8 +6152,6 @@
     }
   },
   "byTicker": {
-    "KXATPCHALLENGERMATCH-26NOV19NARJAC-NAR": "KXATPCHALLENGERMATCH-26NOV19NARJAC",
-    "KXATPCHALLENGERMATCH-26NOV19NARJAC-JAC": "KXATPCHALLENGERMATCH-26NOV19NARJAC",
     "KXBRASILEIROGAME-26NOV19VDGINT-VDG": "KXBRASILEIROGAME-26NOV19VDGINT",
     "KXBRASILEIROGAME-26NOV19VDGINT-INT": "KXBRASILEIROGAME-26NOV19VDGINT",
     "KXBRASILEIROGAME-26NOV19VDGINT-TIE": "KXBRASILEIROGAME-26NOV19VDGINT",
@@ -5867,6 +6509,32 @@
     "KXNCAAMBGAME-26NOV19UALRJAC-UALR": "KXNCAAMBGAME-26NOV19UALRJAC",
     "KXNFLGAME-26NOV19INDHOU-HOU": "KXNFLGAME-26NOV19INDHOU",
     "KXNFLGAME-26NOV19INDHOU-IND": "KXNFLGAME-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-HOU31": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-HOU28": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-HOU24": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-HOU21": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-HOU18": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-HOU17": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-HOU15": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-HOU14": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-HOU11": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-HOU10": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-HOU8": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-HOU7": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-HOU6": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-HOU5": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-HOU4": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-HOU3": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-HOU2": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-IND2": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-IND3": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-IND4": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-IND5": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-IND6": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-IND7": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-IND8": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-IND10": "KXNFLSPREAD-26NOV19INDHOU",
+    "KXNFLSPREAD-26NOV19INDHOU-IND11": "KXNFLSPREAD-26NOV19INDHOU",
     "KXNFLSPREAD-26NOV22NOCHI-CHI28": "KXNFLSPREAD-26NOV22NOCHI",
     "KXNFLSPREAD-26NOV22NOCHI-CHI24": "KXNFLSPREAD-26NOV22NOCHI",
     "KXNFLSPREAD-26NOV22NOCHI-CHI21": "KXNFLSPREAD-26NOV22NOCHI",
@@ -6125,10 +6793,58 @@
     "KXPRESNOMR-28-DMCC": "KXPRESNOMR-28",
     "KXPRESNOMR-28-JJOR": "KXPRESNOMR-28",
     "KXPRESNOMR-28-SMIL": "KXPRESNOMR-28",
-    "KXPRESPERSON-28-JOSS": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-JVAN": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-GNEWS": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-AOCA": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-PBUT": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JSHA": "KXPRESPERSON-28",
     "KXPRESPERSON-28-KHAR": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-WMOO": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-SSMI": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-GWHI": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-ABES": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JPRI": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JVAN": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-TGAB": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-DTRU": "KXPRESPERSON-28",
     "KXPRESPERSON-28-MRUB": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-GYOU": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-DTRUJR": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-NHAL": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-RDES": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-VRAM": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-GABB": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-TWAL": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JDIM": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JOSS": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-MKEL": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-TCAR": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-TMAS": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-REMA": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JTAL": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-HBID": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-RKHA": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-TCRU": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-DBUR": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-RCOO": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-BKEM": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-CBOO": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-RWAR": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-AELS": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JKEN": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-GBOV": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JMCE": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-LHOG": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JKUS": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-MTAY": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-BDON": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-ITRU": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JHAW": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-RPAU": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-DPHI": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-MSHE": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-ASPA": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-MOBA": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-CHOL": "KXPRESPERSON-28",
     "KXSERIEAGAME-26NOV21LAZLEC-LAZ": "KXSERIEAGAME-26NOV21LAZLEC",
     "KXSERIEAGAME-26NOV21LAZLEC-LEC": "KXSERIEAGAME-26NOV21LAZLEC",
     "KXSERIEAGAME-26NOV21LAZLEC-TIE": "KXSERIEAGAME-26NOV21LAZLEC",
@@ -6138,6 +6854,7 @@
     "KXUCLGAME-26NOV24COMAEK-COM": "KXUCLGAME-26NOV24COMAEK",
     "KXUCLGAME-26NOV24COMAEK-AEK": "KXUCLGAME-26NOV24COMAEK",
     "KXUCLGAME-26NOV24COMAEK-TIE": "KXUCLGAME-26NOV24COMAEK",
+    "KXUCLWGAME-26NOV19BARSER-BAR": "KXUCLWGAME-26NOV19BARSER",
     "KXUCLWGAME-26NOV19BARSER-SER": "KXUCLWGAME-26NOV19BARSER",
     "KXUCLWGAME-26NOV19BARSER-TIE": "KXUCLWGAME-26NOV19BARSER",
     "KXUCLWGAME-26NOV19FAKBMU-FAK": "KXUCLWGAME-26NOV19FAKBMU",
