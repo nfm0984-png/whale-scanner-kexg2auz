@@ -1,24 +1,24 @@
 {
   "events": {
-    "KXATPCHALLENGERMATCH-26NOV19GUENAG": {
-      "title": "Gueymard Wayenburg vs Nagel",
-      "sub_title": "Gueymard Wayenburg vs Nagel (Nov 19)",
+    "KXATPCHALLENGERMATCH-26NOV19NARJAC": {
+      "title": "Nardi vs Jacquet",
+      "sub_title": "Nardi vs Jacquet (Nov 19)",
       "markets": [
         {
-          "ticker": "KXATPCHALLENGERMATCH-26NOV19GUENAG-GUE",
-          "title": "Sascha Gueymard Wayenburg wins",
-          "yes_sub_title": "Sascha Gueymard Wayenburg",
-          "no_sub_title": "Sascha Gueymard Wayenburg",
-          "yes_ask": 0.9,
-          "no_ask": 0.11
+          "ticker": "KXATPCHALLENGERMATCH-26NOV19NARJAC-NAR",
+          "title": "Luca Nardi wins",
+          "yes_sub_title": "Luca Nardi",
+          "no_sub_title": "Luca Nardi",
+          "yes_ask": 0.56,
+          "no_ask": 0.45
         },
         {
-          "ticker": "KXATPCHALLENGERMATCH-26NOV19GUENAG-NAG",
-          "title": "Arthur Nagel wins",
-          "yes_sub_title": "Arthur Nagel",
-          "no_sub_title": "Arthur Nagel",
-          "yes_ask": 0.11,
-          "no_ask": 0.9
+          "ticker": "KXATPCHALLENGERMATCH-26NOV19NARJAC-JAC",
+          "title": "Kyrian Jacquet wins",
+          "yes_sub_title": "Kyrian Jacquet",
+          "no_sub_title": "Kyrian Jacquet",
+          "yes_ask": 0.45,
+          "no_ask": 0.56
         }
       ]
     },
@@ -39,7 +39,7 @@
           "title": "Internacional wins",
           "yes_sub_title": "Internacional",
           "no_sub_title": "Internacional",
-          "yes_ask": 0.16,
+          "yes_ask": 0.155,
           "no_ask": 0.85
         },
         {
@@ -47,8 +47,38 @@
           "title": "Tie is the result",
           "yes_sub_title": "Tie",
           "no_sub_title": "Tie",
-          "yes_ask": 0.225,
-          "no_ask": 0.78
+          "yes_ask": 0.22,
+          "no_ask": 0.785
+        }
+      ]
+    },
+    "KXBRASILEIROGAME-26NOV21PALFLA": {
+      "title": "Palmeiras vs Flamengo",
+      "sub_title": "PAL vs FLA (Nov 21)",
+      "markets": [
+        {
+          "ticker": "KXBRASILEIROGAME-26NOV21PALFLA-PAL",
+          "title": "Palmeiras wins",
+          "yes_sub_title": "Palmeiras",
+          "no_sub_title": "Palmeiras",
+          "yes_ask": 0.315,
+          "no_ask": 0.69
+        },
+        {
+          "ticker": "KXBRASILEIROGAME-26NOV21PALFLA-FLA",
+          "title": "Flamengo wins",
+          "yes_sub_title": "Flamengo",
+          "no_sub_title": "Flamengo",
+          "yes_ask": 0.41,
+          "no_ask": 0.595
+        },
+        {
+          "ticker": "KXBRASILEIROGAME-26NOV21PALFLA-TIE",
+          "title": "Tie is the result",
+          "yes_sub_title": "Tie",
+          "no_sub_title": "Tie",
+          "yes_ask": 0.29,
+          "no_ask": 0.715
         }
       ]
     },
@@ -69,7 +99,7 @@
           "title": "Will over 1.5 goals be scored?",
           "yes_sub_title": "Over 1.5 goals scored",
           "no_sub_title": "Over 1.5 goals scored",
-          "yes_ask": 0.7,
+          "yes_ask": 0.71,
           "no_ask": 0.31
         },
         {
@@ -145,16 +175,16 @@
           "title": "Luminosity wins",
           "yes_sub_title": "Luminosity",
           "no_sub_title": "Luminosity",
-          "yes_ask": 0.62,
-          "no_ask": 0.4
+          "yes_ask": 0.63,
+          "no_ask": 0.38
         },
         {
           "ticker": "KXCS2GAME-26NOV191100LGSNG-SNG",
           "title": "Sangal wins",
           "yes_sub_title": "Sangal",
           "no_sub_title": "Sangal",
-          "yes_ask": 0.4,
-          "no_ask": 0.61
+          "yes_ask": 0.39,
+          "no_ask": 0.62
         }
       ]
     },
@@ -189,16 +219,16 @@
           "title": "Luminosity wins map 1",
           "yes_sub_title": "Luminosity",
           "no_sub_title": "Luminosity",
-          "yes_ask": 0.6,
-          "no_ask": 0.44
+          "yes_ask": 0.56,
+          "no_ask": 0.48
         },
         {
           "ticker": "KXCS2MAP-26NOV191100LGSNG-1-SNG",
           "title": "Sangal wins map 1",
           "yes_sub_title": "Sangal",
           "no_sub_title": "Sangal",
-          "yes_ask": 0.43,
-          "no_ask": 0.6
+          "yes_ask": 0.46,
+          "no_ask": 0.58
         }
       ]
     },
@@ -211,16 +241,16 @@
           "title": "Luminosity wins map 2",
           "yes_sub_title": "Luminosity",
           "no_sub_title": "Luminosity",
-          "yes_ask": 0.5,
-          "no_ask": 0.53
+          "yes_ask": 0.57,
+          "no_ask": 0.47
         },
         {
           "ticker": "KXCS2MAP-26NOV191100LGSNG-2-SNG",
           "title": "Sangal wins map 2",
           "yes_sub_title": "Sangal",
           "no_sub_title": "Sangal",
-          "yes_ask": 0.51,
-          "no_ask": 0.5
+          "yes_ask": 0.45,
+          "no_ask": 0.57
         }
       ]
     },
@@ -554,7 +584,7 @@
           "yes_sub_title": "Tennessee",
           "no_sub_title": "Tennessee",
           "yes_ask": 0.14,
-          "no_ask": 0.93
+          "no_ask": 0.94
         },
         {
           "ticker": "KXDCMORATORIUMSTATES-28-UT",
@@ -623,38 +653,60 @@
           "title": "Xtreme Gaming wins",
           "yes_sub_title": "Xtreme Gaming",
           "no_sub_title": "Xtreme Gaming",
-          "yes_ask": 0.43,
-          "no_ask": 0.61
+          "yes_ask": 0.45,
+          "no_ask": 0.58
         },
         {
           "ticker": "KXDOTA2GAME-26NOV200900XTREMEGL-GL",
           "title": "GamerLegion wins",
           "yes_sub_title": "GamerLegion",
           "no_sub_title": "GamerLegion",
-          "yes_ask": 0.6,
+          "yes_ask": 0.57,
           "no_ask": 0.44
         }
       ]
     },
-    "KXDOTA2MAP-26NOV190800ALLANG-2": {
-      "title": "Team Allied vs. angry birds: Map 2 Winner",
-      "sub_title": "Map 2: ALL vs. ANG (Nov 19)",
+    "KXDOTA2GAME-26NOV201200KONCALIQUID": {
+      "title": "DO KONCA vs. Team Liquid",
+      "sub_title": "DO KONCA vs. Team Liquid (Nov 20)",
       "markets": [
         {
-          "ticker": "KXDOTA2MAP-26NOV190800ALLANG-2-ALL",
-          "title": "Team Allied wins map 2",
-          "yes_sub_title": "Team Allied",
-          "no_sub_title": "Team Allied",
-          "yes_ask": 0.26,
-          "no_ask": 0.79
+          "ticker": "KXDOTA2GAME-26NOV201200KONCALIQUID-KONCA",
+          "title": "DO KONCA wins",
+          "yes_sub_title": "DO KONCA",
+          "no_sub_title": "DO KONCA",
+          "yes_ask": 0.33,
+          "no_ask": 0.7
         },
         {
-          "ticker": "KXDOTA2MAP-26NOV190800ALLANG-2-ANG",
-          "title": "angry birds wins map 2",
-          "yes_sub_title": "angry birds",
-          "no_sub_title": "angry birds",
-          "yes_ask": 0.78,
-          "no_ask": 0.26
+          "ticker": "KXDOTA2GAME-26NOV201200KONCALIQUID-LIQUID",
+          "title": "Team Liquid wins",
+          "yes_sub_title": "Team Liquid",
+          "no_sub_title": "Team Liquid",
+          "yes_ask": 0.69,
+          "no_ask": 0.35
+        }
+      ]
+    },
+    "KXDOTA2MAP-26NOV190830HULFRO-2": {
+      "title": "HULIGANI vs. Froglings: Map 2 Winner",
+      "sub_title": "Map 2: HUL vs. FRO (Nov 19)",
+      "markets": [
+        {
+          "ticker": "KXDOTA2MAP-26NOV190830HULFRO-2-HUL",
+          "title": "HULIGANI wins map 2",
+          "yes_sub_title": "HULIGANI",
+          "no_sub_title": "HULIGANI",
+          "yes_ask": 0.97,
+          "no_ask": 0.11
+        },
+        {
+          "ticker": "KXDOTA2MAP-26NOV190830HULFRO-2-FRO",
+          "title": "Froglings wins map 2",
+          "yes_sub_title": "Froglings",
+          "no_sub_title": "Froglings",
+          "yes_ask": 0.09,
+          "no_ask": 0.96
         }
       ]
     },
@@ -697,15 +749,15 @@
           "title": "Aston Villa wins",
           "yes_sub_title": "Aston Villa",
           "no_sub_title": "Aston Villa",
-          "yes_ask": 0.53,
-          "no_ask": 0.48
+          "yes_ask": 0.54,
+          "no_ask": 0.47
         },
         {
           "ticker": "KXEPLGAME-26NOV21AVLSUN-SUN",
           "title": "Sunderland wins",
           "yes_sub_title": "Sunderland",
           "no_sub_title": "Sunderland",
-          "yes_ask": 0.22,
+          "yes_ask": 0.21,
           "no_ask": 0.8
         },
         {
@@ -903,8 +955,8 @@
           "title": "Will the Federal Reserve Hike rates by 25bps at their January 2027 meeting?",
           "yes_sub_title": "Hike 25bps",
           "no_sub_title": "Hike 25bps",
-          "yes_ask": 0.59,
-          "no_ask": 0.42
+          "yes_ask": 0.62,
+          "no_ask": 0.39
         },
         {
           "ticker": "KXFEDDECISION-27JAN-H26",
@@ -970,6 +1022,28 @@
         }
       ]
     },
+    "KXITFMATCH-26NOV19BRADEL": {
+      "title": "Branchetti vs Del Pino",
+      "sub_title": "Branchetti vs Del Pino (Nov 19)",
+      "markets": [
+        {
+          "ticker": "KXITFMATCH-26NOV19BRADEL-BRA",
+          "title": "Giovanni Branchetti wins",
+          "yes_sub_title": "Giovanni Branchetti",
+          "no_sub_title": "Giovanni Branchetti",
+          "yes_ask": 0.16,
+          "no_ask": 0.85
+        },
+        {
+          "ticker": "KXITFMATCH-26NOV19BRADEL-DEL",
+          "title": "Mateo Del Pino wins",
+          "yes_sub_title": "Mateo Del Pino",
+          "no_sub_title": "Mateo Del Pino",
+          "yes_ask": 0.85,
+          "no_ask": 0.16
+        }
+      ]
+    },
     "KXITFWMATCH-26NOV19CINMIX": {
       "title": "Cinalli vs Mi",
       "sub_title": "Cinalli vs Mi (Nov 19)",
@@ -979,16 +1053,16 @@
           "title": "Luna Maria Cinalli wins",
           "yes_sub_title": "Luna Maria Cinalli",
           "no_sub_title": "Luna Maria Cinalli",
-          "yes_ask": 0.51,
-          "no_ask": 0.53
+          "yes_ask": 0.4,
+          "no_ask": 0.61
         },
         {
           "ticker": "KXITFWMATCH-26NOV19CINMIX-MIX",
           "title": "Lan Mi wins",
           "yes_sub_title": "Lan Mi",
           "no_sub_title": "Lan Mi",
-          "yes_ask": 0.53,
-          "no_ask": 0.52
+          "yes_ask": 0.62,
+          "no_ask": 0.39
         }
       ]
     },
@@ -1046,7 +1120,7 @@
           "yes_sub_title": "Zoran Jankovi\u0107",
           "no_sub_title": "Zoran Jankovi\u0107",
           "yes_ask": 0.61,
-          "no_ask": 0.41
+          "no_ask": 0.42
         },
         {
           "ticker": "KXLJUBLJANAMAYOR-26NOV15-LMES",
@@ -1124,7 +1198,7 @@
           "yes_sub_title": "Golden State",
           "no_sub_title": "Golden State",
           "yes_ask": 0.33,
-          "no_ask": 0.68
+          "no_ask": 0.69
         },
         {
           "ticker": "KXNBAGAME-26NOV19GSWMEM-MEM",
@@ -1189,16 +1263,16 @@
           "title": "Portland wins",
           "yes_sub_title": "Portland",
           "no_sub_title": "Portland",
-          "yes_ask": 0.8,
-          "no_ask": 0.21
+          "yes_ask": 0.81,
+          "no_ask": 0.2
         },
         {
           "ticker": "KXNBAGAME-26NOV19PORMIL-MIL",
           "title": "Milwaukee wins",
           "yes_sub_title": "Milwaukee",
           "no_sub_title": "Milwaukee",
-          "yes_ask": 0.21,
-          "no_ask": 0.8
+          "yes_ask": 0.2,
+          "no_ask": 0.81
         }
       ]
     },
@@ -1212,7 +1286,7 @@
           "yes_sub_title": "Charlotte",
           "no_sub_title": "Charlotte",
           "yes_ask": 0.37,
-          "no_ask": 0.64
+          "no_ask": 0.65
         },
         {
           "ticker": "KXNBAGAME-26NOV20CHAATL-ATL",
@@ -1345,8 +1419,8 @@
           "title": "Memphis wins by over 10.5 points",
           "yes_sub_title": "Memphis wins by over 10.5 points",
           "no_sub_title": "Memphis wins by over 10.5 points",
-          "yes_ask": 0.38,
-          "no_ask": 0.64
+          "yes_ask": 0.39,
+          "no_ask": 0.63
         },
         {
           "ticker": "KXNBASPREAD-26NOV19GSWMEM-MEM10",
@@ -1361,15 +1435,15 @@
           "title": "Memphis wins by over 8.5 points",
           "yes_sub_title": "Memphis wins by over 8.5 points",
           "no_sub_title": "Memphis wins by over 8.5 points",
-          "yes_ask": 0.42,
-          "no_ask": 0.59
+          "yes_ask": 0.43,
+          "no_ask": 0.58
         },
         {
           "ticker": "KXNBASPREAD-26NOV19GSWMEM-MEM8",
           "title": "Memphis wins by over 7.5 points",
           "yes_sub_title": "Memphis wins by over 7.5 points",
           "no_sub_title": "Memphis wins by over 7.5 points",
-          "yes_ask": 0.46,
+          "yes_ask": 0.47,
           "no_ask": 0.55
         },
         {
@@ -1378,14 +1452,14 @@
           "yes_sub_title": "Memphis wins by over 6.5 points",
           "no_sub_title": "Memphis wins by over 6.5 points",
           "yes_ask": 0.5,
-          "no_ask": 0.52
+          "no_ask": 0.51
         },
         {
           "ticker": "KXNBASPREAD-26NOV19GSWMEM-MEM6",
           "title": "Memphis wins by over 5.5 points",
           "yes_sub_title": "Memphis wins by over 5.5 points",
           "no_sub_title": "Memphis wins by over 5.5 points",
-          "yes_ask": 0.54,
+          "yes_ask": 0.55,
           "no_ask": 0.47
         },
         {
@@ -1394,14 +1468,14 @@
           "yes_sub_title": "Memphis wins by over 4.5 points",
           "no_sub_title": "Memphis wins by over 4.5 points",
           "yes_ask": 0.58,
-          "no_ask": 0.44
+          "no_ask": 0.43
         },
         {
           "ticker": "KXNBASPREAD-26NOV19GSWMEM-MEM4",
           "title": "Memphis wins by over 3.5 points",
           "yes_sub_title": "Memphis wins by over 3.5 points",
           "no_sub_title": "Memphis wins by over 3.5 points",
-          "yes_ask": 0.61,
+          "yes_ask": 0.62,
           "no_ask": 0.4
         },
         {
@@ -1519,7 +1593,7 @@
           "title": "San Antonio wins by over 38.5 points",
           "yes_sub_title": "San Antonio wins by over 38.5 points",
           "no_sub_title": "San Antonio wins by over 38.5 points",
-          "yes_ask": 0.07,
+          "yes_ask": 0.06,
           "no_ask": 0.96
         },
         {
@@ -1543,7 +1617,7 @@
           "title": "San Antonio wins by over 32.5 points",
           "yes_sub_title": "San Antonio wins by over 32.5 points",
           "no_sub_title": "San Antonio wins by over 32.5 points",
-          "yes_ask": 0.12,
+          "yes_ask": 0.13,
           "no_ask": 0.9
         },
         {
@@ -1552,7 +1626,7 @@
           "yes_sub_title": "San Antonio wins by over 30.5 points",
           "no_sub_title": "San Antonio wins by over 30.5 points",
           "yes_ask": 0.15,
-          "no_ask": 0.88
+          "no_ask": 0.87
         },
         {
           "ticker": "KXNBASPREAD-26NOV19LACSAS-SAS29",
@@ -1591,8 +1665,8 @@
           "title": "San Antonio wins by over 21.5 points",
           "yes_sub_title": "San Antonio wins by over 21.5 points",
           "no_sub_title": "San Antonio wins by over 21.5 points",
-          "yes_ask": 0.35,
-          "no_ask": 0.69
+          "yes_ask": 0.34,
+          "no_ask": 0.68
         },
         {
           "ticker": "KXNBASPREAD-26NOV19LACSAS-SAS21",
@@ -1600,7 +1674,7 @@
           "yes_sub_title": "San Antonio wins by over 20.5 points",
           "no_sub_title": "San Antonio wins by over 20.5 points",
           "yes_ask": 0.37,
-          "no_ask": 0.66
+          "no_ask": 0.65
         },
         {
           "ticker": "KXNBASPREAD-26NOV19LACSAS-SAS20",
@@ -1671,7 +1745,7 @@
           "title": "San Antonio wins by over 11.5 points",
           "yes_sub_title": "San Antonio wins by over 11.5 points",
           "no_sub_title": "San Antonio wins by over 11.5 points",
-          "yes_ask": 0.64,
+          "yes_ask": 0.63,
           "no_ask": 0.39
         },
         {
@@ -1679,8 +1753,8 @@
           "title": "San Antonio wins by over 10.5 points",
           "yes_sub_title": "San Antonio wins by over 10.5 points",
           "no_sub_title": "San Antonio wins by over 10.5 points",
-          "yes_ask": 0.64,
-          "no_ask": 0.37
+          "yes_ask": 0.66,
+          "no_ask": 0.36
         },
         {
           "ticker": "KXNBASPREAD-26NOV19LACSAS-SAS9",
@@ -1711,7 +1785,7 @@
           "title": "San Antonio wins by over 2.5 points",
           "yes_sub_title": "San Antonio wins by over 2.5 points",
           "no_sub_title": "San Antonio wins by over 2.5 points",
-          "yes_ask": 0.86,
+          "yes_ask": 0.87,
           "no_ask": 0.15
         },
         {
@@ -1846,7 +1920,7 @@
           "yes_sub_title": "Minnesota wins by over 8.5 points",
           "no_sub_title": "Minnesota wins by over 8.5 points",
           "yes_ask": 0.26,
-          "no_ask": 0.75
+          "no_ask": 0.76
         },
         {
           "ticker": "KXNBASPREAD-26NOV19NYKMIN-MIN7",
@@ -1862,14 +1936,14 @@
           "yes_sub_title": "Minnesota wins by over 5.5 points",
           "no_sub_title": "Minnesota wins by over 5.5 points",
           "yes_ask": 0.35,
-          "no_ask": 0.67
+          "no_ask": 0.68
         },
         {
           "ticker": "KXNBASPREAD-26NOV19NYKMIN-MIN5",
           "title": "Minnesota wins by over 4.5 points",
           "yes_sub_title": "Minnesota wins by over 4.5 points",
           "no_sub_title": "Minnesota wins by over 4.5 points",
-          "yes_ask": 0.39,
+          "yes_ask": 0.37,
           "no_ask": 0.64
         },
         {
@@ -1877,8 +1951,8 @@
           "title": "Minnesota wins by over 3.5 points",
           "yes_sub_title": "Minnesota wins by over 3.5 points",
           "no_sub_title": "Minnesota wins by over 3.5 points",
-          "yes_ask": 0.41,
-          "no_ask": 0.61
+          "yes_ask": 0.4,
+          "no_ask": 0.62
         },
         {
           "ticker": "KXNBASPREAD-26NOV19NYKMIN-MIN3",
@@ -1893,7 +1967,7 @@
           "title": "Minnesota wins by over 1.5 points",
           "yes_sub_title": "Minnesota wins by over 1.5 points",
           "no_sub_title": "Minnesota wins by over 1.5 points",
-          "yes_ask": 0.46,
+          "yes_ask": 0.47,
           "no_ask": 0.55
         },
         {
@@ -1910,7 +1984,7 @@
           "yes_sub_title": "New York wins by over 2.5 points",
           "no_sub_title": "New York wins by over 2.5 points",
           "yes_ask": 0.46,
-          "no_ask": 0.56
+          "no_ask": 0.55
         },
         {
           "ticker": "KXNBASPREAD-26NOV19NYKMIN-NYK4",
@@ -1918,7 +1992,7 @@
           "yes_sub_title": "New York wins by over 3.5 points",
           "no_sub_title": "New York wins by over 3.5 points",
           "yes_ask": 0.43,
-          "no_ask": 0.58
+          "no_ask": 0.59
         },
         {
           "ticker": "KXNBASPREAD-26NOV19NYKMIN-NYK5",
@@ -1958,7 +2032,7 @@
           "yes_sub_title": "New York wins by over 9.5 points",
           "no_sub_title": "New York wins by over 9.5 points",
           "yes_ask": 0.26,
-          "no_ask": 0.77
+          "no_ask": 0.76
         },
         {
           "ticker": "KXNBASPREAD-26NOV19NYKMIN-NYK12",
@@ -1973,8 +2047,8 @@
           "title": "New York wins by over 13.5 points",
           "yes_sub_title": "New York wins by over 13.5 points",
           "no_sub_title": "New York wins by over 13.5 points",
-          "yes_ask": 0.18,
-          "no_ask": 0.84
+          "yes_ask": 0.19,
+          "no_ask": 0.85
         },
         {
           "ticker": "KXNBASPREAD-26NOV19NYKMIN-NYK16",
@@ -1982,7 +2056,7 @@
           "yes_sub_title": "New York wins by over 15.5 points",
           "no_sub_title": "New York wins by over 15.5 points",
           "yes_ask": 0.15,
-          "no_ask": 0.87
+          "no_ask": 0.88
         },
         {
           "ticker": "KXNBASPREAD-26NOV19NYKMIN-NYK18",
@@ -1990,7 +2064,7 @@
           "yes_sub_title": "New York wins by over 17.5 points",
           "no_sub_title": "New York wins by over 17.5 points",
           "yes_ask": 0.12,
-          "no_ask": 0.9
+          "no_ask": 0.91
         },
         {
           "ticker": "KXNBASPREAD-26NOV19NYKMIN-NYK20",
@@ -2034,276 +2108,6 @@
         }
       ]
     },
-    "KXNBASPREAD-26NOV19PORMIL": {
-      "title": "Portland vs Milwaukee: Spread",
-      "sub_title": "POR vs MIL (Nov 19)",
-      "markets": [
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-MIL17",
-          "title": "Milwaukee wins by over 16.5 points",
-          "yes_sub_title": "Milwaukee wins by over 16.5 points",
-          "no_sub_title": "Milwaukee wins by over 16.5 points",
-          "yes_ask": 0.05,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-MIL15",
-          "title": "Milwaukee wins by over 14.5 points",
-          "yes_sub_title": "Milwaukee wins by over 14.5 points",
-          "no_sub_title": "Milwaukee wins by over 14.5 points",
-          "yes_ask": 0.05,
-          "no_ask": 0.97
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-MIL13",
-          "title": "Milwaukee wins by over 12.5 points",
-          "yes_sub_title": "Milwaukee wins by over 12.5 points",
-          "no_sub_title": "Milwaukee wins by over 12.5 points",
-          "yes_ask": 0.05,
-          "no_ask": 0.97
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-MIL11",
-          "title": "Milwaukee wins by over 10.5 points",
-          "yes_sub_title": "Milwaukee wins by over 10.5 points",
-          "no_sub_title": "Milwaukee wins by over 10.5 points",
-          "yes_ask": 0.06,
-          "no_ask": 0.96
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-MIL9",
-          "title": "Milwaukee wins by over 8.5 points",
-          "yes_sub_title": "Milwaukee wins by over 8.5 points",
-          "no_sub_title": "Milwaukee wins by over 8.5 points",
-          "yes_ask": 0.09,
-          "no_ask": 0.92
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-MIL7",
-          "title": "Milwaukee wins by over 6.5 points",
-          "yes_sub_title": "Milwaukee wins by over 6.5 points",
-          "no_sub_title": "Milwaukee wins by over 6.5 points",
-          "yes_ask": 0.12,
-          "no_ask": 0.91
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-MIL5",
-          "title": "Milwaukee wins by over 4.5 points",
-          "yes_sub_title": "Milwaukee wins by over 4.5 points",
-          "no_sub_title": "Milwaukee wins by over 4.5 points",
-          "yes_ask": 0.15,
-          "no_ask": 0.87
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-MIL3",
-          "title": "Milwaukee wins by over 2.5 points",
-          "yes_sub_title": "Milwaukee wins by over 2.5 points",
-          "no_sub_title": "Milwaukee wins by over 2.5 points",
-          "yes_ask": 0.19,
-          "no_ask": 0.84
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-MIL2",
-          "title": "Milwaukee wins by over 1.5 points",
-          "yes_sub_title": "Milwaukee wins by over 1.5 points",
-          "no_sub_title": "Milwaukee wins by over 1.5 points",
-          "yes_ask": 0.2,
-          "no_ask": 0.82
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR2",
-          "title": "Portland wins by over 1.5 points",
-          "yes_sub_title": "Portland wins by over 1.5 points",
-          "no_sub_title": "Portland wins by over 1.5 points",
-          "yes_ask": 0.78,
-          "no_ask": 0.25
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR4",
-          "title": "Portland wins by over 3.5 points",
-          "yes_sub_title": "Portland wins by over 3.5 points",
-          "no_sub_title": "Portland wins by over 3.5 points",
-          "yes_ask": 0.73,
-          "no_ask": 0.31
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR5",
-          "title": "Portland wins by over 4.5 points",
-          "yes_sub_title": "Portland wins by over 4.5 points",
-          "no_sub_title": "Portland wins by over 4.5 points",
-          "yes_ask": 0.7,
-          "no_ask": 0.33
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR6",
-          "title": "Portland wins by over 5.5 points",
-          "yes_sub_title": "Portland wins by over 5.5 points",
-          "no_sub_title": "Portland wins by over 5.5 points",
-          "yes_ask": 0.67,
-          "no_ask": 0.36
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR7",
-          "title": "Portland wins by over 6.5 points",
-          "yes_sub_title": "Portland wins by over 6.5 points",
-          "no_sub_title": "Portland wins by over 6.5 points",
-          "yes_ask": 0.64,
-          "no_ask": 0.39
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR8",
-          "title": "Portland wins by over 7.5 points",
-          "yes_sub_title": "Portland wins by over 7.5 points",
-          "no_sub_title": "Portland wins by over 7.5 points",
-          "yes_ask": 0.61,
-          "no_ask": 0.41
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR9",
-          "title": "Portland wins by over 8.5 points",
-          "yes_sub_title": "Portland wins by over 8.5 points",
-          "no_sub_title": "Portland wins by over 8.5 points",
-          "yes_ask": 0.58,
-          "no_ask": 0.44
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR10",
-          "title": "Portland wins by over 9.5 points",
-          "yes_sub_title": "Portland wins by over 9.5 points",
-          "no_sub_title": "Portland wins by over 9.5 points",
-          "yes_ask": 0.55,
-          "no_ask": 0.46
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR11",
-          "title": "Portland wins by over 10.5 points",
-          "yes_sub_title": "Portland wins by over 10.5 points",
-          "no_sub_title": "Portland wins by over 10.5 points",
-          "yes_ask": 0.49,
-          "no_ask": 0.52
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR12",
-          "title": "Portland wins by over 11.5 points",
-          "yes_sub_title": "Portland wins by over 11.5 points",
-          "no_sub_title": "Portland wins by over 11.5 points",
-          "yes_ask": 0.46,
-          "no_ask": 0.55
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR13",
-          "title": "Portland wins by over 12.5 points",
-          "yes_sub_title": "Portland wins by over 12.5 points",
-          "no_sub_title": "Portland wins by over 12.5 points",
-          "yes_ask": 0.43,
-          "no_ask": 0.59
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR14",
-          "title": "Portland wins by over 13.5 points",
-          "yes_sub_title": "Portland wins by over 13.5 points",
-          "no_sub_title": "Portland wins by over 13.5 points",
-          "yes_ask": 0.41,
-          "no_ask": 0.62
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR15",
-          "title": "Portland wins by over 14.5 points",
-          "yes_sub_title": "Portland wins by over 14.5 points",
-          "no_sub_title": "Portland wins by over 14.5 points",
-          "yes_ask": 0.38,
-          "no_ask": 0.64
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR16",
-          "title": "Portland wins by over 15.5 points",
-          "yes_sub_title": "Portland wins by over 15.5 points",
-          "no_sub_title": "Portland wins by over 15.5 points",
-          "yes_ask": 0.35,
-          "no_ask": 0.68
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR18",
-          "title": "Portland wins by over 17.5 points",
-          "yes_sub_title": "Portland wins by over 17.5 points",
-          "no_sub_title": "Portland wins by over 17.5 points",
-          "yes_ask": 0.28,
-          "no_ask": 0.73
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR20",
-          "title": "Portland wins by over 19.5 points",
-          "yes_sub_title": "Portland wins by over 19.5 points",
-          "no_sub_title": "Portland wins by over 19.5 points",
-          "yes_ask": 0.24,
-          "no_ask": 0.78
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR22",
-          "title": "Portland wins by over 21.5 points",
-          "yes_sub_title": "Portland wins by over 21.5 points",
-          "no_sub_title": "Portland wins by over 21.5 points",
-          "yes_ask": 0.22,
-          "no_ask": 0.81
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR24",
-          "title": "Portland wins by over 23.5 points",
-          "yes_sub_title": "Portland wins by over 23.5 points",
-          "no_sub_title": "Portland wins by over 23.5 points",
-          "yes_ask": 0.18,
-          "no_ask": 0.85
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR26",
-          "title": "Portland wins by over 25.5 points",
-          "yes_sub_title": "Portland wins by over 25.5 points",
-          "no_sub_title": "Portland wins by over 25.5 points",
-          "yes_ask": 0.14,
-          "no_ask": 0.88
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR28",
-          "title": "Portland wins by over 27.5 points",
-          "yes_sub_title": "Portland wins by over 27.5 points",
-          "no_sub_title": "Portland wins by over 27.5 points",
-          "yes_ask": 0.11,
-          "no_ask": 0.91
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR30",
-          "title": "Portland wins by over 29.5 points",
-          "yes_sub_title": "Portland wins by over 29.5 points",
-          "no_sub_title": "Portland wins by over 29.5 points",
-          "yes_ask": 0.08,
-          "no_ask": 0.94
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR32",
-          "title": "Portland wins by over 31.5 points",
-          "yes_sub_title": "Portland wins by over 31.5 points",
-          "no_sub_title": "Portland wins by over 31.5 points",
-          "yes_ask": 0.07,
-          "no_ask": 0.95
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR34",
-          "title": "Portland wins by over 33.5 points",
-          "yes_sub_title": "Portland wins by over 33.5 points",
-          "no_sub_title": "Portland wins by over 33.5 points",
-          "yes_ask": 0.05,
-          "no_ask": 0.97
-        },
-        {
-          "ticker": "KXNBASPREAD-26NOV19PORMIL-POR36",
-          "title": "Portland wins by over 35.5 points",
-          "yes_sub_title": "Portland wins by over 35.5 points",
-          "no_sub_title": "Portland wins by over 35.5 points",
-          "yes_ask": 0.04,
-          "no_ask": 0.99
-        }
-      ]
-    },
     "KXNBATOTAL-26NOV19GSWMEM": {
       "title": "Golden State vs Memphis: Total Points",
       "sub_title": "GSW vs MEM (Nov 19)",
@@ -2330,7 +2134,7 @@
           "yes_sub_title": "Over 201.5 points",
           "no_sub_title": "Over 201.5 points",
           "yes_ask": 0.94,
-          "no_ask": 0.08
+          "no_ask": 0.09
         },
         {
           "ticker": "KXNBATOTAL-26NOV19GSWMEM-204",
@@ -2353,7 +2157,7 @@
           "title": "Full Game: Over 207.5 points scored",
           "yes_sub_title": "Over 207.5 points",
           "no_sub_title": "Over 207.5 points",
-          "yes_ask": 0.89,
+          "yes_ask": 0.87,
           "no_ask": 0.14
         },
         {
@@ -2377,7 +2181,7 @@
           "title": "Full Game: Over 213.5 points scored",
           "yes_sub_title": "Over 213.5 points",
           "no_sub_title": "Over 213.5 points",
-          "yes_ask": 0.78,
+          "yes_ask": 0.77,
           "no_ask": 0.25
         },
         {
@@ -2385,7 +2189,7 @@
           "title": "Full Game: Over 215.5 points scored",
           "yes_sub_title": "Over 215.5 points",
           "no_sub_title": "Over 215.5 points",
-          "yes_ask": 0.73,
+          "yes_ask": 0.72,
           "no_ask": 0.3
         },
         {
@@ -2393,7 +2197,7 @@
           "title": "Full Game: Over 217.5 points scored",
           "yes_sub_title": "Over 217.5 points",
           "no_sub_title": "Over 217.5 points",
-          "yes_ask": 0.69,
+          "yes_ask": 0.7,
           "no_ask": 0.34
         },
         {
@@ -2401,16 +2205,16 @@
           "title": "Full Game: Over 219.5 points scored",
           "yes_sub_title": "Over 219.5 points",
           "no_sub_title": "Over 219.5 points",
-          "yes_ask": 0.66,
-          "no_ask": 0.36
+          "yes_ask": 0.65,
+          "no_ask": 0.37
         },
         {
           "ticker": "KXNBATOTAL-26NOV19GSWMEM-222",
           "title": "Full Game: Over 221.5 points scored",
           "yes_sub_title": "Over 221.5 points",
           "no_sub_title": "Over 221.5 points",
-          "yes_ask": 0.62,
-          "no_ask": 0.4
+          "yes_ask": 0.61,
+          "no_ask": 0.41
         },
         {
           "ticker": "KXNBATOTAL-26NOV19GSWMEM-224",
@@ -2425,8 +2229,8 @@
           "title": "Full Game: Over 225.5 points scored",
           "yes_sub_title": "Over 225.5 points",
           "no_sub_title": "Over 225.5 points",
-          "yes_ask": 0.52,
-          "no_ask": 0.49
+          "yes_ask": 0.51,
+          "no_ask": 0.5
         },
         {
           "ticker": "KXNBATOTAL-26NOV19GSWMEM-228",
@@ -2473,7 +2277,7 @@
           "title": "Full Game: Over 237.5 points scored",
           "yes_sub_title": "Over 237.5 points",
           "no_sub_title": "Over 237.5 points",
-          "yes_ask": 0.26,
+          "yes_ask": 0.25,
           "no_ask": 0.77
         },
         {
@@ -2482,7 +2286,7 @@
           "yes_sub_title": "Over 239.5 points",
           "no_sub_title": "Over 239.5 points",
           "yes_ask": 0.22,
-          "no_ask": 0.8
+          "no_ask": 0.81
         },
         {
           "ticker": "KXNBATOTAL-26NOV19GSWMEM-242",
@@ -2490,7 +2294,7 @@
           "yes_sub_title": "Over 241.5 points",
           "no_sub_title": "Over 241.5 points",
           "yes_ask": 0.19,
-          "no_ask": 0.83
+          "no_ask": 0.85
         },
         {
           "ticker": "KXNBATOTAL-26NOV19GSWMEM-244",
@@ -2505,7 +2309,7 @@
           "title": "Full Game: Over 245.5 points scored",
           "yes_sub_title": "Over 245.5 points",
           "no_sub_title": "Over 245.5 points",
-          "yes_ask": 0.14,
+          "yes_ask": 0.13,
           "no_ask": 0.89
         },
         {
@@ -2513,7 +2317,7 @@
           "title": "Full Game: Over 247.5 points scored",
           "yes_sub_title": "Over 247.5 points",
           "no_sub_title": "Over 247.5 points",
-          "yes_ask": 0.12,
+          "yes_ask": 0.11,
           "no_ask": 0.91
         },
         {
@@ -2521,8 +2325,8 @@
           "title": "Full Game: Over 249.5 points scored",
           "yes_sub_title": "Over 249.5 points",
           "no_sub_title": "Over 249.5 points",
-          "yes_ask": 0.11,
-          "no_ask": 0.93
+          "yes_ask": 0.1,
+          "no_ask": 0.92
         },
         {
           "ticker": "KXNBATOTAL-26NOV19GSWMEM-252",
@@ -2537,8 +2341,8 @@
           "title": "Full Game: Over 253.5 points scored",
           "yes_sub_title": "Over 253.5 points",
           "no_sub_title": "Over 253.5 points",
-          "yes_ask": 0.08,
-          "no_ask": 0.95
+          "yes_ask": 0.07,
+          "no_ask": 0.96
         }
       ]
     },
@@ -2552,7 +2356,7 @@
           "yes_sub_title": "Over 197.5 points",
           "no_sub_title": "Over 197.5 points",
           "yes_ask": 0.97,
-          "no_ask": 0.06
+          "no_ask": 0.05
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-200",
@@ -2560,14 +2364,14 @@
           "yes_sub_title": "Over 199.5 points",
           "no_sub_title": "Over 199.5 points",
           "yes_ask": 0.95,
-          "no_ask": 0.08
+          "no_ask": 0.07
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-202",
           "title": "Full Game: Over 201.5 points scored",
           "yes_sub_title": "Over 201.5 points",
           "no_sub_title": "Over 201.5 points",
-          "yes_ask": 0.93,
+          "yes_ask": 0.94,
           "no_ask": 0.09
         },
         {
@@ -2576,7 +2380,7 @@
           "yes_sub_title": "Over 203.5 points",
           "no_sub_title": "Over 203.5 points",
           "yes_ask": 0.92,
-          "no_ask": 0.11
+          "no_ask": 0.1
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-206",
@@ -2584,23 +2388,23 @@
           "yes_sub_title": "Over 205.5 points",
           "no_sub_title": "Over 205.5 points",
           "yes_ask": 0.9,
-          "no_ask": 0.13
+          "no_ask": 0.12
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-208",
           "title": "Full Game: Over 207.5 points scored",
           "yes_sub_title": "Over 207.5 points",
           "no_sub_title": "Over 207.5 points",
-          "yes_ask": 0.87,
-          "no_ask": 0.16
+          "yes_ask": 0.88,
+          "no_ask": 0.15
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-210",
           "title": "Full Game: Over 209.5 points scored",
           "yes_sub_title": "Over 209.5 points",
           "no_sub_title": "Over 209.5 points",
-          "yes_ask": 0.84,
-          "no_ask": 0.18
+          "yes_ask": 0.85,
+          "no_ask": 0.17
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-212",
@@ -2615,7 +2419,7 @@
           "title": "Full Game: Over 213.5 points scored",
           "yes_sub_title": "Over 213.5 points",
           "no_sub_title": "Over 213.5 points",
-          "yes_ask": 0.77,
+          "yes_ask": 0.78,
           "no_ask": 0.25
         },
         {
@@ -2631,7 +2435,7 @@
           "title": "Full Game: Over 217.5 points scored",
           "yes_sub_title": "Over 217.5 points",
           "no_sub_title": "Over 217.5 points",
-          "yes_ask": 0.68,
+          "yes_ask": 0.69,
           "no_ask": 0.34
         },
         {
@@ -2639,55 +2443,55 @@
           "title": "Full Game: Over 219.5 points scored",
           "yes_sub_title": "Over 219.5 points",
           "no_sub_title": "Over 219.5 points",
-          "yes_ask": 0.64,
-          "no_ask": 0.38
+          "yes_ask": 0.65,
+          "no_ask": 0.37
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-222",
           "title": "Full Game: Over 221.5 points scored",
           "yes_sub_title": "Over 221.5 points",
           "no_sub_title": "Over 221.5 points",
-          "yes_ask": 0.6,
-          "no_ask": 0.42
+          "yes_ask": 0.61,
+          "no_ask": 0.41
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-224",
           "title": "Full Game: Over 223.5 points scored",
           "yes_sub_title": "Over 223.5 points",
           "no_sub_title": "Over 223.5 points",
-          "yes_ask": 0.54,
-          "no_ask": 0.47
+          "yes_ask": 0.57,
+          "no_ask": 0.45
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-226",
           "title": "Full Game: Over 225.5 points scored",
           "yes_sub_title": "Over 225.5 points",
           "no_sub_title": "Over 225.5 points",
-          "yes_ask": 0.49,
-          "no_ask": 0.53
+          "yes_ask": 0.51,
+          "no_ask": 0.5
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-228",
           "title": "Full Game: Over 227.5 points scored",
           "yes_sub_title": "Over 227.5 points",
           "no_sub_title": "Over 227.5 points",
-          "yes_ask": 0.44,
-          "no_ask": 0.57
+          "yes_ask": 0.46,
+          "no_ask": 0.55
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-230",
           "title": "Full Game: Over 229.5 points scored",
           "yes_sub_title": "Over 229.5 points",
           "no_sub_title": "Over 229.5 points",
-          "yes_ask": 0.41,
-          "no_ask": 0.61
+          "yes_ask": 0.43,
+          "no_ask": 0.59
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-232",
           "title": "Full Game: Over 231.5 points scored",
           "yes_sub_title": "Over 231.5 points",
           "no_sub_title": "Over 231.5 points",
-          "yes_ask": 0.36,
+          "yes_ask": 0.37,
           "no_ask": 0.65
         },
         {
@@ -2695,15 +2499,15 @@
           "title": "Full Game: Over 233.5 points scored",
           "yes_sub_title": "Over 233.5 points",
           "no_sub_title": "Over 233.5 points",
-          "yes_ask": 0.33,
-          "no_ask": 0.7
+          "yes_ask": 0.34,
+          "no_ask": 0.69
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-236",
           "title": "Full Game: Over 235.5 points scored",
           "yes_sub_title": "Over 235.5 points",
           "no_sub_title": "Over 235.5 points",
-          "yes_ask": 0.29,
+          "yes_ask": 0.3,
           "no_ask": 0.72
         },
         {
@@ -2719,24 +2523,24 @@
           "title": "Full Game: Over 239.5 points scored",
           "yes_sub_title": "Over 239.5 points",
           "no_sub_title": "Over 239.5 points",
-          "yes_ask": 0.21,
-          "no_ask": 0.82
+          "yes_ask": 0.23,
+          "no_ask": 0.8
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-242",
           "title": "Full Game: Over 241.5 points scored",
           "yes_sub_title": "Over 241.5 points",
           "no_sub_title": "Over 241.5 points",
-          "yes_ask": 0.18,
-          "no_ask": 0.84
+          "yes_ask": 0.19,
+          "no_ask": 0.83
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-244",
           "title": "Full Game: Over 243.5 points scored",
           "yes_sub_title": "Over 243.5 points",
           "no_sub_title": "Over 243.5 points",
-          "yes_ask": 0.15,
-          "no_ask": 0.87
+          "yes_ask": 0.16,
+          "no_ask": 0.86
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-246",
@@ -2752,15 +2556,15 @@
           "yes_sub_title": "Over 247.5 points",
           "no_sub_title": "Over 247.5 points",
           "yes_ask": 0.11,
-          "no_ask": 0.92
+          "no_ask": 0.91
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-250",
           "title": "Full Game: Over 249.5 points scored",
           "yes_sub_title": "Over 249.5 points",
           "no_sub_title": "Over 249.5 points",
-          "yes_ask": 0.09,
-          "no_ask": 0.93
+          "yes_ask": 0.1,
+          "no_ask": 0.92
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-252",
@@ -2768,7 +2572,7 @@
           "yes_sub_title": "Over 251.5 points",
           "no_sub_title": "Over 251.5 points",
           "yes_ask": 0.08,
-          "no_ask": 0.95
+          "no_ask": 0.94
         },
         {
           "ticker": "KXNBATOTAL-26NOV19LACSAS-254",
@@ -2776,7 +2580,7 @@
           "yes_sub_title": "Over 253.5 points",
           "no_sub_title": "Over 253.5 points",
           "yes_ask": 0.07,
-          "no_ask": 0.96
+          "no_ask": 0.95
         }
       ]
     },
@@ -2805,7 +2609,7 @@
           "title": "Full Game: Over 193.5 points scored",
           "yes_sub_title": "Over 193.5 points",
           "no_sub_title": "Over 193.5 points",
-          "yes_ask": 0.94,
+          "yes_ask": 0.93,
           "no_ask": 0.09
         },
         {
@@ -2813,7 +2617,7 @@
           "title": "Full Game: Over 195.5 points scored",
           "yes_sub_title": "Over 195.5 points",
           "no_sub_title": "Over 195.5 points",
-          "yes_ask": 0.91,
+          "yes_ask": 0.92,
           "no_ask": 0.11
         },
         {
@@ -2821,7 +2625,7 @@
           "title": "Full Game: Over 197.5 points scored",
           "yes_sub_title": "Over 197.5 points",
           "no_sub_title": "Over 197.5 points",
-          "yes_ask": 0.88,
+          "yes_ask": 0.89,
           "no_ask": 0.13
         },
         {
@@ -2830,7 +2634,7 @@
           "yes_sub_title": "Over 199.5 points",
           "no_sub_title": "Over 199.5 points",
           "yes_ask": 0.86,
-          "no_ask": 0.17
+          "no_ask": 0.16
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-202",
@@ -2846,7 +2650,7 @@
           "yes_sub_title": "Over 203.5 points",
           "no_sub_title": "Over 203.5 points",
           "yes_ask": 0.8,
-          "no_ask": 0.23
+          "no_ask": 0.22
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-206",
@@ -2854,7 +2658,7 @@
           "yes_sub_title": "Over 205.5 points",
           "no_sub_title": "Over 205.5 points",
           "yes_ask": 0.75,
-          "no_ask": 0.28
+          "no_ask": 0.26
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-208",
@@ -2862,7 +2666,7 @@
           "yes_sub_title": "Over 207.5 points",
           "no_sub_title": "Over 207.5 points",
           "yes_ask": 0.71,
-          "no_ask": 0.32
+          "no_ask": 0.3
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-210",
@@ -2870,54 +2674,54 @@
           "yes_sub_title": "Over 209.5 points",
           "no_sub_title": "Over 209.5 points",
           "yes_ask": 0.67,
-          "no_ask": 0.36
+          "no_ask": 0.35
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-212",
           "title": "Full Game: Over 211.5 points scored",
           "yes_sub_title": "Over 211.5 points",
           "no_sub_title": "Over 211.5 points",
-          "yes_ask": 0.62,
-          "no_ask": 0.41
+          "yes_ask": 0.63,
+          "no_ask": 0.4
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-214",
           "title": "Full Game: Over 213.5 points scored",
           "yes_sub_title": "Over 213.5 points",
           "no_sub_title": "Over 213.5 points",
-          "yes_ask": 0.57,
-          "no_ask": 0.45
+          "yes_ask": 0.59,
+          "no_ask": 0.43
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-216",
           "title": "Full Game: Over 215.5 points scored",
           "yes_sub_title": "Over 215.5 points",
           "no_sub_title": "Over 215.5 points",
-          "yes_ask": 0.53,
-          "no_ask": 0.48
+          "yes_ask": 0.52,
+          "no_ask": 0.49
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-218",
           "title": "Full Game: Over 217.5 points scored",
           "yes_sub_title": "Over 217.5 points",
           "no_sub_title": "Over 217.5 points",
-          "yes_ask": 0.47,
-          "no_ask": 0.55
+          "yes_ask": 0.49,
+          "no_ask": 0.53
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-220",
           "title": "Full Game: Over 219.5 points scored",
           "yes_sub_title": "Over 219.5 points",
           "no_sub_title": "Over 219.5 points",
-          "yes_ask": 0.43,
-          "no_ask": 0.59
+          "yes_ask": 0.44,
+          "no_ask": 0.58
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-222",
           "title": "Full Game: Over 221.5 points scored",
           "yes_sub_title": "Over 221.5 points",
           "no_sub_title": "Over 221.5 points",
-          "yes_ask": 0.38,
+          "yes_ask": 0.39,
           "no_ask": 0.63
         },
         {
@@ -2925,8 +2729,8 @@
           "title": "Full Game: Over 223.5 points scored",
           "yes_sub_title": "Over 223.5 points",
           "no_sub_title": "Over 223.5 points",
-          "yes_ask": 0.35,
-          "no_ask": 0.67
+          "yes_ask": 0.36,
+          "no_ask": 0.66
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-226",
@@ -2934,46 +2738,46 @@
           "yes_sub_title": "Over 225.5 points",
           "no_sub_title": "Over 225.5 points",
           "yes_ask": 0.32,
-          "no_ask": 0.71
+          "no_ask": 0.7
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-228",
           "title": "Full Game: Over 227.5 points scored",
           "yes_sub_title": "Over 227.5 points",
           "no_sub_title": "Over 227.5 points",
-          "yes_ask": 0.26,
-          "no_ask": 0.76
+          "yes_ask": 0.27,
+          "no_ask": 0.75
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-230",
           "title": "Full Game: Over 229.5 points scored",
           "yes_sub_title": "Over 229.5 points",
           "no_sub_title": "Over 229.5 points",
-          "yes_ask": 0.23,
-          "no_ask": 0.8
+          "yes_ask": 0.25,
+          "no_ask": 0.79
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-232",
           "title": "Full Game: Over 231.5 points scored",
           "yes_sub_title": "Over 231.5 points",
           "no_sub_title": "Over 231.5 points",
-          "yes_ask": 0.2,
-          "no_ask": 0.83
+          "yes_ask": 0.21,
+          "no_ask": 0.81
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-234",
           "title": "Full Game: Over 233.5 points scored",
           "yes_sub_title": "Over 233.5 points",
           "no_sub_title": "Over 233.5 points",
-          "yes_ask": 0.17,
-          "no_ask": 0.85
+          "yes_ask": 0.18,
+          "no_ask": 0.84
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-236",
           "title": "Full Game: Over 235.5 points scored",
           "yes_sub_title": "Over 235.5 points",
           "no_sub_title": "Over 235.5 points",
-          "yes_ask": 0.14,
+          "yes_ask": 0.15,
           "no_ask": 0.88
         },
         {
@@ -2981,32 +2785,32 @@
           "title": "Full Game: Over 237.5 points scored",
           "yes_sub_title": "Over 237.5 points",
           "no_sub_title": "Over 237.5 points",
-          "yes_ask": 0.12,
-          "no_ask": 0.9
+          "yes_ask": 0.13,
+          "no_ask": 0.89
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-240",
           "title": "Full Game: Over 239.5 points scored",
           "yes_sub_title": "Over 239.5 points",
           "no_sub_title": "Over 239.5 points",
-          "yes_ask": 0.1,
-          "no_ask": 0.92
+          "yes_ask": 0.11,
+          "no_ask": 0.91
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-242",
           "title": "Full Game: Over 241.5 points scored",
           "yes_sub_title": "Over 241.5 points",
           "no_sub_title": "Over 241.5 points",
-          "yes_ask": 0.08,
-          "no_ask": 0.94
+          "yes_ask": 0.09,
+          "no_ask": 0.93
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-244",
           "title": "Full Game: Over 243.5 points scored",
           "yes_sub_title": "Over 243.5 points",
           "no_sub_title": "Over 243.5 points",
-          "yes_ask": 0.07,
-          "no_ask": 0.95
+          "yes_ask": 0.08,
+          "no_ask": 0.94
         },
         {
           "ticker": "KXNBATOTAL-26NOV19NYKMIN-246",
@@ -3065,7 +2869,7 @@
           "title": "Wake Forest wins by over 35.5 points",
           "yes_sub_title": "Wake Forest wins by over 35.5 points",
           "no_sub_title": "Wake Forest wins by over 35.5 points",
-          "yes_ask": 0.18,
+          "yes_ask": 0.16,
           "no_ask": 0.85
         },
         {
@@ -3238,6 +3042,28 @@
         }
       ]
     },
+    "KXNCAAMBGAME-26NOV19NCSTMURR": {
+      "title": "NC St. vs Murray St.",
+      "sub_title": "NCST vs MURR (Nov 19)",
+      "markets": [
+        {
+          "ticker": "KXNCAAMBGAME-26NOV19NCSTMURR-MURR",
+          "title": "Murray St. wins",
+          "yes_sub_title": "Murray St.",
+          "no_sub_title": "Murray St.",
+          "yes_ask": 0.37,
+          "no_ask": 0.64
+        },
+        {
+          "ticker": "KXNCAAMBGAME-26NOV19NCSTMURR-NCST",
+          "title": "NC St. wins",
+          "yes_sub_title": "NC St.",
+          "no_sub_title": "NC St.",
+          "yes_ask": 0.64,
+          "no_ask": 0.37
+        }
+      ]
+    },
     "KXNCAAMBGAME-26NOV19OREORST": {
       "title": "Oregon vs Oregon St.",
       "sub_title": "ORE vs ORST (Nov 19)",
@@ -3247,8 +3073,8 @@
           "title": "Oregon St. wins",
           "yes_sub_title": "Oregon St.",
           "no_sub_title": "Oregon St.",
-          "yes_ask": 0.49,
-          "no_ask": 0.52
+          "yes_ask": 0.48,
+          "no_ask": 0.53
         },
         {
           "ticker": "KXNCAAMBGAME-26NOV19OREORST-ORE",
@@ -3269,16 +3095,16 @@
           "title": "Jacksonville wins",
           "yes_sub_title": "Jacksonville",
           "no_sub_title": "Jacksonville",
-          "yes_ask": 0.56,
-          "no_ask": 0.45
+          "yes_ask": 0.57,
+          "no_ask": 0.44
         },
         {
           "ticker": "KXNCAAMBGAME-26NOV19UALRJAC-UALR",
           "title": "Little Rock wins",
           "yes_sub_title": "Little Rock",
           "no_sub_title": "Little Rock",
-          "yes_ask": 0.45,
-          "no_ask": 0.56
+          "yes_ask": 0.44,
+          "no_ask": 0.57
         }
       ]
     },
@@ -3301,220 +3127,6 @@
           "no_sub_title": "Indianapolis",
           "yes_ask": 0.16,
           "no_ask": 0.85
-        }
-      ]
-    },
-    "KXNFLSPREAD-26NOV19INDHOU": {
-      "title": "Indianapolis vs Houston: Spread",
-      "sub_title": "IND vs HOU (Nov 19)",
-      "markets": [
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU31",
-          "title": "Houston wins by over 30.5 points?",
-          "yes_sub_title": "Houston wins by over 30.5 points",
-          "no_sub_title": "Houston wins by over 30.5 points",
-          "yes_ask": 0.08,
-          "no_ask": 0.93
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU28",
-          "title": "Houston wins by over 27.5 points?",
-          "yes_sub_title": "Houston wins by over 27.5 points",
-          "no_sub_title": "Houston wins by over 27.5 points",
-          "yes_ask": 0.12,
-          "no_ask": 0.89
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU24",
-          "title": "Houston wins by over 23.5 points?",
-          "yes_sub_title": "Houston wins by over 23.5 points",
-          "no_sub_title": "Houston wins by over 23.5 points",
-          "yes_ask": 0.2,
-          "no_ask": 0.81
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU21",
-          "title": "Houston wins by over 20.5 points?",
-          "yes_sub_title": "Houston wins by over 20.5 points",
-          "no_sub_title": "Houston wins by over 20.5 points",
-          "yes_ask": 0.27,
-          "no_ask": 0.75
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU18",
-          "title": "Houston wins by over 17.5 points?",
-          "yes_sub_title": "Houston wins by over 17.5 points",
-          "no_sub_title": "Houston wins by over 17.5 points",
-          "yes_ask": 0.34,
-          "no_ask": 0.67
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU17",
-          "title": "Houston wins by over 16.5 points?",
-          "yes_sub_title": "Houston wins by over 16.5 points",
-          "no_sub_title": "Houston wins by over 16.5 points",
-          "yes_ask": 0.38,
-          "no_ask": 0.63
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU15",
-          "title": "Houston wins by over 14.5 points?",
-          "yes_sub_title": "Houston wins by over 14.5 points",
-          "no_sub_title": "Houston wins by over 14.5 points",
-          "yes_ask": 0.41,
-          "no_ask": 0.6
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU14",
-          "title": "Houston wins by over 13.5 points?",
-          "yes_sub_title": "Houston wins by over 13.5 points",
-          "no_sub_title": "Houston wins by over 13.5 points",
-          "yes_ask": 0.46,
-          "no_ask": 0.55
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU11",
-          "title": "Houston wins by over 10.5 points?",
-          "yes_sub_title": "Houston wins by over 10.5 points",
-          "no_sub_title": "Houston wins by over 10.5 points",
-          "yes_ask": 0.56,
-          "no_ask": 0.45
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU10",
-          "title": "Houston wins by over 9.5 points?",
-          "yes_sub_title": "Houston wins by over 9.5 points",
-          "no_sub_title": "Houston wins by over 9.5 points",
-          "yes_ask": 0.59,
-          "no_ask": 0.42
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU8",
-          "title": "Houston wins by over 7.5 points?",
-          "yes_sub_title": "Houston wins by over 7.5 points",
-          "no_sub_title": "Houston wins by over 7.5 points",
-          "yes_ask": 0.63,
-          "no_ask": 0.38
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU7",
-          "title": "Houston wins by over 6.5 points?",
-          "yes_sub_title": "Houston wins by over 6.5 points",
-          "no_sub_title": "Houston wins by over 6.5 points",
-          "yes_ask": 0.69,
-          "no_ask": 0.32
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU6",
-          "title": "Houston wins by over 5.5 points?",
-          "yes_sub_title": "Houston wins by over 5.5 points",
-          "no_sub_title": "Houston wins by over 5.5 points",
-          "yes_ask": 0.72,
-          "no_ask": 0.29
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU5",
-          "title": "Houston wins by over 4.5 points?",
-          "yes_sub_title": "Houston wins by over 4.5 points",
-          "no_sub_title": "Houston wins by over 4.5 points",
-          "yes_ask": 0.74,
-          "no_ask": 0.28
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU4",
-          "title": "Houston wins by over 3.5 points?",
-          "yes_sub_title": "Houston wins by over 3.5 points",
-          "no_sub_title": "Houston wins by over 3.5 points",
-          "yes_ask": 0.77,
-          "no_ask": 0.24
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU3",
-          "title": "Houston wins by over 2.5 points?",
-          "yes_sub_title": "Houston wins by over 2.5 points",
-          "no_sub_title": "Houston wins by over 2.5 points",
-          "yes_ask": 0.83,
-          "no_ask": 0.18
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-HOU2",
-          "title": "Houston wins by over 1.5 points?",
-          "yes_sub_title": "Houston wins by over 1.5 points",
-          "no_sub_title": "Houston wins by over 1.5 points",
-          "yes_ask": 0.85,
-          "no_ask": 0.16
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND2",
-          "title": "Indianapolis wins by over 1.5 points?",
-          "yes_sub_title": "Indianapolis wins by over 1.5 points",
-          "no_sub_title": "Indianapolis wins by over 1.5 points",
-          "yes_ask": 0.15,
-          "no_ask": 0.86
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND3",
-          "title": "Indianapolis wins by over 2.5 points?",
-          "yes_sub_title": "Indianapolis wins by over 2.5 points",
-          "no_sub_title": "Indianapolis wins by over 2.5 points",
-          "yes_ask": 0.14,
-          "no_ask": 0.87
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND4",
-          "title": "Indianapolis wins by over 3.5 points?",
-          "yes_sub_title": "Indianapolis wins by over 3.5 points",
-          "no_sub_title": "Indianapolis wins by over 3.5 points",
-          "yes_ask": 0.1,
-          "no_ask": 0.91
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND5",
-          "title": "Indianapolis wins by over 4.5 points?",
-          "yes_sub_title": "Indianapolis wins by over 4.5 points",
-          "no_sub_title": "Indianapolis wins by over 4.5 points",
-          "yes_ask": 0.09,
-          "no_ask": 0.92
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND6",
-          "title": "Indianapolis wins by over 5.5 points?",
-          "yes_sub_title": "Indianapolis wins by over 5.5 points",
-          "no_sub_title": "Indianapolis wins by over 5.5 points",
-          "yes_ask": 0.09,
-          "no_ask": 0.93
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND7",
-          "title": "Indianapolis wins by over 6.5 points?",
-          "yes_sub_title": "Indianapolis wins by over 6.5 points",
-          "no_sub_title": "Indianapolis wins by over 6.5 points",
-          "yes_ask": 0.06,
-          "no_ask": 0.95
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND8",
-          "title": "Indianapolis wins by over 7.5 points?",
-          "yes_sub_title": "Indianapolis wins by over 7.5 points",
-          "no_sub_title": "Indianapolis wins by over 7.5 points",
-          "yes_ask": 0.05,
-          "no_ask": 0.96
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND10",
-          "title": "Indianapolis wins by over 9.5 points?",
-          "yes_sub_title": "Indianapolis wins by over 9.5 points",
-          "no_sub_title": "Indianapolis wins by over 9.5 points",
-          "yes_ask": 0.04,
-          "no_ask": 0.97
-        },
-        {
-          "ticker": "KXNFLSPREAD-26NOV19INDHOU-IND11",
-          "title": "Indianapolis wins by over 10.5 points?",
-          "yes_sub_title": "Indianapolis wins by over 10.5 points",
-          "no_sub_title": "Indianapolis wins by over 10.5 points",
-          "yes_ask": 0.03,
-          "no_ask": 0.98
         }
       ]
     },
@@ -3543,7 +3155,7 @@
           "title": "Chicago wins by over 20.5 points?",
           "yes_sub_title": "Chicago wins by over 20.5 points",
           "no_sub_title": "Chicago wins by over 20.5 points",
-          "yes_ask": 0.27,
+          "yes_ask": 0.28,
           "no_ask": 0.74
         },
         {
@@ -3575,8 +3187,8 @@
           "title": "Chicago wins by over 13.5 points?",
           "yes_sub_title": "Chicago wins by over 13.5 points",
           "no_sub_title": "Chicago wins by over 13.5 points",
-          "yes_ask": 0.44,
-          "no_ask": 0.57
+          "yes_ask": 0.45,
+          "no_ask": 0.56
         },
         {
           "ticker": "KXNFLSPREAD-26NOV22NOCHI-CHI11",
@@ -3695,8 +3307,8 @@
           "title": "New Orleans wins by over 6.5 points?",
           "yes_sub_title": "New Orleans wins by over 6.5 points",
           "no_sub_title": "New Orleans wins by over 6.5 points",
-          "yes_ask": 0.05,
-          "no_ask": 0.96
+          "yes_ask": 0.07,
+          "no_ask": 0.95
         },
         {
           "ticker": "KXNFLSPREAD-26NOV22NOCHI-NO8",
@@ -3750,7 +3362,7 @@
           "yes_sub_title": "Detroit wins by over 27.5 points",
           "no_sub_title": "Detroit wins by over 27.5 points",
           "yes_ask": 0.08,
-          "no_ask": 0.95
+          "no_ask": 0.94
         },
         {
           "ticker": "KXNFLSPREAD-26NOV22TBDET-DET24",
@@ -4193,15 +3805,15 @@
           "title": "Full Game: over 23.5 points scored?",
           "yes_sub_title": "Over 23.5 points",
           "no_sub_title": "Over 23.5 points",
-          "yes_ask": 0.96,
-          "no_ask": 0.05
+          "yes_ask": 0.97,
+          "no_ask": 0.04
         },
         {
           "ticker": "KXNFLTOTAL-26NOV19INDHOU-27",
           "title": "Full Game: over 26.5 points scored?",
           "yes_sub_title": "Over 26.5 points",
           "no_sub_title": "Over 26.5 points",
-          "yes_ask": 0.95,
+          "yes_ask": 0.94,
           "no_ask": 0.07
         },
         {
@@ -4218,14 +3830,14 @@
           "yes_sub_title": "Over 32.5 points",
           "no_sub_title": "Over 32.5 points",
           "yes_ask": 0.85,
-          "no_ask": 0.17
+          "no_ask": 0.16
         },
         {
           "ticker": "KXNFLTOTAL-26NOV19INDHOU-36",
           "title": "Full Game: over 35.5 points scored?",
           "yes_sub_title": "Over 35.5 points",
           "no_sub_title": "Over 35.5 points",
-          "yes_ask": 0.77,
+          "yes_ask": 0.78,
           "no_ask": 0.24
         },
         {
@@ -4289,7 +3901,7 @@
           "title": "Full Game: over 47.5 points scored?",
           "yes_sub_title": "Over 47.5 points",
           "no_sub_title": "Over 47.5 points",
-          "yes_ask": 0.4,
+          "yes_ask": 0.39,
           "no_ask": 0.62
         },
         {
@@ -4321,7 +3933,7 @@
           "title": "Full Game: over 59.5 points scored?",
           "yes_sub_title": "Over 59.5 points",
           "no_sub_title": "Over 59.5 points",
-          "yes_ask": 0.12,
+          "yes_ask": 0.11,
           "no_ask": 0.9
         },
         {
@@ -4384,7 +3996,7 @@
           "yes_sub_title": "Over 37.5 points",
           "no_sub_title": "Over 37.5 points",
           "yes_ask": 0.72,
-          "no_ask": 0.3
+          "no_ask": 0.29
         },
         {
           "ticker": "KXNFLTOTAL-26NOV22TBDET-41",
@@ -4424,7 +4036,7 @@
           "yes_sub_title": "Over 46.5 points",
           "no_sub_title": "Over 46.5 points",
           "yes_ask": 0.42,
-          "no_ask": 0.59
+          "no_ask": 0.6
         },
         {
           "ticker": "KXNFLTOTAL-26NOV22TBDET-48",
@@ -4479,7 +4091,7 @@
           "title": "Full Game: over 61.5 points scored?",
           "yes_sub_title": "Over 61.5 points",
           "no_sub_title": "Over 61.5 points",
-          "yes_ask": 0.1,
+          "yes_ask": 0.11,
           "no_ask": 0.93
         },
         {
@@ -4517,8 +4129,8 @@
           "title": "Anaheim wins",
           "yes_sub_title": "Anaheim",
           "no_sub_title": "Anaheim",
-          "yes_ask": 0.46,
-          "no_ask": 0.55
+          "yes_ask": 0.45,
+          "no_ask": 0.56
         }
       ]
     },
@@ -4539,8 +4151,8 @@
           "title": "Edmonton wins",
           "yes_sub_title": "Edmonton",
           "no_sub_title": "Edmonton",
-          "yes_ask": 0.43,
-          "no_ask": 0.58
+          "yes_ask": 0.44,
+          "no_ask": 0.57
         }
       ]
     },
@@ -4584,7 +4196,7 @@
           "yes_sub_title": "New York I",
           "no_sub_title": "New York I",
           "yes_ask": 0.5,
-          "no_ask": 0.52
+          "no_ask": 0.51
         }
       ]
     },
@@ -4658,7 +4270,7 @@
           "yes_sub_title": "Montreal wins by over 1.5 goals",
           "no_sub_title": "Montreal wins by over 1.5 goals",
           "yes_ask": 0.14,
-          "no_ask": 0.88
+          "no_ask": 0.87
         },
         {
           "ticker": "KXNHLSPREAD-26NOV19MTLCAR-MTL3",
@@ -4679,7 +4291,7 @@
           "title": "Will Navdeep Bains win the 2026 Ontario Liberal Party leadership election?",
           "yes_sub_title": "Navdeep Bains",
           "no_sub_title": "Navdeep Bains",
-          "yes_ask": 0.22,
+          "yes_ask": 0.2,
           "no_ask": 0.83
         },
         {
@@ -4696,7 +4308,7 @@
           "yes_sub_title": "Lee Fairclough",
           "no_sub_title": "Lee Fairclough",
           "yes_ask": 0.82,
-          "no_ask": 0.24
+          "no_ask": 0.21
         },
         {
           "ticker": "KXONTLIBLEAD-26NOV21-ELOM",
@@ -4883,7 +4495,7 @@
           "title": "Will J.B. Pritzker be the Democratic Presidential nominee in 2028?",
           "yes_sub_title": "J.B. Pritzker",
           "no_sub_title": "J.B. Pritzker",
-          "yes_ask": 0.026,
+          "yes_ask": 0.027,
           "no_ask": 0.975
         },
         {
@@ -5553,8 +5165,8 @@
           "title": "Will John Kennedy be the nominee for the Presidency for the Republican party?",
           "yes_sub_title": "John Kennedy",
           "no_sub_title": "John Kennedy",
-          "yes_ask": 0.004,
-          "no_ask": 0.998
+          "yes_ask": 0.003,
+          "no_ask": 0.999
         },
         {
           "ticker": "KXPRESNOMR-28-DBUR",
@@ -5617,7 +5229,7 @@
           "title": "Will John McEntee be the nominee for the Presidency for the Republican party?",
           "yes_sub_title": "John McEntee",
           "no_sub_title": "John McEntee",
-          "yes_ask": 0.033,
+          "yes_ask": 0.034,
           "no_ask": 0.968
         },
         {
@@ -5675,428 +5287,6 @@
           "no_sub_title": "Stephen Miller",
           "yes_ask": 0.003,
           "no_ask": 1.0
-        }
-      ]
-    },
-    "KXPRESPERSON-28": {
-      "title": "2028 U.S. Presidential Election winner?",
-      "sub_title": "In 2028",
-      "markets": [
-        {
-          "ticker": "KXPRESPERSON-28-GNEWS",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Gavin Newsom",
-          "no_sub_title": "Gavin Newsom",
-          "yes_ask": 0.084,
-          "no_ask": 0.917
-        },
-        {
-          "ticker": "KXPRESPERSON-28-AOCA",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Alexandria Ocasio-Cortez",
-          "no_sub_title": "Alexandria Ocasio-Cortez",
-          "yes_ask": 0.091,
-          "no_ask": 0.91
-        },
-        {
-          "ticker": "KXPRESPERSON-28-PBUT",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Pete Buttigieg",
-          "no_sub_title": "Pete Buttigieg",
-          "yes_ask": 0.03,
-          "no_ask": 0.971
-        },
-        {
-          "ticker": "KXPRESPERSON-28-JSHA",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Josh Shapiro",
-          "no_sub_title": "Josh Shapiro",
-          "yes_ask": 0.027,
-          "no_ask": 0.974
-        },
-        {
-          "ticker": "KXPRESPERSON-28-KHAR",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Kamala Harris",
-          "no_sub_title": "Kamala Harris",
-          "yes_ask": 0.033,
-          "no_ask": 0.968
-        },
-        {
-          "ticker": "KXPRESPERSON-28-WMOO",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Wes Moore",
-          "no_sub_title": "Wes Moore",
-          "yes_ask": 0.018,
-          "no_ask": 0.983
-        },
-        {
-          "ticker": "KXPRESPERSON-28-SSMI",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Stephen A. Smith",
-          "no_sub_title": "Stephen A. Smith",
-          "yes_ask": 0.002,
-          "no_ask": 0.999
-        },
-        {
-          "ticker": "KXPRESPERSON-28-GWHI",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Gretchen Whitmer",
-          "no_sub_title": "Gretchen Whitmer",
-          "yes_ask": 0.005,
-          "no_ask": 0.996
-        },
-        {
-          "ticker": "KXPRESPERSON-28-ABES",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Andy Beshear",
-          "no_sub_title": "Andy Beshear",
-          "yes_ask": 0.029,
-          "no_ask": 0.974
-        },
-        {
-          "ticker": "KXPRESPERSON-28-JPRI",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "J.B. Pritzker",
-          "no_sub_title": "J.B. Pritzker",
-          "yes_ask": 0.02,
-          "no_ask": 0.981
-        },
-        {
-          "ticker": "KXPRESPERSON-28-JVAN",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "J.D. Vance",
-          "no_sub_title": "J.D. Vance",
-          "yes_ask": 0.14,
-          "no_ask": 0.87
-        },
-        {
-          "ticker": "KXPRESPERSON-28-TGAB",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Tulsi Gabbard",
-          "no_sub_title": "Tulsi Gabbard",
-          "yes_ask": 0.004,
-          "no_ask": 0.997
-        },
-        {
-          "ticker": "KXPRESPERSON-28-DTRU",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Donald J. Trump",
-          "no_sub_title": "Donald J. Trump",
-          "yes_ask": 0.009,
-          "no_ask": 0.992
-        },
-        {
-          "ticker": "KXPRESPERSON-28-MRUB",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Marco Rubio",
-          "no_sub_title": "Marco Rubio",
-          "yes_ask": 0.088,
-          "no_ask": 0.913
-        },
-        {
-          "ticker": "KXPRESPERSON-28-GYOU",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Glenn Youngkin",
-          "no_sub_title": "Glenn Youngkin",
-          "yes_ask": 0.006,
-          "no_ask": 0.995
-        },
-        {
-          "ticker": "KXPRESPERSON-28-DTRUJR",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Donald J. Trump Jr.",
-          "no_sub_title": "Donald J. Trump Jr.",
-          "yes_ask": 0.005,
-          "no_ask": 0.996
-        },
-        {
-          "ticker": "KXPRESPERSON-28-NHAL",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Nikki Haley",
-          "no_sub_title": "Nikki Haley",
-          "yes_ask": 0.005,
-          "no_ask": 0.996
-        },
-        {
-          "ticker": "KXPRESPERSON-28-RDES",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Ron DeSantis",
-          "no_sub_title": "Ron DeSantis",
-          "yes_ask": 0.057,
-          "no_ask": 0.944
-        },
-        {
-          "ticker": "KXPRESPERSON-28-VRAM",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Vivek Ramaswamy",
-          "no_sub_title": "Vivek Ramaswamy",
-          "yes_ask": 0.002,
-          "no_ask": 0.999
-        },
-        {
-          "ticker": "KXPRESPERSON-28-GABB",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Greg Abbott",
-          "no_sub_title": "Greg Abbott",
-          "yes_ask": 0.002,
-          "no_ask": 0.999
-        },
-        {
-          "ticker": "KXPRESPERSON-28-TWAL",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Tim Walz",
-          "no_sub_title": "Tim Walz",
-          "yes_ask": 0.001,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXPRESPERSON-28-JDIM",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Jamie Dimon",
-          "no_sub_title": "Jamie Dimon",
-          "yes_ask": 0.002,
-          "no_ask": 0.999
-        },
-        {
-          "ticker": "KXPRESPERSON-28-JOSS",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Jon Ossoff",
-          "no_sub_title": "Jon Ossoff",
-          "yes_ask": 0.18,
-          "no_ask": 0.83
-        },
-        {
-          "ticker": "KXPRESPERSON-28-MKEL",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Mark Kelly",
-          "no_sub_title": "Mark Kelly",
-          "yes_ask": 0.022,
-          "no_ask": 0.979
-        },
-        {
-          "ticker": "KXPRESPERSON-28-TCAR",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Tucker Carlson",
-          "no_sub_title": "Tucker Carlson",
-          "yes_ask": 0.01,
-          "no_ask": 0.991
-        },
-        {
-          "ticker": "KXPRESPERSON-28-TMAS",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Thomas Massie",
-          "no_sub_title": "Thomas Massie",
-          "yes_ask": 0.012,
-          "no_ask": 0.99
-        },
-        {
-          "ticker": "KXPRESPERSON-28-REMA",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Rahm Emanuel",
-          "no_sub_title": "Rahm Emanuel",
-          "yes_ask": 0.013,
-          "no_ask": 0.988
-        },
-        {
-          "ticker": "KXPRESPERSON-28-JTAL",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "James Talarico",
-          "no_sub_title": "James Talarico",
-          "yes_ask": 0.011,
-          "no_ask": 0.99
-        },
-        {
-          "ticker": "KXPRESPERSON-28-HBID",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Hunter Biden",
-          "no_sub_title": "Hunter Biden",
-          "yes_ask": 0.002,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXPRESPERSON-28-RKHA",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Ro Khanna",
-          "no_sub_title": "Ro Khanna",
-          "yes_ask": 0.01,
-          "no_ask": 0.991
-        },
-        {
-          "ticker": "KXPRESPERSON-28-TCRU",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Ted Cruz",
-          "no_sub_title": "Ted Cruz",
-          "yes_ask": 0.011,
-          "no_ask": 0.99
-        },
-        {
-          "ticker": "KXPRESPERSON-28-DBUR",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Doug Burgum",
-          "no_sub_title": "Doug Burgum",
-          "yes_ask": 0.001,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXPRESPERSON-28-RCOO",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Roy Cooper",
-          "no_sub_title": "Roy Cooper",
-          "yes_ask": 0.002,
-          "no_ask": 0.999
-        },
-        {
-          "ticker": "KXPRESPERSON-28-BKEM",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Brian Kemp",
-          "no_sub_title": "Brian Kemp",
-          "yes_ask": 0.006,
-          "no_ask": 0.995
-        },
-        {
-          "ticker": "KXPRESPERSON-28-CBOO",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Cory Booker",
-          "no_sub_title": "Cory Booker",
-          "yes_ask": 0.007,
-          "no_ask": 0.995
-        },
-        {
-          "ticker": "KXPRESPERSON-28-RWAR",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Raphael Warnock",
-          "no_sub_title": "Raphael Warnock",
-          "yes_ask": 0.025,
-          "no_ask": 0.978
-        },
-        {
-          "ticker": "KXPRESPERSON-28-AELS",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Abdul El-Sayed",
-          "no_sub_title": "Abdul El-Sayed",
-          "yes_ask": 0.006,
-          "no_ask": 0.995
-        },
-        {
-          "ticker": "KXPRESPERSON-28-JKEN",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Joe Kent",
-          "no_sub_title": "Joe Kent",
-          "yes_ask": 0.003,
-          "no_ask": 0.998
-        },
-        {
-          "ticker": "KXPRESPERSON-28-GBOV",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Gregory Bovino",
-          "no_sub_title": "Gregory Bovino",
-          "yes_ask": 0.001,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXPRESPERSON-28-JMCE",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "John McEntee",
-          "no_sub_title": "John McEntee",
-          "yes_ask": 0.009,
-          "no_ask": 0.993
-        },
-        {
-          "ticker": "KXPRESPERSON-28-LHOG",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Larry Hogan",
-          "no_sub_title": "Larry Hogan",
-          "yes_ask": 0.001,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXPRESPERSON-28-JKUS",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Jared Kushner",
-          "no_sub_title": "Jared Kushner",
-          "yes_ask": 0.001,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXPRESPERSON-28-MTAY",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Marjorie Taylor Greene",
-          "no_sub_title": "Marjorie Taylor Greene",
-          "yes_ask": 0.003,
-          "no_ask": 0.998
-        },
-        {
-          "ticker": "KXPRESPERSON-28-BDON",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Byron Donalds",
-          "no_sub_title": "Byron Donalds",
-          "yes_ask": 0.002,
-          "no_ask": 0.999
-        },
-        {
-          "ticker": "KXPRESPERSON-28-ITRU",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Ivanka Trump",
-          "no_sub_title": "Ivanka Trump",
-          "yes_ask": 0.005,
-          "no_ask": 0.996
-        },
-        {
-          "ticker": "KXPRESPERSON-28-JHAW",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Josh Hawley",
-          "no_sub_title": "Josh Hawley",
-          "yes_ask": 0.002,
-          "no_ask": 0.999
-        },
-        {
-          "ticker": "KXPRESPERSON-28-RPAU",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Rand Paul",
-          "no_sub_title": "Rand Paul",
-          "yes_ask": 0.002,
-          "no_ask": 0.999
-        },
-        {
-          "ticker": "KXPRESPERSON-28-DPHI",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Dean Phillips",
-          "no_sub_title": "Dean Phillips",
-          "yes_ask": 0.001,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXPRESPERSON-28-MSHE",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Mikie Sherrill",
-          "no_sub_title": "Mikie Sherrill",
-          "yes_ask": 0.001,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXPRESPERSON-28-ASPA",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Abigail Spanberger",
-          "no_sub_title": "Abigail Spanberger",
-          "yes_ask": 0.001,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXPRESPERSON-28-MOBA",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Michelle Obama",
-          "no_sub_title": "Michelle Obama",
-          "yes_ask": 0.003,
-          "no_ask": 0.998
-        },
-        {
-          "ticker": "KXPRESPERSON-28-CHOL",
-          "title": "Who will win the next presidential election?",
-          "yes_sub_title": "Chris Van Hollen",
-          "no_sub_title": "Chris Van Hollen",
-          "yes_ask": 0.004,
-          "no_ask": 0.997
         }
       ]
     },
@@ -6190,36 +5380,6 @@
         }
       ]
     },
-    "KXUCLWGAME-26NOV19BARSER": {
-      "title": "Barcelona vs Servette Chenois",
-      "sub_title": "BAR vs SER (Nov 19)",
-      "markets": [
-        {
-          "ticker": "KXUCLWGAME-26NOV19BARSER-BAR",
-          "title": "Barcelona wins",
-          "yes_sub_title": "Barcelona",
-          "no_sub_title": "Barcelona",
-          "yes_ask": 0.98,
-          "no_ask": 0.03
-        },
-        {
-          "ticker": "KXUCLWGAME-26NOV19BARSER-SER",
-          "title": "Servette Chenois wins",
-          "yes_sub_title": "Servette Chenois",
-          "no_sub_title": "Servette Chenois",
-          "yes_ask": 0.02,
-          "no_ask": 0.99
-        },
-        {
-          "ticker": "KXUCLWGAME-26NOV19BARSER-TIE",
-          "title": "Tie is the result",
-          "yes_sub_title": "Tie",
-          "no_sub_title": "Tie",
-          "yes_ask": 0.02,
-          "no_ask": 0.99
-        }
-      ]
-    },
     "KXUCLWGAME-26NOV19FAKBMU": {
       "title": "Austria Wien vs Bayern",
       "sub_title": "FAK vs BMU (Nov 19)",
@@ -6229,24 +5389,24 @@
           "title": "Austria Wien wins",
           "yes_sub_title": "Austria Wien",
           "no_sub_title": "Austria Wien",
-          "yes_ask": 0.05,
-          "no_ask": 0.96
+          "yes_ask": 0.03,
+          "no_ask": 0.98
         },
         {
           "ticker": "KXUCLWGAME-26NOV19FAKBMU-BMU",
           "title": "Bayern wins",
           "yes_sub_title": "Bayern",
           "no_sub_title": "Bayern",
-          "yes_ask": 0.88,
-          "no_ask": 0.13
+          "yes_ask": 0.91,
+          "no_ask": 0.1
         },
         {
           "ticker": "KXUCLWGAME-26NOV19FAKBMU-TIE",
           "title": "Tie is the result",
           "yes_sub_title": "Tie",
           "no_sub_title": "Tie",
-          "yes_ask": 0.09,
-          "no_ask": 0.92
+          "yes_ask": 0.07,
+          "no_ask": 0.94
         }
       ]
     },
@@ -6281,7 +5441,7 @@
           "title": "Boston River wins",
           "yes_sub_title": "Boston River",
           "no_sub_title": "Boston River",
-          "yes_ask": 0.26,
+          "yes_ask": 0.25,
           "no_ask": 0.76
         },
         {
@@ -6289,8 +5449,8 @@
           "title": "Dep Maldonado wins",
           "yes_sub_title": "Dep Maldonado",
           "no_sub_title": "Dep Maldonado",
-          "yes_ask": 0.49,
-          "no_ask": 0.52
+          "yes_ask": 0.5,
+          "no_ask": 0.51
         },
         {
           "ticker": "KXURYPDGAME-26NOV19BRIMAL-TIE",
@@ -6311,26 +5471,51 @@
           "title": "Lucia Bronzetti wins",
           "yes_sub_title": "Lucia Bronzetti",
           "no_sub_title": "Lucia Bronzetti",
-          "yes_ask": 0.48,
-          "no_ask": 0.53
+          "yes_ask": 0.78,
+          "no_ask": 0.23
         },
         {
           "ticker": "KXWTACHALLENGERMATCH-26NOV19BROMON-MON",
           "title": "Carole Monnet wins",
           "yes_sub_title": "Carole Monnet",
           "no_sub_title": "Carole Monnet",
-          "yes_ask": 0.53,
-          "no_ask": 0.48
+          "yes_ask": 0.23,
+          "no_ask": 0.78
+        }
+      ]
+    },
+    "KXWTACHALLENGERMATCH-26NOV19STRERJ": {
+      "title": "Strakhova vs Erjavec",
+      "sub_title": "Strakhova vs Erjavec (Nov 19)",
+      "markets": [
+        {
+          "ticker": "KXWTACHALLENGERMATCH-26NOV19STRERJ-STR",
+          "title": "Valeriya Strakhova wins",
+          "yes_sub_title": "Valeriya Strakhova",
+          "no_sub_title": "Valeriya Strakhova",
+          "yes_ask": 0.24,
+          "no_ask": 0.77
+        },
+        {
+          "ticker": "KXWTACHALLENGERMATCH-26NOV19STRERJ-ERJ",
+          "title": "Veronika Erjavec wins",
+          "yes_sub_title": "Veronika Erjavec",
+          "no_sub_title": "Veronika Erjavec",
+          "yes_ask": 0.78,
+          "no_ask": 0.23
         }
       ]
     }
   },
   "byTicker": {
-    "KXATPCHALLENGERMATCH-26NOV19GUENAG-GUE": "KXATPCHALLENGERMATCH-26NOV19GUENAG",
-    "KXATPCHALLENGERMATCH-26NOV19GUENAG-NAG": "KXATPCHALLENGERMATCH-26NOV19GUENAG",
+    "KXATPCHALLENGERMATCH-26NOV19NARJAC-NAR": "KXATPCHALLENGERMATCH-26NOV19NARJAC",
+    "KXATPCHALLENGERMATCH-26NOV19NARJAC-JAC": "KXATPCHALLENGERMATCH-26NOV19NARJAC",
     "KXBRASILEIROGAME-26NOV19VDGINT-VDG": "KXBRASILEIROGAME-26NOV19VDGINT",
     "KXBRASILEIROGAME-26NOV19VDGINT-INT": "KXBRASILEIROGAME-26NOV19VDGINT",
     "KXBRASILEIROGAME-26NOV19VDGINT-TIE": "KXBRASILEIROGAME-26NOV19VDGINT",
+    "KXBRASILEIROGAME-26NOV21PALFLA-PAL": "KXBRASILEIROGAME-26NOV21PALFLA",
+    "KXBRASILEIROGAME-26NOV21PALFLA-FLA": "KXBRASILEIROGAME-26NOV21PALFLA",
+    "KXBRASILEIROGAME-26NOV21PALFLA-TIE": "KXBRASILEIROGAME-26NOV21PALFLA",
     "KXBRASILEIROTOTAL-26NOV19SPAFLU-1": "KXBRASILEIROTOTAL-26NOV19SPAFLU",
     "KXBRASILEIROTOTAL-26NOV19SPAFLU-2": "KXBRASILEIROTOTAL-26NOV19SPAFLU",
     "KXBRASILEIROTOTAL-26NOV19SPAFLU-3": "KXBRASILEIROTOTAL-26NOV19SPAFLU",
@@ -6398,8 +5583,10 @@
     "KXDCMORATORIUMSTATES-28-WY": "KXDCMORATORIUMSTATES-28",
     "KXDOTA2GAME-26NOV200900XTREMEGL-XTREME": "KXDOTA2GAME-26NOV200900XTREMEGL",
     "KXDOTA2GAME-26NOV200900XTREMEGL-GL": "KXDOTA2GAME-26NOV200900XTREMEGL",
-    "KXDOTA2MAP-26NOV190800ALLANG-2-ALL": "KXDOTA2MAP-26NOV190800ALLANG-2",
-    "KXDOTA2MAP-26NOV190800ALLANG-2-ANG": "KXDOTA2MAP-26NOV190800ALLANG-2",
+    "KXDOTA2GAME-26NOV201200KONCALIQUID-KONCA": "KXDOTA2GAME-26NOV201200KONCALIQUID",
+    "KXDOTA2GAME-26NOV201200KONCALIQUID-LIQUID": "KXDOTA2GAME-26NOV201200KONCALIQUID",
+    "KXDOTA2MAP-26NOV190830HULFRO-2-HUL": "KXDOTA2MAP-26NOV190830HULFRO-2",
+    "KXDOTA2MAP-26NOV190830HULFRO-2-FRO": "KXDOTA2MAP-26NOV190830HULFRO-2",
     "KXEFLCHAMPIONSHIPGAME-26NOV21SHUWAT-SHU": "KXEFLCHAMPIONSHIPGAME-26NOV21SHUWAT",
     "KXEFLCHAMPIONSHIPGAME-26NOV21SHUWAT-WAT": "KXEFLCHAMPIONSHIPGAME-26NOV21SHUWAT",
     "KXEFLCHAMPIONSHIPGAME-26NOV21SHUWAT-TIE": "KXEFLCHAMPIONSHIPGAME-26NOV21SHUWAT",
@@ -6433,6 +5620,8 @@
     "KXHEGSETHIMPEACH-27JUL01-27MAR01": "KXHEGSETHIMPEACH-27JUL01",
     "KXHEGSETHIMPEACH-27JUL01-27APR01": "KXHEGSETHIMPEACH-27JUL01",
     "KXHEGSETHIMPEACH-27JUL01-27JUL01": "KXHEGSETHIMPEACH-27JUL01",
+    "KXITFMATCH-26NOV19BRADEL-BRA": "KXITFMATCH-26NOV19BRADEL",
+    "KXITFMATCH-26NOV19BRADEL-DEL": "KXITFMATCH-26NOV19BRADEL",
     "KXITFWMATCH-26NOV19CINMIX-CIN": "KXITFWMATCH-26NOV19CINMIX",
     "KXITFWMATCH-26NOV19CINMIX-MIX": "KXITFWMATCH-26NOV19CINMIX",
     "KXLALIGAGAME-26NOV22BARVIL-BAR": "KXLALIGAGAME-26NOV22BARVIL",
@@ -6557,39 +5746,6 @@
     "KXNBASPREAD-26NOV19NYKMIN-NYK24": "KXNBASPREAD-26NOV19NYKMIN",
     "KXNBASPREAD-26NOV19NYKMIN-NYK26": "KXNBASPREAD-26NOV19NYKMIN",
     "KXNBASPREAD-26NOV19NYKMIN-NYK28": "KXNBASPREAD-26NOV19NYKMIN",
-    "KXNBASPREAD-26NOV19PORMIL-MIL17": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-MIL15": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-MIL13": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-MIL11": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-MIL9": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-MIL7": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-MIL5": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-MIL3": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-MIL2": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR2": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR4": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR5": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR6": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR7": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR8": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR9": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR10": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR11": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR12": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR13": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR14": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR15": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR16": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR18": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR20": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR22": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR24": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR26": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR28": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR30": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR32": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR34": "KXNBASPREAD-26NOV19PORMIL",
-    "KXNBASPREAD-26NOV19PORMIL-POR36": "KXNBASPREAD-26NOV19PORMIL",
     "KXNBATOTAL-26NOV19GSWMEM-198": "KXNBATOTAL-26NOV19GSWMEM",
     "KXNBATOTAL-26NOV19GSWMEM-200": "KXNBATOTAL-26NOV19GSWMEM",
     "KXNBATOTAL-26NOV19GSWMEM-202": "KXNBATOTAL-26NOV19GSWMEM",
@@ -6703,38 +5859,14 @@
     "KXNCAAFSPREAD-26NOV21WAKEGT-WAKE4": "KXNCAAFSPREAD-26NOV21WAKEGT",
     "KXNCAAFSPREAD-26NOV21WAKEGT-WAKE3": "KXNCAAFSPREAD-26NOV21WAKEGT",
     "KXNCAAFSPREAD-26NOV21WAKEGT-WAKE2": "KXNCAAFSPREAD-26NOV21WAKEGT",
+    "KXNCAAMBGAME-26NOV19NCSTMURR-MURR": "KXNCAAMBGAME-26NOV19NCSTMURR",
+    "KXNCAAMBGAME-26NOV19NCSTMURR-NCST": "KXNCAAMBGAME-26NOV19NCSTMURR",
     "KXNCAAMBGAME-26NOV19OREORST-ORST": "KXNCAAMBGAME-26NOV19OREORST",
     "KXNCAAMBGAME-26NOV19OREORST-ORE": "KXNCAAMBGAME-26NOV19OREORST",
     "KXNCAAMBGAME-26NOV19UALRJAC-JAC": "KXNCAAMBGAME-26NOV19UALRJAC",
     "KXNCAAMBGAME-26NOV19UALRJAC-UALR": "KXNCAAMBGAME-26NOV19UALRJAC",
     "KXNFLGAME-26NOV19INDHOU-HOU": "KXNFLGAME-26NOV19INDHOU",
     "KXNFLGAME-26NOV19INDHOU-IND": "KXNFLGAME-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-HOU31": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-HOU28": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-HOU24": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-HOU21": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-HOU18": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-HOU17": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-HOU15": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-HOU14": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-HOU11": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-HOU10": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-HOU8": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-HOU7": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-HOU6": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-HOU5": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-HOU4": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-HOU3": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-HOU2": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-IND2": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-IND3": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-IND4": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-IND5": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-IND6": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-IND7": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-IND8": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-IND10": "KXNFLSPREAD-26NOV19INDHOU",
-    "KXNFLSPREAD-26NOV19INDHOU-IND11": "KXNFLSPREAD-26NOV19INDHOU",
     "KXNFLSPREAD-26NOV22NOCHI-CHI28": "KXNFLSPREAD-26NOV22NOCHI",
     "KXNFLSPREAD-26NOV22NOCHI-CHI24": "KXNFLSPREAD-26NOV22NOCHI",
     "KXNFLSPREAD-26NOV22NOCHI-CHI21": "KXNFLSPREAD-26NOV22NOCHI",
@@ -6993,58 +6125,10 @@
     "KXPRESNOMR-28-DMCC": "KXPRESNOMR-28",
     "KXPRESNOMR-28-JJOR": "KXPRESNOMR-28",
     "KXPRESNOMR-28-SMIL": "KXPRESNOMR-28",
-    "KXPRESPERSON-28-GNEWS": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-AOCA": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-PBUT": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-JSHA": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-KHAR": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-WMOO": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-SSMI": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-GWHI": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-ABES": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-JPRI": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-JVAN": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-TGAB": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-DTRU": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-MRUB": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-GYOU": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-DTRUJR": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-NHAL": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-RDES": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-VRAM": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-GABB": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-TWAL": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-JDIM": "KXPRESPERSON-28",
     "KXPRESPERSON-28-JOSS": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-MKEL": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-TCAR": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-TMAS": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-REMA": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-JTAL": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-HBID": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-RKHA": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-TCRU": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-DBUR": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-RCOO": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-BKEM": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-CBOO": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-RWAR": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-AELS": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-JKEN": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-GBOV": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-JMCE": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-LHOG": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-JKUS": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-MTAY": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-BDON": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-ITRU": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-JHAW": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-RPAU": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-DPHI": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-MSHE": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-ASPA": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-MOBA": "KXPRESPERSON-28",
-    "KXPRESPERSON-28-CHOL": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-JVAN": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-KHAR": "KXPRESPERSON-28",
+    "KXPRESPERSON-28-MRUB": "KXPRESPERSON-28",
     "KXSERIEAGAME-26NOV21LAZLEC-LAZ": "KXSERIEAGAME-26NOV21LAZLEC",
     "KXSERIEAGAME-26NOV21LAZLEC-LEC": "KXSERIEAGAME-26NOV21LAZLEC",
     "KXSERIEAGAME-26NOV21LAZLEC-TIE": "KXSERIEAGAME-26NOV21LAZLEC",
@@ -7054,7 +6138,6 @@
     "KXUCLGAME-26NOV24COMAEK-COM": "KXUCLGAME-26NOV24COMAEK",
     "KXUCLGAME-26NOV24COMAEK-AEK": "KXUCLGAME-26NOV24COMAEK",
     "KXUCLGAME-26NOV24COMAEK-TIE": "KXUCLGAME-26NOV24COMAEK",
-    "KXUCLWGAME-26NOV19BARSER-BAR": "KXUCLWGAME-26NOV19BARSER",
     "KXUCLWGAME-26NOV19BARSER-SER": "KXUCLWGAME-26NOV19BARSER",
     "KXUCLWGAME-26NOV19BARSER-TIE": "KXUCLWGAME-26NOV19BARSER",
     "KXUCLWGAME-26NOV19FAKBMU-FAK": "KXUCLWGAME-26NOV19FAKBMU",
@@ -7066,6 +6149,8 @@
     "KXURYPDGAME-26NOV19BRIMAL-MAL": "KXURYPDGAME-26NOV19BRIMAL",
     "KXURYPDGAME-26NOV19BRIMAL-TIE": "KXURYPDGAME-26NOV19BRIMAL",
     "KXWTACHALLENGERMATCH-26NOV19BROMON-BRO": "KXWTACHALLENGERMATCH-26NOV19BROMON",
-    "KXWTACHALLENGERMATCH-26NOV19BROMON-MON": "KXWTACHALLENGERMATCH-26NOV19BROMON"
+    "KXWTACHALLENGERMATCH-26NOV19BROMON-MON": "KXWTACHALLENGERMATCH-26NOV19BROMON",
+    "KXWTACHALLENGERMATCH-26NOV19STRERJ-STR": "KXWTACHALLENGERMATCH-26NOV19STRERJ",
+    "KXWTACHALLENGERMATCH-26NOV19STRERJ-ERJ": "KXWTACHALLENGERMATCH-26NOV19STRERJ"
   }
 }
