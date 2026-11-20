@@ -41850,7 +41850,11 @@
    "first_seen": 1795101381,
    "scans": 6,
    "first_score": 14,
-   "result": null
+   "result": "W",
+   "graded": 1795139772,
+   "ended": 1795139772,
+   "finalScore": "NCSU 93 \u2013 MUR 83",
+   "active": false
   },
   "0x36f5239b523a2a959f4ff9d54f26a5f1f3ef2b802cb76cbbb62de8dde258d167:yes": {
    "tier": "top",
@@ -42089,7 +42093,10 @@
    "first_seen": 1795108974,
    "scans": 4,
    "first_score": 20,
-   "result": null
+   "result": null,
+   "ended": 1795139772,
+   "finalScore": "NCSU 93 \u2013 MUR 83",
+   "active": false
   },
   "0x993c4e36b6d88e9870f0a2bde35bc480e1826e5bdc4819dc3d871ec5c879d8a4:yes": {
    "tier": "poly",
@@ -43340,7 +43347,10 @@
    "first_seen": 1795129245,
    "scans": 2,
    "first_score": 20,
-   "result": null
+   "result": null,
+   "ended": 1795139772,
+   "finalScore": "NCSU 93 \u2013 MUR 83",
+   "active": false
   },
   "0xc284f5ee55d69f7837cd06fa318d1ed4272eeed94e5f7f7af2cc3af9cec35ce3:no": {
    "tier": "poly",
@@ -43416,7 +43426,10 @@
    "first_seen": 1795129245,
    "scans": 2,
    "first_score": 20,
-   "result": null
+   "result": null,
+   "ended": 1795139772,
+   "finalScore": "NCSU 93 \u2013 MUR 83",
+   "active": false
   },
   "0x962151e7819098bd8c5587189aff6844c8616715ba948359c14289a248e1432d:no": {
    "tier": "poly",
