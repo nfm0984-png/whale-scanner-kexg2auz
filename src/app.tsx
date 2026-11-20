@@ -4521,6 +4521,7 @@ function EliteTab(props: { now: number }) {
     <Section heading={"Ranked · " + L.total} caption={"Games ranked by the combined record of every capper on the card · starts or settles within 24 hours"}>
       <Text>{"Each game is one card. Its rank is the collective win ratio of every tracked capper betting on that game (all their wins divided by all their settled bets). Record counts, money does not. The best pick (by its own cappers' record) is up front; the other bets on the game are in the drop-down. Top 15 are games with at least one 2-1+ capper (positive profit) and 10+ settled bets between the cappers. An amber warning names a capper on the other side with a better record."}</Text>
       <div data-ranked-summary="1" style={{ fontSize: 14, fontWeight: 750, color: "#52525B", margin: "2px 2px 8px" }}>{L.total + " games · " + L.top.length + " in the top list"}</div>
+      {L.total > 0 ? <TodayCard all={all} now={props.now} /> : null}
       {L.total === 0 ? <EmptyState title="No ranked games right now" body={"No tracked capper has a $500+ pick with a Kalshi line starting within 24 hours. " + nextScanLabel(props.now) + "."} /> : null}
       {L.top.length ? <div data-elite-top="1" style={{ fontSize: 22, fontWeight: 900, margin: "4px 2px 4px" }}>{"Top " + L.top.length}</div> : null}
       {L.top.map((c: RankedCard, i: number) => render(c, i))}
@@ -5213,19 +5214,22 @@ function todayCard(all: UPick[], now: number): { picks: CardPick[]; total: numbe
     return p.backers.filter((b: UBacker) => !other[b.wallet]).length;
   };
   const oppN = (p: UPick): number => { const o: Record<string, boolean> = {}; oppositeOf(p, all).forEach((q: UPick) => wallets(q).forEach((w: string) => { o[w] = true; })); return Object.keys(o).length; };
-  const rows = all.filter((p: UPick) => p.kind === "sports" && !p.live && p.startTs > now && p.view.price != null && !!p.view.yesNo && !p.view.unmatched && payoutOf(p) < 3)
-    .map((p: UPick) => ({ p, n: nonHedge(p), opp: oppN(p) }))
-    .filter((r) => r.n >= 1 && r.opp < r.n);
-  const cmp = (a: { p: UPick; n: number }, b: { p: UPick; n: number }) =>
-    ((a.p.cmp && a.p.cmp.verdict === "other" ? 1 : 0) - (b.p.cmp && b.p.cmp.verdict === "other" ? 1 : 0)) || (b.n - a.n) || ((b.p.cmp && b.p.cmp.verdict === "this" ? 1 : 0) - (a.p.cmp && a.p.cmp.verdict === "this" ? 1 : 0)) || ((b.p.fresh === "fresh" ? 1 : 0) - (a.p.fresh === "fresh" ? 1 : 0)) || (payoutOf(a.p) - payoutOf(b.p)) || (b.p.total - a.p.total) || (a.p.startTs - b.p.startTs);
-  const safe = rows.filter((r) => payoutOf(r.p) <= 1.8).sort(cmp);
-  const rest = rows.filter((r) => payoutOf(r.p) > 1.8).sort(cmp);
+  const eligible = (p: UPick): boolean => p.kind === "sports" && !p.live && p.startTs > now && p.view.price != null && !!p.view.yesNo && !p.view.unmatched && payoutOf(p) < 3;
+  // Ranked order (best combined capper record first). For each game take its best-record pick that qualifies (under 3x); if the main pick pays 3x+, the next-best under 3x is used.
+  const L = rankedLists(all);
+  const order: RankedCard[] = L.top.concat(L.others, L.small);
+  const rows: { p: UPick; n: number }[] = [];
+  order.forEach((c: RankedCard) => {
+    const pick = bestPickFirst(c.picks).filter((p: UPick) => eligible(p) && nonHedge(p) >= 1 && oppN(p) < nonHedge(p))[0];
+    if (pick) rows.push({ p: pick, n: nonHedge(pick) });
+  });
+  const warned = (p: UPick): boolean => !!(p.cmp && p.cmp.verdict === "other");
   const chosen: { p: UPick; n: number }[] = [];
-  const games: Record<string, boolean> = {};
-  const take = (r: { p: UPick; n: number }) => { chosen.push(r); games[r.p.gameId] = true; };
-  // One pick per game: the next-best pick from another game fills the slot.
-  safe.forEach((r) => { if (!games[r.p.gameId] && chosen.length < CARD_MAX && (chosen.length < CARD_MIN || r.n >= 2)) take(r); });
-  rest.forEach((r) => { if (!games[r.p.gameId] && chosen.length < CARD_MIN) take(r); });
+  const take = (r: { p: UPick; n: number }) => { chosen.push(r); };
+  // Pass 1: safe picks (1.8x or less) without the other-side warning, in Ranked order. Pass 2: fill to 10 with the rest under 3x. Pass 3: warned picks last, only if still short.
+  rows.forEach((r) => { if (chosen.length < CARD_MAX && payoutOf(r.p) <= 1.8 && !warned(r.p)) take(r); });
+  rows.forEach((r) => { if (chosen.length < CARD_MIN && chosen.indexOf(r) < 0 && !warned(r.p)) take(r); });
+  rows.forEach((r) => { if (chosen.length < CARD_MIN && chosen.indexOf(r) < 0) take(r); });
   const picks: CardPick[] = chosen.map((r) => ({ p: r.p, n: r.n, stake: r.n >= 3 ? 4 : r.n === 2 ? 3 : 2 }));
   let total = picks.reduce((a: number, c: CardPick) => a + c.stake, 0);
   while (total > CARD_BUDGET) {
@@ -5235,8 +5239,6 @@ function todayCard(all: UPick[], now: number): { picks: CardPick[]; total: numbe
     picks[j].stake -= 1; total -= 1;
   }
   for (let i = 0; i < picks.length && total < CARD_BUDGET; i++) { if (picks[i].stake < 4) { picks[i].stake += 1; total += 1; } }
-  // Shown by start time, soonest first (the picks and stakes above are unchanged).
-  picks.sort((a: CardPick, b: CardPick) => (a.p.startTs || 1e12) - (b.p.startTs || 1e12));
   return { picks, total };
 }
 function TodayCard(props: { all: UPick[]; now: number }) {
@@ -5248,9 +5250,9 @@ function TodayCard(props: { all: UPick[]; now: number }) {
       <div style={{ borderRadius: 18, background: "#4C1D95", color: "#FFFFFF", padding: "14px 16px", marginBottom: 12 }}>
         <div style={{ fontSize: 22, fontWeight: 900, letterSpacing: "-0.01em" }}>{"Today's $" + CARD_BUDGET + " card"}</div>
         <div data-card-total="1" style={{ fontSize: 16, fontWeight: 800, marginTop: 4, fontVariantNumeric: "tabular-nums" }}>{card.picks.length + " picks · $2–4 each · total $" + card.total + " of $" + CARD_BUDGET}</div>
-        <div style={{ fontSize: 13, fontWeight: 650, opacity: 0.9, marginTop: 4 }}>{"Picks chosen by most cappers on the same side and safer payouts (1.8x or less), nothing paying 3x or more. Listed by start time, soonest first." + (freshN ? " " + freshN + " fresh." : "")}</div>
+        <div style={{ fontSize: 13, fontWeight: 650, opacity: 0.9, marginTop: 4 }}>{"One pick per game, taken from the Ranked list below (best combined capper record first). Safer payouts (1.8x or less) first, nothing paying 3x or more, picks with the amber other-side warning last." + (freshN ? " " + freshN + " fresh." : "")}</div>
       </div>
-      {card.picks.length === 0 ? <EmptyState title="No picks fit the card right now" body={"Nothing upcoming pays under 3x with tracked cappers on the same side. The full list is below. " + nextScanLabel(props.now) + "."} /> : card.picks.map((c: CardPick, i: number) => (
+      {card.picks.length === 0 ? <EmptyState title="No picks fit the card right now" body={"Nothing upcoming pays under 3x with tracked cappers on the same side. The Ranked games are below. " + nextScanLabel(props.now) + "."} /> : card.picks.map((c: CardPick, i: number) => (
         <UCard key={"card-" + c.p.key} p={c.p} opp={oppositeOf(c.p, props.all)} now={props.now} stake={"$" + c.stake} stakeLine={"$" + c.stake + " · total $" + card.total + " of $" + CARD_BUDGET} rankNo={i + 1} />
       ))}
       <div style={{ fontSize: 12, fontWeight: 650, color: t.text.tertiary, margin: "2px 2px 0" }}>{"Suggested stakes only. Nothing is placed for you."}</div>
@@ -5264,7 +5266,7 @@ function CombinedList(props: { now: number; mode: "rank" | "start" }) {
   picks.forEach((p: UPick) => p.backers.forEach((b: UBacker) => { cappers[b.wallet] = true; }));
   const liveN = picks.filter((p: UPick) => p.live).length;
   const start = props.mode === "start";
-  // Games that already started always come first, in start-time order; then the $40 card; then everything upcoming.
+  // Pure schedule: games that already started first, then upcoming, soonest to latest.
   const liveUnits = start ? units.filter((u) => u.picks[0].kind === "sports" && u.picks[0].live) : [];
   const upUnits = start ? units.filter((u) => !(u.picks[0].kind === "sports" && u.picks[0].live)) : units;
   const upPickN = upUnits.reduce((n: number, u) => n + u.picks.length, 0);
@@ -5275,8 +5277,7 @@ function CombinedList(props: { now: number; mode: "rank" | "start" }) {
       {picks.length === 0 ? <EmptyState title="No picks from tracked cappers yet" body={"Nothing open from proven, Elite, Hot or Politics & Econ cappers right now. " + nextScanLabel(props.now) + "."} /> : null}
       {start && liveUnits.length ? head("live", "Already started (" + liveUnits.length + ")") : null}
       {start && liveUnits.length ? <UnitList units={liveUnits} all={picks} now={props.now} stake="$2–4" noun="game" showStart /> : null}
-      {start && picks.length ? <TodayCard all={picks} now={props.now} /> : null}
-      {start && picks.length ? head("up", "All today · upcoming (" + upPickN + ")") : null}
+      {start && picks.length ? head("up", "Upcoming (" + upPickN + ")") : null}
       {picks.length ? <UnitList units={upUnits} all={picks} now={props.now} stake="$2–4" noun="game" showStart={start} /> : null}
     </div>
   );
