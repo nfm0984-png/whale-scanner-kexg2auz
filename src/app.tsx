@@ -5235,6 +5235,8 @@ function todayCard(all: UPick[], now: number): { picks: CardPick[]; total: numbe
     picks[j].stake -= 1; total -= 1;
   }
   for (let i = 0; i < picks.length && total < CARD_BUDGET; i++) { if (picks[i].stake < 4) { picks[i].stake += 1; total += 1; } }
+  // Shown by start time, soonest first (the picks and stakes above are unchanged).
+  picks.sort((a: CardPick, b: CardPick) => (a.p.startTs || 1e12) - (b.p.startTs || 1e12));
   return { picks, total };
 }
 function TodayCard(props: { all: UPick[]; now: number }) {
@@ -5246,7 +5248,7 @@ function TodayCard(props: { all: UPick[]; now: number }) {
       <div style={{ borderRadius: 18, background: "#4C1D95", color: "#FFFFFF", padding: "14px 16px", marginBottom: 12 }}>
         <div style={{ fontSize: 22, fontWeight: 900, letterSpacing: "-0.01em" }}>{"Today's $" + CARD_BUDGET + " card"}</div>
         <div data-card-total="1" style={{ fontSize: 16, fontWeight: 800, marginTop: 4, fontVariantNumeric: "tabular-nums" }}>{card.picks.length + " picks · $2–4 each · total $" + card.total + " of $" + CARD_BUDGET}</div>
-        <div style={{ fontSize: 13, fontWeight: 650, opacity: 0.9, marginTop: 4 }}>{"Most cappers on the same side first, safer payouts (1.8x or less) first, nothing paying 3x or more." + (freshN ? " " + freshN + " fresh." : "")}</div>
+        <div style={{ fontSize: 13, fontWeight: 650, opacity: 0.9, marginTop: 4 }}>{"Picks chosen by most cappers on the same side and safer payouts (1.8x or less), nothing paying 3x or more. Listed by start time, soonest first." + (freshN ? " " + freshN + " fresh." : "")}</div>
       </div>
       {card.picks.length === 0 ? <EmptyState title="No picks fit the card right now" body={"Nothing upcoming pays under 3x with tracked cappers on the same side. The full list is below. " + nextScanLabel(props.now) + "."} /> : card.picks.map((c: CardPick, i: number) => (
         <UCard key={"card-" + c.p.key} p={c.p} opp={oppositeOf(c.p, props.all)} now={props.now} stake={"$" + c.stake} stakeLine={"$" + c.stake + " · total $" + card.total + " of $" + CARD_BUDGET} rankNo={i + 1} />
@@ -5261,12 +5263,21 @@ function CombinedList(props: { now: number; mode: "rank" | "start" }) {
   const cappers: Record<string, boolean> = {};
   picks.forEach((p: UPick) => p.backers.forEach((b: UBacker) => { cappers[b.wallet] = true; }));
   const liveN = picks.filter((p: UPick) => p.live).length;
+  const start = props.mode === "start";
+  // Games that already started always come first, in start-time order; then the $40 card; then everything upcoming.
+  const liveUnits = start ? units.filter((u) => u.picks[0].kind === "sports" && u.picks[0].live) : [];
+  const upUnits = start ? units.filter((u) => !(u.picks[0].kind === "sports" && u.picks[0].live)) : units;
+  const upPickN = upUnits.reduce((n: number, u) => n + u.picks.length, 0);
+  const head = (attr: string, text: string) => <div data-all-today={attr === "up" ? "1" : undefined} data-live-head={attr === "live" ? "1" : undefined} style={{ fontSize: 22, fontWeight: 900, margin: "10px 2px 2px" }}>{text}</div>;
   return (
     <div data-combined-list={props.mode}>
-      {props.mode === "start" && picks.length ? <TodayCard all={picks} now={props.now} /> : null}
-      {props.mode === "start" && picks.length ? <div data-all-today="1" style={{ fontSize: 22, fontWeight: 900, margin: "4px 2px 2px" }}>{"All today (" + picks.length + ")"}</div> : null}
-      <div data-combined-summary="1" style={{ fontSize: 14, fontWeight: 750, color: "#52525B", margin: "2px 2px 12px" }}>{picks.length + " picks · " + units.length + (props.mode === "start" ? " games" : " games") + " · " + Object.keys(cappers).length + " cappers" + (liveN ? " · " + liveN + " live" : "") + " · Journal " + journalWL().wins + "–" + journalWL().losses}</div>
-      {picks.length === 0 ? <EmptyState title="No picks from tracked cappers yet" body={"Nothing open from proven, Elite, Hot or Politics & Econ cappers right now. " + nextScanLabel(props.now) + "."} /> : <UnitList units={units} all={picks} now={props.now} stake="$2–4" noun="game" showStart={props.mode === "start"} />}
+      <div data-combined-summary="1" style={{ fontSize: 14, fontWeight: 750, color: "#52525B", margin: "2px 2px 12px" }}>{picks.length + " picks · " + units.length + " games · " + Object.keys(cappers).length + " cappers" + (liveN ? " · " + liveN + " live" : "") + " · Journal " + journalWL().wins + "–" + journalWL().losses}</div>
+      {picks.length === 0 ? <EmptyState title="No picks from tracked cappers yet" body={"Nothing open from proven, Elite, Hot or Politics & Econ cappers right now. " + nextScanLabel(props.now) + "."} /> : null}
+      {start && liveUnits.length ? head("live", "Already started (" + liveUnits.length + ")") : null}
+      {start && liveUnits.length ? <UnitList units={liveUnits} all={picks} now={props.now} stake="$2–4" noun="game" showStart /> : null}
+      {start && picks.length ? <TodayCard all={picks} now={props.now} /> : null}
+      {start && picks.length ? head("up", "All today · upcoming (" + upPickN + ")") : null}
+      {picks.length ? <UnitList units={upUnits} all={picks} now={props.now} stake="$2–4" noun="game" showStart={start} /> : null}
     </div>
   );
 }
