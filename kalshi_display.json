@@ -9,16 +9,38 @@
           "title": "Nicolai Budkov Kjaer wins",
           "yes_sub_title": "Nicolai Budkov Kjaer",
           "no_sub_title": "Nicolai Budkov Kjaer",
-          "yes_ask": 0.38,
-          "no_ask": 0.64
+          "yes_ask": 0.1,
+          "no_ask": 0.91
         },
         {
           "ticker": "KXATPCHALLENGERMATCH-26NOV20BUDDJE-DJE",
           "title": "Laslo Djere wins",
           "yes_sub_title": "Laslo Djere",
           "no_sub_title": "Laslo Djere",
-          "yes_ask": 0.64,
-          "no_ask": 0.38
+          "yes_ask": 0.91,
+          "no_ask": 0.1
+        }
+      ]
+    },
+    "KXATPCHALLENGERMATCH-26NOV20GUENAR": {
+      "title": "Gueymard Wayenburg vs Nardi",
+      "sub_title": "Gueymard Wayenburg vs Nardi (Nov 20)",
+      "markets": [
+        {
+          "ticker": "KXATPCHALLENGERMATCH-26NOV20GUENAR-GUE",
+          "title": "Sascha Gueymard Wayenburg wins",
+          "yes_sub_title": "Sascha Gueymard Wayenburg",
+          "no_sub_title": "Sascha Gueymard Wayenburg",
+          "yes_ask": 0.42,
+          "no_ask": 0.59
+        },
+        {
+          "ticker": "KXATPCHALLENGERMATCH-26NOV20GUENAR-NAR",
+          "title": "Luca Nardi wins",
+          "yes_sub_title": "Luca Nardi",
+          "no_sub_title": "Luca Nardi",
+          "yes_ask": 0.59,
+          "no_ask": 0.42
         }
       ]
     },
@@ -31,16 +53,16 @@
           "title": "Svyatoslav Gulin wins",
           "yes_sub_title": "Svyatoslav Gulin",
           "no_sub_title": "Svyatoslav Gulin",
-          "yes_ask": 0.16,
-          "no_ask": 0.85
+          "yes_ask": 0.15,
+          "no_ask": 0.88
         },
         {
           "ticker": "KXATPCHALLENGERMATCH-26NOV20GULSAM-SAM",
           "title": "Toby Samuel wins",
           "yes_sub_title": "Toby Samuel",
           "no_sub_title": "Toby Samuel",
-          "yes_ask": 0.85,
-          "no_ask": 0.16
+          "yes_ask": 0.87,
+          "no_ask": 0.14
         }
       ]
     },
@@ -53,15 +75,15 @@
           "title": "Guido Ivan Justo wins",
           "yes_sub_title": "Guido Ivan Justo",
           "no_sub_title": "Guido Ivan Justo",
-          "yes_ask": 0.59,
-          "no_ask": 0.42
+          "yes_ask": 0.6,
+          "no_ask": 0.41
         },
         {
           "ticker": "KXATPCHALLENGERMATCH-26NOV20JUSRON-RON",
           "title": "Franco Roncadelli wins",
           "yes_sub_title": "Franco Roncadelli",
           "no_sub_title": "Franco Roncadelli",
-          "yes_ask": 0.42,
+          "yes_ask": 0.41,
           "no_ask": 0.6
         }
       ]
@@ -75,16 +97,16 @@
           "title": "Palmeiras wins",
           "yes_sub_title": "Palmeiras",
           "no_sub_title": "Palmeiras",
-          "yes_ask": 0.235,
-          "no_ask": 0.77
+          "yes_ask": 0.24,
+          "no_ask": 0.765
         },
         {
           "ticker": "KXBRASILEIROGAME-26NOV21PALFLA-FLA",
           "title": "Flamengo wins",
           "yes_sub_title": "Flamengo",
           "no_sub_title": "Flamengo",
-          "yes_ask": 0.525,
-          "no_ask": 0.48
+          "yes_ask": 0.52,
+          "no_ask": 0.485
         },
         {
           "ticker": "KXBRASILEIROGAME-26NOV21PALFLA-TIE",
@@ -105,24 +127,24 @@
           "title": "Bayern Munich wins",
           "yes_sub_title": "Bayern Munich",
           "no_sub_title": "Bayern Munich",
-          "yes_ask": 0.92,
-          "no_ask": 0.09
+          "yes_ask": 0.91,
+          "no_ask": 0.1
         },
         {
           "ticker": "KXBUNDESLIGAGAME-26NOV20BMUKOE-KOE",
           "title": "FC K\u00f6ln wins",
           "yes_sub_title": "FC K\u00f6ln",
           "no_sub_title": "FC K\u00f6ln",
-          "yes_ask": 0.03,
-          "no_ask": 0.98
+          "yes_ask": 0.04,
+          "no_ask": 0.97
         },
         {
           "ticker": "KXBUNDESLIGAGAME-26NOV20BMUKOE-TIE",
           "title": "Tie is the result",
           "yes_sub_title": "Tie",
           "no_sub_title": "Tie",
-          "yes_ask": 0.06,
-          "no_ask": 0.95
+          "yes_ask": 0.07,
+          "no_ask": 0.94
         }
       ]
     },
@@ -144,7 +166,7 @@
           "yes_sub_title": "Dortmund",
           "no_sub_title": "Dortmund",
           "yes_ask": 0.63,
-          "no_ask": 0.38
+          "no_ask": 0.39
         },
         {
           "ticker": "KXBUNDESLIGAGAME-26NOV21BMGBVB-TIE",
@@ -198,7 +220,7 @@
           "yes_sub_title": "Over 4.5 goals scored",
           "no_sub_title": "Over 4.5 goals scored",
           "yes_ask": 0.51,
-          "no_ask": 0.5
+          "no_ask": 0.51
         },
         {
           "ticker": "KXBUNDESLIGATOTAL-26NOV20BMUKOE-6",
@@ -219,16 +241,16 @@
           "title": "Hype Tech wins",
           "yes_sub_title": "Hype Tech",
           "no_sub_title": "Hype Tech",
-          "yes_ask": 0.7,
-          "no_ask": 0.31
+          "yes_ask": 0.93,
+          "no_ask": 0.16
         },
         {
           "ticker": "KXCS2GAME-26NOV200700HTLC-LC",
           "title": "Lazer Cats wins",
           "yes_sub_title": "Lazer Cats",
           "no_sub_title": "Lazer Cats",
-          "yes_ask": 0.31,
-          "no_ask": 0.7
+          "yes_ask": 0.12,
+          "no_ask": 0.92
         }
       ]
     },
@@ -242,15 +264,15 @@
           "yes_sub_title": "BakS eSports",
           "no_sub_title": "BakS eSports",
           "yes_ask": 0.47,
-          "no_ask": 0.54
+          "no_ask": 0.55
         },
         {
           "ticker": "KXCS2GAME-26NOV200800BAKSFORZER-FORZER",
           "title": "FORZE Reload wins",
           "yes_sub_title": "FORZE Reload",
           "no_sub_title": "FORZE Reload",
-          "yes_ask": 0.53,
-          "no_ask": 0.48
+          "yes_ask": 0.55,
+          "no_ask": 0.47
         }
       ]
     },
@@ -263,8 +285,8 @@
           "title": "BIG wins",
           "yes_sub_title": "BIG",
           "no_sub_title": "BIG",
-          "yes_ask": 0.57,
-          "no_ask": 0.44
+          "yes_ask": 0.58,
+          "no_ask": 0.43
         },
         {
           "ticker": "KXCS2GAME-26NOV200800BIGLG-LG",
@@ -316,7 +338,7 @@
           "yes_sub_title": "GenOne",
           "no_sub_title": "GenOne",
           "yes_ask": 0.43,
-          "no_ask": 0.59
+          "no_ask": 0.58
         }
       ]
     },
@@ -342,25 +364,25 @@
         }
       ]
     },
-    "KXCS2MAP-26NOV200630ABTSEG-1": {
-      "title": "ABT Esports vs. SEGA.dll: Map 1 Winner",
-      "sub_title": "Map 1: ABT vs. SEG (Nov 20)",
+    "KXCS2MAP-26NOV200630ABTSEG-2": {
+      "title": "ABT Esports vs. SEGA.dll: Map 2 Winner",
+      "sub_title": "Map 2: ABT vs. SEG (Nov 20)",
       "markets": [
         {
-          "ticker": "KXCS2MAP-26NOV200630ABTSEG-1-ABT",
-          "title": "ABT Esports wins map 1",
+          "ticker": "KXCS2MAP-26NOV200630ABTSEG-2-ABT",
+          "title": "ABT Esports wins map 2",
           "yes_sub_title": "ABT Esports",
           "no_sub_title": "ABT Esports",
-          "yes_ask": 0.77,
-          "no_ask": 0.25
+          "yes_ask": 0.92,
+          "no_ask": 0.12
         },
         {
-          "ticker": "KXCS2MAP-26NOV200630ABTSEG-1-SEG",
-          "title": "SEGA.dll wins map 1",
+          "ticker": "KXCS2MAP-26NOV200630ABTSEG-2-SEG",
+          "title": "SEGA.dll wins map 2",
           "yes_sub_title": "SEGA.dll",
           "no_sub_title": "SEGA.dll",
-          "yes_ask": 0.25,
-          "no_ask": 0.77
+          "yes_ask": 0.11,
+          "no_ask": 0.92
         }
       ]
     },
@@ -373,8 +395,8 @@
           "title": "Aarhus wins",
           "yes_sub_title": "Aarhus",
           "no_sub_title": "Aarhus",
-          "yes_ask": 0.57,
-          "no_ask": 0.44
+          "yes_ask": 0.58,
+          "no_ask": 0.43
         },
         {
           "ticker": "KXDENSUPERLIGAGAME-26NOV20AGFLBY-LBY",
@@ -391,6 +413,28 @@
           "no_sub_title": "Tie",
           "yes_ask": 0.23,
           "no_ask": 0.78
+        }
+      ]
+    },
+    "KXDOTA2GAME-26NOV200600NEMTS": {
+      "title": "Team Nemesis vs. Team Spirit",
+      "sub_title": "Team Nemesis vs. Team Spirit (Nov 20)",
+      "markets": [
+        {
+          "ticker": "KXDOTA2GAME-26NOV200600NEMTS-NEM",
+          "title": "Team Nemesis wins",
+          "yes_sub_title": "Team Nemesis",
+          "no_sub_title": "Team Nemesis",
+          "yes_ask": 0.46,
+          "no_ask": 0.56
+        },
+        {
+          "ticker": "KXDOTA2GAME-26NOV200600NEMTS-TS",
+          "title": "Team Spirit wins",
+          "yes_sub_title": "Team Spirit",
+          "no_sub_title": "Team Spirit",
+          "yes_ask": 0.56,
+          "no_ask": 0.46
         }
       ]
     },
@@ -460,47 +504,47 @@
         }
       ]
     },
-    "KXDOTA2MAP-26NOV200600NEMTS-1": {
-      "title": "Team Nemesis vs. Team Spirit: Map 1 Winner",
-      "sub_title": "Map 1: NEM vs. TS (Nov 20)",
+    "KXDOTA2MAP-26NOV200600NEMTS-2": {
+      "title": "Team Nemesis vs. Team Spirit: Map 2 Winner",
+      "sub_title": "Map 2: NEM vs. TS (Nov 20)",
       "markets": [
         {
-          "ticker": "KXDOTA2MAP-26NOV200600NEMTS-1-NEM",
-          "title": "Team Nemesis wins map 1",
+          "ticker": "KXDOTA2MAP-26NOV200600NEMTS-2-NEM",
+          "title": "Team Nemesis wins map 2",
           "yes_sub_title": "Team Nemesis",
           "no_sub_title": "Team Nemesis",
-          "yes_ask": 0.82,
-          "no_ask": 0.36
+          "yes_ask": 0.35,
+          "no_ask": 0.69
         },
         {
-          "ticker": "KXDOTA2MAP-26NOV200600NEMTS-1-TS",
-          "title": "Team Spirit wins map 1",
+          "ticker": "KXDOTA2MAP-26NOV200600NEMTS-2-TS",
+          "title": "Team Spirit wins map 2",
           "yes_sub_title": "Team Spirit",
           "no_sub_title": "Team Spirit",
-          "yes_ask": 0.34,
-          "no_ask": 0.82
+          "yes_ask": 0.68,
+          "no_ask": 0.37
         }
       ]
     },
-    "KXDOTA2MAP-26NOV200600PLATTY-1": {
-      "title": "PlayTime vs. Team Yandex: Map 1 Winner",
-      "sub_title": "Map 1: PLAT vs. TY (Nov 20)",
+    "KXDOTA2MAP-26NOV200600PLATTY-2": {
+      "title": "PlayTime vs. Team Yandex: Map 2 Winner",
+      "sub_title": "Map 2: PLAT vs. TY (Nov 20)",
       "markets": [
         {
-          "ticker": "KXDOTA2MAP-26NOV200600PLATTY-1-PLAT",
-          "title": "PlayTime wins map 1",
+          "ticker": "KXDOTA2MAP-26NOV200600PLATTY-2-PLAT",
+          "title": "PlayTime wins map 2",
           "yes_sub_title": "PlayTime",
           "no_sub_title": "PlayTime",
-          "yes_ask": 0.05,
-          "no_ask": 0.99
+          "yes_ask": 0.11,
+          "no_ask": 0.9
         },
         {
-          "ticker": "KXDOTA2MAP-26NOV200600PLATTY-1-TY",
-          "title": "Team Yandex wins map 1",
+          "ticker": "KXDOTA2MAP-26NOV200600PLATTY-2-TY",
+          "title": "Team Yandex wins map 2",
           "yes_sub_title": "Team Yandex",
           "no_sub_title": "Team Yandex",
-          "yes_ask": 0.97,
-          "no_ask": 0.06
+          "yes_ask": 0.9,
+          "no_ask": 0.12
         }
       ]
     },
@@ -760,90 +804,6 @@
         }
       ]
     },
-    "KXJLEAGUEGAME-26NOV20VIKMIT": {
-      "title": "Kobe vs Mito H",
-      "sub_title": "VIK vs MIT (Nov 20)",
-      "markets": [
-        {
-          "ticker": "KXJLEAGUEGAME-26NOV20VIKMIT-VIK",
-          "title": "Kobe wins",
-          "yes_sub_title": "Kobe",
-          "no_sub_title": "Kobe",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXJLEAGUEGAME-26NOV20VIKMIT-MIT",
-          "title": "Mito H wins",
-          "yes_sub_title": "Mito H",
-          "no_sub_title": "Mito H",
-          "yes_ask": 0.88,
-          "no_ask": 0.15
-        },
-        {
-          "ticker": "KXJLEAGUEGAME-26NOV20VIKMIT-TIE",
-          "title": "Tie is the result",
-          "yes_sub_title": "Tie",
-          "no_sub_title": "Tie",
-          "yes_ask": 0.15,
-          "no_ask": 0.88
-        }
-      ]
-    },
-    "KXJLEAGUETOTAL-26NOV20REYJEF": {
-      "title": "Kashiwa vs United Chiba: Total Goals",
-      "sub_title": "REY vs JEF (Nov 20)",
-      "markets": [
-        {
-          "ticker": "KXJLEAGUETOTAL-26NOV20REYJEF-1",
-          "title": "Will over 0.5 goals be scored?",
-          "yes_sub_title": "Over 0.5 goals scored",
-          "no_sub_title": "Over 0.5 goals scored",
-          "yes_ask": 1.0,
-          "no_ask": 0.01
-        },
-        {
-          "ticker": "KXJLEAGUETOTAL-26NOV20REYJEF-2",
-          "title": "Will over 1.5 goals be scored?",
-          "yes_sub_title": "Over 1.5 goals scored",
-          "no_sub_title": "Over 1.5 goals scored",
-          "yes_ask": 0.33,
-          "no_ask": 0.81
-        },
-        {
-          "ticker": "KXJLEAGUETOTAL-26NOV20REYJEF-3",
-          "title": "Will over 2.5 goals be scored?",
-          "yes_sub_title": "Over 2.5 goals scored",
-          "no_sub_title": "Over 2.5 goals scored",
-          "yes_ask": 0.06,
-          "no_ask": 0.99
-        },
-        {
-          "ticker": "KXJLEAGUETOTAL-26NOV20REYJEF-4",
-          "title": "Will over 3.5 goals be scored?",
-          "yes_sub_title": "Over 3.5 goals scored",
-          "no_sub_title": "Over 3.5 goals scored",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXJLEAGUETOTAL-26NOV20REYJEF-5",
-          "title": "Will over 4.5 goals be scored?",
-          "yes_sub_title": "Over 4.5 goals scored",
-          "no_sub_title": "Over 4.5 goals scored",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXJLEAGUETOTAL-26NOV20REYJEF-6",
-          "title": "Will over 5.5 goals be scored?",
-          "yes_sub_title": "Over 5.5 goals scored",
-          "no_sub_title": "Over 5.5 goals scored",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        }
-      ]
-    },
     "KXLALIGAGAME-26NOV21SEVRBB": {
       "title": "Sevilla vs Real Betis",
       "sub_title": "SEV vs RBB (Nov 21)",
@@ -1021,7 +981,7 @@
           "title": "Denver wins",
           "yes_sub_title": "Denver",
           "no_sub_title": "Denver",
-          "yes_ask": 0.52,
+          "yes_ask": 0.53,
           "no_ask": 0.49
         }
       ]
@@ -1035,8 +995,8 @@
           "title": "New Orleans wins",
           "yes_sub_title": "New Orleans",
           "no_sub_title": "New Orleans",
-          "yes_ask": 0.19,
-          "no_ask": 0.82
+          "yes_ask": 0.18,
+          "no_ask": 0.83
         },
         {
           "ticker": "KXNBAGAME-26NOV20NOPOKC-OKC",
@@ -1123,8 +1083,8 @@
           "title": "Washington wins",
           "yes_sub_title": "Washington",
           "no_sub_title": "Washington",
-          "yes_ask": 0.44,
-          "no_ask": 0.57
+          "yes_ask": 0.43,
+          "no_ask": 0.58
         },
         {
           "ticker": "KXNBAGAME-26NOV20WASCHI-CHI",
@@ -1167,7 +1127,7 @@
           "title": "Milwaukee wins",
           "yes_sub_title": "Milwaukee",
           "no_sub_title": "Milwaukee",
-          "yes_ask": 0.15,
+          "yes_ask": 0.16,
           "no_ask": 0.86
         },
         {
@@ -1212,7 +1172,7 @@
           "yes_sub_title": "Jarrett Allen: 6+",
           "no_sub_title": "Jarrett Allen: 6+",
           "yes_ask": 0.93,
-          "no_ask": 0.27
+          "no_ask": 0.26
         },
         {
           "ticker": "KXNBAREB-26NOV20INDCLE-CLEJALLEN31-8",
@@ -1260,7 +1220,7 @@
           "yes_sub_title": "Donovan Mitchell: 4+",
           "no_sub_title": "Donovan Mitchell: 4+",
           "yes_ask": 0.74,
-          "no_ask": 0.42
+          "no_ask": 0.43
         },
         {
           "ticker": "KXNBAREB-26NOV20INDCLE-CLEDMITCHELL45-6",
@@ -1284,7 +1244,7 @@
           "yes_sub_title": "Peyton Watson: 2+",
           "no_sub_title": "Peyton Watson: 2+",
           "yes_ask": 0.95,
-          "no_ask": 0.42
+          "no_ask": 0.41
         },
         {
           "ticker": "KXNBAREB-26NOV20INDCLE-CLEPWATSON8-4",
@@ -1292,7 +1252,7 @@
           "yes_sub_title": "Peyton Watson: 4+",
           "no_sub_title": "Peyton Watson: 4+",
           "yes_ask": 0.65,
-          "no_ask": 0.39
+          "no_ask": 0.4
         },
         {
           "ticker": "KXNBAREB-26NOV20INDCLE-CLEPWATSON8-6",
@@ -1331,8 +1291,8 @@
           "title": "James Harden: 6+ rebounds",
           "yes_sub_title": "James Harden: 6+",
           "no_sub_title": "James Harden: 6+",
-          "yes_ask": 0.43,
-          "no_ask": 0.59
+          "yes_ask": 0.44,
+          "no_ask": 0.57
         },
         {
           "ticker": "KXNBAREB-26NOV20INDCLE-CLEJHARDEN1-8",
@@ -1347,8 +1307,8 @@
           "title": "Tyrese Proctor: 2+ rebounds",
           "yes_sub_title": "Tyrese Proctor: 2+",
           "no_sub_title": "Tyrese Proctor: 2+",
-          "yes_ask": 0.91,
-          "no_ask": 0.41
+          "yes_ask": 0.9,
+          "no_ask": 0.4
         },
         {
           "ticker": "KXNBAREB-26NOV20INDCLE-CLETPROCTOR24-4",
@@ -1356,7 +1316,7 @@
           "yes_sub_title": "Tyrese Proctor: 4+",
           "no_sub_title": "Tyrese Proctor: 4+",
           "yes_ask": 0.53,
-          "no_ask": 0.49
+          "no_ask": 0.48
         },
         {
           "ticker": "KXNBAREB-26NOV20INDCLE-CLETPROCTOR24-6",
@@ -1371,7 +1331,7 @@
           "title": "Tyrese Proctor: 8+ rebounds",
           "yes_sub_title": "Tyrese Proctor: 8+",
           "no_sub_title": "Tyrese Proctor: 8+",
-          "yes_ask": 0.09,
+          "yes_ask": 0.08,
           "no_ask": 0.98
         },
         {
@@ -1380,7 +1340,7 @@
           "yes_sub_title": "Pascal Siakam: 4+",
           "no_sub_title": "Pascal Siakam: 4+",
           "yes_ask": 0.9,
-          "no_ask": 0.34
+          "no_ask": 0.31
         },
         {
           "ticker": "KXNBAREB-26NOV20INDCLE-INDPSIAKAM43-6",
@@ -1395,15 +1355,15 @@
           "title": "Pascal Siakam: 8+ rebounds",
           "yes_sub_title": "Pascal Siakam: 8+",
           "no_sub_title": "Pascal Siakam: 8+",
-          "yes_ask": 0.35,
-          "no_ask": 0.81
+          "yes_ask": 0.34,
+          "no_ask": 0.82
         },
         {
           "ticker": "KXNBAREB-26NOV20INDCLE-INDPSIAKAM43-10",
           "title": "Pascal Siakam: 10+ rebounds",
           "yes_sub_title": "Pascal Siakam: 10+",
           "no_sub_title": "Pascal Siakam: 10+",
-          "yes_ask": 0.17,
+          "yes_ask": 0.18,
           "no_ask": 0.91
         },
         {
@@ -1412,15 +1372,15 @@
           "yes_sub_title": "Aaron Nesmith: 2+",
           "no_sub_title": "Aaron Nesmith: 2+",
           "yes_ask": 0.92,
-          "no_ask": 0.48
+          "no_ask": 0.43
         },
         {
           "ticker": "KXNBAREB-26NOV20INDCLE-INDANESMITH23-4",
           "title": "Aaron Nesmith: 4+ rebounds",
           "yes_sub_title": "Aaron Nesmith: 4+",
           "no_sub_title": "Aaron Nesmith: 4+",
-          "yes_ask": 0.53,
-          "no_ask": 0.48
+          "yes_ask": 0.51,
+          "no_ask": 0.52
         },
         {
           "ticker": "KXNBAREB-26NOV20INDCLE-INDANESMITH23-6",
@@ -1428,7 +1388,7 @@
           "yes_sub_title": "Aaron Nesmith: 6+",
           "no_sub_title": "Aaron Nesmith: 6+",
           "yes_ask": 0.25,
-          "no_ask": 0.84
+          "no_ask": 0.87
         },
         {
           "ticker": "KXNBAREB-26NOV20INDCLE-INDANESMITH23-8",
@@ -1444,7 +1404,7 @@
           "yes_sub_title": "Kelly Oubre Jr.: 2+",
           "no_sub_title": "Kelly Oubre Jr.: 2+",
           "yes_ask": 0.9,
-          "no_ask": 0.42
+          "no_ask": 0.41
         },
         {
           "ticker": "KXNBAREB-26NOV20INDCLE-INDKOUBRE10-4",
@@ -1452,7 +1412,7 @@
           "yes_sub_title": "Kelly Oubre Jr.: 4+",
           "no_sub_title": "Kelly Oubre Jr.: 4+",
           "yes_ask": 0.55,
-          "no_ask": 0.46
+          "no_ask": 0.47
         },
         {
           "ticker": "KXNBAREB-26NOV20INDCLE-INDKOUBRE10-6",
@@ -1475,7 +1435,7 @@
           "title": "Ivica Zubac: 6+ rebounds",
           "yes_sub_title": "Ivica Zubac: 6+",
           "no_sub_title": "Ivica Zubac: 6+",
-          "yes_ask": 0.9,
+          "yes_ask": 0.91,
           "no_ask": 0.28
         },
         {
@@ -1491,15 +1451,15 @@
           "title": "Ivica Zubac: 10+ rebounds",
           "yes_sub_title": "Ivica Zubac: 10+",
           "no_sub_title": "Ivica Zubac: 10+",
-          "yes_ask": 0.47,
-          "no_ask": 0.54
+          "yes_ask": 0.49,
+          "no_ask": 0.52
         },
         {
           "ticker": "KXNBAREB-26NOV20INDCLE-INDIZUBAC40-12",
           "title": "Ivica Zubac: 12+ rebounds",
           "yes_sub_title": "Ivica Zubac: 12+",
           "no_sub_title": "Ivica Zubac: 12+",
-          "yes_ask": 0.28,
+          "yes_ask": 0.3,
           "no_ask": 0.82
         },
         {
@@ -1507,15 +1467,15 @@
           "title": "Ivica Zubac: 14+ rebounds",
           "yes_sub_title": "Ivica Zubac: 14+",
           "no_sub_title": "Ivica Zubac: 14+",
-          "yes_ask": 0.16,
-          "no_ask": 0.93
+          "yes_ask": 0.17,
+          "no_ask": 0.92
         },
         {
           "ticker": "KXNBAREB-26NOV20INDCLE-INDANEMBHARD2-2",
           "title": "Andrew Nembhard: 2+ rebounds",
           "yes_sub_title": "Andrew Nembhard: 2+",
           "no_sub_title": "Andrew Nembhard: 2+",
-          "yes_ask": 0.78,
+          "yes_ask": 0.77,
           "no_ask": 0.4
         },
         {
@@ -1602,14 +1562,14 @@
           "yes_sub_title": "Atlanta wins by over 16.5 points",
           "no_sub_title": "Atlanta wins by over 16.5 points",
           "yes_ask": 0.22,
-          "no_ask": 0.8
+          "no_ask": 0.81
         },
         {
           "ticker": "KXNBASPREAD-26NOV20CHAATL-ATL15",
           "title": "Atlanta wins by over 14.5 points",
           "yes_sub_title": "Atlanta wins by over 14.5 points",
           "no_sub_title": "Atlanta wins by over 14.5 points",
-          "yes_ask": 0.25,
+          "yes_ask": 0.26,
           "no_ask": 0.77
         },
         {
@@ -1641,8 +1601,8 @@
           "title": "Atlanta wins by over 8.5 points",
           "yes_sub_title": "Atlanta wins by over 8.5 points",
           "no_sub_title": "Atlanta wins by over 8.5 points",
-          "yes_ask": 0.43,
-          "no_ask": 0.59
+          "yes_ask": 0.44,
+          "no_ask": 0.58
         },
         {
           "ticker": "KXNBASPREAD-26NOV20CHAATL-ATL8",
@@ -1657,8 +1617,8 @@
           "title": "Atlanta wins by over 6.5 points",
           "yes_sub_title": "Atlanta wins by over 6.5 points",
           "no_sub_title": "Atlanta wins by over 6.5 points",
-          "yes_ask": 0.51,
-          "no_ask": 0.5
+          "yes_ask": 0.52,
+          "no_ask": 0.49
         },
         {
           "ticker": "KXNBASPREAD-26NOV20CHAATL-ATL6",
@@ -1673,8 +1633,8 @@
           "title": "Atlanta wins by over 4.5 points",
           "yes_sub_title": "Atlanta wins by over 4.5 points",
           "no_sub_title": "Atlanta wins by over 4.5 points",
-          "yes_ask": 0.58,
-          "no_ask": 0.43
+          "yes_ask": 0.59,
+          "no_ask": 0.42
         },
         {
           "ticker": "KXNBASPREAD-26NOV20CHAATL-ATL4",
@@ -1705,7 +1665,7 @@
           "title": "Charlotte wins by over 1.5 points",
           "yes_sub_title": "Charlotte wins by over 1.5 points",
           "no_sub_title": "Charlotte wins by over 1.5 points",
-          "yes_ask": 0.31,
+          "yes_ask": 0.3,
           "no_ask": 0.72
         },
         {
@@ -1713,7 +1673,7 @@
           "title": "Charlotte wins by over 2.5 points",
           "yes_sub_title": "Charlotte wins by over 2.5 points",
           "no_sub_title": "Charlotte wins by over 2.5 points",
-          "yes_ask": 0.29,
+          "yes_ask": 0.28,
           "no_ask": 0.74
         },
         {
@@ -1721,7 +1681,7 @@
           "title": "Charlotte wins by over 3.5 points",
           "yes_sub_title": "Charlotte wins by over 3.5 points",
           "no_sub_title": "Charlotte wins by over 3.5 points",
-          "yes_ask": 0.25,
+          "yes_ask": 0.26,
           "no_ask": 0.76
         },
         {
@@ -1769,7 +1729,7 @@
           "title": "Charlotte wins by over 15.5 points",
           "yes_sub_title": "Charlotte wins by over 15.5 points",
           "no_sub_title": "Charlotte wins by over 15.5 points",
-          "yes_ask": 0.07,
+          "yes_ask": 0.06,
           "no_ask": 0.97
         },
         {
@@ -1904,7 +1864,7 @@
           "yes_sub_title": "Denver wins by over 6.5 points",
           "no_sub_title": "Denver wins by over 6.5 points",
           "yes_ask": 0.36,
-          "no_ask": 0.66
+          "no_ask": 0.67
         },
         {
           "ticker": "KXNBASPREAD-26NOV20HOUDEN-DEN6",
@@ -1943,7 +1903,7 @@
           "title": "Denver wins by over 1.5 points",
           "yes_sub_title": "Denver wins by over 1.5 points",
           "no_sub_title": "Denver wins by over 1.5 points",
-          "yes_ask": 0.5,
+          "yes_ask": 0.51,
           "no_ask": 0.51
         },
         {
@@ -1959,7 +1919,7 @@
           "title": "Houston wins by over 2.5 points",
           "yes_sub_title": "Houston wins by over 2.5 points",
           "no_sub_title": "Houston wins by over 2.5 points",
-          "yes_ask": 0.43,
+          "yes_ask": 0.42,
           "no_ask": 0.59
         },
         {
@@ -2085,7 +2045,7 @@
           "title": "Cleveland wins by over 32.5 points",
           "yes_sub_title": "Cleveland wins by over 32.5 points",
           "no_sub_title": "Cleveland wins by over 32.5 points",
-          "yes_ask": 0.05,
+          "yes_ask": 0.04,
           "no_ask": 0.98
         },
         {
@@ -2109,7 +2069,7 @@
           "title": "Cleveland wins by over 26.5 points",
           "yes_sub_title": "Cleveland wins by over 26.5 points",
           "no_sub_title": "Cleveland wins by over 26.5 points",
-          "yes_ask": 0.09,
+          "yes_ask": 0.08,
           "no_ask": 0.93
         },
         {
@@ -2125,7 +2085,7 @@
           "title": "Cleveland wins by over 22.5 points",
           "yes_sub_title": "Cleveland wins by over 22.5 points",
           "no_sub_title": "Cleveland wins by over 22.5 points",
-          "yes_ask": 0.14,
+          "yes_ask": 0.13,
           "no_ask": 0.89
         },
         {
@@ -2133,8 +2093,8 @@
           "title": "Cleveland wins by over 20.5 points",
           "yes_sub_title": "Cleveland wins by over 20.5 points",
           "no_sub_title": "Cleveland wins by over 20.5 points",
-          "yes_ask": 0.17,
-          "no_ask": 0.85
+          "yes_ask": 0.16,
+          "no_ask": 0.86
         },
         {
           "ticker": "KXNBASPREAD-26NOV20INDCLE-CLE19",
@@ -2150,7 +2110,7 @@
           "yes_sub_title": "Cleveland wins by over 16.5 points",
           "no_sub_title": "Cleveland wins by over 16.5 points",
           "yes_ask": 0.24,
-          "no_ask": 0.78
+          "no_ask": 0.79
         },
         {
           "ticker": "KXNBASPREAD-26NOV20INDCLE-CLE15",
@@ -2181,8 +2141,8 @@
           "title": "Cleveland wins by over 10.5 points",
           "yes_sub_title": "Cleveland wins by over 10.5 points",
           "no_sub_title": "Cleveland wins by over 10.5 points",
-          "yes_ask": 0.4,
-          "no_ask": 0.62
+          "yes_ask": 0.39,
+          "no_ask": 0.63
         },
         {
           "ticker": "KXNBASPREAD-26NOV20INDCLE-CLE10",
@@ -2190,7 +2150,7 @@
           "yes_sub_title": "Cleveland wins by over 9.5 points",
           "no_sub_title": "Cleveland wins by over 9.5 points",
           "yes_ask": 0.42,
-          "no_ask": 0.59
+          "no_ask": 0.6
         },
         {
           "ticker": "KXNBASPREAD-26NOV20INDCLE-CLE9",
@@ -2198,7 +2158,7 @@
           "yes_sub_title": "Cleveland wins by over 8.5 points",
           "no_sub_title": "Cleveland wins by over 8.5 points",
           "yes_ask": 0.45,
-          "no_ask": 0.56
+          "no_ask": 0.57
         },
         {
           "ticker": "KXNBASPREAD-26NOV20INDCLE-CLE8",
@@ -2214,7 +2174,7 @@
           "yes_sub_title": "Cleveland wins by over 6.5 points",
           "no_sub_title": "Cleveland wins by over 6.5 points",
           "yes_ask": 0.52,
-          "no_ask": 0.5
+          "no_ask": 0.49
         },
         {
           "ticker": "KXNBASPREAD-26NOV20INDCLE-CLE6",
@@ -2310,7 +2270,7 @@
           "yes_sub_title": "Indiana wins by over 13.5 points",
           "no_sub_title": "Indiana wins by over 13.5 points",
           "yes_ask": 0.08,
-          "no_ask": 0.96
+          "no_ask": 0.95
         },
         {
           "ticker": "KXNBASPREAD-26NOV20INDCLE-IND16",
@@ -2388,7 +2348,7 @@
           "yes_sub_title": "Oklahoma City wins by over 28.5 points",
           "no_sub_title": "Oklahoma City wins by over 28.5 points",
           "yes_ask": 0.11,
-          "no_ask": 0.92
+          "no_ask": 0.91
         },
         {
           "ticker": "KXNBASPREAD-26NOV20NOPOKC-OKC27",
@@ -2427,7 +2387,7 @@
           "title": "Oklahoma City wins by over 18.5 points",
           "yes_sub_title": "Oklahoma City wins by over 18.5 points",
           "no_sub_title": "Oklahoma City wins by over 18.5 points",
-          "yes_ask": 0.3,
+          "yes_ask": 0.31,
           "no_ask": 0.73
         },
         {
@@ -2451,8 +2411,8 @@
           "title": "Oklahoma City wins by over 14.5 points",
           "yes_sub_title": "Oklahoma City wins by over 14.5 points",
           "no_sub_title": "Oklahoma City wins by over 14.5 points",
-          "yes_ask": 0.4,
-          "no_ask": 0.62
+          "yes_ask": 0.41,
+          "no_ask": 0.61
         },
         {
           "ticker": "KXNBASPREAD-26NOV20NOPOKC-OKC14",
@@ -2507,8 +2467,8 @@
           "title": "Oklahoma City wins by over 7.5 points",
           "yes_sub_title": "Oklahoma City wins by over 7.5 points",
           "no_sub_title": "Oklahoma City wins by over 7.5 points",
-          "yes_ask": 0.64,
-          "no_ask": 0.38
+          "yes_ask": 0.65,
+          "no_ask": 0.37
         },
         {
           "ticker": "KXNBASPREAD-26NOV20NOPOKC-OKC7",
@@ -2563,8 +2523,8 @@
           "title": "New Orleans wins by over 3.5 points",
           "yes_sub_title": "New Orleans wins by over 3.5 points",
           "no_sub_title": "New Orleans wins by over 3.5 points",
-          "yes_ask": 0.15,
-          "no_ask": 0.88
+          "yes_ask": 0.14,
+          "no_ask": 0.89
         },
         {
           "ticker": "KXNBASPREAD-26NOV20NOPOKC-NOP6",
@@ -2681,8 +2641,8 @@
           "title": "Brooklyn wins by over 9.5 points",
           "yes_sub_title": "Brooklyn wins by over 9.5 points",
           "no_sub_title": "Brooklyn wins by over 9.5 points",
-          "yes_ask": 0.14,
-          "no_ask": 0.9
+          "yes_ask": 0.13,
+          "no_ask": 0.89
         },
         {
           "ticker": "KXNBASPREAD-26NOV20ORLBKN-BKN8",
@@ -2761,8 +2721,8 @@
           "title": "Orlando wins by over 5.5 points",
           "yes_sub_title": "Orlando wins by over 5.5 points",
           "no_sub_title": "Orlando wins by over 5.5 points",
-          "yes_ask": 0.52,
-          "no_ask": 0.49
+          "yes_ask": 0.53,
+          "no_ask": 0.48
         },
         {
           "ticker": "KXNBASPREAD-26NOV20ORLBKN-ORL7",
@@ -2810,7 +2770,7 @@
           "yes_sub_title": "Orlando wins by over 12.5 points",
           "no_sub_title": "Orlando wins by over 12.5 points",
           "yes_ask": 0.29,
-          "no_ask": 0.73
+          "no_ask": 0.72
         },
         {
           "ticker": "KXNBASPREAD-26NOV20ORLBKN-ORL15",
@@ -2825,8 +2785,8 @@
           "title": "Orlando wins by over 16.5 points",
           "yes_sub_title": "Orlando wins by over 16.5 points",
           "no_sub_title": "Orlando wins by over 16.5 points",
-          "yes_ask": 0.19,
-          "no_ask": 0.82
+          "yes_ask": 0.2,
+          "no_ask": 0.81
         },
         {
           "ticker": "KXNBASPREAD-26NOV20ORLBKN-ORL19",
@@ -2886,6 +2846,276 @@
         }
       ]
     },
+    "KXNBASPREAD-26NOV20PHXUTA": {
+      "title": "Phoenix vs Utah: Spread",
+      "sub_title": "PHX vs UTA (Nov 20)",
+      "markets": [
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-UTA24",
+          "title": "Utah wins by over 23.5 points",
+          "yes_sub_title": "Utah wins by over 23.5 points",
+          "no_sub_title": "Utah wins by over 23.5 points",
+          "yes_ask": 0.04,
+          "no_ask": 1.0
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-UTA22",
+          "title": "Utah wins by over 21.5 points",
+          "yes_sub_title": "Utah wins by over 21.5 points",
+          "no_sub_title": "Utah wins by over 21.5 points",
+          "yes_ask": 0.04,
+          "no_ask": 0.99
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-UTA20",
+          "title": "Utah wins by over 19.5 points",
+          "yes_sub_title": "Utah wins by over 19.5 points",
+          "no_sub_title": "Utah wins by over 19.5 points",
+          "yes_ask": 0.05,
+          "no_ask": 0.97
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-UTA18",
+          "title": "Utah wins by over 17.5 points",
+          "yes_sub_title": "Utah wins by over 17.5 points",
+          "no_sub_title": "Utah wins by over 17.5 points",
+          "yes_ask": 0.07,
+          "no_ask": 0.96
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-UTA16",
+          "title": "Utah wins by over 15.5 points",
+          "yes_sub_title": "Utah wins by over 15.5 points",
+          "no_sub_title": "Utah wins by over 15.5 points",
+          "yes_ask": 0.08,
+          "no_ask": 0.94
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-UTA14",
+          "title": "Utah wins by over 13.5 points",
+          "yes_sub_title": "Utah wins by over 13.5 points",
+          "no_sub_title": "Utah wins by over 13.5 points",
+          "yes_ask": 0.11,
+          "no_ask": 0.92
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-UTA12",
+          "title": "Utah wins by over 11.5 points",
+          "yes_sub_title": "Utah wins by over 11.5 points",
+          "no_sub_title": "Utah wins by over 11.5 points",
+          "yes_ask": 0.14,
+          "no_ask": 0.9
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-UTA10",
+          "title": "Utah wins by over 9.5 points",
+          "yes_sub_title": "Utah wins by over 9.5 points",
+          "no_sub_title": "Utah wins by over 9.5 points",
+          "yes_ask": 0.17,
+          "no_ask": 0.86
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-UTA8",
+          "title": "Utah wins by over 7.5 points",
+          "yes_sub_title": "Utah wins by over 7.5 points",
+          "no_sub_title": "Utah wins by over 7.5 points",
+          "yes_ask": 0.21,
+          "no_ask": 0.82
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-UTA6",
+          "title": "Utah wins by over 5.5 points",
+          "yes_sub_title": "Utah wins by over 5.5 points",
+          "no_sub_title": "Utah wins by over 5.5 points",
+          "yes_ask": 0.25,
+          "no_ask": 0.76
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-UTA4",
+          "title": "Utah wins by over 3.5 points",
+          "yes_sub_title": "Utah wins by over 3.5 points",
+          "no_sub_title": "Utah wins by over 3.5 points",
+          "yes_ask": 0.3,
+          "no_ask": 0.71
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-UTA3",
+          "title": "Utah wins by over 2.5 points",
+          "yes_sub_title": "Utah wins by over 2.5 points",
+          "no_sub_title": "Utah wins by over 2.5 points",
+          "yes_ask": 0.34,
+          "no_ask": 0.69
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-UTA2",
+          "title": "Utah wins by over 1.5 points",
+          "yes_sub_title": "Utah wins by over 1.5 points",
+          "no_sub_title": "Utah wins by over 1.5 points",
+          "yes_ask": 0.37,
+          "no_ask": 0.66
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX2",
+          "title": "Phoenix wins by over 1.5 points",
+          "yes_sub_title": "Phoenix wins by over 1.5 points",
+          "no_sub_title": "Phoenix wins by over 1.5 points",
+          "yes_ask": 0.62,
+          "no_ask": 0.4
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX3",
+          "title": "Phoenix wins by over 2.5 points",
+          "yes_sub_title": "Phoenix wins by over 2.5 points",
+          "no_sub_title": "Phoenix wins by over 2.5 points",
+          "yes_ask": 0.58,
+          "no_ask": 0.43
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX4",
+          "title": "Phoenix wins by over 3.5 points",
+          "yes_sub_title": "Phoenix wins by over 3.5 points",
+          "no_sub_title": "Phoenix wins by over 3.5 points",
+          "yes_ask": 0.55,
+          "no_ask": 0.47
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX5",
+          "title": "Phoenix wins by over 4.5 points",
+          "yes_sub_title": "Phoenix wins by over 4.5 points",
+          "no_sub_title": "Phoenix wins by over 4.5 points",
+          "yes_ask": 0.5,
+          "no_ask": 0.51
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX6",
+          "title": "Phoenix wins by over 5.5 points",
+          "yes_sub_title": "Phoenix wins by over 5.5 points",
+          "no_sub_title": "Phoenix wins by over 5.5 points",
+          "yes_ask": 0.47,
+          "no_ask": 0.54
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX7",
+          "title": "Phoenix wins by over 6.5 points",
+          "yes_sub_title": "Phoenix wins by over 6.5 points",
+          "no_sub_title": "Phoenix wins by over 6.5 points",
+          "yes_ask": 0.41,
+          "no_ask": 0.6
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX8",
+          "title": "Phoenix wins by over 7.5 points",
+          "yes_sub_title": "Phoenix wins by over 7.5 points",
+          "no_sub_title": "Phoenix wins by over 7.5 points",
+          "yes_ask": 0.4,
+          "no_ask": 0.62
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX9",
+          "title": "Phoenix wins by over 8.5 points",
+          "yes_sub_title": "Phoenix wins by over 8.5 points",
+          "no_sub_title": "Phoenix wins by over 8.5 points",
+          "yes_ask": 0.37,
+          "no_ask": 0.65
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX10",
+          "title": "Phoenix wins by over 9.5 points",
+          "yes_sub_title": "Phoenix wins by over 9.5 points",
+          "no_sub_title": "Phoenix wins by over 9.5 points",
+          "yes_ask": 0.34,
+          "no_ask": 0.68
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX11",
+          "title": "Phoenix wins by over 10.5 points",
+          "yes_sub_title": "Phoenix wins by over 10.5 points",
+          "no_sub_title": "Phoenix wins by over 10.5 points",
+          "yes_ask": 0.31,
+          "no_ask": 0.71
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX13",
+          "title": "Phoenix wins by over 12.5 points",
+          "yes_sub_title": "Phoenix wins by over 12.5 points",
+          "no_sub_title": "Phoenix wins by over 12.5 points",
+          "yes_ask": 0.25,
+          "no_ask": 0.77
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX15",
+          "title": "Phoenix wins by over 14.5 points",
+          "yes_sub_title": "Phoenix wins by over 14.5 points",
+          "no_sub_title": "Phoenix wins by over 14.5 points",
+          "yes_ask": 0.21,
+          "no_ask": 0.81
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX17",
+          "title": "Phoenix wins by over 16.5 points",
+          "yes_sub_title": "Phoenix wins by over 16.5 points",
+          "no_sub_title": "Phoenix wins by over 16.5 points",
+          "yes_ask": 0.17,
+          "no_ask": 0.85
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX19",
+          "title": "Phoenix wins by over 18.5 points",
+          "yes_sub_title": "Phoenix wins by over 18.5 points",
+          "no_sub_title": "Phoenix wins by over 18.5 points",
+          "yes_ask": 0.14,
+          "no_ask": 0.88
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX21",
+          "title": "Phoenix wins by over 20.5 points",
+          "yes_sub_title": "Phoenix wins by over 20.5 points",
+          "no_sub_title": "Phoenix wins by over 20.5 points",
+          "yes_ask": 0.11,
+          "no_ask": 0.91
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX23",
+          "title": "Phoenix wins by over 22.5 points",
+          "yes_sub_title": "Phoenix wins by over 22.5 points",
+          "no_sub_title": "Phoenix wins by over 22.5 points",
+          "yes_ask": 0.09,
+          "no_ask": 0.93
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX25",
+          "title": "Phoenix wins by over 24.5 points",
+          "yes_sub_title": "Phoenix wins by over 24.5 points",
+          "no_sub_title": "Phoenix wins by over 24.5 points",
+          "yes_ask": 0.07,
+          "no_ask": 0.96
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX27",
+          "title": "Phoenix wins by over 26.5 points",
+          "yes_sub_title": "Phoenix wins by over 26.5 points",
+          "no_sub_title": "Phoenix wins by over 26.5 points",
+          "yes_ask": 0.06,
+          "no_ask": 0.97
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX29",
+          "title": "Phoenix wins by over 28.5 points",
+          "yes_sub_title": "Phoenix wins by over 28.5 points",
+          "no_sub_title": "Phoenix wins by over 28.5 points",
+          "yes_ask": 0.05,
+          "no_ask": 0.98
+        },
+        {
+          "ticker": "KXNBASPREAD-26NOV20PHXUTA-PHX31",
+          "title": "Phoenix wins by over 30.5 points",
+          "yes_sub_title": "Phoenix wins by over 30.5 points",
+          "no_sub_title": "Phoenix wins by over 30.5 points",
+          "yes_ask": 0.04,
+          "no_ask": 0.99
+        }
+      ]
+    },
     "KXNBATOTAL-26NOV20CHAATL": {
       "title": "Charlotte vs Atlanta: Total Points",
       "sub_title": "CHA vs ATL (Nov 20)",
@@ -2895,15 +3125,15 @@
           "title": "Full Game: Over 191.5 points scored",
           "yes_sub_title": "Over 191.5 points",
           "no_sub_title": "Over 191.5 points",
-          "yes_ask": 0.97,
-          "no_ask": 0.07
+          "yes_ask": 0.96,
+          "no_ask": 0.06
         },
         {
           "ticker": "KXNBATOTAL-26NOV20CHAATL-194",
           "title": "Full Game: Over 193.5 points scored",
           "yes_sub_title": "Over 193.5 points",
           "no_sub_title": "Over 193.5 points",
-          "yes_ask": 0.96,
+          "yes_ask": 0.95,
           "no_ask": 0.08
         },
         {
@@ -2975,7 +3205,7 @@
           "title": "Full Game: Over 211.5 points scored",
           "yes_sub_title": "Over 211.5 points",
           "no_sub_title": "Over 211.5 points",
-          "yes_ask": 0.68,
+          "yes_ask": 0.69,
           "no_ask": 0.33
         },
         {
@@ -2983,7 +3213,7 @@
           "title": "Full Game: Over 213.5 points scored",
           "yes_sub_title": "Over 213.5 points",
           "no_sub_title": "Over 213.5 points",
-          "yes_ask": 0.64,
+          "yes_ask": 0.65,
           "no_ask": 0.37
         },
         {
@@ -2999,32 +3229,32 @@
           "title": "Full Game: Over 217.5 points scored",
           "yes_sub_title": "Over 217.5 points",
           "no_sub_title": "Over 217.5 points",
-          "yes_ask": 0.54,
-          "no_ask": 0.47
+          "yes_ask": 0.55,
+          "no_ask": 0.46
         },
         {
           "ticker": "KXNBATOTAL-26NOV20CHAATL-220",
           "title": "Full Game: Over 219.5 points scored",
           "yes_sub_title": "Over 219.5 points",
           "no_sub_title": "Over 219.5 points",
-          "yes_ask": 0.47,
-          "no_ask": 0.54
+          "yes_ask": 0.5,
+          "no_ask": 0.51
         },
         {
           "ticker": "KXNBATOTAL-26NOV20CHAATL-222",
           "title": "Full Game: Over 221.5 points scored",
           "yes_sub_title": "Over 221.5 points",
           "no_sub_title": "Over 221.5 points",
-          "yes_ask": 0.45,
-          "no_ask": 0.57
+          "yes_ask": 0.46,
+          "no_ask": 0.56
         },
         {
           "ticker": "KXNBATOTAL-26NOV20CHAATL-224",
           "title": "Full Game: Over 223.5 points scored",
           "yes_sub_title": "Over 223.5 points",
           "no_sub_title": "Over 223.5 points",
-          "yes_ask": 0.41,
-          "no_ask": 0.62
+          "yes_ask": 0.42,
+          "no_ask": 0.6
         },
         {
           "ticker": "KXNBATOTAL-26NOV20CHAATL-226",
@@ -3032,7 +3262,7 @@
           "yes_sub_title": "Over 225.5 points",
           "no_sub_title": "Over 225.5 points",
           "yes_ask": 0.37,
-          "no_ask": 0.66
+          "no_ask": 0.64
         },
         {
           "ticker": "KXNBATOTAL-26NOV20CHAATL-228",
@@ -3047,8 +3277,8 @@
           "title": "Full Game: Over 229.5 points scored",
           "yes_sub_title": "Over 229.5 points",
           "no_sub_title": "Over 229.5 points",
-          "yes_ask": 0.29,
-          "no_ask": 0.72
+          "yes_ask": 0.3,
+          "no_ask": 0.71
         },
         {
           "ticker": "KXNBATOTAL-26NOV20CHAATL-232",
@@ -3056,7 +3286,7 @@
           "yes_sub_title": "Over 231.5 points",
           "no_sub_title": "Over 231.5 points",
           "yes_ask": 0.26,
-          "no_ask": 0.79
+          "no_ask": 0.78
         },
         {
           "ticker": "KXNBATOTAL-26NOV20CHAATL-234",
@@ -3071,8 +3301,8 @@
           "title": "Full Game: Over 235.5 points scored",
           "yes_sub_title": "Over 235.5 points",
           "no_sub_title": "Over 235.5 points",
-          "yes_ask": 0.19,
-          "no_ask": 0.85
+          "yes_ask": 0.18,
+          "no_ask": 0.84
         },
         {
           "ticker": "KXNBATOTAL-26NOV20CHAATL-238",
@@ -3080,7 +3310,7 @@
           "yes_sub_title": "Over 237.5 points",
           "no_sub_title": "Over 237.5 points",
           "yes_ask": 0.16,
-          "no_ask": 0.88
+          "no_ask": 0.87
         },
         {
           "ticker": "KXNBATOTAL-26NOV20CHAATL-240",
@@ -3111,8 +3341,8 @@
           "title": "Full Game: Over 245.5 points scored",
           "yes_sub_title": "Over 245.5 points",
           "no_sub_title": "Over 245.5 points",
-          "yes_ask": 0.09,
-          "no_ask": 0.95
+          "yes_ask": 0.08,
+          "no_ask": 0.94
         },
         {
           "ticker": "KXNBATOTAL-26NOV20CHAATL-248",
@@ -3133,7 +3363,7 @@
           "title": "Full Game: Over 195.5 points scored",
           "yes_sub_title": "Over 195.5 points",
           "no_sub_title": "Over 195.5 points",
-          "yes_ask": 0.98,
+          "yes_ask": 0.99,
           "no_ask": 0.05
         },
         {
@@ -3157,7 +3387,7 @@
           "title": "Full Game: Over 201.5 points scored",
           "yes_sub_title": "Over 201.5 points",
           "no_sub_title": "Over 201.5 points",
-          "yes_ask": 0.95,
+          "yes_ask": 0.96,
           "no_ask": 0.09
         },
         {
@@ -3165,7 +3395,7 @@
           "title": "Full Game: Over 203.5 points scored",
           "yes_sub_title": "Over 203.5 points",
           "no_sub_title": "Over 203.5 points",
-          "yes_ask": 0.93,
+          "yes_ask": 0.94,
           "no_ask": 0.1
         },
         {
@@ -3173,7 +3403,7 @@
           "title": "Full Game: Over 205.5 points scored",
           "yes_sub_title": "Over 205.5 points",
           "no_sub_title": "Over 205.5 points",
-          "yes_ask": 0.9,
+          "yes_ask": 0.91,
           "no_ask": 0.13
         },
         {
@@ -3181,7 +3411,7 @@
           "title": "Full Game: Over 207.5 points scored",
           "yes_sub_title": "Over 207.5 points",
           "no_sub_title": "Over 207.5 points",
-          "yes_ask": 0.88,
+          "yes_ask": 0.89,
           "no_ask": 0.15
         },
         {
@@ -3189,7 +3419,7 @@
           "title": "Full Game: Over 209.5 points scored",
           "yes_sub_title": "Over 209.5 points",
           "no_sub_title": "Over 209.5 points",
-          "yes_ask": 0.85,
+          "yes_ask": 0.86,
           "no_ask": 0.18
         },
         {
@@ -3197,7 +3427,7 @@
           "title": "Full Game: Over 211.5 points scored",
           "yes_sub_title": "Over 211.5 points",
           "no_sub_title": "Over 211.5 points",
-          "yes_ask": 0.82,
+          "yes_ask": 0.83,
           "no_ask": 0.21
         },
         {
@@ -3205,8 +3435,8 @@
           "title": "Full Game: Over 213.5 points scored",
           "yes_sub_title": "Over 213.5 points",
           "no_sub_title": "Over 213.5 points",
-          "yes_ask": 0.77,
-          "no_ask": 0.26
+          "yes_ask": 0.79,
+          "no_ask": 0.24
         },
         {
           "ticker": "KXNBATOTAL-26NOV20HOUDEN-216",
@@ -3214,7 +3444,7 @@
           "yes_sub_title": "Over 215.5 points",
           "no_sub_title": "Over 215.5 points",
           "yes_ask": 0.73,
-          "no_ask": 0.3
+          "no_ask": 0.28
         },
         {
           "ticker": "KXNBATOTAL-26NOV20HOUDEN-218",
@@ -3229,7 +3459,7 @@
           "title": "Full Game: Over 219.5 points scored",
           "yes_sub_title": "Over 219.5 points",
           "no_sub_title": "Over 219.5 points",
-          "yes_ask": 0.67,
+          "yes_ask": 0.65,
           "no_ask": 0.37
         },
         {
@@ -3246,14 +3476,14 @@
           "yes_sub_title": "Over 223.5 points",
           "no_sub_title": "Over 223.5 points",
           "yes_ask": 0.58,
-          "no_ask": 0.44
+          "no_ask": 0.43
         },
         {
           "ticker": "KXNBATOTAL-26NOV20HOUDEN-226",
           "title": "Full Game: Over 225.5 points scored",
           "yes_sub_title": "Over 225.5 points",
           "no_sub_title": "Over 225.5 points",
-          "yes_ask": 0.53,
+          "yes_ask": 0.54,
           "no_ask": 0.48
         },
         {
@@ -3270,7 +3500,7 @@
           "yes_sub_title": "Over 229.5 points",
           "no_sub_title": "Over 229.5 points",
           "yes_ask": 0.43,
-          "no_ask": 0.59
+          "no_ask": 0.58
         },
         {
           "ticker": "KXNBATOTAL-26NOV20HOUDEN-232",
@@ -3372,7 +3602,7 @@
           "yes_sub_title": "Over 206.5 points",
           "no_sub_title": "Over 206.5 points",
           "yes_ask": 0.96,
-          "no_ask": 0.08
+          "no_ask": 0.07
         },
         {
           "ticker": "KXNBATOTAL-26NOV20INDCLE-209",
@@ -3380,7 +3610,7 @@
           "yes_sub_title": "Over 208.5 points",
           "no_sub_title": "Over 208.5 points",
           "yes_ask": 0.94,
-          "no_ask": 0.09
+          "no_ask": 0.08
         },
         {
           "ticker": "KXNBATOTAL-26NOV20INDCLE-211",
@@ -3427,7 +3657,7 @@
           "title": "Full Game: Over 220.5 points scored",
           "yes_sub_title": "Over 220.5 points",
           "no_sub_title": "Over 220.5 points",
-          "yes_ask": 0.79,
+          "yes_ask": 0.78,
           "no_ask": 0.25
         },
         {
@@ -3468,7 +3698,7 @@
           "yes_sub_title": "Over 230.5 points",
           "no_sub_title": "Over 230.5 points",
           "yes_ask": 0.57,
-          "no_ask": 0.45
+          "no_ask": 0.46
         },
         {
           "ticker": "KXNBATOTAL-26NOV20INDCLE-233",
@@ -3476,7 +3706,7 @@
           "yes_sub_title": "Over 232.5 points",
           "no_sub_title": "Over 232.5 points",
           "yes_ask": 0.52,
-          "no_ask": 0.5
+          "no_ask": 0.49
         },
         {
           "ticker": "KXNBATOTAL-26NOV20INDCLE-235",
@@ -3507,7 +3737,7 @@
           "title": "Full Game: Over 240.5 points scored",
           "yes_sub_title": "Over 240.5 points",
           "no_sub_title": "Over 240.5 points",
-          "yes_ask": 0.36,
+          "yes_ask": 0.35,
           "no_ask": 0.68
         },
         {
@@ -3531,7 +3761,7 @@
           "title": "Full Game: Over 246.5 points scored",
           "yes_sub_title": "Over 246.5 points",
           "no_sub_title": "Over 246.5 points",
-          "yes_ask": 0.25,
+          "yes_ask": 0.24,
           "no_ask": 0.79
         },
         {
@@ -3539,7 +3769,7 @@
           "title": "Full Game: Over 248.5 points scored",
           "yes_sub_title": "Over 248.5 points",
           "no_sub_title": "Over 248.5 points",
-          "yes_ask": 0.21,
+          "yes_ask": 0.2,
           "no_ask": 0.83
         },
         {
@@ -3563,15 +3793,15 @@
           "title": "Full Game: Over 254.5 points scored",
           "yes_sub_title": "Over 254.5 points",
           "no_sub_title": "Over 254.5 points",
-          "yes_ask": 0.13,
-          "no_ask": 0.9
+          "yes_ask": 0.12,
+          "no_ask": 0.91
         },
         {
           "ticker": "KXNBATOTAL-26NOV20INDCLE-257",
           "title": "Full Game: Over 256.5 points scored",
           "yes_sub_title": "Over 256.5 points",
           "no_sub_title": "Over 256.5 points",
-          "yes_ask": 0.11,
+          "yes_ask": 0.1,
           "no_ask": 0.92
         },
         {
@@ -3579,7 +3809,7 @@
           "title": "Full Game: Over 258.5 points scored",
           "yes_sub_title": "Over 258.5 points",
           "no_sub_title": "Over 258.5 points",
-          "yes_ask": 0.1,
+          "yes_ask": 0.09,
           "no_ask": 0.94
         },
         {
@@ -3665,7 +3895,7 @@
           "title": "Full Game: Over 205.5 points scored",
           "yes_sub_title": "Over 205.5 points",
           "no_sub_title": "Over 205.5 points",
-          "yes_ask": 0.85,
+          "yes_ask": 0.86,
           "no_ask": 0.17
         },
         {
@@ -3673,7 +3903,7 @@
           "title": "Full Game: Over 207.5 points scored",
           "yes_sub_title": "Over 207.5 points",
           "no_sub_title": "Over 207.5 points",
-          "yes_ask": 0.84,
+          "yes_ask": 0.83,
           "no_ask": 0.2
         },
         {
@@ -3721,7 +3951,7 @@
           "title": "Full Game: Over 219.5 points scored",
           "yes_sub_title": "Over 219.5 points",
           "no_sub_title": "Over 219.5 points",
-          "yes_ask": 0.58,
+          "yes_ask": 0.57,
           "no_ask": 0.44
         },
         {
@@ -3753,15 +3983,15 @@
           "title": "Full Game: Over 227.5 points scored",
           "yes_sub_title": "Over 227.5 points",
           "no_sub_title": "Over 227.5 points",
-          "yes_ask": 0.41,
-          "no_ask": 0.62
+          "yes_ask": 0.39,
+          "no_ask": 0.63
         },
         {
           "ticker": "KXNBATOTAL-26NOV20ORLBKN-230",
           "title": "Full Game: Over 229.5 points scored",
           "yes_sub_title": "Over 229.5 points",
           "no_sub_title": "Over 229.5 points",
-          "yes_ask": 0.37,
+          "yes_ask": 0.36,
           "no_ask": 0.66
         },
         {
@@ -3777,7 +4007,7 @@
           "title": "Full Game: Over 233.5 points scored",
           "yes_sub_title": "Over 233.5 points",
           "no_sub_title": "Over 233.5 points",
-          "yes_ask": 0.29,
+          "yes_ask": 0.28,
           "no_ask": 0.75
         },
         {
@@ -3785,7 +4015,7 @@
           "title": "Full Game: Over 235.5 points scored",
           "yes_sub_title": "Over 235.5 points",
           "no_sub_title": "Over 235.5 points",
-          "yes_ask": 0.24,
+          "yes_ask": 0.25,
           "no_ask": 0.78
         },
         {
@@ -3793,7 +4023,7 @@
           "title": "Full Game: Over 237.5 points scored",
           "yes_sub_title": "Over 237.5 points",
           "no_sub_title": "Over 237.5 points",
-          "yes_ask": 0.21,
+          "yes_ask": 0.2,
           "no_ask": 0.82
         },
         {
@@ -3801,8 +4031,8 @@
           "title": "Full Game: Over 239.5 points scored",
           "yes_sub_title": "Over 239.5 points",
           "no_sub_title": "Over 239.5 points",
-          "yes_ask": 0.19,
-          "no_ask": 0.85
+          "yes_ask": 0.18,
+          "no_ask": 0.84
         },
         {
           "ticker": "KXNBATOTAL-26NOV20ORLBKN-242",
@@ -3817,15 +4047,15 @@
           "title": "Full Game: Over 243.5 points scored",
           "yes_sub_title": "Over 243.5 points",
           "no_sub_title": "Over 243.5 points",
-          "yes_ask": 0.14,
-          "no_ask": 0.9
+          "yes_ask": 0.13,
+          "no_ask": 0.89
         },
         {
           "ticker": "KXNBATOTAL-26NOV20ORLBKN-246",
           "title": "Full Game: Over 245.5 points scored",
           "yes_sub_title": "Over 245.5 points",
           "no_sub_title": "Over 245.5 points",
-          "yes_ask": 0.12,
+          "yes_ask": 0.11,
           "no_ask": 0.91
         },
         {
@@ -3833,8 +4063,8 @@
           "title": "Full Game: Over 247.5 points scored",
           "yes_sub_title": "Over 247.5 points",
           "no_sub_title": "Over 247.5 points",
-          "yes_ask": 0.1,
-          "no_ask": 0.94
+          "yes_ask": 0.09,
+          "no_ask": 0.93
         }
       ]
     },
@@ -3848,7 +4078,7 @@
           "yes_sub_title": "Over 187.5 points",
           "no_sub_title": "Over 187.5 points",
           "yes_ask": 0.98,
-          "no_ask": 0.06
+          "no_ask": 0.05
         },
         {
           "ticker": "KXNBATOTAL-26NOV20TORDET-190",
@@ -3863,15 +4093,15 @@
           "title": "Full Game: Over 191.5 points scored",
           "yes_sub_title": "Over 191.5 points",
           "no_sub_title": "Over 191.5 points",
-          "yes_ask": 0.96,
-          "no_ask": 0.09
+          "yes_ask": 0.94,
+          "no_ask": 0.08
         },
         {
           "ticker": "KXNBATOTAL-26NOV20TORDET-194",
           "title": "Full Game: Over 193.5 points scored",
           "yes_sub_title": "Over 193.5 points",
           "no_sub_title": "Over 193.5 points",
-          "yes_ask": 0.94,
+          "yes_ask": 0.93,
           "no_ask": 0.1
         },
         {
@@ -3879,7 +4109,7 @@
           "title": "Full Game: Over 195.5 points scored",
           "yes_sub_title": "Over 195.5 points",
           "no_sub_title": "Over 195.5 points",
-          "yes_ask": 0.91,
+          "yes_ask": 0.92,
           "no_ask": 0.11
         },
         {
@@ -3895,7 +4125,7 @@
           "title": "Full Game: Over 199.5 points scored",
           "yes_sub_title": "Over 199.5 points",
           "no_sub_title": "Over 199.5 points",
-          "yes_ask": 0.88,
+          "yes_ask": 0.86,
           "no_ask": 0.16
         },
         {
@@ -3911,7 +4141,7 @@
           "title": "Full Game: Over 203.5 points scored",
           "yes_sub_title": "Over 203.5 points",
           "no_sub_title": "Over 203.5 points",
-          "yes_ask": 0.8,
+          "yes_ask": 0.81,
           "no_ask": 0.22
         },
         {
@@ -3952,15 +4182,15 @@
           "yes_sub_title": "Over 213.5 points",
           "no_sub_title": "Over 213.5 points",
           "yes_ask": 0.59,
-          "no_ask": 0.43
+          "no_ask": 0.42
         },
         {
           "ticker": "KXNBATOTAL-26NOV20TORDET-216",
           "title": "Full Game: Over 215.5 points scored",
           "yes_sub_title": "Over 215.5 points",
           "no_sub_title": "Over 215.5 points",
-          "yes_ask": 0.54,
-          "no_ask": 0.47
+          "yes_ask": 0.55,
+          "no_ask": 0.46
         },
         {
           "ticker": "KXNBATOTAL-26NOV20TORDET-218",
@@ -3975,8 +4205,8 @@
           "title": "Full Game: Over 219.5 points scored",
           "yes_sub_title": "Over 219.5 points",
           "no_sub_title": "Over 219.5 points",
-          "yes_ask": 0.44,
-          "no_ask": 0.58
+          "yes_ask": 0.45,
+          "no_ask": 0.56
         },
         {
           "ticker": "KXNBATOTAL-26NOV20TORDET-222",
@@ -3991,15 +4221,15 @@
           "title": "Full Game: Over 223.5 points scored",
           "yes_sub_title": "Over 223.5 points",
           "no_sub_title": "Over 223.5 points",
-          "yes_ask": 0.37,
-          "no_ask": 0.67
+          "yes_ask": 0.36,
+          "no_ask": 0.66
         },
         {
           "ticker": "KXNBATOTAL-26NOV20TORDET-226",
           "title": "Full Game: Over 225.5 points scored",
           "yes_sub_title": "Over 225.5 points",
           "no_sub_title": "Over 225.5 points",
-          "yes_ask": 0.32,
+          "yes_ask": 0.33,
           "no_ask": 0.7
         },
         {
@@ -4007,8 +4237,8 @@
           "title": "Full Game: Over 227.5 points scored",
           "yes_sub_title": "Over 227.5 points",
           "no_sub_title": "Over 227.5 points",
-          "yes_ask": 0.29,
-          "no_ask": 0.75
+          "yes_ask": 0.28,
+          "no_ask": 0.74
         },
         {
           "ticker": "KXNBATOTAL-26NOV20TORDET-230",
@@ -4023,7 +4253,7 @@
           "title": "Full Game: Over 231.5 points scored",
           "yes_sub_title": "Over 231.5 points",
           "no_sub_title": "Over 231.5 points",
-          "yes_ask": 0.2,
+          "yes_ask": 0.21,
           "no_ask": 0.82
         },
         {
@@ -4031,8 +4261,8 @@
           "title": "Full Game: Over 233.5 points scored",
           "yes_sub_title": "Over 233.5 points",
           "no_sub_title": "Over 233.5 points",
-          "yes_ask": 0.19,
-          "no_ask": 0.85
+          "yes_ask": 0.18,
+          "no_ask": 0.84
         },
         {
           "ticker": "KXNBATOTAL-26NOV20TORDET-236",
@@ -4048,7 +4278,7 @@
           "yes_sub_title": "Over 237.5 points",
           "no_sub_title": "Over 237.5 points",
           "yes_ask": 0.13,
-          "no_ask": 0.91
+          "no_ask": 0.9
         },
         {
           "ticker": "KXNBATOTAL-26NOV20TORDET-240",
@@ -4063,16 +4293,16 @@
           "title": "Full Game: Over 241.5 points scored",
           "yes_sub_title": "Over 241.5 points",
           "no_sub_title": "Over 241.5 points",
-          "yes_ask": 0.1,
-          "no_ask": 0.94
+          "yes_ask": 0.09,
+          "no_ask": 0.93
         },
         {
           "ticker": "KXNBATOTAL-26NOV20TORDET-244",
           "title": "Full Game: Over 243.5 points scored",
           "yes_sub_title": "Over 243.5 points",
           "no_sub_title": "Over 243.5 points",
-          "yes_ask": 0.09,
-          "no_ask": 0.96
+          "yes_ask": 0.08,
+          "no_ask": 0.95
         }
       ]
     },
@@ -4110,7 +4340,7 @@
           "yes_sub_title": "Over 220.5 points",
           "no_sub_title": "Over 220.5 points",
           "yes_ask": 0.88,
-          "no_ask": 0.14
+          "no_ask": 0.15
         },
         {
           "ticker": "KXNBATOTAL-26NOV20WASCHI-223",
@@ -4118,14 +4348,14 @@
           "yes_sub_title": "Over 222.5 points",
           "no_sub_title": "Over 222.5 points",
           "yes_ask": 0.86,
-          "no_ask": 0.17
+          "no_ask": 0.18
         },
         {
           "ticker": "KXNBATOTAL-26NOV20WASCHI-225",
           "title": "Full Game: Over 224.5 points scored",
           "yes_sub_title": "Over 224.5 points",
           "no_sub_title": "Over 224.5 points",
-          "yes_ask": 0.82,
+          "yes_ask": 0.83,
           "no_ask": 0.21
         },
         {
@@ -4134,7 +4364,7 @@
           "yes_sub_title": "Over 226.5 points",
           "no_sub_title": "Over 226.5 points",
           "yes_ask": 0.79,
-          "no_ask": 0.24
+          "no_ask": 0.25
         },
         {
           "ticker": "KXNBATOTAL-26NOV20WASCHI-229",
@@ -4149,8 +4379,8 @@
           "title": "Full Game: Over 230.5 points scored",
           "yes_sub_title": "Over 230.5 points",
           "no_sub_title": "Over 230.5 points",
-          "yes_ask": 0.72,
-          "no_ask": 0.31
+          "yes_ask": 0.71,
+          "no_ask": 0.32
         },
         {
           "ticker": "KXNBATOTAL-26NOV20WASCHI-233",
@@ -4158,7 +4388,7 @@
           "yes_sub_title": "Over 232.5 points",
           "no_sub_title": "Over 232.5 points",
           "yes_ask": 0.67,
-          "no_ask": 0.35
+          "no_ask": 0.36
         },
         {
           "ticker": "KXNBATOTAL-26NOV20WASCHI-235",
@@ -4166,7 +4396,7 @@
           "yes_sub_title": "Over 234.5 points",
           "no_sub_title": "Over 234.5 points",
           "yes_ask": 0.63,
-          "no_ask": 0.39
+          "no_ask": 0.41
         },
         {
           "ticker": "KXNBATOTAL-26NOV20WASCHI-237",
@@ -4197,8 +4427,8 @@
           "title": "Full Game: Over 242.5 points scored",
           "yes_sub_title": "Over 242.5 points",
           "no_sub_title": "Over 242.5 points",
-          "yes_ask": 0.43,
-          "no_ask": 0.58
+          "yes_ask": 0.42,
+          "no_ask": 0.59
         },
         {
           "ticker": "KXNBATOTAL-26NOV20WASCHI-245",
@@ -4214,14 +4444,14 @@
           "yes_sub_title": "Over 246.5 points",
           "no_sub_title": "Over 246.5 points",
           "yes_ask": 0.36,
-          "no_ask": 0.66
+          "no_ask": 0.67
         },
         {
           "ticker": "KXNBATOTAL-26NOV20WASCHI-249",
           "title": "Full Game: Over 248.5 points scored",
           "yes_sub_title": "Over 248.5 points",
           "no_sub_title": "Over 248.5 points",
-          "yes_ask": 0.32,
+          "yes_ask": 0.31,
           "no_ask": 0.71
         },
         {
@@ -4238,7 +4468,7 @@
           "yes_sub_title": "Over 252.5 points",
           "no_sub_title": "Over 252.5 points",
           "yes_ask": 0.25,
-          "no_ask": 0.78
+          "no_ask": 0.79
         },
         {
           "ticker": "KXNBATOTAL-26NOV20WASCHI-255",
@@ -4261,7 +4491,7 @@
           "title": "Full Game: Over 258.5 points scored",
           "yes_sub_title": "Over 258.5 points",
           "no_sub_title": "Over 258.5 points",
-          "yes_ask": 0.17,
+          "yes_ask": 0.15,
           "no_ask": 0.87
         },
         {
@@ -4269,16 +4499,16 @@
           "title": "Full Game: Over 260.5 points scored",
           "yes_sub_title": "Over 260.5 points",
           "no_sub_title": "Over 260.5 points",
-          "yes_ask": 0.15,
-          "no_ask": 0.89
+          "yes_ask": 0.13,
+          "no_ask": 0.91
         },
         {
           "ticker": "KXNBATOTAL-26NOV20WASCHI-263",
           "title": "Full Game: Over 262.5 points scored",
           "yes_sub_title": "Over 262.5 points",
           "no_sub_title": "Over 262.5 points",
-          "yes_ask": 0.13,
-          "no_ask": 0.91
+          "yes_ask": 0.11,
+          "no_ask": 0.92
         },
         {
           "ticker": "KXNBATOTAL-26NOV20WASCHI-265",
@@ -4336,28 +4566,6 @@
         }
       ]
     },
-    "KXNCAAFGAME-26NOV21TTUBAY": {
-      "title": "Texas Tech vs Baylor",
-      "sub_title": "TTU vs BAY (Nov 21)",
-      "markets": [
-        {
-          "ticker": "KXNCAAFGAME-26NOV21TTUBAY-BAY",
-          "title": "Baylor wins",
-          "yes_sub_title": "Baylor",
-          "no_sub_title": "Baylor",
-          "yes_ask": 0.35,
-          "no_ask": 0.66
-        },
-        {
-          "ticker": "KXNCAAFGAME-26NOV21TTUBAY-TTU",
-          "title": "Texas Tech wins",
-          "yes_sub_title": "Texas Tech",
-          "no_sub_title": "Texas Tech",
-          "yes_ask": 0.66,
-          "no_ask": 0.35
-        }
-      ]
-    },
     "KXNCAAFSPREAD-26NOV21ARSTLT": {
       "title": "Arkansas St. vs Louisiana Tech: Spread",
       "sub_title": "ARST vs LT (Nov 21)",
@@ -4375,7 +4583,7 @@
           "title": "Louisiana Tech wins by over 33.5 points",
           "yes_sub_title": "Louisiana Tech wins by over 33.5 points",
           "no_sub_title": "Louisiana Tech wins by over 33.5 points",
-          "yes_ask": 0.14,
+          "yes_ask": 0.13,
           "no_ask": 0.91
         },
         {
@@ -4383,7 +4591,7 @@
           "title": "Louisiana Tech wins by over 30.5 points",
           "yes_sub_title": "Louisiana Tech wins by over 30.5 points",
           "no_sub_title": "Louisiana Tech wins by over 30.5 points",
-          "yes_ask": 0.18,
+          "yes_ask": 0.17,
           "no_ask": 0.87
         },
         {
@@ -4415,7 +4623,7 @@
           "title": "Louisiana Tech wins by over 21.5 points",
           "yes_sub_title": "Louisiana Tech wins by over 21.5 points",
           "no_sub_title": "Louisiana Tech wins by over 21.5 points",
-          "yes_ask": 0.34,
+          "yes_ask": 0.33,
           "no_ask": 0.7
         },
         {
@@ -4479,7 +4687,7 @@
           "title": "Louisiana Tech wins by over 9.5 points",
           "yes_sub_title": "Louisiana Tech wins by over 9.5 points",
           "no_sub_title": "Louisiana Tech wins by over 9.5 points",
-          "yes_ask": 0.64,
+          "yes_ask": 0.63,
           "no_ask": 0.4
         },
         {
@@ -4487,7 +4695,7 @@
           "title": "Louisiana Tech wins by over 7.5 points",
           "yes_sub_title": "Louisiana Tech wins by over 7.5 points",
           "no_sub_title": "Louisiana Tech wins by over 7.5 points",
-          "yes_ask": 0.68,
+          "yes_ask": 0.67,
           "no_ask": 0.36
         },
         {
@@ -4495,7 +4703,7 @@
           "title": "Louisiana Tech wins by over 6.5 points",
           "yes_sub_title": "Louisiana Tech wins by over 6.5 points",
           "no_sub_title": "Louisiana Tech wins by over 6.5 points",
-          "yes_ask": 0.73,
+          "yes_ask": 0.72,
           "no_ask": 0.31
         },
         {
@@ -4503,7 +4711,7 @@
           "title": "Louisiana Tech wins by over 5.5 points",
           "yes_sub_title": "Louisiana Tech wins by over 5.5 points",
           "no_sub_title": "Louisiana Tech wins by over 5.5 points",
-          "yes_ask": 0.75,
+          "yes_ask": 0.74,
           "no_ask": 0.29
         },
         {
@@ -4511,7 +4719,7 @@
           "title": "Louisiana Tech wins by over 4.5 points",
           "yes_sub_title": "Louisiana Tech wins by over 4.5 points",
           "no_sub_title": "Louisiana Tech wins by over 4.5 points",
-          "yes_ask": 0.77,
+          "yes_ask": 0.76,
           "no_ask": 0.27
         },
         {
@@ -4519,7 +4727,7 @@
           "title": "Louisiana Tech wins by over 3.5 points",
           "yes_sub_title": "Louisiana Tech wins by over 3.5 points",
           "no_sub_title": "Louisiana Tech wins by over 3.5 points",
-          "yes_ask": 0.8,
+          "yes_ask": 0.79,
           "no_ask": 0.25
         },
         {
@@ -4527,7 +4735,7 @@
           "title": "Louisiana Tech wins by over 2.5 points",
           "yes_sub_title": "Louisiana Tech wins by over 2.5 points",
           "no_sub_title": "Louisiana Tech wins by over 2.5 points",
-          "yes_ask": 0.84,
+          "yes_ask": 0.83,
           "no_ask": 0.2
         },
         {
@@ -4535,7 +4743,7 @@
           "title": "Louisiana Tech wins by over 1.5 points",
           "yes_sub_title": "Louisiana Tech wins by over 1.5 points",
           "no_sub_title": "Louisiana Tech wins by over 1.5 points",
-          "yes_ask": 0.86,
+          "yes_ask": 0.85,
           "no_ask": 0.19
         },
         {
@@ -4544,7 +4752,7 @@
           "yes_sub_title": "Arkansas St. wins by over 1.5 points",
           "no_sub_title": "Arkansas St. wins by over 1.5 points",
           "yes_ask": 0.16,
-          "no_ask": 0.89
+          "no_ask": 0.88
         },
         {
           "ticker": "KXNCAAFSPREAD-26NOV21ARSTLT-ARST3",
@@ -4552,7 +4760,7 @@
           "yes_sub_title": "Arkansas St. wins by over 2.5 points",
           "no_sub_title": "Arkansas St. wins by over 2.5 points",
           "yes_ask": 0.15,
-          "no_ask": 0.9
+          "no_ask": 0.89
         },
         {
           "ticker": "KXNCAAFSPREAD-26NOV21ARSTLT-ARST4",
@@ -4560,23 +4768,23 @@
           "yes_sub_title": "Arkansas St. wins by over 3.5 points",
           "no_sub_title": "Arkansas St. wins by over 3.5 points",
           "yes_ask": 0.12,
-          "no_ask": 0.93
+          "no_ask": 0.92
         },
         {
           "ticker": "KXNCAAFSPREAD-26NOV21ARSTLT-ARST5",
           "title": "Arkansas St. wins by over 4.5 points",
           "yes_sub_title": "Arkansas St. wins by over 4.5 points",
           "no_sub_title": "Arkansas St. wins by over 4.5 points",
-          "yes_ask": 0.11,
-          "no_ask": 0.94
+          "yes_ask": 0.1,
+          "no_ask": 0.93
         },
         {
           "ticker": "KXNCAAFSPREAD-26NOV21ARSTLT-ARST6",
           "title": "Arkansas St. wins by over 5.5 points",
           "yes_sub_title": "Arkansas St. wins by over 5.5 points",
           "no_sub_title": "Arkansas St. wins by over 5.5 points",
-          "yes_ask": 0.1,
-          "no_ask": 0.94
+          "yes_ask": 0.11,
+          "no_ask": 0.93
         }
       ]
     },
@@ -4605,7 +4813,7 @@
           "title": "Wake Forest wins by over 35.5 points",
           "yes_sub_title": "Wake Forest wins by over 35.5 points",
           "no_sub_title": "Wake Forest wins by over 35.5 points",
-          "yes_ask": 0.14,
+          "yes_ask": 0.16,
           "no_ask": 0.87
         },
         {
@@ -4637,7 +4845,7 @@
           "title": "Wake Forest wins by over 24.5 points",
           "yes_sub_title": "Wake Forest wins by over 24.5 points",
           "no_sub_title": "Wake Forest wins by over 24.5 points",
-          "yes_ask": 0.38,
+          "yes_ask": 0.39,
           "no_ask": 0.63
         },
         {
@@ -4796,7 +5004,7 @@
           "yes_sub_title": "Over 37.5 points",
           "no_sub_title": "Over 37.5 points",
           "yes_ask": 0.77,
-          "no_ask": 0.25
+          "no_ask": 0.24
         },
         {
           "ticker": "KXNCAAFTOTAL-26NOV20ISUUCF-41",
@@ -4827,8 +5035,8 @@
           "title": "Full Game: Over 49.5 points scored",
           "yes_sub_title": "Over 49.5 points",
           "no_sub_title": "Over 49.5 points",
-          "yes_ask": 0.46,
-          "no_ask": 0.55
+          "yes_ask": 0.48,
+          "no_ask": 0.54
         },
         {
           "ticker": "KXNCAAFTOTAL-26NOV20ISUUCF-53",
@@ -4851,7 +5059,7 @@
           "title": "Full Game: Over 54.5 points scored",
           "yes_sub_title": "Over 54.5 points",
           "no_sub_title": "Over 54.5 points",
-          "yes_ask": 0.34,
+          "yes_ask": 0.35,
           "no_ask": 0.67
         },
         {
@@ -4859,15 +5067,15 @@
           "title": "Full Game: Over 55.5 points scored",
           "yes_sub_title": "Over 55.5 points",
           "no_sub_title": "Over 55.5 points",
-          "yes_ask": 0.31,
-          "no_ask": 0.7
+          "yes_ask": 0.33,
+          "no_ask": 0.69
         },
         {
           "ticker": "KXNCAAFTOTAL-26NOV20ISUUCF-57",
           "title": "Full Game: Over 56.5 points scored",
           "yes_sub_title": "Over 56.5 points",
           "no_sub_title": "Over 56.5 points",
-          "yes_ask": 0.3,
+          "yes_ask": 0.31,
           "no_ask": 0.71
         },
         {
@@ -4891,8 +5099,8 @@
           "title": "Full Game: Over 61.5 points scored",
           "yes_sub_title": "Over 61.5 points",
           "no_sub_title": "Over 61.5 points",
-          "yes_ask": 0.2,
-          "no_ask": 0.81
+          "yes_ask": 0.22,
+          "no_ask": 0.8
         },
         {
           "ticker": "KXNCAAFTOTAL-26NOV20ISUUCF-65",
@@ -4900,7 +5108,7 @@
           "yes_sub_title": "Over 64.5 points",
           "no_sub_title": "Over 64.5 points",
           "yes_ask": 0.17,
-          "no_ask": 0.85
+          "no_ask": 0.84
         },
         {
           "ticker": "KXNCAAFTOTAL-26NOV20ISUUCF-68",
@@ -4908,14 +5116,14 @@
           "yes_sub_title": "Over 67.5 points",
           "no_sub_title": "Over 67.5 points",
           "yes_ask": 0.12,
-          "no_ask": 0.9
+          "no_ask": 0.89
         },
         {
           "ticker": "KXNCAAFTOTAL-26NOV20ISUUCF-71",
           "title": "Full Game: Over 70.5 points scored",
           "yes_sub_title": "Over 70.5 points",
           "no_sub_title": "Over 70.5 points",
-          "yes_ask": 0.1,
+          "yes_ask": 0.11,
           "no_ask": 0.92
         },
         {
@@ -4923,7 +5131,7 @@
           "title": "Full Game: Over 73.5 points scored",
           "yes_sub_title": "Over 73.5 points",
           "no_sub_title": "Over 73.5 points",
-          "yes_ask": 0.08,
+          "yes_ask": 0.07,
           "no_ask": 0.94
         },
         {
@@ -4955,6 +5163,28 @@
           "no_sub_title": "Oklahoma St.",
           "yes_ask": 0.49,
           "no_ask": 0.52
+        }
+      ]
+    },
+    "KXNFLGAME-26NOV22TBDET": {
+      "title": "Tampa Bay vs Detroit",
+      "sub_title": "TB vs DET (Nov 22)",
+      "markets": [
+        {
+          "ticker": "KXNFLGAME-26NOV22TBDET-DET",
+          "title": "Detroit wins",
+          "yes_sub_title": "Detroit",
+          "no_sub_title": "Detroit",
+          "yes_ask": 0.71,
+          "no_ask": 0.3
+        },
+        {
+          "ticker": "KXNFLGAME-26NOV22TBDET-TB",
+          "title": "Tampa Bay wins",
+          "yes_sub_title": "Tampa Bay",
+          "no_sub_title": "Tampa Bay",
+          "yes_ask": 0.3,
+          "no_ask": 0.71
         }
       ]
     },
@@ -5071,7 +5301,7 @@
           "title": "Chicago wins by over 3.5 points?",
           "yes_sub_title": "Chicago wins by over 3.5 points",
           "no_sub_title": "Chicago wins by over 3.5 points",
-          "yes_ask": 0.76,
+          "yes_ask": 0.75,
           "no_ask": 0.26
         },
         {
@@ -5254,7 +5484,7 @@
           "yes_sub_title": "Los Angeles C wins by over 6.5 points",
           "no_sub_title": "Los Angeles C wins by over 6.5 points",
           "yes_ask": 0.37,
-          "no_ask": 0.64
+          "no_ask": 0.65
         },
         {
           "ticker": "KXNFLSPREAD-26NOV22NYJLAC-LAC6",
@@ -5269,7 +5499,7 @@
           "title": "Los Angeles C wins by over 4.5 points?",
           "yes_sub_title": "Los Angeles C wins by over 4.5 points",
           "no_sub_title": "Los Angeles C wins by over 4.5 points",
-          "yes_ask": 0.44,
+          "yes_ask": 0.43,
           "no_ask": 0.58
         },
         {
@@ -5451,15 +5681,15 @@
           "title": "Detroit wins by over 10.5 points?",
           "yes_sub_title": "Detroit wins by over 10.5 points",
           "no_sub_title": "Detroit wins by over 10.5 points",
-          "yes_ask": 0.34,
-          "no_ask": 0.67
+          "yes_ask": 0.33,
+          "no_ask": 0.68
         },
         {
           "ticker": "KXNFLSPREAD-26NOV22TBDET-DET10",
           "title": "Detroit wins by over 9.5 points?",
           "yes_sub_title": "Detroit wins by over 9.5 points",
           "no_sub_title": "Detroit wins by over 9.5 points",
-          "yes_ask": 0.38,
+          "yes_ask": 0.37,
           "no_ask": 0.64
         },
         {
@@ -5633,16 +5863,16 @@
           "title": "Cincinnati wins by over 20.5 points?",
           "yes_sub_title": "Cincinnati wins by over 20.5 points",
           "no_sub_title": "Cincinnati wins by over 20.5 points",
-          "yes_ask": 0.14,
-          "no_ask": 0.88
+          "yes_ask": 0.13,
+          "no_ask": 0.89
         },
         {
           "ticker": "KXNFLSPREAD-26NOV23CINWAS-CIN18",
           "title": "Cincinnati wins by over 17.5 points?",
           "yes_sub_title": "Cincinnati wins by over 17.5 points",
           "no_sub_title": "Cincinnati wins by over 17.5 points",
-          "yes_ask": 0.2,
-          "no_ask": 0.84
+          "yes_ask": 0.21,
+          "no_ask": 0.83
         },
         {
           "ticker": "KXNFLSPREAD-26NOV23CINWAS-CIN17",
@@ -5673,7 +5903,7 @@
           "title": "Cincinnati wins by over 10.5 points?",
           "yes_sub_title": "Cincinnati wins by over 10.5 points",
           "no_sub_title": "Cincinnati wins by over 10.5 points",
-          "yes_ask": 0.35,
+          "yes_ask": 0.36,
           "no_ask": 0.66
         },
         {
@@ -5713,8 +5943,8 @@
           "title": "Cincinnati wins by over 4.5 points?",
           "yes_sub_title": "Cincinnati wins by over 4.5 points",
           "no_sub_title": "Cincinnati wins by over 4.5 points",
-          "yes_ask": 0.56,
-          "no_ask": 0.45
+          "yes_ask": 0.57,
+          "no_ask": 0.44
         },
         {
           "ticker": "KXNFLSPREAD-26NOV23CINWAS-CIN4",
@@ -5722,7 +5952,7 @@
           "yes_sub_title": "Cincinnati wins by over 3.5 points",
           "no_sub_title": "Cincinnati wins by over 3.5 points",
           "yes_ask": 0.6,
-          "no_ask": 0.42
+          "no_ask": 0.41
         },
         {
           "ticker": "KXNFLSPREAD-26NOV23CINWAS-CIN3",
@@ -5786,7 +6016,7 @@
           "yes_sub_title": "Washington wins by over 6.5 points",
           "no_sub_title": "Washington wins by over 6.5 points",
           "yes_ask": 0.14,
-          "no_ask": 0.9
+          "no_ask": 0.91
         },
         {
           "ticker": "KXNFLSPREAD-26NOV23CINWAS-WAS8",
@@ -5818,7 +6048,7 @@
           "yes_sub_title": "Washington wins by over 13.5 points",
           "no_sub_title": "Washington wins by over 13.5 points",
           "yes_ask": 0.08,
-          "no_ask": 0.97
+          "no_ask": 0.98
         },
         {
           "ticker": "KXNFLSPREAD-26NOV23CINWAS-WAS15",
@@ -5879,7 +6109,7 @@
           "title": "Full Game: over 40.5 points scored?",
           "yes_sub_title": "Over 40.5 points",
           "no_sub_title": "Over 40.5 points",
-          "yes_ask": 0.67,
+          "yes_ask": 0.68,
           "no_ask": 0.34
         },
         {
@@ -5920,7 +6150,7 @@
           "yes_sub_title": "Over 47.5 points",
           "no_sub_title": "Over 47.5 points",
           "yes_ask": 0.44,
-          "no_ask": 0.58
+          "no_ask": 0.57
         },
         {
           "ticker": "KXNFLTOTAL-26NOV22TBDET-49",
@@ -5935,8 +6165,8 @@
           "title": "Full Game: over 49.5 points scored?",
           "yes_sub_title": "Over 49.5 points",
           "no_sub_title": "Over 49.5 points",
-          "yes_ask": 0.4,
-          "no_ask": 0.62
+          "yes_ask": 0.39,
+          "no_ask": 0.63
         },
         {
           "ticker": "KXNFLTOTAL-26NOV22TBDET-53",
@@ -6029,7 +6259,7 @@
           "title": "Full Game: over 43.5 points scored?",
           "yes_sub_title": "Over 43.5 points",
           "no_sub_title": "Over 43.5 points",
-          "yes_ask": 0.82,
+          "yes_ask": 0.81,
           "no_ask": 0.2
         },
         {
@@ -6037,7 +6267,7 @@
           "title": "Full Game: over 46.5 points scored?",
           "yes_sub_title": "Over 46.5 points",
           "no_sub_title": "Over 46.5 points",
-          "yes_ask": 0.75,
+          "yes_ask": 0.76,
           "no_ask": 0.27
         },
         {
@@ -6045,8 +6275,8 @@
           "title": "Full Game: over 49.5 points scored?",
           "yes_sub_title": "Over 49.5 points",
           "no_sub_title": "Over 49.5 points",
-          "yes_ask": 0.67,
-          "no_ask": 0.35
+          "yes_ask": 0.68,
+          "no_ask": 0.34
         },
         {
           "ticker": "KXNFLTOTAL-26NOV22TENDAL-51",
@@ -6109,7 +6339,7 @@
           "title": "Full Game: over 61.5 points scored?",
           "yes_sub_title": "Over 61.5 points",
           "no_sub_title": "Over 61.5 points",
-          "yes_ask": 0.32,
+          "yes_ask": 0.33,
           "no_ask": 0.7
         },
         {
@@ -6358,7 +6588,7 @@
           "yes_sub_title": "J.B. Pritzker",
           "no_sub_title": "J.B. Pritzker",
           "yes_ask": 0.027,
-          "no_ask": 0.975
+          "no_ask": 0.974
         },
         {
           "ticker": "KXPRESNOMD-28-JF",
@@ -7171,8 +7401,8 @@
           "title": "Will Brandon Gill be the nominee for the Presidency for the Republican party?",
           "yes_sub_title": "Brandon Gill",
           "no_sub_title": "Brandon Gill",
-          "yes_ask": 0.002,
-          "no_ask": 0.999
+          "yes_ask": 0.001,
+          "no_ask": 1.0
         }
       ]
     },
@@ -7475,8 +7705,8 @@
           "title": "Kevin Vallejos wins",
           "yes_sub_title": "Kevin Vallejos",
           "no_sub_title": "Kevin Vallejos",
-          "yes_ask": 0.55,
-          "no_ask": 0.46
+          "yes_ask": 0.56,
+          "no_ask": 0.45
         }
       ]
     },
@@ -7489,8 +7719,8 @@
           "title": "Aleksandre Topuria wins",
           "yes_sub_title": "Aleksandre Topuria",
           "no_sub_title": "Aleksandre Topuria",
-          "yes_ask": 0.74,
-          "no_ask": 0.27
+          "yes_ask": 0.73,
+          "no_ask": 0.28
         },
         {
           "ticker": "KXUFCFIGHT-26NOV21TOPLUN-LUN",
@@ -7506,6 +7736,8 @@
   "byTicker": {
     "KXATPCHALLENGERMATCH-26NOV20BUDDJE-BUD": "KXATPCHALLENGERMATCH-26NOV20BUDDJE",
     "KXATPCHALLENGERMATCH-26NOV20BUDDJE-DJE": "KXATPCHALLENGERMATCH-26NOV20BUDDJE",
+    "KXATPCHALLENGERMATCH-26NOV20GUENAR-GUE": "KXATPCHALLENGERMATCH-26NOV20GUENAR",
+    "KXATPCHALLENGERMATCH-26NOV20GUENAR-NAR": "KXATPCHALLENGERMATCH-26NOV20GUENAR",
     "KXATPCHALLENGERMATCH-26NOV20GULSAM-GUL": "KXATPCHALLENGERMATCH-26NOV20GULSAM",
     "KXATPCHALLENGERMATCH-26NOV20GULSAM-SAM": "KXATPCHALLENGERMATCH-26NOV20GULSAM",
     "KXATPCHALLENGERMATCH-26NOV20JUSRON-JUS": "KXATPCHALLENGERMATCH-26NOV20JUSRON",
@@ -7537,21 +7769,23 @@
     "KXCS2GAME-26NOV201300LEOG1-G1": "KXCS2GAME-26NOV201300LEOG1",
     "KXCS2GAME-26NOV201300MZPSIN-MZP": "KXCS2GAME-26NOV201300MZPSIN",
     "KXCS2GAME-26NOV201300MZPSIN-SIN": "KXCS2GAME-26NOV201300MZPSIN",
-    "KXCS2MAP-26NOV200630ABTSEG-1-ABT": "KXCS2MAP-26NOV200630ABTSEG-1",
-    "KXCS2MAP-26NOV200630ABTSEG-1-SEG": "KXCS2MAP-26NOV200630ABTSEG-1",
+    "KXCS2MAP-26NOV200630ABTSEG-2-ABT": "KXCS2MAP-26NOV200630ABTSEG-2",
+    "KXCS2MAP-26NOV200630ABTSEG-2-SEG": "KXCS2MAP-26NOV200630ABTSEG-2",
     "KXDENSUPERLIGAGAME-26NOV20AGFLBY-AGF": "KXDENSUPERLIGAGAME-26NOV20AGFLBY",
     "KXDENSUPERLIGAGAME-26NOV20AGFLBY-LBY": "KXDENSUPERLIGAGAME-26NOV20AGFLBY",
     "KXDENSUPERLIGAGAME-26NOV20AGFLBY-TIE": "KXDENSUPERLIGAGAME-26NOV20AGFLBY",
+    "KXDOTA2GAME-26NOV200600NEMTS-NEM": "KXDOTA2GAME-26NOV200600NEMTS",
+    "KXDOTA2GAME-26NOV200600NEMTS-TS": "KXDOTA2GAME-26NOV200600NEMTS",
     "KXDOTA2GAME-26NOV200900OGNAVI-OG": "KXDOTA2GAME-26NOV200900OGNAVI",
     "KXDOTA2GAME-26NOV200900OGNAVI-NAVI": "KXDOTA2GAME-26NOV200900OGNAVI",
     "KXDOTA2GAME-26NOV200900XTREMEGL-XTREME": "KXDOTA2GAME-26NOV200900XTREMEGL",
     "KXDOTA2GAME-26NOV200900XTREMEGL-GL": "KXDOTA2GAME-26NOV200900XTREMEGL",
     "KXDOTA2GAME-26NOV201200KONCALIQUID-KONCA": "KXDOTA2GAME-26NOV201200KONCALIQUID",
     "KXDOTA2GAME-26NOV201200KONCALIQUID-LIQUID": "KXDOTA2GAME-26NOV201200KONCALIQUID",
-    "KXDOTA2MAP-26NOV200600NEMTS-1-NEM": "KXDOTA2MAP-26NOV200600NEMTS-1",
-    "KXDOTA2MAP-26NOV200600NEMTS-1-TS": "KXDOTA2MAP-26NOV200600NEMTS-1",
-    "KXDOTA2MAP-26NOV200600PLATTY-1-PLAT": "KXDOTA2MAP-26NOV200600PLATTY-1",
-    "KXDOTA2MAP-26NOV200600PLATTY-1-TY": "KXDOTA2MAP-26NOV200600PLATTY-1",
+    "KXDOTA2MAP-26NOV200600NEMTS-2-NEM": "KXDOTA2MAP-26NOV200600NEMTS-2",
+    "KXDOTA2MAP-26NOV200600NEMTS-2-TS": "KXDOTA2MAP-26NOV200600NEMTS-2",
+    "KXDOTA2MAP-26NOV200600PLATTY-2-PLAT": "KXDOTA2MAP-26NOV200600PLATTY-2",
+    "KXDOTA2MAP-26NOV200600PLATTY-2-TY": "KXDOTA2MAP-26NOV200600PLATTY-2",
     "KXEFLCHAMPIONSHIPGAME-26NOV21MIDBRC-MID": "KXEFLCHAMPIONSHIPGAME-26NOV21MIDBRC",
     "KXEFLCHAMPIONSHIPGAME-26NOV21MIDBRC-BRC": "KXEFLCHAMPIONSHIPGAME-26NOV21MIDBRC",
     "KXEFLCHAMPIONSHIPGAME-26NOV21MIDBRC-TIE": "KXEFLCHAMPIONSHIPGAME-26NOV21MIDBRC",
@@ -7578,15 +7812,6 @@
     "KXFEDDECISION-26DEC-H0": "KXFEDDECISION-26DEC",
     "KXFEDDECISION-26DEC-H25": "KXFEDDECISION-26DEC",
     "KXFEDDECISION-26DEC-H26": "KXFEDDECISION-26DEC",
-    "KXJLEAGUEGAME-26NOV20VIKMIT-VIK": "KXJLEAGUEGAME-26NOV20VIKMIT",
-    "KXJLEAGUEGAME-26NOV20VIKMIT-MIT": "KXJLEAGUEGAME-26NOV20VIKMIT",
-    "KXJLEAGUEGAME-26NOV20VIKMIT-TIE": "KXJLEAGUEGAME-26NOV20VIKMIT",
-    "KXJLEAGUETOTAL-26NOV20REYJEF-1": "KXJLEAGUETOTAL-26NOV20REYJEF",
-    "KXJLEAGUETOTAL-26NOV20REYJEF-2": "KXJLEAGUETOTAL-26NOV20REYJEF",
-    "KXJLEAGUETOTAL-26NOV20REYJEF-3": "KXJLEAGUETOTAL-26NOV20REYJEF",
-    "KXJLEAGUETOTAL-26NOV20REYJEF-4": "KXJLEAGUETOTAL-26NOV20REYJEF",
-    "KXJLEAGUETOTAL-26NOV20REYJEF-5": "KXJLEAGUETOTAL-26NOV20REYJEF",
-    "KXJLEAGUETOTAL-26NOV20REYJEF-6": "KXJLEAGUETOTAL-26NOV20REYJEF",
     "KXLALIGAGAME-26NOV21SEVRBB-SEV": "KXLALIGAGAME-26NOV21SEVRBB",
     "KXLALIGAGAME-26NOV21SEVRBB-RBB": "KXLALIGAGAME-26NOV21SEVRBB",
     "KXLALIGAGAME-26NOV21SEVRBB-TIE": "KXLALIGAGAME-26NOV21SEVRBB",
@@ -7828,6 +8053,39 @@
     "KXNBASPREAD-26NOV20ORLBKN-ORL27": "KXNBASPREAD-26NOV20ORLBKN",
     "KXNBASPREAD-26NOV20ORLBKN-ORL29": "KXNBASPREAD-26NOV20ORLBKN",
     "KXNBASPREAD-26NOV20ORLBKN-ORL31": "KXNBASPREAD-26NOV20ORLBKN",
+    "KXNBASPREAD-26NOV20PHXUTA-UTA24": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-UTA22": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-UTA20": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-UTA18": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-UTA16": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-UTA14": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-UTA12": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-UTA10": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-UTA8": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-UTA6": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-UTA4": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-UTA3": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-UTA2": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX2": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX3": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX4": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX5": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX6": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX7": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX8": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX9": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX10": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX11": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX13": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX15": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX17": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX19": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX21": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX23": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX25": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX27": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX29": "KXNBASPREAD-26NOV20PHXUTA",
+    "KXNBASPREAD-26NOV20PHXUTA-PHX31": "KXNBASPREAD-26NOV20PHXUTA",
     "KXNBATOTAL-26NOV20CHAATL-192": "KXNBATOTAL-26NOV20CHAATL",
     "KXNBATOTAL-26NOV20CHAATL-194": "KXNBATOTAL-26NOV20CHAATL",
     "KXNBATOTAL-26NOV20CHAATL-196": "KXNBATOTAL-26NOV20CHAATL",
@@ -8004,8 +8262,6 @@
     "KXNBATOTAL-26NOV20WASCHI-271": "KXNBATOTAL-26NOV20WASCHI",
     "KXNCAAFGAME-26NOV21HOUWVU-WVU": "KXNCAAFGAME-26NOV21HOUWVU",
     "KXNCAAFGAME-26NOV21HOUWVU-HOU": "KXNCAAFGAME-26NOV21HOUWVU",
-    "KXNCAAFGAME-26NOV21TTUBAY-BAY": "KXNCAAFGAME-26NOV21TTUBAY",
-    "KXNCAAFGAME-26NOV21TTUBAY-TTU": "KXNCAAFGAME-26NOV21TTUBAY",
     "KXNCAAFSPREAD-26NOV21ARSTLT-LT36": "KXNCAAFSPREAD-26NOV21ARSTLT",
     "KXNCAAFSPREAD-26NOV21ARSTLT-LT34": "KXNCAAFSPREAD-26NOV21ARSTLT",
     "KXNCAAFSPREAD-26NOV21ARSTLT-LT31": "KXNCAAFSPREAD-26NOV21ARSTLT",
@@ -8078,6 +8334,8 @@
     "KXNCAAFTOTAL-26NOV20ISUUCF-77": "KXNCAAFTOTAL-26NOV20ISUUCF",
     "KXNCAAMBGAME-26NOV20OKSTMINN-MINN": "KXNCAAMBGAME-26NOV20OKSTMINN",
     "KXNCAAMBGAME-26NOV20OKSTMINN-OKST": "KXNCAAMBGAME-26NOV20OKSTMINN",
+    "KXNFLGAME-26NOV22TBDET-DET": "KXNFLGAME-26NOV22TBDET",
+    "KXNFLGAME-26NOV22TBDET-TB": "KXNFLGAME-26NOV22TBDET",
     "KXNFLSPREAD-26NOV22NOCHI-CHI28": "KXNFLSPREAD-26NOV22NOCHI",
     "KXNFLSPREAD-26NOV22NOCHI-CHI24": "KXNFLSPREAD-26NOV22NOCHI",
     "KXNFLSPREAD-26NOV22NOCHI-CHI21": "KXNFLSPREAD-26NOV22NOCHI",
