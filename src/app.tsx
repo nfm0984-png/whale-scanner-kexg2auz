@@ -4337,9 +4337,6 @@ function bundleCapperGames(picks: CapperPickRow[]): { game: ComingGame; picks: C
 function comingTabCount(now: number): number {
   return compiledForTab(now).groups.length;
 }
-function eliteTabCount(now: number): number {
-  return eliteGroups(combinedPicks(now)).length;
-}
 function findComingSide(g: ComingGame, sideId: string): ComingSide | null {
   let hit: ComingSide | null = null;
   (g.markets || []).forEach((m: ComingMarket) => (m.sides || []).forEach((s: ComingSide) => { if (s.id === sideId) hit = s; }));
@@ -4482,69 +4479,57 @@ function CapperSlateTab(props: { now: number; mode: "elite" | "coming" }) {
     </Section>
   );
 }
-// Elite (Noel Nov 19): cappers whose graded record is 2-1 or better, best record first, every pick of theirs in the 24h window grouped under them.
-interface EliteGroup { wallet: string; name: string; rec: WL; profit: number | null; picks: UPick[] }
-// Every other tracked capper: positive profit, not Cooling, not a market maker / one-off, but not 2-1 yet (or no graded record).
-function otherCapper(w: string): boolean {
-  const rec = QMAP[w];
-  if (!rec || rec.badge === "Cooling" || rec.mm || rec.oneOff) return false;
-  const big = rec.big || {};
-  const pr = big.profit != null ? big.profit : rec.profit;
-  if (pr == null || pr <= 0) return false;
-  return !wlElite(recWL(w, "sports"));
-}
-function eliteGroups(all: UPick[], others?: boolean): EliteGroup[] {
+// ---------- Ranked (was Elite; Noel Nov 19 evening): game cards ranked by the collective win ratio of every capper on the card ----------
+const ELITE_MIN_BETS = 10; // settled bets needed for a card to rank in the main lists
+interface RankedCard { id: string; picks: UPick[]; rec: WL; cappers: number; hasElite: boolean; startTs: number }
+function rankedCards(all: UPick[]): RankedCard[] {
   const by: Record<string, UPick[]> = {};
-  all.forEach((p: UPick) => {
-    if (p.kind !== "sports") return;
-    p.backers.forEach((b: UBacker) => { if (others ? otherCapper(b.wallet) : eliteCapper(b.wallet)) (by[b.wallet] = by[b.wallet] || []).push(p); });
+  all.forEach((p: UPick) => { if (p.kind === "sports") (by[p.gameId] = by[p.gameId] || []).push(p); });
+  return Object.keys(by).map((id: string) => {
+    const seen: Record<string, boolean> = {};
+    let w = 0, l = 0, elite = false;
+    by[id].forEach((p: UPick) => p.backers.forEach((b: UBacker) => {
+      if (seen[b.wallet]) return;
+      seen[b.wallet] = true;
+      if (eliteCapper(b.wallet)) elite = true;
+      const r = recWL(b.wallet, "sports");
+      if (r) { w += r.w; l += r.l; }
+    }));
+    return { id, picks: by[id], rec: { w, l }, cappers: Object.keys(seen).length, hasElite: elite, startTs: by[id][0].startTs || 0 };
   });
-  const pen = (p: UPick): number => (p.cmp && p.cmp.verdict === "other" ? 1 : 0);
-  return Object.keys(by).map((w: string) => {
-    const rec = QMAP[w];
-    const big = rec.big || {};
-    return { wallet: w, name: nameOf(rec.name, w), rec: (recWL(w, "sports") || { w: 0, l: 0 }) as WL, profit: big.profit != null ? big.profit : (rec.profit != null ? rec.profit : null), picks: by[w].slice().sort((a: UPick, b: UPick) => (pen(a) - pen(b)) || ((a.live ? 0 : 1) - (b.live ? 0 : 1)) || (a.startTs - b.startTs)) };
-  }).sort((a: EliteGroup, b: EliteGroup) => (wlBetter(a.rec, b.rec) ? -1 : wlBetter(b.rec, a.rec) ? 1 : 0) || ((b.profit || 0) - (a.profit || 0)));
 }
-const ELITE_MIN_BETS = 10; // settled bets needed to rank in the main list
+const rankCmp = (a: RankedCard, b: RankedCard): number => (wlRate(b.rec) - wlRate(a.rec)) || (b.rec.w - a.rec.w) || (b.cappers - a.cappers) || (a.startTs - b.startTs);
+function rankedLists(all: UPick[]): { top: RankedCard[]; others: RankedCard[]; small: RankedCard[]; total: number } {
+  const cards = rankedCards(all);
+  const big = cards.filter((c: RankedCard) => c.rec.w + c.rec.l >= ELITE_MIN_BETS).sort(rankCmp);
+  const small = cards.filter((c: RankedCard) => c.rec.w + c.rec.l < ELITE_MIN_BETS).sort(rankCmp);
+  const topCand = big.filter((c: RankedCard) => c.hasElite).slice(0, 15);
+  const topIds: Record<string, boolean> = {};
+  topCand.forEach((c: RankedCard) => { topIds[c.id] = true; });
+  return { top: topCand, others: big.filter((c: RankedCard) => !topIds[c.id]), small, total: cards.length };
+}
+function eliteTabCount(now: number): number {
+  return rankedLists(combinedPicks(now)).total;
+}
 function EliteTab(props: { now: number }) {
-  const t = useGrokTheme();
   const all = combinedPicks(props.now);
-  const groups = eliteGroups(all);
-  const main = groups.filter((g: EliteGroup) => g.rec.w + g.rec.l >= ELITE_MIN_BETS);
-  const small = groups.filter((g: EliteGroup) => g.rec.w + g.rec.l < ELITE_MIN_BETS);
-  const pickN = groups.reduce((n: number, g: EliteGroup) => n + g.picks.length, 0);
-  const oth = eliteGroups(all, true);
-  const othMain = oth.filter((g: EliteGroup) => g.rec.w + g.rec.l >= ELITE_MIN_BETS);
-  const othSmall = oth.filter((g: EliteGroup) => g.rec.w + g.rec.l < ELITE_MIN_BETS);
-  const othPickN = oth.reduce((n: number, g: EliteGroup) => n + g.picks.length, 0);
-  const renderGroup = (g: EliteGroup, i: number) => (
-    <div key={g.wallet} data-elite-capper={g.wallet} style={{ marginBottom: 20 }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", borderRadius: 16, background: "#4C1D95", color: "#FFFFFF", marginBottom: 10 }}>
-        <span style={{ fontSize: 16, fontWeight: 900, minWidth: 30 }}>{"#" + (i + 1)}</span>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ fontSize: 18, fontWeight: 850, overflowWrap: "anywhere" }}>{g.name}</div>
-          <div style={{ fontSize: 14, fontWeight: 750, opacity: 0.95 }}>{(g.rec.w + g.rec.l ? wlText(g.rec) + " · " + pctText(wlRate(g.rec)) : "No graded record yet") + (g.profit != null ? " · " + signedK(g.profit) : "")}</div>
-        </div>
-        <span style={{ fontSize: 13, fontWeight: 850, padding: "3px 10px", borderRadius: 999, background: "#FFFFFF", color: "#4C1D95" }}>{g.picks.length === 1 ? "1 pick" : g.picks.length + " picks"}</span>
-      </div>
-      {g.picks.map((q: UPick) => <UCard key={g.wallet + q.key} p={q} opp={oppositeOf(q, all)} now={props.now} stake="$2–4" />)}
-    </div>
-  );
+  const L = rankedLists(all);
+  const unitOf = (c: RankedCard) => ({ id: c.id, picks: c.picks });
+  const render = (c: RankedCard, i: number) => <GameBlock key={c.id} u={unitOf(c)} now={props.now} stake="$2–4" noun="game" all={all} rankNo={i + 1} rec={c.rec} cappers={c.cappers} />;
+  const sec = (attr: string, title: string, n: number) => <div data-ranked-section={attr} style={{ fontSize: 22, fontWeight: 900, margin: "18px 2px 4px", paddingTop: 10, borderTop: "3px solid #4C1D95" }}>{title + " · " + n}</div>;
   return (
-    <Section heading={"Elite · " + groups.length} caption={"Cappers at 2-1 or better · best record first · starts or settles within 24 hours"}>
-      <Text>{"Elite means a graded record of 2-1 or better (a 66.7%+ win rate) with positive profit and at least 10 settled bets to rank in the main list. 50/50 cappers are left out. Every one of their $500+ picks with a Kalshi line is grouped under them, best record first. A pick where the other side has the better record is flagged and sorted last."}</Text>
-      <div data-elite-summary="1" style={{ fontSize: 14, fontWeight: 750, color: "#52525B", margin: "2px 2px 12px" }}>{groups.length + " cappers · " + pickN + " picks"}</div>
-      <div data-elite-top="1" style={{ fontSize: 22, fontWeight: 900, margin: "4px 2px 8px" }}>{"Top " + groups.length}</div>
-      {groups.length === 0 ? <EmptyState title="No Elite picks right now" body={"None of the cappers at 2-1 or better has a $500+ pick with a Kalshi line settling within 24 hours. " + nextScanLabel(props.now) + "."} /> : main.map((g: EliteGroup, i: number) => renderGroup(g, i))}
-      {small.length ? <div data-elite-small="1" style={{ fontSize: 20, fontWeight: 900, margin: "8px 2px 4px" }}>{"Small sample (under " + ELITE_MIN_BETS + " bets) · " + small.length}</div> : null}
-      {small.length ? <Text>{"Still 2-1 or better, but with fewer than 10 settled bets, so the record isn't ranked with the main list yet."}</Text> : null}
-      {small.map((g: EliteGroup, i: number) => renderGroup(g, i))}
-      <div data-elite-others="1" style={{ fontSize: 22, fontWeight: 900, margin: "18px 2px 4px", paddingTop: 12, borderTop: "3px solid #4C1D95" }}>{"All other cappers · " + oth.length}</div>
-      <Text>{"Every other tracked capper (positive profit, not Cooling, not a market maker) with a $500+ pick in the window, ranked by record history: win rate, then wins. Cappers with fewer than 10 settled bets are at the bottom. " + othPickN + " picks."}</Text>
-      {othMain.map((g: EliteGroup, i: number) => renderGroup(g, i))}
-      {othSmall.length ? <div data-elite-others-small="1" style={{ fontSize: 18, fontWeight: 900, margin: "8px 2px 4px" }}>{"Under " + ELITE_MIN_BETS + " bets · " + othSmall.length}</div> : null}
-      {othSmall.map((g: EliteGroup, i: number) => renderGroup(g, othMain.length + i))}
+    <Section heading={"Ranked · " + L.total} caption={"Games ranked by the combined record of every capper on the card · starts or settles within 24 hours"}>
+      <Text>{"Each game is one card. Its rank is the collective win ratio of every tracked capper betting on that game (all their wins divided by all their settled bets). Record counts, money does not. The best pick (by its own cappers' record) is up front; the other bets on the game are in the drop-down. Top 15 are games with at least one 2-1+ capper (positive profit) and 10+ settled bets between the cappers. An amber warning names a capper on the other side with a better record."}</Text>
+      <div data-ranked-summary="1" style={{ fontSize: 14, fontWeight: 750, color: "#52525B", margin: "2px 2px 8px" }}>{L.total + " games · " + L.top.length + " in the top list"}</div>
+      {L.total === 0 ? <EmptyState title="No ranked games right now" body={"No tracked capper has a $500+ pick with a Kalshi line starting within 24 hours. " + nextScanLabel(props.now) + "."} /> : null}
+      {L.top.length ? <div data-elite-top="1" style={{ fontSize: 22, fontWeight: 900, margin: "4px 2px 4px" }}>{"Top " + L.top.length}</div> : null}
+      {L.top.map((c: RankedCard, i: number) => render(c, i))}
+      {L.others.length ? sec("others", "All other games", L.others.length) : null}
+      {L.others.length ? <Text>{"Same ranking: combined record of all cappers on the card, best to worst."}</Text> : null}
+      {L.others.map((c: RankedCard, i: number) => render(c, L.top.length + i))}
+      {L.small.length ? sec("small", "Small sample (under " + ELITE_MIN_BETS + " bets)", L.small.length) : null}
+      {L.small.length ? <Text>{"The cappers on these games have fewer than 10 settled bets in total, so the record is not ranked with the main lists yet."}</Text> : null}
+      {L.small.map((c: RankedCard, i: number) => render(c, L.top.length + L.others.length + i))}
     </Section>
   );
 }
@@ -4740,16 +4725,21 @@ function hotGroups(now: number): PickGroup[] {
   const slate = openSlateGames(false, now, ((DATA.hotWeek && DATA.hotWeek.games) || []) as ComingGame[]);
   return compiledGroups(slate.games.filter((g: ComingGame) => comingStatus(g, now) === "upcoming"), now).filter((g: PickGroup) => g.backers.some((b: PickBackerRow) => !!HOT_W[b.wallet]));
 }
-function hotTabCount(now: number): number { return hotGroups(now).length; }
+function hotUnits(now: number): { id: string; picks: UPick[] }[] {
+  const picks = combinedPicks(now).filter((p: UPick) => p.kind === "sports" && !p.live && p.startTs > now && p.backers.some((b: UBacker) => !!HOT_W[b.wallet]));
+  return orderUnits(picks, "start");
+}
+function hotTabCount(now: number): number { return hotUnits(now).length; }
 function HotWeekTab(props: { now: number }) {
   const t = useGrokTheme();
-  const groups = hotGroups(props.now);
+  const all = combinedPicks(props.now);
+  const units = hotUnits(props.now);
   const hot = ((DATA.hotWeek && DATA.hotWeek.cappers) || []) as HotCapper[];
-  const gameN = new Set(groups.map((g: PickGroup) => g.game.id)).size;
+  const gameN = units.length;
   const picksBy: Record<string, number> = {};
-  groups.forEach((g: PickGroup) => g.backers.forEach((b: PickBackerRow) => { picksBy[b.wallet] = (picksBy[b.wallet] || 0) + 1; }));
+  units.forEach((u) => u.picks.forEach((q: UPick) => q.backers.forEach((b: UBacker) => { picksBy[b.wallet] = (picksBy[b.wallet] || 0) + 1; })));
   return (
-    <Section heading={"Hot This Week · " + groups.length} caption={"Open pre-game picks from cappers on a heater · " + hot.length + " hot cappers · " + gameN + " game" + (gameN === 1 ? "" : "s")}>
+    <Section heading={"Hot This Week · " + gameN} caption={"Open pre-game picks from cappers on a heater · " + hot.length + " hot cappers · " + gameN + " game" + (gameN === 1 ? "" : "s")}>
       <Text>{"A capper is hot with 8+ settled $500+ bets in the last 7 days, a 60%+ win rate, and positive profit over both 7 and 30 days. Market makers, one-off records, new accounts and Cooling cappers are left out. $500+ with a Kalshi line only; live and finished games are not shown."}</Text>
       <details data-hot-list="1" style={{ margin: "6px 0 12px" }}>
         <summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 15, color: BRAND }}>{"Hot cappers · " + hot.length}</summary>
@@ -4763,7 +4753,7 @@ function HotWeekTab(props: { now: number }) {
           </div>
         ))}
       </details>
-      {groups.length === 0 ? <EmptyState title="No hot-capper picks open" body={"No hot capper has an open pre-game $500+ bet with a Kalshi line right now. " + nextScanLabel(props.now) + "."} /> : <GroupedByGame groups={groups} />}
+      {units.length === 0 ? <EmptyState title="No hot-capper picks open" body={"No hot capper has an open pre-game $500+ bet with a Kalshi line right now. " + nextScanLabel(props.now) + "."} /> : <UnitList units={units} all={all} now={props.now} stake="$2–4" noun="game" showStart />}
     </Section>
   );
 }
@@ -4776,6 +4766,18 @@ const PE_CAP: Record<string, { rec?: { w: number; l: number } | null; best: stri
 const PE_CAT_LABEL: Record<string, string> = { politics: "Politics", economics: "Econ", finance: "Finance" };
 interface UBacker { wallet: string; name: string; cost: number; avg: number | null; tags: string[]; score: number; line: string; buysOk?: boolean; buyTs?: number | null; buy3h?: number | null }
 interface UPick { key: string; mid: string; kind: "sports" | "pe"; view: KalshiView; big: string; sub: string; league: string; gameId: string; startTs: number; settleTs: number; live: boolean; backers: UBacker[]; total: number; tags: string[]; score: number; entryNote: string | null; note: string | null; cmp?: SideCmp | null; fresh?: "fresh" | "hold" | null; freshTs?: number | null; slipTier?: "good" | "slight" | "much" | null }
+interface UPick { bt?: string }
+const BT_ORDER = ["Moneyline", "Spread", "Totals", "Both teams to score", "Player props", "Other"];
+function betTypeOf(ticker: string | null | undefined, label: string): string {
+  const ser = ((ticker || "").split("-")[0] || "").toUpperCase();
+  if (/SPREAD/.test(ser)) return "Spread";
+  if (/TOTAL/.test(ser)) return "Totals";
+  if (/BTTS/.test(ser)) return "Both teams to score";
+  if (/(GAME|FIGHT|MATCH|WINNER)$/.test(ser)) return "Moneyline";
+  if (/(PTS|PASS|RSH|RUSH|REC|YDS|REB|AST|TD|3PT|SOG|SAVE|STRIKE|HIT|GOAL)/.test(ser)) return "Player props";
+  if (!ser) { if (/spread|\+\d|-\d+\.5/i.test(label)) return "Spread"; if (/^(over|under)\b/i.test(label)) return "Totals"; }
+  return "Other";
+}
 const U_TAG_ORDER = ["Proven", "Elite", "🔥 Hot", "Politics-Econ", "Tracked"];
 function shortName(n: string, max = 16): string { return n.length > max ? n.slice(0, max - 1) + "…" : n; }
 function capperScoreOf(w: string): number {
@@ -4897,6 +4899,7 @@ function combinedPicks(now: number, peDays: number = 1): UPick[] {
     if (!p) {
       p = by[g.key] = { key: g.key, mid: g.mid || "", kind: "sports", view: g.view, big: g.label || g.view.outcome, sub: g.game.game, league: g.game.league, gameId: g.game.id, startTs: g.game.startTs || 0, settleTs: g.game.startTs || 0, live: g.live, backers: [], total: 0, tags: [], score: 0, entryNote: g.avgEntry != null && g.view.price != null ? slipWords(slipCents(g.view.price, g.avgEntry), g.avgEntry) : null, note: null };
     }
+    if (!p.bt) p.bt = betTypeOf(g.view.ticker, g.label || g.view.outcome || "");
     g.backers.forEach((b: PickBackerRow) => {
       if (p!.backers.some((x: UBacker) => x.wallet === b.wallet)) return;
       const tags = [QMAP[b.wallet] && QMAP[b.wallet].proven ? "Proven" : "Tracked"].concat(tagsOfWallet(b.wallet).filter((x: string) => x !== "Politics-Econ"));
@@ -5036,7 +5039,7 @@ function RecordFlag(props: { cmp: SideCmp }) {
   return (
     <div data-record-flag={c.verdict} style={{ marginTop: 10, padding: "10px 12px", borderRadius: 14, border: "2px solid " + col, background: other ? "#FEF3C7" : "#F0FDF4" }}>
       <div style={{ fontSize: 16, lineHeight: "21px", fontWeight: 900, color: col, overflowWrap: "anywhere" }}>{other ? "⚠ Other side: " + c.oppName + " (" + wlText(c.oppBest) + ") is betting against this" : "Better record than other side (" + wlText(c.thisBest) + " vs " + wlText(c.oppBest) + ")"}</div>
-      <div style={{ fontSize: 12, fontWeight: 700, color: "#52525B", marginTop: 3 }}>{other ? "Best on this side: " + c.thisName + " (" + wlText(c.thisBest) + ") · " + pctText(wlRate(c.thisBest)) + " vs " + pctText(wlRate(c.oppBest)) : "Best on this side: " + c.thisName + " (" + wlText(c.thisBest) + "), best on other side: " + c.oppName + " (" + wlText(c.oppBest) + ")"}</div>
+      <div style={{ fontSize: 12, fontWeight: 700, color: "#52525B", marginTop: 3 }}>{other ? "Best on this side: " + c.thisName + " (" + wlText(c.thisBest) + ") · " + (wlRate(c.thisBest) * 100).toFixed(1) + "% vs " + (wlRate(c.oppBest) * 100).toFixed(1) + "%" : "Best on this side: " + c.thisName + " (" + wlText(c.thisBest) + "), best on other side: " + c.oppName + " (" + wlText(c.oppBest) + ")"}</div>
     </div>
   );
 }
@@ -5055,7 +5058,7 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center", marginBottom: 6 }}>
           {props.rankNo ? <span data-card-no="1" style={{ display: "inline-block", minWidth: 26, textAlign: "center", padding: "2px 8px", borderRadius: 999, background: BRAND, color: "#FFFFFF", fontSize: 13, fontWeight: 900 }}>{"#" + props.rankNo}</span> : null}
           {p.live ? <Chip bg={RED} color="#FFFFFF">LIVE</Chip> : null}
-          <span style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary }}>{p.league + " · " + (p.kind === "pe" ? settlesOn(p.settleTs, props.now) : (p.startTs ? ptTime(p.startTs) : ""))}</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary }}>{p.league + " · " + (p.kind === "pe" ? settlesOn(p.settleTs, props.now) : (p.startTs ? ptTime(p.startTs) : "")) + (p.kind === "sports" && p.bt ? " · " + p.bt : "")}</span>
         </div>
         <div data-ucard-big="1" style={{ fontSize: 22, lineHeight: "27px", fontWeight: 850, letterSpacing: "-0.01em", overflowWrap: "anywhere" }}>{p.big}</div>
         {p.sub ? <div style={{ fontSize: 14, lineHeight: "19px", fontWeight: 600, color: t.text.secondary, marginTop: 2, overflowWrap: "anywhere" }}>{p.sub}</div> : null}
@@ -5096,27 +5099,84 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
     </div>
   );
 }
+// ---------- One card per game (Noel Nov 19 evening) ----------
+// The main pick is the one whose cappers have the best combined record. Every other bet on the game sits in a collapsed drop-down, grouped by bet type.
+function pickRec(p: UPick): WL {
+  let w = 0, l = 0;
+  p.backers.forEach((b: UBacker) => { const r = recWL(b.wallet, p.kind === "pe" ? "pe" : "sports"); if (r) { w += r.w; l += r.l; } });
+  return { w, l };
+}
+function bestPickFirst(picks: UPick[]): UPick[] {
+  const sample = (r: WL): number => (r.w + r.l >= ELITE_MIN_BETS ? 1 : 0);
+  return picks.slice().sort((a: UPick, b: UPick) => {
+    const ra = pickRec(a), rb = pickRec(b);
+    return (sample(rb) - sample(ra)) || (wlRate(rb) - wlRate(ra)) || (rb.w - ra.w) || (b.backers.length - a.backers.length);
+  });
+}
+function GameHeader(props: { p: UPick; now: number; rankNo?: number; rec?: WL; cappers?: number }) {
+  const p = props.p;
+  if (p.kind !== "sports" || !p.startTs) return null;
+  return (
+    <div data-game-start="1" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 8, margin: "14px 2px 6px", fontSize: 16, fontWeight: 850, color: "#4C1D95" }}>
+      {props.rankNo ? <span data-game-rank="1" style={{ display: "inline-block", minWidth: 30, textAlign: "center", padding: "2px 9px", borderRadius: 999, background: BRAND, color: "#FFFFFF", fontSize: 14, fontWeight: 900 }}>{"#" + props.rankNo}</span> : null}
+      {p.live ? <Chip bg={RED} color="#FFFFFF">LIVE</Chip> : null}
+      <span data-game-start-time="1">{(p.live ? "Started " : "Starts ") + ptTime(p.startTs)}</span>
+      <span style={{ fontSize: 13, fontWeight: 700, color: "#52525B" }}>{(p.live ? ago(p.startTs, props.now) : "in " + untilText(p.startTs, props.now)) + " · " + p.league}</span>
+      {props.rec ? <span data-game-rec="1" style={{ display: "inline-block", padding: "2px 10px", borderRadius: 999, background: "#EDE9FE", color: "#4C1D95", fontSize: 13, fontWeight: 850, border: "1.5px solid #4C1D95" }}>{(props.rec.w + props.rec.l ? "Combined " + wlText(props.rec) + " · " + pctText(wlRate(props.rec)) : "No graded record") + (props.cappers ? " · " + props.cappers + " capper" + (props.cappers === 1 ? "" : "s") : "")}</span> : null}
+    </div>
+  );
+}
+// A compact card for an alternative bet inside the drop-down: side, payout, cappers with records, the On Kalshi line.
+function AltBet(props: { p: UPick; all?: UPick[]; now: number }) {
+  const t = useGrokTheme();
+  const p = props.p;
+  const opp = props.all ? oppositeOf(p, props.all) : undefined;
+  return (
+    <div data-alt-bet={p.key} style={{ borderRadius: 14, border: "1.5px solid " + t.border.default, background: t.bg.base, padding: "10px 12px", marginBottom: 8, fontFamily: t.font.family }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, flexWrap: "wrap" }}>
+        <div style={{ fontSize: 18, lineHeight: "22px", fontWeight: 850, overflowWrap: "anywhere", flex: 1, minWidth: 0 }}>{p.big}</div>
+        <span data-alt-total="1" style={{ display: "inline-block", padding: "2px 10px", borderRadius: 10, background: "#4C1D95", color: "#FFFFFF", fontSize: 18, fontWeight: 900, fontVariantNumeric: "tabular-nums" }}>{kMoney(p.total)}</span>
+      </div>
+      {p.sub ? <div style={{ fontSize: 13, fontWeight: 600, color: t.text.secondary, marginTop: 2, overflowWrap: "anywhere" }}>{p.sub}</div> : null}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center", marginTop: 6 }}>
+        <span style={{ display: "inline-block", padding: "2px 9px", borderRadius: 999, background: "#E0E7FF", color: "#3730A3", fontSize: 13, fontWeight: 850 }}>{p.backers.length + " capper" + (p.backers.length === 1 ? "" : "s")}</span>
+        {p.tags.map((x: string) => <span key={x} style={{ display: "inline-block", padding: "1px 8px", borderRadius: 999, background: "#F3F4F6", color: "#4B5563", fontSize: 12, fontWeight: 800, border: "1px solid #9CA3AF" }}>{x}</span>)}
+      </div>
+      <FreshPricePills p={p} now={props.now} />
+      <div style={{ marginTop: 8 }}><KalshiBuyButton view={p.view} size={17} /></div>
+      <OnKalshiBox view={p.view} />
+      {p.backers.map((b: UBacker) => <div key={b.wallet} data-alt-capper={b.wallet} style={{ fontSize: 13, lineHeight: "19px", fontWeight: 650, color: t.text.secondary, marginTop: 2, overflowWrap: "anywhere" }}>{b.line}</div>)}
+      {p.cmp && p.cmp.verdict && opp ? <RecordFlag cmp={p.cmp} /> : null}
+    </div>
+  );
+}
+function GameBlock(props: { u: { id: string; picks: UPick[] }; now: number; stake: string; noun: string; all?: UPick[]; showStart?: boolean; rankNo?: number; rec?: WL; cappers?: number; stakeLine?: string }) {
+  const [open, setOpen] = useState(false);
+  const picks = props.u.picks[0].kind === "pe" ? props.u.picks : bestPickFirst(props.u.picks);
+  const main = picks[0];
+  const rest = picks.slice(1);
+  const groups = BT_ORDER.map((bt: string) => ({ bt, picks: rest.filter((q: UPick) => (q.kind === "pe" ? "Other" : (q.bt || "Other")) === bt) })).filter((g) => g.picks.length);
+  return (
+    <div data-game-block={props.u.id}>
+      {props.showStart || props.rankNo ? <GameHeader p={main} now={props.now} rankNo={props.rankNo} rec={props.rec} cappers={props.cappers} /> : null}
+      <UCard p={main} opp={props.all ? oppositeOf(main, props.all) : undefined} now={props.now} stake={props.stake} moreRow={rest.length ? <MoreBetsRow noun={props.noun} n={rest.length} open={open} onToggle={() => setOpen(!open)} /> : undefined} />
+      {open && rest.length ? (
+        <div data-game-more="1" style={{ marginLeft: 10, paddingLeft: 8, borderLeft: "3px solid " + BRAND, marginBottom: 10 }}>
+          {groups.map((g) => (
+            <div key={g.bt} data-bet-type={g.bt}>
+              <div style={{ fontSize: 13, fontWeight: 900, letterSpacing: "0.06em", textTransform: "uppercase", color: BRAND, margin: "6px 0" }}>{g.bt + " · " + g.picks.length}</div>
+              {g.picks.map((q: UPick) => <AltBet key={q.key} p={q} all={props.all} now={props.now} />)}
+            </div>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
+}
 function UnitList(props: { units: { id: string; picks: UPick[] }[]; now: number; stake: string; noun: string; all?: UPick[]; showStart?: boolean }) {
-  const [open, setOpen] = useState<Record<string, boolean>>({});
   return (
     <div data-unit-list="1">
-      {props.units.map((u: { id: string; picks: UPick[] }) => {
-        const rest = u.picks.slice(1);
-        const isOpen = !!open[u.id];
-        return (
-          <div key={u.id} data-game-block={u.id}>
-            {props.showStart && u.picks[0].kind === "sports" && u.picks[0].startTs ? (
-              <div data-game-start="1" style={{ display: "flex", alignItems: "center", gap: 8, margin: "14px 2px 6px", fontSize: 16, fontWeight: 850, color: "#4C1D95" }}>
-                {u.picks[0].live ? <Chip bg={RED} color="#FFFFFF">LIVE</Chip> : null}
-                <span data-game-start-time="1">{(u.picks[0].live ? "Started " : "Starts ") + ptTime(u.picks[0].startTs)}</span>
-                <span style={{ fontSize: 13, fontWeight: 700, color: "#52525B" }}>{(u.picks[0].live ? ago(u.picks[0].startTs, props.now) : "in " + untilText(u.picks[0].startTs, props.now)) + " · " + u.picks[0].league}</span>
-              </div>
-            ) : null}
-            <UCard p={u.picks[0]} opp={props.all ? oppositeOf(u.picks[0], props.all) : undefined} now={props.now} stake={props.stake} moreRow={rest.length ? <MoreBetsRow noun={props.noun} n={rest.length} open={isOpen} onToggle={() => setOpen({ ...open, [u.id]: !isOpen })} /> : undefined} />
-            {isOpen && rest.length ? <div data-game-more="1" style={{ marginLeft: 10, paddingLeft: 8, borderLeft: "3px solid " + BRAND }}>{rest.map((q: UPick) => <UCard key={q.key} p={q} opp={props.all ? oppositeOf(q, props.all) : undefined} now={props.now} stake={props.stake} />)}</div> : null}
-          </div>
-        );
-      })}
+      {props.units.map((u: { id: string; picks: UPick[] }) => <GameBlock key={u.id} u={u} now={props.now} stake={props.stake} noun={props.noun} all={props.all} showStart={props.showStart} />)}
     </div>
   );
 }
@@ -5918,7 +5978,7 @@ export default function App() {
           <span style={{ fontSize: 11, fontWeight: 850, letterSpacing: "0.08em", textTransform: "uppercase", color: "#7C3AED", width: 38, flex: "none", lineHeight: "12px" }}>Today</span>
           <div style={{ flex: 1, minWidth: 0 }}>
             <PillTabs bare
-              options={[{ value: "coming", label: "Coming Up", count: combinedPicks(now).length }, { value: "elite", label: "Elite", count: eliteTabCount(now) }, { value: "hot", label: "Hot This Week", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }]}
+              options={[{ value: "coming", label: "Coming Up", count: combinedPicks(now).length }, { value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "hot", label: "Hot This Week", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }]}
               value={tab === "pe" ? "" : tab}
               onChange={(v: string) => { setTab(v); setSportFilter(""); }}
             />
