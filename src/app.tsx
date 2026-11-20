@@ -4493,28 +4493,35 @@ function eliteGroups(all: UPick[]): EliteGroup[] {
     return { wallet: w, name: nameOf(rec.name, w), rec: recWL(w, "sports") as WL, profit: big.profit != null ? big.profit : (rec.profit != null ? rec.profit : null), picks: by[w].slice().sort((a: UPick, b: UPick) => (pen(a) - pen(b)) || ((a.live ? 0 : 1) - (b.live ? 0 : 1)) || (a.startTs - b.startTs)) };
   }).sort((a: EliteGroup, b: EliteGroup) => (wlBetter(a.rec, b.rec) ? -1 : wlBetter(b.rec, a.rec) ? 1 : 0) || ((b.profit || 0) - (a.profit || 0)));
 }
+const ELITE_MIN_BETS = 10; // settled bets needed to rank in the main list
 function EliteTab(props: { now: number }) {
   const t = useGrokTheme();
   const all = combinedPicks(props.now);
   const groups = eliteGroups(all);
+  const main = groups.filter((g: EliteGroup) => g.rec.w + g.rec.l >= ELITE_MIN_BETS);
+  const small = groups.filter((g: EliteGroup) => g.rec.w + g.rec.l < ELITE_MIN_BETS);
   const pickN = groups.reduce((n: number, g: EliteGroup) => n + g.picks.length, 0);
+  const renderGroup = (g: EliteGroup, i: number) => (
+    <div key={g.wallet} data-elite-capper={g.wallet} style={{ marginBottom: 20 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", borderRadius: 16, background: "#4C1D95", color: "#FFFFFF", marginBottom: 10 }}>
+        <span style={{ fontSize: 16, fontWeight: 900, minWidth: 30 }}>{"#" + (i + 1)}</span>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ fontSize: 18, fontWeight: 850, overflowWrap: "anywhere" }}>{g.name}</div>
+          <div style={{ fontSize: 14, fontWeight: 750, opacity: 0.95 }}>{wlText(g.rec) + " · " + pctText(wlRate(g.rec)) + (g.profit != null ? " · " + signedK(g.profit) : "")}</div>
+        </div>
+        <span style={{ fontSize: 13, fontWeight: 850, padding: "3px 10px", borderRadius: 999, background: "#FFFFFF", color: "#4C1D95" }}>{g.picks.length === 1 ? "1 pick" : g.picks.length + " picks"}</span>
+      </div>
+      {g.picks.map((q: UPick) => <UCard key={g.wallet + q.key} p={q} opp={oppositeOf(q, all)} now={props.now} stake="$2–4" />)}
+    </div>
+  );
   return (
     <Section heading={"Elite · " + groups.length} caption={"Cappers at 2-1 or better · best record first · starts or settles within 24 hours"}>
-      <Text>{"Elite means a graded record of 2-1 or better (a 66.7%+ win rate) with positive profit. 50/50 cappers are left out. Every one of their $500+ picks with a Kalshi line is grouped under them, best record first. A pick where the other side has the better record is flagged and sorted last."}</Text>
+      <Text>{"Elite means a graded record of 2-1 or better (a 66.7%+ win rate) with positive profit and at least 10 settled bets to rank in the main list. 50/50 cappers are left out. Every one of their $500+ picks with a Kalshi line is grouped under them, best record first. A pick where the other side has the better record is flagged and sorted last."}</Text>
       <div data-elite-summary="1" style={{ fontSize: 14, fontWeight: 750, color: "#52525B", margin: "2px 2px 12px" }}>{groups.length + " cappers · " + pickN + " picks"}</div>
-      {groups.length === 0 ? <EmptyState title="No Elite picks right now" body={"None of the cappers at 2-1 or better has a $500+ pick with a Kalshi line settling within 24 hours. " + nextScanLabel(props.now) + "."} /> : groups.map((g: EliteGroup, i: number) => (
-        <div key={g.wallet} data-elite-capper={g.wallet} style={{ marginBottom: 20 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", borderRadius: 16, background: "#4C1D95", color: "#FFFFFF", marginBottom: 10 }}>
-            <span style={{ fontSize: 16, fontWeight: 900, minWidth: 30 }}>{"#" + (i + 1)}</span>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: 18, fontWeight: 850, overflowWrap: "anywhere" }}>{g.name}</div>
-              <div style={{ fontSize: 14, fontWeight: 750, opacity: 0.95 }}>{wlText(g.rec) + " · " + pctText(wlRate(g.rec)) + (g.profit != null ? " · " + signedK(g.profit) : "")}</div>
-            </div>
-            <span style={{ fontSize: 13, fontWeight: 850, padding: "3px 10px", borderRadius: 999, background: "#FFFFFF", color: "#4C1D95" }}>{g.picks.length === 1 ? "1 pick" : g.picks.length + " picks"}</span>
-          </div>
-          {g.picks.map((q: UPick) => <UCard key={g.wallet + q.key} p={q} opp={oppositeOf(q, all)} now={props.now} stake="$2–4" />)}
-        </div>
-      ))}
+      {groups.length === 0 ? <EmptyState title="No Elite picks right now" body={"None of the cappers at 2-1 or better has a $500+ pick with a Kalshi line settling within 24 hours. " + nextScanLabel(props.now) + "."} /> : main.map((g: EliteGroup, i: number) => renderGroup(g, i))}
+      {small.length ? <div data-elite-small="1" style={{ fontSize: 20, fontWeight: 900, margin: "8px 2px 4px" }}>{"Small sample (under " + ELITE_MIN_BETS + " bets) · " + small.length}</div> : null}
+      {small.length ? <Text>{"Still 2-1 or better, but with fewer than 10 settled bets, so the record isn't ranked with the main list yet."}</Text> : null}
+      {small.map((g: EliteGroup, i: number) => renderGroup(g, i))}
     </Section>
   );
 }
@@ -4920,6 +4927,11 @@ function orderUnits(picks: UPick[], mode: "rank" | "start" | "settle" | "record"
   if (mode === "settle") units.forEach((u) => u.picks.sort((a: UPick, b: UPick) => (pen(a) - pen(b)) || (a.settleTs - b.settleTs) || (b.total - a.total)));
   return units;
 }
+function settlesOn(ts: number, now: number): string {
+  const f = (x: number, y: boolean) => new Date(x * 1000).toLocaleDateString("en-US", { timeZone: "America/Los_Angeles", month: "short", day: "numeric", year: y ? "numeric" : undefined });
+  const yr = (x: number) => new Date(x * 1000).toLocaleDateString("en-US", { timeZone: "America/Los_Angeles", year: "numeric" });
+  return "settles " + f(ts, yr(ts) !== yr(now));
+}
 function settlesIn(ts: number, now: number): string {
   const d = Math.max(0, Math.round((ts - now) / 86400));
   return d === 0 ? "settles today" : "settles in " + d + " day" + (d === 1 ? "" : "s");
@@ -5015,7 +5027,7 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center", marginBottom: 6 }}>
           {props.rankNo ? <span data-card-no="1" style={{ display: "inline-block", minWidth: 26, textAlign: "center", padding: "2px 8px", borderRadius: 999, background: BRAND, color: "#FFFFFF", fontSize: 13, fontWeight: 900 }}>{"#" + props.rankNo}</span> : null}
           {p.live ? <Chip bg={RED} color="#FFFFFF">LIVE</Chip> : null}
-          <span style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary }}>{p.league + " · " + (p.kind === "pe" ? settlesIn(p.settleTs, props.now) : (p.startTs ? ptTime(p.startTs) : ""))}</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary }}>{p.league + " · " + (p.kind === "pe" ? settlesOn(p.settleTs, props.now) : (p.startTs ? ptTime(p.startTs) : ""))}</span>
         </div>
         <div data-ucard-big="1" style={{ fontSize: 22, lineHeight: "27px", fontWeight: 850, letterSpacing: "-0.01em", overflowWrap: "anywhere" }}>{p.big}</div>
         {p.sub ? <div style={{ fontSize: 14, lineHeight: "19px", fontWeight: 600, color: t.text.secondary, marginTop: 2, overflowWrap: "anywhere" }}>{p.sub}</div> : null}
@@ -5172,7 +5184,7 @@ function ComingUpTab(props: { now: number }) {
     </Section>
   );
 }
-const PE_DAYS = 7; // Politics & Econ settles on its own 7-day window; the sports tabs stay at 24 hours
+const PE_DAYS = 36500; // Politics & Econ has no settle window (every qualifying top-capper pick shows); the sports tabs stay at 24 hours
 function peTabCount(now: number): number { return combinedPicks(now, PE_DAYS).filter((p: UPick) => p.kind === "pe").length; }
 function PoliticsEconTab(props: { now: number }) {
   const t = useGrokTheme();
@@ -5182,10 +5194,10 @@ function PoliticsEconTab(props: { now: number }) {
   const used: Record<string, boolean> = {};
   picks.forEach((p: UPick) => p.backers.forEach((b: UBacker) => { used[b.wallet] = true; }));
   return (
-    <Section heading={"Politics & Econ · " + picks.length} caption={"Settles within 7 days · best record first · " + Object.keys(used).length + " top cappers with an open bet · " + caps.filter((c) => !!c.rec && wlElite(c.rec)).length + " of " + caps.length + " established cappers are at 2-1 or better"}>
-      <Text>{"Suggested $1–2 per pick. Budget about $5–10 a day out of the $40. Only top cappers: established politics, economics and finance wallets (profitable, not market makers) with a graded record of 2-1 or better over their last 90 days, best record first. Each needs a $500+ open position with the same outcome and side on Kalshi, settling within 7 days. Includes Kalshi's short-dated finance markets (daily crypto and gas)."}</Text>
-      {picks.length === 0 ? <EmptyState title="No Kalshi-matched picks right now" body={"None of the top politics, economics or finance cappers has a $500+ bet that matches a Kalshi market and settles within 7 days. Later ones are under Cappers. " + nextScanLabel(props.now) + "."} /> : <UnitList units={units} now={props.now} stake="$1–2" noun="event" />}
-      <Text>{"Only picks settling within 7 days show here. Later ones (and every established capper) are under Cappers → Politics & Econ cappers."}</Text>
+    <Section heading={"Politics & Econ · " + picks.length} caption={"All settle dates · best record first · " + Object.keys(used).length + " top cappers with an open bet · " + caps.filter((c) => !!c.rec && wlElite(c.rec)).length + " of " + caps.length + " established cappers are at 2-1 or better"}>
+      <Text>{"Suggested $1–2 per pick. Budget about $5–10 a day out of the $40. Only top cappers: established politics, economics and finance wallets (profitable, not market makers) with a graded record of 2-1 or better over their last 90 days, best record first. Each needs a $500+ open position with the same outcome and side on Kalshi. No settle-date limit: each card says when it settles. Includes Kalshi's short-dated finance markets (daily crypto and gas)."}</Text>
+      {picks.length === 0 ? <EmptyState title="No Kalshi-matched picks right now" body={"None of the top politics, economics or finance cappers has a $500+ bet that matches a Kalshi market right now. " + nextScanLabel(props.now) + "."} /> : <UnitList units={units} now={props.now} stake="$1–2" noun="event" />}
+      <Text>{"Every established capper (including those under 2-1) is under Cappers → Politics & Econ cappers."}</Text>
     </Section>
   );
 }
@@ -5205,7 +5217,7 @@ function PECappersList(props: { now: number }) {
             <div style={{ fontSize: 15, fontWeight: 850, overflowWrap: "anywhere" }}>{nameOf(c.name, c.wallet)}</div>
             <div style={{ fontSize: 13, color: t.text.secondary }}>{Object.keys(c.cats).filter((k: string) => c.cats[k].month || c.cats[k].all).map((k: string) => PE_CAT_LABEL[k] + " " + signedK(c.cats[k].month) + " mo · " + signedK(c.cats[k].all) + " all").join("  |  ")}</div>
             {mine.length ? mine.map((q: PEPick) => (
-              <div key={q.id} style={{ fontSize: 13, marginTop: 4, lineHeight: "18px" }}><b>{(q.yesNo + " · pays " + cents(q.kPrice))}</b>{" · " + (q.marketTitle || q.polyTitle) + " · " + settlesIn(q.settleTs, props.now) + (q.settleTs > props.now + PE_DAYS * PICK_WINDOW_SECS ? " (not in pick lists yet)" : "")}</div>
+              <div key={q.id} style={{ fontSize: 13, marginTop: 4, lineHeight: "18px" }}><b>{(q.yesNo + " · pays " + cents(q.kPrice))}</b>{" · " + (q.marketTitle || q.polyTitle) + " · " + settlesIn(q.settleTs, props.now)}</div>
             )) : <div style={{ fontSize: 13, marginTop: 4, color: t.text.tertiary }}>No open Kalshi-matched pick right now</div>}
           </div>
         );
