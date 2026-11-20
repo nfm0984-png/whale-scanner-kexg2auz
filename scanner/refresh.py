@@ -255,7 +255,7 @@ def is_final(p):
         return False
     ts = p.get('startTs')
     if ts and ts <= NOW and (NOW - ts) > LIVE_SECS:
-        return True
+        return True  # (picks tabs; Coming Up uses per-sport limits in coming_up.live_secs)
     return False
 def enrich_row(p, do_wp=False, do_kalshi=False):
     global n_espn, n_k, n_filled

@@ -651,6 +651,9 @@ function isStarted(p: Pick, now: number): boolean {
   return false;
 }
 const LIVE_SECS = Math.round(3 * 3600);
+// Longest a game normally runs after its start. Past this (and no live signal) it is treated as over and hidden between data refreshes.
+const LIVE_HOURS: Record<string, number> = { NFL: 4, CFB: 4, NCAAF: 4, MLB: 3.5, ATP: 3.5, WTA: 3.5, UFC: 6, CBB: 2.75, NCAAMB: 2.75, NBA: 3, NHL: 3, CS2: 3.5, DOTA2: 3.5, LOL: 3.5, VAL: 3.5 };
+const liveSecsFor = (league?: string | null): number => Math.round(3600 * (LIVE_HOURS[(league || "").toUpperCase()] || 3));
 function espnIsFinal(state?: string | null, refresh?: Refresh | null): boolean {
   if (state === "post") return true;
   if (refresh && (refresh.state === "post" || !!refresh.final || !!refresh.ended)) return true;
@@ -663,16 +666,16 @@ function espnIsLive(state?: string | null, refresh?: Refresh | null, phase?: str
   if (phase === "live") return true;
   return false;
 }
-function startStatus(startTs: number, now: number, opts?: { state?: string | null; refresh?: Refresh | null; phase?: string | null }): "upcoming" | "live" | "final" {
+function startStatus(startTs: number, now: number, opts?: { state?: string | null; refresh?: Refresh | null; phase?: string | null; league?: string | null }): "upcoming" | "live" | "final" {
   if (opts && espnIsFinal(opts.state, opts.refresh)) return "final";
   if (opts && espnIsLive(opts.state, opts.refresh, opts.phase)) return "live";
   if (!startTs || startTs > now) return "upcoming";
-  if (now - startTs <= LIVE_SECS) return "live";
+  if (now - startTs <= liveSecsFor(opts && opts.league)) return "live";
   return "final";
 }
 function pickStatus(p: Pick, now: number): "upcoming" | "live" | "final" {
   const state = (p.refresh && p.refresh.state) || (p.game && p.game.state) || null;
-  return startStatus(p.startTs || 0, now, { state: state, refresh: p.refresh, phase: null });
+  return startStatus(p.startTs || 0, now, { state: state, refresh: p.refresh, phase: null, league: p.league });
 }
 function pickIsOver(p: Pick, now: number): boolean {
   return pickStatus(p, now) === "final";
@@ -3625,9 +3628,16 @@ function hintForComing(g: ComingGame): GameHint {
   const b = hints.byTitle[k2];
   return hintRank(a) >= hintRank(b) ? (a || b || { state: g.state, phase: g.phase }) : (b || a || { state: g.state, phase: g.phase });
 }
+// A started game whose winner market already sits at 97c+ is decided (nothing left to bet), so it counts as over.
+function comingDecided(g: ComingGame): boolean {
+  if (/^(UFC|BOXING)$/i.test(g.league || "")) return false; // fight cards start hours before each bout
+  return (g.markets || []).some((m: ComingMarket) => (m.kind || "") === "moneyline" && (m.sides || []).some((s: ComingSide) => (s.kPrice != null && s.kPrice >= 0.97) || ((s as any).oppPrice != null && (s as any).oppPrice >= 0.97)));
+}
 function comingStatus(g: ComingGame, now: number): "upcoming" | "live" | "final" {
   const h = hintForComing(g);
-  return startStatus(g.startTs || 0, now, { state: g.state || h.state, refresh: h.refresh, phase: g.phase || h.phase });
+  const st = startStatus(g.startTs || 0, now, { state: g.state || h.state, refresh: h.refresh, phase: g.phase || h.phase, league: g.league });
+  if (st !== "upcoming" && g.startTs && g.startTs <= now && comingDecided(g)) return "final";
+  return st;
 }
 function comingIsLive(g: ComingGame, now: number): boolean {
   return comingStatus(g, now) === "live";

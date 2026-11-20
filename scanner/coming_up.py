@@ -13,6 +13,11 @@ import kalshi_names as kn
 
 LEAN_MIN = 500  # Noel Nov 17: $500 minimum on Coming Up / Elite / combos too
 LIVE_SECS = int(3 * 3600)
+# Longest a game normally runs after its start (fallback when no final signal exists). Anything past this is treated as over.
+_LIVE_HOURS = {'NFL': 4, 'CFB': 4, 'NCAAF': 4, 'MLB': 3.5, 'ATP': 3.5, 'WTA': 3.5, 'UFC': 6, 'CBB': 2.75, 'NCAAMB': 2.75, 'NBA': 3, 'NHL': 3,
+               'CS2': 3.5, 'DOTA2': 3.5, 'LOL': 3.5, 'VAL': 3.5}
+def live_secs(league):
+    return int(3600 * _LIVE_HOURS.get((league or '').upper(), 3))
 STALE_SECS = wf.STALE_SECS
 SPORT_BAR_N = 10
 SPORT_BAR_ROI = 20
@@ -148,7 +153,7 @@ def _is_live(b, now):
     if g.get('state') == 'in' or r.get('state') == 'in' or b.get('phase') == 'live':
         return True
     ts = b.get('startTs') or 0
-    return bool(ts and ts <= now and (now - ts) <= LIVE_SECS)
+    return bool(ts and ts <= now and (now - ts) <= live_secs(b.get('league')))
 
 def _in_window(b, now, win_end):
     k = b.get('kalshi') or {}
@@ -530,6 +535,10 @@ def build(lean_bets, capper_history, now, win_end, proven=None, hot_override=Non
             markets=markets,
         ))
     games.sort(key=_sort_key)
+    try:
+        games = drop_finished(games, now)
+    except Exception as _e:
+        print('drop_finished failed:', _e)
     return games
 
 
@@ -815,7 +824,44 @@ def _game_is_live(g, now):
     if state == 'in' or g.get('phase') == 'live':
         return True
     ts = g.get('startTs') or 0
-    return bool(ts and ts <= now and (now - ts) <= LIVE_SECS)
+    return bool(ts and ts <= now and (now - ts) <= live_secs(g.get('league')))
+
+_KFINAL = ('closed', 'settled', 'finalized', 'determined')
+DECIDED_PX = 0.97
+def drop_finished(games, now, log=print):
+    """Remove games that have ended: any Kalshi market closed/settled/finalized or with a result, or (for started games) a moneyline already priced
+    at 97c+ on a side (decided; nothing left to bet). Games not started yet are never touched here."""
+    out = []; dropped = []
+    for g in games or []:
+        ts = g.get('startTs') or 0
+        if not ts or ts > now:
+            out.append(g); continue
+        done = None
+        seen = set()
+        for m in g.get('markets') or []:
+            for s in m.get('sides') or []:
+                for tk in (s.get('ticker'), s.get('oppTicker')):
+                    if not tk or tk in seen:
+                        continue
+                    seen.add(tk)
+                    km = fetch_market(tk)
+                    if not km:
+                        continue
+                    if (km.get('status') or '') in _KFINAL or km.get('result') in ('yes', 'no'):
+                        done = 'kalshi ' + (km.get('status') or km.get('result')); break
+                    if (m.get('kind') or '') == 'moneyline' and (g.get('league') or '').upper() not in ('UFC', 'BOXING'):  # fight cards start hours before each bout
+                        ya, na = _kfp(km.get('yes_ask_dollars')), _kfp(km.get('no_ask_dollars'))
+                        if (ya is not None and ya >= DECIDED_PX) or (na is not None and na >= DECIDED_PX):
+                            done = 'decided at %s/%s' % (ya, na); break
+                if done: break
+            if done: break
+        if done:
+            dropped.append('%s (%s)' % (g.get('game'), done))
+        else:
+            out.append(g)
+    if dropped:
+        log('finished games removed: %d: %s' % (len(dropped), '; '.join(dropped[:12])))
+    return out
 
 def refresh(games, now, win_end, kalshi_now=None):
     """Keep live (not final) and upcoming games; refresh Kalshi prices on each side."""
@@ -845,4 +891,8 @@ def refresh(games, now, win_end, kalshi_now=None):
         markets.sort(key=_market_rank)
         out.append(dict(g, markets=markets))
     out.sort(key=_sort_key)
+    try:
+        out = drop_finished(out, now)
+    except Exception as _e:
+        print('drop_finished failed:', _e)
     return out
