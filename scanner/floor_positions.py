@@ -112,6 +112,71 @@ def _fetch_positions(wallet, max_pages=3):
     return rows
 
 
+_BUY_CACHE = {}
+BUY_LOOKBACK = 24 * 3600
+
+
+def fetch_buys(wallet, now, max_pages=4):
+    """BUY fills in the last 24h for one wallet, from Polymarket's public Data API v2 /activity (no key).
+
+    Returns [(condition_id, outcome_index, ts, usd)], or None when the API could not be read (never an empty list on failure).
+    Cached per process so the hot-week pass re-uses the floor reads."""
+    if wallet in _BUY_CACHE:
+        return _BUY_CACHE[wallet]
+    out, cur = [], None
+    start = int(now - BUY_LOOKBACK)
+    ok = True
+    for _ in range(max_pages):
+        u = (BASE + '/activity?user=' + wallet + '&type=TRADE&side=BUY&limit=500&start=' + str(start)
+             + ('&cursor=' + urllib.parse.quote(cur) if cur else ''))
+        d = _get(u, tries=3)
+        if d is None:
+            ok = bool(out)
+            break
+        for x in d.get('data') or []:
+            if x.get('type') != 'TRADE' or (x.get('side') or '').upper() != 'BUY':
+                continue
+            out.append((x.get('condition_id'), x.get('outcome_index'), int(x.get('timestamp') or 0), float(x.get('usdc_size') or 0)))
+        pg = d.get('pagination') or {}
+        cur = pg.get('next_cursor')
+        if not pg.get('has_more') or not cur:
+            break
+        time.sleep(0.2)
+    else:
+        ok = True
+    res = out if ok else None
+    if res is not None:
+        _BUY_CACHE[wallet] = res
+    return res
+
+
+def annotate_buys(rows, now, log=print):
+    """Add recent-buy facts to each lean-bet row so the page can tag it Fresh or Hold.
+
+    buyTs   latest BUY fill on this exact side in the last 24h (None = no buy in 24h)
+    buy3h   dollars bought on this side in the 3 hours before `now`
+    buy24h  dollars bought on this side in the last 24h
+    buysOk  True only when the wallet's activity was read; rows without it get no tag (never guessed)."""
+    wallets = sorted({r.get('wallet') for r in rows if r.get('wallet')})
+    if not wallets:
+        return
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        got = dict(zip(wallets, ex.map(lambda w: fetch_buys(w, now), wallets)))
+    n_ok = 0
+    for r in rows:
+        buys = got.get(r.get('wallet'))
+        if buys is None:
+            continue
+        oi = 0 if r.get('side') == 'yes' else 1
+        mine = [b for b in buys if b[0] == r.get('cid') and b[1] == oi]
+        r['buysOk'] = True
+        r['buyTs'] = max((b[2] for b in mine), default=None)
+        r['buy3h'] = round(sum(b[3] for b in mine if b[2] >= now - 3 * 3600))
+        r['buy24h'] = round(sum(b[3] for b in mine))
+        n_ok += 1
+    log(f'buy activity: {len(wallets)} wallets, {sum(1 for w in wallets if got.get(w) is not None)} read, {n_ok} rows tagged')
+
+
 _GAMMA = {}
 
 
@@ -227,6 +292,10 @@ def build_rows(capper_history, now=None, positions=None, log=print, wallets=None
                 shares=round(p.get('current_size') or 0, 1), avg=avg, now=cp, cost=round(cost), value=round(p.get('current_value') or 0),
                 upnl=round(p.get('unrealized_pnl') or 0), upct=p.get('percent_pnl'), firstTs=p.get('first_entry_at'), cons={}, top100=True,
                 src='floor positions', kalshi=kal, game=g, startTs=int(ts) if ts else None, phase=ns['phase'](g, ts)))
+    try:
+        annotate_buys(rows, now, log=log)
+    except Exception as e:
+        log('buy activity failed (rows left untagged):', e)
     log(f'{label} positions: {len(fl)} cappers, {len(ok)} read, {len(rows)} open $500+ bets with a game inside {WINDOW_DAYS} days')
     return rows, ok
 
