@@ -4334,8 +4334,7 @@ function comingTabCount(now: number): number {
   return compiledForTab(now).groups.length;
 }
 function eliteTabCount(now: number): number {
-  const games = openSlateGames(true, now).games;
-  return groupCapperPicks(capperPicksFromGames(games, isEliteBacker), now).length;
+  return eliteGroups(combinedPicks(now)).length;
 }
 function findComingSide(g: ComingGame, sideId: string): ComingSide | null {
   let hit: ComingSide | null = null;
@@ -4479,8 +4478,45 @@ function CapperSlateTab(props: { now: number; mode: "elite" | "coming" }) {
     </Section>
   );
 }
+// Elite (Noel Nov 19): cappers whose graded record is 2-1 or better, best record first, every pick of theirs in the 24h window grouped under them.
+interface EliteGroup { wallet: string; name: string; rec: WL; profit: number | null; picks: UPick[] }
+function eliteGroups(all: UPick[]): EliteGroup[] {
+  const by: Record<string, UPick[]> = {};
+  all.forEach((p: UPick) => {
+    if (p.kind !== "sports") return;
+    p.backers.forEach((b: UBacker) => { if (eliteCapper(b.wallet)) (by[b.wallet] = by[b.wallet] || []).push(p); });
+  });
+  const pen = (p: UPick): number => (p.cmp && p.cmp.verdict === "other" ? 1 : 0);
+  return Object.keys(by).map((w: string) => {
+    const rec = QMAP[w];
+    const big = rec.big || {};
+    return { wallet: w, name: nameOf(rec.name, w), rec: recWL(w, "sports") as WL, profit: big.profit != null ? big.profit : (rec.profit != null ? rec.profit : null), picks: by[w].slice().sort((a: UPick, b: UPick) => (pen(a) - pen(b)) || ((a.live ? 0 : 1) - (b.live ? 0 : 1)) || (a.startTs - b.startTs)) };
+  }).sort((a: EliteGroup, b: EliteGroup) => (wlBetter(a.rec, b.rec) ? -1 : wlBetter(b.rec, a.rec) ? 1 : 0) || ((b.profit || 0) - (a.profit || 0)));
+}
 function EliteTab(props: { now: number }) {
-  return <CapperSlateTab now={props.now} mode="elite" />;
+  const t = useGrokTheme();
+  const all = combinedPicks(props.now);
+  const groups = eliteGroups(all);
+  const pickN = groups.reduce((n: number, g: EliteGroup) => n + g.picks.length, 0);
+  return (
+    <Section heading={"Elite · " + groups.length} caption={"Cappers at 2-1 or better · best record first · starts or settles within 24 hours"}>
+      <Text>{"Elite means a graded record of 2-1 or better (a 66.7%+ win rate) with positive profit. 50/50 cappers are left out. Every one of their $500+ picks with a Kalshi line is grouped under them, best record first. A pick where the other side has the better record is flagged and sorted last."}</Text>
+      <div data-elite-summary="1" style={{ fontSize: 14, fontWeight: 750, color: "#52525B", margin: "2px 2px 12px" }}>{groups.length + " cappers · " + pickN + " picks"}</div>
+      {groups.length === 0 ? <EmptyState title="No Elite picks right now" body={"None of the cappers at 2-1 or better has a $500+ pick with a Kalshi line settling within 24 hours. " + nextScanLabel(props.now) + "."} /> : groups.map((g: EliteGroup, i: number) => (
+        <div key={g.wallet} data-elite-capper={g.wallet} style={{ marginBottom: 20 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", borderRadius: 16, background: "#4C1D95", color: "#FFFFFF", marginBottom: 10 }}>
+            <span style={{ fontSize: 16, fontWeight: 900, minWidth: 30 }}>{"#" + (i + 1)}</span>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: 18, fontWeight: 850, overflowWrap: "anywhere" }}>{g.name}</div>
+              <div style={{ fontSize: 14, fontWeight: 750, opacity: 0.95 }}>{wlText(g.rec) + " · " + pctText(wlRate(g.rec)) + (g.profit != null ? " · " + signedK(g.profit) : "")}</div>
+            </div>
+            <span style={{ fontSize: 13, fontWeight: 850, padding: "3px 10px", borderRadius: 999, background: "#FFFFFF", color: "#4C1D95" }}>{g.picks.length === 1 ? "1 pick" : g.picks.length + " picks"}</span>
+          </div>
+          {g.picks.map((q: UPick) => <UCard key={g.wallet + q.key} p={q} opp={oppositeOf(q, all)} now={props.now} stake="$2–4" />)}
+        </div>
+      ))}
+    </Section>
+  );
 }
 
 // ---------- Compiled picks (Coming Up) and ranked cappers (Cappers tab), Noel Nov 17 ----------
@@ -4702,14 +4738,14 @@ function HotWeekTab(props: { now: number }) {
   );
 }
 // ---------- Combined pick log (Noel Nov 17): every good capper's picks on one list; Politics & Econ tab ----------
-interface PEBacker { wallet: string; name: string; cost: number; avg?: number | null; best?: string; cats?: Record<string, { month: number; all: number }> }
-interface PEPick { id: string; ticker: string; eventTicker: string; eventTitle: string; marketTitle: string; outcome: string; yesNo: "Yes" | "No"; kPrice: number; settleTs: number; polyTitle?: string; polyPrice?: number | null; gap?: number | null; backers: PEBacker[]; total: number; n: number; cat?: string }
-interface PEData { ts?: number; fullTs?: number; cappers?: { wallet: string; name: string; best: string; cats: Record<string, { month: number; all: number }> }[]; picks?: PEPick[]; stats?: Record<string, number> }
+interface PEBacker { wallet: string; name: string; cost: number; avg?: number | null; rec?: { w: number; l: number } | null; best?: string; cats?: Record<string, { month: number; all: number }> }
+interface PEPick { note?: string | null; id: string; ticker: string; eventTicker: string; eventTitle: string; marketTitle: string; outcome: string; yesNo: "Yes" | "No"; kPrice: number; settleTs: number; polyTitle?: string; polyPrice?: number | null; gap?: number | null; backers: PEBacker[]; total: number; n: number; cat?: string }
+interface PEData { ts?: number; fullTs?: number; cappers?: { rec?: { w: number; l: number } | null; wallet: string; name: string; best: string; cats: Record<string, { month: number; all: number }> }[]; picks?: PEPick[]; stats?: Record<string, number> }
 const PE_DATA: PEData = ((DATA as any).politicsEcon || { picks: [], cappers: [] }) as PEData;
-const PE_CAP: Record<string, { best: string; cats: Record<string, { month: number; all: number }> }> = (() => { const m: Record<string, any> = {}; (PE_DATA.cappers || []).forEach((c) => { m[(c.wallet || "").toLowerCase()] = c; }); return m; })();
+const PE_CAP: Record<string, { rec?: { w: number; l: number } | null; best: string; cats: Record<string, { month: number; all: number }> }> = (() => { const m: Record<string, any> = {}; (PE_DATA.cappers || []).forEach((c) => { m[(c.wallet || "").toLowerCase()] = c; }); return m; })();
 const PE_CAT_LABEL: Record<string, string> = { politics: "Politics", economics: "Econ", finance: "Finance" };
 interface UBacker { wallet: string; name: string; cost: number; avg: number | null; tags: string[]; score: number; line: string; buysOk?: boolean; buyTs?: number | null; buy3h?: number | null }
-interface UPick { key: string; mid: string; kind: "sports" | "pe"; view: KalshiView; big: string; sub: string; league: string; gameId: string; startTs: number; settleTs: number; live: boolean; backers: UBacker[]; total: number; tags: string[]; score: number; entryNote: string | null; note: string | null; fresh?: "fresh" | "hold" | null; freshTs?: number | null; slipTier?: "good" | "slight" | "much" | null }
+interface UPick { key: string; mid: string; kind: "sports" | "pe"; view: KalshiView; big: string; sub: string; league: string; gameId: string; startTs: number; settleTs: number; live: boolean; backers: UBacker[]; total: number; tags: string[]; score: number; entryNote: string | null; note: string | null; cmp?: SideCmp | null; fresh?: "fresh" | "hold" | null; freshTs?: number | null; slipTier?: "good" | "slight" | "much" | null }
 const U_TAG_ORDER = ["Proven", "Elite", "🔥 Hot", "Politics-Econ", "Tracked"];
 function shortName(n: string, max = 16): string { return n.length > max ? n.slice(0, max - 1) + "…" : n; }
 function capperScoreOf(w: string): number {
@@ -4735,12 +4771,68 @@ function backerRecordLine(w: string, name: string): string {
   if (pe) { const b = pe.cats[pe.best]; if (b) { parts.push(PE_CAT_LABEL[pe.best] + " " + signedK(b.month) + " mo"); parts.push(signedK(b.all) + " all"); } }
   return parts.join(" · ");
 }
+function peRecordLine(w: string, b: PEBacker): string {
+  const parts: string[] = [shortName(b.name)];
+  const r = b.rec || (PE_CAP[w] && PE_CAP[w].rec) || null;
+  if (r) parts.push(r.w + "-" + r.l);
+  const pe = PE_CAP[w];
+  const c = pe && pe.cats[pe.best];
+  if (pe && c) { parts.push(PE_CAT_LABEL[pe.best] + " " + signedK(c.month) + " mo"); parts.push(signedK(c.all) + " all"); }
+  return parts.join(" · ");
+}
 function tagsOfWallet(w: string): string[] {
   const t: string[] = [];
   if (ELITE_W[w]) t.push("Elite");
   if (HOT_W[w]) t.push("🔥 Hot");
   if (PE_CAP[w]) t.push("Politics-Econ");
   return t;
+}
+// ---------- Records: Elite rule (2-1 or better) and the better-record-than-other-side flag ----------
+interface WL { w: number; l: number }
+interface SideCmp { verdict: "this" | "other" | null; thisBest: WL; oppBest: WL; thisAvg: number; oppAvg: number }
+const wlRate = (r: WL): number => (r.w + r.l ? r.w / (r.w + r.l) : 0);
+const wlBetter = (a: WL, b: WL): boolean => (wlRate(a) - wlRate(b) > 1e-9) || (Math.abs(wlRate(a) - wlRate(b)) <= 1e-9 && a.w > b.w);
+const wlText = (r: WL): string => r.w + "-" + r.l;
+const pctText = (x: number): string => Math.round(x * 100) + "%";
+// Graded record of a capper: sports = the record shown on cards (big-bet record when there is one); Politics & Econ = their settled $500+ non-sports bets of the last 90 days.
+function recWL(w: string, kind: "sports" | "pe"): WL | null {
+  if (kind === "pe") { const c = PE_CAP[w]; return c && c.rec ? { w: c.rec.w, l: c.rec.l } : null; }
+  const rec = QMAP[w];
+  if (!rec) return null;
+  const big = rec.big || {};
+  if (big.n) return { w: big.w || 0, l: big.l || 0 };
+  if (rec.n) return { w: rec.w, l: rec.l };
+  return null;
+}
+// 2-1 or better (win rate 66.7%+), at least one win. A 50/50 capper is out.
+const wlElite = (r: WL | null): boolean => !!r && r.w > 0 && r.w >= 2 * r.l;
+function eliteCapper(w: string): boolean {
+  const rec = QMAP[w];
+  if (!rec || rec.badge === "Cooling" || rec.mm || rec.oneOff) return false;
+  const big = rec.big || {};
+  const pr = big.profit != null ? big.profit : rec.profit;
+  if (pr == null || pr <= 0) return false;
+  return wlElite(recWL(w, "sports"));
+}
+function bestWL(list: WL[]): WL { return list.slice().sort((a: WL, b: WL) => (wlBetter(a, b) ? -1 : wlBetter(b, a) ? 1 : 0))[0]; }
+// Compare the best and the average record of this side's cappers against the Other side's. Only flags when one side wins on both.
+function sideCompare(p: UPick, all: UPick[]): SideCmp | null {
+  if (p.kind !== "sports") return null;
+  const opp = oppositeOf(p, all);
+  if (!opp.length) return null;
+  const oppW: Record<string, boolean> = {};
+  opp.forEach((q: UPick) => q.backers.forEach((b: UBacker) => { oppW[b.wallet] = true; }));
+  const mine: WL[] = [];
+  p.backers.forEach((b: UBacker) => { if (oppW[b.wallet]) return; const r = recWL(b.wallet, "sports"); if (r) mine.push(r); });
+  const theirs: WL[] = [];
+  const seen: Record<string, boolean> = {};
+  opp.forEach((q: UPick) => q.backers.forEach((b: UBacker) => { if (seen[b.wallet]) return; seen[b.wallet] = true; const r = recWL(b.wallet, "sports"); if (r) theirs.push(r); }));
+  if (!mine.length || !theirs.length) return null;
+  const tb = bestWL(mine), ob = bestWL(theirs);
+  const ta = mine.reduce((a: number, r: WL) => a + wlRate(r), 0) / mine.length;
+  const oa = theirs.reduce((a: number, r: WL) => a + wlRate(r), 0) / theirs.length;
+  const verdict = wlBetter(ob, tb) && oa >= ta ? "other" : wlBetter(tb, ob) && ta >= oa ? "this" : null;
+  return { verdict, thisBest: tb, oppBest: ob, thisAvg: ta, oppAvg: oa };
 }
 // Fresh / Hold (from Polymarket's public trade activity, read at scan time): Fresh = a backer bought $500+ on this side in the last 3h.
 // Hold = every backer's activity was read and none of them bought this side in the last 24h. No data for a backer = no tag (never guessed).
@@ -4763,7 +4855,7 @@ function slipTierOf(p: UPick): "good" | "slight" | "much" | null {
   if (s == null) return null;
   return s <= 2 ? "good" : s <= 5 ? "slight" : "much";
 }
-function combinedPicks(now: number): UPick[] {
+function combinedPicks(now: number, peDays: number = 1): UPick[] {
   const by: Record<string, UPick> = {};
   const addGroup = (g: PickGroup) => {
     let p = by[g.key];
@@ -4781,7 +4873,7 @@ function combinedPicks(now: number): UPick[] {
   compiledGroups(upcoming(openSlateGames(true, now).games), now).forEach(addGroup);
   hotGroups(now).forEach(addGroup);
   (PE_DATA.picks || []).forEach((q: PEPick) => {
-    if (q.settleTs < now || q.settleTs > now + PICK_WINDOW_SECS) return;
+    if (q.settleTs < now || q.settleTs > now + peDays * PICK_WINDOW_SECS) return;
     const key = q.ticker + "|" + q.yesNo;
     const view: KalshiView = { backing: q.outcome, marketTitle: q.marketTitle, outcome: q.outcome, yesNo: q.yesNo, price: q.kPrice, ticker: q.ticker };
     const binary = /^(yes|no)$/i.test(q.outcome) || q.marketTitle.toLowerCase().indexOf(q.outcome.toLowerCase()) >= 0;
@@ -4789,12 +4881,12 @@ function combinedPicks(now: number): UPick[] {
     if (!p) {
       const gap = q.gap != null ? Math.round(q.gap * 100) : null;
       p = by[key] = { key, mid: q.ticker, kind: "pe", view, big: binary ? q.marketTitle : q.outcome, sub: binary ? "" : q.marketTitle, league: (q.cat || "Politics"), gameId: q.eventTicker, startTs: 0, settleTs: q.settleTs, live: false, backers: [], total: 0, tags: [], score: 0, entryNote: null,
-        note: gap == null ? null : (gap === 0 ? "Same price on Polymarket" : "Kalshi pays " + (gap > 0 ? "less" : "more") + " than Polymarket (" + cents(q.polyPrice as number) + ")") };
+        note: [gap == null ? null : (gap === 0 ? "Same price on Polymarket" : "Kalshi pays " + (gap > 0 ? "less" : "more") + " than Polymarket (" + cents(q.polyPrice as number) + ")"), q.note || null].filter(Boolean).join(" · ") || null };
     }
     q.backers.forEach((b: PEBacker) => {
       const w = b.wallet.toLowerCase();
       if (p!.backers.some((x: UBacker) => x.wallet === w)) return;
-      p!.backers.push({ wallet: w, name: b.name, cost: b.cost, avg: b.avg != null ? b.avg : null, tags: ["Politics-Econ"].concat(tagsOfWallet(w).filter((x: string) => x !== "Politics-Econ")), score: capperScoreOf(w), line: backerRecordLine(w, b.name) });
+      p!.backers.push({ wallet: w, name: b.name, cost: b.cost, avg: b.avg != null ? b.avg : null, tags: ["Politics-Econ"].concat(tagsOfWallet(w).filter((x: string) => x !== "Politics-Econ")), score: capperScoreOf(w), line: peRecordLine(w, b) });
     });
   });
   const out = Object.keys(by).map((k: string) => by[k]).filter((p: UPick) => p.backers.length);
@@ -4809,18 +4901,23 @@ function combinedPicks(now: number): UPick[] {
     p.fresh = fr.tag; p.freshTs = fr.ts;
     p.slipTier = slipTierOf(p);
   });
+  out.forEach((p: UPick) => { p.cmp = sideCompare(p, out); });
   return out;
 }
-function orderUnits(picks: UPick[], mode: "rank" | "start" | "settle"): { id: string; picks: UPick[] }[] {
+function orderUnits(picks: UPick[], mode: "rank" | "start" | "settle" | "record"): { id: string; picks: UPick[] }[] {
   const by: Record<string, UPick[]> = {};
   const order: string[] = [];
   picks.forEach((p: UPick) => { if (!by[p.gameId]) { by[p.gameId] = []; order.push(p.gameId); } by[p.gameId].push(p); });
-  const units = order.map((id: string) => ({ id, picks: by[id].slice().sort((a: UPick, b: UPick) => (b.score - a.score) || (b.total - a.total)) }));
+  const pen = (p: UPick): number => (p.cmp && p.cmp.verdict === "other" ? 1 : 0);
+  const topRec = (p: UPick): WL => bestWL(p.backers.map((b: UBacker) => recWL(b.wallet, p.kind)).filter((r): r is WL => !!r).concat([{ w: 0, l: 1 }]));
+  const recCmp = (a: UPick, b: UPick): number => (wlBetter(topRec(a), topRec(b)) ? -1 : wlBetter(topRec(b), topRec(a)) ? 1 : 0);
+  const units = order.map((id: string) => ({ id, picks: by[id].slice().sort((a: UPick, b: UPick) => (pen(a) - pen(b)) || (mode === "record" ? (recCmp(a, b) || (a.settleTs - b.settleTs)) : ((b.score - a.score) || (b.total - a.total)))) }));
   const startKey = (u: { picks: UPick[] }) => (u.picks[0].kind === "pe" ? 1e12 + u.picks[0].settleTs : (u.picks[0].live ? 0 : u.picks[0].startTs || 1e11));
   if (mode === "rank") units.sort((a, b) => b.picks[0].score - a.picks[0].score);
   else if (mode === "start") units.sort((a, b) => startKey(a) - startKey(b));
+  else if (mode === "record") units.sort((a, b) => recCmp(a.picks[0], b.picks[0]) || (a.picks[0].settleTs - b.picks[0].settleTs));
   else units.sort((a, b) => Math.min.apply(null, a.picks.map((p: UPick) => p.settleTs)) - Math.min.apply(null, b.picks.map((p: UPick) => p.settleTs)));
-  if (mode === "settle") units.forEach((u) => u.picks.sort((a: UPick, b: UPick) => (a.settleTs - b.settleTs) || (b.total - a.total)));
+  if (mode === "settle") units.forEach((u) => u.picks.sort((a: UPick, b: UPick) => (pen(a) - pen(b)) || (a.settleTs - b.settleTs) || (b.total - a.total)));
   return units;
 }
 function settlesIn(ts: number, now: number): string {
@@ -4892,6 +4989,17 @@ function OtherSide(props: { p: UPick; opp: UPick[] }) {
     </div>
   );
 }
+function RecordFlag(props: { cmp: SideCmp }) {
+  const c = props.cmp;
+  const other = c.verdict === "other";
+  const col = other ? "#B45309" : "#15803D";
+  return (
+    <div data-record-flag={c.verdict} style={{ marginTop: 10, padding: "9px 12px", borderRadius: 14, border: "1.5px solid " + col, background: other ? "#FFFBEB" : "#F0FDF4" }}>
+      <div style={{ fontSize: 15, fontWeight: 850, color: col }}>{other ? "Other side has the better record (" + wlText(c.oppBest) + " vs " + wlText(c.thisBest) + ")" : "Better record than other side (" + wlText(c.thisBest) + " vs " + wlText(c.oppBest) + ")"}</div>
+      <div style={{ fontSize: 12, fontWeight: 700, color: "#52525B", marginTop: 2 }}>{"Best record and average win rate: this side " + wlText(c.thisBest) + " · " + pctText(c.thisAvg) + ", other side " + wlText(c.oppBest) + " · " + pctText(c.oppAvg)}</div>
+    </div>
+  );
+}
 function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNode; sourceTags?: boolean; opp?: UPick[]; stakeLine?: string; rankNo?: number }) {
   const t = useGrokTheme();
   const p = props.p;
@@ -4925,6 +5033,7 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
         {props.stakeLine ? <div data-stake-line="1" style={{ marginTop: 6, fontSize: 14, fontWeight: 850, color: GREEN, fontVariantNumeric: "tabular-nums" }}>{props.stakeLine}</div> : null}
         <OnKalshiBox view={v} />
         {top.map((b: UBacker) => <div key={b.wallet} data-ucard-rec={b.wallet} style={{ fontSize: 14, lineHeight: "20px", fontWeight: 650, color: t.text.secondary, marginTop: 2, overflowWrap: "anywhere" }}>{b.line}</div>)}
+        {p.cmp && p.cmp.verdict && props.opp ? <RecordFlag cmp={p.cmp} /> : null}
         {props.opp ? <OtherSide p={p} opp={props.opp} /> : null}
         <details data-ucard-more="1" style={{ marginTop: 8 }}>
           <summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 14, color: BRAND }}>{rest.length ? "Details · +" + rest.length + " more" : "Details"}</summary>
@@ -5001,7 +5110,7 @@ function todayCard(all: UPick[], now: number): { picks: CardPick[]; total: numbe
     .map((p: UPick) => ({ p, n: nonHedge(p), opp: oppN(p) }))
     .filter((r) => r.n >= 1 && r.opp < r.n);
   const cmp = (a: { p: UPick; n: number }, b: { p: UPick; n: number }) =>
-    (b.n - a.n) || ((b.p.fresh === "fresh" ? 1 : 0) - (a.p.fresh === "fresh" ? 1 : 0)) || (payoutOf(a.p) - payoutOf(b.p)) || (b.p.total - a.p.total) || (a.p.startTs - b.p.startTs);
+    (b.n - a.n) || ((a.p.cmp && a.p.cmp.verdict === "other" ? 1 : 0) - (b.p.cmp && b.p.cmp.verdict === "other" ? 1 : 0)) || ((b.p.fresh === "fresh" ? 1 : 0) - (a.p.fresh === "fresh" ? 1 : 0)) || (payoutOf(a.p) - payoutOf(b.p)) || (b.p.total - a.p.total) || (a.p.startTs - b.p.startTs);
   const safe = rows.filter((r) => payoutOf(r.p) <= 1.8).sort(cmp);
   const rest = rows.filter((r) => payoutOf(r.p) > 1.8).sort(cmp);
   const chosen: { p: UPick; n: number }[] = [];
@@ -5063,19 +5172,20 @@ function ComingUpTab(props: { now: number }) {
     </Section>
   );
 }
-function peTabCount(now: number): number { return combinedPicks(now).filter((p: UPick) => p.kind === "pe").length; }
+const PE_DAYS = 7; // Politics & Econ settles on its own 7-day window; the sports tabs stay at 24 hours
+function peTabCount(now: number): number { return combinedPicks(now, PE_DAYS).filter((p: UPick) => p.kind === "pe").length; }
 function PoliticsEconTab(props: { now: number }) {
   const t = useGrokTheme();
-  const picks = combinedPicks(props.now).filter((p: UPick) => p.kind === "pe");
-  const units = orderUnits(picks, "settle");
+  const picks = combinedPicks(props.now, PE_DAYS).filter((p: UPick) => p.kind === "pe");
+  const units = orderUnits(picks, "record");
   const caps = PE_DATA.cappers || [];
   const used: Record<string, boolean> = {};
   picks.forEach((p: UPick) => p.backers.forEach((b: UBacker) => { used[b.wallet] = true; }));
   return (
-    <Section heading={"Politics & Econ · " + picks.length} caption={"Settles within 24 hours · soonest first · " + Object.keys(used).length + " cappers with an open bet · " + caps.length + " established cappers"}>
-      <Text>{"Suggested $1–2 per pick. Budget about $5–10 a day out of the $40. Only established politics, economics and finance wallets (profitable before this month, not market makers) with a $500+ open position and the same outcome and side on Kalshi."}</Text>
-      {picks.length === 0 ? <EmptyState title="No Kalshi-matched picks right now" body={"None of the established politics, economics or finance cappers has a $500+ bet that matches a Kalshi market and settles within 24 hours. Later ones are under Cappers. " + nextScanLabel(props.now) + "."} /> : <UnitList units={units} now={props.now} stake="$1–2" noun="event" />}
-      <Text>{"Only picks settling within 24 hours show here. Later ones (and every established capper) are under Cappers → Politics & Econ cappers."}</Text>
+    <Section heading={"Politics & Econ · " + picks.length} caption={"Settles within 7 days · best record first · " + Object.keys(used).length + " top cappers with an open bet · " + caps.filter((c) => !!c.rec && wlElite(c.rec)).length + " of " + caps.length + " established cappers are at 2-1 or better"}>
+      <Text>{"Suggested $1–2 per pick. Budget about $5–10 a day out of the $40. Only top cappers: established politics, economics and finance wallets (profitable, not market makers) with a graded record of 2-1 or better over their last 90 days, best record first. Each needs a $500+ open position with the same outcome and side on Kalshi, settling within 7 days. Includes Kalshi's short-dated finance markets (daily crypto and gas)."}</Text>
+      {picks.length === 0 ? <EmptyState title="No Kalshi-matched picks right now" body={"None of the top politics, economics or finance cappers has a $500+ bet that matches a Kalshi market and settles within 7 days. Later ones are under Cappers. " + nextScanLabel(props.now) + "."} /> : <UnitList units={units} now={props.now} stake="$1–2" noun="event" />}
+      <Text>{"Only picks settling within 7 days show here. Later ones (and every established capper) are under Cappers → Politics & Econ cappers."}</Text>
     </Section>
   );
 }
@@ -5095,7 +5205,7 @@ function PECappersList(props: { now: number }) {
             <div style={{ fontSize: 15, fontWeight: 850, overflowWrap: "anywhere" }}>{nameOf(c.name, c.wallet)}</div>
             <div style={{ fontSize: 13, color: t.text.secondary }}>{Object.keys(c.cats).filter((k: string) => c.cats[k].month || c.cats[k].all).map((k: string) => PE_CAT_LABEL[k] + " " + signedK(c.cats[k].month) + " mo · " + signedK(c.cats[k].all) + " all").join("  |  ")}</div>
             {mine.length ? mine.map((q: PEPick) => (
-              <div key={q.id} style={{ fontSize: 13, marginTop: 4, lineHeight: "18px" }}><b>{(q.yesNo + " · pays " + cents(q.kPrice))}</b>{" · " + (q.marketTitle || q.polyTitle) + " · " + settlesIn(q.settleTs, props.now) + (q.settleTs > props.now + PICK_WINDOW_SECS ? " (not in pick lists yet)" : "")}</div>
+              <div key={q.id} style={{ fontSize: 13, marginTop: 4, lineHeight: "18px" }}><b>{(q.yesNo + " · pays " + cents(q.kPrice))}</b>{" · " + (q.marketTitle || q.polyTitle) + " · " + settlesIn(q.settleTs, props.now) + (q.settleTs > props.now + PE_DAYS * PICK_WINDOW_SECS ? " (not in pick lists yet)" : "")}</div>
             )) : <div style={{ fontSize: 13, marginTop: 4, color: t.text.tertiary }}>No open Kalshi-matched pick right now</div>}
           </div>
         );

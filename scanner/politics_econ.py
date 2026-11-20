@@ -3,7 +3,7 @@
 Full scans recompute the capper list (Polymarket public leaderboard, bounded) and re-match every position against Kalshi's open
 non-sports markets. Hourly refreshes keep the capper list and the accepted matches from the last scan, re-read each capper's open
 positions and re-price the matched Kalshi markets one by one."""
-import json, time, urllib.request
+import json, time, urllib.parse, urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
 import pe_cappers as pc
@@ -77,6 +77,90 @@ def _ts(s):
         return None
 
 
+_EVM = {}
+
+
+def _event_markets(ev):
+    """Open Kalshi markets of one event (cached per process); [] when the event does not exist."""
+    if ev not in _EVM:
+        mk, _ = pm.fetch_event_markets([ev], 30, 1, lambda *a, **k: None)
+        _EVM[ev] = mk
+    return _EVM[ev]
+
+
+REC_DAYS = 90        # graded record = settled non-sports bets of the last 90 days (same window as the sports big-bet record)
+REC_MIN_STAKE = 500.0
+
+
+def _record(w, now=None):
+    """(wins, losses) on the wallet's settled non-sports $500+ bets of the last 90 days, or None if unreadable.
+
+    Polymarket public Data API v2, like backfill.py: CLOSED (sold or redeemed; graded by realized P&L) plus REDEEMABLE
+    (resolved but not redeemed, which is where losers at price 0 sit). Both sides of one market held = a hedge, skipped."""
+    import floor_positions as fp
+    now = now or time.time()
+    start = int(now - REC_DAYS * 86400)
+    seen = {}
+    ok = False
+    for status in ('CLOSED', 'REDEEMABLE'):
+        cur = None
+        for _ in range(5):
+            u = (fp.BASE + '/positions?user=' + w + '&status=' + status + '&sort_by=TIMESTAMP&limit=500&start=' + str(start)
+                 + ('&cursor=' + urllib.parse.quote(cur) if cur else ''))
+            d = fp._get(u, tries=3)
+            if d is None:
+                break
+            ok = True
+            for x in d.get('data') or []:
+                if SPORTY.search(x.get('title') or ''):
+                    continue
+                stake = (x.get('total_size') or 0) * (x.get('avg_price') or 0)
+                if stake < REC_MIN_STAKE:
+                    continue
+                if status == 'CLOSED':
+                    pnl = x.get('realized_pnl') or 0
+                    res = 'W' if pnl > 0 else ('L' if pnl < 0 else None)
+                else:
+                    cp = x.get('current_price')
+                    res = 'W' if cp is not None and cp >= 0.95 else ('L' if cp is not None and cp <= 0.05 else None)
+                if res:
+                    seen.setdefault(x.get('condition_id'), {})[x.get('outcome_index')] = (res, stake)
+            pg = d.get('pagination') or {}
+            cur = pg.get('next_cursor')
+            if not pg.get('has_more') or not cur:
+                break
+    if not ok:
+        return None
+    wins = losses = 0
+    for sides in seen.values():
+        if len(sides) > 1:
+            continue
+        res = next(iter(sides.values()))[0]
+        wins += res == 'W'
+        losses += res == 'L'
+    return wins, losses
+
+
+def attach_records(cappers, log=print, force=False):
+    todo = [c for c in cappers if force or not c.get('rec')]
+    if not todo:
+        return
+    with ThreadPoolExecutor(max_workers=6) as ex:
+        res = list(ex.map(lambda c: _record(c['wallet']), todo))
+    n = 0
+    for c, r in zip(todo, res):
+        if r is not None:
+            c['rec'] = dict(w=r[0], l=r[1])
+            n += 1
+    log(f'politics/econ: graded records read for {n} of {len(todo)} cappers')
+
+
+def qualifies(c):
+    """2-1 or better on the graded record (win rate 66.7%+), and at least one win."""
+    r = (c or {}).get('rec') or {}
+    return bool(r.get('w')) and r['w'] >= 2 * r.get('l', 0)
+
+
 def build(prev=None, now=None, full=True, log=print):
     """-> block for emb['politicsEcon']. `prev` is the last block (refresh reuses its cappers and matches)."""
     now = now or time.time()
@@ -90,6 +174,10 @@ def build(prev=None, now=None, full=True, log=print):
     if not cappers:
         cappers = prev.get('cappers') or []
         full = False if not cappers else full
+    try:
+        attach_records(cappers, log, force=full)
+    except Exception as e:
+        log('politics/econ records failed:', e)
     byw = {c['wallet']: c for c in cappers}
     pos = _positions(list(byw), log)
     matches = dict(prev.get('matches') or {})
@@ -130,7 +218,18 @@ def build(prev=None, now=None, full=True, log=print):
     for w, q in elig:
         key = '%s|%s' % (q.get('condition_id'), q.get('outcome'))
         mt = None
-        if index is not None:
+        sm = None
+        if not SPORTY.search(q.get('title') or ''):
+            try:
+                sm = pm.short_match(q.get('title') or '', q.get('outcome'), now, _event_markets)
+            except Exception as e:
+                log('politics/econ short match failed:', e)
+        if sm:
+            m = sm['market']
+            mt = dict(t=m['t'], ev=m['ev'], yesNo=sm['yesNo'], how=sm['how'], q=m['q'], et=m['et'], ys=m['ys'], ns=m['ns'], cat=m['cat'] or 'Finance', note=sm.get('note'))
+            live[m['t']] = dict(t=m['t'], ya=m['ya'], na=m['na'], close=m['close'], exp=m['exp'], status='active')
+            st['short'] = st.get('short', 0) + 1
+        elif index is not None:
             r = None if SPORTY.search(q.get('title') or '') else pm.match(index, q.get('title') or '', q.get('outcome'))
             if r and not _horizon_ok(q, r['market']):
                 st['horizon'] = st.get('horizon', 0) + 1
@@ -160,6 +259,9 @@ def build(prev=None, now=None, full=True, log=print):
         lv = live.get(mt['t'])
         if not lv or lv.get('status') not in ('active', 'open'):
             continue
+        if not qualifies(byw[w]):
+            st['notTop'] = st.get('notTop', 0) + 1      # top cappers only: graded record 2-1 or better
+            continue
         yes = mt['yesNo'] == 'Yes'
         px = lv.get('ya') if yes else lv.get('na')
         if px is None or px < HIDE_LO or px > HIDE_HI:
@@ -170,9 +272,9 @@ def build(prev=None, now=None, full=True, log=print):
             continue
         pid = '%s|%s' % (mt['t'], mt['yesNo'])
         p = picks.setdefault(pid, dict(id=pid, ticker=mt['t'], eventTicker=mt['ev'], eventTitle=mt['et'], marketTitle=mt['q'], outcome=(mt['ys'] if yes else (mt['ns'] or mt['ys'])),
-                                       yesNo=mt['yesNo'], kPrice=px, settleTs=settle, polyTitle=q.get('title'), polyPx=[], backers=[], total=0.0, cat=mt['cat']))
+                                       yesNo=mt['yesNo'], kPrice=px, settleTs=settle, polyTitle=q.get('title'), polyPx=[], backers=[], total=0.0, cat=mt['cat'], note=mt.get('note')))
         c = byw[w]
-        p['backers'].append(dict(wallet=w, name=c['name'], cost=round(q['total_cost_usdc']), avg=q.get('avg_price'), best=c['best'], cats=c['cats']))
+        p['backers'].append(dict(wallet=w, name=c['name'], cost=round(q['total_cost_usdc']), avg=q.get('avg_price'), best=c['best'], cats=c['cats'], rec=c.get('rec')))
         p['total'] += q['total_cost_usdc']
         p['polyPx'].append(q.get('current_price'))
     out = []
@@ -189,5 +291,5 @@ def build(prev=None, now=None, full=True, log=print):
     shown = {b['wallet'] for p in out for b in p['backers']}
     log(f"politics/econ: {len(cappers)} cappers, {st['positions']} open positions, {st['big']} at $500+, hedged {st['hedged']}, resolved {st['resolved']}, unmatched {st['unmatched']}, {len(out)} Kalshi picks from {len(shown)} cappers")
     return dict(ts=int(now), fullTs=int(now) if full else int(prev.get('fullTs') or 0), kalshiComplete=bool(complete) if full else bool(prev.get('kalshiComplete')),
-                cappers=[dict(wallet=c['wallet'], name=c['name'], best=c['best'], cats=c['cats']) for c in cappers],
+                cappers=[dict(wallet=c['wallet'], name=c['name'], best=c['best'], cats=c['cats'], rec=c.get('rec')) for c in cappers],
                 picks=out, matches=matches, stats=st)

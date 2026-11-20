@@ -88,7 +88,8 @@ def slim_market(e, m):
             return None
     return dict(t=m.get('ticker'), ev=e.get('event_ticker'), et=e.get('title') or '', cat=e.get('category') or '', q=m.get('title') or '', ys=m.get('yes_sub_title') or '', ns=m.get('no_sub_title') or '',
                 ya=f('yes_ask_dollars'), na=f('no_ask_dollars'), yb=f('yes_bid_dollars'), nb=f('no_bid_dollars'),
-                close=m.get('close_time') or '', exp=m.get('expected_expiration_time') or '', vol=f('volume_fp') or 0, oi=f('open_interest_fp') or 0)
+                close=m.get('close_time') or '', exp=m.get('expected_expiration_time') or '', vol=f('volume_fp') or 0, oi=f('open_interest_fp') or 0,
+                fs=(float(m['floor_strike']) if m.get('floor_strike') is not None and m.get('strike_type') in ('greater', 'greater_or_equal') else None))
 
 
 def _get(url, tries=4, timeout=25):
@@ -311,3 +312,74 @@ def match(index, title, outcome):
         return dict(market=best[0], yesNo=side, how='title')
     # several identical-title markets (e.g. one per expiry): they must not differ in deadline; ambiguous -> drop
     return None
+
+
+# ---------- Short-dated finance / econ templates (daily crypto, daily gas, CPI) ----------
+# Polymarket and Kalshi word these differently, so they are matched by template, not by title text. Same asset, same date, same threshold, same side.
+# Known difference: Polymarket's daily crypto markets settle at noon ET, Kalshi's at 5pm ET (the card carries that note).
+CRYPTO = {'bitcoin': 'KXBTCD', 'ethereum': 'KXETHD', 'solana': 'KXSOLD', 'xrp': 'KXXRPD', 'dogecoin': 'KXDOGED'}
+_MON_ABBR = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+CRYPTO_RE = re.compile(r'^will the price of (bitcoin|ethereum|solana|xrp|dogecoin) be above \$([\d,]+(?:\.\d+)?) on ([a-z]+)\s+(\d{1,2})\??$', re.I)
+GAS_RE = re.compile(r'^will the us national average gas price be (less|greater|more|higher|lower) than \$([\d.]+) on ([a-z]+)\s+(\d{1,2})\??$', re.I)
+CPI_RE = re.compile(r'^will (?:the )?(?:(?P<mon>[a-z]+) (?P<y>20\d\d) )?(?P<core>core )?cpi yoy(?: in (?P<mon2>[a-z]+) (?P<y2>20\d\d))? be (?P<x>[\d.]+)% or lower\??$', re.I)
+
+
+def _date_from(mon, day, now):
+    m = MONTHS.get((mon or '').lower())
+    if not m:
+        return None
+    today = dt.datetime.fromtimestamp(now, dt.timezone.utc).date()
+    for y in (today.year, today.year + 1):
+        try:
+            d = dt.date(y, m, int(day))
+        except ValueError:
+            return None
+        if d >= today - dt.timedelta(days=30):
+            return d
+    return None
+
+
+def short_template(title, now):
+    """-> dict(event=<kalshi event ticker>, kind='above'|'gas'|'cpi', thr=float, flip=bool, note=str|None) or None."""
+    t = (title or '').strip()
+    m = CRYPTO_RE.match(t)
+    if m:
+        d = _date_from(m.group(3), m.group(4), now)
+        if not d:
+            return None
+        ser = CRYPTO[m.group(1).lower()]
+        return dict(event='%s-%02d%s%02d17' % (ser, d.year % 100, _MON_ABBR[d.month - 1], d.day), kind='above', thr=float(m.group(2).replace(',', '')), flip=False,
+                    note='Kalshi settles at 5pm ET; Polymarket settles at noon ET')
+    m = GAS_RE.match(t)
+    if m:
+        d = _date_from(m.group(3), m.group(4), now)
+        if not d:
+            return None
+        less = m.group(1).lower() in ('less', 'lower')
+        return dict(event='KXAAAGASD-%02d%s%02d' % (d.year % 100, _MON_ABBR[d.month - 1], d.day), kind='gas', thr=float(m.group(2)), flip=less, note=None)
+    return None
+
+
+def short_match(title, outcome, now, get_event_markets):
+    """Match a short-dated Polymarket question to ONE Kalshi strike market. `get_event_markets(event_ticker)` -> [slim markets]. -> dict like match() or None."""
+    if outcome not in ('Yes', 'No'):
+        return None
+    tp = short_template(title, now)
+    if not tp:
+        return None
+    ms = get_event_markets(tp['event']) or []
+    best, bd = None, None
+    for m in ms:
+        fs = m.get('fs')
+        if fs is None:
+            continue
+        diff = abs(fs - tp['thr'])
+        tol = (0.0101 if tp['thr'] >= 100 else tp['thr'] * 0.0003) if tp['kind'] == 'above' else 0.00051
+        if diff <= tol and (bd is None or diff < bd):
+            best, bd = m, diff
+    if not best:
+        return None
+    side = outcome
+    if tp['flip']:
+        side = 'No' if outcome == 'Yes' else 'Yes'
+    return dict(market=best, yesNo=side, how=tp['kind'], note=tp['note'])
