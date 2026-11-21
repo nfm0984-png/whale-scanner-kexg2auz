@@ -9,24 +9,24 @@
           "title": "Auckland wins",
           "yes_sub_title": "Auckland",
           "no_sub_title": "Auckland",
-          "yes_ask": 0.02,
-          "no_ask": 0.99
+          "yes_ask": 0.12,
+          "no_ask": 0.92
         },
         {
           "ticker": "KXALEAGUEGAME-26NOV20AUCVIC-VIC",
           "title": "Melbourne Victory wins",
           "yes_sub_title": "Melbourne Victory",
           "no_sub_title": "Melbourne Victory",
-          "yes_ask": 0.81,
-          "no_ask": 0.2
+          "yes_ask": 0.05,
+          "no_ask": 0.97
         },
         {
           "ticker": "KXALEAGUEGAME-26NOV20AUCVIC-TIE",
           "title": "Tie is the result",
           "yes_sub_title": "Tie",
           "no_sub_title": "Tie",
-          "yes_ask": 0.18,
-          "no_ask": 0.83
+          "yes_ask": 0.89,
+          "no_ask": 0.15
         }
       ]
     },
@@ -217,7 +217,7 @@
           "title": "Team Yandex wins",
           "yes_sub_title": "Team Yandex",
           "no_sub_title": "Team Yandex",
-          "yes_ask": 0.77,
+          "yes_ask": 0.78,
           "no_ask": 0.24
         }
       ]
@@ -441,8 +441,8 @@
           "title": "Tie is the result",
           "yes_sub_title": "Tie",
           "no_sub_title": "Tie",
-          "yes_ask": 0.17,
-          "no_ask": 0.84
+          "yes_ask": 0.18,
+          "no_ask": 0.83
         }
       ]
     },
@@ -677,7 +677,7 @@
           "title": "Will over 1.5 goals be scored?",
           "yes_sub_title": "Over 1.5 goals scored",
           "no_sub_title": "Over 1.5 goals scored",
-          "yes_ask": 0.8,
+          "yes_ask": 0.81,
           "no_ask": 0.21
         },
         {
@@ -701,7 +701,7 @@
           "title": "Will over 4.5 goals be scored?",
           "yes_sub_title": "Over 4.5 goals scored",
           "no_sub_title": "Over 4.5 goals scored",
-          "yes_ask": 0.19,
+          "yes_ask": 0.18,
           "no_ask": 0.83
         },
         {
@@ -760,28 +760,6 @@
         }
       ]
     },
-    "KXITFMATCH-26NOV20PLUMAL": {
-      "title": "Plunger vs Malaszszak",
-      "sub_title": "Plunger vs Malaszszak (Nov 20)",
-      "markets": [
-        {
-          "ticker": "KXITFMATCH-26NOV20PLUMAL-PLU",
-          "title": "Manuel Plunger wins",
-          "yes_sub_title": "Manuel Plunger",
-          "no_sub_title": "Manuel Plunger",
-          "yes_ask": 0.63,
-          "no_ask": 0.39
-        },
-        {
-          "ticker": "KXITFMATCH-26NOV20PLUMAL-MAL",
-          "title": "Markus Malaszszak wins",
-          "yes_sub_title": "Markus Malaszszak",
-          "no_sub_title": "Markus Malaszszak",
-          "yes_ask": 0.37,
-          "no_ask": 0.64
-        }
-      ]
-    },
     "KXJ2LEAGUEGAME-26NOV21KATOIT": {
       "title": "Kataller T vs Oita",
       "sub_title": "KAT vs OIT (Nov 21)",
@@ -792,23 +770,23 @@
           "yes_sub_title": "Kataller T",
           "no_sub_title": "Kataller T",
           "yes_ask": 0.48,
-          "no_ask": 0.53
+          "no_ask": 0.54
         },
         {
           "ticker": "KXJ2LEAGUEGAME-26NOV21KATOIT-OIT",
           "title": "Oita wins",
           "yes_sub_title": "Oita",
           "no_sub_title": "Oita",
-          "yes_ask": 0.23,
-          "no_ask": 0.78
+          "yes_ask": 0.22,
+          "no_ask": 0.79
         },
         {
           "ticker": "KXJ2LEAGUEGAME-26NOV21KATOIT-TIE",
           "title": "Tie is the result",
           "yes_sub_title": "Tie",
           "no_sub_title": "Tie",
-          "yes_ask": 0.28,
-          "no_ask": 0.73
+          "yes_ask": 0.32,
+          "no_ask": 0.69
         }
       ]
     },
@@ -829,16 +807,16 @@
           "title": "Nagoya wins",
           "yes_sub_title": "Nagoya",
           "no_sub_title": "Nagoya",
-          "yes_ask": 0.42,
-          "no_ask": 0.59
+          "yes_ask": 0.4,
+          "no_ask": 0.61
         },
         {
           "ticker": "KXJLEAGUEGAME-26NOV21VERNGE-TIE",
           "title": "Tie is the result",
           "yes_sub_title": "Tie",
           "no_sub_title": "Tie",
-          "yes_ask": 0.36,
-          "no_ask": 0.65
+          "yes_ask": 0.38,
+          "no_ask": 0.63
         }
       ]
     },
@@ -1169,8 +1147,8 @@
           "title": "Minnesota wins",
           "yes_sub_title": "Minnesota",
           "no_sub_title": "Minnesota",
-          "yes_ask": 0.67,
-          "no_ask": 0.34
+          "yes_ask": 0.68,
+          "no_ask": 0.33
         }
       ]
     },
@@ -1184,7 +1162,7 @@
           "yes_sub_title": "Milwaukee",
           "no_sub_title": "Milwaukee",
           "yes_ask": 0.17,
-          "no_ask": 0.84
+          "no_ask": 0.85
         },
         {
           "ticker": "KXNBAGAME-26NOV21MILPHI-PHI",
@@ -1213,7 +1191,7 @@
           "title": "San Antonio wins",
           "yes_sub_title": "San Antonio",
           "no_sub_title": "San Antonio",
-          "yes_ask": 0.9,
+          "yes_ask": 0.91,
           "no_ask": 0.11
         }
       ]
@@ -1235,7 +1213,7 @@
           "title": "New York wins",
           "yes_sub_title": "New York",
           "no_sub_title": "New York",
-          "yes_ask": 0.67,
+          "yes_ask": 0.66,
           "no_ask": 0.35
         }
       ]
@@ -1266,7 +1244,7 @@
           "yes_sub_title": "Philadelphia wins by over 34.5 points",
           "no_sub_title": "Philadelphia wins by over 34.5 points",
           "yes_ask": 0.05,
-          "no_ask": 0.98
+          "no_ask": 0.97
         },
         {
           "ticker": "KXNBASPREAD-26NOV21MILPHI-PHI33",
@@ -1274,7 +1252,7 @@
           "yes_sub_title": "Philadelphia wins by over 32.5 points",
           "no_sub_title": "Philadelphia wins by over 32.5 points",
           "yes_ask": 0.08,
-          "no_ask": 0.97
+          "no_ask": 0.96
         },
         {
           "ticker": "KXNBASPREAD-26NOV21MILPHI-PHI31",
@@ -1290,7 +1268,7 @@
           "yes_sub_title": "Philadelphia wins by over 28.5 points",
           "no_sub_title": "Philadelphia wins by over 28.5 points",
           "yes_ask": 0.11,
-          "no_ask": 0.93
+          "no_ask": 0.92
         },
         {
           "ticker": "KXNBASPREAD-26NOV21MILPHI-PHI27",
@@ -1314,7 +1292,7 @@
           "yes_sub_title": "Philadelphia wins by over 22.5 points",
           "no_sub_title": "Philadelphia wins by over 22.5 points",
           "yes_ask": 0.2,
-          "no_ask": 0.82
+          "no_ask": 0.81
         },
         {
           "ticker": "KXNBASPREAD-26NOV21MILPHI-PHI21",
@@ -1362,14 +1340,14 @@
           "yes_sub_title": "Philadelphia wins by over 14.5 points",
           "no_sub_title": "Philadelphia wins by over 14.5 points",
           "yes_ask": 0.42,
-          "no_ask": 0.61
+          "no_ask": 0.6
         },
         {
           "ticker": "KXNBASPREAD-26NOV21MILPHI-PHI14",
           "title": "Philadelphia wins by over 13.5 points",
           "yes_sub_title": "Philadelphia wins by over 13.5 points",
           "no_sub_title": "Philadelphia wins by over 13.5 points",
-          "yes_ask": 0.45,
+          "yes_ask": 0.44,
           "no_ask": 0.57
         },
         {
@@ -1377,8 +1355,8 @@
           "title": "Philadelphia wins by over 12.5 points",
           "yes_sub_title": "Philadelphia wins by over 12.5 points",
           "no_sub_title": "Philadelphia wins by over 12.5 points",
-          "yes_ask": 0.48,
-          "no_ask": 0.54
+          "yes_ask": 0.49,
+          "no_ask": 0.53
         },
         {
           "ticker": "KXNBASPREAD-26NOV21MILPHI-PHI12",
@@ -1393,8 +1371,8 @@
           "title": "Philadelphia wins by over 10.5 points",
           "yes_sub_title": "Philadelphia wins by over 10.5 points",
           "no_sub_title": "Philadelphia wins by over 10.5 points",
-          "yes_ask": 0.56,
-          "no_ask": 0.45
+          "yes_ask": 0.55,
+          "no_ask": 0.46
         },
         {
           "ticker": "KXNBASPREAD-26NOV21MILPHI-PHI10",
@@ -1410,7 +1388,7 @@
           "yes_sub_title": "Philadelphia wins by over 8.5 points",
           "no_sub_title": "Philadelphia wins by over 8.5 points",
           "yes_ask": 0.65,
-          "no_ask": 0.4
+          "no_ask": 0.41
         },
         {
           "ticker": "KXNBASPREAD-26NOV21MILPHI-PHI8",
@@ -1433,7 +1411,7 @@
           "title": "Philadelphia wins by over 4.5 points",
           "yes_sub_title": "Philadelphia wins by over 4.5 points",
           "no_sub_title": "Philadelphia wins by over 4.5 points",
-          "yes_ask": 0.77,
+          "yes_ask": 0.75,
           "no_ask": 0.27
         },
         {
@@ -1466,7 +1444,7 @@
           "yes_sub_title": "Milwaukee wins by over 3.5 points",
           "no_sub_title": "Milwaukee wins by over 3.5 points",
           "yes_ask": 0.13,
-          "no_ask": 0.91
+          "no_ask": 0.9
         },
         {
           "ticker": "KXNBASPREAD-26NOV21MILPHI-MIL6",
@@ -1482,7 +1460,7 @@
           "yes_sub_title": "Milwaukee wins by over 7.5 points",
           "no_sub_title": "Milwaukee wins by over 7.5 points",
           "yes_ask": 0.08,
-          "no_ask": 0.97
+          "no_ask": 0.96
         },
         {
           "ticker": "KXNBASPREAD-26NOV21MILPHI-MIL10",
@@ -1505,7 +1483,7 @@
           "title": "Milwaukee wins by over 13.5 points",
           "yes_sub_title": "Milwaukee wins by over 13.5 points",
           "no_sub_title": "Milwaukee wins by over 13.5 points",
-          "yes_ask": 0.05,
+          "yes_ask": 0.04,
           "no_ask": 0.99
         }
       ]
@@ -1520,7 +1498,7 @@
           "yes_sub_title": "Over 189.5 points",
           "no_sub_title": "Over 189.5 points",
           "yes_ask": 0.99,
-          "no_ask": 0.25
+          "no_ask": 0.26
         },
         {
           "ticker": "KXNBATOTAL-26NOV21BOSSAC-192",
@@ -1528,7 +1506,7 @@
           "yes_sub_title": "Over 191.5 points",
           "no_sub_title": "Over 191.5 points",
           "yes_ask": 0.98,
-          "no_ask": 0.33
+          "no_ask": 0.32
         },
         {
           "ticker": "KXNBATOTAL-26NOV21BOSSAC-194",
@@ -1536,7 +1514,7 @@
           "yes_sub_title": "Over 193.5 points",
           "no_sub_title": "Over 193.5 points",
           "yes_ask": 0.98,
-          "no_ask": 0.31
+          "no_ask": 0.22
         },
         {
           "ticker": "KXNBATOTAL-26NOV21BOSSAC-196",
@@ -1552,7 +1530,7 @@
           "yes_sub_title": "Over 197.5 points",
           "no_sub_title": "Over 197.5 points",
           "yes_ask": 0.98,
-          "no_ask": 0.28
+          "no_ask": 0.3
         },
         {
           "ticker": "KXNBATOTAL-26NOV21BOSSAC-200",
@@ -1560,7 +1538,7 @@
           "yes_sub_title": "Over 199.5 points",
           "no_sub_title": "Over 199.5 points",
           "yes_ask": 0.98,
-          "no_ask": 0.27
+          "no_ask": 0.3
         },
         {
           "ticker": "KXNBATOTAL-26NOV21BOSSAC-202",
@@ -1568,7 +1546,7 @@
           "yes_sub_title": "Over 201.5 points",
           "no_sub_title": "Over 201.5 points",
           "yes_ask": 0.98,
-          "no_ask": 0.36
+          "no_ask": 0.31
         },
         {
           "ticker": "KXNBATOTAL-26NOV21BOSSAC-204",
@@ -1576,15 +1554,15 @@
           "yes_sub_title": "Over 203.5 points",
           "no_sub_title": "Over 203.5 points",
           "yes_ask": 0.86,
-          "no_ask": 0.36
+          "no_ask": 0.28
         },
         {
           "ticker": "KXNBATOTAL-26NOV21BOSSAC-206",
           "title": "Full Game: Over 205.5 points scored",
           "yes_sub_title": "Over 205.5 points",
           "no_sub_title": "Over 205.5 points",
-          "yes_ask": 0.82,
-          "no_ask": 0.35
+          "yes_ask": 0.84,
+          "no_ask": 0.33
         },
         {
           "ticker": "KXNBATOTAL-26NOV21BOSSAC-208",
@@ -1592,7 +1570,7 @@
           "yes_sub_title": "Over 207.5 points",
           "no_sub_title": "Over 207.5 points",
           "yes_ask": 0.79,
-          "no_ask": 0.36
+          "no_ask": 0.32
         },
         {
           "ticker": "KXNBATOTAL-26NOV21BOSSAC-210",
@@ -1679,15 +1657,15 @@
           "title": "Full Game: Over 229.5 points scored",
           "yes_sub_title": "Over 229.5 points",
           "no_sub_title": "Over 229.5 points",
-          "yes_ask": 0.33,
-          "no_ask": 0.74
+          "yes_ask": 0.32,
+          "no_ask": 0.73
         },
         {
           "ticker": "KXNBATOTAL-26NOV21BOSSAC-232",
           "title": "Full Game: Over 231.5 points scored",
           "yes_sub_title": "Over 231.5 points",
           "no_sub_title": "Over 231.5 points",
-          "yes_ask": 0.29,
+          "yes_ask": 0.28,
           "no_ask": 0.82
         },
         {
@@ -1704,7 +1682,7 @@
           "yes_sub_title": "Over 235.5 points",
           "no_sub_title": "Over 235.5 points",
           "yes_ask": 0.23,
-          "no_ask": 0.94
+          "no_ask": 0.93
         },
         {
           "ticker": "KXNBATOTAL-26NOV21BOSSAC-238",
@@ -1712,7 +1690,7 @@
           "yes_sub_title": "Over 237.5 points",
           "no_sub_title": "Over 237.5 points",
           "yes_ask": 0.2,
-          "no_ask": 0.96
+          "no_ask": 0.94
         },
         {
           "ticker": "KXNBATOTAL-26NOV21BOSSAC-240",
@@ -1720,7 +1698,7 @@
           "yes_sub_title": "Over 239.5 points",
           "no_sub_title": "Over 239.5 points",
           "yes_ask": 0.17,
-          "no_ask": 0.96
+          "no_ask": 0.93
         },
         {
           "ticker": "KXNBATOTAL-26NOV21BOSSAC-242",
@@ -1748,25 +1726,25 @@
         }
       ]
     },
-    "KXNCAAFGAME-26NOV20UNMWYO": {
-      "title": "New Mexico vs Wyoming",
-      "sub_title": "UNM vs WYO (Nov 20)",
+    "KXNBLGAME-26NOV210130ILLATAS": {
+      "title": "Illawarra Hawks vs Tasmania JackJumpers",
+      "sub_title": "ILLA vs TAS (Nov 21)",
       "markets": [
         {
-          "ticker": "KXNCAAFGAME-26NOV20UNMWYO-WYO",
-          "title": "Wyoming wins",
-          "yes_sub_title": "Wyoming",
-          "no_sub_title": "Wyoming",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
+          "ticker": "KXNBLGAME-26NOV210130ILLATAS-TAS",
+          "title": "Tasmania JackJumpers wins",
+          "yes_sub_title": "Tasmania JackJumpers",
+          "no_sub_title": "Tasmania JackJumpers",
+          "yes_ask": 0.66,
+          "no_ask": 0.35
         },
         {
-          "ticker": "KXNCAAFGAME-26NOV20UNMWYO-UNM",
-          "title": "New Mexico wins",
-          "yes_sub_title": "New Mexico",
-          "no_sub_title": "New Mexico",
-          "yes_ask": 1.0,
-          "no_ask": 0.01
+          "ticker": "KXNBLGAME-26NOV210130ILLATAS-ILLA",
+          "title": "Illawarra Hawks wins",
+          "yes_sub_title": "Illawarra Hawks",
+          "no_sub_title": "Illawarra Hawks",
+          "yes_ask": 0.34,
+          "no_ask": 0.67
         }
       ]
     },
@@ -1836,28 +1814,6 @@
         }
       ]
     },
-    "KXNCAAFGAME-26NOV21UNTTULN": {
-      "title": "North Texas vs Tulane",
-      "sub_title": "UNT vs TULN (Nov 21)",
-      "markets": [
-        {
-          "ticker": "KXNCAAFGAME-26NOV21UNTTULN-TULN",
-          "title": "Tulane wins",
-          "yes_sub_title": "Tulane",
-          "no_sub_title": "Tulane",
-          "yes_ask": 0.3,
-          "no_ask": 0.71
-        },
-        {
-          "ticker": "KXNCAAFGAME-26NOV21UNTTULN-UNT",
-          "title": "North Texas wins",
-          "yes_sub_title": "North Texas",
-          "no_sub_title": "North Texas",
-          "yes_ask": 0.71,
-          "no_ask": 0.3
-        }
-      ]
-    },
     "KXNCAAFGAME-26NOV21UTSAUAB": {
       "title": "UTSA vs UAB",
       "sub_title": "UTSA vs UAB (Nov 21)",
@@ -1877,268 +1833,6 @@
           "no_sub_title": "UTSA",
           "yes_ask": 0.67,
           "no_ask": 0.34
-        }
-      ]
-    },
-    "KXNCAAFSPREAD-26NOV20UNMWYO": {
-      "title": "New Mexico vs Wyoming: Spread",
-      "sub_title": "UNM vs WYO (Nov 20)",
-      "markets": [
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-WYO14",
-          "title": "Wyoming wins by over 13.5 points",
-          "yes_sub_title": "Wyoming wins by over 13.5 points",
-          "no_sub_title": "Wyoming wins by over 13.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-WYO12",
-          "title": "Wyoming wins by over 11.5 points",
-          "yes_sub_title": "Wyoming wins by over 11.5 points",
-          "no_sub_title": "Wyoming wins by over 11.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-WYO11",
-          "title": "Wyoming wins by over 10.5 points",
-          "yes_sub_title": "Wyoming wins by over 10.5 points",
-          "no_sub_title": "Wyoming wins by over 10.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-WYO10",
-          "title": "Wyoming wins by over 9.5 points",
-          "yes_sub_title": "Wyoming wins by over 9.5 points",
-          "no_sub_title": "Wyoming wins by over 9.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-WYO8",
-          "title": "Wyoming wins by over 7.5 points",
-          "yes_sub_title": "Wyoming wins by over 7.5 points",
-          "no_sub_title": "Wyoming wins by over 7.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-WYO7",
-          "title": "Wyoming wins by over 6.5 points",
-          "yes_sub_title": "Wyoming wins by over 6.5 points",
-          "no_sub_title": "Wyoming wins by over 6.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-WYO6",
-          "title": "Wyoming wins by over 5.5 points",
-          "yes_sub_title": "Wyoming wins by over 5.5 points",
-          "no_sub_title": "Wyoming wins by over 5.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-WYO5",
-          "title": "Wyoming wins by over 4.5 points",
-          "yes_sub_title": "Wyoming wins by over 4.5 points",
-          "no_sub_title": "Wyoming wins by over 4.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-WYO4",
-          "title": "Wyoming wins by over 3.5 points",
-          "yes_sub_title": "Wyoming wins by over 3.5 points",
-          "no_sub_title": "Wyoming wins by over 3.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-WYO3",
-          "title": "Wyoming wins by over 2.5 points",
-          "yes_sub_title": "Wyoming wins by over 2.5 points",
-          "no_sub_title": "Wyoming wins by over 2.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-WYO2",
-          "title": "Wyoming wins by over 1.5 points",
-          "yes_sub_title": "Wyoming wins by over 1.5 points",
-          "no_sub_title": "Wyoming wins by over 1.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM2",
-          "title": "New Mexico wins by over 1.5 points",
-          "yes_sub_title": "New Mexico wins by over 1.5 points",
-          "no_sub_title": "New Mexico wins by over 1.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 0.01
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM3",
-          "title": "New Mexico wins by over 2.5 points",
-          "yes_sub_title": "New Mexico wins by over 2.5 points",
-          "no_sub_title": "New Mexico wins by over 2.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 0.01
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM4",
-          "title": "New Mexico wins by over 3.5 points",
-          "yes_sub_title": "New Mexico wins by over 3.5 points",
-          "no_sub_title": "New Mexico wins by over 3.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 0.01
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM5",
-          "title": "New Mexico wins by over 4.5 points",
-          "yes_sub_title": "New Mexico wins by over 4.5 points",
-          "no_sub_title": "New Mexico wins by over 4.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 0.01
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM6",
-          "title": "New Mexico wins by over 5.5 points",
-          "yes_sub_title": "New Mexico wins by over 5.5 points",
-          "no_sub_title": "New Mexico wins by over 5.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 0.01
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM7",
-          "title": "New Mexico wins by over 6.5 points",
-          "yes_sub_title": "New Mexico wins by over 6.5 points",
-          "no_sub_title": "New Mexico wins by over 6.5 points",
-          "yes_ask": 1.0,
-          "no_ask": 0.01
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM8",
-          "title": "New Mexico wins by over 7.5 points",
-          "yes_sub_title": "New Mexico wins by over 7.5 points",
-          "no_sub_title": "New Mexico wins by over 7.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM10",
-          "title": "New Mexico wins by over 9.5 points",
-          "yes_sub_title": "New Mexico wins by over 9.5 points",
-          "no_sub_title": "New Mexico wins by over 9.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM11",
-          "title": "New Mexico wins by over 10.5 points",
-          "yes_sub_title": "New Mexico wins by over 10.5 points",
-          "no_sub_title": "New Mexico wins by over 10.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM12",
-          "title": "New Mexico wins by over 11.5 points",
-          "yes_sub_title": "New Mexico wins by over 11.5 points",
-          "no_sub_title": "New Mexico wins by over 11.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM14",
-          "title": "New Mexico wins by over 13.5 points",
-          "yes_sub_title": "New Mexico wins by over 13.5 points",
-          "no_sub_title": "New Mexico wins by over 13.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM15",
-          "title": "New Mexico wins by over 14.5 points",
-          "yes_sub_title": "New Mexico wins by over 14.5 points",
-          "no_sub_title": "New Mexico wins by over 14.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM17",
-          "title": "New Mexico wins by over 16.5 points",
-          "yes_sub_title": "New Mexico wins by over 16.5 points",
-          "no_sub_title": "New Mexico wins by over 16.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM18",
-          "title": "New Mexico wins by over 17.5 points",
-          "yes_sub_title": "New Mexico wins by over 17.5 points",
-          "no_sub_title": "New Mexico wins by over 17.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM21",
-          "title": "New Mexico wins by over 20.5 points",
-          "yes_sub_title": "New Mexico wins by over 20.5 points",
-          "no_sub_title": "New Mexico wins by over 20.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM22",
-          "title": "New Mexico wins by over 21.5 points",
-          "yes_sub_title": "New Mexico wins by over 21.5 points",
-          "no_sub_title": "New Mexico wins by over 21.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM24",
-          "title": "New Mexico wins by over 23.5 points",
-          "yes_sub_title": "New Mexico wins by over 23.5 points",
-          "no_sub_title": "New Mexico wins by over 23.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM25",
-          "title": "New Mexico wins by over 24.5 points",
-          "yes_sub_title": "New Mexico wins by over 24.5 points",
-          "no_sub_title": "New Mexico wins by over 24.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM28",
-          "title": "New Mexico wins by over 27.5 points",
-          "yes_sub_title": "New Mexico wins by over 27.5 points",
-          "no_sub_title": "New Mexico wins by over 27.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM31",
-          "title": "New Mexico wins by over 30.5 points",
-          "yes_sub_title": "New Mexico wins by over 30.5 points",
-          "no_sub_title": "New Mexico wins by over 30.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV20UNMWYO-UNM34",
-          "title": "New Mexico wins by over 33.5 points",
-          "yes_sub_title": "New Mexico wins by over 33.5 points",
-          "no_sub_title": "New Mexico wins by over 33.5 points",
-          "yes_ask": 0.01,
-          "no_ask": 1.0
         }
       ]
     },
@@ -3066,7 +2760,7 @@
           "yes_sub_title": "Notre Dame wins by over 2.5 points",
           "no_sub_title": "Notre Dame wins by over 2.5 points",
           "yes_ask": 0.91,
-          "no_ask": 0.12
+          "no_ask": 0.11
         },
         {
           "ticker": "KXNCAAFSPREAD-26NOV21SMUND-ND2",
@@ -3191,8 +2885,8 @@
           "title": "Texas Tech wins by over 6.5 points",
           "yes_sub_title": "Texas Tech wins by over 6.5 points",
           "no_sub_title": "Texas Tech wins by over 6.5 points",
-          "yes_ask": 0.47,
-          "no_ask": 0.54
+          "yes_ask": 0.46,
+          "no_ask": 0.55
         },
         {
           "ticker": "KXNCAAFSPREAD-26NOV21TTUBAY-TTU6",
@@ -3348,260 +3042,6 @@
         }
       ]
     },
-    "KXNCAAFSPREAD-26NOV21UNTTULN": {
-      "title": "North Texas vs Tulane: Spread",
-      "sub_title": "UNT vs TULN (Nov 21)",
-      "markets": [
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT28",
-          "title": "North Texas wins by over 27.5 points",
-          "yes_sub_title": "North Texas wins by over 27.5 points",
-          "no_sub_title": "North Texas wins by over 27.5 points",
-          "yes_ask": 0.1,
-          "no_ask": 0.91
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT25",
-          "title": "North Texas wins by over 24.5 points",
-          "yes_sub_title": "North Texas wins by over 24.5 points",
-          "no_sub_title": "North Texas wins by over 24.5 points",
-          "yes_ask": 0.13,
-          "no_ask": 0.88
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT24",
-          "title": "North Texas wins by over 23.5 points",
-          "yes_sub_title": "North Texas wins by over 23.5 points",
-          "no_sub_title": "North Texas wins by over 23.5 points",
-          "yes_ask": 0.15,
-          "no_ask": 0.86
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT22",
-          "title": "North Texas wins by over 21.5 points",
-          "yes_sub_title": "North Texas wins by over 21.5 points",
-          "no_sub_title": "North Texas wins by over 21.5 points",
-          "yes_ask": 0.18,
-          "no_ask": 0.83
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT21",
-          "title": "North Texas wins by over 20.5 points",
-          "yes_sub_title": "North Texas wins by over 20.5 points",
-          "no_sub_title": "North Texas wins by over 20.5 points",
-          "yes_ask": 0.21,
-          "no_ask": 0.81
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT18",
-          "title": "North Texas wins by over 17.5 points",
-          "yes_sub_title": "North Texas wins by over 17.5 points",
-          "no_sub_title": "North Texas wins by over 17.5 points",
-          "yes_ask": 0.25,
-          "no_ask": 0.77
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT17",
-          "title": "North Texas wins by over 16.5 points",
-          "yes_sub_title": "North Texas wins by over 16.5 points",
-          "no_sub_title": "North Texas wins by over 16.5 points",
-          "yes_ask": 0.27,
-          "no_ask": 0.74
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT15",
-          "title": "North Texas wins by over 14.5 points",
-          "yes_sub_title": "North Texas wins by over 14.5 points",
-          "no_sub_title": "North Texas wins by over 14.5 points",
-          "yes_ask": 0.3,
-          "no_ask": 0.71
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT14",
-          "title": "North Texas wins by over 13.5 points",
-          "yes_sub_title": "North Texas wins by over 13.5 points",
-          "no_sub_title": "North Texas wins by over 13.5 points",
-          "yes_ask": 0.34,
-          "no_ask": 0.67
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT12",
-          "title": "North Texas wins by over 11.5 points",
-          "yes_sub_title": "North Texas wins by over 11.5 points",
-          "no_sub_title": "North Texas wins by over 11.5 points",
-          "yes_ask": 0.38,
-          "no_ask": 0.63
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT11",
-          "title": "North Texas wins by over 10.5 points",
-          "yes_sub_title": "North Texas wins by over 10.5 points",
-          "no_sub_title": "North Texas wins by over 10.5 points",
-          "yes_ask": 0.4,
-          "no_ask": 0.61
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT10",
-          "title": "North Texas wins by over 9.5 points",
-          "yes_sub_title": "North Texas wins by over 9.5 points",
-          "no_sub_title": "North Texas wins by over 9.5 points",
-          "yes_ask": 0.43,
-          "no_ask": 0.58
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT8",
-          "title": "North Texas wins by over 7.5 points",
-          "yes_sub_title": "North Texas wins by over 7.5 points",
-          "no_sub_title": "North Texas wins by over 7.5 points",
-          "yes_ask": 0.47,
-          "no_ask": 0.54
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT7",
-          "title": "North Texas wins by over 6.5 points",
-          "yes_sub_title": "North Texas wins by over 6.5 points",
-          "no_sub_title": "North Texas wins by over 6.5 points",
-          "yes_ask": 0.53,
-          "no_ask": 0.48
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT6",
-          "title": "North Texas wins by over 5.5 points",
-          "yes_sub_title": "North Texas wins by over 5.5 points",
-          "no_sub_title": "North Texas wins by over 5.5 points",
-          "yes_ask": 0.55,
-          "no_ask": 0.46
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT5",
-          "title": "North Texas wins by over 4.5 points",
-          "yes_sub_title": "North Texas wins by over 4.5 points",
-          "no_sub_title": "North Texas wins by over 4.5 points",
-          "yes_ask": 0.57,
-          "no_ask": 0.44
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT4",
-          "title": "North Texas wins by over 3.5 points",
-          "yes_sub_title": "North Texas wins by over 3.5 points",
-          "no_sub_title": "North Texas wins by over 3.5 points",
-          "yes_ask": 0.57,
-          "no_ask": 0.44
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT3",
-          "title": "North Texas wins by over 2.5 points",
-          "yes_sub_title": "North Texas wins by over 2.5 points",
-          "no_sub_title": "North Texas wins by over 2.5 points",
-          "yes_ask": 0.66,
-          "no_ask": 0.35
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-UNT2",
-          "title": "North Texas wins by over 1.5 points",
-          "yes_sub_title": "North Texas wins by over 1.5 points",
-          "no_sub_title": "North Texas wins by over 1.5 points",
-          "yes_ask": 0.68,
-          "no_ask": 0.33
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-TULN2",
-          "title": "Tulane wins by over 1.5 points",
-          "yes_sub_title": "Tulane wins by over 1.5 points",
-          "no_sub_title": "Tulane wins by over 1.5 points",
-          "yes_ask": 0.3,
-          "no_ask": 0.73
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-TULN3",
-          "title": "Tulane wins by over 2.5 points",
-          "yes_sub_title": "Tulane wins by over 2.5 points",
-          "no_sub_title": "Tulane wins by over 2.5 points",
-          "yes_ask": 0.28,
-          "no_ask": 0.75
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-TULN4",
-          "title": "Tulane wins by over 3.5 points",
-          "yes_sub_title": "Tulane wins by over 3.5 points",
-          "no_sub_title": "Tulane wins by over 3.5 points",
-          "yes_ask": 0.23,
-          "no_ask": 0.79
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-TULN5",
-          "title": "Tulane wins by over 4.5 points",
-          "yes_sub_title": "Tulane wins by over 4.5 points",
-          "no_sub_title": "Tulane wins by over 4.5 points",
-          "yes_ask": 0.21,
-          "no_ask": 0.81
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-TULN6",
-          "title": "Tulane wins by over 5.5 points",
-          "yes_sub_title": "Tulane wins by over 5.5 points",
-          "no_sub_title": "Tulane wins by over 5.5 points",
-          "yes_ask": 0.2,
-          "no_ask": 0.82
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-TULN7",
-          "title": "Tulane wins by over 6.5 points",
-          "yes_sub_title": "Tulane wins by over 6.5 points",
-          "no_sub_title": "Tulane wins by over 6.5 points",
-          "yes_ask": 0.18,
-          "no_ask": 0.84
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-TULN8",
-          "title": "Tulane wins by over 7.5 points",
-          "yes_sub_title": "Tulane wins by over 7.5 points",
-          "no_sub_title": "Tulane wins by over 7.5 points",
-          "yes_ask": 0.15,
-          "no_ask": 0.88
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-TULN10",
-          "title": "Tulane wins by over 9.5 points",
-          "yes_sub_title": "Tulane wins by over 9.5 points",
-          "no_sub_title": "Tulane wins by over 9.5 points",
-          "yes_ask": 0.12,
-          "no_ask": 0.89
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-TULN11",
-          "title": "Tulane wins by over 10.5 points",
-          "yes_sub_title": "Tulane wins by over 10.5 points",
-          "no_sub_title": "Tulane wins by over 10.5 points",
-          "yes_ask": 0.11,
-          "no_ask": 0.91
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-TULN12",
-          "title": "Tulane wins by over 11.5 points",
-          "yes_sub_title": "Tulane wins by over 11.5 points",
-          "no_sub_title": "Tulane wins by over 11.5 points",
-          "yes_ask": 0.1,
-          "no_ask": 0.92
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-TULN14",
-          "title": "Tulane wins by over 13.5 points",
-          "yes_sub_title": "Tulane wins by over 13.5 points",
-          "no_sub_title": "Tulane wins by over 13.5 points",
-          "yes_ask": 0.08,
-          "no_ask": 0.93
-        },
-        {
-          "ticker": "KXNCAAFSPREAD-26NOV21UNTTULN-TULN15",
-          "title": "Tulane wins by over 14.5 points",
-          "yes_sub_title": "Tulane wins by over 14.5 points",
-          "no_sub_title": "Tulane wins by over 14.5 points",
-          "yes_ask": 0.07,
-          "no_ask": 0.94
-        }
-      ]
-    },
     "KXNCAAFSPREAD-26NOV21USAUSM": {
       "title": "South Alabama vs Southern Miss: Spread",
       "sub_title": "USA vs USM (Nov 21)",
@@ -3651,7 +3091,7 @@
           "title": "South Alabama wins by over 11.5 points",
           "yes_sub_title": "South Alabama wins by over 11.5 points",
           "no_sub_title": "South Alabama wins by over 11.5 points",
-          "yes_ask": 0.33,
+          "yes_ask": 0.32,
           "no_ask": 0.7
         },
         {
@@ -3675,7 +3115,7 @@
           "title": "South Alabama wins by over 7.5 points",
           "yes_sub_title": "South Alabama wins by over 7.5 points",
           "no_sub_title": "South Alabama wins by over 7.5 points",
-          "yes_ask": 0.41,
+          "yes_ask": 0.4,
           "no_ask": 0.61
         },
         {
@@ -3812,7 +3252,7 @@
           "yes_sub_title": "Southern Miss wins by over 13.5 points",
           "no_sub_title": "Southern Miss wins by over 13.5 points",
           "yes_ask": 0.1,
-          "no_ask": 0.92
+          "no_ask": 0.91
         },
         {
           "ticker": "KXNCAAFSPREAD-26NOV21USAUSM-USM15",
@@ -3820,7 +3260,7 @@
           "yes_sub_title": "Southern Miss wins by over 14.5 points",
           "no_sub_title": "Southern Miss wins by over 14.5 points",
           "yes_ask": 0.09,
-          "no_ask": 0.94
+          "no_ask": 0.93
         },
         {
           "ticker": "KXNCAAFSPREAD-26NOV21USAUSM-USM17",
@@ -4151,7 +3591,7 @@
           "title": "West Florida wins by over 2.5 points",
           "yes_sub_title": "West Florida wins by over 2.5 points",
           "no_sub_title": "West Florida wins by over 2.5 points",
-          "yes_ask": 0.79,
+          "yes_ask": 0.81,
           "no_ask": 0.39
         },
         {
@@ -4168,14 +3608,14 @@
           "yes_sub_title": "West Florida wins by over 10.5 points",
           "no_sub_title": "West Florida wins by over 10.5 points",
           "yes_ask": 0.51,
-          "no_ask": 0.61
+          "no_ask": 0.63
         },
         {
           "ticker": "KXNCAAFSPREAD-26NOV21UWFLUWGA-UWFL15",
           "title": "West Florida wins by over 14.5 points",
           "yes_sub_title": "West Florida wins by over 14.5 points",
           "no_sub_title": "West Florida wins by over 14.5 points",
-          "yes_ask": 0.49,
+          "yes_ask": 0.5,
           "no_ask": 0.74
         },
         {
@@ -4333,7 +3773,7 @@
           "title": "Wake Forest wins by over 9.5 points",
           "yes_sub_title": "Wake Forest wins by over 9.5 points",
           "no_sub_title": "Wake Forest wins by over 9.5 points",
-          "yes_ask": 0.77,
+          "yes_ask": 0.78,
           "no_ask": 0.24
         },
         {
@@ -5709,8 +5149,8 @@
           "title": "Western Carolina wins",
           "yes_sub_title": "Western Carolina",
           "no_sub_title": "Western Carolina",
-          "yes_ask": 0.08,
-          "no_ask": 0.93
+          "yes_ask": 0.09,
+          "no_ask": 0.92
         }
       ]
     },
@@ -6475,8 +5915,8 @@
           "title": "Detroit wins by over 4.5 points?",
           "yes_sub_title": "Detroit wins by over 4.5 points",
           "no_sub_title": "Detroit wins by over 4.5 points",
-          "yes_ask": 0.51,
-          "no_ask": 0.5
+          "yes_ask": 0.52,
+          "no_ask": 0.49
         },
         {
           "ticker": "KXNFLSPREAD-26NOV22TBDET-DET4",
@@ -6951,8 +6391,8 @@
           "title": "Full Game: over 53.5 points scored?",
           "yes_sub_title": "Over 53.5 points",
           "no_sub_title": "Over 53.5 points",
-          "yes_ask": 0.14,
-          "no_ask": 0.91
+          "yes_ask": 0.13,
+          "no_ask": 0.9
         },
         {
           "ticker": "KXNFLTOTAL-26NOV22PITPHI-57",
@@ -7363,7 +6803,7 @@
           "title": "Nashville wins",
           "yes_sub_title": "Nashville",
           "no_sub_title": "Nashville",
-          "yes_ask": 0.57,
+          "yes_ask": 0.56,
           "no_ask": 0.45
         },
         {
@@ -8967,8 +8407,6 @@
     "KXFEDDECISION-26DEC-H0": "KXFEDDECISION-26DEC",
     "KXFEDDECISION-26DEC-H25": "KXFEDDECISION-26DEC",
     "KXFEDDECISION-26DEC-H26": "KXFEDDECISION-26DEC",
-    "KXITFMATCH-26NOV20PLUMAL-PLU": "KXITFMATCH-26NOV20PLUMAL",
-    "KXITFMATCH-26NOV20PLUMAL-MAL": "KXITFMATCH-26NOV20PLUMAL",
     "KXJ2LEAGUEGAME-26NOV21KATOIT-KAT": "KXJ2LEAGUEGAME-26NOV21KATOIT",
     "KXJ2LEAGUEGAME-26NOV21KATOIT-OIT": "KXJ2LEAGUEGAME-26NOV21KATOIT",
     "KXJ2LEAGUEGAME-26NOV21KATOIT-TIE": "KXJ2LEAGUEGAME-26NOV21KATOIT",
@@ -9077,50 +8515,16 @@
     "KXNBATOTAL-26NOV21BOSSAC-242": "KXNBATOTAL-26NOV21BOSSAC",
     "KXNBATOTAL-26NOV21BOSSAC-244": "KXNBATOTAL-26NOV21BOSSAC",
     "KXNBATOTAL-26NOV21BOSSAC-246": "KXNBATOTAL-26NOV21BOSSAC",
-    "KXNCAAFGAME-26NOV20UNMWYO-WYO": "KXNCAAFGAME-26NOV20UNMWYO",
-    "KXNCAAFGAME-26NOV20UNMWYO-UNM": "KXNCAAFGAME-26NOV20UNMWYO",
+    "KXNBLGAME-26NOV210130ILLATAS-TAS": "KXNBLGAME-26NOV210130ILLATAS",
+    "KXNBLGAME-26NOV210130ILLATAS-ILLA": "KXNBLGAME-26NOV210130ILLATAS",
     "KXNCAAFGAME-26NOV21HOUWVU-WVU": "KXNCAAFGAME-26NOV21HOUWVU",
     "KXNCAAFGAME-26NOV21HOUWVU-HOU": "KXNCAAFGAME-26NOV21HOUWVU",
     "KXNCAAFGAME-26NOV21SDAKILST-ILST": "KXNCAAFGAME-26NOV21SDAKILST",
     "KXNCAAFGAME-26NOV21SDAKILST-SDAK": "KXNCAAFGAME-26NOV21SDAKILST",
     "KXNCAAFGAME-26NOV21TTUBAY-BAY": "KXNCAAFGAME-26NOV21TTUBAY",
     "KXNCAAFGAME-26NOV21TTUBAY-TTU": "KXNCAAFGAME-26NOV21TTUBAY",
-    "KXNCAAFGAME-26NOV21UNTTULN-TULN": "KXNCAAFGAME-26NOV21UNTTULN",
-    "KXNCAAFGAME-26NOV21UNTTULN-UNT": "KXNCAAFGAME-26NOV21UNTTULN",
     "KXNCAAFGAME-26NOV21UTSAUAB-UAB": "KXNCAAFGAME-26NOV21UTSAUAB",
     "KXNCAAFGAME-26NOV21UTSAUAB-UTSA": "KXNCAAFGAME-26NOV21UTSAUAB",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-WYO14": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-WYO12": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-WYO11": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-WYO10": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-WYO8": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-WYO7": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-WYO6": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-WYO5": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-WYO4": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-WYO3": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-WYO2": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM2": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM3": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM4": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM5": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM6": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM7": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM8": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM10": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM11": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM12": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM14": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM15": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM17": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM18": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM21": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM22": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM24": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM25": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM28": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM31": "KXNCAAFSPREAD-26NOV20UNMWYO",
-    "KXNCAAFSPREAD-26NOV20UNMWYO-UNM34": "KXNCAAFSPREAD-26NOV20UNMWYO",
     "KXNCAAFSPREAD-26NOV21ECUARMY-ARMY28": "KXNCAAFSPREAD-26NOV21ECUARMY",
     "KXNCAAFSPREAD-26NOV21ECUARMY-ARMY25": "KXNCAAFSPREAD-26NOV21ECUARMY",
     "KXNCAAFSPREAD-26NOV21ECUARMY-ARMY24": "KXNCAAFSPREAD-26NOV21ECUARMY",
@@ -9268,37 +8672,6 @@
     "KXNCAAFSPREAD-26NOV21TTUBAY-BAY15": "KXNCAAFSPREAD-26NOV21TTUBAY",
     "KXNCAAFSPREAD-26NOV21TTUBAY-BAY17": "KXNCAAFSPREAD-26NOV21TTUBAY",
     "KXNCAAFSPREAD-26NOV21TTUBAY-BAY18": "KXNCAAFSPREAD-26NOV21TTUBAY",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT28": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT25": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT24": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT22": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT21": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT18": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT17": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT15": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT14": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT12": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT11": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT10": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT8": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT7": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT6": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT5": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT4": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT3": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-UNT2": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-TULN2": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-TULN3": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-TULN4": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-TULN5": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-TULN6": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-TULN7": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-TULN8": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-TULN10": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-TULN11": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-TULN12": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-TULN14": "KXNCAAFSPREAD-26NOV21UNTTULN",
-    "KXNCAAFSPREAD-26NOV21UNTTULN-TULN15": "KXNCAAFSPREAD-26NOV21UNTTULN",
     "KXNCAAFSPREAD-26NOV21USAUSM-USA21": "KXNCAAFSPREAD-26NOV21USAUSM",
     "KXNCAAFSPREAD-26NOV21USAUSM-USA18": "KXNCAAFSPREAD-26NOV21USAUSM",
     "KXNCAAFSPREAD-26NOV21USAUSM-USA17": "KXNCAAFSPREAD-26NOV21USAUSM",
