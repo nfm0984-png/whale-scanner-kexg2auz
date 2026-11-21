@@ -4658,7 +4658,7 @@ function EliteTab(props: { now: number }) {
   const unitOf = (c: RankedCard) => ({ id: c.id, picks: c.picks });
   const render = (c: RankedCard, i: number) => <GameBlock key={c.id} u={unitOf(c)} now={props.now} stake="" noun="game" all={all} rankNo={i + 1} rec={c.rec} cappers={c.cappers} net={c.net} hideStake={true} />;
   return (
-    <Section heading={"Ranked · " + L.total} caption="Best picks first">
+    <Section heading={"Ranked · " + L.total} caption="Best picks first · today in PT · after 7pm, + tomorrow">
       {L.total === 0 ? <EmptyState title="No ranked games right now" body={"No tracked capper has a $500+ pick with a Kalshi line right now. " + nextScanLabel(props.now) + "."} /> : null}
       {L.list.map((c: RankedCard, i: number) => render(c, i))}
     </Section>
@@ -4911,7 +4911,7 @@ function HotWeekTab(props: { now: number }) {
   const pays = units.map((u) => kalshiPayout(u.picks[0])).filter((x) => x < 99);
   const payNote = pays.length ? (Math.min.apply(null, pays) + "–" + Math.max.apply(null, pays) + "x") : "";
   return (
-    <Section heading={"Golden Picks · " + gameN} caption={"Most likely to hit" + (payNote ? " · " + payNote : "")}>
+    <Section heading={"Golden Picks · " + gameN} caption={"Most likely to hit · today in PT · after 7pm, + tomorrow" + (payNote ? " · " + payNote : "")}>
       {units.length === 0 ? <EmptyState title="No Golden picks right now" body={"No elite-record capper has an open pre-game favorite (Kalshi 55–85¢, payout 1.8x or less) right now. " + nextScanLabel(props.now) + "."} /> : <UnitList units={units} all={all} now={props.now} stake="$2–4" noun="game" showStart showHit rankOf={(id: string) => { const i = units.findIndex((u) => u.id === id); return i >= 0 ? i + 1 : undefined; }} />}
     </Section>
   );
@@ -5136,9 +5136,26 @@ function slipTierOf(p: UPick): "good" | "slight" | "much" | null {
   if (s == null) return null;
   return s <= 2 ? "good" : s <= 5 ? "slight" : "much";
 }
+function ptDateParts(ts: number): { y: number; m: number; d: number; h: number; key: string } {
+  const parts: Record<string, string> = {};
+  new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", hourCycle: "h23" }).formatToParts(new Date(ts * 1000)).forEach((p) => { if (p.type !== "literal") parts[p.type] = p.value; });
+  return { y: +parts.year, m: +parts.month, d: +parts.day, h: +parts.hour, key: parts.year + "-" + parts.month + "-" + parts.day };
+}
+function ptDayOffset(startTs: number, now: number): number {
+  const a = ptDateParts(startTs), b = ptDateParts(now);
+  return Math.round((Date.UTC(a.y, a.m - 1, a.d) - Date.UTC(b.y, b.m - 1, b.d)) / 86400000);
+}
+// Client-side PT window so the list flips at 7pm without waiting for a scan:
+// before 7pm PT, today's games (live included); from 7pm PT, today plus tomorrow.
+function inSlateWindow(startTs: number, now: number, live?: boolean): boolean {
+  if (live || (startTs > 0 && startTs <= now)) return true;
+  if (!startTs) return false;
+  const off = ptDayOffset(startTs, now);
+  if (off === 0) return true;
+  return off === 1 && ptDateParts(now).h >= 19;
+}
 function allTabPicks(now: number): UPick[] {
-  // Full uncapped sports slate for Ranked and Coming Up (same set). No 24-hour window.
-  return combinedPicks(now, 1, false).filter((p: UPick) => p.kind === "sports");
+  return combinedPicks(now, 1, false).filter((p: UPick) => p.kind === "sports" && inSlateWindow(p.startTs || 0, now, p.live));
 }
 function combinedPicks(now: number, peDays: number = 1, windowed: boolean = true): UPick[] {
   const by: Record<string, UPick> = {};
@@ -5577,7 +5594,7 @@ function CombinedList(props: { now: number; mode: "rank" | "start" }) {
 function ComingUpTab(props: { now: number }) {
   const n = eliteTabCount(props.now);
   return (
-    <Section heading={"Coming Up · " + n} caption="Live first, then soonest">
+    <Section heading={"Coming Up · " + n} caption="Live first, then soonest · today in PT · after 7pm, + tomorrow">
       <CombinedList now={props.now} mode="start" />
     </Section>
   );
@@ -5824,7 +5841,11 @@ export default function App() {
   const [capN, setCapN] = useState<string>("100");
   const [capCustom, setCapCustom] = useState<string>("");
   const [saved, setSaved] = useState<string>("");
-  const [now] = useState<number>(Math.floor(Date.now() / 1000));
+  const [now, setNow] = useState<number>(Math.floor(Date.now() / 1000));
+  useEffect(() => {
+    const id = setInterval(() => setNow(Math.floor(Date.now() / 1000)), 15000);
+    return () => clearInterval(id);
+  }, []);
   const [allBets, setAllBets] = useState<boolean>(false);
   const [pickProfile, setPickProfile] = useState<string>("");
   useEffect(() => {
