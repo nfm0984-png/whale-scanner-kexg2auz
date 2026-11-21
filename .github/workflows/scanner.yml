@@ -222,5 +222,8 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
+      # deploy-pages@v4 can miss the artifact if it starts immediately after the upload.
+      - name: Wait for Pages artifact
+        run: sleep 20
       - id: deploy
         uses: actions/deploy-pages@v4
