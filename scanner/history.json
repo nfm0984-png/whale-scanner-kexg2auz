@@ -57742,7 +57742,11 @@
    "first_seen": 1795281433,
    "scans": 1,
    "first_score": 36,
-   "result": null
+   "result": "W",
+   "graded": 1795285649,
+   "ended": 1795285649,
+   "finalScore": "",
+   "active": false
   },
   "0x1c92b1c8650a13d7c0ef6bbef1a88da3fe788beb048edafbe422286e57c14b2c:yes": {
    "tier": "top",
@@ -57901,7 +57905,10 @@
    "first_seen": 1795281433,
    "scans": 1,
    "first_score": 44,
-   "result": null
+   "result": null,
+   "ended": 1795285649,
+   "finalScore": "UTR 0 \u2013 CAM 0",
+   "active": false
   },
   "0x1a13dbc83a6e47ce392b61c2be8e8c931791a97d4554895b72994f9a3d33ee5a:no": {
    "tier": "fun",
@@ -57981,7 +57988,11 @@
    "first_seen": 1795281433,
    "scans": 1,
    "first_score": 14,
-   "result": null
+   "result": "W",
+   "graded": 1795285649,
+   "ended": 1795285649,
+   "finalScore": "",
+   "active": false
   },
   "0x1723f39ba18ae18892641ab35aa8e4321f308b4317d0b48c724c7d78885030b7:yes": {
    "tier": "poly",
