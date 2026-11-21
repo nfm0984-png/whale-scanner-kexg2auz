@@ -5261,7 +5261,7 @@ function SportBreakdown(props: { wallet: string; league?: string | null }) {
     </div>
   );
 }
-function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNode; sourceTags?: boolean; opp?: UPick[]; stakeLine?: string; rankNo?: number; net?: NetInfo; hideStake?: boolean }) {
+function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNode; sourceTags?: boolean; opp?: UPick[]; stakeLine?: string; rankNo?: number; net?: NetInfo; hideStake?: boolean; hidePricePills?: boolean }) {
   const t = useGrokTheme();
   const p = props.p;
   const v = p.view;
@@ -5288,7 +5288,7 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
           <span data-ucard-count="1" style={{ display: "inline-block", padding: "4px 10px", borderRadius: 999, background: "#E0E7FF", color: "#3730A3", fontSize: 15, fontWeight: 850 }}>{p.backers.length + " capper" + (p.backers.length === 1 ? "" : "s")}</span>
           {kinds.map((x: string) => <span key={x} data-sum-tag={x} style={{ display: "inline-block", padding: "3px 9px", borderRadius: 999, background: colorOf(x)[0], color: colorOf(x)[1], fontSize: 13, fontWeight: 850, border: "1.5px solid " + colorOf(x)[1] }}>{x}</span>)}
         </div>
-        <FreshPricePills p={p} now={props.now} />
+        <FreshPricePills p={p} now={props.now} hidePrice={props.hidePricePills} />
         {props.moreRow}
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 10 }}>
           <div style={{ flex: 1 }}><KalshiBuyButton view={v} size={20} /></div>
@@ -5355,7 +5355,7 @@ function GameHeader(props: { p: UPick; now: number; rankNo?: number; rec?: WL; c
   );
 }
 // A compact card for an alternative bet inside the drop-down: side, payout, cappers with records, the On Kalshi line.
-function AltBet(props: { p: UPick; all?: UPick[]; now: number }) {
+function AltBet(props: { p: UPick; all?: UPick[]; now: number; hidePricePills?: boolean }) {
   const t = useGrokTheme();
   const p = props.p;
   const opp = props.all ? oppositeOf(p, props.all) : undefined;
@@ -5372,7 +5372,7 @@ function AltBet(props: { p: UPick; all?: UPick[]; now: number }) {
         {props.all ? <NetPill net={netOf(p, props.all)} /> : null}
         {props.all ? <ContestedBadge net={netOf(p, props.all)} /> : null}
       </div>
-      <FreshPricePills p={p} now={props.now} />
+      <FreshPricePills p={p} now={props.now} hidePrice={props.hidePricePills} />
       <div style={{ marginTop: 8 }}><KalshiBuyButton view={p.view} size={17} /></div>
       <OnKalshiBox view={p.view} />
       {p.backers.map((b: UBacker) => <div key={b.wallet} data-alt-capper={b.wallet} style={{ fontSize: 13, lineHeight: "19px", fontWeight: 650, color: t.text.secondary, marginTop: 2, overflowWrap: "anywhere" }}>{b.line}</div>)}
@@ -5391,13 +5391,13 @@ function GameBlock(props: { u: { id: string; picks: UPick[] }; now: number; stak
   return (
     <div data-game-block={props.u.id} data-contested={contested ? "1" : undefined} style={contested ? { border: "2.5px solid #EA580C", borderRadius: 20, padding: "4px 8px 6px", background: "#FFF7ED", margin: "8px 0 12px" } : undefined}>
       {props.showStart || props.rankNo ? <GameHeader p={main} now={props.now} rankNo={props.rankNo} rec={props.rec} cappers={props.cappers} net={net} /> : null}
-      <UCard p={main} opp={props.all ? oppositeOf(main, props.all) : undefined} now={props.now} stake={props.hideStake ? "" : props.stake} hideStake={props.hideStake} net={net} moreRow={rest.length ? <MoreBetsRow noun={props.noun} n={rest.length} open={open} onToggle={() => setOpen(!open)} /> : undefined} />
+      <UCard p={main} opp={props.all ? oppositeOf(main, props.all) : undefined} now={props.now} stake={props.hideStake ? "" : props.stake} hideStake={props.hideStake} hidePricePills={props.hideStake} net={net} moreRow={rest.length ? <MoreBetsRow noun={props.noun} n={rest.length} open={open} onToggle={() => setOpen(!open)} /> : undefined} />
       {open && rest.length ? (
         <div data-game-more="1" style={{ marginLeft: 10, paddingLeft: 8, borderLeft: "3px solid " + BRAND, marginBottom: 10 }}>
           {groups.map((g) => (
             <div key={g.bt} data-bet-type={g.bt}>
               <div style={{ fontSize: 13, fontWeight: 900, letterSpacing: "0.06em", textTransform: "uppercase", color: BRAND, margin: "6px 0" }}>{g.bt + " · " + g.picks.length}</div>
-              {g.picks.map((q: UPick) => <AltBet key={q.key} p={q} all={props.all} now={props.now} />)}
+              {g.picks.map((q: UPick) => <AltBet key={q.key} p={q} all={props.all} now={props.now} hidePricePills={props.hideStake} />)}
             </div>
           ))}
         </div>
@@ -5413,9 +5413,10 @@ function UnitList(props: { units: { id: string; picks: UPick[] }[]; now: number;
   );
 }
 // Fresh/Hold tag and the plain-words price pill. Display only; nothing is ever hidden by either.
-function FreshPricePills(props: { p: UPick; now: number }) {
+function FreshPricePills(props: { p: UPick; now: number; hidePrice?: boolean }) {
   const p = props.p;
-  if (!p.fresh && !p.slipTier) return null;
+  const showPrice = !props.hidePrice;
+  if (!p.fresh && !(showPrice && p.slipTier)) return null;
   const pill = (bg: string, fg: string, text: string, sub: string | null, attr: string) => (
     <span data-pill={attr} style={{ display: "inline-flex", alignItems: "baseline", gap: 5, padding: "3px 10px", borderRadius: 999, background: bg, color: fg, border: "1.5px solid " + fg, fontSize: 13, fontWeight: 850 }}>{text}{sub ? <span style={{ fontSize: 12, fontWeight: 700 }}>{sub}</span> : null}</span>
   );
@@ -5423,9 +5424,9 @@ function FreshPricePills(props: { p: UPick; now: number }) {
     <div data-pills="1" style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 8 }}>
       {p.fresh === "fresh" ? pill("#DCFCE7", "#15803D", "Fresh", p.freshTs ? "bought " + ago(p.freshTs, props.now) : null, "fresh") : null}
       {p.fresh === "hold" ? pill("#F3F4F6", "#4B5563", "Hold", "no buys in 24h", "hold") : null}
-      {p.slipTier === "good" ? pill("#DCFCE7", "#15803D", "Good price", null, "price-good") : null}
-      {p.slipTier === "slight" ? pill("#FEF3C7", "#92400E", "Slightly worse", null, "price-slight") : null}
-      {p.slipTier === "much" ? pill("#FEE2E2", "#B91C1C", "Much worse", null, "price-much") : null}
+      {showPrice && p.slipTier === "good" ? pill("#DCFCE7", "#15803D", "Good price", null, "price-good") : null}
+      {showPrice && p.slipTier === "slight" ? pill("#FEF3C7", "#92400E", "Slightly worse", null, "price-slight") : null}
+      {showPrice && p.slipTier === "much" ? pill("#FEE2E2", "#B91C1C", "Much worse", null, "price-much") : null}
     </div>
   );
 }
