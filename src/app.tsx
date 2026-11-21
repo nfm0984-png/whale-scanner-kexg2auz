@@ -165,9 +165,9 @@ function wilsonLower(w: number, n: number, z = 1.96): number {
   return (center - margin) / denom;
 }
 function overallExp(rec: CapperRec | null | undefined): { w: number; l: number; n: number; risked: number } {
+  // Same settled-trade universe as the sport chips (rec.w/l). Never use the big-bet
+  // filter here: a tight 1.5x-median floor can drop every loss and leave a fake 50-0.
   if (!rec) return { w: 0, l: 0, n: 0, risked: 0 };
-  const big = rec.big || {};
-  if (big.n) return { w: big.w || 0, l: big.l || 0, n: big.n || 0, risked: big.risked != null ? big.risked : (rec.risked || 0) };
   return { w: rec.w || 0, l: rec.l || 0, n: rec.n || 0, risked: rec.risked || 0 };
 }
 // Shrunk capper strength 0–1 for Ranked scoring. Combines sport + overall W–L (not ROI),
@@ -4903,11 +4903,10 @@ function backerRecordLine(w: string, name: string, league?: string | null): stri
       const sr = familySportsOf(w)[fam];
       if (sr && sr.n) parts.push(fam + " " + sr.w + "-" + sr.l + (sr.n < 10 ? " small" : ""));
     }
-    const big = rec.big || {};
-    if (big.n) parts.push("overall " + (big.w || 0) + "-" + (big.l || 0)); else if (rec.n) parts.push("overall " + rec.w + "-" + rec.l);
+    if (rec.n) parts.push("overall " + rec.w + "-" + rec.l);
     const best = bestAtOf(w);
     if (best) parts.push("Best at " + best);
-    const pr = big.profit != null ? big.profit : rec.profit;
+    const pr = rec.profit;
     if (pr != null) parts.push(signedK(pr));
     const wk = rec.win && rec.win.week;
     if (wk && wk.rec && wk.rec.length >= 2) parts.push("wk " + wk.rec[0] + "-" + wk.rec[1]); else if (wk && wk.pnl != null) parts.push("wk " + signedK(wk.pnl));
@@ -4940,13 +4939,11 @@ const wlRate = (r: WL): number => (r.w + r.l ? r.w / (r.w + r.l) : 0);
 const wlBetter = (a: WL, b: WL): boolean => (wlRate(a) - wlRate(b) > 1e-9) || (Math.abs(wlRate(a) - wlRate(b)) <= 1e-9 && a.w > b.w);
 const wlText = (r: WL): string => r.w + "-" + r.l;
 const pctText = (x: number): string => Math.round(x * 100) + "%";
-// Graded record of a capper: sports = the record shown on cards (big-bet record when there is one); Politics & Econ = their settled $500+ non-sports bets of the last 90 days.
+// Graded record of a capper: sports = settled W-L in the same universe as the sport chips (not the size-filtered big-bet record); Politics & Econ = their settled $500+ non-sports bets of the last 90 days.
 function recWL(w: string, kind: "sports" | "pe"): WL | null {
   if (kind === "pe") { const c = PE_CAP[w]; return c && c.rec ? { w: c.rec.w, l: c.rec.l } : null; }
   const rec = QMAP[w];
   if (!rec) return null;
-  const big = rec.big || {};
-  if (big.n) return { w: big.w || 0, l: big.l || 0 };
   if (rec.n) return { w: rec.w, l: rec.l };
   return null;
 }
@@ -4963,8 +4960,7 @@ const wlElite = (r: WL | null): boolean => !!r && r.w > 0 && r.w >= 2 * r.l;
 function eliteCapper(w: string): boolean {
   const rec = QMAP[w];
   if (!rec || rec.badge === "Cooling" || rec.mm || rec.oneOff) return false;
-  const big = rec.big || {};
-  const pr = big.profit != null ? big.profit : rec.profit;
+  const pr = rec.profit;
   if (pr == null || pr <= 0) return false;
   return wlElite(recWL(w, "sports"));
 }
