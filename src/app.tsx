@@ -173,6 +173,24 @@ function overallExp(rec: CapperRec | null | undefined): { w: number; l: number; 
 // Shrunk capper strength 0–1 for Ranked scoring. Combines sport + overall W–L (not ROI),
 // with a Wilson lower bound so 3-0 shrinks well below a proven 40-10, and an experience
 // factor from settled-bet count and volume so little experience cannot sit on top.
+const PROVEN_MIN_N = 10; // thin samples (<10 settled overall, or <10 in the pick's sport) never outrank a proven side
+const THIN_SCORE_CAP = 0.05;
+function capperSportN(wallet: string, league?: string | null): number {
+  if (!league) return 0;
+  const sr = familySportsOf(wallet)[sportFamilyOf(league)];
+  return sr && sr.n ? sr.n : 0;
+}
+function isThinCapper(wallet: string, league?: string | null): boolean {
+  const rec = QMAP[(wallet || "").toLowerCase()];
+  const ov = overallExp(rec);
+  if (ov.n < PROVEN_MIN_N) return true;
+  const sN = capperSportN(wallet, league);
+  if (sN > 0 && sN < PROVEN_MIN_N) return true;
+  return false;
+}
+function sideHasProven(backers: { wallet: string }[], league?: string | null): boolean {
+  return backers.some((b) => !isThinCapper(b.wallet, league));
+}
 function capperRankScore(wallet: string, league?: string | null): number {
   const rec = QMAP[(wallet || "").toLowerCase()];
   if (!rec) return 0;
@@ -185,10 +203,13 @@ function capperRankScore(wallet: string, league?: string | null): number {
   }
   const sportW = sN / (sN + 8);
   const rate = sportW * sRate + (1 - sportW) * oRate;
+  const thin = isThinCapper(wallet, league);
+  // Thin samples: Wilson shrinkage only. Profit, volume, and price/hit% cannot lift them.
   const expF = ov.n / (ov.n + 20);
-  const volF = Math.min(1, Math.log(1 + Math.max(0, ov.risked)) / Math.log(10) / 5);
-  const conf = 0.75 * expF + 0.25 * volF;
-  return rate * (0.30 + 0.70 * conf);
+  const volF = thin ? 0 : Math.min(1, Math.log(1 + Math.max(0, ov.risked)) / Math.log(10) / 5);
+  const conf = thin ? 0.50 * expF : (0.75 * expF + 0.25 * volF);
+  const score = rate * (thin ? 0.15 * conf : (0.30 + 0.70 * conf));
+  return thin ? Math.min(score, THIN_SCORE_CAP) : score;
 }
 const PID_LEAGUE: Record<string, string> = (() => {
   const m: Record<string, string> = {};
@@ -4616,11 +4637,14 @@ function rankedCards(all: UPick[]): RankedCard[] {
     return { id, picks, rec: net.own.rec, cappers: net.own.cappers, hasElite: elite, startTs: main.startTs || 0, net, main, contested: net.contested };
   });
 }
-const rankCmp = (a: RankedCard, b: RankedCard): number => (b.net.net - a.net.net) || (b.net.raw - a.net.raw) || (b.net.own.cappers - a.net.own.cappers) || (b.net.own.rec.w - a.net.own.rec.w) || (a.startTs - b.startTs);
+function cardProven(c: RankedCard): boolean { return sideHasProven(c.main.backers, c.main.kind === "sports" ? c.main.league : null); }
+// Proven sides (best capper has 10+ settled bets) always sort above thin-sample sides. Then net score.
+const rankCmp = (a: RankedCard, b: RankedCard): number => (Number(cardProven(b)) - Number(cardProven(a))) || (b.net.net - a.net.net) || (b.net.raw - a.net.raw) || (b.net.own.cappers - a.net.own.cappers) || (b.net.own.rec.w - a.net.own.rec.w) || (a.startTs - b.startTs);
 function rankedLists(all: UPick[]): { list: RankedCard[]; top: RankedCard[]; others: RankedCard[]; small: RankedCard[]; contested: RankedCard[]; total: number } {
-  // One list of every qualifying game, best to worst. No top-15 cap. Small samples stay in the
-  // list but shrink below veterans (Wilson lower bound + experience). Contested stays in the
-  // same order with a badge — opposition already cuts the score.
+  // One list of every qualifying game, best to worst. No top-15 cap. A side whose best capper
+  // has under 10 settled bets (overall or in that sport) is capped and sorted below every proven
+  // side. Price/hit% and profit cannot lift a thin sample. Proven opposition with a better
+  // shrunk record heavily cuts the net. Contested stays in the same list with a badge.
   const cards = rankedCards(all).slice().sort(rankCmp);
   const contested = cards.filter((c: RankedCard) => c.contested);
   return { list: cards, top: cards, others: [], small: [], contested, total: cards.length };
@@ -4833,7 +4857,7 @@ function hotGroups(now: number, windowed: boolean = true): PickGroup[] {
   return compiledGroups(slate.games.filter((g: ComingGame) => comingStatus(g, now) === "upcoming"), now).filter((g: PickGroup) => g.backers.some((b: PickBackerRow) => !!HOT_W[b.wallet]));
 }
 // Golden Picks (Noel Nov 21): most likely to hit. Favorites only — Kalshi 55–85¢, payout 1.8x or less —
-// with at least one elite-record capper (2-1 or better, profitable, not Cooling / MM / one-off). No long shots, no count cap.
+// with at least one elite AND proven capper (2-1 or better, 10+ settled bets, profitable, not Cooling / MM / one-off). No long shots, no thin samples, no better-record opposition, no count cap.
 const GOLDEN_MIN_PX = 0.55;
 const GOLDEN_MAX_PX = 0.85;
 const GOLDEN_MAX_PAYOUT = 1.8;
@@ -4845,15 +4869,31 @@ function hitLabelOf(p: UPick): string | null {
   const pay = kalshiPayout(p);
   return h + "% · " + (pay === 99 ? "—" : pay + "x");
 }
-function goldenHitOk(p: UPick): boolean {
+function goldenHitOk(p: UPick, all: UPick[]): boolean {
   const px = p.view.price;
   if (px == null || p.view.unmatched || !p.view.yesNo) return false;
   if (px < GOLDEN_MIN_PX || px > GOLDEN_MAX_PX) return false;
   if (kalshiPayout(p) > GOLDEN_MAX_PAYOUT) return false;
-  return p.backers.some((b: UBacker) => eliteCapper(b.wallet));
+  if (!p.backers.some((b: UBacker) => eliteCapper(b.wallet) && !isThinCapper(b.wallet, p.league))) return false;
+  const oppPicks = oppositeOf(p, all);
+  if (oppPicks.length) {
+    const oppW: Record<string, boolean> = {};
+    oppPicks.forEach((q: UPick) => q.backers.forEach((b: UBacker) => { oppW[b.wallet] = true; }));
+    const mine = p.backers.filter((b: UBacker) => !oppW[b.wallet]);
+    const oppB: UBacker[] = [];
+    const seen: Record<string, boolean> = {};
+    oppPicks.forEach((q: UPick) => q.backers.forEach((b: UBacker) => { if (seen[b.wallet] || mine.some((m) => m.wallet === b.wallet)) return; seen[b.wallet] = true; oppB.push(b); }));
+    if (sideHasProven(oppB, p.league)) {
+      const own = recOfBackers(mine, "sports", p.league);
+      const opp = recOfBackers(oppB, "sports", p.league);
+      if (opp.score > own.score + 1e-6) return false;
+    }
+  }
+  return true;
 }
 function goldenPicks(now: number): UPick[] {
-  return allTabPicks(now).filter((p: UPick) => !p.live && p.startTs > now && goldenHitOk(p));
+  const all = allTabPicks(now);
+  return all.filter((p: UPick) => !p.live && p.startTs > now && goldenHitOk(p, all));
 }
 function goldenUnits(now: number): { id: string; picks: UPick[] }[] {
   const picks = goldenPicks(now).slice().sort((a: UPick, b: UPick) => ((b.view.price || 0) - (a.view.price || 0)) || (a.startTs - b.startTs));
@@ -5025,11 +5065,17 @@ function netOf(p: UPick, all: UPick[]): NetInfo {
   const seen: Record<string, boolean> = {};
   oppPicks.forEach((q: UPick) => q.backers.forEach((b: UBacker) => { if (seen[b.wallet] || mineW[b.wallet]) return; seen[b.wallet] = true; oppB.push(b); }));
   const opp = recOfBackers(oppB, kind, lg);
-  const raw = 100 * (own.score - opp.score);
+  let raw = 100 * (own.score - opp.score);
+  const ownProven = sideHasProven(p.backers.filter((b: UBacker) => !oppW[b.wallet]), lg);
+  const oppProven = sideHasProven(oppB, lg);
+  const oppBetter = oppProven && opp.score > own.score + 1e-6;
+  // Proven opposition with a better shrunk record is a heavy penalty, not a small deduction.
+  if (oppBetter) raw -= 100;
+  if (!ownProven && oppProven) raw -= 50;
   const net = Math.round(raw);
   // Contested is informational (badge only). Opposition already cuts the net score, so these stay in the same ranked list.
   const oppN = opp.rec.w + opp.rec.l;
-  const contested = oppN >= ELITE_MIN_BETS && (wlRate(opp.rec) >= NET_OPP_WR || net < NET_CLOSE);
+  const contested = oppN >= ELITE_MIN_BETS && (wlRate(opp.rec) >= NET_OPP_WR || net < NET_CLOSE || oppBetter);
   return { net, raw, own, opp, contested };
 }
 function netLabel(n: number): string { return "Net " + (n > 0 ? "+" : "") + n; }
