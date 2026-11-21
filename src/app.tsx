@@ -1088,6 +1088,17 @@ function PillTabs(props: { options: { value: string; label: string; count?: numb
   );
 }
 
+async function fetchLatestData(): Promise<any> {
+  const loader = (window as any).__loadScannerData as undefined | (() => Promise<any>);
+  if (loader) return await loader();
+  const r = await fetch("data.json?t=" + Date.now(), { cache: "no-store" });
+  if (!r.ok) throw new Error("HTTP " + r.status);
+  const raw = await r.json();
+  const unlock = (window as any).__unlockData as undefined | ((raw: any) => Promise<any>);
+  if (unlock) return await unlock(raw);
+  if (raw && raw.enc) throw new Error("Unlock this device to refresh.");
+  return raw;
+}
 const CFG: any = (window as any).__CFG || {};
 const KEY_LS = "orca-gh-access-key";
 function accessKey(): string {
@@ -1129,7 +1140,7 @@ function ActionBar() {
       setJob({ mode, phase: "loading", msg: "Done. Loading the new data…", t0, url: run.html_url });
       const before = mode === "scan" ? DATA.ts : (DATA.refreshTs || 0);
       for (let k = 0; k < 20; k++) {
-        try { const d = await (await fetch("data.json?t=" + Date.now(), { cache: "no-store" })).json(); if ((mode === "scan" ? d.ts : (d.refreshTs || 0)) !== before) break; } catch (e) { /* retry */ }
+        try { const d = await fetchLatestData(); if ((mode === "scan" ? d.ts : (d.refreshTs || 0)) !== before) break; } catch (e) { /* retry */ }
         await sleep(5000);
       }
       window.location.reload();

@@ -35,6 +35,8 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
+    env:
+      KALSHI_SCANNER_PASSCODE: ${{ secrets.KALSHI_SCANNER_PASSCODE }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -44,6 +46,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Unwrap published data
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+        run: |
+          set -euo pipefail
+          pip install -q cryptography
+          python3 scanner/gate_crypto.py decrypt
       - name: Restore backfill cache (raw 90-day whale bets, incremental)
         if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
         uses: actions/cache@v4
@@ -134,6 +142,8 @@ jobs:
           }
           commit_outs() {
             validate_outs "pre-commit" || { echo "ERROR: refusing to commit invalid JSON"; return 1; }
+            pip install -q cryptography
+            python3 scanner/gate_crypto.py encrypt
             git add -- "${outs[@]}"
             if git diff --cached --quiet; then
               echo "no changes to commit"
@@ -144,14 +154,14 @@ jobs:
 
           # Never roll newer data back: if main already holds a newer scan (or a newer refresh of the same scan)
           # than this run produced, drop this run's output and publish the latest main instead.
-          fresh_key='import json,sys; d=json.load(open(sys.argv[1])); e=json.load(open(sys.argv[2])); print(int(d.get("ts",0)), int(e.get("refreshTs",0)))'
+          # fresh-key unwraps AES-wrapped data.json in memory and prints "<ts> <refreshTs>".
           main_is_newer() {
             git fetch origin main || return 1
             git show origin/main:data.json > /tmp/remote_data.json 2>/dev/null || return 1
             git show origin/main:scanner/page_embed.json > /tmp/remote_embed.json 2>/dev/null || echo '{}' > /tmp/remote_embed.json
             local r l
-            r=$(python3 -c "$fresh_key" /tmp/remote_data.json /tmp/remote_embed.json 2>/dev/null) || return 1
-            l=$(python3 -c "$fresh_key" data.json scanner/page_embed.json 2>/dev/null) || return 1
+            r=$(python3 scanner/gate_crypto.py fresh-key /tmp/remote_data.json /tmp/remote_embed.json) || return 1
+            l=$(python3 scanner/gate_crypto.py fresh-key data.json scanner/page_embed.json) || return 1
             local rt=${r% *} rr=${r#* } lt=${l% *} lr=${l#* }
             if [ "$rt" -gt "$lt" ] || { [ "$rt" -eq "$lt" ] && [ "$rr" -gt "$lr" ]; }; then
               echo "main already has newer data (scan $rt/refresh $rr > scan $lt/refresh $lr)"

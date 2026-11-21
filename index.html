@@ -5,20 +5,186 @@
 <meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#7C3AED">
 <title>Orca Whale Scanner</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%8B%3C/text%3E%3C/svg%3E">
-<style>html,body{margin:0;background:#F4F0FF;-webkit-text-size-adjust:100%}*{-webkit-tap-highlight-color:transparent}button{touch-action:manipulation}::-webkit-scrollbar{display:none}#boot{font:15px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;color:#6b6b76;text-align:center;padding:80px 20px}</style>
+<style>
+html,body{margin:0;background:#1E1B4B;min-height:100%;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+button{touch-action:manipulation;font-family:inherit}
+::-webkit-scrollbar{display:none}
+#lock{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:
+  radial-gradient(ellipse at 50% 0%,rgba(124,58,237,0.45),transparent 55%),#1E1B4B;color:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif}
+#lock .card{width:100%;max-width:380px;background:#2E1065;border-radius:24px;padding:28px 24px 24px;
+  box-shadow:0 0 80px rgba(124,58,237,0.35),0 18px 40px rgba(0,0,0,0.35);border:1px solid rgba(196,181,253,0.28)}
+#lock .icon{width:48px;height:48px;border-radius:14px;background:#7C3AED;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+#lock h1{margin:0;font-size:26px;letter-spacing:-0.03em}
+#lock p{margin:8px 0 18px;color:#DDD6FE;font-size:14px;font-weight:650;line-height:1.4}
+#lock input{width:100%;min-height:48px;border:0;border-radius:12px;padding:0 14px;font-size:16px;background:#F4F0FF;color:#2E1065}
+#lock button{width:100%;min-height:48px;margin-top:12px;border:0;border-radius:12px;background:#7C3AED;color:#fff;font-weight:850;font-size:16px;cursor:pointer}
+#lock button:disabled{opacity:.7;cursor:default}
+#lock .err{min-height:20px;margin-top:10px;color:#FECACA;font-size:13px;font-weight:700}
+#boot{font:15px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;color:#DDD6FE;text-align:center;padding:80px 20px}
+</style>
 </head><body>
-<div id="root"><div id="boot">Loading whale picks…</div></div>
-<script src="config.js?v=4262d46e0a"></script>
+<div id="root"><div id="boot">Unlocking…</div></div>
 <script>
-var _t = Date.now();
-Promise.all([
-  fetch('data.json?t=' + _t, {cache: 'no-store'}).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }),
-  fetch('kalshi_display.json?t=' + _t, {cache: 'no-store'}).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
-]).then(function (res) {
-  window.__DATA = res[0];
-  window.__KALSHI_DISPLAY = res[1];
-  var s = document.createElement('script'); s.src = 'app.js?v=4262d46e0a&t=' + Date.now(); s.onerror = function () { document.getElementById('boot').textContent = 'Could not load the app. Pull to reload.'; }; document.body.appendChild(s);
-}).catch(function (e) { document.getElementById('boot').textContent = 'Could not load data (' + e.message + '). Pull to reload.'; });
-
+var LS_KEY = "whale-scanner-gate";
+function loadScript(src) {
+  return new Promise(function (resolve, reject) {
+    var s = document.createElement("script");
+    s.src = src;
+    s.onload = resolve;
+    s.onerror = reject;
+    document.body.appendChild(s);
+  });
+}
+function hexToBytes(hex) {
+  var out = new Uint8Array(hex.length / 2);
+  for (var i = 0; i < out.length; i++) out[i] = parseInt(hex.substr(i * 2, 2), 16);
+  return out;
+}
+function bytesToHex(buf) {
+  var u = new Uint8Array(buf), s = "";
+  for (var i = 0; i < u.length; i++) s += (u[i] + 256).toString(16).slice(-2);
+  return s;
+}
+function b64ToBytes(b64) {
+  var bin = atob(b64), u = new Uint8Array(bin.length);
+  for (var i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+  return u;
+}
+function bytesToB64(buf) {
+  var u = new Uint8Array(buf), s = "";
+  for (var i = 0; i < u.length; i++) s += String.fromCharCode(u[i]);
+  return btoa(s);
+}
+function concatBytes(a, b, c) {
+  var out = new Uint8Array(a.length + (b ? b.length : 0) + (c ? c.length : 0));
+  out.set(a, 0);
+  if (b) out.set(b, a.length);
+  if (c) out.set(c, a.length + (b ? b.length : 0));
+  return out;
+}
+async function hashPasscode(code, saltHex) {
+  var salt = hexToBytes(saltHex);
+  var pw = new TextEncoder().encode(code);
+  var z = new Uint8Array([0]);
+  var buf = await crypto.subtle.digest("SHA-256", concatBytes(salt, z, pw));
+  return bytesToHex(buf);
+}
+async function deriveKey(code, saltHex, iters) {
+  var enc = new TextEncoder();
+  var base = await crypto.subtle.importKey("raw", enc.encode(code), "PBKDF2", false, ["deriveKey"]);
+  return crypto.subtle.deriveKey(
+    { name: "PBKDF2", salt: hexToBytes(saltHex), iterations: iters, hash: "SHA-256" },
+    base,
+    { name: "AES-GCM", length: 256 },
+    true,
+    ["decrypt"]
+  );
+}
+async function importKeyRaw(b64) {
+  return crypto.subtle.importKey("raw", b64ToBytes(b64), { name: "AES-GCM" }, true, ["decrypt"]);
+}
+async function exportKeyRaw(key) {
+  return bytesToB64(await crypto.subtle.exportKey("raw", key));
+}
+async function decryptEnc(obj, key) {
+  var iv = b64ToBytes(obj.iv);
+  var ct = b64ToBytes(obj.ct);
+  var tag = b64ToBytes(obj.tag);
+  var packed = concatBytes(ct, tag);
+  var plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: iv }, key, packed);
+  return JSON.parse(new TextDecoder().decode(plain));
+}
+function showLock(gate, onUnlock) {
+  var root = document.getElementById("root");
+  root.innerHTML = '<div id="lock"><form class="card" autocomplete="off"><div class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h1>Orca Whale Scanner</h1><p>Enter the passcode to open this device’s scanner.</p><input id="code" type="password" inputmode="text" name="passcode" autocomplete="current-password" autocapitalize="off" spellcheck="false" placeholder="Passcode" aria-label="Passcode"><button type="submit" id="go">Unlock</button><div class="err" id="err" role="status"></div></form></div>';
+  var form = root.querySelector("form");
+  var input = document.getElementById("code");
+  var err = document.getElementById("err");
+  var btn = document.getElementById("go");
+  setTimeout(function () { input.focus(); }, 50);
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var code = input.value || "";
+    input.value = "";
+    if (!code) { err.textContent = "Enter the passcode."; return; }
+    btn.disabled = true;
+    err.textContent = "";
+    onUnlock(code).then(function () { btn.disabled = false; }).catch(function (e) {
+      btn.disabled = false;
+      err.textContent = (e && e.message) ? e.message : "That passcode is incorrect.";
+      input.focus();
+    });
+  });
+}
+function bootApp(data, kalshi) {
+  window.__DATA = data;
+  window.__KALSHI_DISPLAY = kalshi || null;
+  if (!document.getElementById("boot") || document.getElementById("lock")) {
+    document.getElementById("root").innerHTML = '<div id="boot">Loading whale picks…</div>';
+  }
+  var t = Date.now();
+  return loadScript("config.js?v=45f9cd1eab&t=" + t).catch(function () {}).then(function () {
+    return loadScript("app.js?v=45f9cd1eab&t=" + Date.now());
+  });
+}
+function fetchJson(name) {
+  return fetch(name + "?t=" + Date.now(), { cache: "no-store" }).then(function (r) {
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json();
+  });
+}
+window.__loadScannerData = function () {
+  return fetchJson("data.json").then(function (raw) { return window.__unlockData(raw); });
+};
+async function start() {
+  var gate = await (await fetch("gate.json?t=" + Date.now(), { cache: "no-store" })).json();
+  window.__GATE = gate;
+  async function applyKey(key) {
+    window.__GATE_KEY = key;
+    window.__unlockData = async function (raw) {
+      if (raw && raw.enc === 1) {
+        if (!window.__GATE_KEY) throw new Error("Unlock this device to refresh.");
+        return await decryptEnc(raw, window.__GATE_KEY);
+      }
+      return raw;
+    };
+    var raw = await fetchJson("data.json");
+    var data = await window.__unlockData(raw);
+    var kalshi = null;
+    try {
+      var kraw = await fetchJson("kalshi_display.json");
+      kalshi = await window.__unlockData(kraw);
+    } catch (e) { kalshi = null; }
+    await bootApp(data, kalshi);
+  }
+  var saved = null;
+  try { saved = JSON.parse(localStorage.getItem(LS_KEY) || "null"); } catch (e) { saved = null; }
+  if (saved && saved.h && saved.h === gate.hash && saved.k) {
+    try {
+      document.getElementById("root").innerHTML = '<div id="boot">Loading whale picks…</div>';
+      var key = await importKeyRaw(saved.k);
+      await applyKey(key);
+      return;
+    } catch (e) {
+      try { localStorage.removeItem(LS_KEY); } catch (e2) {}
+    }
+  }
+  showLock(gate, async function (code) {
+    var hex = await hashPasscode(code, gate.salt);
+    if (hex !== gate.hash) throw new Error("That passcode is incorrect.");
+    var key = await deriveKey(code, gate.salt, gate.iters || 100000);
+    try {
+      localStorage.setItem(LS_KEY, JSON.stringify({ h: hex, k: await exportKeyRaw(key) }));
+    } catch (e) {}
+    document.getElementById("root").innerHTML = '<div id="boot">Loading whale picks…</div>';
+    await applyKey(key);
+  });
+}
+start().catch(function (e) {
+  var boot = document.getElementById("root");
+  boot.innerHTML = '<div id="boot">Could not open the lock screen. Pull to reload.</div>';
+});
 </script>
 </body></html>
