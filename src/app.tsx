@@ -4489,34 +4489,33 @@ function CapperSlateTab(props: { now: number; mode: "elite" | "coming" }) {
     </Section>
   );
 }
-// ---------- Ranked (was Elite; Noel Nov 19 evening): game cards ranked by the collective win ratio of every capper on the card ----------
-const ELITE_MIN_BETS = 10; // settled bets needed for a card to rank in the main lists
-interface RankedCard { id: string; picks: UPick[]; rec: WL; cappers: number; hasElite: boolean; startTs: number }
+// ---------- Ranked (Noel Nov 20): opposition-aware net score is the primary ranking factor ----------
+const ELITE_MIN_BETS = 10; // settled bets needed for a card to rank in the main (non-small-sample) lists
+interface RankedCard { id: string; picks: UPick[]; rec: WL; cappers: number; hasElite: boolean; startTs: number; net: NetInfo; main: UPick; contested: boolean }
 function rankedCards(all: UPick[]): RankedCard[] {
   const by: Record<string, UPick[]> = {};
   all.forEach((p: UPick) => { if (p.kind === "sports") (by[p.gameId] = by[p.gameId] || []).push(p); });
   return Object.keys(by).map((id: string) => {
-    const seen: Record<string, boolean> = {};
-    let w = 0, l = 0, elite = false;
-    by[id].forEach((p: UPick) => p.backers.forEach((b: UBacker) => {
-      if (seen[b.wallet]) return;
-      seen[b.wallet] = true;
-      if (eliteCapper(b.wallet)) elite = true;
-      const r = recWL(b.wallet, "sports");
-      if (r) { w += r.w; l += r.l; }
-    }));
-    return { id, picks: by[id], rec: { w, l }, cappers: Object.keys(seen).length, hasElite: elite, startTs: by[id][0].startTs || 0 };
+    const picks = bestPickFirst(by[id], all);
+    const main = picks[0];
+    const net = netOf(main, all);
+    let elite = false;
+    main.backers.forEach((b: UBacker) => { if (eliteCapper(b.wallet)) elite = true; });
+    return { id, picks, rec: net.own.rec, cappers: net.own.cappers, hasElite: elite, startTs: main.startTs || 0, net, main, contested: net.contested };
   });
 }
-const rankCmp = (a: RankedCard, b: RankedCard): number => (wlRate(b.rec) - wlRate(a.rec)) || (b.rec.w - a.rec.w) || (b.cappers - a.cappers) || (a.startTs - b.startTs);
-function rankedLists(all: UPick[]): { top: RankedCard[]; others: RankedCard[]; small: RankedCard[]; total: number } {
+const rankCmp = (a: RankedCard, b: RankedCard): number => (b.net.net - a.net.net) || (b.net.raw - a.net.raw) || (b.net.own.rec.w - a.net.own.rec.w) || (b.net.own.cappers - a.net.own.cappers) || (a.startTs - b.startTs);
+function rankedLists(all: UPick[]): { top: RankedCard[]; others: RankedCard[]; small: RankedCard[]; contested: RankedCard[]; total: number } {
   const cards = rankedCards(all);
-  const big = cards.filter((c: RankedCard) => c.rec.w + c.rec.l >= ELITE_MIN_BETS).sort(rankCmp);
-  const small = cards.filter((c: RankedCard) => c.rec.w + c.rec.l < ELITE_MIN_BETS).sort(rankCmp);
+  const open = cards.filter((c: RankedCard) => !c.contested);
+  const contested = cards.filter((c: RankedCard) => c.contested).sort(rankCmp);
+  const nOf = (c: RankedCard) => c.net.own.rec.w + c.net.own.rec.l;
+  const big = open.filter((c: RankedCard) => nOf(c) >= ELITE_MIN_BETS).sort(rankCmp);
+  const small = open.filter((c: RankedCard) => nOf(c) < ELITE_MIN_BETS).sort(rankCmp);
   const topCand = big.filter((c: RankedCard) => c.hasElite).slice(0, 15);
   const topIds: Record<string, boolean> = {};
   topCand.forEach((c: RankedCard) => { topIds[c.id] = true; });
-  return { top: topCand, others: big.filter((c: RankedCard) => !topIds[c.id]), small, total: cards.length };
+  return { top: topCand, others: big.filter((c: RankedCard) => !topIds[c.id]), small, contested, total: cards.length };
 }
 function eliteTabCount(now: number): number {
   return rankedLists(combinedPicks(now)).total;
@@ -4525,22 +4524,26 @@ function EliteTab(props: { now: number }) {
   const all = combinedPicks(props.now);
   const L = rankedLists(all);
   const unitOf = (c: RankedCard) => ({ id: c.id, picks: c.picks });
-  const render = (c: RankedCard, i: number) => <GameBlock key={c.id} u={unitOf(c)} now={props.now} stake="$2–4" noun="game" all={all} rankNo={i + 1} rec={c.rec} cappers={c.cappers} />;
+  const render = (c: RankedCard, i: number) => <GameBlock key={c.id} u={unitOf(c)} now={props.now} stake="$2–4" noun="game" all={all} rankNo={i + 1} rec={c.rec} cappers={c.cappers} net={c.net} />;
   const sec = (attr: string, title: string, n: number) => <div data-ranked-section={attr} style={{ fontSize: 22, fontWeight: 900, margin: "18px 2px 4px", paddingTop: 10, borderTop: "3px solid #4C1D95" }}>{title + " · " + n}</div>;
+  const nUn = L.top.length + L.others.length;
   return (
-    <Section heading={"Ranked · " + L.total} caption={"Games ranked by the combined record of every capper on the card · starts or settles within 24 hours"}>
-      <Text>{"Each game is one card. Its rank is the collective win ratio of every tracked capper betting on that game (all their wins divided by all their settled bets). Record counts, money does not. The best pick (by its own cappers' record) is up front; the other bets on the game are in the drop-down. Top 15 are games with at least one 2-1+ capper (positive profit) and 10+ settled bets between the cappers. An amber warning names a capper on the other side with a better record."}</Text>
-      <div data-ranked-summary="1" style={{ fontSize: 14, fontWeight: 750, color: "#52525B", margin: "2px 2px 8px" }}>{L.total + " games · " + L.top.length + " in the top list"}</div>
+    <Section heading={"Ranked · " + L.total} caption={"Games ranked by net capper record (this side minus the other side) · starts or settles within 24 hours"}>
+      <Text>{"Each game is one card. Rank is the net score of the main pick: this side's record minus the other side's, shrunk so a 1-0 capper is not treated as 100%. Record counts, money does not. The main pick is always the side with the stronger net score; other bets on the game are in the drop-down. Games with heavy opposition are marked Contested and sit in their own section at the bottom. The $40 card skips contested picks. An amber warning still names a capper on the other side with a better record."}</Text>
+      <div data-ranked-summary="1" style={{ fontSize: 14, fontWeight: 750, color: "#52525B", margin: "2px 2px 8px" }}>{L.total + " games · " + nUn + " uncontested · " + L.contested.length + " contested · " + L.top.length + " in the top list"}</div>
       {L.total > 0 ? <TodayCard all={all} now={props.now} /> : null}
       {L.total === 0 ? <EmptyState title="No ranked games right now" body={"No tracked capper has a $500+ pick with a Kalshi line starting within 24 hours. " + nextScanLabel(props.now) + "."} /> : null}
       {L.top.length ? <div data-elite-top="1" style={{ fontSize: 22, fontWeight: 900, margin: "4px 2px 4px" }}>{"Top " + L.top.length}</div> : null}
       {L.top.map((c: RankedCard, i: number) => render(c, i))}
-      {L.others.length ? sec("others", "All other games", L.others.length) : null}
-      {L.others.length ? <Text>{"Same ranking: combined record of all cappers on the card, best to worst."}</Text> : null}
+      {L.others.length ? sec("others", "All other uncontested", L.others.length) : null}
+      {L.others.length ? <Text>{"Same ranking: net score of the main pick, best to worst. No heavy opposition on these."}</Text> : null}
       {L.others.map((c: RankedCard, i: number) => render(c, L.top.length + i))}
       {L.small.length ? sec("small", "Small sample (under " + ELITE_MIN_BETS + " bets)", L.small.length) : null}
-      {L.small.length ? <Text>{"The cappers on these games have fewer than 10 settled bets in total, so the record is not ranked with the main lists yet."}</Text> : null}
+      {L.small.length ? <Text>{"The cappers on the main pick have fewer than 10 settled bets, so the record is not ranked with the main lists yet."}</Text> : null}
       {L.small.map((c: RankedCard, i: number) => render(c, L.top.length + L.others.length + i))}
+      {L.contested.length ? sec("contested", "Contested", L.contested.length) : null}
+      {L.contested.length ? <Text>{"These have meaningful opposition: the other side is at least 60% on 10+ settled bets, or the net gap is under 10 points with a 10+ bet other side. They are out of the $40 card. Ranked here by net score, still with the amber other-side warning."}</Text> : null}
+      {L.contested.map((c: RankedCard, i: number) => render(c, L.top.length + L.others.length + L.small.length + i))}
     </Section>
   );
 }
@@ -4857,6 +4860,71 @@ function eliteCapper(w: string): boolean {
   if (pr == null || pr <= 0) return false;
   return wlElite(recWL(w, "sports"));
 }
+// Opposition-aware net score (Noel Nov 20).
+// Side strength = Laplace-smoothed win rate (W+1)/(W+L+2), so 1-0 is 67% not 100% and 0-0 is a neutral 50%.
+// Sample weight = N/(N+10), so 10 settled bets is half weight, 30 is 75%, and a side with no graded bets contributes 0.
+// Side score = strength × weight. Net (shown as "Net +18") = 100 × (own score − opposing score).
+// No opposition ⇒ opposing score is 0, so the net is just this side's own (shrunk) strength.
+// Opposition = the other outcome of the same market; for moneylines, also any moneyline on the other team in the same game.
+// Wallets hedging both sides are dropped from both counts. Record counts, money does not.
+// Contested if the other side's raw combined record is 60%+ on 10+ settled bets, or the other side has 10+ bets and the net margin is under 10 points.
+const NET_PRIOR = 10;
+const NET_CLOSE = 10;
+const NET_OPP_WR = 0.60;
+interface NetSide { rec: WL; cappers: number; score: number }
+interface NetInfo { net: number; raw: number; own: NetSide; opp: NetSide; contested: boolean }
+const laplaceRate = (r: WL): number => (r.w + 1) / (r.w + r.l + 2);
+const sampleWeight = (n: number): number => (n > 0 ? n / (n + NET_PRIOR) : 0);
+const sideScore = (r: WL): number => laplaceRate(r) * sampleWeight(r.w + r.l);
+function isMoneylinePick(p: UPick): boolean { return (p.bt || "") === "Moneyline"; }
+function teamToken(p: UPick): string {
+  const raw = (p.view.outcome || p.view.backing || p.big || "").toLowerCase();
+  return raw.replace(/[^a-z0-9]+/g, " ").replace(/\b(the|vs|at|to|win|wins|winner|moneyline|ml)\b/g, " ").replace(/\s+/g, " ").trim();
+}
+function recOfBackers(backers: UBacker[], kind: "sports" | "pe"): NetSide {
+  const seen: Record<string, boolean> = {};
+  let w = 0, l = 0, n = 0;
+  backers.forEach((b: UBacker) => {
+    if (seen[b.wallet]) return;
+    seen[b.wallet] = true;
+    n += 1;
+    const r = recWL(b.wallet, kind);
+    if (r) { w += r.w; l += r.l; }
+  });
+  const rec = { w, l };
+  return { rec, cappers: n, score: sideScore(rec) };
+}
+function netOf(p: UPick, all: UPick[]): NetInfo {
+  const oppPicks = oppositeOf(p, all);
+  const oppW: Record<string, boolean> = {};
+  oppPicks.forEach((q: UPick) => q.backers.forEach((b: UBacker) => { oppW[b.wallet] = true; }));
+  const mineW: Record<string, boolean> = {};
+  p.backers.forEach((b: UBacker) => { mineW[b.wallet] = true; });
+  const kind: "sports" | "pe" = p.kind === "pe" ? "pe" : "sports";
+  const own = recOfBackers(p.backers.filter((b: UBacker) => !oppW[b.wallet]), kind);
+  const oppB: UBacker[] = [];
+  const seen: Record<string, boolean> = {};
+  oppPicks.forEach((q: UPick) => q.backers.forEach((b: UBacker) => { if (seen[b.wallet] || mineW[b.wallet]) return; seen[b.wallet] = true; oppB.push(b); }));
+  const opp = recOfBackers(oppB, kind);
+  const raw = 100 * (own.score - opp.score);
+  const net = Math.round(raw);
+  const oppN = opp.rec.w + opp.rec.l;
+  const contested = oppN >= ELITE_MIN_BETS && (wlRate(opp.rec) >= NET_OPP_WR || net < NET_CLOSE);
+  return { net, raw, own, opp, contested };
+}
+function netLabel(n: number): string { return "Net " + (n > 0 ? "+" : "") + n; }
+function NetPill(props: { net: NetInfo }) {
+  const n = props.net.net;
+  const fg = n >= NET_CLOSE ? "#15803D" : n > -NET_CLOSE ? "#92400E" : "#B91C1C";
+  const bg = n >= NET_CLOSE ? "#DCFCE7" : n > -NET_CLOSE ? "#FEF3C7" : "#FEE2E2";
+  return <span data-net-pill={String(n)} style={{ display: "inline-block", padding: "2px 10px", borderRadius: 999, background: bg, color: fg, border: "1.5px solid " + fg, fontSize: 13, fontWeight: 850, fontVariantNumeric: "tabular-nums" }}>{netLabel(n)}</span>;
+}
+function ContestedBadge(props: { net: NetInfo }) {
+  if (!props.net.contested) return null;
+  const o = props.net.opp;
+  const text = "Contested: " + o.cappers + " capper" + (o.cappers === 1 ? "" : "s") + " " + wlText(o.rec) + " against";
+  return <span data-contested-badge="1" style={{ display: "inline-block", padding: "3px 10px", borderRadius: 999, background: "#FFEDD5", color: "#9A3412", border: "2px solid #EA580C", fontSize: 13, fontWeight: 900 }}>{text}</span>;
+}
 function bestWL(list: WL[]): WL { return list.slice().sort((a: WL, b: WL) => (wlBetter(a, b) ? -1 : wlBetter(b, a) ? 1 : 0))[0]; }
 // Compare the best and the average record of this side's cappers against the Other side's. Only flags when one side wins on both.
 function sideCompare(p: UPick, all: UPick[]): SideCmp | null {
@@ -5007,8 +5075,16 @@ function OnKalshiBox(props: { view: KalshiView }) {
 }
 // Tracked cappers on the other side of the same market (same pool, same filters: every pick here already passed them).
 function oppositeOf(p: UPick, all: UPick[]): UPick[] {
-  if (!p.mid) return [];
-  return all.filter((q: UPick) => q.key !== p.key && q.gameId === p.gameId && q.mid === p.mid && q.view.yesNo !== null);
+  if (p.kind !== "sports") return [];
+  const seen: Record<string, boolean> = {};
+  const out: UPick[] = [];
+  const add = (q: UPick) => { if (q.key === p.key || seen[q.key]) return; seen[q.key] = true; out.push(q); };
+  if (p.mid) all.forEach((q: UPick) => { if (q.gameId === p.gameId && q.mid === p.mid && q.view.yesNo != null) add(q); });
+  if (isMoneylinePick(p)) {
+    const mine = teamToken(p);
+    if (mine) all.forEach((q: UPick) => { if (q.gameId === p.gameId && isMoneylinePick(q) && teamToken(q) && teamToken(q) !== mine) add(q); });
+  }
+  return out;
 }
 function OtherSide(props: { p: UPick; opp: UPick[] }) {
   const t = useGrokTheme();
@@ -5054,22 +5130,25 @@ function RecordFlag(props: { cmp: SideCmp }) {
     </div>
   );
 }
-function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNode; sourceTags?: boolean; opp?: UPick[]; stakeLine?: string; rankNo?: number }) {
+function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNode; sourceTags?: boolean; opp?: UPick[]; stakeLine?: string; rankNo?: number; net?: NetInfo }) {
   const t = useGrokTheme();
   const p = props.p;
   const v = p.view;
-  const yes = v.yesNo === "Yes";
   const top = p.backers.slice(0, 3);
   const rest = p.backers.slice(3);
   const kinds = p.tags;
+  const nInfo = props.net;
+  const contested = !!(nInfo && nInfo.contested);
   const colorOf = (x: string): string[] => (({ Proven: ["#EDE9FE", "#6D28D9"], Elite: ["#FEF3C7", "#92400E"], "🔥 Hot": ["#FFEDD5", "#C2410C"], "Politics-Econ": ["#DBEAFE", "#1D4ED8"], Tracked: ["#F3F4F6", "#4B5563"] } as Record<string, string[]>)[x] || [t.bg.subtle, t.text.primary]);
   return (
-    <div data-ucard={p.key} data-ucard-kind={p.kind} style={{ borderRadius: 18, border: "1.5px solid " + t.border.default, background: t.bg.base, boxShadow: "0 4px 14px rgba(76,29,149,0.08)", overflow: "hidden", marginBottom: 10, fontFamily: t.font.family }}>
+    <div data-ucard={p.key} data-ucard-kind={p.kind} data-contested={contested ? "1" : undefined} style={{ borderRadius: 18, border: (contested ? "2.5px solid #EA580C" : "1.5px solid " + t.border.default), background: contested ? "#FFF7ED" : t.bg.base, boxShadow: contested ? "0 4px 14px rgba(234,88,12,0.18)" : "0 4px 14px rgba(76,29,149,0.08)", overflow: "hidden", marginBottom: 10, fontFamily: t.font.family }}>
       <div style={{ padding: "12px 14px 12px" }}>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center", marginBottom: 6 }}>
           {props.rankNo ? <span data-card-no="1" style={{ display: "inline-block", minWidth: 26, textAlign: "center", padding: "2px 8px", borderRadius: 999, background: BRAND, color: "#FFFFFF", fontSize: 13, fontWeight: 900 }}>{"#" + props.rankNo}</span> : null}
           {p.live ? <Chip bg={RED} color="#FFFFFF">LIVE</Chip> : null}
           <span style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary }}>{p.league + " · " + (p.kind === "pe" ? settlesOn(p.settleTs, props.now) : (p.startTs ? ptTime(p.startTs) : "")) + (p.kind === "sports" && p.bt ? " · " + p.bt : "")}</span>
+          {nInfo ? <NetPill net={nInfo} /> : null}
+          {nInfo ? <ContestedBadge net={nInfo} /> : null}
         </div>
         <div data-ucard-big="1" style={{ fontSize: 22, lineHeight: "27px", fontWeight: 850, letterSpacing: "-0.01em", overflowWrap: "anywhere" }}>{p.big}</div>
         {p.sub ? <div style={{ fontSize: 14, lineHeight: "19px", fontWeight: 600, color: t.text.secondary, marginTop: 2, overflowWrap: "anywhere" }}>{p.sub}</div> : null}
@@ -5110,21 +5189,20 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
     </div>
   );
 }
-// ---------- One card per game (Noel Nov 19 evening) ----------
-// The main pick is the one whose cappers have the best combined record. Every other bet on the game sits in a collapsed drop-down, grouped by bet type.
+// ---------- One card per game (Noel Nov 20): main pick is the highest net score; never a net-weaker side than its opposite ----------
 function pickRec(p: UPick): WL {
   let w = 0, l = 0;
   p.backers.forEach((b: UBacker) => { const r = recWL(b.wallet, p.kind === "pe" ? "pe" : "sports"); if (r) { w += r.w; l += r.l; } });
   return { w, l };
 }
-function bestPickFirst(picks: UPick[]): UPick[] {
-  const sample = (r: WL): number => (r.w + r.l >= ELITE_MIN_BETS ? 1 : 0);
+function bestPickFirst(picks: UPick[], all?: UPick[]): UPick[] {
+  const pool = all || picks;
   return picks.slice().sort((a: UPick, b: UPick) => {
-    const ra = pickRec(a), rb = pickRec(b);
-    return (sample(rb) - sample(ra)) || (wlRate(rb) - wlRate(ra)) || (rb.w - ra.w) || (b.backers.length - a.backers.length);
+    const na = netOf(a, pool), nb = netOf(b, pool);
+    return (nb.net - na.net) || (nb.raw - na.raw) || (nb.own.rec.w - na.own.rec.w) || (nb.own.cappers - na.own.cappers) || (b.backers.length - a.backers.length);
   });
 }
-function GameHeader(props: { p: UPick; now: number; rankNo?: number; rec?: WL; cappers?: number }) {
+function GameHeader(props: { p: UPick; now: number; rankNo?: number; rec?: WL; cappers?: number; net?: NetInfo }) {
   const p = props.p;
   if (p.kind !== "sports" || !p.startTs) return null;
   return (
@@ -5133,7 +5211,9 @@ function GameHeader(props: { p: UPick; now: number; rankNo?: number; rec?: WL; c
       {p.live ? <Chip bg={RED} color="#FFFFFF">LIVE</Chip> : null}
       <span data-game-start-time="1">{(p.live ? "Started " : "Starts ") + ptTime(p.startTs)}</span>
       <span style={{ fontSize: 13, fontWeight: 700, color: "#52525B" }}>{(p.live ? ago(p.startTs, props.now) : "in " + untilText(p.startTs, props.now)) + " · " + p.league}</span>
-      {props.rec ? <span data-game-rec="1" style={{ display: "inline-block", padding: "2px 10px", borderRadius: 999, background: "#EDE9FE", color: "#4C1D95", fontSize: 13, fontWeight: 850, border: "1.5px solid #4C1D95" }}>{(props.rec.w + props.rec.l ? "Combined " + wlText(props.rec) + " · " + pctText(wlRate(props.rec)) : "No graded record") + (props.cappers ? " · " + props.cappers + " capper" + (props.cappers === 1 ? "" : "s") : "")}</span> : null}
+      {props.net ? <NetPill net={props.net} /> : null}
+      {props.net ? <ContestedBadge net={props.net} /> : null}
+      {props.rec ? <span data-game-rec="1" style={{ display: "inline-block", padding: "2px 10px", borderRadius: 999, background: "#EDE9FE", color: "#4C1D95", fontSize: 13, fontWeight: 850, border: "1.5px solid #4C1D95" }}>{(props.rec.w + props.rec.l ? "This side " + wlText(props.rec) + " · " + pctText(wlRate(props.rec)) : "No graded record") + (props.cappers ? " · " + props.cappers + " capper" + (props.cappers === 1 ? "" : "s") : "")}</span> : null}
     </div>
   );
 }
@@ -5152,6 +5232,8 @@ function AltBet(props: { p: UPick; all?: UPick[]; now: number }) {
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center", marginTop: 6 }}>
         <span style={{ display: "inline-block", padding: "2px 9px", borderRadius: 999, background: "#E0E7FF", color: "#3730A3", fontSize: 13, fontWeight: 850 }}>{p.backers.length + " capper" + (p.backers.length === 1 ? "" : "s")}</span>
         {p.tags.map((x: string) => <span key={x} style={{ display: "inline-block", padding: "1px 8px", borderRadius: 999, background: "#F3F4F6", color: "#4B5563", fontSize: 12, fontWeight: 800, border: "1px solid #9CA3AF" }}>{x}</span>)}
+        {props.all ? <NetPill net={netOf(p, props.all)} /> : null}
+        {props.all ? <ContestedBadge net={netOf(p, props.all)} /> : null}
       </div>
       <FreshPricePills p={p} now={props.now} />
       <div style={{ marginTop: 8 }}><KalshiBuyButton view={p.view} size={17} /></div>
@@ -5161,16 +5243,18 @@ function AltBet(props: { p: UPick; all?: UPick[]; now: number }) {
     </div>
   );
 }
-function GameBlock(props: { u: { id: string; picks: UPick[] }; now: number; stake: string; noun: string; all?: UPick[]; showStart?: boolean; rankNo?: number; rec?: WL; cappers?: number; stakeLine?: string }) {
+function GameBlock(props: { u: { id: string; picks: UPick[] }; now: number; stake: string; noun: string; all?: UPick[]; showStart?: boolean; rankNo?: number; rec?: WL; cappers?: number; stakeLine?: string; net?: NetInfo }) {
   const [open, setOpen] = useState(false);
-  const picks = props.u.picks[0].kind === "pe" ? props.u.picks : bestPickFirst(props.u.picks);
+  const picks = props.u.picks[0].kind === "pe" ? props.u.picks : bestPickFirst(props.u.picks, props.all);
   const main = picks[0];
   const rest = picks.slice(1);
   const groups = BT_ORDER.map((bt: string) => ({ bt, picks: rest.filter((q: UPick) => (q.kind === "pe" ? "Other" : (q.bt || "Other")) === bt) })).filter((g) => g.picks.length);
+  const net = props.net || (props.all ? netOf(main, props.all) : undefined);
+  const contested = !!(net && net.contested && props.rankNo);
   return (
-    <div data-game-block={props.u.id}>
-      {props.showStart || props.rankNo ? <GameHeader p={main} now={props.now} rankNo={props.rankNo} rec={props.rec} cappers={props.cappers} /> : null}
-      <UCard p={main} opp={props.all ? oppositeOf(main, props.all) : undefined} now={props.now} stake={props.stake} moreRow={rest.length ? <MoreBetsRow noun={props.noun} n={rest.length} open={open} onToggle={() => setOpen(!open)} /> : undefined} />
+    <div data-game-block={props.u.id} data-contested={contested ? "1" : undefined} style={contested ? { border: "2.5px solid #EA580C", borderRadius: 20, padding: "4px 8px 6px", background: "#FFF7ED", margin: "8px 0 12px" } : undefined}>
+      {props.showStart || props.rankNo ? <GameHeader p={main} now={props.now} rankNo={props.rankNo} rec={props.rec} cappers={props.cappers} net={net} /> : null}
+      <UCard p={main} opp={props.all ? oppositeOf(main, props.all) : undefined} now={props.now} stake={props.stake} net={net} moreRow={rest.length ? <MoreBetsRow noun={props.noun} n={rest.length} open={open} onToggle={() => setOpen(!open)} /> : undefined} />
       {open && rest.length ? (
         <div data-game-more="1" style={{ marginLeft: 10, paddingLeft: 8, borderLeft: "3px solid " + BRAND, marginBottom: 10 }}>
           {groups.map((g) => (
@@ -5223,22 +5307,19 @@ function todayCard(all: UPick[], now: number): { picks: CardPick[]; total: numbe
     oppositeOf(p, all).forEach((q: UPick) => wallets(q).forEach((w: string) => { other[w] = true; }));
     return p.backers.filter((b: UBacker) => !other[b.wallet]).length;
   };
-  const oppN = (p: UPick): number => { const o: Record<string, boolean> = {}; oppositeOf(p, all).forEach((q: UPick) => wallets(q).forEach((w: string) => { o[w] = true; })); return Object.keys(o).length; };
   const eligible = (p: UPick): boolean => p.kind === "sports" && !p.live && p.startTs > now && p.view.price != null && !!p.view.yesNo && !p.view.unmatched && payoutOf(p) < 3;
-  // Ranked order (best combined capper record first). For each game take its best-record pick that qualifies (under 3x); if the main pick pays 3x+, the next-best under 3x is used.
+  // Uncontested games only, already in net-score order. For each game take the best-net pick that qualifies (under 3x, not contested); if the main pick pays 3x+ or is contested, the next-best uncontested under 3x is used.
   const L = rankedLists(all);
   const order: RankedCard[] = L.top.concat(L.others, L.small);
   const rows: { p: UPick; n: number }[] = [];
   order.forEach((c: RankedCard) => {
-    const pick = bestPickFirst(c.picks).filter((p: UPick) => eligible(p) && nonHedge(p) >= 1 && oppN(p) < nonHedge(p))[0];
+    const pick = bestPickFirst(c.picks, all).filter((p: UPick) => eligible(p) && nonHedge(p) >= 1 && !netOf(p, all).contested)[0];
     if (pick) rows.push({ p: pick, n: nonHedge(pick) });
   });
-  const warned = (p: UPick): boolean => !!(p.cmp && p.cmp.verdict === "other");
   const chosen: { p: UPick; n: number }[] = [];
   const take = (r: { p: UPick; n: number }) => { chosen.push(r); };
-  // Pass 1: safe picks (1.8x or less) without the other-side warning, in Ranked order. Pass 2: fill to 10 with the rest under 3x. Pass 3: warned picks last, only if still short.
-  rows.forEach((r) => { if (chosen.length < CARD_MAX && payoutOf(r.p) <= 1.8 && !warned(r.p)) take(r); });
-  rows.forEach((r) => { if (chosen.length < CARD_MIN && chosen.indexOf(r) < 0 && !warned(r.p)) take(r); });
+  // Pass 1: safer payouts (1.8x or less), in net-score order. Pass 2: fill to 10 with the rest under 3x. Contested picks are never used.
+  rows.forEach((r) => { if (chosen.length < CARD_MAX && payoutOf(r.p) <= 1.8) take(r); });
   rows.forEach((r) => { if (chosen.length < CARD_MIN && chosen.indexOf(r) < 0) take(r); });
   const picks: CardPick[] = chosen.map((r) => ({ p: r.p, n: r.n, stake: r.n >= 3 ? 4 : r.n === 2 ? 3 : 2 }));
   let total = picks.reduce((a: number, c: CardPick) => a + c.stake, 0);
@@ -5260,10 +5341,10 @@ function TodayCard(props: { all: UPick[]; now: number }) {
       <div style={{ borderRadius: 18, background: "#4C1D95", color: "#FFFFFF", padding: "14px 16px", marginBottom: 12 }}>
         <div style={{ fontSize: 22, fontWeight: 900, letterSpacing: "-0.01em" }}>{"Today's $" + CARD_BUDGET + " card"}</div>
         <div data-card-total="1" style={{ fontSize: 16, fontWeight: 800, marginTop: 4, fontVariantNumeric: "tabular-nums" }}>{card.picks.length + " picks · $2–4 each · total $" + card.total + " of $" + CARD_BUDGET}</div>
-        <div style={{ fontSize: 13, fontWeight: 650, opacity: 0.9, marginTop: 4 }}>{"One pick per game, taken from the Ranked list below (best combined capper record first). Safer payouts (1.8x or less) first, nothing paying 3x or more, picks with the amber other-side warning last." + (freshN ? " " + freshN + " fresh." : "")}</div>
+        <div style={{ fontSize: 13, fontWeight: 650, opacity: 0.9, marginTop: 4 }}>{"One pick per game, taken from uncontested Ranked games (best net score first). Safer payouts (1.8x or less) first, nothing paying 3x or more. Contested games — ones with heavy opposition — are left off this card." + (freshN ? " " + freshN + " fresh." : "")}</div>
       </div>
       {card.picks.length === 0 ? <EmptyState title="No picks fit the card right now" body={"Nothing upcoming pays under 3x with tracked cappers on the same side. The Ranked games are below. " + nextScanLabel(props.now) + "."} /> : card.picks.map((c: CardPick, i: number) => (
-        <UCard key={"card-" + c.p.key} p={c.p} opp={oppositeOf(c.p, props.all)} now={props.now} stake={"$" + c.stake} stakeLine={"$" + c.stake + " · total $" + card.total + " of $" + CARD_BUDGET} rankNo={i + 1} />
+        <UCard key={"card-" + c.p.key} p={c.p} opp={oppositeOf(c.p, props.all)} now={props.now} stake={"$" + c.stake} stakeLine={"$" + c.stake + " · total $" + card.total + " of $" + CARD_BUDGET} rankNo={i + 1} net={netOf(c.p, props.all)} />
       ))}
       <div style={{ fontSize: 12, fontWeight: 650, color: t.text.tertiary, margin: "2px 2px 0" }}>{"Suggested stakes only. Nothing is placed for you."}</div>
     </div>
