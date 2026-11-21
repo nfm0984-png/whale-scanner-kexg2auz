@@ -47113,7 +47113,11 @@
    "first_seen": 1795158795,
    "scans": 7,
    "first_score": 29,
-   "result": null
+   "result": "W",
+   "graded": 1795292893,
+   "ended": 1795292893,
+   "finalScore": "A. Sterling 82 \u2013 K. Vallejos 89",
+   "active": false
   },
   "0x9c710a05f27c90b75d42e913739a547b99f415a55b828254fe421a1a37a39a95:no": {
    "tier": "fun",
@@ -47408,7 +47412,11 @@
    "first_seen": 1795158795,
    "scans": 8,
    "first_score": 18,
-   "result": null
+   "result": "L",
+   "graded": 1795292893,
+   "ended": 1795292893,
+   "finalScore": "B. Ortega 81 \u2013 D. Hooker 90",
+   "active": false
   },
   "0xf499ee298aaa25752425ebcf706ed08eb33623b73af6c5b7e9d08adc6a57301f:no": {
    "tier": "top",
@@ -47469,7 +47477,11 @@
    "first_seen": 1795158795,
    "scans": 12,
    "first_score": 17,
-   "result": null
+   "result": "W",
+   "graded": 1795292893,
+   "ended": 1795292893,
+   "finalScore": "B. Ortega 81 \u2013 D. Hooker 90",
+   "active": false
   },
   "0x01d568219643ca122ba7644827dc26c48b765dfab549b086d72659cc0130441d:yes": {
    "tier": "fun",
@@ -54873,7 +54885,10 @@
    "first_seen": 1795250518,
    "scans": 5,
    "first_score": 49,
-   "result": null
+   "result": null,
+   "ended": 1795292893,
+   "finalScore": "TULN 28 \u2013 UNT 24",
+   "active": false
   },
   "0x7d2643c74ce0505927c62037944558575ec5468426300018572fde498918222e:no": {
    "tier": "poly",
@@ -57401,7 +57416,11 @@
    "first_seen": 1795273807,
    "scans": 2,
    "first_score": 25,
-   "result": null
+   "result": "W",
+   "graded": 1795292893,
+   "ended": 1795292893,
+   "finalScore": "PUR 10 \u2013 WIS 42",
+   "active": false
   },
   "0x70cf877684a34993f84ea905102d33ae559b3909bf69631ae8eed18361f09b00:no": {
    "tier": "top",
@@ -57477,7 +57496,11 @@
    "first_seen": 1795273807,
    "scans": 2,
    "first_score": 50,
-   "result": null
+   "result": "W",
+   "graded": 1795292893,
+   "ended": 1795292893,
+   "finalScore": "ARMY 6 \u2013 ECU 10",
+   "active": false
   },
   "0x92a89b444ab0bae28ea5eb594edaa5cf247b1331dc465e93ccf16db1eefea94b:yes": {
    "tier": "top",
@@ -57611,7 +57634,11 @@
    "first_seen": 1795273807,
    "scans": 2,
    "first_score": 34,
-   "result": null
+   "result": "W",
+   "graded": 1795292893,
+   "ended": 1795292893,
+   "finalScore": "ARMY 6 \u2013 ECU 10",
+   "active": false
   },
   "0xb834c477df3a4ac91f32dbb7b6046f862fb882ce717c97f5c148412836519226:no": {
    "tier": "fun",
@@ -57767,7 +57794,11 @@
    "first_seen": 1795281433,
    "scans": 2,
    "first_score": 43,
-   "result": null
+   "result": "W",
+   "graded": 1795292893,
+   "ended": 1795292893,
+   "finalScore": "CIN 35 \u2013 COLO 28",
+   "active": false
   },
   "0xc379a40bdb89cf6e07d70e33f71b57a6f5a75aea434e76880036227bff20791c:no": {
    "tier": "top",
@@ -57949,10 +57980,11 @@
    "first_seen": 1795281433,
    "scans": 2,
    "first_score": 44,
-   "result": null,
-   "ended": 1795285649,
-   "finalScore": "UTR 0 \u2013 CAM 0",
-   "active": false
+   "result": "L",
+   "ended": 1795292893,
+   "finalScore": "UTR 2 \u2013 CAM 3",
+   "active": false,
+   "graded": 1795292893
   },
   "0x1a13dbc83a6e47ce392b61c2be8e8c931791a97d4554895b72994f9a3d33ee5a:no": {
    "tier": "fun",
@@ -58943,7 +58975,11 @@
    "first_seen": 1795288589,
    "scans": 1,
    "first_score": 26,
-   "result": null
+   "result": "W",
+   "graded": 1795292893,
+   "ended": 1795292893,
+   "finalScore": "",
+   "active": false
   },
   "0x24024c37f7ea51cbf62f39d7c4c9f6d897c34ccaac3b0addfab71de25dbaa63e:no": {
    "tier": "top",
@@ -58981,7 +59017,11 @@
    "first_seen": 1795288589,
    "scans": 1,
    "first_score": 58,
-   "result": null
+   "result": "W",
+   "graded": 1795292893,
+   "ended": 1795292893,
+   "finalScore": "PUR 10 \u2013 WIS 42",
+   "active": false
   },
   "0xe87a2835e097f3bc0875ea62006f4de608f5c713601d39fa1b389fc10e0d94c4:no": {
    "tier": "top",
@@ -59080,7 +59120,11 @@
    "first_seen": 1795288589,
    "scans": 1,
    "first_score": 42,
-   "result": null
+   "result": "W",
+   "graded": 1795292893,
+   "ended": 1795292893,
+   "finalScore": "CIN 35 \u2013 COLO 28",
+   "active": false
   },
   "0x6683a43b0e910b293fa60aa89c894811b5cc1da44df3097224223731c252bc00:yes": {
    "tier": "top",
@@ -59122,7 +59166,11 @@
    "first_seen": 1795288589,
    "scans": 1,
    "first_score": 57,
-   "result": null
+   "result": "W",
+   "graded": 1795292893,
+   "ended": 1795292893,
+   "finalScore": "PUR 10 \u2013 WIS 42",
+   "active": false
   },
   "0x7c13eaa418a3ac8b2cfd034e4220e9cfc18a088b773fe516bb03659fad85bc5e:yes": {
    "tier": "glue",
@@ -59202,7 +59250,11 @@
    "first_seen": 1795288589,
    "scans": 1,
    "first_score": 52,
-   "result": null
+   "result": "W",
+   "graded": 1795292893,
+   "ended": 1795292893,
+   "finalScore": "",
+   "active": false
   },
   "0x193e38153d297f99af332f4705bed3c2a21c0b8e66b60fce6f7651fc0b4dc5d2:no": {
    "tier": "glue",
@@ -59316,7 +59368,11 @@
    "first_seen": 1795288589,
    "scans": 1,
    "first_score": 24,
-   "result": null
+   "result": "L",
+   "graded": 1795292893,
+   "ended": 1795292893,
+   "finalScore": "",
+   "active": false
   },
   "0xffb4edeb26b9e005f94ec4e47e706a67c136fed836a089ea89f8da6a3da534a6:yes": {
    "tier": "fun",
@@ -59335,7 +59391,11 @@
    "first_seen": 1795288589,
    "scans": 1,
    "first_score": 34,
-   "result": null
+   "result": "L",
+   "graded": 1795292893,
+   "ended": 1795292893,
+   "finalScore": "TULN 28 \u2013 UNT 24",
+   "active": false
   },
   "0xb1733e5c1f72f999a671c8e94fd2c5d3400d56c9bb85b3f43808b59fc2378074:no": {
    "tier": "fun",
@@ -59392,7 +59452,11 @@
    "first_seen": 1795288589,
    "scans": 1,
    "first_score": 24,
-   "result": null
+   "result": "W",
+   "graded": 1795292893,
+   "ended": 1795292893,
+   "finalScore": "",
+   "active": false
   },
   "0xef22bf189754364d81f4f46145522edd5a312590eb3a1a25ed25e0e47ebb1eae:yes": {
    "tier": "poly",
@@ -59430,7 +59494,10 @@
    "first_seen": 1795288589,
    "scans": 1,
    "first_score": 48,
-   "result": null
+   "result": null,
+   "ended": 1795292893,
+   "finalScore": "ARMY 6 \u2013 ECU 10",
+   "active": false
   },
   "0x082f9d511ed04428651026c3131e345fde3247d15c1dc500f711a09b1bb0b9d6:no": {
    "tier": "poly",
@@ -59487,7 +59554,11 @@
    "first_seen": 1795288589,
    "scans": 1,
    "first_score": 23,
-   "result": null
+   "result": "W",
+   "graded": 1795292893,
+   "ended": 1795292893,
+   "finalScore": "DYJ 0 \u2013 BAR 1",
+   "active": false
   },
   "0x3c7c7604177a4868c05c901252dec2f05da4e204cd0adb438fc0024c754265a9:no": {
    "tier": "poly",
