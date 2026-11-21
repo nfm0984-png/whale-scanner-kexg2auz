@@ -4633,11 +4633,8 @@ function EliteTab(props: { now: number }) {
   const L = rankedLists(all);
   const unitOf = (c: RankedCard) => ({ id: c.id, picks: c.picks });
   const render = (c: RankedCard, i: number) => <GameBlock key={c.id} u={unitOf(c)} now={props.now} stake="" noun="game" all={all} rankNo={i + 1} rec={c.rec} cappers={c.cappers} net={c.net} hideStake={true} />;
-  const thinN = L.list.filter((c: RankedCard) => (c.net.own.rec.w + c.net.own.rec.l) < 10).length;
   return (
-    <Section heading={"Ranked · " + L.total} caption={"Every qualifying game, ranked best to worst · starts or settles within 24 hours"}>
-      <Text>{"Each game is one card. Rank combines each capper's record in this sport (when they have 5+ settled bets there) with their overall record, the number of cappers on the side, and the other side's records. Win rates are shrunk with a Wilson lower bound and an experience factor (settled bets and volume), so a 3-0 does not outrank a proven 40-10. Record counts, money and ROI do not. The main pick is the side with the stronger net score; other bets on the game are in the drop-down. Games with heavy opposition are marked Contested but stay in this same list. An amber warning still names a capper on the other side with a stronger shrunk record."}</Text>
-      <div data-ranked-summary="1" style={{ fontSize: 14, fontWeight: 750, color: "#52525B", margin: "2px 2px 8px" }}>{L.total + " games, all ranked · " + L.contested.length + " contested · " + thinN + " with a small-sample side (still listed, shrunk)"}</div>
+    <Section heading={"Ranked · " + L.total} caption="Best picks first">
       {L.total === 0 ? <EmptyState title="No ranked games right now" body={"No tracked capper has a $500+ pick with a Kalshi line starting within 24 hours. " + nextScanLabel(props.now) + "."} /> : null}
       {L.list.map((c: RankedCard, i: number) => render(c, i))}
     </Section>
@@ -5037,7 +5034,7 @@ function NetPill(props: { net: NetInfo }) {
 function ContestedBadge(props: { net: NetInfo }) {
   if (!props.net.contested) return null;
   const o = props.net.opp;
-  const text = "Contested: " + o.cappers + " capper" + (o.cappers === 1 ? "" : "s") + " " + wlText(o.rec) + " against";
+  const text = "Contested · " + o.cappers + " · " + wlText(o.rec);
   return <span data-contested-badge="1" style={{ display: "inline-block", padding: "3px 10px", borderRadius: 999, background: "#FFEDD5", color: "#9A3412", border: "2px solid #EA580C", fontSize: 13, fontWeight: 900 }}>{text}</span>;
 }
 function bestWL(list: WL[]): WL { return list.slice().sort((a: WL, b: WL) => (wlBetter(a, b) ? -1 : wlBetter(b, a) ? 1 : 0))[0]; }
@@ -5213,7 +5210,7 @@ function OtherSide(props: { p: UPick; opp: UPick[] }) {
   return (
     <div data-other-side="1" style={{ marginTop: 10, padding: "10px 12px", borderRadius: 14, border: "1.5px solid " + (none ? t.border.default : "#F59E0B"), background: none ? t.bg.subtle : "#FFFBEB" }}>
       <div style={{ fontSize: 11, fontWeight: 850, letterSpacing: "0.08em", textTransform: "uppercase", color: "#B45309" }}>Other side</div>
-      {none ? <div data-other-none="1" style={{ fontSize: 14, fontWeight: 700, color: t.text.secondary, marginTop: 4 }}>No tracked cappers on the other side</div> : (
+      {none ? <div data-other-none="1" style={{ marginTop: 6 }}><Chip bg={t.bg.subtle} color={t.text.secondary}>No opposition</Chip></div> : (
         <>
           <div data-other-vs="1" style={{ display: "flex", flexWrap: "wrap", alignItems: "baseline", gap: 6, marginTop: 4, fontSize: 15, fontWeight: 850, fontVariantNumeric: "tabular-nums" }}>
             <span style={{ color: lead ? GREEN : t.text.primary }}>{cap(p.backers.length) + " · " + kMoney(p.total)}</span>
@@ -5236,11 +5233,11 @@ function OtherSide(props: { p: UPick; opp: UPick[] }) {
 function RecordFlag(props: { cmp: SideCmp }) {
   const c = props.cmp;
   const other = c.verdict === "other";
-  const col = other ? "#B45309" : "#15803D";
   return (
-    <div data-record-flag={c.verdict} style={{ marginTop: 10, padding: "10px 12px", borderRadius: 14, border: "2px solid " + col, background: other ? "#FEF3C7" : "#F0FDF4" }}>
-      <div style={{ fontSize: 16, lineHeight: "21px", fontWeight: 900, color: col, overflowWrap: "anywhere" }}>{other ? "⚠ Other side: " + c.oppName + " (" + wlText(c.oppBest) + ") is betting against this" : "Better record than other side (" + wlText(c.thisBest) + " vs " + wlText(c.oppBest) + ")"}</div>
-      <div style={{ fontSize: 12, fontWeight: 700, color: "#52525B", marginTop: 3 }}>{other ? "Best on this side: " + c.thisName + " (" + wlText(c.thisBest) + ") · " + (wlRate(c.thisBest) * 100).toFixed(1) + "% vs " + (wlRate(c.oppBest) * 100).toFixed(1) + "%" : "Best on this side: " + c.thisName + " (" + wlText(c.thisBest) + "), best on other side: " + c.oppName + " (" + wlText(c.oppBest) + ")"}</div>
+    <div data-record-flag={c.verdict} style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 8, alignItems: "center" }}>
+      {other
+        ? <Chip bg="#FEF3C7" color="#9A3412">{"⚠ " + c.oppName + " " + wlText(c.oppBest) + " against"}</Chip>
+        : <Chip bg="#DCFCE7" color="#15803D">{"Better " + wlText(c.thisBest) + " vs " + wlText(c.oppBest)}</Chip>}
     </div>
   );
 }
@@ -5353,7 +5350,7 @@ function GameHeader(props: { p: UPick; now: number; rankNo?: number; rec?: WL; c
       <span style={{ fontSize: 13, fontWeight: 700, color: "#52525B" }}>{(p.live ? ago(p.startTs, props.now) : "in " + untilText(p.startTs, props.now)) + " · " + p.league}</span>
       {props.net ? <NetPill net={props.net} /> : null}
       {props.net ? <ContestedBadge net={props.net} /> : null}
-      {props.rec ? <span data-game-rec="1" style={{ display: "inline-block", padding: "2px 10px", borderRadius: 999, background: "#EDE9FE", color: "#4C1D95", fontSize: 13, fontWeight: 850, border: "1.5px solid #4C1D95" }}>{(props.rec.w + props.rec.l ? "This side " + wlText(props.rec) + " · " + pctText(wlRate(props.rec)) : "No graded record") + (props.cappers ? " · " + props.cappers + " capper" + (props.cappers === 1 ? "" : "s") : "")}</span> : null}
+      {props.rec ? <span data-game-rec="1" style={{ display: "inline-block", padding: "2px 10px", borderRadius: 999, background: "#EDE9FE", color: "#4C1D95", fontSize: 13, fontWeight: 850, border: "1.5px solid #4C1D95" }}>{(props.rec.w + props.rec.l ? wlText(props.rec) + " · " + pctText(wlRate(props.rec)) : "No record") + (props.cappers ? " · " + props.cappers : "")}</span> : null}
     </div>
   );
 }
