@@ -51156,7 +51156,10 @@
    "first_seen": 1795208351,
    "scans": 2,
    "first_score": 23,
-   "result": null
+   "result": null,
+   "ended": 1795226256,
+   "finalScore": "UVA 103 \u2013 L-MD 61",
+   "active": false
   },
   "0x7a50224e9d79cf7267646dea1928204687393e2c9235afac6daca3458a3a2592:no": {
    "tier": "poly",
@@ -51450,7 +51453,11 @@
    "first_seen": 1795216418,
    "scans": 1,
    "first_score": 33,
-   "result": null
+   "result": "W",
+   "graded": 1795226256,
+   "ended": 1795226256,
+   "finalScore": "",
+   "active": false
   },
   "0x02c96bbfe97c821a9409ddb8b2c395ad63689b6d1af01758e729edf71e0afcf3:yes": {
    "tier": "top",
@@ -51914,7 +51921,11 @@
    "first_seen": 1795216418,
    "scans": 1,
    "first_score": 25,
-   "result": null
+   "result": "L",
+   "graded": 1795226256,
+   "ended": 1795226256,
+   "finalScore": "",
+   "active": false
   },
   "0x461845626f81b8d1b24ca798e1f496391853ababc13222db1e9c6b24c9a03afa:no": {
    "tier": "biggest",
