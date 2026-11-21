@@ -4626,16 +4626,16 @@ function rankedLists(all: UPick[]): { list: RankedCard[]; top: RankedCard[]; oth
   return { list: cards, top: cards, others: [], small: [], contested, total: cards.length };
 }
 function eliteTabCount(now: number): number {
-  return rankedLists(combinedPicks(now)).total;
+  return rankedLists(allTabPicks(now)).total;
 }
 function EliteTab(props: { now: number }) {
-  const all = combinedPicks(props.now);
+  const all = allTabPicks(props.now);
   const L = rankedLists(all);
   const unitOf = (c: RankedCard) => ({ id: c.id, picks: c.picks });
   const render = (c: RankedCard, i: number) => <GameBlock key={c.id} u={unitOf(c)} now={props.now} stake="" noun="game" all={all} rankNo={i + 1} rec={c.rec} cappers={c.cappers} net={c.net} hideStake={true} />;
   return (
     <Section heading={"Ranked · " + L.total} caption="Best picks first">
-      {L.total === 0 ? <EmptyState title="No ranked games right now" body={"No tracked capper has a $500+ pick with a Kalshi line starting within 24 hours. " + nextScanLabel(props.now) + "."} /> : null}
+      {L.total === 0 ? <EmptyState title="No ranked games right now" body={"No tracked capper has a $500+ pick with a Kalshi line right now. " + nextScanLabel(props.now) + "."} /> : null}
       {L.list.map((c: RankedCard, i: number) => render(c, i))}
     </Section>
   );
@@ -4828,39 +4828,51 @@ function MorePickGroups(props: { groups: PickGroup[] }) {
     </div>
   );
 }
-function hotGroups(now: number): PickGroup[] {
-  const slate = openSlateGames(false, now, ((DATA.hotWeek && DATA.hotWeek.games) || []) as ComingGame[]);
+function hotGroups(now: number, windowed: boolean = true): PickGroup[] {
+  const slate = openSlateGames(false, now, ((DATA.hotWeek && DATA.hotWeek.games) || []) as ComingGame[], windowed);
   return compiledGroups(slate.games.filter((g: ComingGame) => comingStatus(g, now) === "upcoming"), now).filter((g: PickGroup) => g.backers.some((b: PickBackerRow) => !!HOT_W[b.wallet]));
 }
-function hotUnits(now: number): { id: string; picks: UPick[] }[] {
-  const picks = combinedPicks(now).filter((p: UPick) => p.kind === "sports" && !p.live && p.startTs > now && p.backers.some((b: UBacker) => !!HOT_W[b.wallet]));
-  return orderUnits(picks, "start");
+// Golden Picks (Noel Nov 21): most likely to hit. Favorites only — Kalshi 55–85¢, payout 1.8x or less —
+// with at least one elite-record capper (2-1 or better, profitable, not Cooling / MM / one-off). No long shots, no count cap.
+const GOLDEN_MIN_PX = 0.55;
+const GOLDEN_MAX_PX = 0.85;
+const GOLDEN_MAX_PAYOUT = 1.8;
+function kalshiPayout(p: UPick): number { return p.view.price ? Math.round((1 / Math.min(p.view.price, 1)) * 10) / 10 : 99; }
+function impliedHitPct(p: UPick): number | null { return p.view.price != null ? Math.round(Math.min(Math.max(p.view.price, 0), 1) * 100) : null; }
+function hitLabelOf(p: UPick): string | null {
+  const h = impliedHitPct(p);
+  if (h == null) return null;
+  const pay = kalshiPayout(p);
+  return h + "% · " + (pay === 99 ? "—" : pay + "x");
 }
-function hotTabCount(now: number): number { return hotUnits(now).length; }
+function goldenHitOk(p: UPick): boolean {
+  const px = p.view.price;
+  if (px == null || p.view.unmatched || !p.view.yesNo) return false;
+  if (px < GOLDEN_MIN_PX || px > GOLDEN_MAX_PX) return false;
+  if (kalshiPayout(p) > GOLDEN_MAX_PAYOUT) return false;
+  return p.backers.some((b: UBacker) => eliteCapper(b.wallet));
+}
+function goldenPicks(now: number): UPick[] {
+  return allTabPicks(now).filter((p: UPick) => !p.live && p.startTs > now && goldenHitOk(p));
+}
+function goldenUnits(now: number): { id: string; picks: UPick[] }[] {
+  const picks = goldenPicks(now).slice().sort((a: UPick, b: UPick) => ((b.view.price || 0) - (a.view.price || 0)) || (a.startTs - b.startTs));
+  const units = orderUnits(picks, "start");
+  units.forEach((u) => u.picks.sort((a: UPick, b: UPick) => ((b.view.price || 0) - (a.view.price || 0)) || (a.startTs - b.startTs)));
+  units.sort((a, b) => ((b.picks[0].view.price || 0) - (a.picks[0].view.price || 0)) || (a.picks[0].startTs - b.picks[0].startTs));
+  return units;
+}
+function hotUnits(now: number): { id: string; picks: UPick[] }[] { return goldenUnits(now); }
+function hotTabCount(now: number): number { return goldenUnits(now).length; }
 function HotWeekTab(props: { now: number }) {
-  const t = useGrokTheme();
-  const all = combinedPicks(props.now);
-  const units = hotUnits(props.now);
-  const hot = ((DATA.hotWeek && DATA.hotWeek.cappers) || []) as HotCapper[];
+  const all = allTabPicks(props.now);
+  const units = goldenUnits(props.now);
   const gameN = units.length;
-  const picksBy: Record<string, number> = {};
-  units.forEach((u) => u.picks.forEach((q: UPick) => q.backers.forEach((b: UBacker) => { picksBy[b.wallet] = (picksBy[b.wallet] || 0) + 1; })));
+  const pays = units.map((u) => kalshiPayout(u.picks[0])).filter((x) => x < 99);
+  const payNote = pays.length ? (Math.min.apply(null, pays) + "–" + Math.max.apply(null, pays) + "x") : "";
   return (
-    <Section heading={"Hot This Week · " + gameN} caption={"Open pre-game picks from cappers on a heater · " + hot.length + " hot cappers · " + gameN + " game" + (gameN === 1 ? "" : "s")}>
-      <Text>{"A capper is hot with 8+ settled $500+ bets in the last 7 days, a 60%+ win rate, and positive profit over both 7 and 30 days. Market makers, one-off records, new accounts and Cooling cappers are left out. $500+ with a Kalshi line only; live and finished games are not shown."}</Text>
-      <details data-hot-list="1" style={{ margin: "6px 0 12px" }}>
-        <summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 15, color: BRAND }}>{"Hot cappers · " + hot.length}</summary>
-        {hot.map((c: HotCapper) => (
-          <div key={c.wallet} style={{ borderTop: "1px solid " + t.border.default, marginTop: 8, paddingTop: 8 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", gap: 8, flexWrap: "wrap", alignItems: "baseline" }}>
-              <span style={{ fontSize: 15, fontWeight: 850, overflowWrap: "anywhere" }}>{nameOf(c.name, c.wallet)}</span>
-              <span style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary }}>{(picksBy[c.wallet] || 0) + " open pick" + ((picksBy[c.wallet] || 0) === 1 ? "" : "s")}</span>
-            </div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary, marginTop: 2 }}>{"7d " + c.w7 + "–" + c.l7 + " (" + Math.round(c.wr7) + "%) · " + signedK(c.pnl7) + "  ·  30d " + c.w30 + "–" + c.l30 + " · " + signedK(c.pnl30)}</div>
-          </div>
-        ))}
-      </details>
-      {units.length === 0 ? <EmptyState title="No hot-capper picks open" body={"No hot capper has an open pre-game $500+ bet with a Kalshi line right now. " + nextScanLabel(props.now) + "."} /> : <UnitList units={units} all={all} now={props.now} stake="$2–4" noun="game" showStart />}
+    <Section heading={"Golden Picks · " + gameN} caption={"Most likely to hit" + (payNote ? " · " + payNote : "")}>
+      {units.length === 0 ? <EmptyState title="No Golden picks right now" body={"No elite-record capper has an open pre-game favorite (Kalshi 55–85¢, payout 1.8x or less) right now. " + nextScanLabel(props.now) + "."} /> : <UnitList units={units} all={all} now={props.now} stake="$2–4" noun="game" showStart showHit rankOf={(id: string) => { const i = units.findIndex((u) => u.id === id); return i >= 0 ? i + 1 : undefined; }} />}
     </Section>
   );
 }
@@ -5078,7 +5090,11 @@ function slipTierOf(p: UPick): "good" | "slight" | "much" | null {
   if (s == null) return null;
   return s <= 2 ? "good" : s <= 5 ? "slight" : "much";
 }
-function combinedPicks(now: number, peDays: number = 1): UPick[] {
+function allTabPicks(now: number): UPick[] {
+  // Full uncapped sports slate for Ranked and Coming Up (same set). No 24-hour window.
+  return combinedPicks(now, 1, false).filter((p: UPick) => p.kind === "sports");
+}
+function combinedPicks(now: number, peDays: number = 1, windowed: boolean = true): UPick[] {
   const by: Record<string, UPick> = {};
   const addGroup = (g: PickGroup) => {
     let p = by[g.key];
@@ -5093,9 +5109,9 @@ function combinedPicks(now: number, peDays: number = 1): UPick[] {
     });
   };
   const upcoming = (games: ComingGame[]) => games.filter((g: ComingGame) => comingStatus(g, now) !== "final");
-  compiledGroups(upcoming(openSlateGames(false, now).games), now).forEach(addGroup);
-  compiledGroups(upcoming(openSlateGames(true, now).games), now).forEach(addGroup);
-  hotGroups(now).forEach(addGroup);
+  compiledGroups(upcoming(openSlateGames(false, now, undefined, windowed).games), now).forEach(addGroup);
+  compiledGroups(upcoming(openSlateGames(true, now, undefined, windowed).games), now).forEach(addGroup);
+  hotGroups(now, windowed).forEach(addGroup);
   (PE_DATA.picks || []).forEach((q: PEPick) => {
     if (q.settleTs < now || q.settleTs > now + peDays * PICK_WINDOW_SECS) return;
     const key = q.ticker + "|" + q.yesNo;
@@ -5335,12 +5351,13 @@ function bestPickFirst(picks: UPick[], all?: UPick[]): UPick[] {
     return (nb.net - na.net) || (nb.raw - na.raw) || (nb.own.rec.w - na.own.rec.w) || (nb.own.cappers - na.own.cappers) || (b.backers.length - a.backers.length);
   });
 }
-function GameHeader(props: { p: UPick; now: number; rankNo?: number; rec?: WL; cappers?: number; net?: NetInfo }) {
+function GameHeader(props: { p: UPick; now: number; rankNo?: number; rec?: WL; cappers?: number; net?: NetInfo; hitLabel?: string | null }) {
   const p = props.p;
   if (p.kind !== "sports" || !p.startTs) return null;
   return (
     <div data-game-start="1" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 8, margin: "14px 2px 6px", fontSize: 16, fontWeight: 850, color: "#4C1D95" }}>
       {props.rankNo ? <span data-game-rank="1" style={{ display: "inline-block", minWidth: 30, textAlign: "center", padding: "2px 9px", borderRadius: 999, background: BRAND, color: "#FFFFFF", fontSize: 14, fontWeight: 900 }}>{"#" + props.rankNo}</span> : null}
+      {props.hitLabel ? <Chip bg="#DCFCE7" color="#15803D">{props.hitLabel}</Chip> : null}
       {p.live ? <Chip bg={RED} color="#FFFFFF">LIVE</Chip> : null}
       <span data-game-start-time="1">{(p.live ? "Started " : "Starts ") + ptTime(p.startTs)}</span>
       <span style={{ fontSize: 13, fontWeight: 700, color: "#52525B" }}>{(p.live ? ago(p.startTs, props.now) : "in " + untilText(p.startTs, props.now)) + " · " + p.league}</span>
@@ -5376,7 +5393,7 @@ function AltBet(props: { p: UPick; all?: UPick[]; now: number; hidePricePills?: 
     </div>
   );
 }
-function GameBlock(props: { u: { id: string; picks: UPick[] }; now: number; stake: string; noun: string; all?: UPick[]; showStart?: boolean; rankNo?: number; rec?: WL; cappers?: number; stakeLine?: string; net?: NetInfo; hideStake?: boolean }) {
+function GameBlock(props: { u: { id: string; picks: UPick[] }; now: number; stake: string; noun: string; all?: UPick[]; showStart?: boolean; rankNo?: number; rec?: WL; cappers?: number; stakeLine?: string; net?: NetInfo; hideStake?: boolean; showHit?: boolean }) {
   const [open, setOpen] = useState(false);
   const picks = props.u.picks[0].kind === "pe" ? props.u.picks : bestPickFirst(props.u.picks, props.all);
   const main = picks[0];
@@ -5386,7 +5403,7 @@ function GameBlock(props: { u: { id: string; picks: UPick[] }; now: number; stak
   const contested = !!(net && net.contested && props.rankNo);
   return (
     <div data-game-block={props.u.id} data-contested={contested ? "1" : undefined} style={contested ? { border: "2.5px solid #EA580C", borderRadius: 20, padding: "4px 8px 6px", background: "#FFF7ED", margin: "8px 0 12px" } : undefined}>
-      {props.showStart || props.rankNo ? <GameHeader p={main} now={props.now} rankNo={props.rankNo} rec={props.rec} cappers={props.cappers} net={net} /> : null}
+      {props.showStart || props.rankNo || props.showHit ? <GameHeader p={main} now={props.now} rankNo={props.rankNo} rec={props.rec} cappers={props.cappers} net={net} hitLabel={props.showHit ? hitLabelOf(main) : null} /> : null}
       <UCard p={main} opp={props.all ? oppositeOf(main, props.all) : undefined} now={props.now} stake={props.hideStake ? "" : props.stake} hideStake={props.hideStake} hidePricePills={props.hideStake} net={net} moreRow={rest.length ? <MoreBetsRow noun={props.noun} n={rest.length} open={open} onToggle={() => setOpen(!open)} /> : undefined} />
       {open && rest.length ? (
         <div data-game-more="1" style={{ marginLeft: 10, paddingLeft: 8, borderLeft: "3px solid " + BRAND, marginBottom: 10 }}>
@@ -5401,10 +5418,10 @@ function GameBlock(props: { u: { id: string; picks: UPick[] }; now: number; stak
     </div>
   );
 }
-function UnitList(props: { units: { id: string; picks: UPick[] }[]; now: number; stake: string; noun: string; all?: UPick[]; showStart?: boolean }) {
+function UnitList(props: { units: { id: string; picks: UPick[] }[]; now: number; stake: string; noun: string; all?: UPick[]; showStart?: boolean; showHit?: boolean; rankOf?: (id: string) => number | undefined }) {
   return (
     <div data-unit-list="1">
-      {props.units.map((u: { id: string; picks: UPick[] }) => <GameBlock key={u.id} u={u} now={props.now} stake={props.stake} noun={props.noun} all={props.all} showStart={props.showStart} />)}
+      {props.units.map((u: { id: string; picks: UPick[] }) => <GameBlock key={u.id} u={u} now={props.now} stake={props.stake} noun={props.noun} all={props.all} showStart={props.showStart} showHit={props.showHit} rankNo={props.rankOf ? props.rankOf(u.id) : undefined} />)}
     </div>
   );
 }
@@ -5485,7 +5502,10 @@ function TodayCard(props: { all: UPick[]; now: number }) {
   );
 }
 function CombinedList(props: { now: number; mode: "rank" | "start" }) {
-  const picks = combinedPicks(props.now);
+  const picks = allTabPicks(props.now);
+  const L = rankedLists(picks);
+  const rankOf: Record<string, number> = {};
+  L.list.forEach((c: RankedCard, i: number) => { rankOf[c.id] = i + 1; });
   const units = orderUnits(picks, props.mode);
   const cappers: Record<string, boolean> = {};
   picks.forEach((p: UPick) => p.backers.forEach((b: UBacker) => { cappers[b.wallet] = true; }));
@@ -5495,23 +5515,23 @@ function CombinedList(props: { now: number; mode: "rank" | "start" }) {
   const liveUnits = start ? units.filter((u) => u.picks[0].kind === "sports" && u.picks[0].live) : [];
   const upUnits = start ? units.filter((u) => !(u.picks[0].kind === "sports" && u.picks[0].live)) : units;
   const upPickN = upUnits.reduce((n: number, u) => n + u.picks.length, 0);
+  const rankFn = (id: string) => rankOf[id];
   const head = (attr: string, text: string) => <div data-all-today={attr === "up" ? "1" : undefined} data-live-head={attr === "live" ? "1" : undefined} style={{ fontSize: 22, fontWeight: 900, margin: "10px 2px 2px" }}>{text}</div>;
   return (
     <div data-combined-list={props.mode}>
-      <div data-combined-summary="1" style={{ fontSize: 14, fontWeight: 750, color: "#52525B", margin: "2px 2px 12px" }}>{picks.length + " picks · " + units.length + " games · " + Object.keys(cappers).length + " cappers" + (liveN ? " · " + liveN + " live" : "") + " · Journal " + journalWL().wins + "–" + journalWL().losses}</div>
-      {picks.length === 0 ? <EmptyState title="No picks from tracked cappers yet" body={"Nothing open from proven, Elite, Hot or Politics & Econ cappers right now. " + nextScanLabel(props.now) + "."} /> : null}
+      <div data-combined-summary="1" style={{ fontSize: 14, fontWeight: 750, color: "#52525B", margin: "2px 2px 12px" }}>{picks.length + " picks · " + units.length + " games · " + Object.keys(cappers).length + " cappers" + (liveN ? " · " + liveN + " live" : "")}</div>
+      {picks.length === 0 ? <EmptyState title="No picks from tracked cappers yet" body={"Nothing open from tracked cappers right now. " + nextScanLabel(props.now) + "."} /> : null}
       {start && liveUnits.length ? head("live", "Already started (" + liveUnits.length + ")") : null}
-      {start && liveUnits.length ? <UnitList units={liveUnits} all={picks} now={props.now} stake="$2–4" noun="game" showStart /> : null}
+      {start && liveUnits.length ? <UnitList units={liveUnits} all={picks} now={props.now} stake="$2–4" noun="game" showStart rankOf={rankFn} /> : null}
       {start && picks.length ? head("up", "Upcoming (" + upPickN + ")") : null}
-      {picks.length ? <UnitList units={upUnits} all={picks} now={props.now} stake="$2–4" noun="game" showStart={start} /> : null}
+      {picks.length ? <UnitList units={upUnits} all={picks} now={props.now} stake="$2–4" noun="game" showStart={start} rankOf={rankFn} /> : null}
     </div>
   );
 }
 function ComingUpTab(props: { now: number }) {
-  const n = combinedPicks(props.now).length;
+  const n = eliteTabCount(props.now);
   return (
-    <Section heading={"Coming Up · " + n} caption={"Soonest start first · live first · starts or settles within 24 hours"}>
-      <Text>{"Every open $500+ pick with a Kalshi line from every tracked capper with a positive profit (not Cooling) plus Politics & Econ cappers, grouped by game and sorted by start time. Long-game picks (no start time) go last."}</Text>
+    <Section heading={"Coming Up · " + n} caption="Live first, then soonest">
       <CombinedList now={props.now} mode="start" />
     </Section>
   );
@@ -5725,9 +5745,10 @@ export default function App() {
     try {
       const q = new URLSearchParams(window.location.search).get("tab") || "";
       if (q === "elite" || q === "ranked") return "elite";
-      if (q === "coming" || q === "hot" || q === "cappers") return q;
+      if (q === "golden" || q === "hot") return "hot";
+      if (q === "coming" || q === "cappers") return q;
     } catch (e) { /* ignore */ }
-    return "coming";
+    return "hot";
   });
   const [bigOnly, setBigOnly] = useState<boolean>(false);
   const [provenLimit, setProvenLimit] = useState<number>(5);
@@ -6222,7 +6243,7 @@ export default function App() {
           <span style={{ fontSize: 11, fontWeight: 850, letterSpacing: "0.08em", textTransform: "uppercase", color: "#7C3AED", width: 38, flex: "none", lineHeight: "12px" }}>Today</span>
           <div style={{ flex: 1, minWidth: 0 }}>
             <PillTabs bare
-              options={[{ value: "coming", label: "Coming Up", count: combinedPicks(now).length }, { value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "hot", label: "Hot This Week", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }]}
+              options={[{ value: "hot", label: "Golden Picks", count: hotTabCount(now) }, { value: "coming", label: "Coming Up", count: eliteTabCount(now) }, { value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }]}
               value={tab === "pe" ? "" : tab}
               onChange={(v: string) => { setTab(v); setSportFilter(""); }}
             />
