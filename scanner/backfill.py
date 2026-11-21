@@ -102,6 +102,29 @@ def sport_of(league):
         return 'Cricket'
     return 'Soccer'  # Polymarket's many short league codes (UNL, EPL, SEA, EL1, JA2, ...) are soccer
 
+# Display / Ranked-tab families (Noel, Nov 21). Fine-grained sport_of buckets still feed
+# proven/elite sport-ROI bars. These ten names are what the Ranked tab shows and scores with.
+SPORT_FAMILIES = ('NBA', 'NFL', 'NCAAF', 'NCAAB', 'NHL', 'MLB', 'Soccer', 'Tennis', 'UFC/MMA', 'Other')
+FAMILY_MIN_N = 5  # sport record is used for ranking / "Best at" only at this sample; else overall
+_FAMILY_FROM_SPORT = {
+    'NBA': 'NBA', 'NFL': 'NFL', 'NCAAF': 'NCAAF', 'NCAAB': 'NCAAB',
+    'NHL': 'NHL', 'MLB': 'MLB', 'Soccer': 'Soccer', 'Tennis': 'Tennis', 'MMA': 'UFC/MMA',
+}
+
+def family_of(name):
+    """Map a sport bucket or league code to one of SPORT_FAMILIES. Unknown -> Other. Never invents a record."""
+    raw = (name or '').strip()
+    if not raw:
+        return 'Other'
+    if raw in SPORT_FAMILIES:
+        return raw
+    if raw in _FAMILY_FROM_SPORT:
+        return _FAMILY_FROM_SPORT[raw]
+    sp = sport_of(raw)
+    if sp in SPORT_FAMILIES:
+        return sp
+    return _FAMILY_FROM_SPORT.get(sp, 'Other')
+
 def _profit(cost, avg, res):
     if res == 'W' and avg > 0:
         return cost * (1 - avg) / avg

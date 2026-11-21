@@ -718,7 +718,7 @@ def load_tracked_wallets():
         return {}
 
 # ---- backfill, recent form, per-sport records, copy tracking (Noel, Nov 15) ----
-from backfill import sport_of, DAYS as BF_DAYS
+from backfill import sport_of, family_of, SPORT_FAMILIES, FAMILY_MIN_N, DAYS as BF_DAYS
 FORM_DAYS = 14
 FORM_WEIGHT = 2.0
 FORM_MIN_N = 5
@@ -853,6 +853,13 @@ def apply_records(c, bf=None, cp=None):
     c['formCooling'] = bool(n14 >= FORM_MIN_N and R[2] and R[3] < 0)
     c['sports'] = {sp: {'w': v[0], 'l': v[1], 'n': v[0] + v[1], 'roi': round(100.0 * v[3] / v[2], 1) if v[2] else None}
                    for sp, v in sorted(S.items(), key=lambda kv: -(kv[1][0] + kv[1][1]))}
+    fam = {}
+    for sp, v in S.items():
+        f = family_of(sp)
+        t = fam.setdefault(f, [0, 0, 0.0, 0.0])
+        t[0] += v[0]; t[1] += v[1]; t[2] += v[2]; t[3] += v[3]
+    c['sportFamilies'] = {f: {'w': v[0], 'l': v[1], 'n': v[0] + v[1], 'roi': round(100.0 * v[3] / v[2], 1) if v[2] else None}
+                          for f, v in sorted(fam.items(), key=lambda kv: -(kv[1][0] + kv[1][1]))}
     c['recSrc'] = src
     c['avgEntry'] = round(E[0] / E[1], 4) if E[1] else None
     c['avgN'] = int(E[1])
@@ -886,6 +893,87 @@ def proven_ok(c):
         return False, 'losing on your copies'
     return True, ''
 
+
+SPORT_RECORDS_PATH = os.path.join(HERE, 'capper_sport_records.json')
+
+def _family_row(sr):
+    if not sr:
+        return None
+    n = sr.get('n') or ((sr.get('w') or 0) + (sr.get('l') or 0))
+    return {'w': sr.get('w') or 0, 'l': sr.get('l') or 0, 'n': n, 'roi': sr.get('roi'), 'small': n < 10}
+
+def best_at_family(fams, min_n=FAMILY_MIN_N):
+    """Strongest family by record (win rate, then margin, then wins, then sample). None if no family has min_n settled bets."""
+    best = None
+    best_key = None
+    for name, sr in (fams or {}).items():
+        row = _family_row(sr)
+        if not row or row['n'] < min_n:
+            continue
+        wr = row['w'] / row['n'] if row['n'] else 0
+        key = (wr, row['w'] - row['l'], row['w'], row['n'])
+        if best_key is None or key > best_key:
+            best, best_key = name, key
+    return best
+
+def families_from_capper(c):
+    """Prefer sportFamilies (exact risked/profit rollup). Else merge fine-grained sports into families with n-weighted ROI."""
+    if c.get('sportFamilies'):
+        return {k: _family_row(v) for k, v in c['sportFamilies'].items() if _family_row(v) and _family_row(v)['n']}
+    acc = {}
+    for sp, sr in (c.get('sports') or {}).items():
+        f = family_of(sp)
+        t = acc.setdefault(f, [0, 0, 0.0, 0])  # w, l, roi*n, n
+        w, l, n = sr.get('w') or 0, sr.get('l') or 0, sr.get('n') or 0
+        if not n:
+            n = w + l
+        t[0] += w; t[1] += l; t[3] += n
+        if sr.get('roi') is not None and n:
+            t[2] += float(sr['roi']) * n
+    out = {}
+    for f, t in acc.items():
+        n = t[3] or (t[0] + t[1])
+        if not n:
+            continue
+        out[f] = {'w': t[0], 'l': t[1], 'n': n, 'roi': round(t[2] / n, 1) if t[3] else None, 'small': n < 10}
+    return out
+
+def build_capper_sport_records(cappers, now=None, write=True):
+    """Settled-trade family W-L for the Ranked tab. Never invents a sport the capper has no settled bets in."""
+    ts = int(now or time.time())
+    rows = {}
+    for c in cappers or []:
+        w = (c.get('wallet') or '').lower()
+        if not w:
+            continue
+        fams = families_from_capper(c)
+        if not fams:
+            continue
+        overall = None
+        if c.get('n'):
+            overall = {'w': c.get('w') or 0, 'l': c.get('l') or 0, 'n': c.get('n') or 0, 'roi': c.get('roi')}
+        elif c.get('big') and (c['big'].get('n') or 0):
+            b = c['big']
+            overall = {'w': b.get('w') or 0, 'l': b.get('l') or 0, 'n': b.get('n') or 0, 'roi': b.get('roi')}
+        rows[w] = {
+            'wallet': c.get('wallet') or w,
+            'name': c.get('name') or '',
+            'overall': overall,
+            'sports': fams,
+            'bestAt': best_at_family(fams),
+        }
+    payload = {
+        'updatedTs': ts,
+        'updatedAt': pt(ts),
+        'source': 'Settled public sports trades only (scanner history + $500+ backfill). Records are never invented. Sample under 10 is flagged small; Best at and sport-weighted ranking need 5+ settled bets in that sport.',
+        'sports': list(SPORT_FAMILIES),
+        'minBestAt': FAMILY_MIN_N,
+        'cappers': rows,
+    }
+    if write:
+        json.dump(payload, open(SPORT_RECORDS_PATH, 'w'), separators=(',', ':'))
+    return payload
+
 def page_payload(emb=None, hist=None, store=None):
     store = store or load()
     traders = (emb or {}).get('traders') or []
@@ -909,6 +997,9 @@ def page_payload(emb=None, hist=None, store=None):
             if p.get('league'):
                 lgs.add(str(p['league']).upper())
     out['sportMap'] = {lg: sport_of(lg) for lg in sorted(lgs)}
+    out['sportFamilyMap'] = {lg: family_of(lg) for lg in sorted(lgs)}
+    recs = build_capper_sport_records(out['cappers'])
+    out['capperSportRecords'] = recs
     try:
         cp = json.load(open(os.path.join(HERE, 'copies.json')))
         out['copiesInfo'] = {k: cp.get(k) for k in ('updatedTs', 'tickets', 'ticketsMatched', 'legs', 'legsMatched')}
