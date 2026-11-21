@@ -52308,7 +52308,11 @@
    "first_seen": 1795227584,
    "scans": 1,
    "first_score": 25,
-   "result": null
+   "result": "W",
+   "graded": 1795228876,
+   "ended": 1795228876,
+   "finalScore": "UCF 48 \u2013 ISU 17",
+   "active": false
   },
   "0x00f7da32f554dc69f0645f9d168e0d71e1e6aeb22e0bdfc1ad62b60a5d46dfe5:yes": {
    "tier": "glue",
@@ -52650,7 +52654,10 @@
    "first_seen": 1795227584,
    "scans": 1,
    "first_score": 21,
-   "result": null
+   "result": null,
+   "ended": 1795228876,
+   "finalScore": "UCF 48 \u2013 ISU 17",
+   "active": false
   },
   "0xca80c4eb1f917e4dab9c4e1ec0447fa604e3d2e2c9345f58dd243d3895135a96:yes": {
    "tier": "poly",
