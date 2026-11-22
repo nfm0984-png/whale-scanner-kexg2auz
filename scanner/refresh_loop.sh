@@ -10,7 +10,12 @@ git config user.name "whale-scanner-bot"
 git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
 # A queued job may have checked out an older SHA while a scan pushed. Start from latest data.
+# Decrypt/unwrap can leave unstaged files (e.g. gate.json) that block rebase.
+if ! git diff --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+  git stash push -u -m "refresh-loop-start" || true
+fi
 git pull --rebase origin main || true
+git stash pop || true
 
 CHANGED=0
 python3 - <<'PY' || true

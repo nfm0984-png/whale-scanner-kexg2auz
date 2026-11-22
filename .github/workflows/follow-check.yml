@@ -28,6 +28,9 @@ jobs:
   follow-and-refresh:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
     env:
       KALSHI_SCANNER_PASSCODE: ${{ secrets.KALSHI_SCANNER_PASSCODE }}
     steps:
@@ -83,3 +86,19 @@ jobs:
         run: |
           set -euo pipefail
           bash scanner/refresh_loop.sh
+
+      # GITHUB_TOKEN pushes do not trigger pages.yml, so deploy from this job
+      # when the loop actually pushed new data (same pattern as the full scan).
+      - uses: actions/configure-pages@v5
+        if: (github.event_name != 'schedule' || steps.quiet.outputs.skip != '1') && steps.loop.outputs.value == '1'
+      - uses: actions/upload-pages-artifact@v3
+        if: (github.event_name != 'schedule' || steps.quiet.outputs.skip != '1') && steps.loop.outputs.value == '1'
+        with:
+          path: .
+      - name: Wait for Pages artifact
+        if: (github.event_name != 'schedule' || steps.quiet.outputs.skip != '1') && steps.loop.outputs.value == '1'
+        run: sleep 20
+      - name: Deploy to GitHub Pages
+        if: (github.event_name != 'schedule' || steps.quiet.outputs.skip != '1') && steps.loop.outputs.value == '1'
+        id: pages
+        uses: actions/deploy-pages@v4
