@@ -1,0 +1,37 @@
+name: Dispatch Kalshi scan
+# In-page Kalshi "Run Scan" falls back here when the shared PAT cannot
+# dispatch nfm0984-png/kalshi-scanner (no Actions write on that repo).
+# Requires repo secret KALSHI_DISPATCH_TOKEN: a PAT with Actions write
+# on nfm0984-png/kalshi-scanner.
+on:
+  workflow_dispatch:
+    inputs:
+      new_names:
+        description: How many new names to inspect (full scans only)
+        required: false
+        default: "20"
+        type: string
+      mode:
+        description: scan (full) or follow-check
+        required: false
+        default: "scan"
+        type: string
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Trigger kalshi-scanner
+        env:
+          GH_TOKEN: ${{ secrets.KALSHI_DISPATCH_TOKEN }}
+          NEW_NAMES: ${{ inputs.new_names }}
+          MODE: ${{ inputs.mode }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "Missing repo secret KALSHI_DISPATCH_TOKEN (a PAT with Actions write on nfm0984-png/kalshi-scanner)."
+            exit 1
+          fi
+          gh workflow run scanner.yml --repo nfm0984-png/kalshi-scanner --ref main \
+            -f "new_names=${NEW_NAMES:-20}" \
+            -f "mode=${MODE:-scan}"
