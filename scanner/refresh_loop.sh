@@ -143,3 +143,7 @@ if [ -n "${GITHUB_OUTPUT:-}" ]; then
   fi
 fi
 echo "FOLLOW_LOOP_CHANGED=${CHANGED}"
+# Leave published files encrypted so a later Pages upload cannot ship plaintext.
+if [ "$CHANGED" = "1" ]; then
+  python3 scanner/gate_crypto.py encrypt || true
+fi

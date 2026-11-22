@@ -89,6 +89,14 @@ jobs:
 
       # GITHUB_TOKEN pushes do not trigger pages.yml, so deploy from this job
       # when the loop actually pushed new data (same pattern as the full scan).
+      # The loop decrypts for the next iteration; re-encrypt before uploading
+      # so the public site stays passcode-locked.
+      - name: Re-encrypt published data
+        if: (github.event_name != 'schedule' || steps.quiet.outputs.skip != '1') && steps.loop.outputs.value == '1'
+        run: |
+          set -euo pipefail
+          pip install -q cryptography
+          python3 scanner/gate_crypto.py encrypt
       - uses: actions/configure-pages@v5
         if: (github.event_name != 'schedule' || steps.quiet.outputs.skip != '1') && steps.loop.outputs.value == '1'
       - uses: actions/upload-pages-artifact@v3
