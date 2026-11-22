@@ -63101,7 +63101,10 @@
    "first_seen": 1795317692,
    "scans": 1,
    "first_score": 40,
-   "result": null
+   "result": null,
+   "ended": 1795318940,
+   "finalScore": "MIA 28 \u2013 VT 20",
+   "active": false
   },
   "0x508fb2324e600a4f2a55e3875a2daedbe48335881ee0c0bf013ad76c91006787:yes": {
    "tier": "glue",
@@ -63158,7 +63161,11 @@
    "first_seen": 1795317692,
    "scans": 1,
    "first_score": 73,
-   "result": null
+   "result": "W",
+   "graded": 1795318940,
+   "ended": 1795318940,
+   "finalScore": "MIA 28 \u2013 VT 20",
+   "active": false
   },
   "0x250b9104be8b544694c44d41aacdcf7c1a93f0d9f36d39acd15c2492ba72584a:no": {
    "tier": "glue",
@@ -64241,7 +64248,11 @@
    "first_seen": 1795317692,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "L",
+   "graded": 1795318940,
+   "ended": 1795318940,
+   "finalScore": "RAY 0 \u2013 VAL 1",
+   "active": false
   },
   "0x22e5cf046f9cff5c1ef0e834c66f58e7c76901b08bb801b04eae384b7b5963cf:no": {
    "tier": "fun",
@@ -64336,7 +64347,11 @@
    "first_seen": 1795317692,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "L",
+   "graded": 1795318940,
+   "ended": 1795318940,
+   "finalScore": "BOU 2 \u2013 NFO 0",
+   "active": false
   },
   "0xba8d233f8147a9d940df28aebc00f7a84e99d77b1cb31cfab930c4faea6c9f33:no": {
    "tier": "fun",
