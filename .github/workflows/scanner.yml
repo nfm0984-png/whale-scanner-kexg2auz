@@ -1,13 +1,14 @@
 name: Scanner
-run-name: "${{ github.event_name == 'schedule' && (github.event.schedule == '0 * * * *' && 'scheduled refresh' || 'scheduled scan top 200') || github.event_name == 'workflow_dispatch' && (inputs.mode == 'scan' && format('scan top {0}', inputs.cappers) || 'refresh') || 'deploy site' }}"
+run-name: "${{ github.event_name == 'schedule' && 'scheduled scan top 200' || github.event_name == 'workflow_dispatch' && (inputs.mode == 'scan' && format('scan top {0}', inputs.cappers) || 'refresh') || 'deploy site' }}"
+# Hourly full top-200 scan at :20 UTC (same minute in PT while the offset is whole hours).
+# 5-minute light refreshes live in follow-check.yml (hourly :30 start, loop every 5 min).
+# Scheduled runs no-op from midnight–6 AM America/Los_Angeles (DST-safe).
+# workflow_dispatch: leave mode blank (or "scan") for a full scan; "refresh" for ESPN + Kalshi only.
+# Manual dispatch is always allowed, including overnight.
+# Data pushes deploy through pages.yml so they do not queue behind a running scan.
 on:
   schedule:
-    # Times are PST (UTC-8). During PDT they run one hour later on the clock.
-    - cron: "30 13 * * *"   # 5:30 AM PT — full top-200 scan
-    - cron: "30 18 * * *"   # 10:30 AM PT — full top-200 scan
-    - cron: "30 22 * * *"   # 2:30 PM PT — full top-200 scan
-    - cron: "30 2 * * *"    # 6:30 PM PT — full top-200 scan
-    - cron: "0 * * * *"     # hourly at :00 PT — light refresh
+    - cron: "20 * * * *"
   workflow_dispatch:
     inputs:
       mode:
@@ -19,8 +20,6 @@ on:
         description: number of top all-time sports whales to scan
         type: string
         default: "200"
-  push:
-    branches: [main]
 permissions:
   contents: write
   pages: write
@@ -38,22 +37,40 @@ jobs:
     env:
       KALSHI_SCANNER_PASSCODE: ${{ secrets.KALSHI_SCANNER_PASSCODE }}
     steps:
+      - name: Quiet hours (midnight–6 AM PT)
+        id: quiet
+        if: github.event_name == 'schedule'
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          now = datetime.now(ZoneInfo("America/Los_Angeles"))
+          skip = 0 <= now.hour < 6
+          print("PT now %s hour=%d quiet=%s" % (now.strftime("%a %b %-d %-I:%M %p %Z"), now.hour, skip))
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write("skip=%s\n" % ("1" if skip else "0"))
+          PY
+
       - uses: actions/checkout@v4
+        if: github.event_name != 'schedule' || steps.quiet.outputs.skip != '1'
         with:
           # Always start from the latest main, never the commit that queued this run (a queued refresh used to roll scan data back).
           ref: main
           fetch-depth: 0
       - uses: actions/setup-python@v5
+        if: github.event_name != 'schedule' || steps.quiet.outputs.skip != '1'
         with:
           python-version: "3.12"
       - name: Unwrap published data
-        if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+        if: github.event_name != 'schedule' || steps.quiet.outputs.skip != '1'
         run: |
           set -euo pipefail
           pip install -q cryptography
           python3 scanner/gate_crypto.py decrypt
       - name: Restore backfill cache (raw 90-day whale bets, incremental)
-        if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+        if: github.event_name != 'schedule' || steps.quiet.outputs.skip != '1'
         uses: actions/cache@v4
         with:
           path: scanner/.cache/backfill_raw.json
@@ -62,7 +79,7 @@ jobs:
             backfill-raw-90d-
             backfill-raw-
       - name: Scan or refresh
-        if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+        if: github.event_name != 'schedule' || steps.quiet.outputs.skip != '1'
         working-directory: scanner
         env:
           ORCA_API_KEY: ${{ secrets.ORCA_API_KEY }}
@@ -73,13 +90,8 @@ jobs:
         run: |
           set -euo pipefail
           if [ "$EVENT_NAME" = "schedule" ]; then
-            if [ "$SCHEDULE" = "0 * * * *" ]; then
-              MODE=refresh
-              CAPPERS=200
-            else
-              MODE=scan
-              CAPPERS=200
-            fi
+            MODE=scan
+            CAPPERS=200
           else
             MODE="${INPUT_MODE:-refresh}"
             CAPPERS="${INPUT_CAPPERS:-200}"
@@ -94,7 +106,7 @@ jobs:
             python3 -u refresh.py
           fi
       - name: Kalshi display lines (best effort, falls back to the last committed file)
-        if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+        if: github.event_name != 'schedule' || steps.quiet.outputs.skip != '1'
         continue-on-error: true
         run: |
           cp -f kalshi_display.json /tmp/kalshi_display.prev.json 2>/dev/null || echo '{"events":{},"byTicker":{}}' > /tmp/kalshi_display.prev.json
@@ -107,7 +119,7 @@ jobs:
             cp -f /tmp/kalshi_display.prev.json kalshi_display.json
           fi
       - name: Commit new data
-        if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+        if: github.event_name != 'schedule' || steps.quiet.outputs.skip != '1'
         env:
           MODE: ${{ env.MODE }}
         run: |
@@ -219,11 +231,15 @@ jobs:
             exit 1
           fi
       - uses: actions/configure-pages@v5
+        if: github.event_name != 'schedule' || steps.quiet.outputs.skip != '1'
       - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'schedule' || steps.quiet.outputs.skip != '1'
         with:
           path: .
       # deploy-pages@v4 can miss the artifact if it starts immediately after the upload.
       - name: Wait for Pages artifact
+        if: github.event_name != 'schedule' || steps.quiet.outputs.skip != '1'
         run: sleep 20
       - id: deploy
+        if: github.event_name != 'schedule' || steps.quiet.outputs.skip != '1'
         uses: actions/deploy-pages@v4

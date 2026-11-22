@@ -2,9 +2,15 @@
 """Refresh the current picks WITHOUT calling OrcaLayer (saves usage).
 ESPN: live status/score, final result, start time, both-team matchup, and ESPN's win probability (live) or matchup predictor (pre-game) per pick.
 Kalshi: one public price check per pick's matched contract, plus event start time when ESPN misses. Marks W/L in history.json, then rewrites page_embed.json -> page_data_line.txt.
-Usage: python3 refresh.py"""
+Usage: python3 refresh.py [--light]
+
+--light: skip backfill, first-activity, whale-window discovery and the
+Kalshi-cappers crawl so a 5-minute check can finish in time. Still updates
+ESPN/Kalshi prices, Coming Up from open positions, proven picks and Politics & Econ.
+"""
 import json, os, re, sys, time, subprocess, urllib.request, datetime as dt
 HERE = os.path.dirname(os.path.abspath(__file__))
+LIGHT = "--light" in sys.argv
 PT = dt.timezone(dt.timedelta(hours=-8)); NOW = int(time.time())
 def pt(ts):
     return dt.datetime.fromtimestamp(ts, PT).strftime('%a %b %-d · %-I:%M %p PT')
@@ -428,19 +434,23 @@ try:
     import whale_windows as _ww
     _ww_seen = sorted({w for r in _ch_store['picks'].values() for w in (r.get('backers') or {})} | {(t.get('wallet') or '').lower() for t in (emb.get('traders') or [])})
     _ww.refresh(_ww_seen)
-    _ww.discover(_ww_seen, [c['wallet'] for c in _ch.summarize(_ch_store, emb.get('traders') or [], None) if c.get('proven')])
+    if not LIGHT:
+        _ww.discover(_ww_seen, [c['wallet'] for c in _ch.summarize(_ch_store, emb.get('traders') or [], None) if c.get('proven')])
 except Exception as _e:
     print('whale_windows failed (using cached windows):', _e)
-try:
-    import backfill as _bf, whale_windows as _ww2
-    _bf.refresh(list(_ww2.load_tracked().get('wallets', {}).keys()) + _ww_seen)
-except Exception as _e:
-    print('backfill failed (using cached records):', _e)
-try:
-    import first_activity as _fa, whale_windows as _ww3
-    _fa.refresh(list(_ww3.load_tracked().get('wallets', {}).keys()) + _ww_seen)
-except Exception as _e:
-    print('first_activity failed (using cached ages):', _e)
+if LIGHT:
+    print('light refresh: skipped backfill and first_activity', flush=True)
+else:
+    try:
+        import backfill as _bf, whale_windows as _ww2
+        _bf.refresh(list(_ww2.load_tracked().get('wallets', {}).keys()) + _ww_seen)
+    except Exception as _e:
+        print('backfill failed (using cached records):', _e)
+    try:
+        import first_activity as _fa, whale_windows as _ww3
+        _fa.refresh(list(_ww3.load_tracked().get('wallets', {}).keys()) + _ww_seen)
+    except Exception as _e:
+        print('first_activity failed (using cached ages):', _e)
 emb['capperHistory'] = _ch.page_payload(emb, hist, _ch_store)
 try:
     import proven as _pv
@@ -489,12 +499,16 @@ try:
 except Exception as _e:
     print('politicsEcon failed, keeping previous:', _e)
     emb.setdefault('politicsEcon', dict(ts=int(NOW), cappers=[], picks=[]))
-try:
-    import kalshi_cappers as _kc
-    _kc.attach(emb, NOW)
-except Exception as _e:
-    print('kalshiCappers failed:', _e, flush=True)
+if LIGHT:
+    print('light refresh: kept previous kalshiCappers (no crawl)', flush=True)
     emb.setdefault('kalshiCappers', {'cappers': [], 'coverage': {}, 'blocklist': ['Wiseandstrong']})
+else:
+    try:
+        import kalshi_cappers as _kc
+        _kc.attach(emb, NOW)
+    except Exception as _e:
+        print('kalshiCappers failed:', _e, flush=True)
+        emb.setdefault('kalshiCappers', {'cappers': [], 'coverage': {}, 'blocklist': ['Wiseandstrong']})
 json.dump(emb, open(os.path.join(HERE, 'page_embed.json'), 'w'), separators=(',', ':'))
 subprocess.run([sys.executable, os.path.join(HERE, 'compact.py')])
-print(f"refreshed {pt(NOW)}: {len(emb['signals'])} top + {len(emb['fun'])} fun + {len(emb['poly'])} poly + {len(emb.get('glue') or [])} glue + {len(emb.get('props') or [])} props + {len(emb.get('longshots') or [])} longshots + {len(emb.get('biggest') or [])} biggest + {len(emb.get('upcoming') or [])} upcoming + {len(emb.get('comingUp') or [])} coming-up, ESPN games matched {n_espn}, times/opponents filled {n_filled}, Kalshi checks {n_k}, started/ended removed (top/fun/poly/glue/props/longshots/biggest/upcoming/bets/buys) {removed}, OrcaLayer calls 0")
+print(f"{('light refreshed' if LIGHT else 'refreshed')} {pt(NOW)}: {len(emb['signals'])} top + {len(emb['fun'])} fun + {len(emb['poly'])} poly + {len(emb.get('glue') or [])} glue + {len(emb.get('props') or [])} props + {len(emb.get('longshots') or [])} longshots + {len(emb.get('biggest') or [])} biggest + {len(emb.get('upcoming') or [])} upcoming + {len(emb.get('comingUp') or [])} coming-up, ESPN games matched {n_espn}, times/opponents filled {n_filled}, Kalshi checks {n_k}, started/ended removed (top/fun/poly/glue/props/longshots/biggest/upcoming/bets/buys) {removed}, OrcaLayer calls 0")

@@ -192,6 +192,36 @@ def is_non_sport_ticker(ticker):
     return bool(NON_SPORT_RE.match(ticker or ""))
 
 
+COMBO_TICKER_RE = re.compile(r"(MVECROSS|CROSSCATEGORY|KXCOMBO|KXPARLAY|\bKXMVE)", re.I)
+
+
+def is_combo_market(info, ticker=""):
+    """True when this Kalshi market is itself a combo/parlay ticket (one contract, many legs)."""
+    cat = ((info or {}).get("category") or "").strip().lower()
+    if cat == "combos":
+        return True
+    tk = ticker or (info or {}).get("ticker") or ""
+    if COMBO_TICKER_RE.search(tk):
+        return True
+    return False
+
+
+def parse_combo_legs(info):
+    """Split a combo market title into legs. Never invents legs from other markets."""
+    info = info or {}
+    text = (info.get("title") or info.get("event_title") or "").strip()
+    if not text:
+        return []
+    for sep in (" / ", " + ", " | ", " • "):
+        parts = [p.strip() for p in text.split(sep) if p.strip()]
+        if len(parts) >= 2:
+            return parts
+    parts = [p.strip() for p in re.split(r",\s+(?:and\s+)?|\s+and\s+", text) if p.strip()]
+    if len(parts) >= 2:
+        return parts
+    return [text]
+
+
 def notional(price, count):
     try:
         return float(price) * float(count)
@@ -480,8 +510,10 @@ def is_sports_market(info, ticker):
     cat = (info.get("category") or "").strip().lower()
     if cat in ("crypto", "economics", "economy", "politics", "climate", "weather", "culture", "elections", "financials", "mentions", "companies", "world"):
         return False
-    if cat == "combos":
-        return False
+    # A capper's combo/parlay is one Kalshi market. Keep it as one sports ticket;
+    # never drop it as non-sports and never split it into per-leg singles.
+    if cat == "combos" or is_combo_market(info, ticker):
+        return not is_non_sport_ticker(ticker)
     if cat == "sports":
         return True
     if league_of(ticker):
@@ -879,7 +911,14 @@ def build(now=None):
                 backing = info.get("yes_sub_title") if side == "yes" else info.get("no_sub_title")
                 backing = backing or info.get("title") or tk
                 game = info.get("event_title") or info.get("title") or ev_tk or tk
-                league = league_of(tk, info.get("category")) or "Sports"
+                combo = is_combo_market(info, tk)
+                legs = parse_combo_legs(info) if combo else []
+                league = league_of(tk, info.get("category")) or ("Combo" if combo else "Sports")
+                if combo:
+                    game = info.get("event_title") or info.get("title") or game
+                    if legs:
+                        backing = " + ".join(legs)
+                        # keep the ticket itself as the game title, legs go on the card
                 start_ts = info.get("start_ts") or 0
                 stale = bool(last_ts and (now - last_ts) > STALE_SEC)
                 price_moved = bool(slip is not None and abs(slip) >= 1.0)
@@ -911,6 +950,8 @@ def build(now=None):
                     "stale": stale,
                     "slip": slip,
                     "priceMoved": price_moved,
+                    "combo": combo,
+                    "legs": legs,
                 })
 
         # Recompute MTM cleanly from picks

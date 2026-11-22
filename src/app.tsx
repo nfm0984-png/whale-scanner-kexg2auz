@@ -30,6 +30,7 @@ interface KalshiCapperPick {
   yesSubTitle?: string; noSubTitle?: string; cost: number; contracts?: number;
   lastTs?: number | null; startTs?: number; start?: string; state?: string; league: string; game: string;
   stale?: boolean; slip?: number | null; priceMoved?: boolean;
+  combo?: boolean; legs?: string[];
 }
 interface KalshiCapper {
   nickname: string; profileUrl: string; joinedAt?: string; followers?: number;
@@ -1113,18 +1114,20 @@ function Chip(props: { children: ReactNode; bg: string; color: string; border?: 
 }
 
 function nextScanLabel(now: number): string {
-  // Full top-400 scans: 5:30 AM, 10:30 AM, 2:30 PM, 6:30 PM America/Los_Angeles.
-  const slots = [5 * 60 + 30, 10 * 60 + 30, 14 * 60 + 30, 18 * 60 + 30];
+  // Light checks about every 5 minutes from 6 AM to midnight PT.
+  // Full top-200 scans at :20 America/Los_Angeles, skipped midnight–6 AM PT.
   const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(new Date(now * 1000));
   const get = (t: string) => (parts.find((p) => p.type === t) || { value: "0" }).value;
   const curMin = parseInt(get("hour"), 10) * 60 + parseInt(get("minute"), 10);
+  const slots: number[] = [];
+  for (let h = 6; h <= 23; h++) slots.push(h * 60 + 20);
   let sameDay = true;
   let slot = slots.find((s: number) => s > curMin);
   if (slot == null) { slot = slots[0]; sameDay = false; }
   const h = Math.floor(slot / 60);
   const m = slot % 60;
   const time = (h % 12 || 12) + ":" + String(m).padStart(2, "0") + " " + (h < 12 ? "AM" : "PM") + " PT";
-  return "next scan " + (sameDay ? "today" : "tomorrow") + " " + time;
+  return "checks about every 5 min · next full scan " + (sameDay ? "today" : "tomorrow") + " " + time;
 }
 
 function journalWL(): { wins: number; losses: number } {
@@ -1228,6 +1231,9 @@ function accessKey(): string {
   try { const v = window.localStorage.getItem(KEY_LS); if (v) return v; } catch (e) { /* ignore */ }
   return "";
 }
+function actionsWorkflowUrl(): string {
+  return "https://github.com/" + (CFG.owner || "nfm0984-png") + "/" + (CFG.repo || "whale-scanner-kexg2auz") + "/actions/workflows/" + (CFG.workflow || "scanner.yml");
+}
 async function ghApi(path: string, init?: { method?: string; body?: string }): Promise<Response> {
   const h: Record<string, string> = { Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28", Authorization: "Bearer " + accessKey() };
   if (init && init.body) h["Content-Type"] = "application/json";
@@ -1284,7 +1290,7 @@ function ActionBar() {
     setJob({ mode, phase: "starting", msg: "Starting " + (mode === "scan" ? "a scan of the top " + count + " whales" : "a refresh") + "…", t0, n: count });
     try {
       const r = await ghApi("/actions/workflows/" + CFG.workflow + "/dispatches", { method: "POST", body: JSON.stringify({ ref: "main", inputs: { mode, cappers: String(mode === "scan" ? count : 100) }, return_run_details: true }) });
-      if (r.status === 401 || r.status === 403 || r.status === 404) { setJob({ mode, phase: "error", msg: "GitHub rejected the access key (" + r.status + "). It may be expired or missing Actions access.", t0 }); return; }
+      if (r.status === 401 || r.status === 403 || r.status === 404) { setJob({ mode, phase: "error", msg: "GitHub rejected the access key (" + r.status + "). It may be expired or missing Actions: Read and write on this repo. Use Run scan on GitHub, or grant a fine-grained PAT Actions: Read and write on whale-scanner-kexg2auz.", t0, url: actionsWorkflowUrl() }); return; }
       if (!r.ok) { setJob({ mode, phase: "error", msg: "GitHub returned " + r.status + ". Try again in a minute.", t0 }); return; }
       let runId: number | null = null;
       if (r.status === 200) { try { const j = await r.json(); runId = j.workflow_run_id || null; } catch (e) { runId = null; } }
@@ -1350,6 +1356,7 @@ function ActionBar() {
               </div>
               {n === "custom" ? <input type="number" min={1} inputMode="numeric" value={custom} onChange={(ev: { target: { value: string } }) => setCustom(ev.target.value)} placeholder="Any number of whales" style={{ marginTop: 8, width: "100%", boxSizing: "border-box", height: 44, borderRadius: 12, border: "none", padding: "0 12px", fontSize: 16 }} /> : null}
               {hasKey ? goBtn("scan", busy ? "Working…" : "Run scan · Top " + count) : keyBox}
+              <a href={actionsWorkflowUrl()} target="_blank" rel="noreferrer" style={{ display: "inline-block", marginTop: 8, color: "#FFFFFF", fontWeight: 700 }}>Run scan on GitHub ↗</a>
               <div style={{ marginTop: 8, color: "rgba(255,255,255,0.85)" }}>Runs on GitHub with your OrcaLayer key and updates this page when done. Last scan {DATA.scannedAt}.</div>
             </div>
           ) : (
@@ -1357,6 +1364,7 @@ function ActionBar() {
               <div style={{ fontWeight: 800, fontSize: 14 }}>Refresh: ESPN scores + Kalshi prices only</div>
               <div style={{ marginTop: 4, color: "rgba(255,255,255,0.85)" }}>Checks live status, final results and ESPN win chances, logs W/L to the Journal, and drops games that have already started from Top 20, Upcoming, Fun, Polymarket, Player Props, Longshots and Biggest Bets (live games stay on Bets). Ended games are removed everywhere. No OrcaLayer calls.</div>
               {hasKey ? goBtn("refresh", busy ? "Working…" : "Run refresh") : keyBox}
+              <a href={actionsWorkflowUrl()} target="_blank" rel="noreferrer" style={{ display: "inline-block", marginTop: 8, color: "#FFFFFF", fontWeight: 700 }}>Run scan on GitHub ↗</a>
               <div style={{ marginTop: 8, color: "rgba(255,255,255,0.85)" }}>Last refresh {DATA.refreshedAt || "not yet"}.</div>
             </div>
           )}
@@ -5782,11 +5790,21 @@ function KalshiCappersTab(props: { now: number }) {
                     {live ? <Chip bg={RED} color="#FFFFFF">LIVE</Chip> : null}
                     {stale ? <Chip bg={AMBER} color="#FFFFFF">Stale</Chip> : null}
                     {p.priceMoved ? <Chip bg={AMBER} color="#FFFFFF">Price moved</Chip> : null}
+                    {p.combo || (p.legs && p.legs.length >= 2) ? <Chip bg={BRAND} color="#FFFFFF">{(p.legs && p.legs.length ? p.legs.length : 0) ? (p.legs as string[]).length + "-leg combo" : "Combo"}</Chip> : null}
                     <Chip bg={BRAND} color="#FFFFFF">{p.league}</Chip>
                     <Chip bg={t.bg.subtle} color={t.text.primary}>{p.start || (p.startTs ? ptTime(p.startTs) : "")}</Chip>
                   </div>
                   <div style={{ fontSize: 18, lineHeight: "23px", fontWeight: 850, marginTop: 6, overflowWrap: "anywhere" }}>{p.game}</div>
-                  <div style={{ fontSize: 16, fontWeight: 850, color: t.text.primary, marginTop: 8 }}>{p.label}</div>
+                  {p.combo || (p.legs && p.legs.length >= 2) ? (
+                    <div style={{ marginTop: 8 }}>
+                      <div style={{ fontSize: 13, fontWeight: 750, color: t.text.secondary, marginBottom: 4 }}>All legs on this one combo ticket</div>
+                      {(p.legs || []).map((leg: string, i: number) => (
+                        <div key={i} style={{ fontSize: 16, fontWeight: 850, color: t.text.primary, marginTop: 2 }}>{(i + 1) + ". " + leg}</div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div style={{ fontSize: 16, fontWeight: 850, color: t.text.primary, marginTop: 8 }}>{p.label}</div>
+                  )}
                   <div style={{ marginTop: 4, display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}><BetAmt n={p.cost} /><span style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary }}>on Kalshi</span></div>
                   {slipWords(p.slip, p.entry) ? <div style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary, marginTop: 2 }}>{slipWords(p.slip, p.entry)}</div> : null}
                   <div style={{ margin: "8px 0 0" }}>
@@ -5811,7 +5829,7 @@ export default function App() {
       if (q === "golden" || q === "hot") return "hot";
       if (q === "coming" || q === "cappers") return q;
     } catch (e) { /* ignore */ }
-    return "hot";
+    return "elite";
   });
   const [bigOnly, setBigOnly] = useState<boolean>(false);
   const [provenLimit, setProvenLimit] = useState<number>(5);
@@ -6310,7 +6328,7 @@ export default function App() {
           <span style={{ fontSize: 11, fontWeight: 850, letterSpacing: "0.08em", textTransform: "uppercase", color: "#7C3AED", width: 38, flex: "none", lineHeight: "12px" }}>Today</span>
           <div style={{ flex: 1, minWidth: 0 }}>
             <PillTabs bare
-              options={[{ value: "hot", label: "Golden Picks", count: hotTabCount(now) }, { value: "coming", label: "Coming Up", count: eliteTabCount(now) }, { value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }]}
+              options={[{ value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: eliteTabCount(now) }, { value: "hot", label: "Golden Picks", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }]}
               value={tab === "pe" ? "" : tab}
               onChange={(v: string) => { setTab(v); setSportFilter(""); }}
             />

@@ -1,0 +1,36 @@
+name: Pages
+# Deploy the already-built (and encrypted) site whenever main is pushed.
+# Uses a separate concurrency group so a 5-minute data push does not queue
+# behind, or block, a running scan / light-refresh loop.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "README.md"
+      - ".github/workflows/dispatch-kalshi-scan.yml"
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: Wait for Pages artifact
+        run: sleep 20
+      - id: deploy
+        uses: actions/deploy-pages@v4
