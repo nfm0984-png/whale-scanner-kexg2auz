@@ -57,12 +57,21 @@ run_once() {
     return 0
   fi
   git commit -m "refresh $(TZ=America/Los_Angeles date '+%a %b %-d %-I:%M %p PT')"
+
+  # Leftover unstaged/untracked files (gate.json, generated line files) must not block rebase.
+  if ! git diff --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+    echo "stashing leftover files before rebase:"
+    git status --short
+    git stash push -u -m "refresh-loop-uncommitted" || true
+  fi
+
   i=0
   while [ $i -lt 3 ]; do
     i=$((i + 1))
     if git pull --rebase -X theirs origin main && git push; then
       CHANGED=1
       echo "pushed light refresh $(git rev-parse --short HEAD)"
+      git stash pop || true
       python3 scanner/gate_crypto.py decrypt || true
       return 0
     fi
@@ -74,6 +83,7 @@ run_once() {
       if GIT_EDITOR=true git rebase --continue && git push; then
         CHANGED=1
         echo "pushed light refresh $(git rev-parse --short HEAD)"
+        git stash pop || true
         python3 scanner/gate_crypto.py decrypt || true
         return 0
       fi
@@ -82,6 +92,7 @@ run_once() {
     sleep 8
   done
   echo "gave up pushing this light refresh"
+  git stash pop || true
   python3 scanner/gate_crypto.py decrypt || true
   return 1
 }
