@@ -4976,6 +4976,45 @@ function backerRecordLine(w: string, name: string, league?: string | null): stri
   if (pe) { const b = pe.cats[pe.best]; if (b) { parts.push(PE_CAT_LABEL[pe.best] + " " + signedK(b.month) + " mo"); parts.push(signedK(b.all) + " all"); } }
   return parts.join(" · ");
 }
+function backerCompactLine(w: string, name: string, league?: string | null): string {
+  const rec = QMAP[w];
+  const parts: string[] = [name];
+  if (rec) {
+    if (league) {
+      const fam = sportFamilyOf(league);
+      const sr = familySportsOf(w)[fam];
+      if (sr && sr.n) parts.push(fam + " " + sr.w + "-" + sr.l);
+    }
+    if (rec.n) parts.push(rec.w + "-" + rec.l);
+    if (rec.profit != null) parts.push(signedK(rec.profit));
+    return parts.join(" · ");
+  }
+  const pe = PE_CAP[w];
+  if (pe) {
+    if (pe.rec && (pe.rec.w || pe.rec.l)) parts.push(pe.rec.w + "-" + pe.rec.l);
+    const b = pe.cats[pe.best];
+    if (b && b.all != null) parts.push(signedK(b.all));
+  }
+  return parts.join(" · ");
+}
+function strongestTag(tags: string[]): string | null {
+  const order = ["Proven", "Elite", "🔥 Hot", "Politics-Econ"];
+  for (let i = 0; i < order.length; i++) if (tags.indexOf(order[i]) >= 0) return order[i];
+  return null;
+}
+function boughtLineOf(p: UPick, now: number): string | null {
+  const times = p.backers.map((b: UBacker) => b.buyTs || 0).concat(p.freshTs || 0);
+  const ts = Math.max.apply(null, times);
+  if (ts > 0) return "bought " + ago(ts, now);
+  if (p.fresh === "hold") return "no buys in 24h";
+  return null;
+}
+function kalshiTapHint(v: KalshiView): string | null {
+  if (v.unmatched || !v.yesNo) return null;
+  const outcome = (v.outcome || "").trim();
+  if (!outcome || /^(yes|no)$/i.test(outcome)) return "Tap " + v.yesNo;
+  return "Tap " + outcome + " → " + v.yesNo;
+}
 function peRecordLine(w: string, b: PEBacker): string {
   const parts: string[] = [shortName(b.name)];
   const r = b.rec || (PE_CAP[w] && PE_CAP[w].rec) || null;
@@ -5290,10 +5329,11 @@ function OtherSide(props: { p: UPick; opp: UPick[] }) {
   const cap = (n: number) => n + " capper" + (n === 1 ? "" : "s");
   const none = backers.length === 0;
   const lead = p.total >= oTotal;
+  if (none) return null;
   return (
-    <div data-other-side="1" style={{ marginTop: 10, padding: "10px 12px", borderRadius: 14, border: "1.5px solid " + (none ? t.border.default : "#F59E0B"), background: none ? t.bg.subtle : "#FFFBEB" }}>
+    <div data-other-side="1" style={{ marginTop: 10, padding: "10px 12px", borderRadius: 14, border: "1.5px solid #F59E0B", background: "#FFFBEB" }}>
       <div style={{ fontSize: 11, fontWeight: 850, letterSpacing: "0.08em", textTransform: "uppercase", color: "#B45309" }}>Other side</div>
-      {none ? <div data-other-none="1" style={{ marginTop: 6 }}><Chip bg={t.bg.subtle} color={t.text.secondary}>No opposition</Chip></div> : (
+      {(
         <>
           <div data-other-vs="1" style={{ display: "flex", flexWrap: "wrap", alignItems: "baseline", gap: 6, marginTop: 4, fontSize: 15, fontWeight: 850, fontVariantNumeric: "tabular-nums" }}>
             <span style={{ color: lead ? GREEN : t.text.primary }}>{cap(p.backers.length) + " · " + kMoney(p.total)}</span>
@@ -5324,6 +5364,13 @@ function RecordFlag(props: { cmp: SideCmp }) {
     </div>
   );
 }
+function BestAtThisSport(props: { wallet: string; league?: string | null }) {
+  const best = bestAtOf(props.wallet);
+  if (!best) return null;
+  const fam = props.league ? sportFamilyOf(props.league) : "";
+  if (!fam || best !== fam) return null;
+  return <Chip bg="#FEF3C7" color="#92400E">{"Best at " + best}</Chip>;
+}
 function SportBreakdown(props: { wallet: string; league?: string | null }) {
   const t = useGrokTheme();
   const fams = familySportsOf(props.wallet);
@@ -5351,6 +5398,9 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
   const top = p.backers.slice(0, 3);
   const rest = p.backers.slice(3);
   const kinds = p.tags;
+  const badge = strongestTag(kinds);
+  const bought = boughtLineOf(p, props.now);
+  const hasOpp = !!(props.opp && props.opp.some((q: UPick) => q.backers.length > 0));
   const nInfo = props.net;
   const contested = !!(nInfo && nInfo.contested);
   const colorOf = (x: string): string[] => (({ Proven: ["#EDE9FE", "#6D28D9"], Elite: ["#FEF3C7", "#92400E"], "🔥 Hot": ["#FFEDD5", "#C2410C"], "Politics-Econ": ["#DBEAFE", "#1D4ED8"], Tracked: ["#F3F4F6", "#4B5563"] } as Record<string, string[]>)[x] || [t.bg.subtle, t.text.primary]);
@@ -5369,26 +5419,27 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
         <div data-ucard-sum="1" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 8, marginTop: 10 }}>
           <span data-ucard-total="1" style={{ display: "inline-block", padding: "3px 12px", borderRadius: 12, background: "#4C1D95", color: "#FFFFFF", fontSize: 28, lineHeight: "34px", fontWeight: 900, letterSpacing: "-0.02em", fontVariantNumeric: "tabular-nums" }}>{kMoney(p.total)}</span>
           <span data-ucard-count="1" style={{ display: "inline-block", padding: "4px 10px", borderRadius: 999, background: "#E0E7FF", color: "#3730A3", fontSize: 15, fontWeight: 850 }}>{p.backers.length + " capper" + (p.backers.length === 1 ? "" : "s")}</span>
-          {kinds.map((x: string) => <span key={x} data-sum-tag={x} style={{ display: "inline-block", padding: "3px 9px", borderRadius: 999, background: colorOf(x)[0], color: colorOf(x)[1], fontSize: 13, fontWeight: 850, border: "1.5px solid " + colorOf(x)[1] }}>{x}</span>)}
+          {badge ? <span data-sum-tag={badge} style={{ display: "inline-block", padding: "3px 9px", borderRadius: 999, background: colorOf(badge)[0], color: colorOf(badge)[1], fontSize: 13, fontWeight: 850, border: "1.5px solid " + colorOf(badge)[1] }}>{badge}</span> : null}
         </div>
-        <FreshPricePills p={p} now={props.now} hidePrice={props.hidePricePills} />
+        {bought ? <div data-bought-line="1" style={{ fontSize: 13, fontWeight: 650, color: t.text.tertiary, marginTop: 6 }}>{bought}</div> : null}
         {props.moreRow}
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 10 }}>
-          <div style={{ flex: 1 }}><KalshiBuyButton view={v} size={20} /></div>
+          <div style={{ flex: 1 }}><KalshiBuyButton view={v} size={17} openLink hint /></div>
           {props.hideStake || !props.stake ? null : <div data-k-stake="1" style={{ fontSize: 14, fontWeight: 800, color: GREEN, lineHeight: "17px" }}>{"Stake"}<br />{props.stake}</div>}
         </div>
         {props.stakeLine ? <div data-stake-line="1" style={{ marginTop: 6, fontSize: 14, fontWeight: 850, color: GREEN, fontVariantNumeric: "tabular-nums" }}>{props.stakeLine}</div> : null}
-        <OnKalshiBox view={v} />
         {top.map((b: UBacker) => (
-          <div key={b.wallet}>
-            <div data-ucard-rec={b.wallet} style={{ fontSize: 14, lineHeight: "20px", fontWeight: 650, color: t.text.secondary, marginTop: 2, overflowWrap: "anywhere" }}>{b.line}</div>
-            {p.kind === "sports" ? <SportBreakdown wallet={b.wallet} league={p.league} /> : null}
+          <div key={b.wallet} data-ucard-rec={b.wallet} style={{ marginTop: 8 }}>
+            <div style={{ fontSize: 14, lineHeight: "20px", fontWeight: 650, color: t.text.secondary, overflowWrap: "anywhere" }}>{backerCompactLine(b.wallet, b.name, p.kind === "sports" ? p.league : null)}</div>
+            {p.kind === "sports" ? <div style={{ marginTop: 4 }}><BestAtThisSport wallet={b.wallet} league={p.league} /></div> : null}
           </div>
         ))}
-        {p.cmp && p.cmp.verdict && props.opp ? <RecordFlag cmp={p.cmp} /> : null}
-        {props.opp ? <OtherSide p={p} opp={props.opp} /> : null}
+        {p.cmp && p.cmp.verdict && hasOpp ? <RecordFlag cmp={p.cmp} /> : null}
+        {hasOpp ? <OtherSide p={p} opp={props.opp || []} /> : null}
         <details data-ucard-more="1" style={{ marginTop: 8 }}>
           <summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 14, color: BRAND }}>{rest.length ? "Details · +" + rest.length + " more" : "Details"}</summary>
+          <FreshPricePills p={p} now={props.now} hidePrice={props.hidePricePills} />
+          {!hasOpp && props.opp ? <div data-other-none="1" style={{ marginTop: 6 }}><Chip bg={t.bg.subtle} color={t.text.secondary}>No opposition</Chip></div> : null}
           {p.note ? <div style={{ fontSize: 13, fontWeight: 700, color: AMBER, marginTop: 4 }}>{p.note}</div> : null}
           {p.entryNote ? <div style={{ fontSize: 13, fontWeight: 700, color: t.text.tertiary, marginTop: 4 }}>{p.entryNote}</div> : null}
           {p.backers.map((b: UBacker, i: number) => (
@@ -5397,7 +5448,7 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
                 <span style={{ fontSize: 15, fontWeight: 850, overflowWrap: "anywhere" }}>{b.name}</span>
                 <span><span style={{ fontSize: 16, fontWeight: 850, fontVariantNumeric: "tabular-nums" }}>{money(b.cost)}</span><span style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary }}>{b.avg != null ? " @ " + cents(b.avg) : ""}</span></span>
               </div>
-              {i >= 3 ? <div style={{ fontSize: 13, fontWeight: 650, color: t.text.secondary }}>{b.line}</div> : null}
+              <div style={{ fontSize: 13, fontWeight: 650, color: t.text.secondary }}>{b.line}</div>
               {p.kind === "sports" ? <SportBreakdown wallet={b.wallet} league={p.league} /> : null}
               {PE_CAP[b.wallet] ? (
                 <div style={{ fontSize: 13, color: t.text.secondary, marginTop: 2 }}>{Object.keys(PE_CAP[b.wallet].cats).filter((c: string) => PE_CAP[b.wallet].cats[c].month || PE_CAP[b.wallet].cats[c].all).map((c: string) => PE_CAT_LABEL[c] + " " + signedK(PE_CAP[b.wallet].cats[c].month) + " mo · " + signedK(PE_CAP[b.wallet].cats[c].all) + " all").join("  |  ")}</div>
@@ -5452,15 +5503,32 @@ function AltBet(props: { p: UPick; all?: UPick[]; now: number; hidePricePills?: 
       {p.sub ? <div style={{ fontSize: 13, fontWeight: 600, color: t.text.secondary, marginTop: 2, overflowWrap: "anywhere" }}>{p.sub}</div> : null}
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center", marginTop: 6 }}>
         <span style={{ display: "inline-block", padding: "2px 9px", borderRadius: 999, background: "#E0E7FF", color: "#3730A3", fontSize: 13, fontWeight: 850 }}>{p.backers.length + " capper" + (p.backers.length === 1 ? "" : "s")}</span>
-        {p.tags.map((x: string) => <span key={x} style={{ display: "inline-block", padding: "1px 8px", borderRadius: 999, background: "#F3F4F6", color: "#4B5563", fontSize: 12, fontWeight: 800, border: "1px solid #9CA3AF" }}>{x}</span>)}
+        {strongestTag(p.tags) ? <span style={{ display: "inline-block", padding: "1px 8px", borderRadius: 999, background: "#F3F4F6", color: "#4B5563", fontSize: 12, fontWeight: 800, border: "1px solid #9CA3AF" }}>{strongestTag(p.tags)}</span> : null}
         {props.all ? <NetPill net={netOf(p, props.all)} /> : null}
         {props.all ? <ContestedBadge net={netOf(p, props.all)} /> : null}
       </div>
-      <FreshPricePills p={p} now={props.now} hidePrice={props.hidePricePills} />
-      <div style={{ marginTop: 8 }}><KalshiBuyButton view={p.view} size={17} /></div>
-      <OnKalshiBox view={p.view} />
-      {p.backers.map((b: UBacker) => <div key={b.wallet} data-alt-capper={b.wallet} style={{ fontSize: 13, lineHeight: "19px", fontWeight: 650, color: t.text.secondary, marginTop: 2, overflowWrap: "anywhere" }}>{b.line}</div>)}
-      {p.cmp && p.cmp.verdict && opp ? <RecordFlag cmp={p.cmp} /> : null}
+      {boughtLineOf(p, props.now) ? <div style={{ fontSize: 12, fontWeight: 650, color: t.text.tertiary, marginTop: 4 }}>{boughtLineOf(p, props.now)}</div> : null}
+      <div style={{ marginTop: 8 }}><KalshiBuyButton view={p.view} size={16} openLink hint /></div>
+      {p.backers.map((b: UBacker) => (
+        <div key={b.wallet} data-alt-capper={b.wallet} style={{ marginTop: 4 }}>
+          <div style={{ fontSize: 13, lineHeight: "19px", fontWeight: 650, color: t.text.secondary, overflowWrap: "anywhere" }}>{backerCompactLine(b.wallet, b.name, p.kind === "sports" ? p.league : null)}</div>
+          {p.kind === "sports" ? <BestAtThisSport wallet={b.wallet} league={p.league} /> : null}
+        </div>
+      ))}
+      {p.cmp && p.cmp.verdict && opp && opp.some((q: UPick) => q.backers.length > 0) ? <RecordFlag cmp={p.cmp} /> : null}
+      <details data-alt-more="1" style={{ marginTop: 8 }}>
+        <summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 13, color: BRAND }}>Details</summary>
+        <FreshPricePills p={p} now={props.now} hidePrice={props.hidePricePills} />
+        {p.backers.map((b: UBacker) => (
+          <div key={b.wallet} style={{ borderTop: "1px solid " + t.border.default, marginTop: 8, paddingTop: 8 }}>
+            <div style={{ fontSize: 13, fontWeight: 650, color: t.text.secondary }}>{b.line}</div>
+            {p.kind === "sports" ? <SportBreakdown wallet={b.wallet} league={p.league} /> : null}
+            {PE_CAP[b.wallet] ? (
+              <div style={{ fontSize: 13, color: t.text.secondary, marginTop: 2 }}>{Object.keys(PE_CAP[b.wallet].cats).filter((c: string) => PE_CAP[b.wallet].cats[c].month || PE_CAP[b.wallet].cats[c].all).map((c: string) => PE_CAT_LABEL[c] + " " + signedK(PE_CAP[b.wallet].cats[c].month) + " mo · " + signedK(PE_CAP[b.wallet].cats[c].all) + " all").join("  |  ")}</div>
+            ) : <RecTiles recs={capperRecs(b.wallet)} small={true} />}
+          </div>
+        ))}
+      </details>
     </div>
   );
 }
@@ -5648,13 +5716,24 @@ function PECappersList(props: { now: number }) {
     </details>
   );
 }
-function KalshiBuyButton(props: { view: KalshiView; size?: number }) {
+function KalshiBuyButton(props: { view: KalshiView; size?: number; openLink?: boolean; hint?: boolean }) {
+  const t = useGrokTheme();
   const v = props.view;
   const ok = !v.unmatched && !!v.yesNo && v.price != null;
   const yes = v.yesNo === "Yes";
+  const url = props.openLink ? kalshiUrlOf(v.ticker) : null;
+  const label = ok ? (v.yesNo + " · pays " + cents(v.price) + (props.openLink && url ? " · Open on Kalshi" : "")) : "No Kalshi line";
+  const hint = props.hint ? kalshiTapHint(v) : null;
+  const style: Record<string, string | number> = { display: "flex", alignItems: "center", justifyContent: "center", width: "100%", boxSizing: "border-box", padding: "12px 14px", borderRadius: 14, background: ok ? (yes ? GREEN : RED) : "#9CA3AF", color: "#FFFFFF", fontSize: props.size || 20, fontWeight: 850, fontVariantNumeric: "tabular-nums", letterSpacing: "-0.01em", lineHeight: 1.2, textAlign: "center", textDecoration: "none", whiteSpace: "normal" };
+  const inner = <span data-k-price="1">{label}</span>;
   return (
-    <div data-k-yesno="1" data-k-side={ok ? v.yesNo : undefined} style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "100%", boxSizing: "border-box", padding: "12px 14px", borderRadius: 14, background: ok ? (yes ? GREEN : RED) : "#9CA3AF", color: "#FFFFFF", fontSize: props.size || 20, fontWeight: 850, fontVariantNumeric: "tabular-nums", letterSpacing: "-0.01em", lineHeight: 1.1 }}>
-      <span data-k-price="1">{ok ? (v.yesNo + " · pays " + cents(v.price)) : "No Kalshi line"}</span>
+    <div>
+      {ok && url ? (
+        <a data-k-yesno="1" data-k-side={v.yesNo} data-kalshi-link="1" href={url} target="_blank" rel="noreferrer" style={style}>{inner}</a>
+      ) : (
+        <div data-k-yesno="1" data-k-side={ok ? v.yesNo : undefined} style={style}>{inner}</div>
+      )}
+      {hint ? <div data-kalshi-hint="1" style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary, marginTop: 6, lineHeight: "18px" }}>{hint}</div> : null}
     </div>
   );
 }
