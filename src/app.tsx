@@ -1477,7 +1477,7 @@ function Hero(props: { top: number; fun: number; buys: number; bets: number; act
               <span aria-hidden="true">📅</span>
               <span>{formatLongDatePt()}</span>
             </div>
-            <h1 className="ws-hero-title" style={{ fontSize: 34, fontWeight: 900, letterSpacing: "-0.03em", margin: "8px 0 0", lineHeight: 1.1 }}>Orca Whale Scanner</h1>
+            <h1 className="ws-hero-title" style={{ fontSize: 34, fontWeight: 900, letterSpacing: "-0.03em", margin: "8px 0 0", lineHeight: 1.1 }}>Polymarket Scanner</h1>
             <div style={{ fontSize: 15, fontWeight: 600, color: "#94A3B8", marginTop: 6 }}>Kalshi whale picks, best first — public books and trade tape.</div>
             <div style={{ fontSize: 12, fontWeight: 650, color: "#94A3B8", marginTop: 6 }}>{"Top " + DATA.coverage.cappers + " all-time sports whales · next " + DATA.settings.windowH + " hours"}</div>
             <div style={{ fontSize: 12, fontWeight: 650, color: "#94A3B8", marginTop: 2 }}>{"Scanned " + DATA.scannedAt + " · Refreshed " + (DATA.refreshedAt || "not yet")}</div>
@@ -6286,7 +6286,7 @@ export default function App() {
     </Section>
   );
   return (
-    <Page title="Orca Whale Scanner" summary="Kalshi whale picks, best first." record={tabRecord || undefined} caution={tabCaution || undefined}>
+    <Page title="Polymarket Scanner" summary="Kalshi whale picks, best first." record={tabRecord || undefined} caution={tabCaution || undefined}>
       <Hero top={top.length} fun={fun.length} buys={BUY_LINES.length} bets={BET_LINES.length} active={activeTraders.length} value={openValue} />
 
       <div className="ws-tabs-flow" data-tab-bar="desktop">
