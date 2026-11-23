@@ -5993,6 +5993,20 @@ export default function App() {
   const [capView, setCapView] = useState<string>("all");
   const [capQ, setCapQ] = useState<string>("");
   const [tabSort, setTabSort] = useState<Record<string, string>>({});
+  // Noel Nov 23: on a phone the hero and stat tiles fill the first screen, so a tab tap looked like it did nothing. Bring the new tab's content into view under the tab bar.
+  const tabScroll = useState<{ first: boolean }>(() => ({ first: true }))[0];
+  useEffect(() => {
+    if (tabScroll.first) { tabScroll.first = false; return; }
+    try {
+      const el = document.getElementById("ws-tab-top");
+      if (!el) return;
+      const bar = document.querySelector(".ws-float") as HTMLElement | null;
+      const barH = bar && window.getComputedStyle(bar).display !== "none" ? bar.getBoundingClientRect().height : 0;
+      const top = el.getBoundingClientRect().top;
+      if (top >= barH && top < window.innerHeight * (barH ? 0.45 : 0.85)) return;
+      window.scrollTo({ top: Math.max(0, window.scrollY + top - barH - 8), behavior: "smooth" });
+    } catch (e) { /* ignore */ }
+  }, [tab]);
   const sortOf = (k?: string): string => tabSort[k || tab] || ({ hot: "f14", top: "start", biggest: "size" } as Record<string, string>)[k || tab] || "best";
   const setSortOf = (v: string, k?: string) => setTabSort({ ...tabSort, [k || tab]: v });
   const [capLimit, setCapLimit] = useState<number>(25);
@@ -6326,6 +6340,7 @@ export default function App() {
         <Toggle label="Only picks a followed capper backs" value={f.followedOnly} onChange={(v: boolean) => set("followedOnly", v)} />
       </Section>
 
+      <div id="ws-tab-top" data-tab-top="1" style={{ height: 0, scrollMarginTop: 8 }} />
       {tab === "picks" ? (
         <Section heading={"All Picks · " + combinedPicks(now).length}>
           <MissingPicksNote />
