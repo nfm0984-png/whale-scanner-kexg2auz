@@ -15,17 +15,58 @@ const TONE: Record<string, [string, string]> = { success: ["#DCFCE7", "#166534"]
 
 export function Page(p: { title?: string; summary?: string; record?: string; caution?: string; children?: React.ReactNode }) {
   return (
-    <div style={{ maxWidth: 760, margin: "0 auto", padding: "100px 12px 56px", fontFamily: FONT, color: theme.text.primary, minHeight: "100vh", background: "#F4F0FF" }}>
-      {p.title ? <h1 style={{ fontSize: 24, lineHeight: "30px", margin: "6px 2px 4px", fontWeight: 850, letterSpacing: "-0.02em" }}>{p.title}</h1> : null}
-      {p.summary ? <p style={{ fontSize: 13, lineHeight: "18px", color: theme.text.tertiary, margin: "0 2px 8px" }}>{p.summary}</p> : null}
-      {p.record ? <p style={{ fontSize: 14, lineHeight: "18px", fontWeight: 800, color: theme.text.primary, margin: "0 2px 6px" }}>{p.record}</p> : null}
-      {p.caution ? <p style={{ fontSize: 13, lineHeight: "18px", fontWeight: 650, color: "#B45309", margin: "0 2px 12px" }}>{p.caution}</p> : null}
-      {p.children}
+    <div className="ws-page">
+      <style>{`
+        .ws-page{min-height:100vh;background:#F0F7FF;color:#0B1F33;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif}
+        .ws-wrap{max-width:1100px;margin:0 auto;padding:20px 20px 48px}
+        .ws-page-head{display:none}
+        .ws-hero{position:relative;overflow:hidden;border-radius:24px;background:#071422;color:#fff;padding:22px 24px 20px;box-shadow:0 0 80px rgba(37,99,235,0.22),0 18px 40px rgba(7,20,34,0.28)}
+        .ws-hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.045) 1px,transparent 1px);background-size:28px 28px;mask-image:radial-gradient(ellipse at 30% 0%,#000 0%,transparent 70%);pointer-events:none}
+        .ws-hero::after{content:"";position:absolute;width:280px;height:280px;right:-60px;top:-80px;background:radial-gradient(circle,rgba(37,99,235,0.45),transparent 70%);pointer-events:none}
+        .ws-hero-row{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+        .ws-hero-actions{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:0 0 auto;min-width:220px;max-width:340px}
+        .ws-hero-actions > div{margin-top:0 !important;width:100%}
+        .ws-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0 0}
+        .ws-tabs-flow{display:block}
+        .ws-tabs{display:flex;flex-wrap:nowrap;align-items:center;gap:6px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;background:#0B1F33;border-radius:16px;padding:6px;margin:16px 0 0}
+        .ws-tabs::-webkit-scrollbar{display:none}
+        .ws-tabs-label{font-size:10px;font-weight:850;letter-spacing:0.08em;text-transform:uppercase;color:#93C5FD;padding:0 8px;flex:none;line-height:1.15}
+        .ws-body{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start;margin-top:18px}
+        .ws-side{display:flex;flex-direction:column;gap:12px;position:sticky;top:16px}
+        .ws-side-card{background:#0B1F33;color:#fff;border-radius:16px;padding:14px 16px;box-shadow:0 10px 24px rgba(7,20,34,0.12)}
+        .ws-float{display:none}
+        @media (max-width: 800px){
+          .ws-page{background:#F4F0FF;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Inter,"Helvetica Neue",Arial,sans-serif}
+          .ws-wrap{max-width:760px;padding:100px 12px 56px}
+          .ws-page-head{display:block}
+          .ws-hero{padding:18px;border-radius:22px}
+          .ws-hero-title{display:none}
+          .ws-hero-row{flex-direction:column}
+          .ws-hero-actions{align-items:stretch;width:100%;min-width:0;max-width:none}
+          .ws-stats{grid-template-columns:1fr 1fr}
+          .ws-tabs-flow{display:none !important}
+          .ws-body{grid-template-columns:1fr;margin-top:14px}
+          .ws-side{position:static}
+          .ws-float{display:flex;position:fixed;top:0;left:0;right:0;z-index:50;justify-content:center;background:rgba(244,240,255,0.92);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid #DDD6FE;box-shadow:0 4px 16px rgba(124,58,237,0.08)}
+          .ws-float-inner{width:100%;max-width:760px}
+        }
+      `}</style>
+      <div className="ws-wrap">
+        {(p.title || p.summary || p.record || p.caution) ? (
+          <div className="ws-page-head">
+            {p.title ? <h1 style={{ fontSize: 24, lineHeight: "30px", margin: "6px 2px 4px", fontWeight: 850, letterSpacing: "-0.02em" }}>{p.title}</h1> : null}
+            {p.summary ? <p style={{ fontSize: 13, lineHeight: "18px", color: theme.text.tertiary, margin: "0 2px 8px" }}>{p.summary}</p> : null}
+            {p.record ? <p style={{ fontSize: 14, lineHeight: "18px", fontWeight: 800, color: theme.text.primary, margin: "0 2px 6px" }}>{p.record}</p> : null}
+            {p.caution ? <p style={{ fontSize: 13, lineHeight: "18px", fontWeight: 650, color: "#B45309", margin: "0 2px 12px" }}>{p.caution}</p> : null}
+          </div>
+        ) : null}
+        {p.children}
+      </div>
     </div>
   );
 }
 export function Floating(p: { edge?: string; align?: string; bar?: boolean; children?: React.ReactNode }) {
-  return <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, display: "flex", justifyContent: "center", background: "rgba(244,240,255,0.92)", backdropFilter: "saturate(1.4) blur(12px)", WebkitBackdropFilter: "saturate(1.4) blur(12px)", borderBottom: "1px solid #DDD6FE", boxShadow: "0 4px 16px rgba(124,58,237,0.08)" }}><div style={{ width: "100%", maxWidth: 760 }}>{p.children}</div></div>;
+  return <div className="ws-float"><div className="ws-float-inner">{p.children}</div></div>;
 }
 export function CardGrid(p: { children?: React.ReactNode }) {
   return <div>{p.children}</div>;

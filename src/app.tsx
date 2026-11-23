@@ -1407,37 +1407,99 @@ function Ring(props: { score: number; track: string; text: string; sub: string; 
   );
 }
 
-function Hero(props: { top: number; fun: number; buys: number; bets: number; active: number; value: number }) {
-  const stat = (v: string, l: string) => (
-    <div style={{ flex: "1 1 70px", minWidth: 0, background: "rgba(255,255,255,0.12)", borderRadius: 14, padding: "10px 12px" }}>
-      <div style={{ fontSize: 22, lineHeight: "26px", fontWeight: 800, color: "#FFFFFF" }}>{v}</div>
-      <div style={{ fontSize: 11, lineHeight: "14px", fontWeight: 600, color: "rgba(255,255,255,0.78)", marginTop: 2, letterSpacing: "0.03em" }}>{l}</div>
+function formatLongDatePt(ms = Date.now()): string {
+  return new Date(ms).toLocaleDateString("en-US", { timeZone: "America/Los_Angeles", weekday: "long", month: "long", day: "numeric" });
+}
+function DashStat(props: { label: string; value: string; sub?: string; color: string }) {
+  return (
+    <div data-dash-stat={props.label} style={{ background: "#0B1F33", color: "#FFFFFF", borderRadius: 16, padding: "14px 16px", minHeight: 76, boxShadow: "0 10px 24px rgba(7,20,34,0.12)" }}>
+      <div style={{ fontSize: 12, fontWeight: 700, color: "#93C5FD", letterSpacing: "0.02em" }}>{props.label}</div>
+      <div style={{ fontSize: 26, fontWeight: 900, letterSpacing: "-0.03em", lineHeight: "30px", fontVariantNumeric: "tabular-nums" }}>{props.value}</div>
+      {props.sub ? <div style={{ fontSize: 11, fontWeight: 650, color: "#BFDBFE", marginTop: 1 }}>{props.sub}</div> : null}
     </div>
   );
+}
+function StatusRow(props: { label: string; status: string; tone: "ok" | "public" | "muted" | "warn" }) {
+  const color = props.tone === "ok" ? "#4ADE80" : props.tone === "public" ? "#7DD3FC" : props.tone === "warn" ? "#FCD34D" : "#94A3B8";
+  return (
+    <div style={{ display: "flex", justifyContent: "space-between", gap: 10, padding: "7px 0", borderBottom: "1px solid rgba(148,163,184,0.16)", fontSize: 13, fontWeight: 700 }}>
+      <span style={{ color: "#E2E8F0" }}>{props.label}</span>
+      <span style={{ color, textAlign: "right", fontVariantNumeric: "tabular-nums" }}>{props.status}</span>
+    </div>
+  );
+}
+function ShellSide() {
+  const scans = (DATA.scans || []).slice().reverse().slice(0, 8);
+  return (
+    <aside className="ws-side">
+      <div className="ws-side-card" data-data-sources="1">
+        <div style={{ fontSize: 14, fontWeight: 850, marginBottom: 4 }}>Data sources</div>
+        <StatusRow label="OrcaLayer" status="Connected" tone="ok" />
+        <StatusRow label="Kalshi markets" status="Public" tone="public" />
+        <StatusRow label="ESPN scoreboard" status="Public" tone="public" />
+        <StatusRow label="Polymarket" status="Links" tone="muted" />
+      </div>
+      <div className="ws-side-card" data-scan-status="1">
+        <div style={{ fontSize: 14, fontWeight: 850, marginBottom: 4 }}>Scan status</div>
+        <StatusRow label="Last scan" status={DATA.scannedAt || "—"} tone="ok" />
+        <StatusRow label="Last refresh" status={DATA.refreshedAt || "not yet"} tone="public" />
+        <StatusRow label="Whales tracked" status={"Top " + (DATA.coverage && DATA.coverage.cappers ? DATA.coverage.cappers : "—")} tone="public" />
+        <StatusRow label="Window" status={(DATA.settings && DATA.settings.windowH ? DATA.settings.windowH + " hours" : "—")} tone="muted" />
+      </div>
+      <div className="ws-side-card" data-scan-history="1">
+        <div style={{ fontSize: 14, fontWeight: 850, marginBottom: 4 }}>Scan history</div>
+        <div style={{ fontSize: 12, fontWeight: 650, color: "#94A3B8", marginBottom: 6 }}>{"Recent scans · " + (DATA.scans ? DATA.scans.length : 0) + " kept"}</div>
+        <div style={{ maxHeight: 280, overflowY: "auto" }}>
+          {scans.length === 0 ? <div style={{ fontSize: 13, color: "#94A3B8" }}>No history yet.</div> : scans.map((s: Scan, i: number) => (
+            <div key={(s.ts || i)} style={{ padding: "8px 0", borderBottom: "1px solid rgba(148,163,184,0.16)" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", gap: 8, alignItems: "baseline" }}>
+                <span style={{ fontSize: 13, fontWeight: 800, color: "#E2E8F0" }}>{s.ts ? ptTime(s.ts) : "—"}</span>
+                <span style={{ fontSize: 13, fontWeight: 800, color: "#7DD3FC" }}>{(s.signals != null ? s.signals + " top" : "")}</span>
+              </div>
+              <div style={{ fontSize: 12, fontWeight: 650, color: "#94A3B8", marginTop: 2 }}>
+                {(s.fun != null ? s.fun + " fun" : "") + (s.buys != null ? " · " + s.buys + " buys" : "") + (s.wallets != null ? " · " + s.wallets + " wallets" : "")}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </aside>
+  );
+}
+function Hero(props: { top: number; fun: number; buys: number; bets: number; active: number; value: number }) {
   const chip = (s: string) => <span style={{ fontSize: 11, fontWeight: 600, padding: "4px 9px", borderRadius: 999, background: "rgba(255,255,255,0.12)" }}>{s}</span>;
   return (
-    <div style={{ borderRadius: 22, padding: 18, background: `linear-gradient(135deg, #1E1B4B 0%, ${BRAND} 50%, #F97316 100%)`, color: "#FFFFFF", boxShadow: "0 14px 36px rgba(76, 29, 149, 0.35)" }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, flexWrap: "wrap" }}>
-        <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: "0.14em" }}>ORCA · WHALE SIGNALS</div>
-        <span style={{ fontSize: 11, fontWeight: 700, padding: "4px 9px", borderRadius: 999, background: "rgba(255,255,255,0.16)" }}>Live · tap to scan</span>
-      </div>
-      <div style={{ fontSize: 26, lineHeight: "32px", fontWeight: 800, marginTop: 10 }}>Follow conviction. Verify everything.</div>
-      <div style={{ fontSize: 13, lineHeight: "18px", color: "rgba(255,255,255,0.82)", marginTop: 4 }}>Top {DATA.coverage.cappers} all-time sports whales · games that haven't started, next {DATA.settings.windowH} hours</div>
-      <div style={{ fontSize: 12, lineHeight: "17px", color: "rgba(255,255,255,0.78)", marginTop: 2 }}>Scanned {DATA.scannedAt} · Refreshed {DATA.refreshedAt || "not yet"}</div>
-      <ActionBar />
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 14 }}>
-        {stat(String(props.top), "TOP PICKS")}
-        {stat(String(props.fun), "FUN PICKS")}
-        {stat(String(props.buys), "RECENT BUYS")}
-        {stat(String(props.bets), "SPORTS BETS")}
-      </div>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 12 }}>
-        {chip("Top " + DATA.coverage.cappers + " whales · all-time")}
-        {chip(props.active + " with open bets")}
-        {chip(kMoney(props.value) + " in open bets")}
-        {chip((DATA.coverage.notOnKalshi || 0) + " not on Kalshi")}
-        {chip(DATA.coverage.hedgedExcluded + DATA.coverage.twoSidedExcluded + " hedges filtered")}
-        {chip("$" + DATA.settings.min + " min · " + DATA.settings.wallets + "+ wallets")}
+    <div>
+      <header className="ws-hero" data-header-actions="1">
+        <div className="ws-hero-row">
+          <div style={{ minWidth: 0, position: "relative", zIndex: 1 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 700, color: "#93C5FD" }}>
+              <span aria-hidden="true">📅</span>
+              <span>{formatLongDatePt()}</span>
+            </div>
+            <h1 className="ws-hero-title" style={{ fontSize: 34, fontWeight: 900, letterSpacing: "-0.03em", margin: "8px 0 0", lineHeight: 1.1 }}>Orca Whale Scanner</h1>
+            <div style={{ fontSize: 15, fontWeight: 600, color: "#94A3B8", marginTop: 6 }}>Kalshi whale picks, best first — public books and trade tape.</div>
+            <div style={{ fontSize: 12, fontWeight: 650, color: "#94A3B8", marginTop: 6 }}>{"Top " + DATA.coverage.cappers + " all-time sports whales · next " + DATA.settings.windowH + " hours"}</div>
+            <div style={{ fontSize: 12, fontWeight: 650, color: "#94A3B8", marginTop: 2 }}>{"Scanned " + DATA.scannedAt + " · Refreshed " + (DATA.refreshedAt || "not yet")}</div>
+          </div>
+          <div className="ws-hero-actions">
+            <ActionBar />
+          </div>
+        </div>
+        <div style={{ position: "relative", zIndex: 1, display: "flex", flexWrap: "wrap", gap: 6, marginTop: 12 }}>
+          {chip("Top " + DATA.coverage.cappers + " whales · all-time")}
+          {chip(props.active + " with open bets")}
+          {chip(kMoney(props.value) + " in open bets")}
+          {chip((DATA.coverage.notOnKalshi || 0) + " not on Kalshi")}
+          {chip((DATA.coverage.hedgedExcluded + DATA.coverage.twoSidedExcluded) + " hedges filtered")}
+          {chip("$" + DATA.settings.min + " min · " + DATA.settings.wallets + "+ wallets")}
+        </div>
+      </header>
+      <div className="ws-stats">
+        <DashStat label="Top picks" value={String(props.top)} sub="Best whale tickets" color="#2563EB" />
+        <DashStat label="Fun picks" value={String(props.fun)} sub="Longer shots" color="#0EA5E9" />
+        <DashStat label="Recent buys" value={String(props.buys)} sub="Fresh tape" color="#6366F1" />
+        <DashStat label="Sports bets" value={String(props.bets)} sub="Open books" color="#15803D" />
       </div>
     </div>
   );
@@ -6227,6 +6289,34 @@ export default function App() {
     <Page title="Orca Whale Scanner" summary="Kalshi whale picks, best first." record={tabRecord || undefined} caution={tabCaution || undefined}>
       <Hero top={top.length} fun={fun.length} buys={BUY_LINES.length} bets={BET_LINES.length} active={activeTraders.length} value={openValue} />
 
+      <div className="ws-tabs-flow" data-tab-bar="desktop">
+        <div className="ws-tabs">
+          <span className="ws-tabs-label">Today</span>
+          {[{ value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: eliteTabCount(now) }, { value: "hot", label: "Golden Picks", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }].map((t) => {
+            const on = tab === t.value;
+            return (
+              <button key={t.value} type="button" onClick={() => { setTab(t.value); setSportFilter(""); }} style={{ flex: "0 0 auto", display: "inline-flex", alignItems: "center", gap: 7, padding: "8px 14px", borderRadius: 999, border: "0", background: on ? "#1D4ED8" : "transparent", color: on ? "#FFFFFF" : "#BFDBFE", fontWeight: 800, fontSize: 14, cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap", touchAction: "manipulation" }}>
+                {t.label}
+                <span style={{ display: "inline-block", marginLeft: 2, padding: "1px 7px", borderRadius: 999, background: on ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.08)", color: on ? "#FFFFFF" : "#93C5FD", fontSize: 12 }}>{t.count}</span>
+              </button>
+            );
+          })}
+          <span className="ws-tabs-label">Long game</span>
+          {(() => {
+            const on = tab === "pe";
+            const count = peTabCount(now);
+            return (
+              <button type="button" onClick={() => { setTab("pe"); setSportFilter(""); }} style={{ flex: "0 0 auto", display: "inline-flex", alignItems: "center", gap: 7, padding: "8px 14px", borderRadius: 999, border: "0", background: on ? "#1D4ED8" : "transparent", color: on ? "#FFFFFF" : "#BFDBFE", fontWeight: 800, fontSize: 14, cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap", touchAction: "manipulation" }}>
+                Politics & Econ
+                <span style={{ display: "inline-block", marginLeft: 2, padding: "1px 7px", borderRadius: 999, background: on ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.08)", color: on ? "#FFFFFF" : "#93C5FD", fontSize: 12 }}>{count}</span>
+              </button>
+            );
+          })()}
+        </div>
+      </div>
+
+      <div className="ws-body">
+      <div className="ws-main">
       <Section heading="Bankroll and pick rules" caption={"Bankroll " + money(bankroll) + " · " + money(minP) + "+ positions · Top 20 needs " + minW + "+ whales" + (followed.length ? " · " + followed.length + " followed" : "") + (hidden.length ? " · " + hidden.length + " hidden" : "")} collapsible defaultOpen={false}>
         <Grid columns={3}>
           <Input label="Bankroll ($)" type="number" value={bankrollText} onChange={(v: string) => setBankroll(v)} />
@@ -6400,6 +6490,10 @@ export default function App() {
           </Section>
         </Section>
       )}
+
+      </div>
+      <ShellSide />
+      </div>
 
       <Floating edge="top" align="center" bar>
         <div data-tab-bar="1" style={{ padding: "6px 0 6px 10px" }}>
