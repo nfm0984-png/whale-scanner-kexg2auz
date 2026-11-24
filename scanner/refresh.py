@@ -458,6 +458,12 @@ try:
 except Exception as _e:
     print('proven picks failed:', _e)
 try:
+    import orca_lenses as _olr
+    _olr.refresh()
+    emb['orcaLenses'] = _olr.payload()
+except Exception as _e:
+    print('orca lenses failed:', _e, flush=True)
+try:
     import coming_up as _cu
     def _cu_px(tk):
         kn = kalshi_now(tk)

@@ -175,11 +175,18 @@ def _in_window(b, now, win_end):
         return True
     return _is_live(b, now)
 
+def _lens_skip(wallet):
+    try:
+        import orca_lenses as _ol
+        return _ol.skip(wallet)
+    except Exception:
+        return False
+
 def _uniq(rows):
     best = {}
     for b in rows:
         w = (b.get('wallet') or '').lower()
-        if not w:
+        if not w or _lens_skip(w):
             continue
         if w not in best or (b.get('cost') or 0) > (best[w].get('cost') or 0):
             best[w] = b
@@ -196,7 +203,15 @@ def _capper_roi(rec):
         return f['roi']
     return rec.get('roi')
 
+def _orca_flags(wallet):
+    try:
+        import orca_lenses as _ol
+        return _ol.flags(wallet)
+    except Exception:
+        return None
+
 def _backer(b, rec, sport_map):
+
     sport = sport_of(b.get('league'), sport_map)
     sr = ((rec or {}).get('sports') or {}).get(sport) or {}
     return dict(
@@ -217,6 +232,7 @@ def _backer(b, rec, sport_map):
         roi=_capper_roi(rec),
         wr=(rec or {}).get('wr'),
         elite=bool((rec or {}).get('proven')),
+        orca=_orca_flags(b.get('wallet')),
     )
 
 def _uniq(rows):
@@ -348,7 +364,7 @@ def market_labels(ctx, yes_lab=None, no_lab=None, title=None):
         or bool(re.search(r'[+-][\d.]+', (yes_lab or '') + ' ' + (no_lab or ''))) and not re.search(r'\bO/?U\s+', q, re.I)
     if is_spread:
         yes = contract.strip() if re.search(r'wins? by over', contract, re.I) else None
-        sm = re.match(r'Spread:\s*(.+?)\s*\((-?[\d.]+)\)', q)
+        sm = re.match(r'Spread:\s*(.+?)\s*\(([+-]?[\d.]+)\)', q)
         fav = _clean(sm.group(1)) if sm else None
         line = abs(float(sm.group(2))) if sm else None
         if line is None:
@@ -669,6 +685,73 @@ def _moneyline_title(src_market, event, game_title, src, peer=None):
         return _clean(game_title) + ' winner'
     return None
 
+def _wins_by_parse(title):
+    m = re.search(r'^(.*?)\s+wins by (?:over|more than)\s+([\d.]+)', (title or '').strip(), re.I)
+    if not m:
+        return None, None
+    return m.group(1).strip(), float(m.group(2))
+
+def _match_spread_market(markets, team, line):
+    if not markets or not team or line is None:
+        return None
+    hits = []
+    for m in markets:
+        title = (m.get('yes_sub_title') or m.get('title') or '').strip()
+        t, ln = _wins_by_parse(title)
+        fs = _kfp(m.get('floor_strike'))
+        if ln is None:
+            ln = fs
+        if ln is None or abs(ln - float(line)) > 0.06:
+            continue
+        name = t or re.sub(r'\s+wins by.*$', '', title, flags=re.I)
+        if _name_hit(team, name):
+            hits.append(m)
+    return hits[0] if hits else None
+
+def _rematch_spread_sides(sides, q, ev_ms):
+    """Point both sides at the favorite's Kalshi 'wins by over/more than N' contract.
+
+    Polymarket 'Spread: PSV (-1.5)' YES = PSV covers -1.5 = BUY YES on PSV wins by more than 1.5.
+    The NO side ('Real Madrid +1.5') is BUY NO on that same PSV contract, not on Real Madrid's line.
+    A plus line on the named team ('Spread: Real Madrid (+1.5)') inverts the YES/NO mapping.
+    """
+    sm = re.match(r'Spread:\s*(.+?)\s*\(([+-]?[\d.]+)\)', q or '', re.I)
+    if not sm or not ev_ms:
+        return False
+    named, raw = sm.group(1).strip(), float(sm.group(2))
+    line = abs(raw)
+    named_is_fav = raw <= 0
+    fav = named if named_is_fav else None
+    if not fav:
+        for m in ev_ms:
+            t, ln = _wins_by_parse(m.get('yes_sub_title') or m.get('title') or '')
+            if t and ln is not None and abs(ln - line) < 0.06 and not _name_hit(named, t):
+                fav = t
+                break
+    mkt = _match_spread_market(ev_ms, fav, line) if fav else None
+    if not mkt:
+        return False
+    title = mkt.get('yes_sub_title') or mkt.get('title') or ''
+    yes_ask, no_ask = _asks(mkt if (mkt.get('yes_ask_dollars') or mkt.get('no_ask_dollars')) else fetch_market(mkt.get('ticker')))
+    invert = not named_is_fav
+    for s in sides:
+        poly_no = (s.get('side') or '').lower() == 'no'
+        want_yes = (not poly_no) if not invert else poly_no
+        s['ticker'] = mkt.get('ticker')
+        s['contract'] = title
+        s['action'] = 'BUY YES' if want_yes else 'BUY NO'
+        s['yesSubTitle'] = mkt.get('yes_sub_title')
+        s['noSubTitle'] = mkt.get('no_sub_title')
+        s['marketTitle'] = title
+        px = yes_ask if want_yes else no_ask
+        if px is not None:
+            apply_price(s, px)
+        if yes_ask is not None:
+            s['yesAsk'] = yes_ask
+        if no_ask is not None:
+            s['noAsk'] = no_ask
+    return True
+
 def complete_sides(sides, kind='other', game_title='', q=''):
     """Copy the matched Kalshi market onto the empty side and attach the real complementary ask."""
     sides = [dict(s or {}) for s in (sides or [])]
@@ -684,6 +767,14 @@ def complete_sides(sides, kind='other', game_title='', q=''):
     ev_tk = event_ticker_of(ticker, market)
     ev = fetch_event(ev_tk) if ev_tk else None
     ev_ms = fetch_event_markets(ev_tk) if ev_tk else []
+    if (kind or '').lower() == 'spread' or re.match(r'Spread:', q or '', re.I):
+        if _rematch_spread_sides(sides, q, ev_ms):
+            src = next((s for s in sides if s.get('ticker') and s.get('action')), src)
+            ticker = src.get('ticker')
+            market = fetch_market(ticker) if ticker else market
+            ev_tk = event_ticker_of(ticker, market) or ev_tk
+            ev = fetch_event(ev_tk) if ev_tk else ev
+            ev_ms = fetch_event_markets(ev_tk) if ev_tk else ev_ms
     yes, no = _asks(market)
     two_contract = (kind or '').lower() == 'moneyline' and not _binary_market(kind, src.get('contract'), q)
     team_for = {}

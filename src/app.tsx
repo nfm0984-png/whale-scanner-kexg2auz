@@ -45,7 +45,7 @@ interface KalshiCappersData {
 interface HotCapper { wallet: string; name: string; w7: number; l7: number; n7: number; wr7: number; pnl7: number; w30: number; l30: number; pnl30: number }
 interface HotWeekData { ts?: number; cappers?: HotCapper[]; games?: ComingGame[] }
 interface ScanData { scannedAt: string; ts: number; secs: number; settings: { cappers: number; min: number; wallets: number; markets: number; windowH: number }; coverage: { cappers: number; qualified: number; golden: number; marketsFound: number; marketsInWindow: number; marketsScanned: number; hedgedExcluded: number; twoSidedExcluded: number; walletsLoaded: number; positionsLoaded: number; bets: number; buysRaw: number; buys: number; orcaCalls: number; orcaErrors: string[]; kalshiSeries: number; kalshiMatched: number; espnLeagues: number; lb30?: { asOf: string | null; start: string | null; end: string | null; scanned: number; deepestRank: number; skippedNonSports: number; skippedNoPositions: number; endpoint?: string; params?: string }; lbAll?: { asOf: string | null; start: string | null; end: string | null; scanned: number; deepestRank: number; skippedNonSports: number; skippedNoPositions: number; endpoint?: string; params?: string }; notOnKalshi?: number }; signals: Pick[]; totalSignals: number; fun: Pick[]; totalFun: number; poly?: Pick[]; totalPoly?: number; glue?: Pick[]; totalGlue?: number; props?: Pick[]; totalProps?: number; longshots?: Pick[]; totalLongshots?: number; biggest?: Pick[]; totalBiggest?: number; upcoming?: Pick[]; totalUpcoming?: number; history: Hist[]; scans: Scan[]; buysC: Cols; betsC: Cols; tradersC: Cols; partNames: string[]; refreshedAt?: string; refreshTs?: number; capperHistory?: CapperHistory; capperSportRecords?: CapperSportRecords; provenPicks?: ProvenData; comingUp?: ComingGame[]; hotWeek?: HotWeekData;
-  missing_picks?: { wallet?: string; name?: string; q?: string; label?: string; cost?: number; reason?: string }[]; totalComingUp?: number; comingUpCappers?: number; kalshiCappers?: KalshiCappersData }
+  missing_picks?: { wallet?: string; name?: string; q?: string; label?: string; cost?: number; reason?: string }[]; totalComingUp?: number; comingUpCappers?: number; kalshiCappers?: KalshiCappersData; orcaLenses?: OrcaLenses }
 interface BuyRaw { ts: number; firstTs: number; fills: number; wallet: string; name: string; wr: number | null; wpnl: number; top100: boolean; rank: number | null; golden: boolean; q: string; side: string; label: string; kind: string; league: string; price: number | null; now: number | null; usd: number; shares: number | null; posCost: number; hedged: boolean; agree60: number; agreeAll: number; score: number; parts: number[]; kAct: string | null; kPrice: number | null; kContract: string | null; kEdge: number | null; kWhy: string | null; start: string; src: string; startTs: number | null; phase: string; gDetail: string; gScore: string; rank30?: number | null; rankAll?: number | null; gName?: string }
 interface BetRaw { firstTs: number | null; lastBuyTs: number | null; wallet: string; name: string; wr: number | null; resolved: number | null; cpnl: number; rank: number | null; golden: boolean; skill: boolean; top100: boolean; src: string; q: string; side: string; label: string; outcome: string; kind: string; league: string; shares: number | null; avg: number | null; now: number | null; cost: number; value: number | null; upnl: number | null; upct: number | null; consYes: number | null; consNo: number | null; agree60: number; agreeAll: number; score: number; parts: number[]; kAct: string | null; kPrice: number | null; kContract: string | null; kEdge: number | null; kWhy: string | null; start: string; src2: string; startTs: number | null; phase: string; gDetail: string; gScore: string; rank30?: number | null; rankAll?: number | null; gName?: string }
 interface Trader { wallet: string; name: string; rank: number; pnl: number; wr: number | null; resolved: number | null; wins: number | null; losses: number | null; pf: number | null; skill: boolean; golden: boolean; qualified: boolean; bets: number; value: number; lastTs: number | null; skillEdge: number | null; rank30?: number | null; sportsPct?: number | null; rankAll?: number | null; pnl30?: number | null }
@@ -85,6 +85,26 @@ const QMAP: Record<string, CapperRec> = (() => {
 const PROVEN: ProvenData | undefined = DATA.provenPicks;
 const HOT_W: Record<string, HotCapper> = (() => { const m: Record<string, HotCapper> = {}; ((DATA.hotWeek && DATA.hotWeek.cappers) || []).forEach((c: HotCapper) => { m[(c.wallet || "").toLowerCase()] = c; }); return m; })();
 const ELITE_W: Record<string, boolean> = (() => { const m: Record<string, boolean> = {}; ((PROVEN && PROVEN.elite) || []).forEach((e) => { m[(e.wallet || "").toLowerCase()] = true; }); return m; })();
+interface OrcaLenses { ts?: number; smart?: string[]; proven?: string[]; copyable?: string[]; niche?: string[]; flipper?: string[]; tiny?: string[]; missing?: string[] }
+interface OrcaFlag { proven: boolean; smart: boolean; copyable: boolean; niche: boolean; skip: boolean }
+const ORCA_W: Record<string, OrcaFlag> = (() => {
+  const m: Record<string, OrcaFlag> = {};
+  const L = (DATA.orcaLenses || {}) as OrcaLenses;
+  const flag = (w: string): OrcaFlag => { const k = (w || "").toLowerCase(); if (!m[k]) m[k] = { proven: false, smart: false, copyable: false, niche: false, skip: false }; return m[k]; };
+  (L.smart || []).forEach((w) => { flag(w).smart = true; });
+  (L.proven || []).forEach((w) => { flag(w).proven = true; });
+  (L.copyable || []).forEach((w) => { flag(w).copyable = true; });
+  (L.niche || []).forEach((w) => { flag(w).niche = true; });
+  (L.flipper || []).concat(L.tiny || []).forEach((w) => { flag(w).skip = true; });
+  return m;
+})();
+function orcaOf(wallet?: string | null): OrcaFlag { return ORCA_W[(wallet || "").toLowerCase()] || { proven: false, smart: false, copyable: false, niche: false, skip: false }; }
+function sideOrcaStats(backers: { wallet?: string | null }[] | undefined): { proven: number; lens: number; consensus: boolean } {
+  let proven = 0, lens = 0;
+  (backers || []).forEach((b) => { const o = orcaOf(b.wallet); if (o.proven) proven += 1; if (o.proven || o.smart || o.copyable || o.niche) lens += 1; });
+  return { proven, lens, consensus: proven >= 2 };
+}
+
 // Per-sport records (Noel, Nov 15): league code -> sport bucket (same mapping as scanner/backfill.py)
 const SPORT_MAP: Record<string, string> = (DATA.capperHistory && DATA.capperHistory.sportMap) || {};
 function sportOf(lg: string | null | undefined): string {
@@ -1780,12 +1800,15 @@ function resolveKalshiView(side: { label?: string | null; action?: string | null
     // Spread picks ("Raptors +3.5"): Kalshi lists one row per team and line, "X wins by over N points".
     // Backing T +N = No on the other team's row; backing T -N = Yes on T's own row. Team must match; never guess.
     const sp = backing.match(/^(.*?)\s*([+-])\s*(\d+(?:\.\d+)?)\s*(?:or better.*)?$/i);
-    if (sp && sp[1] && /wins by over/i.test(ev.markets.map((m: KMarketDisp) => m.yes_sub_title || "").join(" "))) {
+    const winsBy = /wins by (?:over|more than)/i;
+    if (sp && sp[1] && winsBy.test(ev.markets.map((m: KMarketDisp) => m.yes_sub_title || m.title || "").join(" "))) {
       const tName = sp[1].trim();
       const under = sp[2] === "+";
       const line = sp[3];
-      const rows = ev.markets.filter((m: KMarketDisp) => { const mm = (m.yes_sub_title || "").match(/^(.*?)\s+wins by over\s+(\d+(?:\.\d+)?)\s+points?/i); return !!mm && mm[2] === line; });
-      const hit = rows.filter((m: KMarketDisp) => { const team = ((m.yes_sub_title || "").match(/^(.*?)\s+wins by over/i) || ["", ""])[1]; const same = kalshiNameHit(tName, team); return under ? !same : same; })[0] || null;
+      const rowParse = (m: KMarketDisp) => (m.yes_sub_title || m.title || "").match(/^(.*?)\s+wins by (?:over|more than)\s+(\d+(?:\.\d+)?)\s*(?:points?|goals?)?/i);
+      const rows = ev.markets.filter((m: KMarketDisp) => { const mm = rowParse(m); return !!mm && mm[2] === line; });
+      // Team +N (underdog covering) = No on the *other* team's wins-by-over-N row, not on this team's.
+      const hit = rows.filter((m: KMarketDisp) => { const team = (rowParse(m) || ["", ""])[1]; const same = kalshiNameHit(tName, team); return under ? !same : same; })[0] || null;
       if (hit) {
         const px = under ? hit.no_ask : hit.yes_ask;
         if (px != null) return { backing, marketTitle, outcome: hit.yes_sub_title || backing, yesNo: under ? "No" : "Yes", price: px, ticker: hit.ticker, unmatched: false };
@@ -4477,8 +4500,21 @@ function splitGamesFront(games: ComingGame[]): { front: ComingGame[]; more: Comi
 }
 // Pick lists only show games that are live or start within 24 hours; later games stay on the capper cards in the Cappers tab.
 const PICK_WINDOW_SECS = 24 * 3600;
+function dropOrcaSkipBackers(games: ComingGame[]): ComingGame[] {
+  return games.map((g: ComingGame) => ({
+    ...g,
+    markets: (g.markets || []).map((m: ComingMarket) => {
+      const sides = (m.sides || []).map((s: ComingSide) => {
+        const keep = (s.backers || []).filter((b: ComingBacker) => !orcaOf(b.wallet).skip);
+        if (keep.length === (s.backers || []).length) return s;
+        return { ...s, backers: keep, cappers: keep.length, usd: keep.reduce((a: number, b: ComingBacker) => a + (b.cost || 0), 0), names: keep.map((b: ComingBacker) => b.name) };
+      }).filter((s: ComingSide) => (s.cappers || 0) > 0 || (s.backers || []).length > 0);
+      return { ...m, sides };
+    }).filter((m: ComingMarket) => (m.sides || []).length > 0),
+  })).filter((g: ComingGame) => (g.markets || []).length > 0);
+}
 function openSlateGames(eliteOnly: boolean, now: number, source?: ComingGame[], windowed: boolean = true): { games: ComingGame[]; log: CleanLog } {
-  const coming = asComingGames((source || DATA.comingUp || []) as ComingGame[]);
+  const coming = dropOrcaSkipBackers(asComingGames((source || DATA.comingUp || []) as ComingGame[]));
   let base: ComingGame[];
   if (!eliteOnly) base = coming.filter((g: ComingGame) => (g.capperCount || 0) > 0);
   else {
@@ -4740,6 +4776,17 @@ function PickFlags(props: { p: UPick }): React.ReactElement | null {
   const g = entryGapCents(p);
   if (g != null && g <= -FADE_CENTS) out.push(<span key="fd" data-fading="1" title="Kalshi price is 5c+ below what the cappers paid, so the market is moving against them. Ranked below non-fading picks." style={flagChip("#F1F5F9", "#475569", "#94A3B8")}>{"📉 Fading · " + Math.abs(g) + "¢ under entry"}</span>);
   else if (g != null && g >= FADE_CENTS) out.push(<span key="lt" data-late="1" title="Kalshi price is 5c+ above what the cappers paid. Label only; ranking unchanged." style={flagChip("#FFF7ED", "#9A3412", "#FB923C")}>{"⏰ You're late · +" + g + "¢ over entry"}</span>);
+  const oc = sideOrcaStats(p.backers);
+  if (oc.consensus) out.push(<span key="cs" data-consensus="1" title="Two or more OrcaLayer Proven-only cappers are on this side" style={flagChip("#ECFDF5", "#047857", "#34D399")}>{"Consensus · " + oc.proven + " proven"}</span>);
+  const lensChips: { key: string; label: string; title: string }[] = [];
+  (p.backers || []).forEach((b: UBacker) => {
+    const o = orcaOf(b.wallet);
+    if (o.proven && !lensChips.some((x) => x.key === "pr")) lensChips.push({ key: "pr", label: "Orca Proven", title: "Backed by an OrcaLayer Proven-only (Skill) capper" });
+    if (o.smart && !o.proven && !lensChips.some((x) => x.key === "sm")) lensChips.push({ key: "sm", label: "Smart", title: "Backed by an OrcaLayer Smart-only capper" });
+    if (o.copyable && !lensChips.some((x) => x.key === "cp")) lensChips.push({ key: "cp", label: "Copyable scale", title: "Backed by a Copyable scale + Sports capper (avg $50–$500, ROI 25%+)" });
+    if (o.niche && !lensChips.some((x) => x.key === "nc")) lensChips.push({ key: "nc", label: "Niche specialist", title: "Backed by a Niche specialist + Sports capper" });
+  });
+  lensChips.forEach((c) => out.push(<span key={c.key} data-orca-lens={c.key} title={c.title} style={flagChip("#F0FDFA", "#0F766E", "#5EEAD4")}>{c.label}</span>));
   return out.length ? <>{out}</> : null;
 }
 function rankedLists(all: UPick[]): { list: RankedCard[]; top: RankedCard[]; others: RankedCard[]; small: RankedCard[]; contested: RankedCard[]; total: number } {
@@ -4747,7 +4794,8 @@ function rankedLists(all: UPick[]): { list: RankedCard[]; top: RankedCard[]; oth
   // has under 10 settled bets (overall or in that sport) is capped and sorted below every proven
   // side. Price/hit% and profit cannot lift a thin sample. Proven opposition with a better
   // shrunk record heavily cuts the net. Contested stays in the same list with a badge.
-  const cards = topSlotsMoneyline(rankedCards(all).slice().sort((a: RankedCard, b: RankedCard) => (Number(isFadingPick(a.main)) - Number(isFadingPick(b.main))) || (Number(b.hasElite) - Number(a.hasElite)) || rankCmp(a, b)));
+  const orcaBoost = (c: RankedCard) => sideOrcaStats(c.main.backers);
+  const cards = topSlotsMoneyline(rankedCards(all).slice().sort((a: RankedCard, b: RankedCard) => (Number(isFadingPick(a.main)) - Number(isFadingPick(b.main))) || (Number(b.hasElite) - Number(a.hasElite)) || (Number(orcaBoost(b).consensus) - Number(orcaBoost(a).consensus)) || (orcaBoost(b).lens - orcaBoost(a).lens) || rankCmp(a, b)));
   const contested = cards.filter((c: RankedCard) => c.contested);
   return { list: cards, top: cards, others: [], small: [], contested, total: cards.length };
 }

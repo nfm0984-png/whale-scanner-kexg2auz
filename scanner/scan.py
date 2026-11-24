@@ -252,12 +252,26 @@ def parse(m):
     elif tail.startswith('total'):
         pass
     elif re.fullmatch(r'spread-(home|away)-\d+(pt\d+)?', tail):
-        sm = re.match(r'Spread:\s*(.+?)\s*\((-?[\d.]+)\)', q)
+        sm = re.match(r'Spread:\s*(.+?)\s*\(([+-]?[\d.]+)\)', q)
         side = 'home' if 'home' in tail else 'away'
-        fav = sm.group(1) if sm else '?'; line = abs(float(sm.group(2))) if sm else None
-        info.update(kind='spread', line=line, fav=fav, favcode=codes[1] if side == 'home' and len(codes) > 1 else codes[0],
-                    yes=f"{fav} -{line:g}", no=f"{fav} +{line:g} or better for the other side")
-        info['dogcode'] = codes[0] if info['favcode'] == codes[-1] else codes[-1]
+        # slug spread-home / spread-away names the team the Polymarket line is about (codes[0] = home).
+        named_code = codes[0] if side == 'home' or len(codes) < 2 else codes[1]
+        other_code = codes[1] if named_code == codes[0] and len(codes) > 1 else (codes[0] if len(codes) else named_code)
+        named = sm.group(1) if sm else '?'
+        raw_line = float(sm.group(2)) if sm else None
+        line = abs(raw_line) if raw_line is not None else None
+        named_is_fav = True if raw_line is None or raw_line <= 0 else False
+        fav = named if named_is_fav else None
+        favcode = named_code if named_is_fav else other_code
+        dogcode = other_code if named_is_fav else named_code
+        if named_is_fav:
+            yes = f"{named} -{line:g}" if line is not None else named
+            no = f"{named} +{line:g} or better for the other side" if line is not None else named
+        else:
+            yes = f"{named} +{line:g}" if line is not None else named
+            no = f"{named} -{line:g} or better for the other side" if line is not None else named
+        info.update(kind='spread', line=line, fav=fav or named, favcode=favcode, dogcode=dogcode,
+                    named=named, named_code=named_code, named_is_fav=named_is_fav, yes=yes, no=no)
     elif tail == '' and len(teams) == 2:
         info.update(kind='moneyline', yes=teams[0], no=teams[1])
     elif league in ESPORTS and re.fullmatch(r'game(\d+)', tail) and len(teams) == 2 and re.search(r'(?i)\b(map|game)\s*\d+\s*winner', q):
@@ -598,10 +612,22 @@ def kalshi(s):
     elif info['kind'] == 'spread':
         ev = find_event(spr, info)
         if not ev: return dict(status='none', why='No open Kalshi spread market for this game')
-        ms = ev[2]; fc = info['favcode'].upper()
-        cand = [x for x in ms if fp(x.get('floor_strike')) == info['line'] and (suffix(x).rstrip('0123456789') == fc or namematch(info['fav'], re.sub(r'\s+wins by over.*$', '', x.get('yes_sub_title') or '')))]
-        if not cand: return dict(status='none', why=f"No Kalshi line for {info['fav']} by over {info['line']:g}")
-        m = cand[0]; act = 'BUY YES' if s['side'] == 'yes' else 'BUY NO'; p = fp(m['yes_ask_dollars' if act == 'BUY YES' else 'no_ask_dollars'])
+        ms = ev[2]; fc = (info.get('favcode') or '').upper()
+        def spread_team(t):
+            return re.sub(r'\s+wins by (?:over|more than).*$', '', t or '', flags=re.I)
+        name_hits = [x for x in ms if fp(x.get('floor_strike')) == info['line'] and namematch(info.get('fav'), spread_team(x.get('yes_sub_title') or x.get('title') or ''))]
+        code_hits = [x for x in ms if fp(x.get('floor_strike')) == info['line'] and suffix(x).rstrip('0123456789') == fc]
+        cand = name_hits or code_hits
+        if not cand: return dict(status='none', why=f"No Kalshi line for {info.get('fav')} by over {info['line']:g}")
+        m = cand[0]
+        # Poly YES on a favorite (negative line) = BUY YES on that team's "wins by over N".
+        # Poly YES on a dog (positive line, e.g. Real Madrid +1.5) = BUY NO on the favorite's line.
+        invert = not info.get('named_is_fav', True)
+        if s['side'] == 'yes':
+            act = 'BUY NO' if invert else 'BUY YES'
+        else:
+            act = 'BUY YES' if invert else 'BUY NO'
+        p = fp(m['yes_ask_dollars' if act == 'BUY YES' else 'no_ask_dollars'])
     elif info['kind'] == 'prop':
         series = (KPROP.get(info['league']) or {}).get(info.get('stat'))
         if not series:
@@ -898,8 +924,24 @@ def phase(g, ts):
     if g.get('state') == 'in': return 'live'
     if ts and ts <= NOW: return 'live'
     return 'upcoming'
+# OrcaLayer lenses (Proven / Smart / Copyable scale / Niche specialist; skip flippers and tiny size).
+try:
+    import orca_lenses as _ol
+    _ol.refresh()
+    _OL_SKIP = {w for w in list(cappers) if _ol.skip(w)}
+    for w, c in cappers.items():
+        f = _ol.flags(w)
+        c['orca'] = f
+        if f.get('proven'):
+            c['skill_badge'] = c.get('skill_badge') or True
+    print('orca lenses skip %d flipper/tiny cappers of %d' % (len(_OL_SKIP), len(cappers)), flush=True)
+except Exception as _e:
+    print('orca lenses failed:', _e, flush=True)
+    _OL_SKIP = set()
 BETS, LEAN_BETS, two_sided, TSTAT = [], [], 0, {}
 for w, ps in POS.items():
+    if w in _OL_SKIP or (w or '').lower() in _OL_SKIP:
+        continue
     c = cappers.get(w) or {}
     sides = collections.defaultdict(set)
     for p in ps: sides[p.get('condition_id')].add(p.get('side'))
@@ -1026,7 +1068,7 @@ for (cid, side), bs in grp.items():
     avg = sum(b['cost'] * (b['avg'] or 0) for b in bs) / inv if inv else None
     f24 = sum(FLOW[(b['wallet'], cid, side)][0] for b in bs); f24o = sum(FLOW[(b['wallet'], cid, oside(side))][0] for b in opp)
     backers = [dict(wallet=b['wallet'], name=b['name'], cost=b['cost'], avg=b['avg'], wr=b['wr'], resolved=b['resolved'], pnl=b['cpnl'], rank=b['rank'], rankAll=b.get('rankAll') or (cappers.get(b['wallet']) or {}).get('rankAll'), rank30=b.get('rank30'),
-                    golden=b['golden'], skill=False, top100=True, first_ts=b['firstTs'], last_ts=b.get('lastTs'), trades=None,
+                    golden=b['golden'], skill=bool(b.get('skill') or (cappers.get(b['wallet']) or {}).get('skill_badge') or ((cappers.get(b['wallet']) or {}).get('orca') or {}).get('proven')), orca=(cappers.get(b['wallet']) or {}).get('orca') or {}, top100=True, first_ts=b['firstTs'], last_ts=b.get('lastTs'), trades=None,
                     buy24=round(FLOW[(b['wallet'], cid, side)][0]), sell24=round(FLOW[(b['wallet'], cid, side)][1]),
                     flow=('Buying more' if FLOW[(b['wallet'], cid, side)][0] > FLOW[(b['wallet'], cid, side)][1] else ('Trimming' if FLOW[(b['wallet'], cid, side)][1] > 0 else 'Holding'))) for b in sorted(bs, key=lambda x: (x.get('rank') or 999))]
     signals.append(dict(id=f"{cid}:{side}", market_id=b0['market_id'], condition_id=cid, question=b0['q'], slug=b0['slug'], side=side, label=b0['label'], info=b0['_info'],
@@ -1151,8 +1193,19 @@ def rank_key(s):
         net, cnt = (s.get('net') or 0), len(s['backers'])
     tier = _ch_rank.vet_tier(s.get('backers') or [], _QMAP, _lg(s)) if (_QMAP and _ch_rank) else 1
     s['vet_tier'] = tier
+    proven_n = 0; lens_n = 0
+    for b in (s.get('backers') or []):
+        oc = b.get('orca') or (cappers.get((b.get('wallet') or '').lower()) or {}).get('orca') or {}
+        if oc.get('proven') or b.get('skill'):
+            proven_n += 1
+        if oc.get('proven') or oc.get('smart') or oc.get('copyable') or oc.get('niche'):
+            lens_n += 1
+    s['orcaProven'] = proven_n
+    s['consensus'] = proven_n >= 2
+    s['orcaLens'] = lens_n
     # Vetting first (Noel, Nov 14): picks with a vetted 10+ sample backer, then vetted small sample, then unvetted.
-    return (tier, band, -backer_quality(s), -net, -(s.get('one_sided_share') or 0), -cnt, best_rank(s), -(s.get('score') or 0))
+    # Nov 24: 2+ Orca Proven cappers (consensus) and Copyable/Niche/Smart lenses bump the pick next.
+    return (tier, band, -int(s['consensus']), -lens_n, -backer_quality(s), -net, -(s.get('one_sided_share') or 0), -cnt, best_rank(s), -(s.get('score') or 0))
 for s in signals: annotate(s)
 signals.sort(key=rank_key)
 ONK = [s for s in signals if s['kalshi'].get('status') == 'ok']
@@ -1276,12 +1329,12 @@ def slim(s):
         score=s['score'], parts=s['parts'], price=round(s['price'], 3), avgEntry=round(s['avg_entry'], 3) if s['avg_entry'] else None,
         whales=len(s['backers']), invested=s['invested'], net=s['net'], oneSidedShare=round(share, 4) if share is not None else None,
         priceBand=s.get('price_band'), split=bool(s.get('split')), glue=bool(s.get('glue')), pricier=bool(s.get('pricier')),
-        overCents=s.get('over_cents'), pickId=s.get('pick_id'), strength=s.get('strength'), started=bool(s.get('started')),
+        overCents=s.get('over_cents'), pickId=s.get('pick_id'), strength=s.get('strength'), started=bool(s.get('started')), consensus=bool(s.get('consensus')), orcaProven=s.get('orcaProven') or 0, orcaLens=s.get('orcaLens') or 0,
         totalBackers=(s['side_count_all'] or None), golden=s['golden'], oppMoney=s['opp_money'], oppCount=s['opp_count'], oppQualified=s['opp_qualified'],
         fresh24=s['fresh24'], fresh24Opp=s['fresh24_opp'], sideAll=s['side_total_all'], sideCountAll=s['side_count_all'], oppAll=s['opp_total_all'], oppCountAll=s['opp_count_all'],
         hedgeAll=s['hedge_all'], game=s['game'], startTs=int(s.get('start_ts') or 0),
         backers=[dict(name=b['name'], cost=b['cost'], avg=round(b['avg'], 3) if b['avg'] else None, wr=b['wr'], resolved=b['resolved'], pnl=round(b['pnl'] or 0), rank=b['rank'],
-                      golden=b['golden'], skill=b['skill'], flow=b.get('flow'), buy24=b.get('buy24'), sell24=b.get('sell24'),
+                      golden=b['golden'], skill=b['skill'], orca=b.get('orca') or {}, flow=b.get('flow'), buy24=b.get('buy24'), sell24=b.get('sell24'),
                       sport=b.get('sport'), wallet=b['wallet'], top100=b.get('top100'), rankAll=b.get('rankAll'), rank30=b.get('rank30'), firstTs=b.get('first_ts'), lastTs=b.get('last_ts'), trades=b.get('trades')) for b in s['backers'][:10]],
         opposing=[dict(name=o['name'], wallet=o['wallet'], cost=o['cost'], avg=round(o['avg'], 3) if o.get('avg') else None, wr=o.get('wr'), qualified=o['qualified'], golden=o['golden'], rank=o.get('rank'), rankAll=o.get('rankAll'), rank30=o.get('rank30')) for o in sorted(s['opposing'], key=lambda o: -o['cost'])[:6]],
         kalshi={kk: vv for kk, vv in k.items()}, risks=s.get('risks', []))
@@ -1326,6 +1379,15 @@ for s in CONS[:8] + GLUE[:2] + FUN[:3] + POLY[:3] + PROPS[:3] + LONGSHOTS[:3] + 
 # ---------- 13. Page embed (wallets kept for Polymarket profile links) ----------
 for b_ in BETS: b_.pop('_info', None)
 emb = json.loads(json.dumps(out))
+try:
+    import orca_lenses as _ol2
+    if _ol2.state().get('ts'):
+        pass
+    else:
+        _ol2.refresh()
+    emb['orcaLenses'] = _ol2.payload()
+except Exception as _e:
+    print('orca lenses embed failed:', _e, flush=True)
 def kslim(k): return {kk: k.get(kk) for kk in ('status', 'why', 'action', 'price', 'contract', 'ticker', 'edge_vs_whales', 'slip', 'light', 'rule', 'yesAsk', 'noAsk', 'marketTitle', 'eventTitle', 'oppTicker', 'oppContract', 'oppAction', 'oppPrice', 'yesSubTitle', 'noSubTitle') if k.get(kk) is not None}
 for r_ in emb['bets'] + emb['buys']:
     r_['kalshi'] = kslim(r_['kalshi'])
