@@ -84512,7 +84512,10 @@
    "first_seen": 1795533939,
    "scans": 4,
    "first_score": 62,
-   "result": null
+   "result": null,
+   "ended": 1795557048,
+   "finalScore": "MNC 2 \u2013 NAP 2",
+   "active": false
   },
   "0x294fb3fd41ecfe86055c0a82128306af3c24546b65e550cb75f5f7fc17d8a0be:no": {
    "tier": "fun",
@@ -86412,7 +86415,11 @@
    "first_seen": 1795554674,
    "scans": 1,
    "first_score": 7,
-   "result": null
+   "result": "L",
+   "graded": 1795557048,
+   "ended": 1795557048,
+   "finalScore": "",
+   "active": false
   },
   "0x690ba820c68108090f03d087d89d76e8997cd1d1acd0e51affd36a398e9cc6bf:yes": {
    "tier": "fun",
@@ -86861,7 +86868,11 @@
    "first_seen": 1795554674,
    "scans": 1,
    "first_score": 44,
-   "result": null
+   "result": "W",
+   "graded": 1795557048,
+   "ended": 1795557048,
+   "finalScore": "",
+   "active": false
   },
   "0x68b454c2ae8f7b5abb241c138191cbbcc4d0167bdb324b9bbd0886bdf1c63bd7:no": {
    "tier": "biggest",
