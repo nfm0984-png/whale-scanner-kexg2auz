@@ -18,7 +18,7 @@ interface CapperHistory { minSample: number; updatedAt?: string; cappers: Capper
 interface ProvenRow { smallSample?: boolean; cn?: number | null; pid: string; wallet: string; name: string; league: string; sport: string; game: string; market: string; pick: string; opp: string; slug: string; startTs: number | null; start: string; cost: number; avg: number; now: number | null; usual: number | null; mult: number | null; kalshi: { action: string; price: number | null; ticker: string; contract?: string | null; src?: string; live?: boolean; yesAsk?: number | null; noAsk?: number | null; marketTitle?: string | null; eventTitle?: string | null; oppTicker?: string | null; oppContract?: string | null; oppAction?: string | null; oppPrice?: number | null } | null; sportRec: { w: number; l: number; n: number; roi: number | null }; f14?: { w: number; l: number; n: number; roi: number | null }; rec: number[]; roi: number | null; badge?: string; verdict: string; why: string[]; hedged?: boolean; inTop?: boolean; group?: ProvenRow[]; firstTs?: number | null; lastTs?: number | null; stale?: boolean; slip?: number | null }
 interface ProvenData { updatedAt: string; updatedTs: number; rule: string; splitGames?: string[]; elite: { wallet: string; name: string; rec: number[]; roi: number | null; wr?: number | null; sports?: { sport: string; w: number; l: number; n: number; roi: number }[]; f14?: { w: number; l: number; n: number; roi: number | null }; badge?: string; usual?: number | null; open?: number }[]; nearMiss?: { wallet: string; name: string; why: string[]; rec: number[]; roi: number | null }[]; picks: ProvenRow[]; counts: Record<string, number> }
 interface ComingBacker { wallet?: string; name: string; cost: number; avg?: number | null; lastTs?: number | null; buysOk?: boolean | null; buyTs?: number | null; buy3h?: number | null; buy24h?: number | null; sport?: string; sw?: number; sl?: number; sn?: number; sroi?: number | null; roi?: number | null; wr?: number | null; elite?: boolean }
-interface ComingSide { px?: number | null; id: string; side: string; label: string; kPrice: number | null; avgEntry: number | null; slip: number | null; action?: string | null; contract?: string | null; ticker?: string | null; marketTitle?: string | null; eventTitle?: string | null; yesAsk?: number | null; noAsk?: number | null; yesSubTitle?: string | null; noSubTitle?: string | null; oppTicker?: string | null; oppContract?: string | null; oppAction?: string | null; oppPrice?: number | null; cappers: number; usd: number; names?: string[]; backers?: ComingBacker[]; lastTs?: number | null }
+interface ComingSide { firstTs?: number | null; px?: number | null; id: string; side: string; label: string; kPrice: number | null; avgEntry: number | null; slip: number | null; action?: string | null; contract?: string | null; ticker?: string | null; marketTitle?: string | null; eventTitle?: string | null; yesAsk?: number | null; noAsk?: number | null; yesSubTitle?: string | null; noSubTitle?: string | null; oppTicker?: string | null; oppContract?: string | null; oppAction?: string | null; oppPrice?: number | null; cappers: number; usd: number; names?: string[]; backers?: ComingBacker[]; lastTs?: number | null }
 interface ComingMarket { id: string; kind: string; q?: string; sides: ComingSide[] }
 interface ComingGame { id: string; game: string; league: string; startTs: number; start: string; capperCount?: number; capperRoi?: number | null; state?: string | null; phase?: string | null; markets: ComingMarket[] }
 interface Scan { ts: number; signals: number; fun: number; poly?: number; glue?: number; props?: number; longshots?: number; biggest?: number; upcoming?: number; calls: number; cappers?: number; bets?: number; buys?: number; wallets?: number }
@@ -4719,12 +4719,35 @@ function topSlotsMoneyline(cards: RankedCard[]): RankedCard[] {
   cards.forEach((c: RankedCard) => { if (top.length < TOP_ML_SLOTS && isTopBetType(c.main)) top.push(c); });
   return top.concat(cards.filter((c: RankedCard) => top.indexOf(c) < 0));
 }
+// ---- Nov 23 (Noel): LIVE-added tag, Fading / You're late ----
+// Fading: Kalshi price is 5c+ BELOW the cappers' average entry -> sorts below every non-fading card.
+// You're late: 5c+ ABOVE their entry -> label only, no downrank. LIVE: first shown after the game started.
+const FADE_CENTS = 5;
+function entryGapCents(p: UPick): number | null {
+  const px = p.view ? p.view.price : null;
+  if (px == null || !(px > 0 && px < 1)) return null;
+  const avgs = (p.backers || []).filter((b: UBacker) => b.avg != null && (b.avg as number) > 0 && (b.avg as number) < 1).map((b: UBacker) => b.avg as number);
+  if (!avgs.length) return null;
+  return Math.round((px - avgs.reduce((a: number, x: number) => a + x, 0) / avgs.length) * 100);
+}
+function isFadingPick(p: UPick): boolean { const g = entryGapCents(p); return g != null && g <= -FADE_CENTS; }
+function addedAfterStart(p: UPick): boolean { return p.kind === "sports" && !!p.startTs && !!p.firstTs && (p.firstTs as number) > p.startTs; }
+const flagChip = (bg: string, fg: string, border: string): React.CSSProperties => ({ display: "inline-block", padding: "2px 9px", borderRadius: 999, background: bg, color: fg, border: "1.5px solid " + border, fontSize: 12, fontWeight: 850 });
+function PickFlags(props: { p: UPick }): React.ReactElement | null {
+  const p = props.p;
+  const out: React.ReactElement[] = [];
+  if (addedAfterStart(p)) out.push(<span key="la" data-live-added="1" title="This pick first showed up on the scanner after the game had started" style={flagChip("#FEE2E2", "#B91C1C", "#EF4444")}>{"LIVE · added after start"}</span>);
+  const g = entryGapCents(p);
+  if (g != null && g <= -FADE_CENTS) out.push(<span key="fd" data-fading="1" title="Kalshi price is 5c+ below what the cappers paid, so the market is moving against them. Ranked below non-fading picks." style={flagChip("#F1F5F9", "#475569", "#94A3B8")}>{"📉 Fading · " + Math.abs(g) + "¢ under entry"}</span>);
+  else if (g != null && g >= FADE_CENTS) out.push(<span key="lt" data-late="1" title="Kalshi price is 5c+ above what the cappers paid. Label only; ranking unchanged." style={flagChip("#FFF7ED", "#9A3412", "#FB923C")}>{"⏰ You're late · +" + g + "¢ over entry"}</span>);
+  return out.length ? <>{out}</> : null;
+}
 function rankedLists(all: UPick[]): { list: RankedCard[]; top: RankedCard[]; others: RankedCard[]; small: RankedCard[]; contested: RankedCard[]; total: number } {
   // One list of every qualifying game, best to worst. No top-15 cap. A side whose best capper
   // has under 10 settled bets (overall or in that sport) is capped and sorted below every proven
   // side. Price/hit% and profit cannot lift a thin sample. Proven opposition with a better
   // shrunk record heavily cuts the net. Contested stays in the same list with a badge.
-  const cards = topSlotsMoneyline(rankedCards(all).slice().sort((a: RankedCard, b: RankedCard) => (Number(b.hasElite) - Number(a.hasElite)) || rankCmp(a, b)));
+  const cards = topSlotsMoneyline(rankedCards(all).slice().sort((a: RankedCard, b: RankedCard) => (Number(isFadingPick(a.main)) - Number(isFadingPick(b.main))) || (Number(b.hasElite) - Number(a.hasElite)) || rankCmp(a, b)));
   const contested = cards.filter((c: RankedCard) => c.contested);
   return { list: cards, top: cards, others: [], small: [], contested, total: cards.length };
 }
@@ -4792,7 +4815,7 @@ function RecTiles(props: { recs: CapRecs; small?: boolean; avg?: boolean }) {
   );
 }
 interface PickBackerRow { wallet: string; name: string; cost: number; avg: number | null; buysOk?: boolean; buyTs?: number | null; buy3h?: number | null }
-interface PickGroup { key: string; view: KalshiView; game: ComingGame; label: string; backers: PickBackerRow[]; total: number; n: number; avgBet: number; avgEntry: number | null; live: boolean; startTs: number; front: boolean; best: boolean; mid?: string }
+interface PickGroup { firstTs?: number; key: string; view: KalshiView; game: ComingGame; label: string; backers: PickBackerRow[]; total: number; n: number; avgBet: number; avgEntry: number | null; live: boolean; startTs: number; front: boolean; best: boolean; mid?: string }
 function compiledGroups(games: ComingGame[], now: number): PickGroup[] {
   const by: Record<string, PickGroup> = {};
   const frontRows: { wallet: string; cost: number; day: string; key: string }[] = [];
@@ -4809,6 +4832,8 @@ function compiledGroups(games: ComingGame[], now: number): PickGroup[] {
         const gk = (view.ticker || raw.ticker || raw.id) + "|" + view.yesNo;
         if (!by[gk]) by[gk] = { key: gk, view, game: g, label: raw.label, backers: [], total: 0, n: 0, avgBet: 0, avgEntry: null, live, startTs: g.startTs || 0, front: false, best: false, mid: m.id };
         const grp = by[gk];
+        const sfs = raw.firstTs || 0;
+        if (sfs > 0 && (!grp.firstTs || sfs < grp.firstTs)) grp.firstTs = sfs;
         backers.forEach((b: ComingBacker) => {
           const w = (b.wallet || "").toLowerCase();
           if (!w || grp.backers.some((x) => x.wallet === w)) return;
@@ -5006,7 +5031,7 @@ const PE_CAP: Record<string, { rec?: { w: number; l: number } | null; best: stri
 const PE_CAT_LABEL: Record<string, string> = { politics: "Politics", economics: "Econ", finance: "Finance" };
 interface UBacker { wallet: string; name: string; cost: number; avg: number | null; tags: string[]; score: number; line: string; buysOk?: boolean; buyTs?: number | null; buy3h?: number | null }
 interface UPick { key: string; mid: string; kind: "sports" | "pe"; view: KalshiView; big: string; sub: string; league: string; gameId: string; startTs: number; settleTs: number; live: boolean; backers: UBacker[]; total: number; tags: string[]; score: number; entryNote: string | null; note: string | null; cmp?: SideCmp | null; fresh?: "fresh" | "hold" | null; freshTs?: number | null; slipTier?: "good" | "slight" | "much" | null }
-interface UPick { bt?: string }
+interface UPick { bt?: string; firstTs?: number }
 const BT_ORDER = ["Moneyline", "Spread", "Totals", "Both teams to score", "Player props", "Other"];
 function betTypeOf(ticker: string | null | undefined, label: string): string {
   const ser = ((ticker || "").split("-")[0] || "").toUpperCase();
@@ -5285,6 +5310,7 @@ function combinedPicks(now: number, peDays: number = 1, windowed: boolean = true
       p = by[g.key] = { key: g.key, mid: g.mid || "", kind: "sports", view: g.view, big: g.label || g.view.outcome, sub: g.game.game, league: g.game.league, gameId: g.game.id, startTs: g.game.startTs || 0, settleTs: g.game.startTs || 0, live: g.live, backers: [], total: 0, tags: [], score: 0, entryNote: g.avgEntry != null && g.view.price != null ? slipWords(slipCents(g.view.price, g.avgEntry), g.avgEntry) : null, note: null };
     }
     if (!p.bt) p.bt = betTypeOf(g.view.ticker, g.label || g.view.outcome || "");
+    if (g.firstTs && g.firstTs > 0 && (!p.firstTs || g.firstTs < p.firstTs)) p.firstTs = g.firstTs;
     g.backers.forEach((b: PickBackerRow) => {
       if (p!.backers.some((x: UBacker) => x.wallet === b.wallet)) return;
       const tags = [QMAP[b.wallet] && QMAP[b.wallet].proven ? "Proven" : "Tracked"].concat(tagsOfWallet(b.wallet).filter((x: string) => x !== "Politics-Econ"));
@@ -5486,6 +5512,7 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
           <span style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary }}>{p.league + " · " + (p.kind === "pe" ? settlesOn(p.settleTs, props.now) : (p.startTs ? ptTime(p.startTs) : "")) + (p.kind === "sports" && p.bt ? " · " + p.bt : "")}</span>
           {nInfo ? <NetPill net={nInfo} /> : null}
           {nInfo ? <ContestedBadge net={nInfo} /> : null}
+          <PickFlags p={p} />
         </div>
         <div data-ucard-big="1" style={{ fontSize: 22, lineHeight: "27px", fontWeight: 850, letterSpacing: "-0.01em", overflowWrap: "anywhere" }}>{p.big}</div>
         {p.sub ? <div style={{ fontSize: 14, lineHeight: "19px", fontWeight: 600, color: t.text.secondary, marginTop: 2, overflowWrap: "anywhere" }}>{p.sub}</div> : null}
@@ -5578,6 +5605,7 @@ function AltBet(props: { p: UPick; all?: UPick[]; now: number; hidePricePills?: 
         <span style={{ display: "inline-block", padding: "2px 9px", borderRadius: 999, background: "#E0E7FF", color: "#3730A3", fontSize: 13, fontWeight: 850 }}>{p.backers.length + " capper" + (p.backers.length === 1 ? "" : "s")}</span>
         {strongestTag(p.tags) ? <span style={{ display: "inline-block", padding: "1px 8px", borderRadius: 999, background: "#F3F4F6", color: "#4B5563", fontSize: 12, fontWeight: 800, border: "1px solid #9CA3AF" }}>{strongestTag(p.tags)}</span> : null}
         {props.all ? <NetPill net={netOf(p, props.all)} /> : null}
+        <PickFlags p={p} />
         {props.all ? <ContestedBadge net={netOf(p, props.all)} /> : null}
       </div>
       {boughtLineOf(p, props.now) ? <div style={{ fontSize: 12, fontWeight: 650, color: t.text.tertiary, marginTop: 4 }}>{boughtLineOf(p, props.now)}</div> : null}

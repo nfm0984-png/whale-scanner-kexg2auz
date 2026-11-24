@@ -20,6 +20,7 @@ tr = [[t.get(f) if not isinstance(t.get(f), float) else round(t[f], 2) for f in 
 d['buysC'] = {'f': BF, 'r': buys}; d['betsC'] = {'f': TF, 'r': bets}; d['tradersC'] = {'f': RF, 'r': tr}
 d['partNames'] = list((d['buys'] or d['bets'] or [{'parts': {}}])[0]['parts'].keys())
 del d['buys'], d['bets'], d['traders']
+d.pop('sideFirstSeen', None)  # stays in page_embed.json only (carry-forward map for first-seen stamps)
 # capperHistory stays on the page payload so records survive compact
 for s in d['signals'] + d['fun'] + (d.get('poly') or []) + (d.get('glue') or []) + (d.get('props') or []) + (d.get('longshots') or []) + (d.get('biggest') or []) + (d.get('upcoming') or []): s['kalshi'].pop('url', None); s['kalshi'].pop('occ', None)
 line = 'const DATA: ScanData = ' + json.dumps(d, separators=(',', ':'), ensure_ascii=False) + ';'

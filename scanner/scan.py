@@ -1357,6 +1357,15 @@ try:
     emb['missing_picks'] = _fp.check_missing(_fl_rows, emb['comingUp'], NOW)
     emb['totalComingUp'] = len(emb['comingUp'])
     try:
+        try:
+            _prev_emb = json.load(open(os.path.join(HERE, 'page_embed.json')))
+            _prev_fs = _prev_emb.get('sideFirstSeen') if isinstance(_prev_emb, dict) else None
+        except Exception:
+            _prev_fs = None
+        emb['sideFirstSeen'] = _cu.stamp_first_seen(emb['comingUp'], _prev_fs, NOW)
+    except Exception as _e:
+        print('first-seen stamp failed:', _e)
+    try:
         import hot_week as _hw
         emb['hotWeek'] = _hw.build(emb, NOW)
         _hot = _hw.hot_wallet_set(emb['hotWeek'])

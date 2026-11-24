@@ -477,6 +477,10 @@ try:
         emb['comingUp'] = _cu.refresh(emb.get('comingUp') or [], NOW, NOW + _fp.WINDOW_DAYS * 86400, kalshi_now=_cu_px)
     emb['totalComingUp'] = len(emb['comingUp'])
     try:
+        emb['sideFirstSeen'] = _cu.stamp_first_seen(emb['comingUp'], emb.get('sideFirstSeen'), NOW)
+    except Exception as _e:
+        print('first-seen stamp failed:', _e)
+    try:
         import hot_week as _hw
         emb['hotWeek'] = _hw.build(emb, NOW)
         _hot = _hw.hot_wallet_set(emb['hotWeek'])

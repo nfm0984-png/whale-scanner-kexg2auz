@@ -896,3 +896,30 @@ def refresh(games, now, win_end, kalshi_now=None):
     except Exception as _e:
         print('drop_finished failed:', _e)
     return out
+
+
+def stamp_first_seen(games, prev_map, now, keep_days=4):
+    """Nov 23 (Noel): stamp each Coming Up side with when the scanner first showed it (side['firstTs']).
+
+    prev_map is the previous run's {side id: first ts}. None means no history yet (first deploy):
+    sides seen then are stored as 0 = unknown so they never get a false 'LIVE · added after start' tag.
+    Returns the updated map (entries older than keep_days dropped).
+    """
+    seed = prev_map is None
+    fs = dict(prev_map or {})
+    for g in games or []:
+        for m in g.get('markets') or []:
+            for sd in m.get('sides') or []:
+                sid = sd.get('id')
+                if not sid or not (sd.get('backers') or []):
+                    continue
+                if sid not in fs:
+                    fs[sid] = 0 if seed else int(now)
+                sd['firstTs'] = int(fs[sid] or 0)
+    live_ids = {sd.get('id') for g in games or [] for m in g.get('markets') or [] for sd in m.get('sides') or []}
+    cut = now - keep_days * 86400
+    out = {}
+    for k, v in fs.items():
+        if k in live_ids or (v and v >= cut):
+            out[k] = v
+    return out
