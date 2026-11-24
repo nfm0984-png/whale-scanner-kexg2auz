@@ -4710,12 +4710,21 @@ function rankedCards(all: UPick[]): RankedCard[] {
 function cardProven(c: RankedCard): boolean { return sideHasProven(c.main.backers, c.main.kind === "sports" ? c.main.league : null); }
 // Proven sides (best capper has 10+ settled bets) always sort above thin-sample sides. Then net score.
 const rankCmp = (a: RankedCard, b: RankedCard): number => (Number(cardProven(b)) - Number(cardProven(a))) || (b.net.net - a.net.net) || (b.net.raw - a.net.raw) || (b.net.own.cappers - a.net.own.cappers) || (b.net.own.rec.w - a.net.own.rec.w) || (a.startTs - b.startTs);
+// P1b (Noel Nov 23): cards with an elite capper on the main pick rank above cards without one, and the
+// top 3 slots go to moneyline / "other" cards only (spreads & totals start at #4). Nothing is removed.
+function isTopBetType(p: UPick): boolean { const bt = p.bt || betTypeOf(p.view.ticker, p.big || ""); return bt === "Moneyline" || bt === "Other"; }
+const TOP_ML_SLOTS = 3;
+function topSlotsMoneyline(cards: RankedCard[]): RankedCard[] {
+  const top: RankedCard[] = [];
+  cards.forEach((c: RankedCard) => { if (top.length < TOP_ML_SLOTS && isTopBetType(c.main)) top.push(c); });
+  return top.concat(cards.filter((c: RankedCard) => top.indexOf(c) < 0));
+}
 function rankedLists(all: UPick[]): { list: RankedCard[]; top: RankedCard[]; others: RankedCard[]; small: RankedCard[]; contested: RankedCard[]; total: number } {
   // One list of every qualifying game, best to worst. No top-15 cap. A side whose best capper
   // has under 10 settled bets (overall or in that sport) is capped and sorted below every proven
   // side. Price/hit% and profit cannot lift a thin sample. Proven opposition with a better
   // shrunk record heavily cuts the net. Contested stays in the same list with a badge.
-  const cards = rankedCards(all).slice().sort(rankCmp);
+  const cards = topSlotsMoneyline(rankedCards(all).slice().sort((a: RankedCard, b: RankedCard) => (Number(b.hasElite) - Number(a.hasElite)) || rankCmp(a, b)));
   const contested = cards.filter((c: RankedCard) => c.contested);
   return { list: cards, top: cards, others: [], small: [], contested, total: cards.length };
 }
@@ -4944,6 +4953,8 @@ function goldenHitOk(p: UPick, all: UPick[]): boolean {
   if (px == null || p.view.unmatched || !p.view.yesNo) return false;
   if (px < GOLDEN_MIN_PX || px > GOLDEN_MAX_PX) return false;
   if (kalshiPayout(p) > GOLDEN_MAX_PAYOUT) return false;
+  // P3 (Noel Nov 23): moneyline / "other" only — Golden totals & spreads went 3-6 in the Nov 16–23 backtest.
+  if (!isTopBetType(p)) return false;
   if (!p.backers.some((b: UBacker) => eliteCapper(b.wallet) && !isThinCapper(b.wallet, p.league))) return false;
   const oppPicks = oppositeOf(p, all);
   if (oppPicks.length) {
@@ -5598,7 +5609,11 @@ function GameBlock(props: { u: { id: string; picks: UPick[] }; now: number; stak
   const [open, setOpen] = useState(false);
   const picks = props.u.picks[0].kind === "pe" ? props.u.picks : bestPickFirst(props.u.picks, props.all);
   const main = picks[0];
-  const rest = picks.slice(1);
+  const [openUnproven, setOpenUnproven] = useState(false);
+  // P2 (Noel Nov 23): side picks with no elite capper fold under "More picks (unproven)". Nothing is deleted.
+  const allRest = picks.slice(1);
+  const rest = allRest.filter((q: UPick) => q.kind === "pe" || q.backers.some((b: UBacker) => eliteCapper(b.wallet)));
+  const unproven = allRest.filter((q: UPick) => rest.indexOf(q) < 0);
   const groups = BT_ORDER.map((bt: string) => ({ bt, picks: rest.filter((q: UPick) => (q.kind === "pe" ? "Other" : (q.bt || "Other")) === bt) })).filter((g) => g.picks.length);
   const net = props.net || (props.all ? netOf(main, props.all) : undefined);
   const contested = !!(net && net.contested && props.rankNo);
@@ -5614,6 +5629,17 @@ function GameBlock(props: { u: { id: string; picks: UPick[] }; now: number; stak
               {g.picks.map((q: UPick) => <AltBet key={q.key} p={q} all={props.all} now={props.now} hidePricePills={props.hideStake} />)}
             </div>
           ))}
+        </div>
+      ) : null}
+      {unproven.length ? (
+        <div data-unproven="1" style={{ margin: "2px 0 10px 10px" }}>
+          <button type="button" onClick={() => setOpenUnproven(!openUnproven)} style={{ padding: "6px 12px", borderRadius: 999, border: "1.5px solid #CBD5E1", background: "#F8FAFC", color: "#475569", fontWeight: 800, fontSize: 13, cursor: "pointer", fontFamily: "inherit" }}>{(openUnproven ? "Hide" : "More picks (unproven)") + " · " + unproven.length}</button>
+          {openUnproven ? (
+            <div style={{ marginTop: 6, paddingLeft: 8, borderLeft: "3px solid #CBD5E1" }}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: "#64748B", margin: "4px 0 6px" }}>No elite capper on these. Side picks like this went 38.6% vs 45.7% implied in the Nov 16–23 backtest.</div>
+              {unproven.map((q: UPick) => <AltBet key={q.key} p={q} all={props.all} now={props.now} hidePricePills={props.hideStake} />)}
+            </div>
+          ) : null}
         </div>
       ) : null}
     </div>
