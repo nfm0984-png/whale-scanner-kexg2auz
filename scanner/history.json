@@ -71447,7 +71447,11 @@
    "first_seen": 1795382366,
    "scans": 12,
    "first_score": 21,
-   "result": null
+   "result": "W",
+   "graded": 1795492158,
+   "ended": 1795492158,
+   "finalScore": "NO 119 \u2013 PHX 123",
+   "active": false
   },
   "0x59492e0712e6608645920d038d1dbe24a161d0644028713cdbb40848564e020e:no": {
    "tier": "top",
@@ -76553,7 +76557,10 @@
    "first_seen": 1795447724,
    "scans": 7,
    "first_score": 24,
-   "result": null
+   "result": null,
+   "ended": 1795492158,
+   "finalScore": "NO 119 \u2013 PHX 123",
+   "active": false
   },
   "0xbfdbbfce25f73ad13c92460321a00518f7ac82b59b3ad06ef3430bc30b045fcf:yes": {
    "tier": "biggest",
@@ -80411,7 +80418,11 @@
    "first_seen": 1795484459,
    "scans": 2,
    "first_score": 30,
-   "result": null
+   "result": "W",
+   "graded": 1795492158,
+   "ended": 1795492158,
+   "finalScore": "",
+   "active": false
   },
   "0xde7486184dec0264fc5bd971ae491b3c280ee7da916131be85dbc98340e64b86:no": {
    "tier": "props",
@@ -81089,7 +81100,10 @@
    "first_seen": 1795490032,
    "scans": 1,
    "first_score": 31,
-   "result": null
+   "result": null,
+   "ended": 1795492158,
+   "finalScore": "NO 119 \u2013 PHX 123",
+   "active": false
   },
   "0x6f649c96f2dfd0c68bede1e0cfe642b1d9f0c07ec5fabfb4b4a0e7f9469da7b4:no": {
    "tier": "top",
@@ -81284,7 +81298,10 @@
    "first_seen": 1795490032,
    "scans": 1,
    "first_score": 32,
-   "result": null
+   "result": null,
+   "ended": 1795492158,
+   "finalScore": "NO 119 \u2013 PHX 123",
+   "active": false
   },
   "0xeeac63f9c9a68cb636c86c89cc5294600fce3d7888fb8750c52443739d429dbf:no": {
    "tier": "fun",
