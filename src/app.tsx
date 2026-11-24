@@ -4716,7 +4716,7 @@ function isTopBetType(p: UPick): boolean { const bt = p.bt || betTypeOf(p.view.t
 const TOP_ML_SLOTS = 3;
 function topSlotsMoneyline(cards: RankedCard[]): RankedCard[] {
   const top: RankedCard[] = [];
-  cards.forEach((c: RankedCard) => { if (top.length < TOP_ML_SLOTS && isTopBetType(c.main)) top.push(c); });
+  cards.forEach((c: RankedCard) => { if (top.length < TOP_ML_SLOTS && isTopBetType(c.main) && !isFadingPick(c.main)) top.push(c); });  // fading cards are never pulled up (Nov 23)
   return top.concat(cards.filter((c: RankedCard) => top.indexOf(c) < 0));
 }
 // ---- Nov 23 (Noel): LIVE-added tag, Fading / You're late ----
