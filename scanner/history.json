@@ -67038,7 +67038,11 @@
    "first_seen": 1795357060,
    "scans": 17,
    "first_score": 21,
-   "result": null
+   "result": "W",
+   "graded": 1795492457,
+   "ended": 1795492457,
+   "finalScore": "HOU 116 \u2013 LAC 104",
+   "active": false
   },
   "0x4673e011c1de8b070f60db8b92cd7290c6ad80327f4e443b1c7ef44910706213:yes": {
    "tier": "top",
@@ -76455,7 +76459,10 @@
    "first_seen": 1795447724,
    "scans": 7,
    "first_score": 36,
-   "result": null
+   "result": null,
+   "ended": 1795492457,
+   "finalScore": "HOU 116 \u2013 LAC 104",
+   "active": false
   },
   "0x7407ff20398b62240ede94742789c9d89251583252782609be240ef0fe624a6c:yes": {
    "tier": "fun",
@@ -81122,7 +81129,11 @@
    "first_seen": 1795490032,
    "scans": 1,
    "first_score": 32,
-   "result": null
+   "result": "W",
+   "graded": 1795492457,
+   "ended": 1795492457,
+   "finalScore": "",
+   "active": false
   },
   "0xeaa7e13b69440d028259ea2bebeb066c1035d20f4da616fcb2c41985df655f76:yes": {
    "tier": "top",
@@ -81453,7 +81464,11 @@
    "first_seen": 1795490032,
    "scans": 1,
    "first_score": 29,
-   "result": null
+   "result": "L",
+   "graded": 1795492457,
+   "ended": 1795492457,
+   "finalScore": "HOU 116 \u2013 LAC 104",
+   "active": false
   },
   "0x0646cd2350ca6129309e407a6ed5826b96a663fb0ead6142b474bbfcb706ca31:yes": {
    "tier": "poly",
@@ -81760,7 +81775,11 @@
    "first_seen": 1795490032,
    "scans": 1,
    "first_score": 35,
-   "result": null
+   "result": "L",
+   "graded": 1795492457,
+   "ended": 1795492457,
+   "finalScore": "HOU 116 \u2013 LAC 104",
+   "active": false
   },
   "0xb3e4ff3f18742b285c5130e830845623fce42040ba93eaa4728e3c06ca65d337:no": {
    "tier": "biggest",
