@@ -76807,7 +76807,10 @@
    "first_seen": 1795447724,
    "scans": 4,
    "first_score": 20,
-   "result": null
+   "result": null,
+   "ended": 1795492757,
+   "finalScore": "UVU 72 \u2013 SFA 77",
+   "active": false
   },
   "0x0d73aa16921860ab607736bc3e852c3f41df7a899c5d44b6989014af88eba507:yes": {
    "tier": "biggest",
@@ -80467,7 +80470,11 @@
    "first_seen": 1795484459,
    "scans": 2,
    "first_score": 20,
-   "result": null
+   "result": "L",
+   "graded": 1795492757,
+   "ended": 1795492757,
+   "finalScore": "",
+   "active": false
   },
   "0x5bff1981da831dca4bd4f62174835b86c260b59ac238981160feeb7b64c9a414:no": {
    "tier": "props",
