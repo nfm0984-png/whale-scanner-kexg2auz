@@ -76254,7 +76254,11 @@
    "first_seen": 1795447724,
    "scans": 22,
    "first_score": 24,
-   "result": null
+   "result": "W",
+   "graded": 1795578311,
+   "ended": 1795578311,
+   "finalScore": "WSH 116 \u2013 BOS 131",
+   "active": false
   },
   "0xfe6f58d4fa395aee480b05a7e9fb186603a067034a0db6159fc868f66450a77b:no": {
    "tier": "top",
@@ -87445,7 +87449,11 @@
    "first_seen": 1795554674,
    "scans": 6,
    "first_score": 20,
-   "result": null
+   "result": "L",
+   "graded": 1795578311,
+   "ended": 1795578311,
+   "finalScore": "",
+   "active": false
   },
   "0xd2e428281e6e4046e075056542105bf4965e7ad73a9f7a3bba4cae00bb0a3b7f:no": {
    "tier": "fun",
@@ -89020,7 +89028,11 @@
    "first_seen": 1795565270,
    "scans": 5,
    "first_score": 51,
-   "result": null
+   "result": "L",
+   "graded": 1795578311,
+   "ended": 1795578311,
+   "finalScore": "EDM 3 \u2013 VGK 5",
+   "active": false
   },
   "0x304279d718918b773a5091080095c6a448f87ba63fa0f977e907076ff0a6d660:yes": {
    "tier": "glue",
@@ -89039,7 +89051,11 @@
    "first_seen": 1795565270,
    "scans": 5,
    "first_score": 27,
-   "result": null
+   "result": "W",
+   "graded": 1795578311,
+   "ended": 1795578311,
+   "finalScore": "WSH 116 \u2013 BOS 131",
+   "active": false
   },
   "0x254bbc3ed773b412532280d12a7dde77421585b7c6ad006786ce28d325d4b33d:yes": {
    "tier": "biggest",
@@ -89421,7 +89437,11 @@
    "first_seen": 1795569627,
    "scans": 4,
    "first_score": 25,
-   "result": null
+   "result": "W",
+   "graded": 1795578311,
+   "ended": 1795578311,
+   "finalScore": "WSH 116 \u2013 BOS 131",
+   "active": false
   },
   "0xc855c0b6d43d109b650a5042dfd8185519428a42b4a39ddbae214cbfdb24de82:yes": {
    "tier": "fun",
@@ -89732,7 +89752,11 @@
    "first_seen": 1795569627,
    "scans": 4,
    "first_score": 55,
-   "result": null
+   "result": "L",
+   "graded": 1795578311,
+   "ended": 1795578311,
+   "finalScore": "",
+   "active": false
   },
   "0x6485845ec0c6ada8491381bc409b70b223a736d6c11678f9ee66cf7023fbab05:no": {
    "tier": "props",
@@ -90212,7 +90236,7 @@
    "first_score": 26,
    "result": "L",
    "graded": 1795572430,
-   "ended": 1795572430,
+   "ended": 1795578311,
    "finalScore": "FEY 0 \u2013 FCP 1",
    "active": false
   },
@@ -90880,7 +90904,10 @@
    "first_seen": 1795576957,
    "scans": 1,
    "first_score": 43,
-   "result": null
+   "result": null,
+   "ended": 1795578311,
+   "finalScore": "WSH 116 \u2013 BOS 131",
+   "active": false
   },
   "0x7016da593c8edf27e94ecb572d3c4caf9d27098b7cfcfdafc76e81e167696789:yes": {
    "tier": "poly",
