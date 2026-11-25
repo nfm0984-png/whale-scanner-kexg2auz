@@ -4815,21 +4815,14 @@ const rankCmp = (a: RankedCard, b: RankedCard): number => (Number(cardProven(b))
 // top 3 slots go to moneyline / "other" cards only (spreads & totals start at #4). Nothing is removed.
 function isTopBetType(p: UPick): boolean { const bt = p.bt || betTypeOf(p.view.ticker, p.big || ""); return bt === "Moneyline" || bt === "Other"; }
 const TOP_ML_SLOTS = 3;
-function isStartedCard(c: RankedCard, now: number): boolean {
-  if (c.main.live) return true;
-  const start = c.startTs || c.main.startTs || 0;
-  return !!(start && start <= now);
-}
-function topSlotsMoneyline(cards: RankedCard[], now: number): RankedCard[] {
+function topSlotsMoneyline(cards: RankedCard[]): RankedCard[] {
   const top: RankedCard[] = [];
-  // Fading, started, and You're-late cards are never pulled into the reserved top-3 moneyline slots (Nov 23/24).
-  cards.forEach((c: RankedCard) => { if (top.length < TOP_ML_SLOTS && isTopBetType(c.main) && !isFadingPick(c.main) && !isStartedCard(c, now) && !isLatePick(c.main)) top.push(c); });
+  cards.forEach((c: RankedCard) => { if (top.length < TOP_ML_SLOTS && isTopBetType(c.main) && !isFadingPick(c.main)) top.push(c); });  // fading cards are never pulled up (Nov 23)
   return top.concat(cards.filter((c: RankedCard) => top.indexOf(c) < 0));
 }
 // ---- Nov 23 (Noel): LIVE-added tag, Fading / You're late ----
-// Fading: Kalshi price is 5c+ BELOW the cappers' average entry -> sorts below non-fading cards in the same group.
-// Nov 24 (Noel): started (LIVE) games rank below all pregame picks. You're late (5c+ ABOVE entry)
-// also ranks below fair-price pregame picks; bigger lateness = lower. Labels stay. LIVE-added tag unchanged.
+// Fading: Kalshi price is 5c+ BELOW the cappers' average entry -> sorts below every non-fading card.
+// You're late: 5c+ ABOVE their entry -> label only, no downrank. LIVE: first shown after the game started.
 const FADE_CENTS = 5;
 function entryGapCents(p: UPick): number | null {
   const px = p.view ? p.view.price : null;
@@ -4839,43 +4832,6 @@ function entryGapCents(p: UPick): number | null {
   return Math.round((px - avgs.reduce((a: number, x: number) => a + x, 0) / avgs.length) * 100);
 }
 function isFadingPick(p: UPick): boolean { const g = entryGapCents(p); return g != null && g <= -FADE_CENTS; }
-function isLatePick(p: UPick): boolean { const g = entryGapCents(p); return g != null && g >= FADE_CENTS; }
-function lateCents(p: UPick): number { const g = entryGapCents(p); return g != null && g >= FADE_CENTS ? g : 0; }
-// Nov 24 (Noel): Ranked primary key is estimated hit chance — Kalshi implied prob (price)
-// blended with the capper's shrunk win rate. Consensus (2+ cappers, or 2+ Orca Proven)
-// weights the track record more. Stake is only a final tiebreak.
-function shrunkHitRate(w: number, n: number): number {
-  if (n <= 0) return 0.5;
-  return (w + 2) / (n + 4);
-}
-function backerHitRate(b: UBacker, p: UPick): { rate: number; n: number } {
-  const rec = p.kind === "pe" ? recWL(b.wallet, "pe") : recWLSport(b.wallet, p.league);
-  const n = rec ? (rec.w + rec.l) : 0;
-  if (n > 0) return { rate: shrunkHitRate(rec!.w, n), n };
-  return { rate: 0.5, n: 0 };
-}
-function hitProb(p: UPick): number {
-  const px = p.view && p.view.price != null ? p.view.price : null;
-  const market = px != null && px > 0 ? Math.min(Math.max(px, 0.01), 0.99) : 0.5;
-  const seen: Record<string, boolean> = {};
-  let rateW = 0, nTot = 0, nCaps = 0;
-  (p.backers || []).forEach((b: UBacker) => {
-    const k = (b.wallet || "").toLowerCase();
-    if (!k || seen[k]) return;
-    seen[k] = true;
-    const r = backerHitRate(b, p);
-    const ww = Math.max(r.n, 1);
-    rateW += r.rate * ww;
-    nTot += r.n;
-    nCaps += 1;
-  });
-  const capperRate = nCaps ? rateW / Math.max(nTot, nCaps) : 0.5;
-  const consensus = nCaps >= 2 || sideOrcaStats(p.backers).consensus;
-  const w = nTot / (nTot + (consensus ? 10 : 18));
-  const shift = Math.max(-0.08, Math.min(0.08, (capperRate - market) * w * 0.4));
-  return Math.min(0.99, Math.max(0.01, market + shift));
-}
-function estHitLabel(p: UPick): string { return Math.round(hitProb(p) * 100) + "% hit"; }
 function addedAfterStart(p: UPick): boolean { return p.kind === "sports" && !!p.startTs && !!p.firstTs && (p.firstTs as number) > p.startTs; }
 const flagChip = (bg: string, fg: string, border: string): React.CSSProperties => ({ display: "inline-block", padding: "2px 9px", borderRadius: 999, background: bg, color: fg, border: "1.5px solid " + border, fontSize: 12, fontWeight: 850 });
 function PickFlags(props: { p: UPick }): React.ReactElement | null {
@@ -4884,7 +4840,7 @@ function PickFlags(props: { p: UPick }): React.ReactElement | null {
   if (addedAfterStart(p)) out.push(<span key="la" data-live-added="1" title="This pick first showed up on the scanner after the game had started" style={flagChip("#FEE2E2", "#B91C1C", "#EF4444")}>{"LIVE · added after start"}</span>);
   const g = entryGapCents(p);
   if (g != null && g <= -FADE_CENTS) out.push(<span key="fd" data-fading="1" title="Kalshi price is 5c+ below what the cappers paid, so the market is moving against them. Ranked below non-fading picks." style={flagChip("#F1F5F9", "#475569", "#94A3B8")}>{"📉 Fading · " + Math.abs(g) + "¢ under entry"}</span>);
-  else if (g != null && g >= FADE_CENTS) out.push(<span key="lt" data-late="1" title="Kalshi price is 5c+ above what the cappers paid. Ranked below fair-price pregame picks; more late = lower." style={flagChip("#FFF7ED", "#9A3412", "#FB923C")}>{"⏰ You're late · +" + g + "¢ over entry"}</span>);
+  else if (g != null && g >= FADE_CENTS) out.push(<span key="lt" data-late="1" title="Kalshi price is 5c+ above what the cappers paid. Label only; ranking unchanged." style={flagChip("#FFF7ED", "#9A3412", "#FB923C")}>{"⏰ You're late · +" + g + "¢ over entry"}</span>);
   const oc = sideOrcaStats(p.backers);
   if (oc.consensus) out.push(<span key="cs" data-consensus="1" title="Two or more OrcaLayer Proven-only cappers are on this side" style={flagChip("#ECFDF5", "#047857", "#34D399")}>{"Consensus · " + oc.proven + " proven"}</span>);
   const lensChips: { key: string; label: string; title: string }[] = [];
@@ -4898,25 +4854,22 @@ function PickFlags(props: { p: UPick }): React.ReactElement | null {
   lensChips.forEach((c) => out.push(<span key={c.key} data-orca-lens={c.key} title={c.title} style={flagChip("#F0FDFA", "#0F766E", "#5EEAD4")}>{c.label}</span>));
   return out.length ? <>{out}</> : null;
 }
-function rankedLists(all: UPick[], now: number): { list: RankedCard[]; top: RankedCard[]; others: RankedCard[]; small: RankedCard[]; contested: RankedCard[]; total: number } {
+function rankedLists(all: UPick[]): { list: RankedCard[]; top: RankedCard[]; others: RankedCard[]; small: RankedCard[]; contested: RankedCard[]; total: number } {
   // One list of every qualifying game, best to worst. No top-15 cap. A side whose best capper
   // has under 10 settled bets (overall or in that sport) is capped and sorted below every proven
   // side. Price/hit% and profit cannot lift a thin sample. Proven opposition with a better
   // shrunk record heavily cuts the net. Contested stays in the same list with a badge.
-  // Started games sit below every pregame pick; You're-late sits below fair-price pregame (Nov 24).
-  // Hit chance is the primary sort inside each group. Forced top-3 moneyline/other slots
-  // would put a lower-hit ML above a higher-hit spread/total, so they are not applied.
-  // Bet type is only a tiebreak (ML/other ahead when hit % is equal).
-  const cards = rankedCards(all).slice().sort((a: RankedCard, b: RankedCard) => (Number(isStartedCard(a, now)) - Number(isStartedCard(b, now))) || (lateCents(a.main) - lateCents(b.main)) || (Number(isFadingPick(a.main)) - Number(isFadingPick(b.main))) || (hitProb(b.main) - hitProb(a.main)) || (Number(isTopBetType(b.main)) - Number(isTopBetType(a.main))) || ((b.main.total || 0) - (a.main.total || 0)) || (a.startTs - b.startTs));
+  const orcaBoost = (c: RankedCard) => sideOrcaStats(c.main.backers);
+  const cards = topSlotsMoneyline(rankedCards(all).slice().sort((a: RankedCard, b: RankedCard) => (Number(isFadingPick(a.main)) - Number(isFadingPick(b.main))) || (Number(b.hasElite) - Number(a.hasElite)) || (Number(orcaBoost(b).consensus) - Number(orcaBoost(a).consensus)) || (orcaBoost(b).lens - orcaBoost(a).lens) || rankCmp(a, b)));
   const contested = cards.filter((c: RankedCard) => c.contested);
   return { list: cards, top: cards, others: [], small: [], contested, total: cards.length };
 }
 function eliteTabCount(now: number): number {
-  return rankedLists(allTabPicks(now), now).total;
+  return rankedLists(allTabPicks(now)).total;
 }
 function EliteTab(props: { now: number }) {
   const all = allTabPicks(props.now);
-  const L = rankedLists(all, props.now);
+  const L = rankedLists(all);
   const unitOf = (c: RankedCard) => ({ id: c.id, picks: c.picks });
   const render = (c: RankedCard, i: number) => <GameBlock key={c.id} u={unitOf(c)} now={props.now} stake="" noun="game" all={all} rankNo={i + 1} rec={c.rec} cappers={c.cappers} net={c.net} hideStake={true} />;
   return (
@@ -5668,7 +5621,6 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
       <div style={{ padding: "12px 14px 12px" }}>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center", marginBottom: 6 }}>
           {props.rankNo ? <span data-card-no="1" style={{ display: "inline-block", minWidth: 26, textAlign: "center", padding: "2px 8px", borderRadius: 999, background: BRAND, color: "#FFFFFF", fontSize: 13, fontWeight: 900 }}>{"#" + props.rankNo}</span> : null}
-          {props.rankNo ? <span data-hit-pct="1" title="Estimated chance this hits: current Kalshi price, adjusted by the capper's graded win rate. More cappers on the same side counts as consensus." style={{ display: "inline-block", padding: "2px 9px", borderRadius: 999, background: "#ECFDF5", color: "#047857", border: "1.5px solid #10B981", fontSize: 12, fontWeight: 850 }}>{estHitLabel(p)}</span> : null}
           {p.live ? <Chip bg={RED} color="#FFFFFF">LIVE</Chip> : null}
           <span style={{ fontSize: 12, fontWeight: 700, color: t.text.tertiary }}>{p.league + " · " + (p.kind === "pe" ? settlesOn(p.settleTs, props.now) : (p.startTs ? ptTime(p.startTs) : "")) + (p.kind === "sports" && p.bt ? " · " + p.bt : "")}</span>
           {nInfo ? <NetPill net={nInfo} /> : null}
@@ -5808,7 +5760,7 @@ function GameBlock(props: { u: { id: string; picks: UPick[] }; now: number; stak
   const contested = !!(net && net.contested && props.rankNo);
   return (
     <div data-game-block={props.u.id} data-contested={contested ? "1" : undefined} style={contested ? { border: "2.5px solid #EA580C", borderRadius: 20, padding: "4px 8px 6px", background: "#FFF7ED", margin: "8px 0 12px" } : undefined}>
-      {props.showStart || props.rankNo || props.showHit ? <GameHeader p={main} now={props.now} rankNo={props.rankNo} rec={props.rec} cappers={props.cappers} net={net} hitLabel={props.showHit ? hitLabelOf(main) : (props.rankNo ? estHitLabel(main) : null)} /> : null}
+      {props.showStart || props.rankNo || props.showHit ? <GameHeader p={main} now={props.now} rankNo={props.rankNo} rec={props.rec} cappers={props.cappers} net={net} hitLabel={props.showHit ? hitLabelOf(main) : null} /> : null}
       <UCard p={main} opp={props.all ? oppositeOf(main, props.all) : undefined} now={props.now} stake={props.hideStake ? "" : props.stake} hideStake={props.hideStake} hidePricePills={props.hideStake} net={net} moreRow={rest.length ? <MoreBetsRow noun={props.noun} n={rest.length} open={open} onToggle={() => setOpen(!open)} /> : undefined} />
       {open && rest.length ? (
         <div data-game-more="1" style={{ marginLeft: 10, paddingLeft: 8, borderLeft: "3px solid " + BRAND, marginBottom: 10 }}>
@@ -5876,7 +5828,7 @@ function todayCard(all: UPick[], now: number): { picks: CardPick[]; total: numbe
   };
   const eligible = (p: UPick): boolean => p.kind === "sports" && !p.live && p.startTs > now && p.view.price != null && !!p.view.yesNo && !p.view.unmatched && payoutOf(p) < 3;
   // Uncontested games only, already in net-score order. For each game take the best-net pick that qualifies (under 3x, not contested); if the main pick pays 3x+ or is contested, the next-best uncontested under 3x is used.
-  const L = rankedLists(all, now);
+  const L = rankedLists(all);
   const order: RankedCard[] = L.top.concat(L.others, L.small);
   const rows: { p: UPick; n: number }[] = [];
   order.forEach((c: RankedCard) => {
@@ -5919,7 +5871,7 @@ function TodayCard(props: { all: UPick[]; now: number }) {
 }
 function CombinedList(props: { now: number; mode: "rank" | "start" }) {
   const picks = allTabPicks(props.now);
-  const L = rankedLists(picks, props.now);
+  const L = rankedLists(picks);
   const rankOf: Record<string, number> = {};
   L.list.forEach((c: RankedCard, i: number) => { rankOf[c.id] = i + 1; });
   const units = orderUnits(picks, props.mode);
