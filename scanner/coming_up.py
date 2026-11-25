@@ -558,6 +558,91 @@ def capper_quality_ok(rec, now, backer=None, stats=None):
     return True
 
 
+LAST20_MIN_WINS = 6
+LAST20_MIN_N = 6
+SPORT_MIN_N = 5
+MIN_PAYOUT = 1.2
+
+_SPORT_ALIAS = {
+    "CFB": "NCAAF", "NCAAF": "NCAAF", "CBB": "NCAAB", "CWBB": "NCAAB", "NCAAB": "NCAAB",
+    "ATP": "Tennis", "WTA": "Tennis", "ITF": "Tennis", "TENNIS": "Tennis",
+    "UFC": "UFC/MMA", "MMA": "UFC/MMA", "UFC/MMA": "UFC/MMA",
+    "EPL": "Soccer", "UCL": "Soccer", "UEL": "Soccer", "MLS": "Soccer", "SOCCER": "Soccer",
+}
+
+
+def _sport_fam(league):
+    u = (league or "").upper()
+    if not u:
+        return ""
+    return _SPORT_ALIAS.get(u) or (league or "")
+
+
+def capper_form_ok(rec, backer=None, stats=None):
+    rec = rec or {}
+    r = rec.get("last20") or {}
+    n = r.get("n") or 0
+    w = r.get("w") or 0
+    if not n:
+        return True
+    if n >= LAST20_MIN_N and w < LAST20_MIN_WINS:
+        if stats is not None:
+            stats.setdefault("droppedNames", set()).add(rec.get("name") or (backer or {}).get("name") or rec.get("wallet"))
+        return False
+    return True
+
+
+def capper_sport_ok(rec, backer=None, league=None, stats=None):
+    rec = rec or {}
+    sports = rec.get("sports") or rec.get("sportFamilies") or {}
+    if not sports:
+        return True
+    fam = _sport_fam(league or (backer or {}).get("sport") or "")
+    if not fam:
+        return True
+    row = sports.get(fam)
+    if not row:
+        for k, v in sports.items():
+            if (k or "").lower() == fam.lower():
+                row = v
+                break
+    if not row or (row.get("n") or 0) < SPORT_MIN_N:
+        return True
+    profit = _qnum(row.get("profit") if isinstance(row, dict) else None)
+    if profit is not None:
+        ok = profit > 0
+    else:
+        roi = _qnum(row.get("roi") if isinstance(row, dict) else None)
+        if roi is not None:
+            ok = roi > 0
+        else:
+            ok = (row.get("w") or 0) > (row.get("l") or 0)
+    if not ok and stats is not None:
+        stats.setdefault("droppedNames", set()).add(rec.get("name") or (backer or {}).get("name") or rec.get("wallet"))
+    return ok
+
+
+def capper_shown_ok(rec, now, backer=None, stats=None, league=None):
+    if not capper_quality_ok(rec, now, backer, stats):
+        return False
+    if not capper_form_ok(rec, backer, stats):
+        return False
+    if not capper_sport_ok(rec, backer, league, stats):
+        return False
+    return True
+
+
+def pick_payout_ok(side):
+    if not side:
+        return True
+    px = side.get("kPrice")
+    if px is None:
+        px = side.get("px") or side.get("price")
+    if not isinstance(px, (int, float)) or not (0 < px < 1):
+        return True
+    return (1.0 / px) >= MIN_PAYOUT - 1e-12
+
+
 def filter_quality_games(games, capper_history, now, log=print):
     """Drop failing cappers from sides; drop a pick/game if no qualifying capper remains."""
     recs = {}
@@ -575,9 +660,9 @@ def filter_quality_games(games, capper_history, now, log=print):
                 keep = []
                 for b in s.get("backers") or []:
                     rec = recs.get((b.get("wallet") or "").lower()) or {}
-                    if capper_quality_ok(rec, now, b, stats):
+                    if capper_shown_ok(rec, now, b, stats, league=g.get("league") or b.get("sport")):
                         keep.append(b)
-                if not keep:
+                if not keep or not pick_payout_ok(s):
                     continue
                 s = dict(s)
                 s["backers"] = keep

@@ -1,0 +1,55 @@
+name: Daily scorecard
+# Build yesterday's scanner-pick W-L and $ scorecard. GitHub Actions only.
+# 13:35 UTC = 6:35 AM PDT; 14:35 UTC = 6:35 AM PST. An in-job PT guard keeps DST correct.
+on:
+  schedule:
+    - cron: "35 13,14 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: whale-scorecard
+  cancel-in-progress: false
+jobs:
+  scorecard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: PT window
+        id: window
+        run: |
+          python3 - << 'PY'
+          import os
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          now = datetime.now(ZoneInfo("America/Los_Angeles"))
+          run = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch" or (now.hour == 6 and now.minute >= 30)
+          print("now", now.strftime("%a %b %-d %-I:%M %p PT"), "run", run)
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write("run=" + ("true" if run else "false") + "\n")
+          PY
+      - name: Build yesterday's scorecard
+        if: steps.window.outputs.run == 'true'
+        run: python3 scanner/scorecard.py
+      - name: Commit and push
+        if: steps.window.outputs.run == 'true'
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scorecard.json
+          if git diff --cached --quiet; then
+            echo "no scorecard change"
+            exit 0
+          fi
+          git commit -m "scorecard $(TZ=America/Los_Angeles date '+%a %b %-d %Y PT')"
+          git pull --rebase --autostash origin main
+          git push origin main

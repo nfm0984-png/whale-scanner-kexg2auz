@@ -140,6 +140,42 @@ function capperQualityOk(wallet: string | undefined, now: number, lastMap?: Reco
   if (last != null && last < now - QUALITY_SEVEN_SECS) return false;
   return true;
 }
+
+const LAST20_MIN_WINS = 6;
+const LAST20_MIN_N = 6;
+const SPORT_SAMPLE_N = 5;
+const MIN_PAYOUT = 1.2;
+function capperFormOk(wallet?: string | null): boolean {
+  const r = last20Of(wallet);
+  if (!r || !r.n) return true;
+  return !(r.n >= LAST20_MIN_N && r.w < LAST20_MIN_WINS);
+}
+function capperSportOk(wallet?: string | null, league?: string | null): boolean {
+  const rec = QMAP[(wallet || "").toLowerCase()];
+  const sports = rec && (rec.sports || rec.sportFamilies);
+  if (!sports || !Object.keys(sports).length) return true;
+  const fam = sportOf(league);
+  if (!fam || fam === "Other") return true;
+  const row = sports[fam] || (Object.keys(sports).map((k: string) => (k.toLowerCase() === fam.toLowerCase() ? sports[k] : null)).find(Boolean) as { w?: number; l?: number; n?: number; roi?: number | null; profit?: number } | undefined);
+  if (!row || !(row.n >= SPORT_SAMPLE_N)) return true;
+  const profit = qualityNum((row as { profit?: number }).profit);
+  if (profit != null) return profit > 0;
+  const roi = qualityNum(row.roi);
+  if (roi != null) return roi > 0;
+  return (row.w || 0) > (row.l || 0);
+}
+function capperShownOk(wallet: string | undefined, now: number, lastMap?: Record<string, number>, league?: string | null): boolean {
+  return capperQualityOk(wallet, now, lastMap) && capperFormOk(wallet) && capperSportOk(wallet, league);
+}
+function pickPayoutOk(p: { payout?: number | null; view?: { price?: number | null }; kPrice?: number | null; price?: number | null; px?: number | null; kind?: string } | null | undefined): boolean {
+  if (!p) return true;
+  if (p.kind && p.kind !== "sports") return true;
+  if (p.payout != null && p.payout > 0) return p.payout >= MIN_PAYOUT;
+  const px = (p.view && p.view.price != null) ? p.view.price : (p.kPrice != null ? p.kPrice : (p.price != null ? p.price : (p.px != null ? p.px : null)));
+  if (px == null || !(px > 0 && px < 1)) return true;
+  return (1 / px) >= MIN_PAYOUT;
+}
+
 const PROVEN: ProvenData | undefined = DATA.provenPicks;
 const HOT_W: Record<string, HotCapper> = (() => { const m: Record<string, HotCapper> = {}; ((DATA.hotWeek && DATA.hotWeek.cappers) || []).forEach((c: HotCapper) => { m[(c.wallet || "").toLowerCase()] = c; }); return m; })();
 const ELITE_W: Record<string, boolean> = (() => { const m: Record<string, boolean> = {}; ((PROVEN && PROVEN.elite) || []).forEach((e) => { m[(e.wallet || "").toLowerCase()] = true; }); return m; })();
@@ -4707,7 +4743,8 @@ function dropQualityBackers(games: ComingGame[], now: number): ComingGame[] {
     ...g,
     markets: (g.markets || []).map((m: ComingMarket) => {
       const sides = (m.sides || []).map((s: ComingSide) => {
-        const keep = (s.backers || []).filter((b: ComingBacker) => capperQualityOk(b.wallet, now, lastMap));
+        const keep = (s.backers || []).filter((b: ComingBacker) => capperShownOk(b.wallet, now, lastMap, g.league || b.sport));
+        if (!pickPayoutOk(s)) return { ...s, backers: [], cappers: 0, usd: 0, names: [] };
         if (keep.length === (s.backers || []).length) return s;
         return { ...s, backers: keep, cappers: keep.length, usd: keep.reduce((a: number, b: ComingBacker) => a + (b.cost || 0), 0), names: keep.map((b: ComingBacker) => b.name) };
       }).filter((s: ComingSide) => (s.cappers || 0) > 0 || (s.backers || []).length > 0);
@@ -4981,6 +5018,8 @@ function PickFlags(props: { p: UPick }): React.ReactElement | null {
   else if (g != null && g >= FADE_CENTS) out.push(<span key="lt" data-late="1" title="Kalshi price is 5c+ above what the cappers paid. Label only; ranking unchanged." style={flagChip("#FFF7ED", "#9A3412", "#FB923C")}>{"⏰ You're late · +" + g + "¢ over entry"}</span>);
   const oc = sideOrcaStats(p.backers);
   if (oc.consensus) out.push(<span key="cs" data-consensus="1" title="Two or more OrcaLayer Proven-only cappers are on this side" style={flagChip("#ECFDF5", "#047857", "#34D399")}>{"Consensus · " + oc.proven + " proven"}</span>);
+  const agreeN = (p.backers || []).length;
+  if (agreeN >= 2) out.push(<span key="ag" data-agree="1" title="Two or more cappers who pass the quality filter are on this pick. Label only; ranking unchanged." style={flagChip("#EEF2FF", "#3730A3", "#818CF8")}>{agreeN + " agree"}</span>);
   const lensChips: { key: string; label: string; title: string }[] = [];
   (p.backers || []).forEach((b: UBacker) => {
     const o = orcaOf(b.wallet);
@@ -5006,6 +5045,47 @@ function rankedLists(all: UPick[]): { list: RankedCard[]; top: RankedCard[]; oth
 function eliteTabCount(now: number): number {
   return rankedLists(allTabPicks(now)).total;
 }
+
+interface ScorecardPick { result?: string; pnl?: number | null; capper?: string; label?: string; q?: string; side?: string; ticker?: string; combo?: boolean }
+interface Scorecard { date?: string; label?: string; updatedAt?: string; w?: number; l?: number; pending?: number; pnl?: number | null; pnlNote?: string; pnlPartial?: boolean; picks?: ScorecardPick[] }
+function moneyAbs(n: number): string {
+  const a = Math.abs(n);
+  if (a >= 1000) return (a / 1000).toFixed(a >= 10000 ? 0 : 1).replace(/\.0$/, "") + "k";
+  return String(Math.round(a));
+}
+function ScorecardBlock(): React.ReactElement | null {
+  const [sc, setSc] = useState<Scorecard | null>(null);
+  useEffect(() => {
+    fetch("scorecard.json?t=" + Date.now()).then((r) => r.ok ? r.json() : null).then((d: Scorecard) => { if (d && (d.date || d.label)) setSc(d); }).catch(() => {});
+  }, []);
+  if (!sc) return null;
+  const w = sc.w || 0, l = sc.l || 0, pending = sc.pending || 0;
+  const pnl = sc.pnl;
+  const pnlStr = (pnl == null) ? "" : ((pnl >= 0 ? "+$" : "-$") + moneyAbs(pnl));
+  const heading = "Yesterday · " + w + "–" + l + (pending ? " · " + pending + " pending" : "") + (pnlStr ? " · " + pnlStr : "") + (sc.pnlPartial ? " (partial $)" : "");
+  return (
+    <Section heading={heading} caption={(sc.label || "Yesterday") + (sc.pnlNote ? " · " + sc.pnlNote : "") + (sc.updatedAt ? " · updated " + sc.updatedAt : "")}>
+      {(sc.picks || []).length === 0 ? <Text>No scanner picks started yesterday.</Text> : (
+        <div style={{ display: "flex", flexDirection: "column", gap: 4, marginTop: 6 }}>
+          {(sc.picks || []).map((row: ScorecardPick, i: number) => {
+            const res = row.result || "pending";
+            const title = row.label || row.q || row.ticker || row.capper || ("Pick " + (i + 1));
+            const who = row.capper || row.side || "";
+            const dol = row.pnl == null ? "" : ((row.pnl >= 0 ? "+$" : "-$") + moneyAbs(row.pnl));
+            const color = res === "W" ? "#047857" : res === "L" ? "#B91C1C" : "#64748B";
+            return (
+              <div key={i} style={{ display: "flex", justifyContent: "space-between", gap: 10, fontSize: 13, fontWeight: 700, color: "#0F172A" }}>
+                <span style={{ overflowWrap: "anywhere" }}><span style={{ color, fontWeight: 850, marginRight: 6 }}>{res}</span>{title}{who && title !== who ? " · " + who : ""}</span>
+                {dol ? <span style={{ color, flex: "none", fontVariantNumeric: "tabular-nums" }}>{dol}</span> : null}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </Section>
+  );
+}
+
 function EliteTab(props: { now: number }) {
   const all = allTabPicks(props.now);
   const L = rankedLists(all);
@@ -5015,10 +5095,13 @@ function EliteTab(props: { now: number }) {
     return <GameBlock key={c.id} u={{ id: c.id, picks }} now={props.now} stake="" noun="game" all={all} rankNo={i + 1} rec={c.rec} cappers={c.cappers} net={c.net} hideStake={true} />;
   };
   return (
+    <div>
+    <ScorecardBlock />
     <Section heading={"Ranked · " + L.total} caption="Best picks first · today in PT · after 7pm, + tomorrow">
       {L.total === 0 ? <EmptyState title="No ranked games right now" body={"No tracked capper has a $1,000+ pick with a Kalshi line right now. " + nextScanLabel(props.now) + "."} /> : null}
       {L.list.map((c: RankedCard, i: number) => render(c, i))}
     </Section>
+    </div>
   );
 }
 
@@ -5593,7 +5676,7 @@ function combinedPicks(now: number, peDays: number = 1, windowed: boolean = true
       p!.backers.push({ wallet: w, name: b.name, cost: b.cost, avg: b.avg != null ? b.avg : null, tags: ["Politics-Econ"].concat(tagsOfWallet(w).filter((x: string) => x !== "Politics-Econ")), score: capperScoreOf(w), line: peRecordLine(w, b) });
     });
   });
-  const out = Object.keys(by).map((k: string) => by[k]).map((p: UPick) => ({ ...p, backers: (p.backers || []).filter((b: UBacker) => capperQualityOk(b.wallet, now)) })).filter((p: UPick) => p.backers.length);
+  const out = Object.keys(by).map((k: string) => by[k]).map((p: UPick) => ({ ...p, backers: (p.backers || []).filter((b: UBacker) => capperShownOk(b.wallet, now, undefined, p.league)) })).filter((p: UPick) => p.backers.length && pickPayoutOk(p));
   out.forEach((p: UPick) => {
     p.backers.sort((a: UBacker, b: UBacker) => b.score - a.score);
     p.total = p.backers.reduce((a: number, b: UBacker) => a + b.cost, 0);
