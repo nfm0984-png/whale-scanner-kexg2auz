@@ -89884,7 +89884,10 @@
    "first_seen": 1795569627,
    "scans": 3,
    "first_score": 23,
-   "result": null
+   "result": null,
+   "ended": 1795579511,
+   "finalScore": "WSU 80 \u2013 SHSU 73",
+   "active": false
   },
   "0x34b4c1a2af3a1d0be46863bb6ebe9022dc2ac0f0214adf60c514feac9296d2f0:no": {
    "tier": "poly",
@@ -89903,7 +89906,10 @@
    "first_seen": 1795569627,
    "scans": 3,
    "first_score": 20,
-   "result": null
+   "result": null,
+   "ended": 1795579511,
+   "finalScore": "WSU 80 \u2013 SHSU 73",
+   "active": false
   },
   "0xc5944ce5d6c4c39f8df3e466b140a4723693444b85525b2a600cc111f79660f9:no": {
    "tier": "fun",
@@ -90802,7 +90808,11 @@
    "first_seen": 1795576957,
    "scans": 1,
    "first_score": 21,
-   "result": null
+   "result": "W",
+   "graded": 1795579511,
+   "ended": 1795579511,
+   "finalScore": "WSU 80 \u2013 SHSU 73",
+   "active": false
   },
   "0xee10be0394841a8fb2a9730e9209718c0367808d7b0a78306561c12986b5a8f5:no": {
    "tier": "fun",
