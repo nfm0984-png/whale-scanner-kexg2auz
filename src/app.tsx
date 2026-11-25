@@ -617,6 +617,21 @@ function Last20Dots(props: { wallet?: string | null; rec?: { dots: string; w: nu
     </div>
   );
 }
+const LAST20_PRIOR = 10;
+function last20Shrink(wallet?: string | null): number {
+  const r = last20Of(wallet);
+  if (!r || !r.n) return -1;
+  return (r.w + 0.5 * LAST20_PRIOR) / (r.n + LAST20_PRIOR);
+}
+function cardHotScore(c: { main?: { backers?: { wallet?: string | null }[] }; backers?: { wallet?: string | null }[] }): number {
+  const bs = (c.main && c.main.backers) || c.backers || [];
+  let best = -1;
+  bs.forEach((b) => { const s = last20Shrink(b.wallet); if (s > best) best = s; });
+  return best;
+}
+function sortBackersByLast20<T extends { wallet?: string | null }>(backers: T[]): T[] {
+  return backers.slice().sort((a: T, b: T) => last20Shrink(b.wallet) - last20Shrink(a.wallet));
+}
 function winShort(rec: CapperRec | undefined): string {
   if (!rec || !rec.win) return "";
   const w = rec.win;
@@ -4860,7 +4875,8 @@ function rankedLists(all: UPick[]): { list: RankedCard[]; top: RankedCard[]; oth
   // side. Price/hit% and profit cannot lift a thin sample. Proven opposition with a better
   // shrunk record heavily cuts the net. Contested stays in the same list with a badge.
   const orcaBoost = (c: RankedCard) => sideOrcaStats(c.main.backers);
-  const cards = topSlotsMoneyline(rankedCards(all).slice().sort((a: RankedCard, b: RankedCard) => (Number(isFadingPick(a.main)) - Number(isFadingPick(b.main))) || (Number(b.hasElite) - Number(a.hasElite)) || (Number(orcaBoost(b).consensus) - Number(orcaBoost(a).consensus)) || (orcaBoost(b).lens - orcaBoost(a).lens) || rankCmp(a, b)));
+  // Ranked: keep every pick; hotter shrunk last-20 (16-4 beats 3-0) first. Unknown/cold last-20 go lower. Existing keys stay as tiebreakers.
+  const cards = rankedCards(all).slice().sort((a: RankedCard, b: RankedCard) => (cardHotScore(b) - cardHotScore(a)) || (Number(isFadingPick(a.main)) - Number(isFadingPick(b.main))) || (Number(b.hasElite) - Number(a.hasElite)) || (Number(orcaBoost(b).consensus) - Number(orcaBoost(a).consensus)) || (orcaBoost(b).lens - orcaBoost(a).lens) || rankCmp(a, b));
   const contested = cards.filter((c: RankedCard) => c.contested);
   return { list: cards, top: cards, others: [], small: [], contested, total: cards.length };
 }
@@ -4871,7 +4887,10 @@ function EliteTab(props: { now: number }) {
   const all = allTabPicks(props.now);
   const L = rankedLists(all);
   const unitOf = (c: RankedCard) => ({ id: c.id, picks: c.picks });
-  const render = (c: RankedCard, i: number) => <GameBlock key={c.id} u={unitOf(c)} now={props.now} stake="" noun="game" all={all} rankNo={i + 1} rec={c.rec} cappers={c.cappers} net={c.net} hideStake={true} />;
+  const render = (c: RankedCard, i: number) => {
+    const picks = (c.picks || []).map((p: UPick) => ({ ...p, backers: sortBackersByLast20(p.backers || []) }));
+    return <GameBlock key={c.id} u={{ id: c.id, picks }} now={props.now} stake="" noun="game" all={all} rankNo={i + 1} rec={c.rec} cappers={c.cappers} net={c.net} hideStake={true} />;
+  };
   return (
     <Section heading={"Ranked · " + L.total} caption="Best picks first · today in PT · after 7pm, + tomorrow">
       {L.total === 0 ? <EmptyState title="No ranked games right now" body={"No tracked capper has a $500+ pick with a Kalshi line right now. " + nextScanLabel(props.now) + "."} /> : null}
