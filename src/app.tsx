@@ -5644,6 +5644,7 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
         {top.map((b: UBacker) => (
           <div key={b.wallet} data-ucard-rec={b.wallet} style={{ marginTop: 8 }}>
             <div style={{ fontSize: 14, lineHeight: "20px", fontWeight: 650, color: t.text.secondary, overflowWrap: "anywhere" }}>{backerCompactLine(b.wallet, b.name, p.kind === "sports" ? p.league : null)}</div>
+            <Last20Dots wallet={b.wallet} />
             {p.kind === "sports" ? <div style={{ marginTop: 4 }}><BestAtThisSport wallet={b.wallet} league={p.league} /></div> : null}
           </div>
         ))}
@@ -5662,6 +5663,7 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
                 <span><span style={{ fontSize: 16, fontWeight: 850, fontVariantNumeric: "tabular-nums" }}>{money(b.cost)}</span><span style={{ fontSize: 13, fontWeight: 700, color: t.text.secondary }}>{b.avg != null ? " @ " + cents(b.avg) : ""}</span></span>
               </div>
               <div style={{ fontSize: 13, fontWeight: 650, color: t.text.secondary }}>{b.line}</div>
+              <Last20Dots wallet={b.wallet} />
               {p.kind === "sports" ? <SportBreakdown wallet={b.wallet} league={p.league} /> : null}
               {PE_CAP[b.wallet] ? (
                 <div style={{ fontSize: 13, color: t.text.secondary, marginTop: 2 }}>{Object.keys(PE_CAP[b.wallet].cats).filter((c: string) => PE_CAP[b.wallet].cats[c].month || PE_CAP[b.wallet].cats[c].all).map((c: string) => PE_CAT_LABEL[c] + " " + signedK(PE_CAP[b.wallet].cats[c].month) + " mo · " + signedK(PE_CAP[b.wallet].cats[c].all) + " all").join("  |  ")}</div>
@@ -5726,6 +5728,7 @@ function AltBet(props: { p: UPick; all?: UPick[]; now: number; hidePricePills?: 
       {p.backers.map((b: UBacker) => (
         <div key={b.wallet} data-alt-capper={b.wallet} style={{ marginTop: 4 }}>
           <div style={{ fontSize: 13, lineHeight: "19px", fontWeight: 650, color: t.text.secondary, overflowWrap: "anywhere" }}>{backerCompactLine(b.wallet, b.name, p.kind === "sports" ? p.league : null)}</div>
+          <Last20Dots wallet={b.wallet} />
           {p.kind === "sports" ? <BestAtThisSport wallet={b.wallet} league={p.league} /> : null}
         </div>
       ))}
