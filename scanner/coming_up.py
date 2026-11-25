@@ -471,6 +471,154 @@ def _sort_key(g):
     roi = g.get('capperRoi')
     return (-n, -(roi if roi is not None else -999), g.get('startTs') or 10**12)
 
+
+QUALITY_SEVEN_SECS = 7 * 86400
+
+
+def _qnum(v):
+    try:
+        if v is None:
+            return None
+        return float(v)
+    except (TypeError, ValueError):
+        return None
+
+
+def _qts(v, now):
+    try:
+        n = float(v)
+    except (TypeError, ValueError):
+        return None
+    if n > 1e12:
+        n = n / 1000.0
+    if n < 1e9 or (now is not None and n > float(now) + 86400):
+        return None
+    return n
+
+
+def _win_pnl(rec, key):
+    w = (rec or {}).get("win") or {}
+    v = w.get(key)
+    if isinstance(v, dict):
+        return _qnum(v.get("pnl"))
+    return _qnum(v)
+
+
+def capper_quality_ok(rec, now, backer=None, stats=None):
+    """Keep unless all-time or year dollar PnL is negative, month dollar PnL is not positive, or there are no bets in 7 days.
+
+    Missing fields: keep the capper and count them on stats.
+    """
+    rec = rec or {}
+    backer = backer or {}
+    stats = stats if stats is not None else {}
+    wallet = (backer.get("wallet") or rec.get("wallet") or "").lower()
+
+    def miss(key):
+        seen = stats.setdefault("_seen_" + key, set())
+        if wallet and wallet in seen:
+            return
+        if wallet:
+            seen.add(wallet)
+        stats[key] = stats.get(key, 0) + 1
+
+    # Dollar PnL only — never W-L or scanner graded profit.
+    all_time = _win_pnl(rec, "all")
+    if all_time is None:
+        all_time = _qnum(rec.get("pnl"))
+        if all_time == 0:
+            all_time = None
+    year = _win_pnl(rec, "year")
+    if all_time is None and year is None:
+        miss("missingAllTime")
+    else:
+        if all_time is not None and all_time < 0:
+            stats.setdefault("droppedNames", set()).add(rec.get("name") or wallet)
+            return False
+        if year is not None and year < 0:
+            stats.setdefault("droppedNames", set()).add(rec.get("name") or wallet)
+            return False
+
+    month = _win_pnl(rec, "month")
+    if month is None:
+        month = _qnum(rec.get("pnl30"))
+    if month is None:
+        miss("missingMonth")
+    elif month <= 0:
+        stats.setdefault("droppedNames", set()).add(rec.get("name") or wallet)
+        return False
+
+    last = _qts(backer.get("lastTs") or backer.get("firstTs") or rec.get("lastTs")
+                or (rec.get("big") or {}).get("lastTs") or (rec.get("bf") or {}).get("ts"), now)
+    if last is None:
+        miss("missingLastBet")
+    elif now is not None and last < float(now) - QUALITY_SEVEN_SECS:
+        stats.setdefault("droppedNames", set()).add(rec.get("name") or wallet)
+        return False
+    return True
+
+
+def filter_quality_games(games, capper_history, now, log=print):
+    """Drop failing cappers from sides; drop a pick/game if no qualifying capper remains."""
+    recs = {}
+    for c in (capper_history or {}).get("cappers") or []:
+        w = (c.get("wallet") or "").lower()
+        if w:
+            recs[w] = c
+    stats = {}
+    out = []
+    for g in games or []:
+        markets = []
+        for m in g.get("markets") or []:
+            sides = []
+            for s in m.get("sides") or []:
+                keep = []
+                for b in s.get("backers") or []:
+                    rec = recs.get((b.get("wallet") or "").lower()) or {}
+                    if capper_quality_ok(rec, now, b, stats):
+                        keep.append(b)
+                if not keep:
+                    continue
+                s = dict(s)
+                s["backers"] = keep
+                s["cappers"] = len(keep)
+                s["usd"] = round(sum(b.get("cost") or 0 for b in keep))
+                s["names"] = [b.get("name") for b in keep]
+                sides.append(s)
+            if not sides:
+                continue
+            m = dict(m)
+            m["sides"] = sides
+            markets.append(m)
+        if not markets:
+            continue
+        wallets = {}
+        for m in markets:
+            for s in m.get("sides") or []:
+                for b in s.get("backers") or []:
+                    w = (b.get("wallet") or "").lower()
+                    if w:
+                        wallets[w] = b
+        g = dict(g)
+        g["markets"] = markets
+        g["capperCount"] = len(wallets)
+        out.append(g)
+    names = sorted(stats.get("droppedNames") or [])
+    miss_n = len(set().union(
+        stats.get("_seen_missingAllTime") or [],
+        stats.get("_seen_missingMonth") or [],
+        stats.get("_seen_missingLastBet") or [],
+    ))
+    log("quality filter: dropped %d cappers, kept %d with a missing field (all-time/year %d, month %d, last bet %d)%s" % (
+        len(names),
+        miss_n,
+        stats.get("missingAllTime") or 0,
+        stats.get("missingMonth") or 0,
+        stats.get("missingLastBet") or 0,
+        (": " + ", ".join(names[:20]) + ("..." if len(names) > 20 else "")) if names else "",
+    ))
+    return out
+
 def build(lean_bets, capper_history, now, win_end, proven=None, hot_override=None):
     """Return one card per upcoming game, both sides, ranked by capper count then ROI."""
     hot = hot_override if hot_override is not None else hot_wallets(capper_history, proven)
@@ -555,6 +703,10 @@ def build(lean_bets, capper_history, now, win_end, proven=None, hot_override=Non
         games = drop_finished(games, now)
     except Exception as _e:
         print('drop_finished failed:', _e)
+    try:
+        games = filter_quality_games(games, capper_history, now)
+    except Exception as _e:
+        print('quality filter failed:', _e)
     return games
 
 
@@ -954,7 +1106,7 @@ def drop_finished(games, now, log=print):
         log('finished games removed: %d: %s' % (len(dropped), '; '.join(dropped[:12])))
     return out
 
-def refresh(games, now, win_end, kalshi_now=None):
+def refresh(games, now, win_end, kalshi_now=None, capper_history=None):
     """Keep live (not final) and upcoming games; refresh Kalshi prices on each side."""
     out = []
     for g in games or []:
@@ -986,6 +1138,10 @@ def refresh(games, now, win_end, kalshi_now=None):
         out = drop_finished(out, now)
     except Exception as _e:
         print('drop_finished failed:', _e)
+    try:
+        out = filter_quality_games(out, capper_history or {}, now)
+    except Exception as _e:
+        print('quality filter failed:', _e)
     return out
 
 

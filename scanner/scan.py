@@ -1415,7 +1415,23 @@ try:
     _fl_w = set(_fp.floor_wallets(emb.get('capperHistory') or {}))
     _lean = [r_ for r_ in LEAN_BETS if (r_.get('wallet') or '').lower() not in _fl_ok] + _fl_rows
     CU_END = NOW + _fp.WINDOW_DAYS * 86400
+    # Copy already-pulled 30d leaderboard PnL and last trade time onto history so the quality filter can use them.
+    try:
+        _hist = emb.get('capperHistory') or {}
+        _by = {(c.get('wallet') or '').lower(): c for c in (_hist.get('cappers') or [])}
+        for _w, _c in (cappers or {}).items():
+            rec = _by.get((_w or '').lower())
+            if not rec:
+                continue
+            if rec.get('pnl30') is None and _c.get('pnl30') is not None:
+                rec['pnl30'] = _c.get('pnl30')
+            ts = _c.get('last_trade_ts') or _c.get('lastTs')
+            if ts and not rec.get('lastTs'):
+                rec['lastTs'] = ts
+    except Exception as _e:
+        print('quality field attach failed:', _e)
     emb['comingUp'] = _cu.build(_lean, emb.get('capperHistory') or {}, NOW, CU_END, proven=emb.get('provenPicks'))
+
     emb['missing_picks'] = _fp.check_missing(_fl_rows, emb['comingUp'], NOW)
     emb['totalComingUp'] = len(emb['comingUp'])
     try:

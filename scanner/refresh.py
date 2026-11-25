@@ -480,7 +480,7 @@ try:
         emb['missing_picks'] = _fp.check_missing(_fl_rows, emb['comingUp'], NOW)
     else:
         print('floor positions unavailable (%d of %d cappers read); re-pricing the previous Coming Up cards' % (len(_fl_ok), len(_fl_all)), flush=True)
-        emb['comingUp'] = _cu.refresh(emb.get('comingUp') or [], NOW, NOW + _fp.WINDOW_DAYS * 86400, kalshi_now=_cu_px)
+        emb['comingUp'] = _cu.refresh(emb.get('comingUp') or [], NOW, NOW + _fp.WINDOW_DAYS * 86400, kalshi_now=_cu_px, capper_history=emb.get('capperHistory') or {})
     emb['totalComingUp'] = len(emb['comingUp'])
     try:
         emb['sideFirstSeen'] = _cu.stamp_first_seen(emb['comingUp'], emb.get('sideFirstSeen'), NOW)

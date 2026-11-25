@@ -82,6 +82,64 @@ const QMAP: Record<string, CapperRec> = (() => {
   (((DATA.capperHistory && DATA.capperHistory.cappers) || []) as CapperRec[]).forEach((c: CapperRec) => { m[(c.wallet || "").toLowerCase()] = c; });
   return m;
 })();
+const TRADER_MAP: Record<string, Trader> = (() => {
+  const m: Record<string, Trader> = {};
+  TRADERS.forEach((t: Trader) => { if (t.wallet) m[t.wallet.toLowerCase()] = t; });
+  return m;
+})();
+const QUALITY_SEVEN_SECS = 7 * 86400;
+function qualityNum(v: unknown): number | null {
+  return typeof v === "number" && isFinite(v) ? v : null;
+}
+function qualityTs(v: unknown, now: number): number | null {
+  let n = typeof v === "number" && isFinite(v) ? v : null;
+  if (n == null) return null;
+  if (n > 1e12) n = n / 1000;
+  if (n < 1e9 || n > now + 86400) return null;
+  return n;
+}
+function whaleLastTsMap(now: number): Record<string, number> {
+  const m: Record<string, number> = {};
+  const bump = (wallet: string | undefined, ts: unknown) => {
+    const k = (wallet || "").toLowerCase();
+    const t = qualityTs(ts, now);
+    if (!k || t == null) return;
+    if (m[k] == null || t > m[k]) m[k] = t;
+  };
+  TRADERS.forEach((x: Trader) => bump(x.wallet, x.lastTs));
+  (((DATA.capperHistory && DATA.capperHistory.cappers) || []) as CapperRec[]).forEach((c: CapperRec) => {
+    bump(c.wallet, c.big && c.big.lastTs);
+    bump(c.wallet, c.bf && c.bf.ts);
+    bump(c.wallet, (c as CapperRec & { lastTs?: number }).lastTs);
+  });
+  ((DATA.comingUp || []) as ComingGame[]).forEach((g: ComingGame) => (g.markets || []).forEach((m: ComingMarket) => (m.sides || []).forEach((s: ComingSide) => (s.backers || []).forEach((b: ComingBacker) => bump(b.wallet, b.lastTs)))));
+  return m;
+}
+function capperQualityOk(wallet: string | undefined, now: number, lastMap?: Record<string, number>): boolean {
+  const w = (wallet || "").toLowerCase();
+  if (!w) return true;
+  const rec = QMAP[w];
+  const tr = TRADER_MAP[w];
+  const winPnl = (k: string): number | null => {
+    const v = rec && rec.win && rec.win[k];
+    return v && v.pnl != null ? qualityNum(v.pnl) : null;
+  };
+  // Dollar PnL only — never W-L or scanner graded profit.
+  let allTime = winPnl("all");
+  if (allTime == null) {
+    const tp = tr ? qualityNum(tr.pnl) : null;
+    if (tp != null && tp !== 0) allTime = tp;
+  }
+  const year = winPnl("year");
+  if (allTime != null && allTime < 0) return false;
+  if (year != null && year < 0) return false;
+  let month = winPnl("month");
+  if (month == null && tr && tr.pnl30 != null) month = qualityNum(tr.pnl30);
+  if (month != null && month <= 0) return false;
+  const last = (lastMap || whaleLastTsMap(now))[w];
+  if (last != null && last < now - QUALITY_SEVEN_SECS) return false;
+  return true;
+}
 const PROVEN: ProvenData | undefined = DATA.provenPicks;
 const HOT_W: Record<string, HotCapper> = (() => { const m: Record<string, HotCapper> = {}; ((DATA.hotWeek && DATA.hotWeek.cappers) || []).forEach((c: HotCapper) => { m[(c.wallet || "").toLowerCase()] = c; }); return m; })();
 const ELITE_W: Record<string, boolean> = (() => { const m: Record<string, boolean> = {}; ((PROVEN && PROVEN.elite) || []).forEach((e) => { m[(e.wallet || "").toLowerCase()] = true; }); return m; })();
@@ -623,14 +681,64 @@ function last20Shrink(wallet?: string | null): number {
   if (!r || !r.n) return -1;
   return (r.w + 0.5 * LAST20_PRIOR) / (r.n + LAST20_PRIOR);
 }
-function cardHotScore(c: { main?: { backers?: { wallet?: string | null }[] }; backers?: { wallet?: string | null }[] }): number {
-  const bs = (c.main && c.main.backers) || c.backers || [];
-  let best = -1;
-  bs.forEach((b) => { const s = last20Shrink(b.wallet); if (s > best) best = s; });
-  return best;
+function longTermPnlOfWallet(wallet?: string | null): number | null {
+  const w = (wallet || "").toLowerCase();
+  const rec = QMAP[w];
+  const tr = TRADER_MAP[w];
+  const winPnl = (k: string): number | null => {
+    const v = rec && rec.win && rec.win[k];
+    return v && v.pnl != null ? qualityNum(v.pnl) : null;
+  };
+  const all = winPnl("all");
+  if (all != null) return all;
+  const year = winPnl("year");
+  if (year != null) return year;
+  const tp = tr ? qualityNum(tr.pnl) : null;
+  return tp != null && tp !== 0 ? tp : null;
+}
+function boardRankOfWallet(wallet?: string | null): number | null {
+  const w = (wallet || "").toLowerCase();
+  const rec = QMAP[w];
+  const tr = TRADER_MAP[w];
+  const cands = [rec && rec.rankAll, tr && tr.rankAll, rec && rec.rank, tr && tr.rank].filter((n): n is number => typeof n === "number" && n > 0);
+  return cands.length ? Math.min.apply(null, cands) : null;
+}
+function veteranDaysOfWallet(wallet?: string | null): number {
+  const age = ageDaysOf(QMAP[(wallet || "").toLowerCase()]);
+  return age != null ? age : 0;
+}
+function last20PnlOfWallet(wallet?: string | null): number | null {
+  const r = last20Of(wallet);
+  return r && r.n ? r.pnl : null;
+}
+function cmpCapperHistory(a?: string | null, b?: string | null): number {
+  const pa = longTermPnlOfWallet(a), pb = longTermPnlOfWallet(b);
+  if (pa == null && pb != null) return 1;
+  if (pb == null && pa != null) return -1;
+  if (pa != null && pb != null && pa !== pb) return pb - pa;
+  const ra = boardRankOfWallet(a), rb = boardRankOfWallet(b);
+  if (ra == null && rb != null) return 1;
+  if (rb == null && ra != null) return -1;
+  if (ra != null && rb != null && ra !== rb) return ra - rb;
+  const va = veteranDaysOfWallet(a), vb = veteranDaysOfWallet(b);
+  if (va !== vb) return vb - va;
+  const la = last20PnlOfWallet(a), lb = last20PnlOfWallet(b);
+  if (la == null && lb != null) return 1;
+  if (lb == null && la != null) return -1;
+  if (la != null && lb != null && la !== lb) return lb - la;
+  return 0;
+}
+function bestHistoryWallet(bs: { wallet?: string | null }[]): string {
+  if (!bs.length) return "";
+  return (bs.slice().sort((x, y) => cmpCapperHistory(x.wallet, y.wallet))[0].wallet || "");
+}
+function cardHistoryCmp(a: { main?: { backers?: { wallet?: string | null }[] }; backers?: { wallet?: string | null }[] }, b: { main?: { backers?: { wallet?: string | null }[] }; backers?: { wallet?: string | null }[] }): number {
+  const abs = (a.main && a.main.backers) || a.backers || [];
+  const bbs = (b.main && b.main.backers) || b.backers || [];
+  return cmpCapperHistory(bestHistoryWallet(abs), bestHistoryWallet(bbs));
 }
 function sortBackersByLast20<T extends { wallet?: string | null }>(backers: T[]): T[] {
-  return backers.slice().sort((a: T, b: T) => last20Shrink(b.wallet) - last20Shrink(a.wallet));
+  return backers.slice().sort((a: T, b: T) => cmpCapperHistory(a.wallet, b.wallet));
 }
 function winShort(rec: CapperRec | undefined): string {
   if (!rec || !rec.win) return "";
@@ -4593,8 +4701,22 @@ function dropOrcaSkipBackers(games: ComingGame[]): ComingGame[] {
     }).filter((m: ComingMarket) => (m.sides || []).length > 0),
   })).filter((g: ComingGame) => (g.markets || []).length > 0);
 }
+function dropQualityBackers(games: ComingGame[], now: number): ComingGame[] {
+  const lastMap = whaleLastTsMap(now);
+  return games.map((g: ComingGame) => ({
+    ...g,
+    markets: (g.markets || []).map((m: ComingMarket) => {
+      const sides = (m.sides || []).map((s: ComingSide) => {
+        const keep = (s.backers || []).filter((b: ComingBacker) => capperQualityOk(b.wallet, now, lastMap));
+        if (keep.length === (s.backers || []).length) return s;
+        return { ...s, backers: keep, cappers: keep.length, usd: keep.reduce((a: number, b: ComingBacker) => a + (b.cost || 0), 0), names: keep.map((b: ComingBacker) => b.name) };
+      }).filter((s: ComingSide) => (s.cappers || 0) > 0 || (s.backers || []).length > 0);
+      return { ...m, sides };
+    }).filter((m: ComingMarket) => (m.sides || []).length > 0),
+  })).map(fillGameStats).filter((g: ComingGame) => (g.markets || []).length > 0 && (g.capperCount || 0) > 0);
+}
 function openSlateGames(eliteOnly: boolean, now: number, source?: ComingGame[], windowed: boolean = true): { games: ComingGame[]; log: CleanLog } {
-  const coming = dropOrcaSkipBackers(asComingGames((source || DATA.comingUp || []) as ComingGame[]));
+  const coming = dropQualityBackers(dropOrcaSkipBackers(asComingGames((source || DATA.comingUp || []) as ComingGame[])), now);
   let base: ComingGame[];
   if (!eliteOnly) base = coming.filter((g: ComingGame) => (g.capperCount || 0) > 0);
   else {
@@ -4815,13 +4937,14 @@ function rankedCards(all: UPick[]): RankedCard[] {
   const by: Record<string, UPick[]> = {};
   all.forEach((p: UPick) => { if (p.kind === "sports") (by[p.gameId] = by[p.gameId] || []).push(p); });
   return Object.keys(by).map((id: string) => {
-    const picks = bestPickFirst(by[id], all);
+    const picks = bestPickFirst(by[id], all).filter((p: UPick) => (p.backers || []).length);
+    if (!picks.length) return null;
     const main = picks[0];
     const net = netOf(main, all);
     let elite = false;
     main.backers.forEach((b: UBacker) => { if (eliteCapper(b.wallet)) elite = true; });
     return { id, picks, rec: net.own.rec, cappers: net.own.cappers, hasElite: elite, startTs: main.startTs || 0, net, main, contested: net.contested };
-  });
+  }).filter((c): c is RankedCard => !!c);
 }
 function cardProven(c: RankedCard): boolean { return sideHasProven(c.main.backers, c.main.kind === "sports" ? c.main.league : null); }
 // Proven sides (best capper has 10+ settled bets) always sort above thin-sample sides. Then net score.
@@ -4875,8 +4998,8 @@ function rankedLists(all: UPick[]): { list: RankedCard[]; top: RankedCard[]; oth
   // side. Price/hit% and profit cannot lift a thin sample. Proven opposition with a better
   // shrunk record heavily cuts the net. Contested stays in the same list with a badge.
   const orcaBoost = (c: RankedCard) => sideOrcaStats(c.main.backers);
-  // Ranked: keep every pick; hotter shrunk last-20 (16-4 beats 3-0) first. Unknown/cold last-20 go lower. Existing keys stay as tiebreakers.
-  const cards = rankedCards(all).slice().sort((a: RankedCard, b: RankedCard) => (cardHotScore(b) - cardHotScore(a)) || (Number(isFadingPick(a.main)) - Number(isFadingPick(b.main))) || (Number(b.hasElite) - Number(a.hasElite)) || (Number(orcaBoost(b).consensus) - Number(orcaBoost(a).consensus)) || (orcaBoost(b).lens - orcaBoost(a).lens) || rankCmp(a, b));
+  // Ranked: keep every pick. Long-term dollar PnL and leaderboard rank first, veterans above newbies. Last-20 dollar PnL (not raw W-L) is only a tiebreaker.
+  const cards = rankedCards(all).slice().sort((a: RankedCard, b: RankedCard) => cardHistoryCmp(a, b) || (Number(isFadingPick(a.main)) - Number(isFadingPick(b.main))) || (Number(b.hasElite) - Number(a.hasElite)) || (Number(orcaBoost(b).consensus) - Number(orcaBoost(a).consensus)) || (orcaBoost(b).lens - orcaBoost(a).lens) || rankCmp(a, b));
   const contested = cards.filter((c: RankedCard) => c.contested);
   return { list: cards, top: cards, others: [], small: [], contested, total: cards.length };
 }
@@ -5470,7 +5593,7 @@ function combinedPicks(now: number, peDays: number = 1, windowed: boolean = true
       p!.backers.push({ wallet: w, name: b.name, cost: b.cost, avg: b.avg != null ? b.avg : null, tags: ["Politics-Econ"].concat(tagsOfWallet(w).filter((x: string) => x !== "Politics-Econ")), score: capperScoreOf(w), line: peRecordLine(w, b) });
     });
   });
-  const out = Object.keys(by).map((k: string) => by[k]).filter((p: UPick) => p.backers.length);
+  const out = Object.keys(by).map((k: string) => by[k]).map((p: UPick) => ({ ...p, backers: (p.backers || []).filter((b: UBacker) => capperQualityOk(b.wallet, now)) })).filter((p: UPick) => p.backers.length);
   out.forEach((p: UPick) => {
     p.backers.sort((a: UBacker, b: UBacker) => b.score - a.score);
     p.total = p.backers.reduce((a: number, b: UBacker) => a + b.cost, 0);
