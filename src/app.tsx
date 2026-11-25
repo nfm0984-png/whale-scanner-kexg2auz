@@ -9,7 +9,7 @@ interface Refresh { at: number; state?: string | null; detail?: string; score?: 
 interface Pick { id: string; q: string; label: string; kind: string; league: string; slug: string; score: number; parts: Record<string, number>; price: number; avgEntry: number | null; whales: number; invested: number; golden: number; oppMoney: number; oppCount: number; oppQualified: number; fresh24: number; fresh24Opp: number; sideAll: number; sideCountAll: number | null; oppAll: number; oppCountAll: number | null; hedgeAll: number; game: Game; startTs: number; backers: Backer[]; opposing: Opp[]; kalshi: Kalshi; risks: string[]; net?: number; totalBackers?: number | null; refresh?: Refresh; oneSidedShare?: number | null; priceBand?: string; split?: boolean; glue?: boolean; pricier?: boolean; overCents?: number | null; pickId?: string; strength?: string; started?: boolean; fromProven?: boolean }
 interface Hist { id: string; tier?: string; q: string; label: string; score: number; whales: number; invested: number; start: string; kalshi: string; kprice?: number | null; first_seen: number; last_seen: number; scans: number; result: string | null; graded?: number; active: boolean }
 interface CapperHistPick { id: string; q?: string | null; label?: string | null; side?: string | null; league?: string | null; start?: string | null; startTs?: number | null; kind?: string | null; cost?: number | null; avg?: number | null; result?: string | null; graded?: number | null; kAct?: string | null; kContract?: string | null; kprice?: number | null; profit?: number | null; current?: boolean; conv?: string | null; mult?: number | null }
-interface CapperRec { firstTs?: number | null; ageDays?: number | null; big?: { w?: number; l?: number; n?: number; profit?: number | null; risked?: number | null; roi?: number | null; spanDays?: number | null; firstTs?: number | null; lastTs?: number | null; floor?: number | null; med?: number | null }; kShare?: number | null; wallet: string; name: string; rankAll?: number | null; rank?: number | null; golden?: boolean; w: number; l: number; push: number; open: number; n: number; profit: number; risked: number; wr?: number | null; roi?: number | null; qualified: boolean; pnl?: number | null; wrAll?: number | null; picks: CapperHistPick[]; cw?: number; cl?: number; cn?: number; cwr?: number | null; croi?: number | null; cprofit?: number; crisked?: number; quality?: number; qQual?: boolean; demoted?: boolean; shrunkWr?: number | null; shrunkRoi?: number | null; win?: Record<string, { pnl?: number; roi?: number | null; rec?: number[] }>; badge?: string; proven?: boolean; coldDemoted?: boolean; medBet?: number | null; maxBet?: number | null; convRec?: Record<string, { w: number; l: number; roi: number | null }>; winStale?: string[]; tracked?: boolean; isNew?: boolean; addedTs?: number | null; trackedReason?: string | null; hotBoost?: number; f14?: { w: number; l: number; n: number; roi: number | null }; formCooling?: boolean; sports?: Record<string, { w: number; l: number; n: number; roi: number | null }>; sportFamilies?: Record<string, { w: number; l: number; n: number; roi: number | null }>; copies?: { w: number; l: number; n: number; push: number; open: number; tickets: number; tw: number; tl: number; stake: number }; bf?: { n: number; med: number | null; ts: number; days: number; recent: (string | number)[][] }; recSrc?: { scanner: number; backfill: number }; qwr?: number | null; qroi?: number | null; avgEntry?: number | null; avgN?: number; nearCertN?: number; mm?: boolean; mmWhy?: string | null; oneOff?: boolean; oneOffWhy?: string | null }
+interface CapperRec { firstTs?: number | null; ageDays?: number | null; big?: { w?: number; l?: number; n?: number; profit?: number | null; risked?: number | null; roi?: number | null; spanDays?: number | null; firstTs?: number | null; lastTs?: number | null; floor?: number | null; med?: number | null }; kShare?: number | null; wallet: string; name: string; rankAll?: number | null; rank?: number | null; golden?: boolean; w: number; l: number; push: number; open: number; n: number; profit: number; risked: number; wr?: number | null; roi?: number | null; qualified: boolean; pnl?: number | null; wrAll?: number | null; picks: CapperHistPick[]; cw?: number; cl?: number; cn?: number; cwr?: number | null; croi?: number | null; cprofit?: number; crisked?: number; quality?: number; qQual?: boolean; demoted?: boolean; shrunkWr?: number | null; shrunkRoi?: number | null; win?: Record<string, { pnl?: number; roi?: number | null; rec?: number[] }>; badge?: string; proven?: boolean; coldDemoted?: boolean; medBet?: number | null; maxBet?: number | null; convRec?: Record<string, { w: number; l: number; roi: number | null }>; winStale?: string[]; tracked?: boolean; isNew?: boolean; addedTs?: number | null; trackedReason?: string | null; hotBoost?: number; f14?: { w: number; l: number; n: number; roi: number | null }; formCooling?: boolean; sports?: Record<string, { w: number; l: number; n: number; roi: number | null }>; sportFamilies?: Record<string, { w: number; l: number; n: number; roi: number | null }>; copies?: { w: number; l: number; n: number; push: number; open: number; tickets: number; tw: number; tl: number; stake: number }; bf?: { n: number; med: number | null; ts: number; days: number; recent: (string | number)[][] }; recSrc?: { scanner: number; backfill: number }; qwr?: number | null; qroi?: number | null; avgEntry?: number | null; avgN?: number; nearCertN?: number; mm?: boolean; mmWhy?: string | null; oneOff?: boolean; oneOffWhy?: string | null; last20?: { dots: string; w: number; l: number; n: number; pnl: number } }
 interface NewCap { wallet: string; name: string; reason?: string | null; badge?: string | null; month?: number | null }
 interface SportFamRec { w: number; l: number; n: number; roi: number | null; small?: boolean }
 interface CapperSportRow { wallet: string; name: string; overall?: { w: number; l: number; n: number; roi: number | null } | null; sports: Record<string, SportFamRec>; bestAt?: string | null }
@@ -557,6 +557,66 @@ function kShort(v: number | null | undefined): string {
   if (a >= 1e3) return sg + "$" + Math.round(a / 1e3) + "K";
   return sg + "$" + Math.round(a);
 }
+
+function lastPnl(v: number): string {
+  const a = Math.abs(v), sg = v < 0 ? "-" : "+";
+  if (a >= 1e6) return sg + "$" + (a / 1e6).toFixed(a >= 1e7 ? 0 : 1) + "M";
+  if (a >= 1000) return sg + "$" + (a / 1000).toFixed(a >= 10000 ? 0 : 1).replace(/\.0$/, "") + "k";
+  if (a >= 100) return sg + "$" + Math.round(a);
+  return sg + "$" + a.toFixed(2).replace(/\.00$/, "");
+}
+function last20FromRec(rec: CapperRec | undefined): { dots: string; w: number; l: number; n: number; pnl: number } | null {
+  if (!rec) return null;
+  if (rec.last20 && rec.last20.n && rec.last20.dots) return rec.last20;
+  const rows: { ts: number; id: string; res: string; pr: number }[] = [];
+  const seen: Record<string, boolean> = {};
+  ((rec.bf && rec.bf.recent) || []).forEach((row: (string | number)[]) => {
+    if (!row || row.length < 5) return;
+    const res = String(row[4] || "");
+    if (res !== "W" && res !== "L") return;
+    const id = String(row[0] || "");
+    const cost = Number(row[2] || 0);
+    const avg = Number(row[3] || 0);
+    const ts = Number(row[5] || 0);
+    const pr = res === "L" ? -cost : (avg > 0 ? cost * (1 - avg) / avg : 0);
+    const key = id || ("bf|" + ts + "|" + res);
+    if (seen[key]) return;
+    seen[key] = true;
+    rows.push({ ts, id, res, pr });
+  });
+  (rec.picks || []).forEach((pk: CapperHistPick) => {
+    const res = pk.result || "";
+    if (res !== "W" && res !== "L") return;
+    const id = String(pk.id || "");
+    const key = id || ("sc|" + (pk.graded || pk.startTs || 0) + "|" + res);
+    if (seen[key] || (id && seen[id])) return;
+    seen[key] = true;
+    if (id) seen[id] = true;
+    rows.push({ ts: Number(pk.graded || pk.startTs || 0), id, res, pr: pk.profit != null ? pk.profit : 0 });
+  });
+  rows.sort((a, b) => b.ts - a.ts);
+  const top = rows.slice(0, 20).reverse();
+  if (!top.length) return null;
+  const w = top.filter((r) => r.res === "W").length;
+  return { dots: top.map((r) => r.res).join(""), w, l: top.length - w, n: top.length, pnl: Math.round(top.reduce((s, r) => s + r.pr, 0) * 100) / 100 };
+}
+function last20Of(wallet?: string | null): { dots: string; w: number; l: number; n: number; pnl: number } | null {
+  return last20FromRec(QMAP[(wallet || "").toLowerCase()]);
+}
+function Last20Dots(props: { wallet?: string | null; rec?: { dots: string; w: number; l: number; n: number; pnl: number } | null }): React.ReactElement | null {
+  const r = props.rec !== undefined ? props.rec : last20Of(props.wallet);
+  if (!r || !r.n || !r.dots) return null;
+  return (
+    <div data-last20="1" title="Oldest left, newest right" style={{ marginTop: 4, maxWidth: "100%" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 3, alignItems: "center" }}>
+        {r.dots.split("").map((d, i) => (
+          <span key={i} title={d === "W" ? "Hit" : "Miss"} style={{ width: 7, height: 7, borderRadius: 999, background: d === "W" ? GREEN : RED, flex: "none", display: "inline-block" }} />
+        ))}
+      </div>
+      <div style={{ fontSize: 11, lineHeight: "15px", fontWeight: 750, color: r.pnl >= 0 ? GREEN : RED, marginTop: 3, fontVariantNumeric: "tabular-nums" }}>{"Last " + r.n + " settled: " + r.w + "W-" + r.l + "L · " + lastPnl(r.pnl)}</div>
+    </div>
+  );
+}
 function winShort(rec: CapperRec | undefined): string {
   if (!rec || !rec.win) return "";
   const w = rec.win;
@@ -688,6 +748,7 @@ function BackersLine(props: { backers: { wallet?: string | null; cost?: number |
             {!vd.counts ? <span style={{ fontWeight: 800, color: RED }}>{" · doesn't count: " + [vd.why, vd.bet].filter(Boolean).join(", ")}</span> : null}
             {rec && rec.f14 && rec.f14.n ? <span data-backer-f14="1" style={{ fontWeight: 750, color: rec.formCooling ? RED : (rec.f14.roi != null && rec.f14.roi > 0 ? GREEN : t.text.secondary) }}>{" · 14d " + f14Text(rec.f14) + (rec.formCooling ? " · Cooling (14d)" : "")}</span> : null}
             {rec && rec.win ? <span>{" · " + winShort(rec)}</span> : null}
+            <Last20Dots wallet={b.wallet} />
           </div>
         );
       })}
@@ -2583,6 +2644,7 @@ function CapperSportList(props: { backers: { wallet?: string | null; cost?: numb
           <div key={i} style={{ fontSize: 13, lineHeight: "19px", marginTop: i ? 4 : 0, color: t.text.secondary }}>
             <span style={{ fontWeight: 800, color: sportGood ? GREEN : t.text.primary }}>{sportTxt}</span>
             {" · " + nm + (b.cost ? " " + money(b.cost) : "") + (overall ? " · " + overall : "")}
+            <Last20Dots wallet={b.wallet} />
           </div>
         );
       })}
@@ -3546,6 +3608,7 @@ function ProvenCard(props: { r: ProvenRow; rank: number; now: number }) {
       <div style={{ fontSize: 13, lineHeight: "19px", marginTop: 2, color: t.text.secondary }}>
         <span style={{ fontWeight: 800, color: sr.n >= 5 && sr.roi != null && sr.roi < 0 ? RED : sr.roi != null && sr.roi > 0 ? GREEN : t.text.secondary }}>{r.sport + " " + f14Text(sr)}</span>
         {" · overall " + (r.rec ? r.rec[0] + "–" + r.rec[1] : "n/a") + ", " + pct(r.roi) + " ROI · 14d " + f14Text(r.f14)}
+        <Last20Dots wallet={r.wallet} />
       </div>
       ) : null}
       {openCaps || group.length > 1 ? (
@@ -3554,7 +3617,7 @@ function ProvenCard(props: { r: ProvenRow; rank: number; now: number }) {
             <div data-capper-sport-list="1">
               {group.map((g: ProvenRow, i: number) => {
                 const gsr = g.sportRec || { w: 0, l: 0, n: 0, roi: null };
-                return <div key={g.wallet + i} style={{ fontSize: 13, lineHeight: "19px", marginTop: 4, color: t.text.secondary }}><span style={{ fontWeight: 800, color: gsr.roi != null && gsr.roi >= 20 ? GREEN : t.text.primary }}>{g.sport + " " + f14Text(gsr)}</span>{" · " + nameOf(g.name, g.wallet) + " " + money(g.cost) + (g.mult != null ? " = " + g.mult + "x usual" : "") + " · overall " + (g.rec ? g.rec[0] + "–" + g.rec[1] : "n/a") + ", " + pct(g.roi) + " ROI"}</div>;
+                return <div key={g.wallet + i} style={{ fontSize: 13, lineHeight: "19px", marginTop: 4, color: t.text.secondary }}><span style={{ fontWeight: 800, color: gsr.roi != null && gsr.roi >= 20 ? GREEN : t.text.primary }}>{g.sport + " " + f14Text(gsr)}</span>{" · " + nameOf(g.name, g.wallet) + " " + money(g.cost) + (g.mult != null ? " = " + g.mult + "x usual" : "") + " · overall " + (g.rec ? g.rec[0] + "–" + g.rec[1] : "n/a") + ", " + pct(g.roi) + " ROI"}<Last20Dots wallet={g.wallet} /></div>;
               })}
             </div>
           ) : <div style={{ fontSize: 12, color: t.text.tertiary, marginTop: 4 }}>Tap the {group.length} badge to see each capper's sport ROI.</div>}
@@ -3730,6 +3793,7 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; longshot?: boo
                     {b.trades ? " · " + b.trades + (b.trades === 1 ? " fill" : " fills") : ""}
                   </div>
                   <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 2 }}><Pct v={b.wr} /> win rate (all-time){b.resolved ? " · " + b.resolved.toLocaleString("en-US") + " resolved" : ""} · P&L {money(b.pnl)}{b.sport ? " · " + p.league + " record " + b.sport.wr + "% over " + b.sport.n : ""}</div>
+                  <Last20Dots wallet={b.wallet} />
                   <div style={{ fontSize: 13, lineHeight: "18px", color: t.text.secondary, marginTop: 2 }}>{b.flow ? "24h: " + b.flow + (b.buy24 ? " · bought " + money(b.buy24) : "") + (b.sell24 ? " · sold " + money(b.sell24) : "") : "24h flow not checked"}</div>
                   <div style={{ marginTop: 6 }}><CapperButtons wallet={b.wallet} followed={props.followed} hidden={props.hidden} toggle={props.toggle} /></div>
                 </div>
@@ -4317,6 +4381,7 @@ function SidesGameCard(props: { g: ComingGame; now: number; rank?: number; sugge
                             <span style={{ fontSize: 13, fontWeight: 800, color: BRAND, overflowWrap: "anywhere" }}>{nameOf(b.name, b.wallet || "")}</span>
                             <span style={{ fontSize: 13, fontWeight: 800, color: roi == null ? t.text.tertiary : roi >= 0 ? GREEN : RED }}>{"  " + (roi != null ? pct(roi) + " ROI" : "n/a")}</span>
                             {comingSportLine(b) ? <div style={{ fontSize: 11, color: t.text.tertiary }}>{comingSportLine(b)}</div> : null}
+                            <Last20Dots wallet={b.wallet} />
                           </button>
                         );
                       }) : <div style={{ fontSize: 12, color: t.text.tertiary }}>No hot cappers on this side</div>}

@@ -293,6 +293,7 @@ def summarize(store, traders=None, current_ids=None, windows=None):
         ))
         apply_conviction(c)
         apply_records(c, bfw.get(w), copies.get(w))
+        attach_last20(c)
         attach_windows(c, windows)
         tr = tracked.get(w)
         if tr:
@@ -875,6 +876,61 @@ def apply_records(c, bf=None, cp=None):
             c['big'] = bf['big']
     if cp:
         c['copies'] = cp
+
+
+LAST20_N = 20
+
+def attach_last20(c):
+    """Store the most recent settled W/L results (up to 20) on the capper.
+    dots are oldest-to-newest, left to right. Pushes are skipped.
+    Prefers backfill recent ($500+ settled sports) and fills from scanner picks."""
+    rows = []
+    seen = set()
+    bf = c.get('bf') or {}
+    for row in (bf.get('recent') or []):
+        if not isinstance(row, (list, tuple)) or len(row) < 5:
+            continue
+        res = row[4]
+        if res not in ('W', 'L'):
+            continue
+        pid = str(row[0] or '')
+        cost = row[2] if len(row) > 2 else 0
+        avg = row[3] if len(row) > 3 else None
+        ts = row[5] if len(row) > 5 else 0
+        pr = profit_of(cost, avg, res)
+        key = pid or ('bf', ts, res, cost)
+        if key in seen:
+            continue
+        seen.add(key)
+        rows.append((float(ts or 0), res, float(pr or 0)))
+    for pck in c.get('picks') or []:
+        res = pck.get('result')
+        if res not in ('W', 'L'):
+            continue
+        pid = str(pck.get('id') or '')
+        if pid and pid in seen:
+            continue
+        key = pid or ('sc', pck.get('startTs') or pck.get('graded'), res, pck.get('cost'))
+        if key in seen:
+            continue
+        seen.add(key)
+        pr = pck.get('profit')
+        if pr is None:
+            pr = profit_of(pck.get('cost'), pck.get('avg'), res)
+        rows.append((float(_pick_ts(pck) or 0), res, float(pr or 0)))
+    rows.sort(key=lambda r: r[0], reverse=True)
+    rows = rows[:LAST20_N]
+    rows.reverse()
+    if not rows:
+        c['last20'] = {'dots': '', 'w': 0, 'l': 0, 'n': 0, 'pnl': 0.0}
+        return
+    w = sum(1 for r in rows if r[1] == 'W')
+    l = len(rows) - w
+    c['last20'] = {
+        'dots': ''.join(r[1] for r in rows),
+        'w': w, 'l': l, 'n': w + l,
+        'pnl': round(sum(r[2] for r in rows), 2),
+    }
 
 def proven_ok(c):
     """Upgraded quality filter for Proven Picks: vetted record (30-day backfill + scanner), not Cold,

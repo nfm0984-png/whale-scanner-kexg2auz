@@ -14,7 +14,7 @@ actions/cache); each wallet is re-read from (last fetch - 3 days), at most every
 lookback when the cache is missing or does not yet reach ~90 days (e.g. an older 30-day cache). Only compact
 per-wallet aggregates are committed (backfill.json):
   cells["SPORT|day"] = [w, l, push, risked, profit, cw, cl, crisked, cprofit]   (day = epoch day, UTC)
-  med/max bet size, n graded, and the 8 most recent graded bets for the capper detail.
+  med/max bet size, n graded, and the 20 most recent graded bets for the capper-row dots and detail.
 Raw rows: pid -> [cost, avg, result, ts, slug, outcome]
 """
 import json, os, re, time, urllib.request, urllib.parse, urllib.error
@@ -179,7 +179,7 @@ def aggregate(raw):
         except Exception:
             _KL = frozenset()
         k_n = sum(1 for r in bets.values() if ((r[4] or '').split('-')[0] in _KL))
-        recent = sorted(bets.values(), key=lambda r: -(r[3] or 0))[:8]
+        recent = sorted(bets.values(), key=lambda r: -(r[3] or 0))[:20]
         med = _med(costs)
         floor = max(MIN_COST, 1.5 * med) if med else MIN_COST
         bw = bl = 0
