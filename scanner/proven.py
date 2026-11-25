@@ -38,7 +38,7 @@ SPORT_BAR_N = 10
 SPORT_BAR_ROI = 20.0
 SPORT_BAR_ROI_VOL = 10.0      # loosened Nov 15: +10% sport ROI for cappers with 100+ graded bets total
 SPORT_BAR_VOL_N = 100
-ELITE_MIN_BET = 500           # one $500 minimum for every pick on every tab (Noel, Nov 17); replaces the Nov 16 $250 floor-passer minimum
+ELITE_MIN_BET = 1000          # one $1,000 minimum for every pick on every tab (Noel, Nov 25); was $500
 SPORT_GOOD_N = 30             # a pick can only be GOOD if the capper has 30+ graded in THAT sport
 
 def sport_bar_roi(c):

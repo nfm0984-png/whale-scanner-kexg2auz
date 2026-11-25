@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """OrcaLayer whale scanner (snapshot). Whale data: OrcaLayer API only. Kalshi: contract match + price. ESPN: schedule/scores.
-Usage: python3 scan.py [--cappers 200 (any positive integer)] [--min 500]
+Usage: python3 scan.py [--cappers 200 (any positive integer)] [--min 1000]
 Whales = top N sports whales by all-time P&L (OrcaLayer /api/v2/whales/leaderboard?sort=pnl; pnl-leaderboard only supports window=7|30), processed #1 first."""
 import json, time, math, re, sys, os, argparse, urllib.request, collections, datetime as dt, hashlib
 from concurrent.futures import ThreadPoolExecutor
 from orca import orca, CALLS
 HERE = os.path.dirname(os.path.abspath(__file__))
-ap = argparse.ArgumentParser(); ap.add_argument('--cappers', type=int, default=200); ap.add_argument('--min', type=float, default=500)
+ap = argparse.ArgumentParser(); ap.add_argument('--cappers', type=int, default=200); ap.add_argument('--min', type=float, default=1000)
 ap.add_argument('--markets', type=int, default=60); ap.add_argument('--wallets', type=int, default=2); A = ap.parse_args()
 if A.cappers < 1: sys.exit('--cappers must be a positive integer')  # presets 20/40/60/80/100/200/400 or any custom number; default 200
 T0 = time.time(); NOW = int(T0)
@@ -229,7 +229,7 @@ for off in range(0, 500, 100):
 found_markets = len(mk); MK_ALL = {m['id']: m for m in mk}
 def ets(x): return dt.datetime.fromisoformat(x.replace(' ', 'T').replace('Z', '+00:00')).timestamp()
 WIN_H = 36  # Nov 15: was 12h; 36h keeps overnight/early-morning and next-day games (Asia, Europe, esports, tennis)
-LEAN_MIN = 500  # Noel Nov 17: one $500 minimum everywhere (was 100 for Coming Up)
+LEAN_MIN = 1000  # Noel Nov 25: one $1,000 minimum everywhere (was 500)
 WIN_END = NOW + WIN_H * 3600; WIN_START = NOW - 5 * 3600
 mk = [m for m in mk if re.search(r'-20\d\d-\d\d-\d\d', m['slug']) and WIN_START <= ets(m['end_date']) <= WIN_END]
 in_window = len(mk)

@@ -11,7 +11,7 @@ import wallet_flags as wf
 import capper_history as ch
 import kalshi_names as kn
 
-LEAN_MIN = 500  # Noel Nov 17: $500 minimum on Coming Up / Elite / combos too
+LEAN_MIN = 1000  # Noel Nov 25: $1,000 minimum on Coming Up / Elite / singles and combos
 LIVE_SECS = int(3 * 3600)
 # Longest a game normally runs after its start (fallback when no final signal exists). Anything past this is treated as over.
 _LIVE_HOURS = {'NFL': 4, 'CFB': 4, 'NCAAF': 4, 'MLB': 3.5, 'ATP': 3.5, 'WTA': 3.5, 'UFC': 6, 'CBB': 2.75, 'NCAAMB': 2.75, 'NBA': 3, 'NHL': 3,

@@ -395,8 +395,8 @@ function provenIsStale(r: ProvenRow, now: number): boolean {
   return !!t && now - t > STALE_SECS;
 }
 
-// One minimum for every pick on every tab (All Picks, Proven, Elite, Coming Up): $500 (Noel, Nov 17). Replaces the Nov 16 $250 floor-passer minimum.
-const FLOOR_MIN_BET = 500;
+// One minimum for every pick on every tab (All Picks, Proven, Elite, Coming Up): $1,000 (Noel, Nov 25). Was $500.
+const FLOOR_MIN_BET = 1000;
 const ELITE_MIN_BET = FLOOR_MIN_BET;
 const ELITE_FULL_N = 20;
 const OVERALL_ROI_FLOOR = 15;
@@ -443,7 +443,7 @@ function sportRecFor(wallet: string | null | undefined, league?: string | null, 
   if (!sr) return null;
   return { sport, sr };
 }
-// Same bars as Proven Picks: GOOD = elite + sport ROI, $500+ and about 1x usual, winning sport record, Kalshi 45-92¢.
+// Same bars as Proven Picks: GOOD = elite + sport ROI, $1,000+ and about 1x usual, winning sport record, Kalshi 45-92¢.
 // OK = a real-size elite sport-ROI bet that misses one of those bars (price, size under 1x, thin sport record).
 // CAUTION = small/throwaway bet or no Kalshi market. "" = no elite sport-ROI backer.
 function pickVerdictOf(p: Pick, backers?: Backer[]): { verdict: "GOOD" | "OK" | "CAUTION" | ""; why: string[] } {
@@ -764,7 +764,7 @@ const VET_MIN_N = 10;          // full sample
 const VET_SMALL_N = 5;         // 5-9 allowed only when clearly positive
 const VET_SMALL_WR = 60;       // small sample: 60%+ copyable win rate
 const VET_SMALL_ROI = 10;      // small sample: +10%+ copyable ROI
-const VET_MIN_BET = 500;       // absolute bet floor ($)
+const VET_MIN_BET = 1000;      // absolute bet floor ($)
 const VET_MIN_MULT = 0.5;      // and at least half the whale's usual bet
 interface Verdict { counts: boolean; tier: number; why: string; bet: string }
 function backerVerdict(wallet: string | null | undefined, cost: number | null | undefined, pid?: string): Verdict {
@@ -3344,7 +3344,7 @@ function GameCard(props: { g: GamePack; now: number; rank: number; followed: str
         <ActionBtn ex={ex} />
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 8, marginTop: 14 }}>
-        {tile("whales", BRAND, "Whales on " + (g.heavyName || "this side"), String(g.whales), "Unique wallets, $500+")}
+        {tile("whales", BRAND, "Whales on " + (g.heavyName || "this side"), String(g.whales), "Unique wallets, $1,000+")}
         {tile("money", GREEN, "Heavier side", kMoney(g.heavyMoney), g.otherMoney ? "vs " + kMoney(g.otherMoney) + " against" : "No money against")}
         {tile("star", AMBER, "Open positions", String(g.rows.length), Object.keys(markets).length + " market" + (Object.keys(markets).length === 1 ? "" : "s"))}
         {tile("against", RED, "Other side", g.otherName ? kMoney(g.otherMoney) : "None", g.otherName || "No opposing whale money")}
@@ -3843,15 +3843,15 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; longshot?: boo
             const topRank = topW ? rankLabel(topW.rankAll, topW.rank, topW.rank30) : "";
             return (
               <Fragment>
-                {tile("money", GREEN, "Biggest whale bet", topW ? money(topW.cost) : "n/a", topW ? (topW.name + (topRank ? " · " + topRank : "")) : "No $500+ whale")}
-                {tile("whales", BRAND, "Other whales on same bet", String(otherN), otherN ? "same market and same side" : "no other $500+ whale on this side")}
+                {tile("money", GREEN, "Biggest whale bet", topW ? money(topW.cost) : "n/a", topW ? (topW.name + (topRank ? " · " + topRank : "")) : "No $1,000+ whale")}
+                {tile("whales", BRAND, "Other whales on same bet", String(otherN), otherN ? "same market and same side" : "no other $1,000+ whale on this side")}
                 {tile("star", AMBER, "Their money", money(otherMoney), otherN ? "from the other whales on this side" : "only one whale on this side")}
-                {tile("money", BRAND2, "Total", money(totalSide), "all $500+ whales on this side" + ((p.oppCount > 0 || (p.oppMoney || 0) > 0) ? " · " + kMoney(p.oppMoney) + " against" : ""))}
+                {tile("money", BRAND2, "Total", money(totalSide), "all $1,000+ whales on this side" + ((p.oppCount > 0 || (p.oppMoney || 0) > 0) ? " · " + kMoney(p.oppMoney) + " against" : ""))}
               </Fragment>
             );
           })() : (
             <Fragment>
-              {tile("whales", BRAND, "Top whales on this bet", String(backers.length), "$500+ each · top " + DATA.coverage.cappers + " all-time · " + p.golden + " golden")}
+              {tile("whales", BRAND, "Top whales on this bet", String(backers.length), "$1,000+ each · top " + DATA.coverage.cappers + " all-time · " + p.golden + " golden")}
               {tile("money", GREEN, "Net money", kMoney(netVal), "Net " + money(netVal) + " (" + sharePct + "% one-sided)")}
               {tile("star", AMBER, "Total backers", p.totalBackers !== undefined && p.totalBackers !== null ? p.totalBackers.toLocaleString("en-US") : "n/a", "all wallets, any size" + (p.sideAll ? " · " + kMoney(p.sideAll) : ""))}
               {tile("against", RED, "Top whales against", String(p.oppCount), kMoney(p.oppMoney) + " on the other side")}
@@ -3922,14 +3922,14 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; longshot?: boo
                 </div>
               </div>
             ))}
-            <div style={{ marginTop: 14 }}>{label("OPPOSING WHALES · $500+")}</div>
+            <div style={{ marginTop: 14 }}>{label("OPPOSING WHALES · $1,000+")}</div>
             {p.opposing.length ? p.opposing.map((o: Opp, i: number) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 0", flexWrap: "wrap" }}>
                 <Face name={o.name} size={26} />
                 <span style={{ fontSize: 14, flex: "1 1 auto", minWidth: 0 }}><NameLink name={o.name} wallet={o.wallet} />{o.wr !== null ? <Fragment> · <Pct v={o.wr} /></Fragment> : null}{rankLabel(o.rankAll, o.rank, o.rank30) ? " · " + rankLabel(o.rankAll, o.rank, o.rank30) : ""}</span>
                 <span style={{ fontSize: 14, fontWeight: 700 }}>{money(o.cost)}{o.avg ? " @ " + cents(o.avg) : ""}</span>
               </div>
-            )) : <div style={{ fontSize: 14, color: t.text.secondary, padding: "8px 0" }}>No $500+ whale on the other side.</div>}
+            )) : <div style={{ fontSize: 14, color: t.text.secondary, padding: "8px 0" }}>No $1,000+ whale on the other side.</div>}
             <div style={{ marginTop: 14 }}>{label("FRESH MONEY · LAST 24H, ALL WHALES")}</div>
             <div style={{ display: "flex", height: 10, borderRadius: 999, overflow: "hidden", background: t.border.default, marginTop: 8 }}>
               <div style={{ width: `${freshShare * 100}%`, background: GREEN }} />
@@ -4071,7 +4071,7 @@ function sortComingGames(games: ComingGame[], sort: string, now: number): Coming
   return rows;
 }
 function fillGameStats(g0: ComingGame): ComingGame {
-  // $500 minimum on every pick: drop backers under FLOOR_MIN_BET from each side and re-total (guards old data between scans).
+  // $1,000 minimum on every pick: drop backers under FLOOR_MIN_BET from each side and re-total (guards old data between scans).
   const g: ComingGame = { ...g0, markets: (g0.markets || []).map((m: ComingMarket) => ({ ...m, sides: (m.sides || []).map((s: ComingSide) => {
     const keep = (s.backers || []).filter((b: ComingBacker) => (b.cost || 0) >= FLOOR_MIN_BET);
     if (keep.length === (s.backers || []).length) return s;
@@ -4626,7 +4626,7 @@ function mergeComingGames(lists: ComingGame[][]): ComingGame[] {
   });
   return Object.keys(by).map((k: string) => fillGameStats(by[k]));
 }
-// Cleanup rules (Noel, Nov 17): applied after the $500 minimum.
+// Cleanup rules (Noel, Nov 17): applied after the $1,000 minimum.
 const FRONT_MIN = 600;
 const FRONT_MAX = 3;
 const GAME_MAX_SECS = 3 * 3600;
@@ -4867,7 +4867,7 @@ function CapperSlateTab(props: { now: number; mode: "elite" | "coming" }) {
   const caption = eliteOnly
     ? ("Elite cappers' picks, live first" + (liveN ? " · " + liveN + " live" : ""))
     : ("Proven cappers' picks, live first" + (liveN ? " · " + liveN + " live" : ""));
-  const blurb = "$500+ with a Kalshi line only. Top 3 picks of $600+ per capper up front; the rest under Show more.";
+  const blurb = "$1,000+ with a Kalshi line only. Top 3 picks of $600+ per capper up front; the rest under Show more.";
   const emptyTitle = eliteOnly ? "No elite picks right now" : "No proven-capper games yet";
   const emptyBody = (eliteOnly
     ? "No live or upcoming sports bets from elite cappers right now. Live games stay until they finish — "
@@ -5016,7 +5016,7 @@ function EliteTab(props: { now: number }) {
   };
   return (
     <Section heading={"Ranked · " + L.total} caption="Best picks first · today in PT · after 7pm, + tomorrow">
-      {L.total === 0 ? <EmptyState title="No ranked games right now" body={"No tracked capper has a $500+ pick with a Kalshi line right now. " + nextScanLabel(props.now) + "."} /> : null}
+      {L.total === 0 ? <EmptyState title="No ranked games right now" body={"No tracked capper has a $1,000+ pick with a Kalshi line right now. " + nextScanLabel(props.now) + "."} /> : null}
       {L.list.map((c: RankedCard, i: number) => render(c, i))}
     </Section>
   );
@@ -6130,7 +6130,7 @@ function CappersRanked(props: { now: number }) {
   return (
     <div data-cappers-ranked="1" style={{ marginBottom: 18 }}>
       <div style={{ fontSize: 18, fontWeight: 850, margin: "6px 0 2px" }}>{"Proven cappers · " + ranked.length}</div>
-      <Text>{"Best to worst by long-term record (big-bet profit and ROI, plus year, month, 30d and week). Every current pick is under the capper: $500+, Kalshi line, not finished. " + withPicks + " have picks now."}</Text>
+      <Text>{"Best to worst by long-term record (big-bet profit and ROI, plus year, month, 30d and week). Every current pick is under the capper: $1,000+, Kalshi line, not finished. " + withPicks + " have picks now."}</Text>
       {ranked.map((w: string, i: number) => {
         const rec = QMAP[w];
         const r = capperRecs(w);
@@ -6289,7 +6289,7 @@ export default function App() {
   const [rankedLimit, setRankedLimit] = useState<number>(30);
   const [rankedNoK, setRankedNoK] = useState<boolean>(false);
   const [bankrollText, setBankrollText] = useState<string>(DEFAULT_BANKROLL);
-  const [minPos, setMinPos] = useState<string>("500");
+  const [minPos, setMinPos] = useState<string>("1000");
   const [minWallets, setMinWallets] = useState<string>("2");
   const [f, setF] = useState<Filters>(DEFAULT_FILTERS);
   const [followed, setFollowed] = useState<string[]>([]);
@@ -6370,7 +6370,7 @@ export default function App() {
   const bankroll = Math.max(0, Number(bankrollText) || 0);
   const minP = Number(minPos);
   const minW = Number(minWallets);
-  const floorMin = (w: string | null | undefined): number => (minP <= 500 && (ELITE_W[(w || "").toLowerCase()] || walletLongTermOk(w)) ? FLOOR_MIN_BET : minP);
+  const floorMin = (w: string | null | undefined): number => Math.max(minP || 0, FLOOR_MIN_BET);
   const visibleBackers = (p: Pick): Backer[] => p.backers.filter((b: Backer) => b.cost >= floorMin(b.wallet) && hidden.indexOf((b.wallet || "").toLowerCase()) < 0);
   const followOk = (p: Pick): boolean => !f.followedOnly || p.backers.some((b: Backer) => followed.indexOf((b.wallet || "").toLowerCase()) >= 0);
   // Started and ended games are dropped from Top 20, Upcoming, Fun, Polymarket, Props, Longshots and Biggest Bets. Live games stay on Bets.
@@ -6382,7 +6382,7 @@ export default function App() {
   const vb = (p: Pick): Backer[] => visibleBackers(p);
   const notHedged = (p: Pick): boolean => !pickHasCapperHedge(p);
   const provenRows: ProvenRow[] = sortProvenBy(mergeProvenRows(((PROVEN && PROVEN.picks) || []).filter((r: ProvenRow) => walletLongTermOk(r.wallet) && startStatus(r.startTs || 0, now, hintForComing({ id: "", game: r.game || "", league: r.league || "", startTs: r.startTs || 0, start: r.start || "", markets: [] })) !== "final" && !r.hedged && !isEliteSplitGame(r.slug) && !provenTooExpensive(r))), sortOf("proven"), now);
-  // Pinned Proven section hides sub-$500 throwaway positions (still counted in the CAUTION total).
+  // Pinned Proven section hides sub-$1,000 throwaway positions (still counted in the CAUTION total).
   const provenPinned: ProvenRow[] = provenRows.filter((r: ProvenRow) => r.verdict !== "CAUTION" || (r.cost || 0) >= FLOOR_MIN_BET);
   const provenComboPicks: Pick[] = provenRows.map((r: ProvenRow) => provenToPick(r)).filter((p: Pick | null): p is Pick => !!p);
   // GOOD first; fill remaining slots with the best OK Kalshi legs. Never CAUTION, no-Kalshi, hedges, or elite-split games.
@@ -6596,7 +6596,7 @@ export default function App() {
         <Select label="Purchased within" value={f.bought} onChange={(v: string) => set("bought", v)} options={[{ value: "", label: "Any purchase in this scan" }, { value: "1", label: "Last hour" }, { value: "3", label: "Last 3 hours" }, { value: "6", label: "Last 6 hours" }, { value: "12", label: "Last 12 hours" }, { value: "24", label: "Last 24 hours" }]} />
         <Input label="Capper name or wallet" value={f.capper} onChange={(v: string) => set("capper", v)} placeholder="All cappers" />
         <Select label="Platform" value={f.platform} onChange={(v: string) => set("platform", v)} options={[{ value: "all", label: "All platforms" }, { value: "kalshi", label: "Verified Kalshi picks" }, { value: "poly", label: "Polymarket only" }]} />
-        <Input label="Minimum purchase ($)" type="number" value={f.min} onChange={(v: string) => set("min", v)} placeholder="500" />
+        <Input label="Minimum purchase ($)" type="number" value={f.min} onChange={(v: string) => set("min", v)} placeholder="1000" />
         <Input label="Maximum purchase ($)" type="number" value={f.max} onChange={(v: string) => set("max", v)} placeholder="No max" />
         <Select label="Kalshi side" value={f.kSide} onChange={(v: string) => set("kSide", v)} options={[{ value: "", label: "Any side" }, { value: "YES", label: "YES" }, { value: "NO", label: "NO" }]} />
         <Select label="Kalshi verification" value={f.kStatus} onChange={(v: string) => set("kStatus", v)} options={[{ value: "", label: "Any verification status" }, { value: "verified", label: "Verified contract" }, { value: "none", label: "No verified equivalent" }]} />
@@ -6656,7 +6656,7 @@ export default function App() {
       {tab === "picks" ? (
         <Section heading={"All Picks · " + combinedPicks(now).length}>
           <MissingPicksNote />
-          <Text>{"Every open $500+ pick with a Kalshi line from every tracked capper with a positive profit (not Cooling) plus Politics & Econ cappers that starts or settles within 24 hours, best to worst by capper history. One card per pick; tap the arrow to see the other bets on that game."}</Text>
+          <Text>{"Every open $1,000+ pick with a Kalshi line from every tracked capper with a positive profit (not Cooling) plus Politics & Econ cappers that starts or settles within 24 hours, best to worst by capper history. One card per pick; tap the arrow to see the other bets on that game."}</Text>
           <CombinedList now={now} mode="rank" />
           <details data-old-allpicks="1" style={{ margin: "14px 0" }}>
             <summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 15, color: BRAND }}>{"Whale signals (old All Picks view) · " + (bigOnly ? biggestTotal : allPickTotal)}</summary>
@@ -6669,7 +6669,7 @@ export default function App() {
           <LeaguePills picks={bigOnly ? biggestAll : rankedAll} value={sportFilter} onChange={setSportFilter} />
           <div data-pinned-proven="1" style={{ borderRadius: 16, padding: "10px 12px", background: "linear-gradient(180deg,#F5F0FF 0%, #EDE9FE 100%)", margin: "4px 0 12px", border: "1.5px solid #DDD6FE", boxShadow: "0 6px 16px rgba(124,58,237,0.08)" }}>
             <div style={{ fontSize: 15, fontWeight: 850, color: "#7C3AED" }}>{"📌 Proven Picks · " + provenTotal + (PROVEN ? " · GOOD " + (PROVEN.counts.GOOD || 0) + " · OK " + (PROVEN.counts.OK || 0) : "")}</div>
-            <div style={{ fontSize: 12, color: t.text.tertiary, margin: "2px 0 6px" }}>{"Elite cappers' own open bets, $500+, both sides on each game, with the Kalshi line on each side" + (provenRows.length > provenPinned.length ? " · " + (provenRows.length - provenPinned.length) + " smaller positions hidden" : "") + (PROVEN ? " · updated " + shortUpdatedAt(PROVEN.updatedAt) : "")}</div>
+            <div style={{ fontSize: 12, color: t.text.tertiary, margin: "2px 0 6px" }}>{"Elite cappers' own open bets, $1,000+, both sides on each game, with the Kalshi line on each side" + (provenRows.length > provenPinned.length ? " · " + (provenRows.length - provenPinned.length) + " smaller positions hidden" : "") + (PROVEN ? " · updated " + shortUpdatedAt(PROVEN.updatedAt) : "")}</div>
             <EliteCapperList />
             {provenTotal === 0 ? <EmptyState title="No proven-capper picks yet" body={"No live or upcoming sports bets from elite cappers in the next 48 hours — " + nextScanLabel(now) + "."} /> : <ComingGroups games={provenGames} now={now} keyPrefix="P" onCapper={setPickProfile} limit={provenLimit} onMore={() => setProvenLimit(provenGames.length)} />}
             <MoreGames games={provenSplit.more} now={now} keyPrefix="P" onCapper={setPickProfile} />
@@ -6740,7 +6740,7 @@ export default function App() {
             <Rows rows={allPicks.map((p: Pick) => ({ lead: p.league, title: matchup(p.q) + " — " + p.label, detail: p.whales + (p.whales === 1 ? " top whale, " : " top whales, ") + money(p.invested) + ". All wallets on this side: " + (p.totalBackers !== undefined && p.totalBackers !== null ? p.totalBackers.toLocaleString("en-US") : "n/a") + " with " + money(p.sideAll) + ".", meta: "Score " + p.score }))} />
           </Section>
           <Section heading="Opposing whales" collapsible defaultOpen={false}>
-            <Rows rows={allPicks.map((p: Pick) => ({ lead: p.league, title: matchup(p.q) + " — against " + p.label, detail: p.oppCount + " whales with $500+ (" + p.oppQualified + " qualified), " + money(p.oppMoney) + "." + (p.opposing.length ? " Biggest: " + p.opposing.slice(0, 3).map((o: Opp) => o.name + " " + money(o.cost)).join(", ") + "." : ""), status: p.oppMoney > p.invested ? { label: "More money against", tone: "warning" as const } : { label: "Smaller" } }))} />
+            <Rows rows={allPicks.map((p: Pick) => ({ lead: p.league, title: matchup(p.q) + " — against " + p.label, detail: p.oppCount + " whales with $1,000+ (" + p.oppQualified + " qualified), " + money(p.oppMoney) + "." + (p.opposing.length ? " Biggest: " + p.opposing.slice(0, 3).map((o: Opp) => o.name + " " + money(o.cost)).join(", ") + "." : ""), status: p.oppMoney > p.invested ? { label: "More money against", tone: "warning" as const } : { label: "Smaller" } }))} />
           </Section>
           <Section heading="Value now · Kalshi price check" collapsible defaultOpen={false} caption="Price comparison only. Kalshi never counts toward the signal score.">
             <Rows rows={allPicks.map((p: Pick) => ({ lead: p.league, title: matchup(p.q) + " — " + p.label, detail: p.kalshi.status === "ok" ? p.kalshi.action + " " + p.kalshi.contract + " at " + cents(p.kalshi.price) + " vs whale entry " + cents(p.avgEntry) + " and Polymarket now " + cents(p.price) : (p.kalshi.why || "No match"), status: p.kalshi.status === "ok" ? (p.kalshi.light === "green" ? { label: "Value", tone: "success" as const } : { label: "Pricier", tone: "warning" as const }) : { label: "No contract" } }))} />
@@ -6777,16 +6777,16 @@ export default function App() {
           </Section>
           <Section heading="Methodology" collapsible defaultOpen={false} caption="Scores rank evidence; they are not win probabilities.">
             <Properties items={[
-              { label: "Guardrails", value: "Only the top " + DATA.coverage.cappers + " all-time sports whales count (≥50% of open cost in sports) · $500 minimum position · 2+ of them for Top 20 · verified Kalshi contract required for Top 20 and Fun · the Polymarket tab is only for picks with no Kalshi contract (never a duplicate of a Kalshi tab) · player props have their own tab · 10–20¢ 2-whale one-sided picks go to Longshots, not Fun · Biggest Bets ranks remaining open bets by the largest single whale position · Upcoming lists $500+ whale bets on games starting in the next 24 hours, soonest first · games that have started are hidden from Top 20, Upcoming, Fun, Polymarket, Player Props, Longshots and Biggest Bets" },
+              { label: "Guardrails", value: "Only the top " + DATA.coverage.cappers + " all-time sports whales count (≥50% of open cost in sports) · $1,000 minimum position · 2+ of them for Top 20 · verified Kalshi contract required for Top 20 and Fun · the Polymarket tab is only for picks with no Kalshi contract (never a duplicate of a Kalshi tab) · player props have their own tab · 10–20¢ 2-whale one-sided picks go to Longshots, not Fun · Biggest Bets ranks remaining open bets by the largest single whale position · Upcoming lists $1,000+ whale bets on games starting in the next 24 hours, soonest first · games that have started are hidden from Top 20, Upcoming, Fun, Polymarket, Player Props, Longshots and Biggest Bets" },
               { label: "Quality score (every tab)", value: "Every tab defaults to Best to worst, with Worst to best, start time, and bet size in the same menu. Each card shows its # rank and a 0–100 quality score. For picks the score uses the existing ranking signals plus: vetted backer sample (10+ first), elite/proven/Hot backer status, graded ROI and the sport-specific record, conviction (bet size vs usual), whether a Kalshi market is matched, and Kalshi price vs the whales' entry (edge). Started or settled games, when shown, always go last. For Cappers (and as the main idea on Hot Cappers), best means elite first, then ROI with a minimum sample, then record." },
               { label: "Top 20 ranking", value: "Price band first (65–84¢ best, then 45–64¢ and 85–94¢; under 45¢ and 95¢+ are out of Top 20), then backing-whale quality (graded win rate and ROI on copyable Kalshi singles; 10+ sample, small samples neutral, low-edge volume demoted), then net money (for minus against) and one-sided share, then whale count. Split (share under 65%) is capped at Small and dropped from Top 20 if under 55%. Pricier (current >3¢ above whale avg entry) is dropped from Top 20; >5¢ is hidden from Top 20 entirely." },
               { label: "Polymarket tab", value: "Up to 20 whale picks that passed every rule but have no matching Kalshi contract. Ranked the same way as Top 20. Each card says in plain words what to buy on Polymarket and links to the market. Player props and 10–20¢ longshots are moved to their own tabs. Results are tagged Polymarket in the journal. Refresh drops started and finished ones. A caution is shown while the tab's graded record is losing." },
               { label: "Player Props tab", value: "Only player props backed by an elite capper with +20% sport ROI, and only when Kalshi has a matching player-prop contract (NFL TDs or yards, NBA points, rebounds or assists, and similar). Cards show the exact Kalshi wording, ticker, price, player, both teams, league, PT time, and the backer's record, ROI and size vs usual. Unmatched or weak props are hidden. Started games are hidden." },
               { label: "Longshots tab", value: "5x–10x payouts: prices 10–20¢, 2+ proven whales, net one-sided (share at least 55%), any type or sport. Ranked like Top 20. Most will lose; each hit pays 5–10x. Flat $1 stakes, or $2 for the strongest, under the daily cap. Moved out of Fun Picks so they are not duplicated there." },
-              { label: "Upcoming tab", value: "Up to 30 unstarted games in the next 24 hours that $500+ proven whales have bet, any sport or market including player props. Sorted best to worst by the quality score (start time and bet size are in the sort menu). Each card shows both teams, the PT date and start time with a countdown, the biggest whale bet (name and all-time rank), how many other whales are on the same bet and their money, the combined total, a split flag if whales are on the other side, and the backers' graded W-L and ROI. Strength rules still apply." },
-              { label: "Biggest Bets tab", value: "Up to 30 open whale bets, sorted best to worst by the quality score (switch to bet size for the largest single $500+ position first). Any sport or market type, including player props. Each card shows the biggest whale's bet size and all-time rank, how many other whales made the same bet, their money, the combined total, and the backers' graded W-L and ROI. Split markets are flagged. Strength rules still apply (under 45¢ never Go big, 95¢+ glue only, pricier-than-entry flag). Started and ended games are hidden. Duplicates with other tabs are expected." },
+              { label: "Upcoming tab", value: "Up to 30 unstarted games in the next 24 hours that $1,000+ proven whales have bet, any sport or market including player props. Sorted best to worst by the quality score (start time and bet size are in the sort menu). Each card shows both teams, the PT date and start time with a countdown, the biggest whale bet (name and all-time rank), how many other whales are on the same bet and their money, the combined total, a split flag if whales are on the other side, and the backers' graded W-L and ROI. Strength rules still apply." },
+              { label: "Biggest Bets tab", value: "Up to 30 open whale bets, sorted best to worst by the quality score (switch to bet size for the largest single $1,000+ position first). Any sport or market type, including player props. Each card shows the biggest whale's bet size and all-time rank, how many other whales made the same bet, their money, the combined total, and the backers' graded W-L and ROI. Split markets are flagged. Strength rules still apply (under 45¢ never Go big, 95¢+ glue only, pricier-than-entry flag). Started and ended games are hidden. Duplicates with other tabs are expected." },
               { label: "Cappers tab", value: "One card per whale we have collected picks from, sorted best to worst: elite (Proven Picks list) first, then copyable ROI with a 10+ graded sample (5–9 counts at half weight), then win rate and record. Tap to see current live picks as PickCards and every tracked pick labeled HIT, MISSED, PUSH, or OPEN/LIVE. Records are stored in capper history, graded on refresh, and never wiped. The tab W-L is the sum of each capper's record (a shared pick can count more than once)." },
-              { label: "Whale-quality ranking", value: "Vetting rule (Nov 14): a backer only counts if they have a winning graded record and positive copyable ROI on 10+ picks (5–9 allowed only at 60%+ wins and +10% ROI, labeled small sample), are not Cold, and bet real size ($500+, at least 0.5x their usual bet, not a throwaway). Negative-ROI, Cold, ungraded and small-bet backers add nothing to quality, net money or whale count, and are shown on cards as a red caution. Top 20, Fun, Polymarket, Player Props, Longshots, Biggest Bets, Hot Cappers and Bets (unless you switch on unvetted bets) only list picks with at least one vetted backer, and lists are not padded. The Hot boost only applies to positive-ROI whales. Picks on Top 20, Fun, Polymarket, Player Props, Longshots, Biggest Bets, and Bets are ranked by price band first (existing 65–84¢ / mid / other bands; started and overpriced rules still apply), then by the backing whales' quality, then net money and agreement. Quality is each whale's win rate and ROI on Kalshi-copyable singles in the 10–94¢ bands. A whale needs 10+ graded copyable picks to get a non-neutral score; smaller samples shrink toward the average but are treated as neutral (not boosted). High-volume whales with ROI near zero or negative on those copyable bets are heavily demoted. Upcoming stays soonest-first, with quality as the tiebreak. Every card shows Backers W-L and ROI from those graded copyable records. Period P&L rule: whales whose Polymarket P&L is negative over the past month, past year or all time are Cold and demoted; past-week-only negative is Cooling (small penalty). Conviction: each backer's bet is compared with their usual (median) bet; High conviction (2x+ or a top-3 bet that day) weighs 1.5x, Throwaway (0.25x or less) weighs 0.1x in quality, net money and whale count. Cards list the top backers as e.g. 'name $587 = 3.1x usual · High conviction · Hot · Wk/Mo/Yr/All P&L'." },
+              { label: "Whale-quality ranking", value: "Vetting rule (Nov 14): a backer only counts if they have a winning graded record and positive copyable ROI on 10+ picks (5–9 allowed only at 60%+ wins and +10% ROI, labeled small sample), are not Cold, and bet real size ($1,000+, at least 0.5x their usual bet, not a throwaway). Negative-ROI, Cold, ungraded and small-bet backers add nothing to quality, net money or whale count, and are shown on cards as a red caution. Top 20, Fun, Polymarket, Player Props, Longshots, Biggest Bets, Hot Cappers and Bets (unless you switch on unvetted bets) only list picks with at least one vetted backer, and lists are not padded. The Hot boost only applies to positive-ROI whales. Picks on Top 20, Fun, Polymarket, Player Props, Longshots, Biggest Bets, and Bets are ranked by price band first (existing 65–84¢ / mid / other bands; started and overpriced rules still apply), then by the backing whales' quality, then net money and agreement. Quality is each whale's win rate and ROI on Kalshi-copyable singles in the 10–94¢ bands. A whale needs 10+ graded copyable picks to get a non-neutral score; smaller samples shrink toward the average but are treated as neutral (not boosted). High-volume whales with ROI near zero or negative on those copyable bets are heavily demoted. Upcoming stays soonest-first, with quality as the tiebreak. Every card shows Backers W-L and ROI from those graded copyable records. Period P&L rule: whales whose Polymarket P&L is negative over the past month, past year or all time are Cold and demoted; past-week-only negative is Cooling (small penalty). Conviction: each backer's bet is compared with their usual (median) bet; High conviction (2x+ or a top-3 bet that day) weighs 1.5x, Throwaway (0.25x or less) weighs 0.1x in quality, net money and whale count. Cards list the top backers as e.g. 'name $587 = 3.1x usual · High conviction · Hot · Wk/Mo/Yr/All P&L'." },
               { label: "Strength label", value: "Go big: 3+ top whales, or $10,000+ with opposing whale money under 15% (or none) — never on under-45¢, 95¢+, or Split (share under 65%). Spreads cap at Normal unless 3+ whales and share of 65% or more. Normal: exactly 2. Small: 1, or any capped pick. 95¢+ is labeled Small, glue leg only." },
               { label: "Signal score (picks)", value: "Consensus 25 · Capper record 25 · Money 15 · One-sided 15 · Golden 10 · Fresh money 10" },
               { label: "Evidence score (buys, bets)", value: "Recency 25 · Capper record 20 · Independent agreement within 60 min 20 · Kalshi quote 20 · Kalshi price at or below the capper's 10" },

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Open $500+ pre-game positions of every proven-floor capper, straight from Polymarket's public Data API (v2).
+"""Open $1,000+ pre-game positions of every proven-floor capper, straight from Polymarket's public Data API (v2).
 
 Why: the full scan only sees positions at scan time and only inside a 36h window, and the hourly refresh never loads new
 positions, so a floor capper's fresh or days-out bet (NFL, college football, a bet opened after the scan) never reached Coming Up.
@@ -14,7 +14,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 BASE = 'https://data-api.polymarket.com/v2'
 WINDOW_DAYS = 7
-MIN_COST = 500
+MIN_COST = 1000
 _KEEP_ASSIGN = {'ESPORTS', 'KSER', 'KALT', 'NAME_ONLY', 'KM', 'KPROP', 'STAT_PAT', 'STAT_WORDS', 'MON', 'EP', 'ESPN', 'TZOFF', 'ET', 'SLUG_RE', 'PT'}
 _SKIP_DEF = {'fetch_pos', 'lb_rows', 'classify', '_pool_add', '_poly_sports_board', 'wname', 'qual_h', 'gold_h', 'qualifies', 'golden'}
 _NS = {}
@@ -230,7 +230,7 @@ def floor_wallets(capper_history):
 
 
 def build_rows(capper_history, now=None, positions=None, log=print, wallets=None, label='floor'):
-    """Lean-bet rows (same shape scan.py builds) for every floor capper's open $500+ position, games up to 7 days out.
+    """Lean-bet rows (same shape scan.py builds) for every floor capper's open $1,000+ position, games up to 7 days out.
 
     Returns (rows, ok_wallets). Wallets whose positions could not be read are left out of ok_wallets so callers can keep
     their previous rows instead of dropping them."""
@@ -296,12 +296,12 @@ def build_rows(capper_history, now=None, positions=None, log=print, wallets=None
         annotate_buys(rows, now, log=log)
     except Exception as e:
         log('buy activity failed (rows left untagged):', e)
-    log(f'{label} positions: {len(fl)} cappers, {len(ok)} read, {len(rows)} open $500+ bets with a game inside {WINDOW_DAYS} days')
+    log(f'{label} positions: {len(fl)} cappers, {len(ok)} read, {len(rows)} open $1,000+ bets with a game inside {WINDOW_DAYS} days')
     return rows, ok
 
 
 def check_missing(rows, coming_up, now=None):
-    """Safeguard: every floor capper's open $500+ pre-game position with a Kalshi line must be on a Coming Up card.
+    """Safeguard: every floor capper's open $1,000+ pre-game position with a Kalshi line must be on a Coming Up card.
     Returns the ones that are not, each with the reason. Positions on a finished game or priced under 3c / over 97c are the
     allowed filters, so they are not counted as missing."""
     import coming_up as cu
