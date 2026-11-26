@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795733510,
-  "updatedAt": "Thu Nov 26 \u00b7 2:51 PM PT",
+  "ts": 1795733812,
+  "updatedAt": "Thu Nov 26 \u00b7 2:56 PM PT",
   "picks": [
     {
       "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL9",
@@ -61,6 +61,15 @@
       "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL11",
       "yesNo": "No",
       "side": "Eagles +10.5",
+      "game": "Dallas Cowboys vs Philadelphia Eagles",
+      "startTs": 1795728600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL18",
+      "yesNo": "No",
+      "side": "Eagles +17.5",
       "game": "Dallas Cowboys vs Philadelphia Eagles",
       "startTs": 1795728600,
       "bt": "spread",
