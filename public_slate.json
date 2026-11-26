@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795718777,
-  "updatedAt": "Thu Nov 26 \u00b7 10:46 AM PT",
+  "ts": 1795719079,
+  "updatedAt": "Thu Nov 26 \u00b7 10:51 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -40,6 +40,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET7",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 6.5 points",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET11",
       "yesNo": "Yes",
       "side": "Detroit wins by over 10.5 points",
@@ -64,7 +73,7 @@
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "total",
-      "n": 1
+      "n": 2
     },
     {
       "ticker": "KXNFLTOTAL-26NOV26CHIDET-53",
@@ -101,6 +110,33 @@
       "startTs": 1795716000,
       "bt": "total",
       "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
+      "yesNo": "Yes",
+      "side": "AFC Bournemouth to win",
+      "game": "Celta Vigo vs AFC Bournemouth",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26RCCBOU-RCC",
+      "yesNo": "Yes",
+      "side": "RC Celta de Vigo not to win",
+      "game": "Celta Vigo vs AFC Bournemouth",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26RCCBOU-3",
+      "yesNo": "Yes",
+      "side": "Over 2.5",
+      "game": "Celta Vigo vs AFC Bournemouth",
+      "startTs": 1795715100,
+      "bt": "total",
+      "n": 2
     },
     {
       "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
@@ -170,15 +206,6 @@
       "yesNo": "No",
       "side": "Under 4.5",
       "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144",
-      "startTs": 1795715100,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26VIKBEN-5",
-      "yesNo": "No",
-      "side": "Under 4.5",
-      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica",
       "startTs": 1795715100,
       "bt": "total",
       "n": 1
@@ -337,15 +364,6 @@
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV261300TSALIR-TSA",
-      "yesNo": "Yes",
-      "side": "Spirit Academy",
-      "game": "Counter-Strike: Lir vs Spirit Academy",
-      "startTs": 1795716000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27ATLBOS-BOS",
       "yesNo": "Yes",
       "side": "Celtics",
@@ -451,6 +469,15 @@
       "game": "Wyoming Cowboys vs UConn Huskies",
       "startTs": 1795885200,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27MILDET-DET",
+      "yesNo": "Yes",
+      "side": "Pistons",
+      "game": "Detroit Pistons vs Milwaukee Bucks",
+      "startTs": 1795825800,
+      "bt": "moneyline",
       "n": 1
     },
     {
