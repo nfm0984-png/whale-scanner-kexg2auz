@@ -100177,7 +100177,10 @@
    "first_seen": 1795667878,
    "scans": 2,
    "first_score": 11,
-   "result": null
+   "result": null,
+   "ended": 1795679814,
+   "finalScore": "HAW 83 \u2013 UIW 81",
+   "active": false
   },
   "0x4e44cfe1d3d9d62b775656340755b2899dc810c6a4a3adc7f11a97be33107af7:yes": {
    "tier": "poly",
@@ -100196,7 +100199,10 @@
    "first_seen": 1795667878,
    "scans": 2,
    "first_score": 10,
-   "result": null
+   "result": null,
+   "ended": 1795679814,
+   "finalScore": "HAW 83 \u2013 UIW 81",
+   "active": false
   },
   "0xa4ba7a39c40a08734d1d1bba51e88e7d05730066b48ec428267d2d2afaf7b472:yes": {
    "tier": "poly",
@@ -100434,7 +100440,11 @@
    "first_seen": 1795674011,
    "scans": 1,
    "first_score": 20,
-   "result": null
+   "result": "W",
+   "graded": 1795679814,
+   "ended": 1795679814,
+   "finalScore": "HAW 83 \u2013 UIW 81",
+   "active": false
   },
   "0x599675716e824e79d54b5607caa7bea147a012a5526a643cf68bde6497d8aa2d:no": {
    "tier": "fun",
