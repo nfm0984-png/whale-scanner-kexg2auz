@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795676490,
-  "updatedAt": "Wed Nov 25 \u00b7 11:01 PM PT",
+  "ts": 1795676791,
+  "updatedAt": "Wed Nov 25 \u00b7 11:06 PM PT",
   "picks": [
     {
       "ticker": "KXCS2GAME-26NOV260100EFM80-M80",
@@ -76,6 +76,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
+      "yesNo": "Yes",
+      "side": "Bears",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXUELGAME-26NOV26VIKBEN-BEN",
       "yesNo": "No",
       "side": "Sport Lisboa e Benfica not to win",
@@ -101,15 +110,6 @@
       "startTs": 1795715100,
       "bt": "moneyline",
       "n": 2
-    },
-    {
-      "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
-      "yesNo": "Yes",
-      "side": "Bears",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "moneyline",
-      "n": 1
     },
     {
       "ticker": "KXCS2GAME-26NOV260600TLIMP-IMP",
