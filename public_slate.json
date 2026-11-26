@@ -1,53 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795679861,
-  "updatedAt": "Wed Nov 25 \u00b7 11:57 PM PT",
+  "ts": 1795686699,
+  "updatedAt": "Thu Nov 26 \u00b7 1:51 AM PT",
   "picks": [
-    {
-      "ticker": "KXCS2GAME-26NOV260100EFM80-M80",
-      "yesNo": "Yes",
-      "side": "M80",
-      "game": "Counter-Strike: M80 vs Eternal Fire",
-      "startTs": 1795672800,
-      "bt": "moneyline",
-      "n": 6
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV260100EFM80-EF",
-      "yesNo": "Yes",
-      "side": "Eternal Fire",
-      "game": "Counter-Strike: M80 vs Eternal Fire",
-      "startTs": 1795672800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV260100FAZEHERO-FAZE",
-      "yesNo": "Yes",
-      "side": "FaZe",
-      "game": "Counter-Strike: Heroic vs FaZe",
-      "startTs": 1795672800,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV260100FAZEHERO-HERO",
-      "yesNo": "Yes",
-      "side": "Heroic",
-      "game": "Counter-Strike: Heroic vs FaZe",
-      "startTs": 1795672800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
-      "yesNo": "Yes",
-      "side": "Denver wins by over 5.5 points",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
       "yesNo": "Yes",
@@ -94,18 +49,9 @@
       "n": 2
     },
     {
-      "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
-      "yesNo": "No",
-      "side": "Olympiak\u00f3s SFP not to win",
-      "game": "Olympiacos vs AC Milan",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV2603309Z100T-100T",
+      "ticker": "KXCS2GAME-26NOV2603309Z100T-9Z",
       "yesNo": "Yes",
-      "side": "100 Thieves",
+      "side": "9z",
       "game": "Counter-Strike: 100 Thieves vs 9z",
       "startTs": 1795681800,
       "bt": "moneyline",
@@ -130,11 +76,29 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFSPREAD-26NOV28UABUNT-UNT4",
+      "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
       "yesNo": "Yes",
-      "side": "North Texas wins by over 3.5 points",
-      "game": "UAB vs North Texas",
-      "startTs": 1795899600,
+      "side": "FC Barcelona to win",
+      "game": "Deportivo vs Barcelona",
+      "startTs": 1795965300,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV260600CWWC-CW",
+      "yesNo": "Yes",
+      "side": "Chinggis Warriors",
+      "game": "Counter-Strike: Wildcard vs Chinggis Warriors",
+      "startTs": 1795690800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26KCBUF-BUF3",
+      "yesNo": "No",
+      "side": "Chiefs +2.5",
+      "game": "Buffalo Bills vs Kansas City Chiefs",
+      "startTs": 1795742400,
       "bt": "spread",
       "n": 1
     },
@@ -148,11 +112,11 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV26KCBUF-BUF3",
-      "yesNo": "No",
-      "side": "Chiefs +2.5",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
+      "ticker": "KXNCAAFSPREAD-26NOV28UABUNT-UNT4",
+      "yesNo": "Yes",
+      "side": "North Texas wins by over 3.5 points",
+      "game": "UAB vs North Texas",
+      "startTs": 1795899600,
       "bt": "spread",
       "n": 1
     },
@@ -193,11 +157,29 @@
       "n": 1
     },
     {
+      "ticker": "KXNBAGAME-26NOV27PHIIND-PHI",
+      "yesNo": "Yes",
+      "side": "76ers",
+      "game": "Indiana Pacers vs Philadelphia 76ers",
+      "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXEPLGAME-26NOV29EVELFC-LFC",
       "yesNo": "Yes",
       "side": "Liverpool FC not to win",
       "game": "Everton vs Liverpool",
       "startTs": 1795953600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV260500AURGL-1-GL",
+      "yesNo": "Yes",
+      "side": "GamerLegion",
+      "game": "GamerLegion vs Aurora",
+      "startTs": 1795687200,
       "bt": "moneyline",
       "n": 1
     }
