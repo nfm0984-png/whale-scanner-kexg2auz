@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795722864,
-  "updatedAt": "Thu Nov 26 \u00b7 11:54 AM PT",
+  "ts": 1795723170,
+  "updatedAt": "Thu Nov 26 \u00b7 11:59 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -11,15 +11,6 @@
       "startTs": 1795716000,
       "bt": "moneyline",
       "n": 5
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET8",
-      "yesNo": "No",
-      "side": "Bears +7.5",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET8",
@@ -148,6 +139,15 @@
       "n": 1
     },
     {
+      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
+      "yesNo": "Yes",
+      "side": "Juventus FC to win",
+      "game": "Juventus vs Omonia Nicosia",
+      "startTs": 1795723200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL10",
       "yesNo": "No",
       "side": "Eagles +9.5",
@@ -166,12 +166,12 @@
       "n": 1
     },
     {
-      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
-      "yesNo": "Yes",
-      "side": "Juventus FC to win",
-      "game": "Juventus vs Omonia Nicosia",
-      "startTs": 1795723200,
-      "bt": "moneyline",
+      "ticker": "KXUELSPREAD-26NOV26BESHBS-BES2",
+      "yesNo": "No",
+      "side": "Markets +1.5",
+      "game": "Be\u015fikta\u015f JK vs MH Hapoel Be'er Sheva - More Markets",
+      "startTs": 1795715100,
+      "bt": "spread",
       "n": 1
     },
     {
@@ -477,6 +477,15 @@
       "side": "Pistons",
       "game": "Detroit Pistons vs Milwaukee Bucks",
       "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27GSWPOR-POR",
+      "yesNo": "Yes",
+      "side": "Trail Blazers",
+      "game": "Portland Trail Blazers vs Golden State Warriors",
+      "startTs": 1795833000,
       "bt": "moneyline",
       "n": 1
     },
