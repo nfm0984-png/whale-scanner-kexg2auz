@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795717877,
-  "updatedAt": "Thu Nov 26 \u00b7 10:31 AM PT",
+  "ts": 1795718177,
+  "updatedAt": "Thu Nov 26 \u00b7 10:36 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -11,51 +11,6 @@
       "startTs": 1795716000,
       "bt": "moneyline",
       "n": 3
-    },
-    {
-      "ticker": "KXNFLGAME-26NOV26CHIDET-DET",
-      "yesNo": "Yes",
-      "side": "Lions",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET6",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 5.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET5",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 4.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET3",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 2.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET4",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 3.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
     },
     {
       "ticker": "KXNFLTOTAL-26NOV26CHIDET-57",
@@ -90,33 +45,6 @@
       "side": "Over 52.5",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
-      "yesNo": "Yes",
-      "side": "AFC Bournemouth to win",
-      "game": "Celta Vigo vs AFC Bournemouth",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26RCCBOU-RCC",
-      "yesNo": "Yes",
-      "side": "RC Celta de Vigo not to win",
-      "game": "Celta Vigo vs AFC Bournemouth",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26RCCBOU-3",
-      "yesNo": "Yes",
-      "side": "Over 2.5",
-      "game": "Celta Vigo vs AFC Bournemouth",
-      "startTs": 1795715100,
       "bt": "total",
       "n": 1
     },
@@ -301,6 +229,15 @@
       "n": 1
     },
     {
+      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
+      "yesNo": "Yes",
+      "side": "Juventus FC to win",
+      "game": "Juventus vs Omonia Nicosia",
+      "startTs": 1795723200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
       "yesNo": "Yes",
       "side": "Bologna FC 1909 to win",
@@ -324,6 +261,15 @@
       "side": "FC Barcelona to win",
       "game": "Deportivo vs Barcelona",
       "startTs": 1795965300,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV261300TSALIR-TSA",
+      "yesNo": "Yes",
+      "side": "Spirit Academy",
+      "game": "Counter-Strike: Lir vs Spirit Academy",
+      "startTs": 1795716000,
       "bt": "moneyline",
       "n": 1
     },
@@ -388,15 +334,6 @@
       "game": "Appalachian State vs South Alabama",
       "startTs": 1795809600,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
-      "yesNo": "Yes",
-      "side": "Juventus FC to win",
-      "game": "Juventus vs Omonia Nicosia",
-      "startTs": 1795723200,
-      "bt": "moneyline",
       "n": 1
     },
     {
