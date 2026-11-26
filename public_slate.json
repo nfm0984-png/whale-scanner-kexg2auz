@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795726363,
-  "updatedAt": "Thu Nov 26 \u00b7 12:52 PM PT",
+  "ts": 1795726746,
+  "updatedAt": "Thu Nov 26 \u00b7 12:59 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -13,9 +13,27 @@
       "n": 4
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET5",
-      "yesNo": "No",
-      "side": "Bears +4.5",
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET7",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 6.5 points",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET6",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 5.5 points",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET10",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 9.5 points",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "spread",
@@ -23,20 +41,20 @@
     },
     {
       "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET8",
-      "yesNo": "No",
-      "side": "Bears +7.5",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 7.5 points",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "spread",
       "n": 1
     },
     {
-      "ticker": "KXNFLTOTAL-26NOV26CHIDET-65",
-      "yesNo": "No",
-      "side": "Under 64.5",
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET11",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 10.5 points",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
-      "bt": "total",
+      "bt": "spread",
       "n": 1
     },
     {
@@ -125,6 +143,15 @@
       "yesNo": "Yes",
       "side": "Over 2.5",
       "game": "Crystal Palace vs Real Sociedad",
+      "startTs": 1795723200,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26JUVOMO-5",
+      "yesNo": "No",
+      "side": "Under 4.5",
+      "game": "Juventus vs Omonia Nicosia",
       "startTs": 1795723200,
       "bt": "total",
       "n": 1
@@ -256,6 +283,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
+      "yesNo": "Yes",
+      "side": "Spurs",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
       "ticker": "KXUELGAME-26NOV26TSGSTU-TSG",
       "yesNo": "Yes",
       "side": "TSG 1899 Hoffenheim to win",
@@ -346,6 +382,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNBAGAME-26NOV27NOPLAC-LAC",
+      "yesNo": "Yes",
+      "side": "Clippers",
+      "game": "LA Clippers vs New Orleans Pelicans",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXSERIEAGAME-26NOV29COMJUV-COM",
       "yesNo": "Yes",
       "side": "Como 1907 to win",
@@ -409,15 +454,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
-      "yesNo": "Yes",
-      "side": "Spurs",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
       "yesNo": "Yes",
       "side": "Nuggets",
@@ -432,6 +468,15 @@
       "side": "Varvara Lepchenko",
       "game": "Varvara Lepchenko vs Sofia Costoulas",
       "startTs": 1795716300,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAMBGAME-26NOV26MIAMICH-MICH",
+      "yesNo": "Yes",
+      "side": "Michigan Wolverines",
+      "game": "Michigan Wolverines vs Miami Hurricanes",
+      "startTs": 1795725000,
       "bt": "moneyline",
       "n": 1
     }
