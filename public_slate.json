@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795725126,
-  "updatedAt": "Thu Nov 26 \u00b7 12:32 PM PT",
+  "ts": 1795725425,
+  "updatedAt": "Thu Nov 26 \u00b7 12:37 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -175,6 +175,24 @@
       "n": 1
     },
     {
+      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
+      "yesNo": "Yes",
+      "side": "Juventus FC to win",
+      "game": "Juventus vs Omonia Nicosia",
+      "startTs": 1795723200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
+      "yesNo": "Yes",
+      "side": "Juventus FC not to win",
+      "game": "Juventus vs Omonia Nicosia",
+      "startTs": 1795723200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU15",
       "yesNo": "Yes",
       "side": "Texas Tech wins by over 14.5 points",
@@ -234,15 +252,6 @@
       "side": "Raptors",
       "game": "Toronto Raptors vs Brooklyn Nets",
       "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
-      "yesNo": "Yes",
-      "side": "Juventus FC to win",
-      "game": "Juventus vs Omonia Nicosia",
-      "startTs": 1795723200,
       "bt": "moneyline",
       "n": 1
     },
