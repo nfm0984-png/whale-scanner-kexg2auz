@@ -586,14 +586,27 @@ function namesClash(a: string | null | undefined, b: string | null | undefined):
   if (yy.indexOf("over ") === 0 || yy.indexOf("under ") === 0 || yy === "over" || yy === "under") return false;
   return xx === yy || (xx.length >= 4 && yy.indexOf(xx) >= 0) || (yy.length >= 4 && xx.indexOf(yy) >= 0);
 }
+const SPLIT_CAP_RATIO = 2;
+const SPLIT_USD_RATIO = 2.5;
+function isLopsidedMajority(ownN: number, ownUsd: number, oppN: number, oppUsd: number): boolean {
+  if (!(ownN >= 1) || !(oppN >= 1)) return false;
+  if (ownN >= 3 && oppN === 1) return true;
+  return ownN >= SPLIT_CAP_RATIO * oppN && ownUsd >= SPLIT_USD_RATIO * (oppUsd || 0);
+}
+function isCoinFlipSplit(aN: number, aUsd: number, bN: number, bUsd: number): boolean {
+  return !isLopsidedMajority(aN, aUsd, bN, bUsd) && !isLopsidedMajority(bN, bUsd, aN, aUsd);
+}
+function backersUsd(backers: { cost?: number }[] | null | undefined): number {
+  return (backers || []).reduce((s, b) => s + (b.cost || 0), 0);
+}
 const SPLIT_GAMES: Record<string, boolean> = (() => {
   const m: Record<string, boolean> = {};
   ((PROVEN && PROVEN.splitGames) || []).forEach((g: string) => { if (g) m[g] = true; });
   ["signals", "fun", "poly", "glue", "props", "longshots", "biggest", "upcoming"].forEach((k: string) => {
     (((DATA as any)[k] || []) as Pick[]).forEach((p: Pick) => {
-      const eliteBack = (p.backers || []).some((b: Backer) => ELITE_W[(b.wallet || "").toLowerCase()]);
-      const eliteOpp = (p.opposing || []).some((o: Opp) => ELITE_W[(o.wallet || "").toLowerCase()]);
-      if (eliteBack && eliteOpp) m[evKey(p.slug)] = true;
+      const eliteBackers = (p.backers || []).filter((b: Backer) => ELITE_W[(b.wallet || "").toLowerCase()]);
+      const eliteOpp = ((p.opposing || []) as Opp[]).filter((o: Opp) => ELITE_W[(o.wallet || "").toLowerCase()]);
+      if (eliteBackers.length && eliteOpp.length && isCoinFlipSplit(eliteBackers.length, backersUsd(eliteBackers), eliteOpp.length, backersUsd(eliteOpp))) m[evKey(p.slug)] = true;
     });
   });
   const byEv: Record<string, ProvenRow[]> = {};
@@ -606,10 +619,27 @@ const SPLIT_GAMES: Record<string, boolean> = (() => {
       const pick = (r.pick || "").trim().toLowerCase();
       (mk[market] = mk[market] || {})[pick] = true;
     });
-    if (Object.keys(mk).some((market: string) => Object.keys(mk[market]).length > 1)) m[k] = true;
-    for (let i = 0; i < rs.length; i++) {
+    const camps: Record<string, ProvenRow[]> = {};
+    rs.forEach((r: ProvenRow) => {
+      const pick = (r.pick || "").trim().toLowerCase();
+      (camps[pick] = camps[pick] || []).push(r);
+    });
+    const campKeys = Object.keys(camps);
+    if (campKeys.length === 2) {
+      const a = camps[campKeys[0]], b = camps[campKeys[1]];
+      if (isCoinFlipSplit(a.length, backersUsd(a), b.length, backersUsd(b))) m[k] = true;
+    } else if (Object.keys(mk).some((market: string) => Object.keys(mk[market]).length > 1)) {
+      m[k] = true;
+    }
+    for (let i = 0; i < rs.length && !m[k]; i++) {
       for (let j = i + 1; j < rs.length; j++) {
-        if (namesClash(rs[i].opp, rs[j].pick) || namesClash(rs[j].opp, rs[i].pick)) m[k] = true;
+        if (namesClash(rs[i].opp, rs[j].pick) || namesClash(rs[j].opp, rs[i].pick)) {
+          const pickA = (rs[i].pick || "").trim().toLowerCase();
+          const pickB = (rs[j].pick || "").trim().toLowerCase();
+          const a = (camps[pickA] || [rs[i]]), b = (camps[pickB] || [rs[j]]);
+          if (isCoinFlipSplit(a.length, backersUsd(a), b.length, backersUsd(b))) m[k] = true;
+          break;
+        }
       }
     }
   });
@@ -5077,23 +5107,29 @@ function slateHitForPick(p: UPick): PublicSlatePick | null {
   }
   return hits.length === 1 ? hits[0] : null;
 }
-function splitInfo(p: UPick, now?: number): { oppN: number; oppLabel: string } | null {
-  const all = (typeof allTabPicks === "function") ? allTabPicks(now || (Date.now() / 1000)) : [];
+function splitInfo(p: UPick, now?: number, pool?: UPick[]): { oppN: number; oppLabel: string; ownN: number; ownUsd: number; oppUsd: number; stance: "majority" | "hide" } | null {
+  const ts = now || (Date.now() / 1000);
+  const all = pool || (typeof comingUpTabPicks === "function" ? comingUpTabPicks(ts) : (typeof allTabPicks === "function" ? allTabPicks(ts) : []));
   const opp = oppositeOf(p, all).filter((q: UPick) => {
     if (p.mid && q.mid === p.mid && q.view && p.view && q.view.yesNo && p.view.yesNo && q.view.yesNo !== p.view.yesNo) return true;
     if (isMoneylinePick(p) && isMoneylinePick(q) && teamToken(q) && teamToken(p) && teamToken(q) !== teamToken(p)) return true;
     return false;
   });
   let oppN = 0;
+  let oppUsd = 0;
   let oppLabel = "";
   opp.forEach((q: UPick) => {
     const n = (q.backers || []).length;
     if (!n) return;
     oppN += n;
+    oppUsd += backersUsd(q.backers);
     if (!oppLabel) oppLabel = q.big || (q.view && (q.view.backing || q.view.outcome)) || "other side";
   });
-  if (oppN < 1 || !(p.backers || []).length) return null;
-  return { oppN, oppLabel };
+  const ownN = (p.backers || []).length;
+  const ownUsd = backersUsd(p.backers);
+  if (oppN < 1 || !ownN) return null;
+  const stance: "majority" | "hide" = isLopsidedMajority(ownN, ownUsd, oppN, oppUsd) ? "majority" : "hide";
+  return { oppN, oppLabel, ownN, ownUsd, oppUsd, stance };
 }
 function PickFlags(props: { p: UPick }): React.ReactElement | null {
   useOtherSlate();
@@ -5108,7 +5144,7 @@ function PickFlags(props: { p: UPick }): React.ReactElement | null {
   const agreeN = (p.backers || []).length;
   if (agreeN >= 2) out.push(<span key="ag" data-agree="1" title="Two or more cappers who pass the quality filter are on this pick. Label only; ranking unchanged." style={flagChip("#EEF2FF", "#3730A3", "#818CF8")}>{agreeN + " agree"}</span>);
   const split = splitInfo(p);
-  if (split) out.push(<span key="sp" data-split="1" title={"Quality cappers are on both sides of this market — sharp-vs-sharp coin flip. " + split.oppN + " on " + split.oppLabel + "."} style={flagChip("#FFFBEB", "#B45309", "#F59E0B")}>{"Split · vs " + split.oppN + (split.oppLabel ? " on " + split.oppLabel : "")}</span>);
+  if (split && split.stance === "majority") out.push(<span key="sp" data-split="1" title={"Lopsided split: " + split.ownN + " quality cappers on this side vs " + split.oppN + " on " + split.oppLabel + ". Showing the heavy majority."} style={flagChip("#FFFBEB", "#B45309", "#F59E0B")}>{"Split · " + split.ownN + "–" + split.oppN}</span>);
   const both = slateHitForPick(p);
   if (both) out.push(<span key="bo" data-both-scanners="1" title={"A top Kalshi capper is also on this same contract" + (both.n ? " (" + both.n + " capper" + (both.n === 1 ? "" : "s") + ")" : "") + "."} style={flagChip("#ECFDF5", "#047857", "#34D399")}>{"Both scanners"}</span>);
   const lensChips: { key: string; label: string; title: string }[] = [];
@@ -5124,11 +5160,18 @@ function PickFlags(props: { p: UPick }): React.ReactElement | null {
 }
 function hideSplitPicks(all: UPick[], now?: number): { picks: UPick[]; hidden: number } {
   const ids: Record<string, boolean> = {};
-  all.forEach((p: UPick) => { if (p.kind === "sports" && splitInfo(p, now)) ids[p.gameId] = true; });
-  return { picks: all.filter((p: UPick) => !(p.kind === "sports" && splitInfo(p, now))), hidden: Object.keys(ids).length };
+  const picks = all.filter((p: UPick) => {
+    if (p.kind !== "sports") return true;
+    const info = splitInfo(p, now, all);
+    if (!info) return true;
+    if (info.stance === "majority") return true;
+    ids[p.gameId] = true;
+    return false;
+  });
+  return { picks, hidden: Object.keys(ids).length };
 }
 function splitHiddenNote(n: number): string {
-  return n ? (n + " split game" + (n === 1 ? "" : "s") + " hidden") : "";
+  return n ? (n + " coin-flip split game" + (n === 1 ? "" : "s") + " hidden") : "";
 }
 const STALE_PRICE_CENTS = 6;
 const PRICED_OUT_LO = 0.03;
@@ -5533,7 +5576,19 @@ function goldenHitOk(p: UPick, all: UPick[]): boolean {
     const oppB: UBacker[] = [];
     const seen: Record<string, boolean> = {};
     oppPicks.forEach((q: UPick) => q.backers.forEach((b: UBacker) => { if (seen[b.wallet] || mine.some((m) => m.wallet === b.wallet)) return; seen[b.wallet] = true; oppB.push(b); }));
-    if (sideHasProven(oppB, p.league)) {
+    if (oppB.length >= 1 && mine.length >= 1) {
+      if (isLopsidedMajority(mine.length, backersUsd(mine), oppB.length, backersUsd(oppB))) {
+        // keep the heavy majority side on Golden Picks
+      } else if (isLopsidedMajority(oppB.length, backersUsd(oppB), mine.length, backersUsd(mine))) {
+        return false;
+      } else if (isCoinFlipSplit(mine.length, backersUsd(mine), oppB.length, backersUsd(oppB))) {
+        return false;
+      } else if (sideHasProven(oppB, p.league)) {
+        const own = recOfBackers(mine, "sports", p.league);
+        const opp = recOfBackers(oppB, "sports", p.league);
+        if (opp.score > own.score + 1e-6) return false;
+      }
+    } else if (sideHasProven(oppB, p.league)) {
       const own = recOfBackers(mine, "sports", p.league);
       const opp = recOfBackers(oppB, "sports", p.league);
       if (opp.score > own.score + 1e-6) return false;
@@ -5845,6 +5900,21 @@ function inSlateWindow(startTs: number, now: number, live?: boolean): boolean {
 }
 function allTabPicks(now: number): UPick[] {
   return combinedPicks(now, 1, false).filter((p: UPick) => p.kind === "sports" && inSlateWindow(p.startTs || 0, now, p.live));
+}
+function comingUpHorizonSecs(): number {
+  const h = DATA && DATA.settings && DATA.settings.windowH;
+  return (typeof h === "number" && h > 0 ? h : 36) * 3600;
+}
+function inComingUpWindow(startTs: number, now: number, live?: boolean): boolean {
+  if (live || (startTs > 0 && startTs <= now)) return true;
+  if (!startTs) return false;
+  return startTs <= now + comingUpHorizonSecs();
+}
+function comingUpTabPicks(now: number): UPick[] {
+  return combinedPicks(now, 1, false).filter((p: UPick) => p.kind === "sports" && inComingUpWindow(p.startTs || 0, now, p.live));
+}
+function comingUpTabCount(now: number): number {
+  return rankedLists(hideBoardPicks(comingUpTabPicks(now), now).picks).total;
 }
 function combinedPicks(now: number, peDays: number = 1, windowed: boolean = true): UPick[] {
   const by: Record<string, UPick> = {};
@@ -6304,7 +6374,7 @@ function TodayCard(props: { all: UPick[]; now: number }) {
   );
 }
 function CombinedList(props: { now: number; mode: "rank" | "start" }) {
-  const hid = hideBoardPicks(allTabPicks(props.now), props.now);
+  const hid = hideBoardPicks((props.mode === "start" ? comingUpTabPicks(props.now) : allTabPicks(props.now)), props.now);
   const picks = hid.picks;
   const splitNote = boardHiddenNotes(hid);
   const L = rankedLists(picks);
@@ -6334,9 +6404,9 @@ function CombinedList(props: { now: number; mode: "rank" | "start" }) {
   );
 }
 function ComingUpTab(props: { now: number }) {
-  const n = eliteTabCount(props.now);
+  const n = comingUpTabCount(props.now);
   return (
-    <Section heading={"Coming Up · " + n} caption="Live first, then soonest · today in PT · after 7pm, + tomorrow">
+    <Section heading={"Coming Up · " + n} caption="Live first, then soonest · full 36-hour slate (not limited to today)">
       <CombinedList now={props.now} mode="start" />
     </Section>
   );
@@ -6910,7 +6980,7 @@ export default function App() {
       <div className="ws-tabs-flow" data-tab-bar="desktop">
         <div className="ws-tabs">
           <span className="ws-tabs-label">Today</span>
-          {[{ value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: eliteTabCount(now) }, { value: "hot", label: "Golden Picks", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }, { value: "scorecard", label: "Scorecard" }].map((t) => {
+          {[{ value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: comingUpTabCount(now) }, { value: "hot", label: "Golden Picks", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }, { value: "scorecard", label: "Scorecard" }].map((t) => {
             const on = tab === t.value;
             return (
               <button key={t.value} type="button" onClick={() => { setTab(t.value); setSportFilter(""); }} style={{ flex: "0 0 auto", display: "inline-flex", alignItems: "center", gap: 7, padding: "8px 14px", borderRadius: 999, border: "0", background: on ? "#1D4ED8" : "transparent", color: on ? "#FFFFFF" : "#BFDBFE", fontWeight: 800, fontSize: 14, cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap", touchAction: "manipulation" }}>
@@ -7121,7 +7191,7 @@ export default function App() {
           <span style={{ fontSize: 11, fontWeight: 850, letterSpacing: "0.08em", textTransform: "uppercase", color: "#7C3AED", width: 38, flex: "none", lineHeight: "12px" }}>Today</span>
           <div style={{ flex: 1, minWidth: 0 }}>
             <PillTabs bare
-              options={[{ value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: eliteTabCount(now) }, { value: "hot", label: "Golden Picks", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }, { value: "scorecard", label: "Scorecard" }]}
+              options={[{ value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: comingUpTabCount(now) }, { value: "hot", label: "Golden Picks", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }, { value: "scorecard", label: "Scorecard" }]}
               value={tab === "pe" ? "" : tab}
               onChange={(v: string) => { setTab(v); setSportFilter(""); }}
             />

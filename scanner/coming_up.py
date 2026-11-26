@@ -1234,6 +1234,65 @@ def refresh(games, now, win_end, kalshi_now=None, capper_history=None):
     return out
 
 
+def merge_lean_rows(*groups):
+    """Dedupe lean-bet rows by (wallet, cid, side), keeping the larger cost."""
+    best = {}
+    for rows in groups:
+        for b in rows or []:
+            w = (b.get('wallet') or '').lower()
+            cid = b.get('cid') or b.get('q')
+            side = b.get('side') or 'yes'
+            if not w or not cid:
+                continue
+            key = (w, cid, side)
+            if key not in best or (b.get('cost') or 0) > (best[key].get('cost') or 0):
+                bb = dict(b)
+                bb['wallet'] = w
+                best[key] = bb
+    return list(best.values())
+
+
+def rows_from_cards(games):
+    """Flatten previous Coming Up cards back into lean-bet rows so a missed
+    floor-position fetch cannot drop a still-open (including live) quality side."""
+    rows = []
+    for g in games or []:
+        ts = g.get('startTs') or 0
+        title = g.get('game') or ''
+        league = g.get('league') or ''
+        start = g.get('start') or ''
+        for m in g.get('markets') or []:
+            cid = m.get('id') or m.get('cid') or m.get('q')
+            for s in m.get('sides') or []:
+                px = s.get('kPrice') if s.get('kPrice') is not None else s.get('px')
+                kal = {'status': 'ok', 'price': px, 'ticker': s.get('ticker'),
+                       'action': s.get('action'), 'contract': s.get('contract')} if px is not None else {}
+                side = s.get('side') or 'yes'
+                for b in s.get('backers') or []:
+                    w = (b.get('wallet') or '').lower()
+                    if not w or not cid:
+                        continue
+                    rows.append({
+                        'wallet': w,
+                        'name': b.get('name') or '',
+                        'cid': cid,
+                        'q': m.get('q') or '',
+                        'side': side,
+                        'startTs': ts,
+                        'cost': b.get('cost') or 0,
+                        'avg': b.get('avg') if b.get('avg') is not None else s.get('avgEntry'),
+                        'kalshi': kal,
+                        'game': {'name': title, 'start': start},
+                        'league': league,
+                        'kind': m.get('kind') or 'other',
+                        'label': s.get('label') or b.get('label') or '',
+                        'lastTs': s.get('lastTs') or b.get('lastTs'),
+                        'firstTs': s.get('firstTs') or b.get('firstTs'),
+                    })
+    return rows
+
+
+
 def stamp_first_seen(games, prev_map, now, keep_days=4):
     """Nov 23 (Noel): stamp each Coming Up side with when the scanner first showed it (side['firstTs']).
 

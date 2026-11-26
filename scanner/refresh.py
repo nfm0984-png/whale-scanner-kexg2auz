@@ -457,12 +457,16 @@ try:
     emb['provenPicks'] = _pv.build(emb, _ch_store)
 except Exception as _e:
     print('proven picks failed:', _e)
+_prior_lenses = emb.get('orcaLenses')
 try:
     import orca_lenses as _olr
-    _olr.refresh()
-    emb['orcaLenses'] = _olr.payload()
+    _olr.refresh(prior=_prior_lenses)
+    emb['orcaLenses'] = _olr.payload(prior=_prior_lenses)
 except Exception as _e:
     print('orca lenses failed:', _e, flush=True)
+    if _prior_lenses and any((_prior_lenses.get(k) or []) for k in ('proven', 'smart', 'copyable', 'niche')):
+        emb['orcaLenses'] = _prior_lenses
+        print('orca lenses: kept previous lists after error', flush=True)
 try:
     import coming_up as _cu
     def _cu_px(tk):
@@ -475,9 +479,18 @@ try:
     import floor_positions as _fp
     _fl_all = _fp.floor_wallets(emb.get('capperHistory') or {})
     _fl_rows, _fl_ok = _fp.build_rows(emb.get('capperHistory') or {}, NOW)
-    if _fl_all and len(_fl_ok) >= max(1, len(_fl_all) // 2):
-        emb['comingUp'] = _cu.build(_fl_rows, emb.get('capperHistory') or {}, NOW, NOW + _fp.WINDOW_DAYS * 86400, proven=emb.get('provenPicks'))
-        emb['missing_picks'] = _fp.check_missing(_fl_rows, emb['comingUp'], NOW)
+    # Always rebuild Coming Up from current quality bets + floor rows + previous
+    # cards so a missed floor fetch cannot drop a live quality game (e.g. Cowboys).
+    # MM / $1,000 / 1.2x / stale-6¢ gates stay inside coming_up.build / _in_window.
+    _prev_rows = _cu.rows_from_cards(emb.get('comingUp') or [])
+    _bet_rows = list(emb.get('bets') or [])
+    _merged = _cu.merge_lean_rows(_fl_rows, _bet_rows, _prev_rows)
+    if _merged:
+        emb['comingUp'] = _cu.build(_merged, emb.get('capperHistory') or {}, NOW, NOW + _fp.WINDOW_DAYS * 86400, proven=emb.get('provenPicks'))
+        try:
+            emb['missing_picks'] = _fp.check_missing(_fl_rows, emb['comingUp'], NOW)
+        except Exception as _e:
+            print('missing_picks check failed:', _e)
     else:
         print('floor positions unavailable (%d of %d cappers read); re-pricing the previous Coming Up cards' % (len(_fl_ok), len(_fl_all)), flush=True)
         emb['comingUp'] = _cu.refresh(emb.get('comingUp') or [], NOW, NOW + _fp.WINDOW_DAYS * 86400, kalshi_now=_cu_px, capper_history=emb.get('capperHistory') or {})

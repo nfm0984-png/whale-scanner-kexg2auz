@@ -374,35 +374,80 @@ def build(emb, store=None, write=True):
         if key not in best or r['cost'] > best[key]['cost']:
             best[key] = r
     out = list(best.values())
-    # Hide the whole game when elite cappers are on opposite sides, including an elite who hedged both sides.
+    # Hide true coin-flip / even elite splits. Keep the heavy majority side of a
+    # lopsided split (e.g. 3 vs 1, or 2:1 caps with 2.5x dollars). Hedged events stay hidden.
+    import split_policy as _sp
     split_events = set(k for k in hedge_events if k)
     by_ev = {}
     for r in out:
         by_ev.setdefault(evkey(r['slug']), []).append(r)
+    hide_row = set()
     for ek, rs in by_ev.items():
-        mk = {}
-        for r in rs:
-            mk.setdefault((r.get('market') or '').strip().lower(), set()).add((r.get('pick') or '').strip().lower())
-        if any(len(v) > 1 for v in mk.values()):
-            split_events.add(ek)
+        if ek in hedge_events:
             continue
-        done = False
-        for i, a in enumerate(rs):
-            if done:
-                break
-            for b in rs[i + 1:]:
-                if _names_clash(a.get('opp'), b.get('pick')) or _names_clash(b.get('opp'), a.get('pick')):
+        groups = {}
+        for r in rs:
+            key = ((r.get('market') or '').strip().lower(), (r.get('pick') or '').strip().lower())
+            groups.setdefault(key, []).append(r)
+        keys = list(groups)
+        opp = {k: set() for k in keys}
+        for i, k1 in enumerate(keys):
+            a = groups[k1][0]
+            for k2 in keys[i + 1:]:
+                b = groups[k2][0]
+                same_mkt = k1[0] == k2[0] and k1[1] != k2[1] and k1[1] and k2[1]
+                clash = _names_clash(a.get('opp'), b.get('pick')) or _names_clash(b.get('opp'), a.get('pick'))
+                if same_mkt or clash:
+                    opp[k1].add(k2)
+                    opp[k2].add(k1)
+        seen = set()
+        def _comp(start):
+            stack = [start]
+            outk = []
+            while stack:
+                x = stack.pop()
+                if x in seen:
+                    continue
+                seen.add(x)
+                outk.append(x)
+                stack.extend(opp[x])
+            return outk
+        for k in keys:
+            if k in seen:
+                continue
+            ck = _comp(k)
+            if len(ck) < 2:
+                continue
+            camps = [(gk, groups[gk], len(groups[gk]), sum((x.get('cost') or 0) for x in groups[gk])) for gk in ck]
+            # Merge to two camps when possible (yes/no or two picks); otherwise treat as contested.
+            if len(camps) == 2:
+                (k1, v1, n1, u1), (k2, v2, n2, u2) = camps
+                if _sp.is_lopsided_majority(n1, u1, n2, u2):
+                    for r in v1:
+                        r['splitNote'] = _sp.badge(n1, n2)
+                    for r in v2:
+                        hide_row.add(id(r))
+                elif _sp.is_lopsided_majority(n2, u2, n1, u1):
+                    for r in v2:
+                        r['splitNote'] = _sp.badge(n2, n1)
+                    for r in v1:
+                        hide_row.add(id(r))
+                else:
                     split_events.add(ek)
-                    done = True
-                    break
-    if split_events:
-        out = [r for r in out if evkey(r['slug']) not in split_events]
+                    for r in v1 + v2:
+                        hide_row.add(id(r))
+            else:
+                split_events.add(ek)
+                for _, vs, _, _ in camps:
+                    for r in vs:
+                        hide_row.add(id(r))
+    out = [r for r in out if evkey(r['slug']) not in split_events and id(r) not in hide_row]
     # stale picks rank below fresh ones of the same verdict
     out.sort(key=lambda r: (order[r['verdict']], 1 if r.get('stale') else 0, r['startTs'] or 10 ** 12, -r['cost']))
     slip_hidden = sum(1 for p in rows if p.get('_slipHidden'))
     res = {
         'updatedTs': int(now), 'updatedAt': pt(now),
-        'rule': 'Elite: 30+ graded BIG bets (stake >= max($500, 1.5x median)) over a 60+ day account, +15% big-bet ROI, Hot, and +20% ROI in the sport (+10% if 100+ graded). No 12-bet small-sample path. Fun/small bets are ignored. A pick is only GOOD if that capper has 30+ graded in that sport. Every pick needs $500+. Market makers/bots dropped. One-off jackpot records cannot be elite. Picks 2c+ worse than the whale entry (after Kalshi fee) are hidden. Buys older than 1 hour are tagged stale. Split games hidden.',
+        'rule': 'Elite: 30+ graded BIG bets (stake >= max($500, 1.5x median)) over a 60+ day account, +15% big-bet ROI, Hot, and +20% ROI in the sport (+10% if 100+ graded). No 12-bet small-sample path. Fun/small bets are ignored. A pick is only GOOD if that capper has 30+ graded in that sport. Every pick needs $500+. Market makers/bots dropped. One-off jackpot records cannot be elite. Picks 2c+ worse than the whale entry (after Kalshi fee) are hidden. Buys older than 1 hour are tagged stale. True coin-flip splits hidden; lopsided majority sides (e.g. 3 vs 1) stay.',
         'filters': {'slipHidden': slip_hidden, 'stale': sum(1 for r in out if r.get('stale')), 'cleanup': clean_removed},
         'splitGames': sorted(split_events),
         'elite': [{'wallet': c['wallet'], 'name': c.get('name'), 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi'),
@@ -416,7 +461,7 @@ def build(emb, store=None, write=True):
     if write:
         for pth in (OUT, OUT_ROOT):
             json.dump(res, open(pth, 'w'), separators=(',', ':'))
-    print(f"proven picks: {len(elite)} elite cappers ({', '.join((c.get('name') or c['wallet'][:10]) for c in elite[:12])}), {len(out)} open picks, {res['counts']}, hidden {len(split_events)} elite-split/hedged games, slip-hidden {slip_hidden}, stale {res['filters']['stale']}")
+    print(f"proven picks: {len(elite)} elite cappers ({', '.join((c.get('name') or c['wallet'][:10]) for c in elite[:12])}), {len(out)} open picks, {res['counts']}, hidden {len(split_events)} coin-flip/hedged games, dropped {sum(1 for _ in hide_row)} minority/coin-flip rows, slip-hidden {slip_hidden}, stale {res['filters']['stale']}")
     return res
 
 if __name__ == '__main__':

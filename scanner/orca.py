@@ -1,12 +1,26 @@
 import json, time, urllib.request, urllib.error, urllib.parse
 import os as _os
 _HERE = _os.path.dirname(_os.path.abspath(__file__))
-_K = (_os.environ.get('ORCA_API_KEY') or open(_os.path.join(_HERE, '.orca_api_key')).read()).strip()
+def _load_key():
+    k = _os.environ.get('ORCA_API_KEY')
+    if k:
+        return k.strip()
+    path = _os.path.join(_HERE, '.orca_api_key')
+    if _os.path.isfile(path):
+        try:
+            return open(path).read().strip()
+        except Exception:
+            return ''
+    return ''
+_K = _load_key()
 BASE = "https://orcalayer.com"
 CALLS = {'n': 0, 'units': 0, 'errors': [], 'last_limit': None, 'last_remaining': None}
 import hashlib, os
 CACHE_DIR = _os.path.join(_HERE, '.cache'); CACHE_TTL = int(os.environ.get('ORCA_CACHE_TTL', '0'))
 def orca(path, params=None, body=None, units=1, tries=4, timeout=90, wait202=True):
+    if not _K:
+        CALLS['errors'].append('no api key')
+        return None
     url = BASE + path + ('?' + urllib.parse.urlencode(params) if params else '')
     if CACHE_TTL and body is None:
         os.makedirs(CACHE_DIR, exist_ok=True); cf = os.path.join(CACHE_DIR, hashlib.md5(url.encode()).hexdigest())
