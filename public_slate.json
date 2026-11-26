@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795717108,
-  "updatedAt": "Thu Nov 26 \u00b7 10:18 AM PT",
+  "ts": 1795717277,
+  "updatedAt": "Thu Nov 26 \u00b7 10:21 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -45,6 +45,51 @@
       "side": "Over 52.5",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26USGLPO-USG",
+      "yesNo": "Yes",
+      "side": "RU Saint-Gilloise to win",
+      "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144 - More Markets",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26USGLPO-USG",
+      "yesNo": "No",
+      "side": "RU Saint-Gilloise not to win",
+      "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144 - More Markets",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26USGLPO-TIE",
+      "yesNo": "Yes",
+      "side": "DRAW",
+      "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144 - More Markets",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26USGLPO-6",
+      "yesNo": "No",
+      "side": "Under 5.5",
+      "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144 - More Markets",
+      "startTs": 1795715100,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26USGLPO-5",
+      "yesNo": "No",
+      "side": "Under 4.5",
+      "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144 - More Markets",
+      "startTs": 1795715100,
       "bt": "total",
       "n": 1
     },
@@ -94,42 +139,6 @@
       "n": 1
     },
     {
-      "ticker": "KXUELGAME-26NOV26USGLPO-USG",
-      "yesNo": "Yes",
-      "side": "RU Saint-Gilloise to win",
-      "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144 - More Markets",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26USGLPO-USG",
-      "yesNo": "No",
-      "side": "RU Saint-Gilloise not to win",
-      "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144 - More Markets",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26USGLPO-6",
-      "yesNo": "No",
-      "side": "Under 5.5",
-      "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144 - More Markets",
-      "startTs": 1795715100,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26USGLPO-5",
-      "yesNo": "No",
-      "side": "Under 4.5",
-      "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144 - More Markets",
-      "startTs": 1795715100,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
       "yesNo": "Yes",
       "side": "Chiefs",
@@ -166,24 +175,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL10",
-      "yesNo": "No",
-      "side": "Eagles +9.5",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL9",
-      "yesNo": "Yes",
-      "side": "Dallas wins by over 8.5 points",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXUELGAME-26NOV26VIKBEN-VIK",
       "yesNo": "Yes",
       "side": "FC Viktoria Plze\u0148 not to win",
@@ -199,6 +190,24 @@
       "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
       "startTs": 1795715100,
       "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL10",
+      "yesNo": "No",
+      "side": "Eagles +9.5",
+      "game": "Dallas Cowboys vs Philadelphia Eagles",
+      "startTs": 1795728600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL9",
+      "yesNo": "Yes",
+      "side": "Dallas wins by over 8.5 points",
+      "game": "Dallas Cowboys vs Philadelphia Eagles",
+      "startTs": 1795728600,
+      "bt": "spread",
       "n": 1
     },
     {
