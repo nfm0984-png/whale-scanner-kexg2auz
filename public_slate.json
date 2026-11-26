@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795723796,
-  "updatedAt": "Thu Nov 26 \u00b7 12:09 PM PT",
+  "ts": 1795724085,
+  "updatedAt": "Thu Nov 26 \u00b7 12:14 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -76,42 +76,6 @@
       "n": 1
     },
     {
-      "ticker": "KXUELGAME-26NOV26CRYRSO-CRY",
-      "yesNo": "Yes",
-      "side": "Crystal Palace FC not to win",
-      "game": "Crystal Palace vs Real Sociedad",
-      "startTs": 1795723200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26CRYRSO-TIE",
-      "yesNo": "No",
-      "side": "NO DRAW",
-      "game": "Crystal Palace vs Real Sociedad",
-      "startTs": 1795723200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26CRYRSO-RSO",
-      "yesNo": "Yes",
-      "side": "Real Sociedad de F\u00fatbol not to win",
-      "game": "Crystal Palace vs Real Sociedad",
-      "startTs": 1795723200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26CRYRSO-3",
-      "yesNo": "Yes",
-      "side": "Over 2.5",
-      "game": "Crystal Palace vs Real Sociedad",
-      "startTs": 1795723200,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
       "yesNo": "Yes",
       "side": "Denver wins by over 5.5 points",
@@ -139,10 +103,46 @@
       "n": 1
     },
     {
+      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
+      "yesNo": "Yes",
+      "side": "Juventus FC to win",
+      "game": "Juventus vs Omonia Nicosia",
+      "startTs": 1795723200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXUELTOTAL-26NOV26JUVOMO-2",
       "yesNo": "Yes",
       "side": "Over 1.5",
       "game": "Juventus vs Omonia Nicosia",
+      "startTs": 1795723200,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26CRYRSO-TIE",
+      "yesNo": "No",
+      "side": "NO DRAW",
+      "game": "Crystal Palace vs Real Sociedad",
+      "startTs": 1795723200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26CRYRSO-RSO",
+      "yesNo": "Yes",
+      "side": "Real Sociedad de F\u00fatbol not to win",
+      "game": "Crystal Palace vs Real Sociedad",
+      "startTs": 1795723200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26CRYRSO-3",
+      "yesNo": "Yes",
+      "side": "Over 2.5",
+      "game": "Crystal Palace vs Real Sociedad",
       "startTs": 1795723200,
       "bt": "total",
       "n": 1
@@ -202,24 +202,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAMBGAME-26NOV26MDSDSU-SDSU",
-      "yesNo": "Yes",
-      "side": "San Diego State Aztecs",
-      "game": "San Diego State Aztecs vs Maryland Terrapins",
-      "startTs": 1795716000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAMBGAME-26NOV26MDSDSU-MD",
-      "yesNo": "Yes",
-      "side": "Maryland Terrapins",
-      "game": "San Diego State Aztecs vs Maryland Terrapins",
-      "startTs": 1795716000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU15",
       "yesNo": "Yes",
       "side": "Texas Tech wins by over 14.5 points",
@@ -253,15 +235,6 @@
       "game": "OFI Crete vs Anderlecht",
       "startTs": 1795723200,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELSPREAD-26NOV26BESHBS-BES2",
-      "yesNo": "No",
-      "side": "Markets +1.5",
-      "game": "Be\u015fikta\u015f JK vs MH Hapoel Be'er Sheva - More Markets",
-      "startTs": 1795715100,
-      "bt": "spread",
       "n": 1
     },
     {
@@ -324,15 +297,6 @@
       "side": "FC Barcelona to win",
       "game": "Deportivo vs Barcelona",
       "startTs": 1795965300,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXATPCHALLENGERMATCH-26NOV26NEFWIL-NEF",
-      "yesNo": "Yes",
-      "side": "Axel Nefve",
-      "game": "San Salvador: Axel Nefve vs Benjamin Willwerth",
-      "startTs": 1795718400,
       "bt": "moneyline",
       "n": 1
     },
@@ -414,15 +378,6 @@
       "side": "Texans",
       "game": "Houston Texans vs Baltimore Ravens",
       "startTs": 1795975200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXITFMATCH-26NOV25LORPRI-PRI",
-      "yesNo": "Yes",
-      "side": "Salvador Price",
-      "game": "M15 Santa Cruz: Santiago Lora vs Salvador Price",
-      "startTs": 1795716038,
       "bt": "moneyline",
       "n": 1
     },
@@ -512,6 +467,15 @@
       "yesNo": "Yes",
       "side": "Spirit Academy",
       "game": "Counter-Strike: Lir vs Spirit Academy",
+      "startTs": 1795716000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAMBGAME-26NOV26MDSDSU-SDSU",
+      "yesNo": "Yes",
+      "side": "San Diego State Aztecs",
+      "game": "San Diego State Aztecs vs Maryland Terrapins",
       "startTs": 1795716000,
       "bt": "moneyline",
       "n": 1
