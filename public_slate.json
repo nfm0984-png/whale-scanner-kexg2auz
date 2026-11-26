@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795709744,
-  "updatedAt": "Thu Nov 26 \u00b7 8:15 AM PT",
+  "ts": 1795711567,
+  "updatedAt": "Thu Nov 26 \u00b7 8:46 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -11,6 +11,15 @@
       "startTs": 1795716000,
       "bt": "moneyline",
       "n": 2
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV26CHIDET-DET",
+      "yesNo": "Yes",
+      "side": "Lions",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "moneyline",
+      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV26CHIDET-CHI2",
@@ -37,12 +46,21 @@
       "game": "Celta Vigo vs AFC Bournemouth",
       "startTs": 1795715100,
       "bt": "moneyline",
-      "n": 1
+      "n": 2
     },
     {
       "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
       "yesNo": "Yes",
       "side": "AFC Bournemouth not to win",
+      "game": "Celta Vigo vs AFC Bournemouth",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26RCCBOU-RCC",
+      "yesNo": "Yes",
+      "side": "RC Celta de Vigo not to win",
       "game": "Celta Vigo vs AFC Bournemouth",
       "startTs": 1795715100,
       "bt": "moneyline",
@@ -58,13 +76,13 @@
       "n": 1
     },
     {
-      "ticker": "KXDOTA2MAP-26NOV261200TYGL-1-GL",
+      "ticker": "KXDOTA2MAP-26NOV261200TYGL-2-TY",
       "yesNo": "Yes",
-      "side": "GamerLegion",
+      "side": "Team Yandex",
       "game": "Team Yandex vs GamerLegion",
       "startTs": 1795712400,
       "bt": "moneyline",
-      "n": 1
+      "n": 2
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
@@ -100,7 +118,7 @@
       "game": "Buffalo Bills vs Kansas City Chiefs",
       "startTs": 1795742400,
       "bt": "moneyline",
-      "n": 2
+      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV26KCBUF-BUF3",
@@ -121,12 +139,48 @@
       "n": 1
     },
     {
+      "ticker": "KXUELGAME-26NOV26VIKBEN-VIK",
+      "yesNo": "Yes",
+      "side": "FC Viktoria Plze\u0148 not to win",
+      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXUELGAME-26NOV26VIKBEN-BEN",
       "yesNo": "No",
       "side": "Sport Lisboa e Benfica not to win",
       "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
       "startTs": 1795715100,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU15",
+      "yesNo": "Yes",
+      "side": "Texas Tech wins by over 14.5 points",
+      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
+      "startTs": 1795741200,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU14",
+      "yesNo": "Yes",
+      "side": "Texas Tech wins by over 13.5 points",
+      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
+      "startTs": 1795741200,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU21",
+      "yesNo": "No",
+      "side": "TCU Horned Frogs +20.5",
+      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
+      "startTs": 1795741200,
+      "bt": "spread",
       "n": 1
     },
     {
@@ -247,6 +301,15 @@
       "n": 1
     },
     {
+      "ticker": "KXUELGAME-26NOV26OLLSK-OL",
+      "yesNo": "Yes",
+      "side": "Olympique Lyonnais to win",
+      "game": "Olympique Lyonnais vs Lillestr\u00f8m SK",
+      "startTs": 1795723200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV27MSSTMISS-MISS18",
       "yesNo": "Yes",
       "side": "Ole Miss wins by over 17.5 points",
@@ -265,19 +328,19 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU21",
-      "yesNo": "No",
-      "side": "TCU Horned Frogs +20.5",
-      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
-      "startTs": 1795741200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27PHIIND-PHI",
       "yesNo": "Yes",
       "side": "76ers",
       "game": "Indiana Pacers vs Philadelphia 76ers",
+      "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27MILDET-DET",
+      "yesNo": "Yes",
+      "side": "Pistons",
+      "game": "Detroit Pistons vs Milwaukee Bucks",
       "startTs": 1795825800,
       "bt": "moneyline",
       "n": 1
