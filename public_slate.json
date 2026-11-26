@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795715008,
-  "updatedAt": "Thu Nov 26 \u00b7 9:43 AM PT",
+  "ts": 1795715335,
+  "updatedAt": "Thu Nov 26 \u00b7 9:48 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -100,15 +100,6 @@
       "game": "Olympiacos vs AC Milan",
       "startTs": 1795715100,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26OLYACM-3",
-      "yesNo": "No",
-      "side": "Under 2.5",
-      "game": "Olympiacos vs AC Milan",
-      "startTs": 1795715100,
-      "bt": "total",
       "n": 1
     },
     {
@@ -301,6 +292,24 @@
       "n": 1
     },
     {
+      "ticker": "KXNBAGAME-26NOV27ATLBOS-BOS",
+      "yesNo": "Yes",
+      "side": "Celtics",
+      "game": "Boston Celtics vs Atlanta Hawks",
+      "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27ATLBOS-ATL",
+      "yesNo": "Yes",
+      "side": "Hawks",
+      "game": "Boston Celtics vs Atlanta Hawks",
+      "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV28SACHAW-HAW14",
       "yesNo": "Yes",
       "side": "Hawai'i wins by over 13.5 points",
@@ -387,15 +396,6 @@
       "side": "Pistons",
       "game": "Detroit Pistons vs Milwaukee Bucks",
       "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27ATLBOS-BOS",
-      "yesNo": "Yes",
-      "side": "Celtics",
-      "game": "Boston Celtics vs Atlanta Hawks",
-      "startTs": 1795827600,
       "bt": "moneyline",
       "n": 1
     },
