@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795677694,
-  "updatedAt": "Wed Nov 25 \u00b7 11:21 PM PT",
+  "ts": 1795677990,
+  "updatedAt": "Wed Nov 25 \u00b7 11:26 PM PT",
   "picks": [
     {
       "ticker": "KXCS2GAME-26NOV260100EFM80-M80",
@@ -22,15 +22,6 @@
       "n": 2
     },
     {
-      "ticker": "KXCS2MAP-26NOV260100FAZEHERO-2-HERO",
-      "yesNo": "Yes",
-      "side": "Heroic",
-      "game": "Counter-Strike: Heroic vs FaZe",
-      "startTs": 1795672800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXCS2MAP-26NOV260100FAZEHERO-2-FAZE",
       "yesNo": "Yes",
       "side": "FaZe",
@@ -38,6 +29,15 @@
       "startTs": 1795672800,
       "bt": "moneyline",
       "n": 2
+    },
+    {
+      "ticker": "KXCS2MAP-26NOV260100FAZEHERO-2-HERO",
+      "yesNo": "Yes",
+      "side": "Heroic",
+      "game": "Counter-Strike: Heroic vs FaZe",
+      "startTs": 1795672800,
+      "bt": "moneyline",
+      "n": 1
     },
     {
       "ticker": "KXCS2GAME-26NOV260100FAZEHERO-FAZE",
