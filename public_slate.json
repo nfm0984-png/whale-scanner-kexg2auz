@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795728699,
-  "updatedAt": "Thu Nov 26 \u00b7 1:31 PM PT",
+  "ts": 1795729193,
+  "updatedAt": "Thu Nov 26 \u00b7 1:39 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26PHIDAL-DAL",
@@ -23,48 +23,12 @@
     },
     {
       "ticker": "KXUELGAME-26NOV26CRYRSO-CRY",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Crystal Palace FC not to win",
       "game": "Crystal Palace vs Real Sociedad",
       "startTs": 1795723200,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26CRYRSO-RSO",
-      "yesNo": "Yes",
-      "side": "Real Sociedad de F\u00fatbol not to win",
-      "game": "Crystal Palace vs Real Sociedad",
-      "startTs": 1795723200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26CRYRSO-TIE",
-      "yesNo": "No",
-      "side": "NO DRAW",
-      "game": "Crystal Palace vs Real Sociedad",
-      "startTs": 1795723200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26CRYRSO-3",
-      "yesNo": "No",
-      "side": "Under 2.5",
-      "game": "Crystal Palace vs Real Sociedad",
-      "startTs": 1795723200,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26CRYRSO-3",
-      "yesNo": "Yes",
-      "side": "Over 2.5",
-      "game": "Crystal Palace vs Real Sociedad",
-      "startTs": 1795723200,
-      "bt": "total",
-      "n": 1
+      "n": 3
     },
     {
       "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
@@ -73,6 +37,15 @@
       "game": "Toronto Raptors vs Brooklyn Nets",
       "startTs": 1795825800,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26FTCCEL-1",
+      "yesNo": "No",
+      "side": "Under 0.5",
+      "game": "Ferencv\u00e1rosi TC vs NK Celje - More Markets",
+      "startTs": 1795723200,
+      "bt": "total",
       "n": 1
     },
     {
@@ -139,6 +112,15 @@
       "n": 1
     },
     {
+      "ticker": "KXUELTOTAL-26NOV26OFIRSC-4",
+      "yesNo": "No",
+      "side": "Under 3.5",
+      "game": "OFI Crete vs Anderlecht",
+      "startTs": 1795723200,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
       "yesNo": "Yes",
       "side": "FC Barcelona to win",
@@ -157,15 +139,6 @@
       "n": 2
     },
     {
-      "ticker": "KXUELGAME-26NOV26TSGSTU-TSG",
-      "yesNo": "Yes",
-      "side": "TSG 1899 Hoffenheim to win",
-      "game": "TSG Hoffenheim vs SK Sturm Graz",
-      "startTs": 1795723200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27ATLBOS-BOS",
       "yesNo": "Yes",
       "side": "Celtics",
@@ -180,6 +153,15 @@
       "side": "Hawks",
       "game": "Boston Celtics vs Atlanta Hawks",
       "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAMBGAME-26NOV26TENNISU-ISU",
+      "yesNo": "Yes",
+      "side": "Iowa State Cyclones",
+      "game": "Iowa State Cyclones vs Tennessee Volunteers",
+      "startTs": 1795725000,
       "bt": "moneyline",
       "n": 1
     },
@@ -256,12 +238,12 @@
       "n": 1
     },
     {
-      "ticker": "KXUELTOTAL-26NOV26JUVOMO-5",
-      "yesNo": "No",
-      "side": "Under 4.5",
-      "game": "Juventus vs Omonia Nicosia",
-      "startTs": 1795723200,
-      "bt": "total",
+      "ticker": "KXATPCHALLENGERMATCH-26NOV25ANDDUR-AND",
+      "yesNo": "Yes",
+      "side": "Lucas Da Silva",
+      "game": "San Salvador: Lucas Da Silva vs Diego Duran",
+      "startTs": 1795725600,
+      "bt": "moneyline",
       "n": 1
     },
     {
