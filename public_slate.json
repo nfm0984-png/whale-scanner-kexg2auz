@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795718177,
-  "updatedAt": "Thu Nov 26 \u00b7 10:36 AM PT",
+  "ts": 1795718477,
+  "updatedAt": "Thu Nov 26 \u00b7 10:41 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -11,6 +11,24 @@
       "startTs": 1795716000,
       "bt": "moneyline",
       "n": 3
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET7",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 6.5 points",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET8",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 7.5 points",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 1
     },
     {
       "ticker": "KXNFLTOTAL-26NOV26CHIDET-57",
@@ -47,6 +65,15 @@
       "startTs": 1795716000,
       "bt": "total",
       "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
+      "yesNo": "No",
+      "side": "Olympiak\u00f3s SFP not to win",
+      "game": "Olympiacos vs AC Milan",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 2
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
@@ -94,13 +121,13 @@
       "n": 1
     },
     {
-      "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
+      "ticker": "KXUELTOTAL-26NOV26VIKBEN-5",
       "yesNo": "No",
-      "side": "Olympiak\u00f3s SFP not to win",
-      "game": "Olympiacos vs AC Milan",
+      "side": "Under 4.5",
+      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica",
       "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 2
+      "bt": "total",
+      "n": 1
     },
     {
       "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
@@ -135,15 +162,6 @@
       "side": "Over 50.5",
       "game": "Buffalo Bills vs Kansas City Chiefs",
       "startTs": 1795742400,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26VIKBEN-5",
-      "yesNo": "No",
-      "side": "Under 4.5",
-      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
-      "startTs": 1795715100,
       "bt": "total",
       "n": 1
     },
