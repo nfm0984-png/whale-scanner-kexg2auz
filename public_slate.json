@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795725425,
-  "updatedAt": "Thu Nov 26 \u00b7 12:37 PM PT",
+  "ts": 1795725730,
+  "updatedAt": "Thu Nov 26 \u00b7 12:42 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -22,18 +22,18 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET6",
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET8",
       "yesNo": "Yes",
-      "side": "Detroit wins by over 5.5 points",
+      "side": "Detroit wins by over 7.5 points",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "spread",
       "n": 1
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET8",
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET6",
       "yesNo": "Yes",
-      "side": "Detroit wins by over 7.5 points",
+      "side": "Detroit wins by over 5.5 points",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "spread",
@@ -112,6 +112,24 @@
       "n": 1
     },
     {
+      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
+      "yesNo": "Yes",
+      "side": "Juventus FC to win",
+      "game": "Juventus vs Omonia Nicosia",
+      "startTs": 1795723200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
+      "yesNo": "Yes",
+      "side": "Juventus FC not to win",
+      "game": "Juventus vs Omonia Nicosia",
+      "startTs": 1795723200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
       "yesNo": "Yes",
       "side": "Chiefs",
@@ -172,24 +190,6 @@
       "game": "Crystal Palace vs Real Sociedad",
       "startTs": 1795723200,
       "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
-      "yesNo": "Yes",
-      "side": "Juventus FC to win",
-      "game": "Juventus vs Omonia Nicosia",
-      "startTs": 1795723200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
-      "yesNo": "Yes",
-      "side": "Juventus FC not to win",
-      "game": "Juventus vs Omonia Nicosia",
-      "startTs": 1795723200,
-      "bt": "moneyline",
       "n": 1
     },
     {
