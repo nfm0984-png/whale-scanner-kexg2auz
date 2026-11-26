@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795708065,
-  "updatedAt": "Thu Nov 26 \u00b7 7:47 AM PT",
+  "ts": 1795708385,
+  "updatedAt": "Thu Nov 26 \u00b7 7:53 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -11,24 +11,6 @@
       "startTs": 1795716000,
       "bt": "moneyline",
       "n": 2
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV261200TYGL-1-TY",
-      "yesNo": "Yes",
-      "side": "Team Yandex",
-      "game": "Team Yandex vs GamerLegion",
-      "startTs": 1795712400,
-      "bt": "moneyline",
-      "n": 3
-    },
-    {
-      "ticker": "KXDOTA2GAME-26NOV261200TYGL-GL",
-      "yesNo": "Yes",
-      "side": "GamerLegion",
-      "game": "Team Yandex vs GamerLegion",
-      "startTs": 1795712400,
-      "bt": "moneyline",
-      "n": 1
     },
     {
       "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
@@ -47,6 +29,15 @@
       "startTs": 1795715100,
       "bt": "moneyline",
       "n": 1
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV261200TYGL-1-TY",
+      "yesNo": "Yes",
+      "side": "Team Yandex",
+      "game": "Team Yandex vs GamerLegion",
+      "startTs": 1795712400,
+      "bt": "moneyline",
+      "n": 3
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
