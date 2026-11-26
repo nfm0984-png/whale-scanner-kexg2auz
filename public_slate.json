@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795714659,
-  "updatedAt": "Thu Nov 26 \u00b7 9:37 AM PT",
+  "ts": 1795714837,
+  "updatedAt": "Thu Nov 26 \u00b7 9:40 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -85,15 +85,6 @@
       "n": 1
     },
     {
-      "ticker": "KXUELGAME-26NOV26OLYACM-ACM",
-      "yesNo": "Yes",
-      "side": "AC Milan not to win",
-      "game": "Olympiacos vs AC Milan",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
       "yesNo": "No",
       "side": "Olympiak\u00f3s SFP not to win",
@@ -101,6 +92,15 @@
       "startTs": 1795715100,
       "bt": "moneyline",
       "n": 2
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26OLYACM-ACM",
+      "yesNo": "Yes",
+      "side": "AC Milan not to win",
+      "game": "Olympiacos vs AC Milan",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
     },
     {
       "ticker": "KXUELTOTAL-26NOV26OLYACM-3",
