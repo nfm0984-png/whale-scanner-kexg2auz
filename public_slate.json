@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795719979,
-  "updatedAt": "Thu Nov 26 \u00b7 11:06 AM PT",
+  "ts": 1795720154,
+  "updatedAt": "Thu Nov 26 \u00b7 11:09 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -10,7 +10,7 @@
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "moneyline",
-      "n": 3
+      "n": 2
     },
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-DET",
@@ -19,7 +19,7 @@
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "moneyline",
-      "n": 1
+      "n": 2
     },
     {
       "ticker": "KXNFLSPREAD-26NOV26CHIDET-CHI2",
@@ -28,7 +28,7 @@
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "spread",
-      "n": 1
+      "n": 2
     },
     {
       "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET7",
@@ -112,15 +112,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLTOTAL-26NOV26CHIDET-57",
-      "yesNo": "Yes",
-      "side": "Over 56.5",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "total",
-      "n": 3
-    },
-    {
       "ticker": "KXNFLTOTAL-26NOV26CHIDET-53",
       "yesNo": "No",
       "side": "Under 52.5",
@@ -139,13 +130,13 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLTOTAL-26NOV26CHIDET-55",
-      "yesNo": "No",
-      "side": "Under 54.5",
+      "ticker": "KXNFLTOTAL-26NOV26CHIDET-57",
+      "yesNo": "Yes",
+      "side": "Over 56.5",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "total",
-      "n": 1
+      "n": 3
     },
     {
       "ticker": "KXNFLTOTAL-26NOV26CHIDET-47",
@@ -182,24 +173,6 @@
       "startTs": 1795715100,
       "bt": "moneyline",
       "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
-      "yesNo": "No",
-      "side": "Olympiak\u00f3s SFP not to win",
-      "game": "Olympiacos vs AC Milan",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
-      "yesNo": "Yes",
-      "side": "Olympiak\u00f3s SFP to win",
-      "game": "Olympiacos vs AC Milan",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 2
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
@@ -247,21 +220,21 @@
       "n": 1
     },
     {
-      "ticker": "KXUELTOTAL-26NOV26USGLPO-6",
-      "yesNo": "No",
-      "side": "Under 5.5",
-      "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144 - More Markets",
-      "startTs": 1795715100,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXUELTOTAL-26NOV26USGLPO-5",
       "yesNo": "No",
       "side": "Under 4.5",
       "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144 - More Markets",
       "startTs": 1795715100,
       "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
+      "yesNo": "Yes",
+      "side": "Olympiak\u00f3s SFP to win",
+      "game": "Olympiacos vs AC Milan",
+      "startTs": 1795715100,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -324,15 +297,6 @@
       "side": "Genaro Alberto Olivieri",
       "game": "Florianopolis: Joaquin Aguilar vs Genaro Alberto Olivieri",
       "startTs": 1795711800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26BESHBS-BES",
-      "yesNo": "Yes",
-      "side": "Be\u015fikta\u015f JK not to win",
-      "game": "Be\u015fikta\u015f JK vs MH Hapoel Be'er Sheva",
-      "startTs": 1795715100,
       "bt": "moneyline",
       "n": 1
     },
@@ -568,6 +532,15 @@
       "game": "Wyoming Cowboys vs UConn Huskies",
       "startTs": 1795885200,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27MILDET-DET",
+      "yesNo": "Yes",
+      "side": "Pistons",
+      "game": "Detroit Pistons vs Milwaukee Bucks",
+      "startTs": 1795825800,
+      "bt": "moneyline",
       "n": 1
     },
     {
