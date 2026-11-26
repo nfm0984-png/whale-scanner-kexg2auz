@@ -5053,6 +5053,13 @@ function moneyAbs(n: number): string {
   if (a >= 1000) return (a / 1000).toFixed(a >= 10000 ? 0 : 1).replace(/\.0$/, "") + "k";
   return String(Math.round(a));
 }
+function scorecardMoney(n: number | null | undefined): string {
+  if (n == null || !isFinite(Number(n)) || Math.abs(n) < 0.005) return "";
+  const sign = n >= 0 ? "+$" : "-$";
+  const a = Math.abs(n);
+  if (a >= 1000) return sign + (a / 1000).toFixed(a >= 10000 ? 0 : 1).replace(/\.0$/, "") + "k";
+  return sign + a.toFixed(2).replace(/\.00$/, "");
+}
 function ScorecardBlock(): React.ReactElement {
   const [sc, setSc] = useState<Scorecard | null | undefined>(undefined);
   useEffect(() => {
@@ -5062,7 +5069,7 @@ function ScorecardBlock(): React.ReactElement {
   if (!sc) return <EmptyState title="No scorecard yet" body="Yesterday’s scanner picks will show here after the daily scorecard job runs (about 6:35 AM PT)." />;
   const w = sc.w || 0, l = sc.l || 0, pending = sc.pending || 0;
   const pnl = sc.pnl;
-  const pnlStr = (pnl == null || Math.abs(pnl) < 0.005) ? "" : ((pnl >= 0 ? "+$" : "-$") + moneyAbs(pnl));
+  const pnlStr = scorecardMoney(pnl);
   const heading = "Yesterday · " + w + "–" + l + (pending ? " · " + pending + " pending" : "") + (pnlStr ? " · " + pnlStr : "") + (sc.pnlPartial ? " (partial $)" : "");
   return (
     <Section heading={heading} caption={(sc.label || "Yesterday") + (sc.pnlNote ? " · " + sc.pnlNote : "") + (sc.updatedAt ? " · updated " + sc.updatedAt : "")}>
@@ -5072,7 +5079,7 @@ function ScorecardBlock(): React.ReactElement {
             const res = row.result || "pending";
             const title = row.label || row.q || row.ticker || row.capper || ("Pick " + (i + 1));
             const who = row.capper || row.side || "";
-            const dol = (row.pnl == null || Math.abs(row.pnl) < 0.005) ? "" : ((row.pnl >= 0 ? "+$" : "-$") + moneyAbs(row.pnl));
+            const dol = scorecardMoney(row.pnl);
             const color = res === "W" ? "#047857" : res === "L" ? "#B91C1C" : "#64748B";
             return (
               <div key={i} style={{ display: "flex", justifyContent: "space-between", gap: 10, fontSize: 13, fontWeight: 700, color: "#0F172A" }}>
