@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795715335,
-  "updatedAt": "Thu Nov 26 \u00b7 9:48 AM PT",
+  "ts": 1795715688,
+  "updatedAt": "Thu Nov 26 \u00b7 9:54 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -130,42 +130,6 @@
       "n": 1
     },
     {
-      "ticker": "KXUELGAME-26NOV26VIKBEN-VIK",
-      "yesNo": "Yes",
-      "side": "FC Viktoria Plze\u0148 not to win",
-      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26VIKBEN-2",
-      "yesNo": "Yes",
-      "side": "Over 1.5",
-      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
-      "startTs": 1795715100,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26VIKBEN-5",
-      "yesNo": "No",
-      "side": "Under 4.5",
-      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
-      "startTs": 1795715100,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26VIKBEN-3",
-      "yesNo": "Yes",
-      "side": "Over 2.5",
-      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
-      "startTs": 1795715100,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
       "yesNo": "Yes",
       "side": "Chiefs",
@@ -193,12 +157,21 @@
       "n": 1
     },
     {
-      "ticker": "KXUELGAME-26NOV26BESHBS-BES",
+      "ticker": "KXUELGAME-26NOV26VIKBEN-VIK",
       "yesNo": "Yes",
-      "side": "Be\u015fikta\u015f JK not to win",
-      "game": "Be\u015fikta\u015f JK vs MH Hapoel Be'er Sheva",
+      "side": "FC Viktoria Plze\u0148 not to win",
+      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
       "startTs": 1795715100,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26VIKBEN-3",
+      "yesNo": "Yes",
+      "side": "Over 2.5",
+      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
+      "startTs": 1795715100,
+      "bt": "total",
       "n": 1
     },
     {
@@ -331,9 +304,18 @@
       "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
       "yesNo": "Yes",
       "side": "Levante UD to win",
-      "game": "Levante UD vs Real Racing Club",
+      "game": "Levante UD vs Real Racing Club - More Markets",
       "startTs": 1795809600,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXLALIGATOTAL-26NOV27LEVSAN-4",
+      "yesNo": "Yes",
+      "side": "Over 3.5",
+      "game": "Levante UD vs Real Racing Club - More Markets",
+      "startTs": 1795809600,
+      "bt": "total",
       "n": 1
     },
     {
@@ -343,6 +325,15 @@
       "game": "Appalachian State vs South Alabama",
       "startTs": 1795809600,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
+      "yesNo": "Yes",
+      "side": "Juventus FC to win",
+      "game": "Juventus vs Omonia Nicosia",
+      "startTs": 1795723200,
+      "bt": "moneyline",
       "n": 1
     },
     {
