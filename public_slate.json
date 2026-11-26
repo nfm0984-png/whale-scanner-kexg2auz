@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795714063,
-  "updatedAt": "Thu Nov 26 \u00b7 9:27 AM PT",
+  "ts": 1795714357,
+  "updatedAt": "Thu Nov 26 \u00b7 9:32 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -49,33 +49,6 @@
       "n": 1
     },
     {
-      "ticker": "KXDOTA2MAP-26NOV261200TYGL-2-TY",
-      "yesNo": "Yes",
-      "side": "Team Yandex",
-      "game": "Team Yandex vs GamerLegion",
-      "startTs": 1795712400,
-      "bt": "moneyline",
-      "n": 4
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV261200TYGL-2-GL",
-      "yesNo": "Yes",
-      "side": "GamerLegion",
-      "game": "Team Yandex vs GamerLegion",
-      "startTs": 1795712400,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXDOTA2GAME-26NOV261200TYGL-GL",
-      "yesNo": "Yes",
-      "side": "GamerLegion",
-      "game": "Team Yandex vs GamerLegion",
-      "startTs": 1795712400,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
       "yesNo": "Yes",
       "side": "AFC Bournemouth to win",
@@ -109,6 +82,24 @@
       "game": "Celta Vigo vs AFC Bournemouth",
       "startTs": 1795715100,
       "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV261200TYGL-2-GL",
+      "yesNo": "Yes",
+      "side": "GamerLegion",
+      "game": "Team Yandex vs GamerLegion",
+      "startTs": 1795712400,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXDOTA2GAME-26NOV261200TYGL-GL",
+      "yesNo": "Yes",
+      "side": "GamerLegion",
+      "game": "Team Yandex vs GamerLegion",
+      "startTs": 1795712400,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -256,6 +247,15 @@
       "n": 1
     },
     {
+      "ticker": "KXUELGAME-26NOV26USGLPO-USG",
+      "yesNo": "Yes",
+      "side": "RU Saint-Gilloise to win",
+      "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
       "yesNo": "Yes",
       "side": "Knicks",
@@ -343,15 +343,6 @@
       "game": "Appalachian State vs South Alabama",
       "startTs": 1795809600,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26USGLPO-USG",
-      "yesNo": "Yes",
-      "side": "RU Saint-Gilloise to win",
-      "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144",
-      "startTs": 1795715100,
-      "bt": "moneyline",
       "n": 1
     },
     {
