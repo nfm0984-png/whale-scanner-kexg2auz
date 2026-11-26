@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795707166,
-  "updatedAt": "Thu Nov 26 \u00b7 7:32 AM PT",
+  "ts": 1795707469,
+  "updatedAt": "Thu Nov 26 \u00b7 7:37 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -154,6 +154,15 @@
       "game": "UAB vs North Texas",
       "startTs": 1795899600,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
+      "yesNo": "Yes",
+      "side": "Levante UD to win",
+      "game": "Levante UD vs Real Racing Club",
+      "startTs": 1795809600,
+      "bt": "moneyline",
       "n": 1
     },
     {
