@@ -1,22 +1,22 @@
 {
   "source": "whale",
-  "ts": 1795678470,
-  "updatedAt": "Wed Nov 25 \u00b7 11:34 PM PT",
+  "ts": 1795679573,
+  "updatedAt": "Wed Nov 25 \u00b7 11:52 PM PT",
   "picks": [
     {
-      "ticker": "KXCS2MAP-26NOV260100FAZEHERO-2-FAZE",
+      "ticker": "KXCS2GAME-26NOV260100EFM80-M80",
       "yesNo": "Yes",
-      "side": "FaZe",
-      "game": "Counter-Strike: Heroic vs FaZe",
+      "side": "M80",
+      "game": "Counter-Strike: M80 vs Eternal Fire",
       "startTs": 1795672800,
       "bt": "moneyline",
-      "n": 2
+      "n": 6
     },
     {
-      "ticker": "KXCS2MAP-26NOV260100FAZEHERO-2-HERO",
+      "ticker": "KXCS2GAME-26NOV260100EFM80-EF",
       "yesNo": "Yes",
-      "side": "Heroic",
-      "game": "Counter-Strike: Heroic vs FaZe",
+      "side": "Eternal Fire",
+      "game": "Counter-Strike: M80 vs Eternal Fire",
       "startTs": 1795672800,
       "bt": "moneyline",
       "n": 1
@@ -28,7 +28,7 @@
       "game": "Counter-Strike: Heroic vs FaZe",
       "startTs": 1795672800,
       "bt": "moneyline",
-      "n": 1
+      "n": 2
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
@@ -77,7 +77,7 @@
     },
     {
       "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "AFC Bournemouth not to win",
       "game": "Celta Vigo vs AFC Bournemouth",
       "startTs": 1795715100,
@@ -108,6 +108,15 @@
       "side": "Imperial",
       "game": "Counter-Strike: Imperial vs Liquid",
       "startTs": 1795690800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
+      "yesNo": "Yes",
+      "side": "Bologna FC 1909 to win",
+      "game": "Venezia vs Bologna",
+      "startTs": 1795808700,
       "bt": "moneyline",
       "n": 1
     },
@@ -148,15 +157,6 @@
       "n": 1
     },
     {
-      "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
-      "yesNo": "Yes",
-      "side": "Bologna FC 1909 to win",
-      "game": "Venezia vs Bologna",
-      "startTs": 1795808700,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNFLGAME-26NOV29NYGIND-NYG",
       "yesNo": "Yes",
       "side": "Giants",
@@ -185,7 +185,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV29EVELFC-LFC",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "Liverpool FC not to win",
       "game": "Everton vs Liverpool",
       "startTs": 1795953600,
