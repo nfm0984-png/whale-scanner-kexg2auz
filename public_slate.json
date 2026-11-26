@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795675619,
-  "updatedAt": "Wed Nov 25 \u00b7 10:46 PM PT",
+  "ts": 1795675890,
+  "updatedAt": "Wed Nov 25 \u00b7 10:51 PM PT",
   "picks": [
     {
       "ticker": "KXCS2GAME-26NOV260100EFM80-M80",
@@ -11,6 +11,15 @@
       "startTs": 1795672800,
       "bt": "moneyline",
       "n": 6
+    },
+    {
+      "ticker": "KXCS2MAP-26NOV260100EFM80-2-M80",
+      "yesNo": "Yes",
+      "side": "M80",
+      "game": "Counter-Strike: M80 vs Eternal Fire",
+      "startTs": 1795672800,
+      "bt": "moneyline",
+      "n": 2
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
@@ -56,6 +65,15 @@
       "startTs": 1795672800,
       "bt": "moneyline",
       "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26VIKBEN-BEN",
+      "yesNo": "No",
+      "side": "Sport Lisboa e Benfica not to win",
+      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 2
     },
     {
       "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
