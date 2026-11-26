@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795711567,
-  "updatedAt": "Thu Nov 26 \u00b7 8:46 AM PT",
+  "ts": 1795711961,
+  "updatedAt": "Thu Nov 26 \u00b7 8:52 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -139,6 +139,24 @@
       "n": 1
     },
     {
+      "ticker": "KXUELGAME-26NOV26BESHBS-BES",
+      "yesNo": "Yes",
+      "side": "Be\u015fikta\u015f JK not to win",
+      "game": "Be\u015fikta\u015f JK vs MH Hapoel Be'er Sheva",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELSPREAD-26NOV26BESHBS-BES2",
+      "yesNo": "No",
+      "side": "Markets +1.5",
+      "game": "Be\u015fikta\u015f JK vs MH Hapoel Be'er Sheva",
+      "startTs": 1795715100,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXUELGAME-26NOV26VIKBEN-VIK",
       "yesNo": "Yes",
       "side": "FC Viktoria Plze\u0148 not to win",
@@ -252,6 +270,15 @@
       "side": "North Texas wins by over 3.5 points",
       "game": "UAB vs North Texas",
       "startTs": 1795899600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELSPREAD-26NOV26RBSARA-RBS3",
+      "yesNo": "No",
+      "side": "RB Salzburg +2.5",
+      "game": "RB Salzburg vs Ararat-Armenia",
+      "startTs": 1795715100,
       "bt": "spread",
       "n": 1
     },
