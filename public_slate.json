@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795716510,
-  "updatedAt": "Thu Nov 26 \u00b7 10:08 AM PT",
+  "ts": 1795716807,
+  "updatedAt": "Thu Nov 26 \u00b7 10:13 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -10,6 +10,42 @@
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "moneyline",
+      "n": 3
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV26CHIDET-DET",
+      "yesNo": "Yes",
+      "side": "Lions",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-CHI2",
+      "yesNo": "No",
+      "side": "Lions +1.5",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 2
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET2",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 1.5 points",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLTOTAL-26NOV26CHIDET-57",
+      "yesNo": "Yes",
+      "side": "Over 56.5",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "total",
       "n": 3
     },
     {
@@ -29,15 +65,6 @@
       "startTs": 1795715100,
       "bt": "moneyline",
       "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
-      "yesNo": "No",
-      "side": "Olympiak\u00f3s SFP not to win",
-      "game": "Olympiacos vs AC Milan",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 2
     },
     {
       "ticker": "KXUELGAME-26NOV26VIKBEN-BEN",
@@ -74,6 +101,15 @@
       "startTs": 1795715100,
       "bt": "total",
       "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
+      "yesNo": "No",
+      "side": "Olympiak\u00f3s SFP not to win",
+      "game": "Olympiacos vs AC Milan",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 2
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
