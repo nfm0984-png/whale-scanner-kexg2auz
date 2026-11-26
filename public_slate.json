@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795724824,
-  "updatedAt": "Thu Nov 26 \u00b7 12:27 PM PT",
+  "ts": 1795725126,
+  "updatedAt": "Thu Nov 26 \u00b7 12:32 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -10,7 +10,16 @@
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "moneyline",
-      "n": 5
+      "n": 4
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET7",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 6.5 points",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET6",
@@ -40,15 +49,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET7",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 6.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET11",
       "yesNo": "Yes",
       "side": "Detroit wins by over 10.5 points",
@@ -56,15 +56,6 @@
       "startTs": 1795716000,
       "bt": "spread",
       "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV26CHIDET-53",
-      "yesNo": "No",
-      "side": "Under 52.5",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "total",
-      "n": 2
     },
     {
       "ticker": "KXNFLTOTAL-26NOV26CHIDET-65",
@@ -121,33 +112,6 @@
       "n": 1
     },
     {
-      "ticker": "KXUELGAME-26NOV26CRYRSO-TIE",
-      "yesNo": "No",
-      "side": "NO DRAW",
-      "game": "Crystal Palace vs Real Sociedad",
-      "startTs": 1795723200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26CRYRSO-RSO",
-      "yesNo": "Yes",
-      "side": "Real Sociedad de F\u00fatbol not to win",
-      "game": "Crystal Palace vs Real Sociedad",
-      "startTs": 1795723200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26CRYRSO-3",
-      "yesNo": "Yes",
-      "side": "Over 2.5",
-      "game": "Crystal Palace vs Real Sociedad",
-      "startTs": 1795723200,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
       "yesNo": "Yes",
       "side": "Chiefs",
@@ -180,6 +144,33 @@
       "side": "Over 50.5",
       "game": "Buffalo Bills vs Kansas City Chiefs",
       "startTs": 1795742400,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26CRYRSO-TIE",
+      "yesNo": "No",
+      "side": "NO DRAW",
+      "game": "Crystal Palace vs Real Sociedad",
+      "startTs": 1795723200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26CRYRSO-RSO",
+      "yesNo": "Yes",
+      "side": "Real Sociedad de F\u00fatbol not to win",
+      "game": "Crystal Palace vs Real Sociedad",
+      "startTs": 1795723200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26CRYRSO-3",
+      "yesNo": "Yes",
+      "side": "Over 2.5",
+      "game": "Crystal Palace vs Real Sociedad",
+      "startTs": 1795723200,
       "bt": "total",
       "n": 1
     },
