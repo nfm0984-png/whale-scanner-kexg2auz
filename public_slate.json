@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795720154,
-  "updatedAt": "Thu Nov 26 \u00b7 11:09 AM PT",
+  "ts": 1795722469,
+  "updatedAt": "Thu Nov 26 \u00b7 11:47 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -10,66 +10,12 @@
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "moneyline",
-      "n": 2
+      "n": 5
     },
     {
-      "ticker": "KXNFLGAME-26NOV26CHIDET-DET",
-      "yesNo": "Yes",
-      "side": "Lions",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-CHI2",
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET8",
       "yesNo": "No",
-      "side": "Lions +1.5",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 2
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET7",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 6.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET5",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 4.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET6",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 5.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET4",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 3.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET10",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 9.5 points",
+      "side": "Bears +7.5",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "spread",
@@ -85,18 +31,18 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET3",
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET10",
       "yesNo": "Yes",
-      "side": "Detroit wins by over 2.5 points",
+      "side": "Detroit wins by over 9.5 points",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "spread",
       "n": 1
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET2",
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET7",
       "yesNo": "Yes",
-      "side": "Detroit wins by over 1.5 points",
+      "side": "Detroit wins by over 6.5 points",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "spread",
@@ -112,9 +58,9 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLTOTAL-26NOV26CHIDET-53",
-      "yesNo": "No",
-      "side": "Under 52.5",
+      "ticker": "KXNFLTOTAL-26NOV26CHIDET-57",
+      "yesNo": "Yes",
+      "side": "Over 56.5",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "total",
@@ -122,21 +68,12 @@
     },
     {
       "ticker": "KXNFLTOTAL-26NOV26CHIDET-53",
-      "yesNo": "Yes",
-      "side": "Over 52.5",
+      "yesNo": "No",
+      "side": "Under 52.5",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV26CHIDET-57",
-      "yesNo": "Yes",
-      "side": "Over 56.5",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "total",
-      "n": 3
+      "n": 2
     },
     {
       "ticker": "KXNFLTOTAL-26NOV26CHIDET-47",
@@ -157,20 +94,11 @@
       "n": 1
     },
     {
-      "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
+      "ticker": "KXUELGAME-26NOV26CRYRSO-CRY",
       "yesNo": "Yes",
-      "side": "AFC Bournemouth to win",
-      "game": "Celta Vigo vs AFC Bournemouth",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26RCCBOU-RCC",
-      "yesNo": "Yes",
-      "side": "RC Celta de Vigo not to win",
-      "game": "Celta Vigo vs AFC Bournemouth",
-      "startTs": 1795715100,
+      "side": "Crystal Palace FC not to win",
+      "game": "Crystal Palace vs Real Sociedad",
+      "startTs": 1795723200,
       "bt": "moneyline",
       "n": 1
     },
@@ -202,39 +130,21 @@
       "n": 1
     },
     {
-      "ticker": "KXUELGAME-26NOV26USGLPO-USG",
-      "yesNo": "Yes",
-      "side": "RU Saint-Gilloise to win",
-      "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144 - More Markets",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26USGLPO-USG",
+      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL10",
       "yesNo": "No",
-      "side": "RU Saint-Gilloise not to win",
-      "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144 - More Markets",
-      "startTs": 1795715100,
-      "bt": "moneyline",
+      "side": "Eagles +9.5",
+      "game": "Dallas Cowboys vs Philadelphia Eagles",
+      "startTs": 1795728600,
+      "bt": "spread",
       "n": 1
     },
     {
-      "ticker": "KXUELTOTAL-26NOV26USGLPO-5",
-      "yesNo": "No",
-      "side": "Under 4.5",
-      "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144 - More Markets",
-      "startTs": 1795715100,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
+      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL9",
       "yesNo": "Yes",
-      "side": "Olympiak\u00f3s SFP to win",
-      "game": "Olympiacos vs AC Milan",
-      "startTs": 1795715100,
-      "bt": "moneyline",
+      "side": "Dallas wins by over 8.5 points",
+      "game": "Dallas Cowboys vs Philadelphia Eagles",
+      "startTs": 1795728600,
+      "bt": "spread",
       "n": 1
     },
     {
@@ -274,29 +184,20 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL10",
-      "yesNo": "No",
-      "side": "Eagles +9.5",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
+      "ticker": "KXNCAAMBGAME-26NOV26MDSDSU-SDSU",
+      "yesNo": "Yes",
+      "side": "San Diego State Aztecs",
+      "game": "San Diego State Aztecs vs Maryland Terrapins",
+      "startTs": 1795716000,
+      "bt": "moneyline",
       "n": 1
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL9",
+      "ticker": "KXNCAAMBGAME-26NOV26MDSDSU-MD",
       "yesNo": "Yes",
-      "side": "Dallas wins by over 8.5 points",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXATPCHALLENGERMATCH-26NOV26AGUOLI-OLI",
-      "yesNo": "Yes",
-      "side": "Genaro Alberto Olivieri",
-      "game": "Florianopolis: Joaquin Aguilar vs Genaro Alberto Olivieri",
-      "startTs": 1795711800,
+      "side": "Maryland Terrapins",
+      "game": "San Diego State Aztecs vs Maryland Terrapins",
+      "startTs": 1795716000,
       "bt": "moneyline",
       "n": 1
     },
@@ -427,6 +328,15 @@
       "n": 1
     },
     {
+      "ticker": "KXWTACHALLENGERMATCH-26NOV26COSLEP-LEP",
+      "yesNo": "Yes",
+      "side": "Varvara Lepchenko",
+      "game": "Varvara Lepchenko vs Sofia Costoulas",
+      "startTs": 1795716300,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV28SACHAW-HAW14",
       "yesNo": "Yes",
       "side": "Hawai'i wins by over 13.5 points",
@@ -441,24 +351,6 @@
       "side": "North Texas wins by over 3.5 points",
       "game": "UAB vs North Texas",
       "startTs": 1795899600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26VIKBEN-5",
-      "yesNo": "No",
-      "side": "Under 4.5",
-      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
-      "startTs": 1795715100,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELSPREAD-26NOV26RBSARA-RBS3",
-      "yesNo": "No",
-      "side": "RB Salzburg +2.5",
-      "game": "RB Salzburg vs Ararat-Armenia",
-      "startTs": 1795715100,
       "bt": "spread",
       "n": 1
     },
@@ -535,6 +427,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFSPREAD-26NOV27BUFFAKR-BUFF8",
+      "yesNo": "Yes",
+      "side": "Buffalo wins by over 7.5 points",
+      "game": "Akron Zips vs Buffalo Bulls",
+      "startTs": 1795798800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27MILDET-DET",
       "yesNo": "Yes",
       "side": "Pistons",
@@ -558,6 +459,15 @@
       "side": "Nuggets",
       "game": "Utah Jazz vs Denver Nuggets",
       "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV261300TSALIR-TSA",
+      "yesNo": "Yes",
+      "side": "Spirit Academy",
+      "game": "Counter-Strike: Lir vs Spirit Academy",
+      "startTs": 1795716000,
       "bt": "moneyline",
       "n": 1
     }
