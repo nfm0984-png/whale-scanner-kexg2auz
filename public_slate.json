@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795719680,
-  "updatedAt": "Thu Nov 26 \u00b7 11:01 AM PT",
+  "ts": 1795719979,
+  "updatedAt": "Thu Nov 26 \u00b7 11:06 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -11,6 +11,33 @@
       "startTs": 1795716000,
       "bt": "moneyline",
       "n": 3
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV26CHIDET-DET",
+      "yesNo": "Yes",
+      "side": "Lions",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-CHI2",
+      "yesNo": "No",
+      "side": "Lions +1.5",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET7",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 6.5 points",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET5",
@@ -25,6 +52,15 @@
       "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET6",
       "yesNo": "Yes",
       "side": "Detroit wins by over 5.5 points",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET4",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 3.5 points",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "spread",
@@ -49,18 +85,18 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET4",
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET3",
       "yesNo": "Yes",
-      "side": "Detroit wins by over 3.5 points",
+      "side": "Detroit wins by over 2.5 points",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "spread",
       "n": 1
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET7",
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET2",
       "yesNo": "Yes",
-      "side": "Detroit wins by over 6.5 points",
+      "side": "Detroit wins by over 1.5 points",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "spread",
@@ -85,6 +121,33 @@
       "n": 3
     },
     {
+      "ticker": "KXNFLTOTAL-26NOV26CHIDET-53",
+      "yesNo": "No",
+      "side": "Under 52.5",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "total",
+      "n": 2
+    },
+    {
+      "ticker": "KXNFLTOTAL-26NOV26CHIDET-53",
+      "yesNo": "Yes",
+      "side": "Over 52.5",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLTOTAL-26NOV26CHIDET-55",
+      "yesNo": "No",
+      "side": "Under 54.5",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXNFLTOTAL-26NOV26CHIDET-47",
       "yesNo": "No",
       "side": "Under 46.5",
@@ -97,15 +160,6 @@
       "ticker": "KXNFLTOTAL-26NOV26CHIDET-65",
       "yesNo": "Yes",
       "side": "Over 64.5",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV26CHIDET-53",
-      "yesNo": "Yes",
-      "side": "Over 52.5",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "total",
@@ -145,7 +199,7 @@
       "game": "Olympiacos vs AC Milan",
       "startTs": 1795715100,
       "bt": "moneyline",
-      "n": 1
+      "n": 2
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
@@ -270,6 +324,15 @@
       "side": "Genaro Alberto Olivieri",
       "game": "Florianopolis: Joaquin Aguilar vs Genaro Alberto Olivieri",
       "startTs": 1795711800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26BESHBS-BES",
+      "yesNo": "Yes",
+      "side": "Be\u015fikta\u015f JK not to win",
+      "game": "Be\u015fikta\u015f JK vs MH Hapoel Be'er Sheva",
+      "startTs": 1795715100,
       "bt": "moneyline",
       "n": 1
     },
