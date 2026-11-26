@@ -1,134 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795733812,
-  "updatedAt": "Thu Nov 26 \u00b7 2:56 PM PT",
+  "ts": 1795736153,
+  "updatedAt": "Thu Nov 26 \u00b7 3:35 PM PT",
   "picks": [
-    {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL9",
-      "yesNo": "No",
-      "side": "Eagles +8.5",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL10",
-      "yesNo": "No",
-      "side": "Eagles +9.5",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL7",
-      "yesNo": "No",
-      "side": "Eagles +6.5",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL15",
-      "yesNo": "No",
-      "side": "Eagles +14.5",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL17",
-      "yesNo": "Yes",
-      "side": "Dallas wins by over 16.5 points",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL8",
-      "yesNo": "No",
-      "side": "Eagles +7.5",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL11",
-      "yesNo": "No",
-      "side": "Eagles +10.5",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL18",
-      "yesNo": "No",
-      "side": "Eagles +17.5",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV26PHIDAL-49",
-      "yesNo": "No",
-      "side": "Under 48.5",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "total",
-      "n": 2
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV26PHIDAL-47",
-      "yesNo": "No",
-      "side": "Under 46.5",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV26PHIDAL-45",
-      "yesNo": "No",
-      "side": "Under 44.5",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
-      "yesNo": "Yes",
-      "side": "Denver wins by over 5.5 points",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
-      "yesNo": "Yes",
-      "side": "Denver wins by over 4.5 points",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV27DENPIT-35",
-      "yesNo": "Yes",
-      "side": "Over 34.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "total",
-      "n": 1
-    },
     {
       "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
       "yesNo": "Yes",
@@ -146,24 +20,6 @@
       "startTs": 1795742400,
       "bt": "spread",
       "n": 2
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV26KCBUF-49",
-      "yesNo": "Yes",
-      "side": "Over 48.5",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV26KCBUF-51",
-      "yesNo": "Yes",
-      "side": "Over 50.5",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "total",
-      "n": 1
     },
     {
       "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
@@ -196,15 +52,6 @@
       "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU14",
       "yesNo": "Yes",
       "side": "Texas Tech wins by over 13.5 points",
-      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
-      "startTs": 1795741200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU21",
-      "yesNo": "No",
-      "side": "TCU Horned Frogs +20.5",
       "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
       "startTs": 1795741200,
       "bt": "spread",
@@ -256,24 +103,6 @@
       "n": 1
     },
     {
-      "ticker": "KXATPCHALLENGERMATCH-26NOV25ANDDUR-DUR",
-      "yesNo": "Yes",
-      "side": "Diego Duran",
-      "game": "San Salvador: Lucas Da Silva vs Diego Duran",
-      "startTs": 1795725600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
-      "yesNo": "Yes",
-      "side": "Spurs",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27ATLBOS-BOS",
       "yesNo": "Yes",
       "side": "Celtics",
@@ -307,6 +136,15 @@
       "game": "UAB vs North Texas",
       "startTs": 1795899600,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXATPCHALLENGERMATCH-26NOV25ANDDUR-DUR",
+      "yesNo": "Yes",
+      "side": "Diego Duran",
+      "game": "San Salvador: Lucas Da Silva vs Diego Duran",
+      "startTs": 1795725600,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -355,15 +193,6 @@
       "n": 1
     },
     {
-      "ticker": "KXSERIEAGAME-26NOV29COMJUV-COM",
-      "yesNo": "Yes",
-      "side": "Como 1907 to win",
-      "game": "Como vs Juventus",
-      "startTs": 1795981500,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNCAAFSPREAD-26NOV27MSSTMISS-MISS18",
       "yesNo": "Yes",
       "side": "Ole Miss wins by over 17.5 points",
@@ -382,12 +211,12 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFSPREAD-26NOV27BUFFAKR-BUFF8",
+      "ticker": "KXSERIEAGAME-26NOV29COMJUV-COM",
       "yesNo": "Yes",
-      "side": "Buffalo wins by over 7.5 points",
-      "game": "Akron Zips vs Buffalo Bulls",
-      "startTs": 1795798800,
-      "bt": "spread",
+      "side": "Como 1907 to win",
+      "game": "Como vs Juventus",
+      "startTs": 1795981500,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -409,20 +238,20 @@
       "n": 1
     },
     {
-      "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
+      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
       "yesNo": "Yes",
-      "side": "Nuggets",
-      "game": "Utah Jazz vs Denver Nuggets",
+      "side": "Spurs",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
       "startTs": 1795833000,
       "bt": "moneyline",
       "n": 1
     },
     {
-      "ticker": "KXNCAAMBGAME-26NOV26SMCUCLA-SMC",
+      "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
       "yesNo": "Yes",
-      "side": "Saint Mary's Gaels",
-      "game": "Saint Mary's Gaels vs UCLA Bruins",
-      "startTs": 1795730400,
+      "side": "Nuggets",
+      "game": "Utah Jazz vs Denver Nuggets",
+      "startTs": 1795833000,
       "bt": "moneyline",
       "n": 1
     }
