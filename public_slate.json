@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795711961,
-  "updatedAt": "Thu Nov 26 \u00b7 8:52 AM PT",
+  "ts": 1795712259,
+  "updatedAt": "Thu Nov 26 \u00b7 8:57 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -67,24 +67,6 @@
       "n": 1
     },
     {
-      "ticker": "KXDOTA2GAME-26NOV261200TYGL-GL",
-      "yesNo": "Yes",
-      "side": "GamerLegion",
-      "game": "Team Yandex vs GamerLegion",
-      "startTs": 1795712400,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV261200TYGL-2-TY",
-      "yesNo": "Yes",
-      "side": "Team Yandex",
-      "game": "Team Yandex vs GamerLegion",
-      "startTs": 1795712400,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
       "yesNo": "Yes",
       "side": "Denver wins by over 5.5 points",
@@ -109,6 +91,24 @@
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV261200TYGL-2-TY",
+      "yesNo": "Yes",
+      "side": "Team Yandex",
+      "game": "Team Yandex vs GamerLegion",
+      "startTs": 1795712400,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXDOTA2GAME-26NOV261200TYGL-GL",
+      "yesNo": "Yes",
+      "side": "GamerLegion",
+      "game": "Team Yandex vs GamerLegion",
+      "startTs": 1795712400,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -139,24 +139,6 @@
       "n": 1
     },
     {
-      "ticker": "KXUELGAME-26NOV26BESHBS-BES",
-      "yesNo": "Yes",
-      "side": "Be\u015fikta\u015f JK not to win",
-      "game": "Be\u015fikta\u015f JK vs MH Hapoel Be'er Sheva",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELSPREAD-26NOV26BESHBS-BES2",
-      "yesNo": "No",
-      "side": "Markets +1.5",
-      "game": "Be\u015fikta\u015f JK vs MH Hapoel Be'er Sheva",
-      "startTs": 1795715100,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXUELGAME-26NOV26VIKBEN-VIK",
       "yesNo": "Yes",
       "side": "FC Viktoria Plze\u0148 not to win",
@@ -172,6 +154,24 @@
       "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
       "startTs": 1795715100,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26BESHBS-BES",
+      "yesNo": "Yes",
+      "side": "Be\u015fikta\u015f JK not to win",
+      "game": "Be\u015fikta\u015f JK vs MH Hapoel Be'er Sheva",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELSPREAD-26NOV26BESHBS-BES2",
+      "yesNo": "No",
+      "side": "Markets +1.5",
+      "game": "Be\u015fikta\u015f JK vs MH Hapoel Be'er Sheva",
+      "startTs": 1795715100,
+      "bt": "spread",
       "n": 1
     },
     {
