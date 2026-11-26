@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795716807,
-  "updatedAt": "Thu Nov 26 \u00b7 10:13 AM PT",
+  "ts": 1795717108,
+  "updatedAt": "Thu Nov 26 \u00b7 10:18 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -13,27 +13,9 @@
       "n": 3
     },
     {
-      "ticker": "KXNFLGAME-26NOV26CHIDET-DET",
-      "yesNo": "Yes",
-      "side": "Lions",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNFLSPREAD-26NOV26CHIDET-CHI2",
       "yesNo": "No",
       "side": "Lions +1.5",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 2
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET2",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 1.5 points",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "spread",
@@ -49,56 +31,20 @@
       "n": 3
     },
     {
-      "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
+      "ticker": "KXNFLTOTAL-26NOV26CHIDET-65",
       "yesNo": "Yes",
-      "side": "AFC Bournemouth to win",
-      "game": "Celta Vigo vs AFC Bournemouth",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26RCCBOU-RCC",
-      "yesNo": "Yes",
-      "side": "RC Celta de Vigo not to win",
-      "game": "Celta Vigo vs AFC Bournemouth",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26VIKBEN-BEN",
-      "yesNo": "Yes",
-      "side": "Sport Lisboa e Benfica to win",
-      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26VIKBEN-VIK",
-      "yesNo": "Yes",
-      "side": "FC Viktoria Plze\u0148 not to win",
-      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26VIKBEN-2",
-      "yesNo": "Yes",
-      "side": "Over 1.5",
-      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
-      "startTs": 1795715100,
+      "side": "Over 64.5",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
       "bt": "total",
       "n": 1
     },
     {
-      "ticker": "KXUELTOTAL-26NOV26VIKBEN-3",
+      "ticker": "KXNFLTOTAL-26NOV26CHIDET-53",
       "yesNo": "Yes",
-      "side": "Over 2.5",
-      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
-      "startTs": 1795715100,
+      "side": "Over 52.5",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
       "bt": "total",
       "n": 1
     },
@@ -110,6 +56,15 @@
       "startTs": 1795715100,
       "bt": "moneyline",
       "n": 2
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26OLYACM-3",
+      "yesNo": "No",
+      "side": "Under 2.5",
+      "game": "Olympiacos vs AC Milan",
+      "startTs": 1795715100,
+      "bt": "total",
+      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
@@ -211,6 +166,42 @@
       "n": 1
     },
     {
+      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL10",
+      "yesNo": "No",
+      "side": "Eagles +9.5",
+      "game": "Dallas Cowboys vs Philadelphia Eagles",
+      "startTs": 1795728600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL9",
+      "yesNo": "Yes",
+      "side": "Dallas wins by over 8.5 points",
+      "game": "Dallas Cowboys vs Philadelphia Eagles",
+      "startTs": 1795728600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26VIKBEN-VIK",
+      "yesNo": "Yes",
+      "side": "FC Viktoria Plze\u0148 not to win",
+      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26VIKBEN-5",
+      "yesNo": "No",
+      "side": "Under 4.5",
+      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
+      "startTs": 1795715100,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU15",
       "yesNo": "Yes",
       "side": "Texas Tech wins by over 14.5 points",
@@ -271,15 +262,6 @@
       "game": "Toronto Raptors vs Brooklyn Nets",
       "startTs": 1795825800,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL9",
-      "yesNo": "Yes",
-      "side": "Dallas wins by over 8.5 points",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
       "n": 1
     },
     {
