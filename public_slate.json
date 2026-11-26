@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795726020,
-  "updatedAt": "Thu Nov 26 \u00b7 12:47 PM PT",
+  "ts": 1795726363,
+  "updatedAt": "Thu Nov 26 \u00b7 12:52 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -22,45 +22,9 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET6",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 5.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET8",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 7.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET10",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 9.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET7",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 6.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET11",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 10.5 points",
+      "yesNo": "No",
+      "side": "Bears +7.5",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "spread",
@@ -73,6 +37,15 @@
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV26PHIDAL-DAL",
+      "yesNo": "Yes",
+      "side": "Cowboys",
+      "game": "Dallas Cowboys vs Philadelphia Eagles",
+      "startTs": 1795728600,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -121,6 +94,42 @@
       "n": 1
     },
     {
+      "ticker": "KXUELGAME-26NOV26CRYRSO-CRY",
+      "yesNo": "Yes",
+      "side": "Crystal Palace FC not to win",
+      "game": "Crystal Palace vs Real Sociedad",
+      "startTs": 1795723200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26CRYRSO-TIE",
+      "yesNo": "No",
+      "side": "NO DRAW",
+      "game": "Crystal Palace vs Real Sociedad",
+      "startTs": 1795723200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26CRYRSO-RSO",
+      "yesNo": "Yes",
+      "side": "Real Sociedad de F\u00fatbol not to win",
+      "game": "Crystal Palace vs Real Sociedad",
+      "startTs": 1795723200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26CRYRSO-3",
+      "yesNo": "Yes",
+      "side": "Over 2.5",
+      "game": "Crystal Palace vs Real Sociedad",
+      "startTs": 1795723200,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
       "yesNo": "Yes",
       "side": "Chiefs",
@@ -153,33 +162,6 @@
       "side": "Over 50.5",
       "game": "Buffalo Bills vs Kansas City Chiefs",
       "startTs": 1795742400,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26CRYRSO-TIE",
-      "yesNo": "No",
-      "side": "NO DRAW",
-      "game": "Crystal Palace vs Real Sociedad",
-      "startTs": 1795723200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26CRYRSO-RSO",
-      "yesNo": "Yes",
-      "side": "Real Sociedad de F\u00fatbol not to win",
-      "game": "Crystal Palace vs Real Sociedad",
-      "startTs": 1795723200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26CRYRSO-3",
-      "yesNo": "Yes",
-      "side": "Over 2.5",
-      "game": "Crystal Palace vs Real Sociedad",
-      "startTs": 1795723200,
       "bt": "total",
       "n": 1
     },
@@ -297,15 +279,6 @@
       "side": "Hawks",
       "game": "Boston Celtics vs Atlanta Hawks",
       "startTs": 1795827600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXWTACHALLENGERMATCH-26NOV26COSLEP-LEP",
-      "yesNo": "Yes",
-      "side": "Varvara Lepchenko",
-      "game": "Varvara Lepchenko vs Sofia Costoulas",
-      "startTs": 1795716300,
       "bt": "moneyline",
       "n": 1
     },
@@ -454,11 +427,11 @@
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV261300TSALIR-TSA",
+      "ticker": "KXWTACHALLENGERMATCH-26NOV26COSLEP-LEP",
       "yesNo": "Yes",
-      "side": "Spirit Academy",
-      "game": "Counter-Strike: Lir vs Spirit Academy",
-      "startTs": 1795716000,
+      "side": "Varvara Lepchenko",
+      "game": "Varvara Lepchenko vs Sofia Costoulas",
+      "startTs": 1795716300,
       "bt": "moneyline",
       "n": 1
     }
