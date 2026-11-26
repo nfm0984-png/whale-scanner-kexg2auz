@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795729787,
-  "updatedAt": "Thu Nov 26 \u00b7 1:49 PM PT",
+  "ts": 1795730091,
+  "updatedAt": "Thu Nov 26 \u00b7 1:54 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26PHIDAL-DAL",
@@ -10,24 +10,6 @@
       "game": "Dallas Cowboys vs Philadelphia Eagles",
       "startTs": 1795728600,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL9",
-      "yesNo": "Yes",
-      "side": "Dallas wins by over 8.5 points",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL7",
-      "yesNo": "Yes",
-      "side": "Dallas wins by over 6.5 points",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
       "n": 1
     },
     {
@@ -253,6 +235,15 @@
       "game": "Wyoming Cowboys vs UConn Huskies",
       "startTs": 1795885200,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26OFIRSC-4",
+      "yesNo": "No",
+      "side": "Under 3.5",
+      "game": "OFI Crete vs Anderlecht",
+      "startTs": 1795723200,
+      "bt": "total",
       "n": 1
     },
     {
