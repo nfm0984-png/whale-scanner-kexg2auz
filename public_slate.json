@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795712259,
-  "updatedAt": "Thu Nov 26 \u00b7 8:57 AM PT",
+  "ts": 1795712561,
+  "updatedAt": "Thu Nov 26 \u00b7 9:02 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -67,6 +67,33 @@
       "n": 1
     },
     {
+      "ticker": "KXUELTOTAL-26NOV26RCCBOU-3",
+      "yesNo": "Yes",
+      "side": "Over 2.5",
+      "game": "Celta Vigo vs AFC Bournemouth",
+      "startTs": 1795715100,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV261200TYGL-2-TY",
+      "yesNo": "Yes",
+      "side": "Team Yandex",
+      "game": "Team Yandex vs GamerLegion",
+      "startTs": 1795712400,
+      "bt": "moneyline",
+      "n": 4
+    },
+    {
+      "ticker": "KXDOTA2GAME-26NOV261200TYGL-GL",
+      "yesNo": "Yes",
+      "side": "GamerLegion",
+      "game": "Team Yandex vs GamerLegion",
+      "startTs": 1795712400,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
       "yesNo": "Yes",
       "side": "Denver wins by over 5.5 points",
@@ -94,24 +121,6 @@
       "n": 1
     },
     {
-      "ticker": "KXDOTA2MAP-26NOV261200TYGL-2-TY",
-      "yesNo": "Yes",
-      "side": "Team Yandex",
-      "game": "Team Yandex vs GamerLegion",
-      "startTs": 1795712400,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXDOTA2GAME-26NOV261200TYGL-GL",
-      "yesNo": "Yes",
-      "side": "GamerLegion",
-      "game": "Team Yandex vs GamerLegion",
-      "startTs": 1795712400,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
       "yesNo": "Yes",
       "side": "Chiefs",
@@ -136,24 +145,6 @@
       "game": "Buffalo Bills vs Kansas City Chiefs",
       "startTs": 1795742400,
       "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26VIKBEN-VIK",
-      "yesNo": "Yes",
-      "side": "FC Viktoria Plze\u0148 not to win",
-      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26VIKBEN-BEN",
-      "yesNo": "No",
-      "side": "Sport Lisboa e Benfica not to win",
-      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
-      "startTs": 1795715100,
-      "bt": "moneyline",
       "n": 1
     },
     {
@@ -217,6 +208,24 @@
       "game": "Toronto Raptors vs Brooklyn Nets",
       "startTs": 1795825800,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26VIKBEN-VIK",
+      "yesNo": "Yes",
+      "side": "FC Viktoria Plze\u0148 not to win",
+      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26VIKBEN-2",
+      "yesNo": "Yes",
+      "side": "Over 1.5",
+      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
+      "startTs": 1795715100,
+      "bt": "total",
       "n": 1
     },
     {
