@@ -116,6 +116,142 @@ def signal_breakdown(picks):
     return out
 
 
+
+def yes_no(side):
+    u = (side or "").strip().upper()
+    if u in ("Y", "YES") or u.endswith(" YES") or "BUY YES" in u:
+        return "YES"
+    if u in ("N", "NO") or u.endswith(" NO") or "BUY NO" in u:
+        return "NO"
+    return u
+
+
+def _dedupe_key(p):
+    tk = (p.get("ticker") or "").strip().upper()
+    yn = yes_no(p.get("yesNo") or p.get("side"))
+    if tk and yn:
+        return ("t", tk, yn)
+    return ("q", (p.get("q") or p.get("label") or "").strip().lower(), yn, p.get("start") or p.get("startTs") or 0)
+
+
+def dedupe_picks(raw):
+    groups, order = {}, []
+    for p in raw:
+        k = _dedupe_key(p)
+        if k not in groups:
+            groups[k] = []
+            order.append(k)
+        groups[k].append(p)
+    out = []
+    for k in order:
+        rows = groups[k]
+        names = []
+        for r in rows:
+            n = (r.get("capper") or "").strip()
+            if n and n not in names:
+                names.append(n)
+        agree = max(len(names) or 0, max((r.get("agree") or 1) for r in rows), len(rows))
+        results = [r.get("result") for r in rows]
+        if "W" in results and "L" not in results:
+            res = "W"
+        elif "L" in results and "W" not in results:
+            res = "L"
+        else:
+            res = rows[0].get("result") or "pending"
+        proto = dict(rows[0])
+        yn = yes_no(proto.get("yesNo") or proto.get("side"))
+        proto["yesNo"] = yn
+        proto["side"] = yn
+        proto["result"] = res
+        proto["agree"] = agree
+        proto["cappers"] = names
+        proto["capper"] = names[0] if len(names) == 1 else proto.get("capper") or ""
+        proto["capperNote"] = names[0] if len(names) == 1 else (("%d capper%s" % (agree, "" if agree == 1 else "s")) if agree else "")
+        pnl = None
+        price = proto.get("price") if proto.get("price") is not None else proto.get("kprice")
+        for r in rows:
+            if r.get("result") == res:
+                if r.get("pnl") is not None and pnl is None:
+                    pnl = r.get("pnl")
+                rp = r.get("price") if r.get("price") is not None else r.get("kprice")
+                if rp is not None and price is None:
+                    price = rp
+        proto["price"] = price
+        proto["kprice"] = price
+        proto["payout"] = None if _payout(price) is None else round(_payout(price), 2)
+        proto["pnl"] = None if pnl is None or (isinstance(pnl, (int, float)) and abs(pnl) < 0.005) else (round(pnl, 2) if isinstance(pnl, (int, float)) else pnl)
+        out.append(proto)
+    return out
+
+
+def drop_split_picks(picks):
+    from collections import defaultdict
+    by_tk, by_q = defaultdict(set), defaultdict(set)
+    for p in picks:
+        yn = yes_no(p.get("yesNo") or p.get("side"))
+        tk = (p.get("ticker") or "").strip().upper()
+        if tk and yn in ("YES", "NO"):
+            by_tk[tk].add(yn)
+        qk = ((p.get("q") or "").strip().lower(), p.get("start") or p.get("startTs") or 0)
+        if qk[0] and yn in ("YES", "NO"):
+            by_q[qk].add(yn)
+    split_tk = {tk for tk, s in by_tk.items() if "YES" in s and "NO" in s}
+    split_q = {k for k, s in by_q.items() if "YES" in s and "NO" in s}
+    kept, hidden = [], set()
+    for p in picks:
+        tk = (p.get("ticker") or "").strip().upper()
+        qk = ((p.get("q") or "").strip().lower(), p.get("start") or p.get("startTs") or 0)
+        if (tk and tk in split_tk) or (qk[0] and qk in split_q):
+            hidden.add(tk or qk[0])
+            continue
+        kept.append(p)
+    return kept, len(hidden)
+
+
+def totals_of(picks):
+    w = l = pending = 0
+    pnl = 0.0
+    pnl_known = True
+    for p in picks:
+        res = p.get("result")
+        if res == "W":
+            w += 1
+            if p.get("pnl") is None:
+                pnl_known = False
+        elif res == "L":
+            l += 1
+            if p.get("pnl") is None:
+                pnl_known = False
+        elif res == "pending":
+            pending += 1
+        u = p.get("pnl")
+        if isinstance(u, (int, float)):
+            pnl += u
+    return w, l, pending, round(pnl, 2), pnl_known
+
+
+def day_summary(data):
+    return {
+        "date": data.get("date"),
+        "label": data.get("label"),
+        "w": data.get("w") or 0,
+        "l": data.get("l") or 0,
+        "pending": data.get("pending") or 0,
+        "pnl": data.get("pnl"),
+        "n": len(data.get("picks") or []),
+    }
+
+
+def merge_history(existing, data):
+    hist = list((existing or {}).get("history") or [])
+    if not hist and existing and existing.get("date") and existing.get("date") != data.get("date"):
+        hist.append(day_summary(existing))
+    hist = [h for h in hist if h.get("date") != data.get("date")]
+    hist.append(day_summary(data))
+    hist.sort(key=lambda h: h.get("date") or "")
+    return hist[-7:]
+
+
 def yesterday_date(now=None):
     now = now or datetime.now(PT)
     return (now.astimezone(PT) - timedelta(days=1)).date()
@@ -154,11 +290,18 @@ def build(now=None):
         invested = row.get("invested")
         units = _pnl(res, invested, row.get("kprice"))
         kprice = row.get("kprice")
+        kal = row.get("kalshi") or ""
+        ticker = (row.get("ticker") or "").strip()
+        if not ticker.upper().startswith("KX"):
+            tok = (kal.split()[0] if kal else "")
+            ticker = tok if tok.upper().startswith("KX") else ""
         item = {
             "label": row.get("label") or "",
             "q": row.get("q") or "",
             "side": row.get("side") or "",
+            "yesNo": yes_no(row.get("side")),
             "start": row.get("start") or "",
+            "ticker": ticker,
             "result": res,
             "invested": invested,
             "pnl": units,
@@ -166,24 +309,13 @@ def build(now=None):
             "kprice": kprice,
             "payout": None if _payout(kprice) is None else round(_payout(kprice), 2),
             "agree": int(row.get("whales") or 1),
-            "combo": bool(row.get("combo") or (row.get("tier") == "combo") or ("combo" in (row.get("kalshi") or "").lower())),
+            "combo": bool(row.get("combo") or (row.get("tier") == "combo") or ("combo" in kal.lower())),
         }
         picks.append(item)
-        if res == "W":
-            w += 1
-            if units is None:
-                pnl_known = False
-            else:
-                pnl += units
-        elif res == "L":
-            l += 1
-            if units is None:
-                pnl_known = False
-            else:
-                pnl += units
-        elif res == "pending":
-            pending += 1
+    picks = dedupe_picks(picks)
+    picks, hidden_splits = drop_split_picks(picks)
     picks.sort(key=lambda r: (r.get("start") or "", r.get("label") or ""))
+    w, l, pending, pnl, pnl_known = totals_of(picks)
     label = datetime(day.year, day.month, day.day, tzinfo=PT).strftime("%a %b %-d, %Y") + " PT"
     return {
         "date": day.isoformat(),
@@ -194,14 +326,22 @@ def build(now=None):
         "pending": pending,
         "pnl": round(pnl, 2),
         "pnlPartial": (not pnl_known),
-        "pnlNote": "Flat $100 at the Kalshi price (not whale size)",
+        "pnlNote": "Flat $100 at the Kalshi price (not whale size) · unique contracts only",
+        "hiddenSplits": hidden_splits,
         "breakdown": signal_breakdown(picks),
         "picks": picks,
     }
 
 
 def write(path=OUT, now=None):
+    existing = {}
+    if os.path.exists(path):
+        try:
+            existing = json.load(open(path))
+        except Exception:
+            existing = {}
     data = build(now)
+    data["history"] = merge_history(existing, data)
     with open(path, "w") as f:
         json.dump(data, f, indent=2)
         f.write("\n")
@@ -210,4 +350,4 @@ def write(path=OUT, now=None):
 
 if __name__ == "__main__":
     d = write()
-    print("scorecard", d["label"], "%d-%d" % (d["w"], d["l"]), "pending", d["pending"], "pnl", d["pnl"], "n", len(d["picks"]))
+    print("scorecard", d["label"], "%d-%d" % (d["w"], d["l"]), "pending", d["pending"], "pnl", d["pnl"], "n", len(d["picks"]), "hiddenSplits", d.get("hiddenSplits") or 0, "history", len(d.get("history") or []))

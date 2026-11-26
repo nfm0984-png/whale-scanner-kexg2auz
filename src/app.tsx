@@ -5122,6 +5122,14 @@ function PickFlags(props: { p: UPick }): React.ReactElement | null {
   lensChips.forEach((c) => out.push(<span key={c.key} data-orca-lens={c.key} title={c.title} style={flagChip("#F0FDFA", "#0F766E", "#5EEAD4")}>{c.label}</span>));
   return out.length ? <>{out}</> : null;
 }
+function hideSplitPicks(all: UPick[], now?: number): { picks: UPick[]; hidden: number } {
+  const ids: Record<string, boolean> = {};
+  all.forEach((p: UPick) => { if (p.kind === "sports" && splitInfo(p, now)) ids[p.gameId] = true; });
+  return { picks: all.filter((p: UPick) => !(p.kind === "sports" && splitInfo(p, now))), hidden: Object.keys(ids).length };
+}
+function splitHiddenNote(n: number): string {
+  return n ? (n + " split game" + (n === 1 ? "" : "s") + " hidden") : "";
+}
 function rankedLists(all: UPick[]): { list: RankedCard[]; top: RankedCard[]; others: RankedCard[]; small: RankedCard[]; contested: RankedCard[]; total: number } {
   // One list of every qualifying game, best to worst. No top-15 cap. A side whose best capper
   // has under 10 settled bets (overall or in that sport) is capped and sorted below every proven
@@ -5134,12 +5142,13 @@ function rankedLists(all: UPick[]): { list: RankedCard[]; top: RankedCard[]; oth
   return { list: cards, top: cards, others: [], small: [], contested, total: cards.length };
 }
 function eliteTabCount(now: number): number {
-  return rankedLists(allTabPicks(now)).total;
+  return rankedLists(hideSplitPicks(allTabPicks(now), now).picks).total;
 }
 
-interface ScorecardPick { result?: string; pnl?: number | null; capper?: string; label?: string; q?: string; side?: string; ticker?: string; combo?: boolean }
+interface ScorecardPick { result?: string; pnl?: number | null; capper?: string; capperNote?: string; cappers?: string[]; agree?: number; yesNo?: string; label?: string; q?: string; side?: string; ticker?: string; combo?: boolean }
 interface ScorecardBucket { label: string; w?: number; l?: number; pending?: number; pnl?: number | null; n?: number }
-interface Scorecard { date?: string; label?: string; updatedAt?: string; w?: number; l?: number; pending?: number; pnl?: number | null; pnlNote?: string; pnlPartial?: boolean; breakdown?: ScorecardBucket[]; picks?: ScorecardPick[] }
+interface ScorecardDay { date?: string; label?: string; w?: number; l?: number; pending?: number; pnl?: number | null; n?: number }
+interface Scorecard { date?: string; label?: string; updatedAt?: string; w?: number; l?: number; pending?: number; pnl?: number | null; pnlNote?: string; pnlPartial?: boolean; hiddenSplits?: number; breakdown?: ScorecardBucket[]; history?: ScorecardDay[]; picks?: ScorecardPick[] }
 function moneyAbs(n: number): string {
   const a = Math.abs(n);
   if (a >= 1000) return (a / 1000).toFixed(a >= 10000 ? 0 : 1).replace(/\.0$/, "") + "k";
@@ -5151,6 +5160,32 @@ function scorecardMoney(n: number | null | undefined): string {
   const a = Math.abs(n);
   if (a >= 1000) return sign + (a / 1000).toFixed(a >= 10000 ? 0 : 1).replace(/\.0$/, "") + "k";
   return sign + a.toFixed(2).replace(/\.00$/, "");
+}
+function scorecardYesNo(row: ScorecardPick): string {
+  const u = ((row.yesNo || row.side || "") + "").trim().toUpperCase();
+  if (u === "Y" || u === "YES" || u.indexOf("BUY YES") >= 0) return "YES";
+  if (u === "N" || u === "NO" || u.indexOf("BUY NO") >= 0) return "NO";
+  return "";
+}
+function ScorecardHistory(props: { sc: Scorecard }): React.ReactElement | null {
+  const days = props.sc.history || [];
+  if (!days.length) return null;
+  return (
+    <div data-scorecard-history="1" style={{ marginTop: 14, paddingTop: 10, borderTop: "1.5px solid #EDE9FE" }}>
+      <div style={{ fontSize: 13, fontWeight: 850, color: "#475569", marginBottom: 6 }}>{"Last 7 days (" + days.length + " day" + (days.length === 1 ? "" : "s") + " tracked)"}</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+        {days.slice().reverse().map((d: ScorecardDay) => {
+          const dol = scorecardMoney(d.pnl);
+          return (
+            <div key={d.date || d.label} style={{ display: "flex", justifyContent: "space-between", gap: 10, fontSize: 13, fontWeight: 750, color: "#0F172A" }}>
+              <span>{d.label || d.date || ""}</span>
+              <span style={{ flex: "none", fontVariantNumeric: "tabular-nums" }}>{(d.w || 0) + "–" + (d.l || 0) + (d.pending ? " · " + d.pending + " pend" : "") + (dol ? " · " + dol : "")}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
 function ScorecardBreakdown(props: { sc: Scorecard }): React.ReactElement | null {
   const rows = props.sc.breakdown || [];
@@ -5183,23 +5218,27 @@ function ScorecardBlock(): React.ReactElement {
   return (
     <Section heading={heading} caption={(sc.label || "Yesterday") + (sc.pnlNote ? " · " + sc.pnlNote : "") + (sc.updatedAt ? " · updated " + sc.updatedAt : "")}>
       <ScorecardBreakdown sc={sc} />
+      {sc.hiddenSplits ? <div data-splits-hidden="1" style={{ fontSize: 13, fontWeight: 700, color: "#B45309", margin: "0 0 8px" }}>{splitHiddenNote(sc.hiddenSplits)}</div> : null}
       {(sc.picks || []).length === 0 ? <EmptyState title="No scanner picks yesterday" body="No Kalshi-linked scanner picks started yesterday in PT." /> : (
         <div style={{ display: "flex", flexDirection: "column", gap: 4, marginTop: 6 }}>
           {(sc.picks || []).map((row: ScorecardPick, i: number) => {
             const res = row.result || "pending";
-            const title = row.label || row.q || row.ticker || row.capper || ("Pick " + (i + 1));
-            const who = row.capper || row.side || "";
+            const rawTitle = row.label || row.q || row.ticker || row.capper || ("Pick " + (i + 1));
+            const title = rawTitle.indexOf("KX") === 0 ? (row.q || row.capper || rawTitle) : rawTitle;
+            const yn = scorecardYesNo(row);
+            const who = row.capperNote || (row.agree && row.agree > 1 ? (row.agree + " cappers") : (row.capper || ""));
             const dol = scorecardMoney(row.pnl);
             const color = res === "W" ? "#047857" : res === "L" ? "#B91C1C" : "#64748B";
             return (
               <div key={i} style={{ display: "flex", justifyContent: "space-between", gap: 10, fontSize: 13, fontWeight: 700, color: "#0F172A" }}>
-                <span style={{ overflowWrap: "anywhere" }}><span style={{ color, fontWeight: 850, marginRight: 8 }}>{res + " "}</span>{title}{who && title !== who ? " · " + who : ""}</span>
+                <span style={{ overflowWrap: "anywhere" }}><span style={{ color, fontWeight: 850, marginRight: 8 }}>{res + " "}</span>{yn ? <span data-yesno={yn} style={{ display: "inline-block", marginRight: 6, padding: "0 6px", borderRadius: 6, background: yn === "YES" ? "#ECFDF5" : "#F1F5F9", color: yn === "YES" ? "#047857" : "#334155", fontWeight: 900, fontSize: 11, letterSpacing: "0.04em" }}>{yn}</span> : null}{title}{who && title !== who ? " · " + who : ""}</span>
                 {dol ? <span style={{ color, flex: "none", fontVariantNumeric: "tabular-nums" }}>{dol}</span> : null}
               </div>
             );
           })}
         </div>
       )}
+      <ScorecardHistory sc={sc} />
     </Section>
   );
 }
@@ -5208,15 +5247,18 @@ function ScorecardTab(): React.ReactElement {
 }
 
 function EliteTab(props: { now: number }) {
-  const all = allTabPicks(props.now);
+  const hid = hideSplitPicks(allTabPicks(props.now), props.now);
+  const all = hid.picks;
   const L = rankedLists(all);
+  const splitNote = splitHiddenNote(hid.hidden);
   const unitOf = (c: RankedCard) => ({ id: c.id, picks: c.picks });
   const render = (c: RankedCard, i: number) => {
     const picks = (c.picks || []).map((p: UPick) => ({ ...p, backers: sortBackersByLast20(p.backers || []) }));
     return <GameBlock key={c.id} u={{ id: c.id, picks }} now={props.now} stake="" noun="game" all={all} rankNo={i + 1} rec={c.rec} cappers={c.cappers} net={c.net} hideStake={true} />;
   };
   return (
-    <Section heading={"Ranked · " + L.total} caption="Best picks first · today in PT · after 7pm, + tomorrow">
+    <Section heading={"Ranked · " + L.total} caption={"Best picks first · today in PT · after 7pm, + tomorrow" + (splitNote ? " · " + splitNote : "")}>
+      {splitNote ? <div data-splits-hidden="1" style={{ fontSize: 13, fontWeight: 700, color: "#B45309", margin: "0 2px 8px" }}>{splitNote}</div> : null}
       {L.total === 0 ? <EmptyState title="No ranked games right now" body={"No tracked capper has a $1,000+ pick with a Kalshi line right now. " + nextScanLabel(props.now) + "."} /> : null}
       {L.list.map((c: RankedCard, i: number) => render(c, i))}
     </Section>
@@ -6216,7 +6258,9 @@ function TodayCard(props: { all: UPick[]; now: number }) {
   );
 }
 function CombinedList(props: { now: number; mode: "rank" | "start" }) {
-  const picks = allTabPicks(props.now);
+  const hid = hideSplitPicks(allTabPicks(props.now), props.now);
+  const picks = hid.picks;
+  const splitNote = splitHiddenNote(hid.hidden);
   const L = rankedLists(picks);
   const rankOf: Record<string, number> = {};
   L.list.forEach((c: RankedCard, i: number) => { rankOf[c.id] = i + 1; });
@@ -6234,6 +6278,7 @@ function CombinedList(props: { now: number; mode: "rank" | "start" }) {
   return (
     <div data-combined-list={props.mode}>
       <div data-combined-summary="1" style={{ fontSize: 14, fontWeight: 750, color: "#52525B", margin: "2px 2px 12px" }}>{picks.length + " picks · " + units.length + " games · " + Object.keys(cappers).length + " cappers" + (liveN ? " · " + liveN + " live" : "")}</div>
+      {splitNote ? <div data-splits-hidden="1" style={{ fontSize: 13, fontWeight: 700, color: "#B45309", margin: "0 2px 8px" }}>{splitNote}</div> : null}
       {picks.length === 0 ? <EmptyState title="No picks from tracked cappers yet" body={"Nothing open from tracked cappers right now. " + nextScanLabel(props.now) + "."} /> : null}
       {start && liveUnits.length ? head("live", "Already started (" + liveUnits.length + ")") : null}
       {start && liveUnits.length ? <UnitList units={liveUnits} all={picks} now={props.now} stake="$2–4" noun="game" showStart rankOf={rankFn} /> : null}
