@@ -52,7 +52,14 @@ def classify(r, ps):
     tot = sum(p.get('cost') or p.get('initial_value') or 0 for p in ps)
     sp = sum(p.get('cost') or p.get('initial_value') or 0 for p in ps if p.get('category') == 'SPORTS')
     if not ps or tot <= 0: LB['skippedNoPositions'] += 1; return
-    if sp / tot < 0.5: LB['skippedNonSports'] += 1; return
+    # Orca Proven wallets with any open sports positions stay in the pool even if
+    # sports is under 50% of their book, so they are not crowded out as "non-sports".
+    if sp / tot < 0.5:
+        if (r.get('src') == 'orca-proven') and sp > 0:
+            CAND.append((r, ps, round(100 * sp / tot, 1)))
+            return
+        LB['skippedNonSports'] += 1
+        return
     CAND.append((r, ps, round(100 * sp / tot, 1)))
 # ---- Capper pool (Noel, Nov 15 9 PM): all-time + monthly + weekly leaderboards, deduped; cappers already known to fail
 # pick eligibility (14d/30d not green, all-time ROI < +5% or year down, market maker/bot, mostly non-Kalshi, 90c+ favorites) are skipped,
@@ -72,6 +79,29 @@ def _pool_add(rows, src):
         if not w or w in _seen: continue
         _seen.add(w); r['src'] = src; r['ord'] = len(POOL); POOL.append(r); n += 1
     POOL_STATS['sources'][src] = n
+# OrcaLayer Pro core pool: every Sports Proven wallet first, then Smart / Copyable / Niche,
+# then all-time sports PnL whales fill the remaining slots (Noel, Nov 25).
+try:
+    import orca_lenses as _ol_pool
+    _ol_pool.refresh()
+    def _lens_rows(name):
+        out = []
+        for i, w in enumerate((_ol_pool.state().get(name) or [])):
+            w = (w or '').lower()
+            if not w or _ol_pool.skip(w):
+                continue
+            out.append(dict(rank=i + 1, wallet=w, name=None, pnl_usd=None, volume_usd=None,
+                            trades=None, resolved_markets=0, resolved_won=0, win_rate=None))
+        return out
+    _pool_add(_lens_rows('proven'), 'orca-proven')
+    _pool_add(_lens_rows('smart'), 'orca-smart')
+    _pool_add(_lens_rows('copyable'), 'orca-copyable')
+    _pool_add(_lens_rows('niche'), 'orca-niche')
+    print('orca lens pool: proven %d, smart %d, copyable %d, niche %d' % (
+        POOL_STATS['sources'].get('orca-proven', 0), POOL_STATS['sources'].get('orca-smart', 0),
+        POOL_STATS['sources'].get('orca-copyable', 0), POOL_STATS['sources'].get('orca-niche', 0)), flush=True)
+except Exception as _e:
+    print('orca lens pool failed (falling back to leaderboard order):', _e, flush=True)
 _rows_all = []
 for _o in range(0, 1000, 100):
     d = orca('/api/v2/whales/leaderboard', {'sort': 'pnl', 'filter': 'all', 'limit': 100, 'offset': _o, 'min_markets': 0})
@@ -118,15 +148,27 @@ for _period, _src in (('all', 'sports-all'), ('month', 'sports-month'), ('week',
         _pool_add(_poly_sports_board(_period), _src)
     except Exception as _e:
         print('sports leaderboard', _src, 'failed:', _e, flush=True)
+_LENS_PRIO = {'orca-proven': -4, 'orca-smart': -3, 'orca-copyable': -2, 'orca-niche': -1}
 _ordered = []
 for r in POOL:
     why = ELIG.get(r['wallet'].lower())
-    sports = str(r.get('src') or '').startswith('sports')
-    if why is None: r['prio'] = 1 if sports else 2; POOL_STATS['unknown'] += 1; _ordered.append(r)
-    elif not why: r['prio'] = 0; POOL_STATS['eligibleKnown'] += 1; _ordered.append(r)
-    else:
+    src = str(r.get('src') or '')
+    sports = src.startswith('sports')
+    if why:
         POOL_STATS['skippedIneligible'] += 1
         for x in why: POOL_STATS['skipReasons'][x] = POOL_STATS['skipReasons'].get(x, 0) + 1
+        continue
+    if src in _LENS_PRIO:
+        r['prio'] = _LENS_PRIO[src]
+        if why is None: POOL_STATS['unknown'] += 1
+        else: POOL_STATS['eligibleKnown'] += 1
+    elif why is None:
+        r['prio'] = 1 if sports else 2
+        POOL_STATS['unknown'] += 1
+    else:
+        r['prio'] = 0
+        POOL_STATS['eligibleKnown'] += 1
+    _ordered.append(r)
 _ordered.sort(key=lambda r: (r['prio'], r['ord']))
 print(f"capper pool: {len(POOL)} leaderboard wallets {POOL_STATS['sources']}; {POOL_STATS['eligibleKnown']} known-eligible first, {POOL_STATS['unknown']} new/unknown, skipped {POOL_STATS['skippedIneligible']} known-ineligible {POOL_STATS['skipReasons']}", flush=True)
 for i in range(0, len(_ordered), 20):
@@ -166,7 +208,12 @@ for chunk in PENDING:  # higher-ranked wallets that were still being computed: r
         if r['wallet'].lower() in got: classify(r, got[r['wallet'].lower()])
     print(f"  retried all-time ranks {chunk[0]['rank']}-{chunk[-1]['rank']}: sports whales so far {len(CAND)}", flush=True)
 CAND.sort(key=lambda c_: (c_[0].get('prio', 2), c_[0].get('ord', 10 ** 7)))
-for r, ps, spct in CAND[:A.cappers]:  # rank order: all-time #1 first
+# Keep every Orca Proven sports wallet that classified, then fill remaining slots up to --cappers.
+_proven_c = [c for c in CAND if (c[0].get('src') == 'orca-proven')]
+_rest_c = [c for c in CAND if c[0].get('src') != 'orca-proven']
+_chosen = _proven_c + _rest_c[:max(0, A.cappers - len(_proven_c))]
+print('scan pool selected: %d Orca Proven + %d others (cap %d)' % (len(_proven_c), len(_chosen) - len(_proven_c), A.cappers), flush=True)
+for r, ps, spct in _chosen:  # Proven first, then Smart/Copyable/Niche, then leaderboard whales
     w = r['wallet'].lower(); res = r.get('resolved_markets') or 0; won = r.get('resolved_won') or 0
     cappers[w] = dict(wallet=w, name=r.get('name'), rank=len(cappers) + 1, rankAll=r['rank'] if r.get('src', 'all-time') == 'all-time' else None, rank30=None, poolSrc=r.get('src'), pnl30=None,
                       total_pnl=r.get('pnl_usd'), total_volume=r.get('volume_usd'),
@@ -196,6 +243,33 @@ for i in range(0, len(_tw), 20):
                           skill_edge_cents=None, market_win_rate=None, last_trade_ts=None, avg_entry_price=None, tracked=True)
         POS[w] = ps; TRACKED_ADDED += 1
 if _tw: print(f"tracked cappers: {TRACKED_ADDED} of {len(_tw)} off-leaderboard tracked whales have open positions and were added", flush=True)
+# Guarantee every Orca Proven wallet is position-scanned, even if it missed the capped walk.
+try:
+    import orca_lenses as _ol_rest
+    _prov_rest = [(w or '').lower() for w in ((_ol_rest.state().get('proven') or [])) if w and not _ol_rest.skip(w) and (w or '').lower() not in cappers]
+    _prov_rest = list(dict.fromkeys(_prov_rest))
+    _prov_added = 0
+    for i in range(0, len(_prov_rest), 20):
+        _chunk = _prov_rest[i:i + 20]
+        _got = fetch_pos(_chunk, True) or {}
+        for w in _chunk:
+            ps = [p for p in (_got.get(w) or []) if not p.get('closed')]
+            if not ps:
+                continue
+            sp = sum(p.get('cost') or p.get('initial_value') or 0 for p in ps if p.get('category') == 'SPORTS')
+            if sp <= 0:
+                continue
+            tot = sum(p.get('cost') or p.get('initial_value') or 0 for p in ps) or 1
+            cappers[w] = dict(wallet=w, name=None, rank=len(cappers) + 1, rankAll=None, rank30=None, poolSrc='orca-proven', pnl30=None,
+                              total_pnl=None, total_volume=None, win_rate=None, resolved_markets=0, wins=0, losses=None,
+                              sports_pct=round(100 * sp / tot, 1), trades=None, profit_factor=None, skill_badge=True,
+                              skill_edge_cents=None, market_win_rate=None, last_trade_ts=None, avg_entry_price=None, tracked=True)
+            POS[w] = ps
+            _prov_added += 1
+    if _prov_rest:
+        print('orca proven rest: added %d of %d remaining Proven wallets with open sports positions' % (_prov_added, len(_prov_rest)), flush=True)
+except Exception as _e:
+    print('orca proven rest failed:', _e, flush=True)
 # Cheap secondary: 30-day PnL/rank for wallets that appear on the 30-day leaderboard (a few calls, not per-wallet).
 PNL30 = {}
 for off in range(0, 2000, 500):

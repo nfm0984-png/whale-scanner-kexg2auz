@@ -47,21 +47,31 @@ def parse_start(s, year_hint):
         return None
 
 
+PX_MIN, PX_MAX = 0.03, 0.97
+RANKED_STALE_CENTS = 6.0
+
+
+def _usable_price(kprice):
+    return isinstance(kprice, (int, float)) and PX_MIN <= kprice <= PX_MAX
+
+
+def _priced_out(kprice):
+    return isinstance(kprice, (int, float)) and (kprice < PX_MIN or kprice > PX_MAX)
+
+
 def _pnl(result, invested, kprice):
-    """Flat $100 at the Kalshi price. Missing price: $0 on a win is omitted; a loss is -$100."""
+    """Flat $100 at a usable Kalshi price (3¢–97¢). Unpriced and priced-out both sides return None (excluded from $ PnL)."""
     if result not in ("W", "L"):
         return None
-    if isinstance(kprice, (int, float)) and 0 < kprice < 1:
-        units = (1.0 / kprice - 1.0) if result == "W" else -1.0
-        return round(FLAT_STAKE * units, 2)
-    if result == "L":
-        return round(-FLAT_STAKE, 2)
-    return None
+    if not _usable_price(kprice):
+        return None
+    units = (1.0 / kprice - 1.0) if result == "W" else -1.0
+    return round(FLAT_STAKE * units, 2)
 
 
 
 def _payout(px):
-    if isinstance(px, (int, float)) and 0 < px < 1:
+    if _usable_price(px):
         return 1.0 / px
     return None
 
@@ -257,14 +267,13 @@ def yesterday_date(now=None):
     return (now.astimezone(PT) - timedelta(days=1)).date()
 
 
-def build(now=None):
+def build(now=None, day=None):
     now = now or datetime.now(PT)
-    day = yesterday_date(now)
+    day = day or yesterday_date(now)
     hist = json.load(open(HIST)) if os.path.exists(HIST) else {"picks": {}}
     picks = []
-    w = l = pending = 0
-    pnl = 0.0
-    pnl_known = True
+    priced_out = 0
+    stale_hidden = 0
     raw = hist.get("picks") or {}
     if isinstance(raw, list):
         rows = raw
@@ -288,8 +297,24 @@ def build(now=None):
         else:
             res = "pending"
         invested = row.get("invested")
-        units = _pnl(res, invested, row.get("kprice"))
         kprice = row.get("kprice")
+        if _priced_out(kprice):
+            priced_out += 1
+            continue
+        # Future snapshots: drop stale-line picks when entry + Kalshi price both exist.
+        avg = row.get("avg")
+        if avg is None:
+            avg = row.get("entry") if row.get("entry") is not None else row.get("avg_entry")
+        if _usable_price(kprice) and isinstance(avg, (int, float)):
+            try:
+                from wallet_flags import slip_cents
+                sl = slip_cents(kprice, avg)
+                if sl is not None and sl > RANKED_STALE_CENTS:
+                    stale_hidden += 1
+                    continue
+            except Exception:
+                pass
+        units = _pnl(res, invested, kprice)
         kal = row.get("kalshi") or ""
         ticker = (row.get("ticker") or "").strip()
         if not ticker.upper().startswith("KX"):
@@ -316,6 +341,14 @@ def build(now=None):
     picks, hidden_splits = drop_split_picks(picks)
     picks.sort(key=lambda r: (r.get("start") or "", r.get("label") or ""))
     w, l, pending, pnl, pnl_known = totals_of(picks)
+    unpriced = sum(1 for p in picks if p.get("result") in ("W", "L") and p.get("pnl") is None)
+    note = "Flat $100 at the Kalshi price (not whale size) · unique contracts only"
+    if unpriced:
+        note += " · %d unpriced excluded from $" % unpriced
+    if priced_out:
+        note += " · %d priced-out line%s dropped" % (priced_out, "" if priced_out == 1 else "s")
+    if stale_hidden:
+        note += " · %d stale-price pick%s hidden" % (stale_hidden, "" if stale_hidden == 1 else "s")
     label = datetime(day.year, day.month, day.day, tzinfo=PT).strftime("%a %b %-d, %Y") + " PT"
     return {
         "date": day.isoformat(),
@@ -325,22 +358,31 @@ def build(now=None):
         "l": l,
         "pending": pending,
         "pnl": round(pnl, 2),
-        "pnlPartial": (not pnl_known),
-        "pnlNote": "Flat $100 at the Kalshi price (not whale size) · unique contracts only",
+        "pnlPartial": (not pnl_known) or bool(unpriced),
+        "pnlNote": note,
         "hiddenSplits": hidden_splits,
+        "pricedOut": priced_out,
+        "unpricedExcluded": unpriced,
+        "hiddenStale": stale_hidden,
         "breakdown": signal_breakdown(picks),
         "picks": picks,
     }
 
 
-def write(path=OUT, now=None):
+def write(path=OUT, now=None, day=None, update_history_only=False):
     existing = {}
     if os.path.exists(path):
         try:
             existing = json.load(open(path))
         except Exception:
             existing = {}
-    data = build(now)
+    data = build(now, day=day)
+    if update_history_only and existing.get("date") and existing.get("date") != data.get("date"):
+        existing["history"] = merge_history(existing, data)
+        with open(path, "w") as f:
+            json.dump(existing, f, indent=2)
+            f.write("\n")
+        return existing
     data["history"] = merge_history(existing, data)
     with open(path, "w") as f:
         json.dump(data, f, indent=2)

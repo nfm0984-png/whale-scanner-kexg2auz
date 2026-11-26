@@ -5130,6 +5130,51 @@ function hideSplitPicks(all: UPick[], now?: number): { picks: UPick[]; hidden: n
 function splitHiddenNote(n: number): string {
   return n ? (n + " split game" + (n === 1 ? "" : "s") + " hidden") : "";
 }
+const STALE_PRICE_CENTS = 6;
+const PRICED_OUT_LO = 0.03;
+const PRICED_OUT_HI = 0.97;
+function pickKalshiPx(p: UPick): number | null {
+  const px = p.view && p.view.price != null ? p.view.price : null;
+  return (typeof px === "number") ? px : null;
+}
+function pickAvgEntry(p: UPick): number | null {
+  const priced = (p.backers || []).filter((b: UBacker) => b.avg != null && b.cost > 0);
+  const w = priced.reduce((a: number, b: UBacker) => a + b.cost, 0);
+  if (!w) return null;
+  return priced.reduce((a: number, b: UBacker) => a + b.cost * (b.avg as number), 0) / w;
+}
+function pickPricedOut(p: UPick): boolean {
+  const px = pickKalshiPx(p);
+  return px != null && (px < PRICED_OUT_LO || px > PRICED_OUT_HI);
+}
+function pickStalePrice(p: UPick): boolean {
+  const sl = slipCents(pickKalshiPx(p), pickAvgEntry(p));
+  return sl != null && sl > STALE_PRICE_CENTS;
+}
+function hideStalePicks(all: UPick[]): { picks: UPick[]; stale: number; pricedOut: number } {
+  let stale = 0, pricedOut = 0;
+  const picks = all.filter((p: UPick) => {
+    if (p.kind !== "sports") return true;
+    if (pickPricedOut(p)) { pricedOut += 1; return false; }
+    if (pickStalePrice(p)) { stale += 1; return false; }
+    return true;
+  });
+  return { picks, stale, pricedOut };
+}
+function staleHiddenNote(n: number): string {
+  return n ? (n + " stale-price pick" + (n === 1 ? "" : "s") + " hidden") : "";
+}
+function pricedOutHiddenNote(n: number): string {
+  return n ? (n + " priced-out pick" + (n === 1 ? "" : "s") + " hidden") : "";
+}
+function hideBoardPicks(all: UPick[], now?: number): { picks: UPick[]; split: number; stale: number; pricedOut: number } {
+  const hid = hideSplitPicks(all, now);
+  const st = hideStalePicks(hid.picks);
+  return { picks: st.picks, split: hid.hidden, stale: st.stale, pricedOut: st.pricedOut };
+}
+function boardHiddenNotes(h: { split: number; stale: number; pricedOut: number }): string {
+  return [splitHiddenNote(h.split), staleHiddenNote(h.stale), pricedOutHiddenNote(h.pricedOut)].filter(Boolean).join(" · ");
+}
 function rankedLists(all: UPick[]): { list: RankedCard[]; top: RankedCard[]; others: RankedCard[]; small: RankedCard[]; contested: RankedCard[]; total: number } {
   // One list of every qualifying game, best to worst. No top-15 cap. A side whose best capper
   // has under 10 settled bets (overall or in that sport) is capped and sorted below every proven
@@ -5137,12 +5182,13 @@ function rankedLists(all: UPick[]): { list: RankedCard[]; top: RankedCard[]; oth
   // shrunk record heavily cuts the net. Contested stays in the same list with a badge.
   const orcaBoost = (c: RankedCard) => sideOrcaStats(c.main.backers);
   // Ranked: keep every pick. Long-term dollar PnL and leaderboard rank first, veterans above newbies. Last-20 dollar PnL (not raw W-L) is only a tiebreaker.
-  const cards = rankedCards(all).slice().sort((a: RankedCard, b: RankedCard) => cardHistoryCmp(a, b) || (Number(isFadingPick(a.main)) - Number(isFadingPick(b.main))) || (Number(b.hasElite) - Number(a.hasElite)) || (Number(orcaBoost(b).consensus) - Number(orcaBoost(a).consensus)) || (orcaBoost(b).lens - orcaBoost(a).lens) || rankCmp(a, b));
+  const provenOf = (c: RankedCard) => (sideOrcaStats(c.main.backers).proven > 0 ? 1 : 0);
+  const cards = rankedCards(all).slice().sort((a: RankedCard, b: RankedCard) => (provenOf(b) - provenOf(a)) || cardHistoryCmp(a, b) || (Number(isFadingPick(a.main)) - Number(isFadingPick(b.main))) || (Number(b.hasElite) - Number(a.hasElite)) || (Number(orcaBoost(b).consensus) - Number(orcaBoost(a).consensus)) || (orcaBoost(b).lens - orcaBoost(a).lens) || rankCmp(a, b));
   const contested = cards.filter((c: RankedCard) => c.contested);
   return { list: cards, top: cards, others: [], small: [], contested, total: cards.length };
 }
 function eliteTabCount(now: number): number {
-  return rankedLists(hideSplitPicks(allTabPicks(now), now).picks).total;
+  return rankedLists(hideBoardPicks(allTabPicks(now), now).picks).total;
 }
 
 interface ScorecardPick { result?: string; pnl?: number | null; capper?: string; capperNote?: string; cappers?: string[]; agree?: number; yesNo?: string; label?: string; q?: string; side?: string; ticker?: string; combo?: boolean }
@@ -5247,18 +5293,18 @@ function ScorecardTab(): React.ReactElement {
 }
 
 function EliteTab(props: { now: number }) {
-  const hid = hideSplitPicks(allTabPicks(props.now), props.now);
+  const hid = hideBoardPicks(allTabPicks(props.now), props.now);
   const all = hid.picks;
   const L = rankedLists(all);
-  const splitNote = splitHiddenNote(hid.hidden);
+  const hideNote = boardHiddenNotes(hid);
   const unitOf = (c: RankedCard) => ({ id: c.id, picks: c.picks });
   const render = (c: RankedCard, i: number) => {
     const picks = (c.picks || []).map((p: UPick) => ({ ...p, backers: sortBackersByLast20(p.backers || []) }));
     return <GameBlock key={c.id} u={{ id: c.id, picks }} now={props.now} stake="" noun="game" all={all} rankNo={i + 1} rec={c.rec} cappers={c.cappers} net={c.net} hideStake={true} />;
   };
   return (
-    <Section heading={"Ranked · " + L.total} caption={"Best picks first · today in PT · after 7pm, + tomorrow" + (splitNote ? " · " + splitNote : "")}>
-      {splitNote ? <div data-splits-hidden="1" style={{ fontSize: 13, fontWeight: 700, color: "#B45309", margin: "0 2px 8px" }}>{splitNote}</div> : null}
+    <Section heading={"Ranked · " + L.total} caption={"Best picks first · Orca Proven first · today in PT · after 7pm, + tomorrow" + (hideNote ? " · " + hideNote : "")}>
+      {hideNote ? <div data-splits-hidden="1" style={{ fontSize: 13, fontWeight: 700, color: "#B45309", margin: "0 2px 8px" }}>{hideNote}</div> : null}
       {L.total === 0 ? <EmptyState title="No ranked games right now" body={"No tracked capper has a $1,000+ pick with a Kalshi line right now. " + nextScanLabel(props.now) + "."} /> : null}
       {L.list.map((c: RankedCard, i: number) => render(c, i))}
     </Section>
@@ -6258,9 +6304,9 @@ function TodayCard(props: { all: UPick[]; now: number }) {
   );
 }
 function CombinedList(props: { now: number; mode: "rank" | "start" }) {
-  const hid = hideSplitPicks(allTabPicks(props.now), props.now);
+  const hid = hideBoardPicks(allTabPicks(props.now), props.now);
   const picks = hid.picks;
-  const splitNote = splitHiddenNote(hid.hidden);
+  const splitNote = boardHiddenNotes(hid);
   const L = rankedLists(picks);
   const rankOf: Record<string, number> = {};
   L.list.forEach((c: RankedCard, i: number) => { rankOf[c.id] = i + 1; });

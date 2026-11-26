@@ -48,9 +48,20 @@ def slip_cents(kprice, entry):
     except (TypeError, ValueError):
         return None
 
-def too_expensive(kprice, entry):
-    """Price check disabled (Noel, Nov 17): nothing is hidden for how far Kalshi is from the capper's entry."""
-    return False
+# Ranked / Coming Up hide a pick when Kalshi is more than this many cents worse than entry (after fee).
+# Golden Picks keeps the stricter SLIP_CAP_CENTS = 2.0 gate and does not use this.
+RANKED_STALE_CENTS = 6.0
+
+def too_expensive(kprice, entry, cap=None):
+    """True when Kalshi (plus taker fee) is more than `cap` cents worse than the whale's entry.
+
+    Default cap is RANKED_STALE_CENTS (6¢) for Ranked / Coming Up / future scorecards.
+    Pass cap=SLIP_CAP_CENTS (2.0) for Golden Picks. cap=None disables the check.
+    """
+    if cap is None:
+        return False
+    sl = slip_cents(kprice, entry)
+    return sl is not None and sl > cap
 
 def load_stats():
     try:

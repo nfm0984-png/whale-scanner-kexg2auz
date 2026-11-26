@@ -164,10 +164,14 @@ def _in_window(b, now, win_end):
     kp = k.get('price')
     if kp < 0.03 or kp > 0.97:
         return False  # resolved / priced out
+    # Ranked / Coming Up stale-line gate (Noel, Nov 25): hide when Kalshi is >6¢ worse
+    # than the whale's average entry (after the taker fee). Golden Picks keeps its own 2¢ gate.
+    avg = b.get('avg') if b.get('avg') is not None else b.get('avg_entry')
+    sl = wf.slip_cents(kp, avg)
+    if sl is not None and sl > 6:
+        return False
     ts0 = b.get('startTs') or 0
     last = b.get('lastTs') or b.get('firstTs') or 0
-    # Stale pre-game buys no longer block (Noel, Nov 17); slip below is the freshness guard.
-    # Noel Nov 17: no price check. How far Kalshi is from the capper's entry is shown on the card as a note, never a filter.
     ts = b.get('startTs') or 0
     if not ts or ts > win_end:
         return False
