@@ -1,8 +1,62 @@
 {
   "source": "whale",
-  "ts": 1795686699,
-  "updatedAt": "Thu Nov 26 \u00b7 1:51 AM PT",
+  "ts": 1795704828,
+  "updatedAt": "Thu Nov 26 \u00b7 6:53 AM PT",
   "picks": [
+    {
+      "ticker": "KXDOTA2MAP-26NOV260830LIQUID1WIN-2-1WIN",
+      "yesNo": "Yes",
+      "side": "1win",
+      "game": "1win vs Team Liquid",
+      "startTs": 1795699800,
+      "bt": "moneyline",
+      "n": 4
+    },
+    {
+      "ticker": "KXDOTA2GAME-26NOV260830LIQUID1WIN-1WIN",
+      "yesNo": "Yes",
+      "side": "1win",
+      "game": "1win vs Team Liquid",
+      "startTs": 1795699800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
+      "yesNo": "Yes",
+      "side": "Bears",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
+      "yesNo": "Yes",
+      "side": "AFC Bournemouth to win",
+      "game": "Celta Vigo vs AFC Bournemouth",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
+      "yesNo": "Yes",
+      "side": "AFC Bournemouth not to win",
+      "game": "Celta Vigo vs AFC Bournemouth",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
+      "yesNo": "Yes",
+      "side": "Denver wins by over 5.5 points",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 1
+    },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
       "yesNo": "Yes",
@@ -22,15 +76,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
-      "yesNo": "Yes",
-      "side": "Bears",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXUELGAME-26NOV26VIKBEN-BEN",
       "yesNo": "No",
       "side": "Sport Lisboa e Benfica not to win",
@@ -40,29 +85,38 @@
       "n": 2
     },
     {
-      "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
+      "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
       "yesNo": "Yes",
-      "side": "AFC Bournemouth not to win",
-      "game": "Celta Vigo vs AFC Bournemouth",
-      "startTs": 1795715100,
+      "side": "Chiefs",
+      "game": "Buffalo Bills vs Kansas City Chiefs",
+      "startTs": 1795742400,
       "bt": "moneyline",
       "n": 2
     },
     {
-      "ticker": "KXCS2GAME-26NOV2603309Z100T-9Z",
+      "ticker": "KXNFLSPREAD-26NOV26KCBUF-BUF3",
+      "yesNo": "No",
+      "side": "Chiefs +2.5",
+      "game": "Buffalo Bills vs Kansas City Chiefs",
+      "startTs": 1795742400,
+      "bt": "spread",
+      "n": 2
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
       "yesNo": "Yes",
-      "side": "9z",
-      "game": "Counter-Strike: 100 Thieves vs 9z",
-      "startTs": 1795681800,
+      "side": "Knicks",
+      "game": "New York Knicks vs Miami Heat",
+      "startTs": 1795824000,
       "bt": "moneyline",
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV260600TLIMP-IMP",
+      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
       "yesNo": "Yes",
-      "side": "Imperial",
-      "game": "Counter-Strike: Imperial vs Liquid",
-      "startTs": 1795690800,
+      "side": "Raptors",
+      "game": "Toronto Raptors vs Brooklyn Nets",
+      "startTs": 1795825800,
       "bt": "moneyline",
       "n": 1
     },
@@ -85,21 +139,12 @@
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV260600CWWC-CW",
-      "yesNo": "Yes",
-      "side": "Chinggis Warriors",
-      "game": "Counter-Strike: Wildcard vs Chinggis Warriors",
-      "startTs": 1795690800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26KCBUF-BUF3",
+      "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
       "yesNo": "No",
-      "side": "Chiefs +2.5",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "spread",
+      "side": "Olympiak\u00f3s SFP not to win",
+      "game": "Olympiacos vs AC Milan",
+      "startTs": 1795715100,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -117,6 +162,15 @@
       "side": "North Texas wins by over 3.5 points",
       "game": "UAB vs North Texas",
       "startTs": 1795899600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV27APPUSA-USA4",
+      "yesNo": "No",
+      "side": "State +3.5",
+      "game": "Appalachian State vs South Alabama",
+      "startTs": 1795809600,
       "bt": "spread",
       "n": 1
     },
@@ -157,6 +211,33 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFSPREAD-26NOV27MSSTMISS-MISS18",
+      "yesNo": "Yes",
+      "side": "Ole Miss wins by over 17.5 points",
+      "game": "Mississippi State vs Ole Miss",
+      "startTs": 1795798800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV28CONNWYO-CONN4",
+      "yesNo": "No",
+      "side": "Wyoming Cowboys +3.5",
+      "game": "Wyoming Cowboys vs UConn Huskies",
+      "startTs": 1795885200,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU21",
+      "yesNo": "No",
+      "side": "TCU Horned Frogs +20.5",
+      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
+      "startTs": 1795741200,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27PHIIND-PHI",
       "yesNo": "Yes",
       "side": "76ers",
@@ -166,20 +247,29 @@
       "n": 1
     },
     {
-      "ticker": "KXEPLGAME-26NOV29EVELFC-LFC",
+      "ticker": "KXNBAGAME-26NOV27ATLBOS-BOS",
       "yesNo": "Yes",
-      "side": "Liverpool FC not to win",
-      "game": "Everton vs Liverpool",
-      "startTs": 1795953600,
+      "side": "Celtics",
+      "game": "Boston Celtics vs Atlanta Hawks",
+      "startTs": 1795827600,
       "bt": "moneyline",
       "n": 1
     },
     {
-      "ticker": "KXDOTA2MAP-26NOV260500AURGL-1-GL",
+      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
       "yesNo": "Yes",
-      "side": "GamerLegion",
-      "game": "GamerLegion vs Aurora",
-      "startTs": 1795687200,
+      "side": "Spurs",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXEPLGAME-26NOV29EVELFC-LFC",
+      "yesNo": "No",
+      "side": "Liverpool FC not to win",
+      "game": "Everton vs Liverpool",
+      "startTs": 1795953600,
       "bt": "moneyline",
       "n": 1
     }
