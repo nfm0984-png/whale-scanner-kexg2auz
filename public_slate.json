@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795724085,
-  "updatedAt": "Thu Nov 26 \u00b7 12:14 PM PT",
+  "ts": 1795724824,
+  "updatedAt": "Thu Nov 26 \u00b7 12:27 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -11,15 +11,6 @@
       "startTs": 1795716000,
       "bt": "moneyline",
       "n": 5
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET7",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 6.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET6",
@@ -49,6 +40,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET7",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 6.5 points",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET11",
       "yesNo": "Yes",
       "side": "Detroit wins by over 10.5 points",
@@ -67,12 +67,30 @@
       "n": 2
     },
     {
-      "ticker": "KXNFLTOTAL-26NOV26CHIDET-47",
+      "ticker": "KXNFLTOTAL-26NOV26CHIDET-65",
       "yesNo": "No",
-      "side": "Under 46.5",
+      "side": "Under 64.5",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL10",
+      "yesNo": "No",
+      "side": "Eagles +9.5",
+      "game": "Dallas Cowboys vs Philadelphia Eagles",
+      "startTs": 1795728600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL9",
+      "yesNo": "Yes",
+      "side": "Dallas wins by over 8.5 points",
+      "game": "Dallas Cowboys vs Philadelphia Eagles",
+      "startTs": 1795728600,
+      "bt": "spread",
       "n": 1
     },
     {
@@ -103,24 +121,6 @@
       "n": 1
     },
     {
-      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
-      "yesNo": "Yes",
-      "side": "Juventus FC to win",
-      "game": "Juventus vs Omonia Nicosia",
-      "startTs": 1795723200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26JUVOMO-2",
-      "yesNo": "Yes",
-      "side": "Over 1.5",
-      "game": "Juventus vs Omonia Nicosia",
-      "startTs": 1795723200,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXUELGAME-26NOV26CRYRSO-TIE",
       "yesNo": "No",
       "side": "NO DRAW",
@@ -145,24 +145,6 @@
       "game": "Crystal Palace vs Real Sociedad",
       "startTs": 1795723200,
       "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL10",
-      "yesNo": "No",
-      "side": "Eagles +9.5",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL9",
-      "yesNo": "Yes",
-      "side": "Dallas wins by over 8.5 points",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
       "n": 1
     },
     {
@@ -229,15 +211,6 @@
       "n": 1
     },
     {
-      "ticker": "KXUELGAME-26NOV26OFIRSC-RSC",
-      "yesNo": "Yes",
-      "side": "RSC Anderlecht to win",
-      "game": "OFI Crete vs Anderlecht",
-      "startTs": 1795723200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
       "yesNo": "Yes",
       "side": "Knicks",
@@ -270,6 +243,15 @@
       "side": "Raptors",
       "game": "Toronto Raptors vs Brooklyn Nets",
       "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
+      "yesNo": "Yes",
+      "side": "Juventus FC to win",
+      "game": "Juventus vs Omonia Nicosia",
+      "startTs": 1795723200,
       "bt": "moneyline",
       "n": 1
     },
@@ -382,6 +364,15 @@
       "n": 1
     },
     {
+      "ticker": "KXITFMATCH-26NOV25LORPRI-PRI",
+      "yesNo": "Yes",
+      "side": "Salvador Price",
+      "game": "M15 Santa Cruz: Santiago Lora vs Salvador Price",
+      "startTs": 1795716038,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXSERIEAGAME-26NOV29COMJUV-COM",
       "yesNo": "Yes",
       "side": "Como 1907 to win",
@@ -467,15 +458,6 @@
       "yesNo": "Yes",
       "side": "Spirit Academy",
       "game": "Counter-Strike: Lir vs Spirit Academy",
-      "startTs": 1795716000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAMBGAME-26NOV26MDSDSU-SDSU",
-      "yesNo": "Yes",
-      "side": "San Diego State Aztecs",
-      "game": "San Diego State Aztecs vs Maryland Terrapins",
       "startTs": 1795716000,
       "bt": "moneyline",
       "n": 1
