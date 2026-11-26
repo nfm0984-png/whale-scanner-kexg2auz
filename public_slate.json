@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795727702,
-  "updatedAt": "Thu Nov 26 \u00b7 1:15 PM PT",
+  "ts": 1795728699,
+  "updatedAt": "Thu Nov 26 \u00b7 1:31 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26PHIDAL-DAL",
@@ -10,15 +10,6 @@
       "game": "Dallas Cowboys vs Philadelphia Eagles",
       "startTs": 1795728600,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL10",
-      "yesNo": "No",
-      "side": "Eagles +9.5",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "spread",
       "n": 1
     },
     {
@@ -31,36 +22,9 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
+      "ticker": "KXUELGAME-26NOV26CRYRSO-CRY",
       "yesNo": "Yes",
-      "side": "Denver wins by over 5.5 points",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
-      "yesNo": "Yes",
-      "side": "Denver wins by over 4.5 points",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV27DENPIT-35",
-      "yesNo": "Yes",
-      "side": "Over 34.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26CRYRSO-TIE",
-      "yesNo": "No",
-      "side": "NO DRAW",
+      "side": "Crystal Palace FC not to win",
       "game": "Crystal Palace vs Real Sociedad",
       "startTs": 1795723200,
       "bt": "moneyline",
@@ -76,12 +40,39 @@
       "n": 1
     },
     {
+      "ticker": "KXUELGAME-26NOV26CRYRSO-TIE",
+      "yesNo": "No",
+      "side": "NO DRAW",
+      "game": "Crystal Palace vs Real Sociedad",
+      "startTs": 1795723200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26CRYRSO-3",
+      "yesNo": "No",
+      "side": "Under 2.5",
+      "game": "Crystal Palace vs Real Sociedad",
+      "startTs": 1795723200,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXUELTOTAL-26NOV26CRYRSO-3",
       "yesNo": "Yes",
       "side": "Over 2.5",
       "game": "Crystal Palace vs Real Sociedad",
       "startTs": 1795723200,
       "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
+      "yesNo": "Yes",
+      "side": "Raptors",
+      "game": "Toronto Raptors vs Brooklyn Nets",
+      "startTs": 1795825800,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -103,51 +94,6 @@
       "n": 2
     },
     {
-      "ticker": "KXNFLTOTAL-26NOV26KCBUF-49",
-      "yesNo": "Yes",
-      "side": "Over 48.5",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV26KCBUF-51",
-      "yesNo": "Yes",
-      "side": "Over 50.5",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU15",
-      "yesNo": "Yes",
-      "side": "Texas Tech wins by over 14.5 points",
-      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
-      "startTs": 1795741200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU14",
-      "yesNo": "Yes",
-      "side": "Texas Tech wins by over 13.5 points",
-      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
-      "startTs": 1795741200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU21",
-      "yesNo": "No",
-      "side": "TCU Horned Frogs +20.5",
-      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
-      "startTs": 1795741200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
       "yesNo": "Yes",
       "side": "Knicks",
@@ -166,20 +112,20 @@
       "n": 1
     },
     {
+      "ticker": "KXNFLGAME-26NOV29NYGIND-NYG",
+      "yesNo": "Yes",
+      "side": "Giants",
+      "game": "Indianapolis Colts vs New York Giants",
+      "startTs": 1795975200,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
       "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
       "yesNo": "Yes",
       "side": "M80",
       "game": "Counter-Strike: M80 vs 100 Thieves",
       "startTs": 1795777200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
-      "yesNo": "Yes",
-      "side": "Raptors",
-      "game": "Toronto Raptors vs Brooklyn Nets",
-      "startTs": 1795825800,
       "bt": "moneyline",
       "n": 1
     },
@@ -191,15 +137,6 @@
       "startTs": 1795808700,
       "bt": "moneyline",
       "n": 1
-    },
-    {
-      "ticker": "KXNFLGAME-26NOV29NYGIND-NYG",
-      "yesNo": "Yes",
-      "side": "Giants",
-      "game": "Indianapolis Colts vs New York Giants",
-      "startTs": 1795975200,
-      "bt": "moneyline",
-      "n": 2
     },
     {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
@@ -265,6 +202,24 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU15",
+      "yesNo": "Yes",
+      "side": "Texas Tech wins by over 14.5 points",
+      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
+      "startTs": 1795741200,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU14",
+      "yesNo": "Yes",
+      "side": "Texas Tech wins by over 13.5 points",
+      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
+      "startTs": 1795741200,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
       "yesNo": "Yes",
       "side": "Levante UD to win",
@@ -298,6 +253,15 @@
       "game": "Houston Texans vs Baltimore Ravens",
       "startTs": 1795975200,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26JUVOMO-5",
+      "yesNo": "No",
+      "side": "Under 4.5",
+      "game": "Juventus vs Omonia Nicosia",
+      "startTs": 1795723200,
+      "bt": "total",
       "n": 1
     },
     {
@@ -342,15 +306,6 @@
       "side": "Wyoming Cowboys +3.5",
       "game": "Wyoming Cowboys vs UConn Huskies",
       "startTs": 1795885200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV27BUFFAKR-BUFF8",
-      "yesNo": "Yes",
-      "side": "Buffalo wins by over 7.5 points",
-      "game": "Akron Zips vs Buffalo Bulls",
-      "startTs": 1795798800,
       "bt": "spread",
       "n": 1
     },
