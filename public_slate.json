@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795737135,
-  "updatedAt": "Thu Nov 26 \u00b7 3:52 PM PT",
+  "ts": 1795737453,
+  "updatedAt": "Thu Nov 26 \u00b7 3:57 PM PT",
   "picks": [
     {
       "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL15",
@@ -63,6 +63,15 @@
       "side": "Knicks",
       "game": "New York Knicks vs Miami Heat",
       "startTs": 1795824000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXATPCHALLENGERMATCH-26NOV26LEGPOL-LEG",
+      "yesNo": "Yes",
+      "side": "Timo Legout",
+      "game": "San Salvador: Timo Legout vs Karl Poling",
+      "startTs": 1795734600,
       "bt": "moneyline",
       "n": 1
     },
