@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795715688,
-  "updatedAt": "Thu Nov 26 \u00b7 9:54 AM PT",
+  "ts": 1795715906,
+  "updatedAt": "Thu Nov 26 \u00b7 9:58 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -58,15 +58,6 @@
       "n": 2
     },
     {
-      "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
-      "yesNo": "Yes",
-      "side": "AFC Bournemouth not to win",
-      "game": "Celta Vigo vs AFC Bournemouth",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXUELGAME-26NOV26RCCBOU-RCC",
       "yesNo": "Yes",
       "side": "RC Celta de Vigo not to win",
@@ -95,7 +86,7 @@
     },
     {
       "ticker": "KXUELGAME-26NOV26OLYACM-ACM",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "AC Milan not to win",
       "game": "Olympiacos vs AC Milan",
       "startTs": 1795715100,
@@ -157,12 +148,30 @@
       "n": 1
     },
     {
+      "ticker": "KXNFLTOTAL-26NOV26KCBUF-51",
+      "yesNo": "Yes",
+      "side": "Over 50.5",
+      "game": "Buffalo Bills vs Kansas City Chiefs",
+      "startTs": 1795742400,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXUELGAME-26NOV26VIKBEN-VIK",
       "yesNo": "Yes",
       "side": "FC Viktoria Plze\u0148 not to win",
       "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
       "startTs": 1795715100,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26VIKBEN-2",
+      "yesNo": "Yes",
+      "side": "Over 1.5",
+      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
+      "startTs": 1795715100,
+      "bt": "total",
       "n": 1
     },
     {
@@ -225,6 +234,15 @@
       "side": "76ers",
       "game": "Indiana Pacers vs Philadelphia 76ers",
       "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
+      "yesNo": "Yes",
+      "side": "M80",
+      "game": "Counter-Strike: M80 vs 100 Thieves",
+      "startTs": 1795777200,
       "bt": "moneyline",
       "n": 1
     },
