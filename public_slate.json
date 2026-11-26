@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795709267,
-  "updatedAt": "Thu Nov 26 \u00b7 8:07 AM PT",
+  "ts": 1795709569,
+  "updatedAt": "Thu Nov 26 \u00b7 8:12 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -11,6 +11,24 @@
       "startTs": 1795716000,
       "bt": "moneyline",
       "n": 2
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-CHI2",
+      "yesNo": "No",
+      "side": "Lions +1.5",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET2",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 1.5 points",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 1
     },
     {
       "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
@@ -27,6 +45,24 @@
       "side": "AFC Bournemouth not to win",
       "game": "Celta Vigo vs AFC Bournemouth",
       "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXDOTA2GAME-26NOV261200TYGL-GL",
+      "yesNo": "Yes",
+      "side": "GamerLegion",
+      "game": "Team Yandex vs GamerLegion",
+      "startTs": 1795712400,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV261200TYGL-1-GL",
+      "yesNo": "Yes",
+      "side": "GamerLegion",
+      "game": "Team Yandex vs GamerLegion",
+      "startTs": 1795712400,
       "bt": "moneyline",
       "n": 1
     },
@@ -55,24 +91,6 @@
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXDOTA2GAME-26NOV261200TYGL-GL",
-      "yesNo": "Yes",
-      "side": "GamerLegion",
-      "game": "Team Yandex vs GamerLegion",
-      "startTs": 1795712400,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV261200TYGL-1-GL",
-      "yesNo": "Yes",
-      "side": "GamerLegion",
-      "game": "Team Yandex vs GamerLegion",
-      "startTs": 1795712400,
-      "bt": "moneyline",
       "n": 1
     },
     {
