@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795725730,
-  "updatedAt": "Thu Nov 26 \u00b7 12:42 PM PT",
+  "ts": 1795726020,
+  "updatedAt": "Thu Nov 26 \u00b7 12:47 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -13,18 +13,9 @@
       "n": 4
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET7",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 6.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET8",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 7.5 points",
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET5",
+      "yesNo": "No",
+      "side": "Bears +4.5",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "spread",
@@ -40,9 +31,27 @@
       "n": 1
     },
     {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET8",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 7.5 points",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET10",
       "yesNo": "Yes",
       "side": "Detroit wins by over 9.5 points",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET7",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 6.5 points",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "spread",
@@ -109,24 +118,6 @@
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
-      "yesNo": "Yes",
-      "side": "Juventus FC to win",
-      "game": "Juventus vs Omonia Nicosia",
-      "startTs": 1795723200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
-      "yesNo": "Yes",
-      "side": "Juventus FC not to win",
-      "game": "Juventus vs Omonia Nicosia",
-      "startTs": 1795723200,
-      "bt": "moneyline",
       "n": 1
     },
     {
@@ -306,6 +297,15 @@
       "side": "Hawks",
       "game": "Boston Celtics vs Atlanta Hawks",
       "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXWTACHALLENGERMATCH-26NOV26COSLEP-LEP",
+      "yesNo": "Yes",
+      "side": "Varvara Lepchenko",
+      "game": "Varvara Lepchenko vs Sofia Costoulas",
+      "startTs": 1795716300,
       "bt": "moneyline",
       "n": 1
     },
