@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795675236,
-  "updatedAt": "Wed Nov 25 \u00b7 10:40 PM PT",
+  "ts": 1795675619,
+  "updatedAt": "Wed Nov 25 \u00b7 10:46 PM PT",
   "picks": [
     {
       "ticker": "KXCS2GAME-26NOV260100EFM80-M80",
@@ -40,6 +40,15 @@
       "n": 1
     },
     {
+      "ticker": "KXCS2MAP-26NOV260100FAZEHERO-2-FAZE",
+      "yesNo": "Yes",
+      "side": "FaZe",
+      "game": "Counter-Strike: Heroic vs FaZe",
+      "startTs": 1795672800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXCS2GAME-26NOV260100FAZEHERO-FAZE",
       "yesNo": "Yes",
       "side": "FaZe",
@@ -50,7 +59,7 @@
     },
     {
       "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "AFC Bournemouth not to win",
       "game": "Celta Vigo vs AFC Bournemouth",
       "startTs": 1795715100,
@@ -148,15 +157,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
-      "yesNo": "Yes",
-      "side": "Spurs",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXSERIEAGAME-26NOV29COMJUV-COM",
       "yesNo": "Yes",
       "side": "Como 1907 to win",
@@ -167,7 +167,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV29EVELFC-LFC",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Liverpool FC not to win",
       "game": "Everton vs Liverpool",
       "startTs": 1795953600,
