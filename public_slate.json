@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795675890,
-  "updatedAt": "Wed Nov 25 \u00b7 10:51 PM PT",
+  "ts": 1795676206,
+  "updatedAt": "Wed Nov 25 \u00b7 10:56 PM PT",
   "picks": [
     {
       "ticker": "KXCS2GAME-26NOV260100EFM80-M80",
@@ -20,6 +20,33 @@
       "startTs": 1795672800,
       "bt": "moneyline",
       "n": 2
+    },
+    {
+      "ticker": "KXCS2MAP-26NOV260100FAZEHERO-2-HERO",
+      "yesNo": "Yes",
+      "side": "Heroic",
+      "game": "Counter-Strike: Heroic vs FaZe",
+      "startTs": 1795672800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2MAP-26NOV260100FAZEHERO-2-FAZE",
+      "yesNo": "Yes",
+      "side": "FaZe",
+      "game": "Counter-Strike: Heroic vs FaZe",
+      "startTs": 1795672800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV260100FAZEHERO-FAZE",
+      "yesNo": "Yes",
+      "side": "FaZe",
+      "game": "Counter-Strike: Heroic vs FaZe",
+      "startTs": 1795672800,
+      "bt": "moneyline",
+      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
@@ -46,24 +73,6 @@
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2MAP-26NOV260100FAZEHERO-2-FAZE",
-      "yesNo": "Yes",
-      "side": "FaZe",
-      "game": "Counter-Strike: Heroic vs FaZe",
-      "startTs": 1795672800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV260100FAZEHERO-FAZE",
-      "yesNo": "Yes",
-      "side": "FaZe",
-      "game": "Counter-Strike: Heroic vs FaZe",
-      "startTs": 1795672800,
-      "bt": "moneyline",
       "n": 1
     },
     {
