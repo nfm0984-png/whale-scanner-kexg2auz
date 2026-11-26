@@ -128,7 +128,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # Data/site outputs only. Never add .trigger_token or scanner/.orca_api_key.
-          outs=(data.json proven_picks.json scanner/history.json scanner/page_embed.json scanner/capper_history.json scanner/whale_windows.json scanner/tracked_cappers.json scanner/backfill.json scanner/proven_picks.json scanner/wallet_stats.json kalshi_display.json)
+          outs=(data.json public_slate.json proven_picks.json scanner/history.json scanner/page_embed.json scanner/capper_history.json scanner/whale_windows.json scanner/tracked_cappers.json scanner/backfill.json scanner/proven_picks.json scanner/wallet_stats.json kalshi_display.json)
 
           validate_outs() {
             python3 scanner/validate_json.py "$1" "${outs[@]}"

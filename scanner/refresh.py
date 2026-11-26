@@ -500,6 +500,12 @@ try:
         emb.setdefault('hotWeek', dict(ts=int(NOW), cappers=[], games=[]))
     emb['comingUpCappers'] = _cu.capper_count(emb['comingUp'])
     print('comingUp cards', emb['totalComingUp'], 'cappers', emb['comingUpCappers'], flush=True)
+
+    try:
+        from public_slate import write_from_data as write_public_slate
+        write_public_slate(emb)
+    except Exception as _e:
+        print('public_slate skipped:', _e)
 except Exception as _e:
     print('comingUp refresh failed:', _e)
     emb.setdefault('comingUp', []); emb.setdefault('totalComingUp', 0)

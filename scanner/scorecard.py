@@ -59,6 +59,63 @@ def _pnl(result, invested, kprice):
     return None
 
 
+
+def _payout(px):
+    if isinstance(px, (int, float)) and 0 < px < 1:
+        return 1.0 / px
+    return None
+
+
+def _bucket_stats(rows):
+    w = l = pending = 0
+    pnl = 0.0
+    for r in rows:
+        res = r.get("result")
+        if res == "W":
+            w += 1
+        elif res == "L":
+            l += 1
+        elif res == "pending":
+            pending += 1
+        u = r.get("pnl")
+        if isinstance(u, (int, float)):
+            pnl += u
+    return {"w": w, "l": l, "pending": pending, "pnl": round(pnl, 2), "n": len(rows)}
+
+
+def signal_breakdown(picks):
+    agree, single, singles, combos, dogs, favs = [], [], [], [], [], []
+    for p in picks:
+        if (p.get("agree") or 1) >= 2:
+            agree.append(p)
+        else:
+            single.append(p)
+        if p.get("combo"):
+            combos.append(p)
+        else:
+            singles.append(p)
+        pay = p.get("payout")
+        if pay is None:
+            pay = _payout(p.get("price") if p.get("price") is not None else p.get("kprice"))
+        if isinstance(pay, (int, float)):
+            (dogs if pay >= 2.0 else favs).append(p)
+    out = []
+    for label, rows in (
+        ("2+ agree", agree),
+        ("Single capper", single),
+        ("Singles", singles),
+        ("Combos", combos),
+        ("Underdogs (≥2.0x)", dogs),
+        ("Favorites (<2.0x)", favs),
+    ):
+        if not rows:
+            continue
+        st = _bucket_stats(rows)
+        st["label"] = label
+        out.append(st)
+    return out
+
+
 def yesterday_date(now=None):
     now = now or datetime.now(PT)
     return (now.astimezone(PT) - timedelta(days=1)).date()
@@ -96,6 +153,7 @@ def build(now=None):
             res = "pending"
         invested = row.get("invested")
         units = _pnl(res, invested, row.get("kprice"))
+        kprice = row.get("kprice")
         item = {
             "label": row.get("label") or "",
             "q": row.get("q") or "",
@@ -104,6 +162,11 @@ def build(now=None):
             "result": res,
             "invested": invested,
             "pnl": units,
+            "price": kprice,
+            "kprice": kprice,
+            "payout": None if _payout(kprice) is None else round(_payout(kprice), 2),
+            "agree": int(row.get("whales") or 1),
+            "combo": bool(row.get("combo") or (row.get("tier") == "combo") or ("combo" in (row.get("kalshi") or "").lower())),
         }
         picks.append(item)
         if res == "W":
@@ -132,6 +195,7 @@ def build(now=None):
         "pnl": round(pnl, 2),
         "pnlPartial": (not pnl_known),
         "pnlNote": "Flat $100 at the Kalshi price (not whale size)",
+        "breakdown": signal_breakdown(picks),
         "picks": picks,
     }
 

@@ -1,13 +1,55 @@
 {
   "date": "2026-11-24",
   "label": "Tue Nov 24, 2026 PT",
-  "updatedAt": "Wed Nov 25 \u00b7 7:41 PM PT",
+  "updatedAt": "Wed Nov 25 \u00b7 8:10 PM PT",
   "w": 19,
   "l": 7,
   "pending": 1,
   "pnl": -247.94,
   "pnlPartial": true,
   "pnlNote": "Flat $100 at the Kalshi price (not whale size)",
+  "breakdown": [
+    {
+      "w": 14,
+      "l": 3,
+      "pending": 0,
+      "pnl": -17.65,
+      "n": 17,
+      "label": "2+ agree"
+    },
+    {
+      "w": 5,
+      "l": 4,
+      "pending": 1,
+      "pnl": -230.29,
+      "n": 10,
+      "label": "Single capper"
+    },
+    {
+      "w": 19,
+      "l": 7,
+      "pending": 1,
+      "pnl": -247.94,
+      "n": 27,
+      "label": "Singles"
+    },
+    {
+      "w": 0,
+      "l": 3,
+      "pending": 0,
+      "pnl": -300.0,
+      "n": 3,
+      "label": "Underdogs (\u22652.0x)"
+    },
+    {
+      "w": 15,
+      "l": 3,
+      "pending": 0,
+      "pnl": 152.06,
+      "n": 18,
+      "label": "Favorites (<2.0x)"
+    }
+  ],
   "picks": [
     {
       "label": "Andrea Paolini",
@@ -16,7 +58,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 1568,
-      "pnl": 7.53
+      "pnl": 7.53,
+      "price": 0.93,
+      "kprice": 0.93,
+      "payout": 1.08,
+      "agree": 2,
+      "combo": false
     },
     {
       "label": "Bellarmine Knights -1.5",
@@ -25,7 +72,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 7549,
-      "pnl": null
+      "pnl": null,
+      "price": 1.0,
+      "kprice": 1.0,
+      "payout": null,
+      "agree": 2,
+      "combo": false
     },
     {
       "label": "Christian Langmo",
@@ -34,7 +86,12 @@
       "start": "2026-11-24",
       "result": "pending",
       "invested": 9584,
-      "pnl": null
+      "pnl": null,
+      "price": null,
+      "kprice": null,
+      "payout": null,
+      "agree": 1,
+      "combo": false
     },
     {
       "label": "David Jorda Sanchis",
@@ -43,7 +100,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 964,
-      "pnl": 20.48
+      "pnl": 20.48,
+      "price": 0.83,
+      "kprice": 0.83,
+      "payout": 1.2,
+      "agree": 1,
+      "combo": false
     },
     {
       "label": "Demi Tran",
@@ -52,7 +114,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 984,
-      "pnl": 69.49
+      "pnl": 69.49,
+      "price": 0.59,
+      "kprice": 0.59,
+      "payout": 1.69,
+      "agree": 1,
+      "combo": false
     },
     {
       "label": "Erika Sema",
@@ -61,7 +128,12 @@
       "start": "2026-11-24",
       "result": "L",
       "invested": 1487,
-      "pnl": -100.0
+      "pnl": -100.0,
+      "price": 0.88,
+      "kprice": 0.88,
+      "payout": 1.14,
+      "agree": 1,
+      "combo": false
     },
     {
       "label": "FK Bod\u00f8/Glimt +1.5 or better for the other side",
@@ -70,7 +142,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 4910,
-      "pnl": null
+      "pnl": null,
+      "price": 1.0,
+      "kprice": 1.0,
+      "payout": null,
+      "agree": 2,
+      "combo": false
     },
     {
       "label": "Franco Roncadelli",
@@ -79,7 +156,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 7101,
-      "pnl": 72.41
+      "pnl": 72.41,
+      "price": 0.58,
+      "kprice": 0.58,
+      "payout": 1.72,
+      "agree": 2,
+      "combo": false
     },
     {
       "label": "Juan Manuel La Serna",
@@ -88,7 +170,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 9674,
-      "pnl": 2.04
+      "pnl": 2.04,
+      "price": 0.98,
+      "kprice": 0.98,
+      "payout": 1.02,
+      "agree": 2,
+      "combo": false
     },
     {
       "label": "Kaichi Uchida",
@@ -97,7 +184,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 1480,
-      "pnl": 53.85
+      "pnl": 53.85,
+      "price": 0.65,
+      "kprice": 0.65,
+      "payout": 1.54,
+      "agree": 2,
+      "combo": false
     },
     {
       "label": "Karl Poling",
@@ -106,7 +198,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 3524,
-      "pnl": 2.04
+      "pnl": 2.04,
+      "price": 0.98,
+      "kprice": 0.98,
+      "payout": 1.02,
+      "agree": 2,
+      "combo": false
     },
     {
       "label": "Lautaro Rocha",
@@ -115,7 +212,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 2032,
-      "pnl": 40.85
+      "pnl": 40.85,
+      "price": 0.71,
+      "kprice": 0.71,
+      "payout": 1.41,
+      "agree": 1,
+      "combo": false
     },
     {
       "label": "Luciano Emanuel Ambrogi",
@@ -124,7 +226,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 5304,
-      "pnl": 35.14
+      "pnl": 35.14,
+      "price": 0.74,
+      "kprice": 0.74,
+      "payout": 1.35,
+      "agree": 2,
+      "combo": false
     },
     {
       "label": "Matthew Dellavedova",
@@ -133,7 +240,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 1836,
-      "pnl": 69.49
+      "pnl": 69.49,
+      "price": 0.59,
+      "kprice": 0.59,
+      "payout": 1.69,
+      "agree": 2,
+      "combo": false
     },
     {
       "label": "Middlesbrough FC +1.5 or better for the other side",
@@ -142,7 +254,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 52367,
-      "pnl": 38.89
+      "pnl": 38.89,
+      "price": 0.72,
+      "kprice": 0.72,
+      "payout": 1.39,
+      "agree": 1,
+      "combo": false
     },
     {
       "label": "Middlesbrough FC -1.5",
@@ -151,7 +268,12 @@
       "start": "2026-11-24",
       "result": "L",
       "invested": 19867,
-      "pnl": -100.0
+      "pnl": -100.0,
+      "price": 0.3,
+      "kprice": 0.3,
+      "payout": 3.33,
+      "agree": 3,
+      "combo": false
     },
     {
       "label": "Norwich City FC NOT TO WIN",
@@ -160,7 +282,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 24418,
-      "pnl": 31.58
+      "pnl": 31.58,
+      "price": 0.76,
+      "kprice": 0.76,
+      "payout": 1.32,
+      "agree": 5,
+      "combo": false
     },
     {
       "label": "OVER",
@@ -169,7 +296,12 @@
       "start": "2026-11-24",
       "result": "L",
       "invested": 1600,
-      "pnl": -100.0
+      "pnl": -100.0,
+      "price": 0.57,
+      "kprice": 0.57,
+      "payout": 1.75,
+      "agree": 1,
+      "combo": false
     },
     {
       "label": "Real Betis Balompi\u00e9 +1.5 or better for the other side",
@@ -178,7 +310,12 @@
       "start": "2026-11-24",
       "result": "L",
       "invested": 181658,
-      "pnl": -100
+      "pnl": -100,
+      "price": null,
+      "kprice": null,
+      "payout": null,
+      "agree": 3,
+      "combo": false
     },
     {
       "label": "Real Betis Balompi\u00e9 WIN",
@@ -187,7 +324,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 175318,
-      "pnl": 3.09
+      "pnl": 3.09,
+      "price": 0.97,
+      "kprice": 0.97,
+      "payout": 1.03,
+      "agree": 6,
+      "combo": false
     },
     {
       "label": "SANTIAGO PESINO",
@@ -196,7 +338,12 @@
       "start": "2026-11-24",
       "result": "L",
       "invested": 1801,
-      "pnl": -100.0
+      "pnl": -100.0,
+      "price": 0.37,
+      "kprice": 0.37,
+      "payout": 2.7,
+      "agree": 2,
+      "combo": false
     },
     {
       "label": "Sheffield United FC NOT TO WIN",
@@ -205,7 +352,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 18539,
-      "pnl": 4.17
+      "pnl": 4.17,
+      "price": 0.96,
+      "kprice": 0.96,
+      "payout": 1.04,
+      "agree": 6,
+      "combo": false
     },
     {
       "label": "Sonal Patil",
@@ -214,7 +366,12 @@
       "start": "2026-11-24",
       "result": "L",
       "invested": 1248,
-      "pnl": -100.0
+      "pnl": -100.0,
+      "price": 0.65,
+      "kprice": 0.65,
+      "payout": 1.54,
+      "agree": 1,
+      "combo": false
     },
     {
       "label": "Stefon Diggs under 49.5 receiving yards",
@@ -223,7 +380,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 1272,
-      "pnl": null
+      "pnl": null,
+      "price": null,
+      "kprice": null,
+      "payout": null,
+      "agree": 1,
+      "combo": false
     },
     {
       "label": "Tristan Schoolkate",
@@ -232,7 +394,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 1533,
-      "pnl": 1.01
+      "pnl": 1.01,
+      "price": 0.99,
+      "kprice": 0.99,
+      "payout": 1.01,
+      "agree": 2,
+      "combo": false
     },
     {
       "label": "UNDER",
@@ -241,7 +408,12 @@
       "start": "2026-11-24",
       "result": "W",
       "invested": 22959,
-      "pnl": null
+      "pnl": null,
+      "price": null,
+      "kprice": null,
+      "payout": null,
+      "agree": 2,
+      "combo": false
     },
     {
       "label": "Western Michigan -6.5",
@@ -250,7 +422,12 @@
       "start": "2026-11-24",
       "result": "L",
       "invested": 6000,
-      "pnl": -100.0
+      "pnl": -100.0,
+      "price": 0.01,
+      "kprice": 0.01,
+      "payout": 100.0,
+      "agree": 1,
+      "combo": false
     }
   ]
 }

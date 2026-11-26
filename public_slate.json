@@ -1,0 +1,349 @@
+{
+  "source": "whale",
+  "ts": 1795666233,
+  "updatedAt": "Wed Nov 25 \u00b7 8:10 PM PT",
+  "picks": [
+    {
+      "ticker": "KXNFLGAME-26NOV25GBLAR-LAR",
+      "yesNo": "Yes",
+      "side": "Rams",
+      "game": "Los Angeles Rams vs Green Bay Packers",
+      "startTs": 1795654800,
+      "bt": "moneyline",
+      "n": 5
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV25GBLAR-GB",
+      "yesNo": "Yes",
+      "side": "Packers",
+      "game": "Los Angeles Rams vs Green Bay Packers",
+      "startTs": 1795654800,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV25GBLAR-LAR3",
+      "yesNo": "No",
+      "side": "Packers +2.5",
+      "game": "Los Angeles Rams vs Green Bay Packers",
+      "startTs": 1795654800,
+      "bt": "spread",
+      "n": 2
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV25GBLAR-LAR4",
+      "yesNo": "No",
+      "side": "Packers +3.5",
+      "game": "Los Angeles Rams vs Green Bay Packers",
+      "startTs": 1795654800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV25GBLAR-LAR7",
+      "yesNo": "Yes",
+      "side": "Los Angeles R wins by over 6.5 points",
+      "game": "Los Angeles Rams vs Green Bay Packers",
+      "startTs": 1795654800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLTOTAL-26NOV25GBLAR-45",
+      "yesNo": "No",
+      "side": "Under 44.5",
+      "game": "Los Angeles Rams vs Green Bay Packers",
+      "startTs": 1795654800,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLTOTAL-26NOV25GBLAR-43",
+      "yesNo": "No",
+      "side": "Under 42.5",
+      "game": "Los Angeles Rams vs Green Bay Packers",
+      "startTs": 1795654800,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV25SASPOR-SAS",
+      "yesNo": "Yes",
+      "side": "Spurs",
+      "game": "Portland Trail Blazers vs San Antonio Spurs",
+      "startTs": 1795662000,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV25SASPOR-POR",
+      "yesNo": "Yes",
+      "side": "Trail Blazers",
+      "game": "Portland Trail Blazers vs San Antonio Spurs",
+      "startTs": 1795662000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV25SASPOR-SAS3",
+      "yesNo": "Yes",
+      "side": "San Antonio wins by over 2.5 points",
+      "game": "Portland Trail Blazers vs San Antonio Spurs",
+      "startTs": 1795662000,
+      "bt": "spread",
+      "n": 2
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV25SASPOR-SAS4",
+      "yesNo": "No",
+      "side": "Blazers +3.5",
+      "game": "Portland Trail Blazers vs San Antonio Spurs",
+      "startTs": 1795662000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBATOTAL-26NOV25SASPOR-227",
+      "yesNo": "No",
+      "side": "Under 226.5",
+      "game": "Portland Trail Blazers vs San Antonio Spurs",
+      "startTs": 1795662000,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV25PHXHOU-HOU10",
+      "yesNo": "No",
+      "side": "Suns +9.5",
+      "game": "Houston Rockets vs Phoenix Suns",
+      "startTs": 1795656600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBATOTAL-26NOV25PHXHOU-224",
+      "yesNo": "No",
+      "side": "Under 223.5",
+      "game": "Houston Rockets vs Phoenix Suns",
+      "startTs": 1795656600,
+      "bt": "total",
+      "n": 2
+    },
+    {
+      "ticker": "KXNBATOTAL-26NOV25PHXHOU-226",
+      "yesNo": "No",
+      "side": "Under 225.5",
+      "game": "Houston Rockets vs Phoenix Suns",
+      "startTs": 1795656600,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV25SACGSW-SAC",
+      "yesNo": "Yes",
+      "side": "Kings",
+      "game": "Golden State Warriors vs Sacramento Kings",
+      "startTs": 1795662000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV25SACGSW-GSW6",
+      "yesNo": "No",
+      "side": "Kings +5.5",
+      "game": "Golden State Warriors vs Sacramento Kings",
+      "startTs": 1795662000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBATOTAL-26NOV25SACGSW-219",
+      "yesNo": "No",
+      "side": "Under 218.5",
+      "game": "Golden State Warriors vs Sacramento Kings",
+      "startTs": 1795662000,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV260100EFM80-M80",
+      "yesNo": "Yes",
+      "side": "M80",
+      "game": "Counter-Strike: M80 vs Eternal Fire",
+      "startTs": 1795672800,
+      "bt": "moneyline",
+      "n": 3
+    },
+    {
+      "ticker": "KXLIGAMXGAME-26NOV25MONAME-MON",
+      "yesNo": "Yes",
+      "side": "CF Monterrey not to win",
+      "game": "Monterrey vs Am\u00e9rica",
+      "startTs": 1795662600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXLIGAMXGAME-26NOV25MONAME-AME",
+      "yesNo": "Yes",
+      "side": "CF Am\u00e9rica not to win",
+      "game": "Monterrey vs Am\u00e9rica",
+      "startTs": 1795662600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXLIGAMXTOTAL-26NOV25MONAME-3",
+      "yesNo": "No",
+      "side": "Under 2.5",
+      "game": "Monterrey vs Am\u00e9rica",
+      "startTs": 1795662600,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNHLTOTAL-26NOV25SJANA-7",
+      "yesNo": "No",
+      "side": "Under 6.5",
+      "game": "Anaheim Ducks vs San Jose Sharks",
+      "startTs": 1795662000,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXATPCHALLENGERMATCH-26NOV25NOGHAS-HAS",
+      "yesNo": "Yes",
+      "side": "Benjamin Hassan",
+      "game": "Yokohama: Rio Noguchi vs Benjamin Hassan",
+      "startTs": 1795663800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV260100FAZEHERO-FAZE",
+      "yesNo": "Yes",
+      "side": "FaZe",
+      "game": "Counter-Strike: Heroic vs FaZe",
+      "startTs": 1795672800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
+      "yesNo": "Yes",
+      "side": "AFC Bournemouth not to win",
+      "game": "Celta Vigo vs AFC Bournemouth",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
+      "yesNo": "No",
+      "side": "Olympiak\u00f3s SFP not to win",
+      "game": "Olympiacos vs AC Milan",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
+      "yesNo": "Yes",
+      "side": "Spurs",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV28SACHAW-HAW14",
+      "yesNo": "Yes",
+      "side": "Hawai'i wins by over 13.5 points",
+      "game": "Hawai'i Rainbow Warriors vs Sacramento State Hornets",
+      "startTs": 1795924800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV28UABUNT-UNT4",
+      "yesNo": "Yes",
+      "side": "North Texas wins by over 3.5 points",
+      "game": "UAB vs North Texas",
+      "startTs": 1795899600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26KCBUF-BUF3",
+      "yesNo": "No",
+      "side": "Chiefs +2.5",
+      "game": "Buffalo Bills vs Kansas City Chiefs",
+      "startTs": 1795742400,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26USGLPO-USG",
+      "yesNo": "Yes",
+      "side": "RU Saint-Gilloise to win",
+      "game": "RU Saint-Gilloise vs KKS Lech Pozna\u0144",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
+      "yesNo": "Yes",
+      "side": "Bologna FC 1909 to win",
+      "game": "Venezia vs Bologna",
+      "startTs": 1795808700,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV29NYGIND-NYG",
+      "yesNo": "Yes",
+      "side": "Giants",
+      "game": "Indianapolis Colts vs New York Giants",
+      "startTs": 1795975200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV29BALHOU-HOU",
+      "yesNo": "Yes",
+      "side": "Texans",
+      "game": "Houston Texans vs Baltimore Ravens",
+      "startTs": 1795975200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXSERIEAGAME-26NOV29COMJUV-COM",
+      "yesNo": "Yes",
+      "side": "Como 1907 to win",
+      "game": "Como vs Juventus",
+      "startTs": 1795981500,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNHLGAME-26NOV25MTLCOL-MTL",
+      "yesNo": "Yes",
+      "side": "Canadiens",
+      "game": "Colorado Avalanche vs Montreal Canadiens",
+      "startTs": 1795660200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAMBGAME-26NOV25JVSTPAC-JVST",
+      "yesNo": "Yes",
+      "side": "Jacksonville State Gamecocks",
+      "game": "Jacksonville State Gamecocks vs Pacific Tigers",
+      "startTs": 1795665300,
+      "bt": "moneyline",
+      "n": 1
+    }
+  ]
+}

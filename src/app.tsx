@@ -747,7 +747,37 @@ function last20PnlOfWallet(wallet?: string | null): number | null {
   const r = last20Of(wallet);
   return r && r.n ? r.pnl : null;
 }
+function walletRoiPct(wallet?: string | null): { roi: number | null; reliable: boolean; n: number } {
+  const rec = QMAP[(wallet || "").toLowerCase()];
+  const n = rec ? ((rec.cn != null ? rec.cn : rec.n) || 0) : 0;
+  const vol = rec ? ((rec.crisked != null ? rec.crisked : rec.risked) || 0) : 0;
+  let roi: number | null = null;
+  if (rec && rec.croi != null && n >= 5) roi = rec.croi;
+  else if (rec && rec.roi != null && (rec.n || 0) >= 5) roi = rec.roi;
+  else if (rec && vol >= 1000 && rec.cprofit != null) roi = 100 * rec.cprofit / vol;
+  const reliable = n >= 20 || vol >= 25000 || (n >= 10 && vol >= 10000);
+  return { roi, reliable, n };
+}
+function historyVeteranWallet(wallet?: string | null): boolean {
+  const r = walletRoiPct(wallet);
+  const pnl = longTermPnlOfWallet(wallet);
+  return r.reliable || veteranDaysOfWallet(wallet) >= 60 || r.n >= 10 || (pnl != null && Math.abs(pnl) >= 50000);
+}
+function historyScoreWallet(wallet?: string | null): number | null {
+  const pnl = longTermPnlOfWallet(wallet);
+  if (pnl == null) return null;
+  const logp = Math.log10(1 + Math.max(0, pnl));
+  const r = walletRoiPct(wallet);
+  if (r.roi != null && r.reliable) return logp * (1 + Math.max(-0.5, r.roi) / 8);
+  return logp;
+}
 function cmpCapperHistory(a?: string | null, b?: string | null): number {
+  const va = historyVeteranWallet(a), vb = historyVeteranWallet(b);
+  if (va !== vb) return va ? -1 : 1;
+  const sa = historyScoreWallet(a), sb = historyScoreWallet(b);
+  if (sa == null && sb != null) return 1;
+  if (sb == null && sa != null) return -1;
+  if (sa != null && sb != null && Math.abs(sa - sb) > 1e-9) return sb - sa;
   const pa = longTermPnlOfWallet(a), pb = longTermPnlOfWallet(b);
   if (pa == null && pb != null) return 1;
   if (pb == null && pa != null) return -1;
@@ -756,8 +786,8 @@ function cmpCapperHistory(a?: string | null, b?: string | null): number {
   if (ra == null && rb != null) return 1;
   if (rb == null && ra != null) return -1;
   if (ra != null && rb != null && ra !== rb) return ra - rb;
-  const va = veteranDaysOfWallet(a), vb = veteranDaysOfWallet(b);
-  if (va !== vb) return vb - va;
+  const da = veteranDaysOfWallet(a), db = veteranDaysOfWallet(b);
+  if (da !== db) return db - da;
   const la = last20PnlOfWallet(a), lb = last20PnlOfWallet(b);
   if (la == null && lb != null) return 1;
   if (lb == null && la != null) return -1;
@@ -5009,7 +5039,64 @@ function entryGapCents(p: UPick): number | null {
 function isFadingPick(p: UPick): boolean { const g = entryGapCents(p); return g != null && g <= -FADE_CENTS; }
 function addedAfterStart(p: UPick): boolean { return p.kind === "sports" && !!p.startTs && !!p.firstTs && (p.firstTs as number) > p.startTs; }
 const flagChip = (bg: string, fg: string, border: string): React.CSSProperties => ({ display: "inline-block", padding: "2px 9px", borderRadius: 999, background: bg, color: fg, border: "1.5px solid " + border, fontSize: 12, fontWeight: 850 });
+interface PublicSlatePick { ticker?: string; yesNo?: string; side?: string; game?: string; startTs?: number; bt?: string; n?: number }
+let OTHER_SLATE: PublicSlatePick[] = [];
+let OTHER_SLATE_STARTED = false;
+const OTHER_SLATE_LISTENERS: Array<() => void> = [];
+function useOtherSlate(): PublicSlatePick[] {
+  const [rows, setRows] = useState<PublicSlatePick[]>(OTHER_SLATE);
+  useEffect(() => {
+    const bump = () => setRows(OTHER_SLATE.slice());
+    OTHER_SLATE_LISTENERS.push(bump);
+    if (!OTHER_SLATE_STARTED) {
+      OTHER_SLATE_STARTED = true;
+      fetch("https://nfm0984-png.github.io/kalshi-scanner/public_slate.json?t=" + Date.now()).then((r) => r.ok ? r.json() : null).then((d: { picks?: PublicSlatePick[] }) => {
+        if (d && Array.isArray(d.picks)) { OTHER_SLATE = d.picks; OTHER_SLATE_LISTENERS.forEach((fn) => fn()); }
+      }).catch(() => {});
+    }
+    return () => { const i = OTHER_SLATE_LISTENERS.indexOf(bump); if (i >= 0) OTHER_SLATE_LISTENERS.splice(i, 1); };
+  }, []);
+  return rows;
+}
+function normTicker(t?: string | null): string { return (t || "").toUpperCase().replace(/[^A-Z0-9-]/g, ""); }
+function normYesNo(y?: string | null): string {
+  const u = (y || "").trim().toUpperCase();
+  if (u === "Y" || u === "YES" || u.indexOf("BUY YES") >= 0 || /\bYES$/.test(u)) return "YES";
+  if (u === "N" || u === "NO" || u.indexOf("BUY NO") >= 0 || /\bNO$/.test(u)) return "NO";
+  return u;
+}
+function slateHitForPick(p: UPick): PublicSlatePick | null {
+  const tk = normTicker(p.view && p.view.ticker);
+  if (!tk) return null;
+  const hits = OTHER_SLATE.filter((s) => normTicker(s.ticker) === tk);
+  if (!hits.length) return null;
+  const yn = normYesNo(p.view && p.view.yesNo);
+  if (yn) {
+    const same = hits.find((s) => normYesNo(s.yesNo) === yn);
+    if (same) return same;
+  }
+  return hits.length === 1 ? hits[0] : null;
+}
+function splitInfo(p: UPick, now?: number): { oppN: number; oppLabel: string } | null {
+  const all = (typeof allTabPicks === "function") ? allTabPicks(now || (Date.now() / 1000)) : [];
+  const opp = oppositeOf(p, all).filter((q: UPick) => {
+    if (p.mid && q.mid === p.mid && q.view && p.view && q.view.yesNo && p.view.yesNo && q.view.yesNo !== p.view.yesNo) return true;
+    if (isMoneylinePick(p) && isMoneylinePick(q) && teamToken(q) && teamToken(p) && teamToken(q) !== teamToken(p)) return true;
+    return false;
+  });
+  let oppN = 0;
+  let oppLabel = "";
+  opp.forEach((q: UPick) => {
+    const n = (q.backers || []).length;
+    if (!n) return;
+    oppN += n;
+    if (!oppLabel) oppLabel = q.big || (q.view && (q.view.backing || q.view.outcome)) || "other side";
+  });
+  if (oppN < 1 || !(p.backers || []).length) return null;
+  return { oppN, oppLabel };
+}
 function PickFlags(props: { p: UPick }): React.ReactElement | null {
+  useOtherSlate();
   const p = props.p;
   const out: React.ReactElement[] = [];
   if (addedAfterStart(p)) out.push(<span key="la" data-live-added="1" title="This pick first showed up on the scanner after the game had started" style={flagChip("#FEE2E2", "#B91C1C", "#EF4444")}>{"LIVE · added after start"}</span>);
@@ -5020,6 +5107,10 @@ function PickFlags(props: { p: UPick }): React.ReactElement | null {
   if (oc.consensus) out.push(<span key="cs" data-consensus="1" title="Two or more OrcaLayer Proven-only cappers are on this side" style={flagChip("#ECFDF5", "#047857", "#34D399")}>{"Consensus · " + oc.proven + " proven"}</span>);
   const agreeN = (p.backers || []).length;
   if (agreeN >= 2) out.push(<span key="ag" data-agree="1" title="Two or more cappers who pass the quality filter are on this pick. Label only; ranking unchanged." style={flagChip("#EEF2FF", "#3730A3", "#818CF8")}>{agreeN + " agree"}</span>);
+  const split = splitInfo(p);
+  if (split) out.push(<span key="sp" data-split="1" title={"Quality cappers are on both sides of this market — sharp-vs-sharp coin flip. " + split.oppN + " on " + split.oppLabel + "."} style={flagChip("#FFFBEB", "#B45309", "#F59E0B")}>{"Split · vs " + split.oppN + (split.oppLabel ? " on " + split.oppLabel : "")}</span>);
+  const both = slateHitForPick(p);
+  if (both) out.push(<span key="bo" data-both-scanners="1" title={"A top Kalshi capper is also on this same contract" + (both.n ? " (" + both.n + " capper" + (both.n === 1 ? "" : "s") + ")" : "") + "."} style={flagChip("#ECFDF5", "#047857", "#34D399")}>{"Both scanners"}</span>);
   const lensChips: { key: string; label: string; title: string }[] = [];
   (p.backers || []).forEach((b: UBacker) => {
     const o = orcaOf(b.wallet);
@@ -5047,7 +5138,8 @@ function eliteTabCount(now: number): number {
 }
 
 interface ScorecardPick { result?: string; pnl?: number | null; capper?: string; label?: string; q?: string; side?: string; ticker?: string; combo?: boolean }
-interface Scorecard { date?: string; label?: string; updatedAt?: string; w?: number; l?: number; pending?: number; pnl?: number | null; pnlNote?: string; pnlPartial?: boolean; picks?: ScorecardPick[] }
+interface ScorecardBucket { label: string; w?: number; l?: number; pending?: number; pnl?: number | null; n?: number }
+interface Scorecard { date?: string; label?: string; updatedAt?: string; w?: number; l?: number; pending?: number; pnl?: number | null; pnlNote?: string; pnlPartial?: boolean; breakdown?: ScorecardBucket[]; picks?: ScorecardPick[] }
 function moneyAbs(n: number): string {
   const a = Math.abs(n);
   if (a >= 1000) return (a / 1000).toFixed(a >= 10000 ? 0 : 1).replace(/\.0$/, "") + "k";
@@ -5059,6 +5151,23 @@ function scorecardMoney(n: number | null | undefined): string {
   const a = Math.abs(n);
   if (a >= 1000) return sign + (a / 1000).toFixed(a >= 10000 ? 0 : 1).replace(/\.0$/, "") + "k";
   return sign + a.toFixed(2).replace(/\.00$/, "");
+}
+function ScorecardBreakdown(props: { sc: Scorecard }): React.ReactElement | null {
+  const rows = props.sc.breakdown || [];
+  if (!rows.length) return null;
+  return (
+    <div data-scorecard-breakdown="1" style={{ display: "flex", flexWrap: "wrap", gap: 8, margin: "10px 0 8px" }}>
+      {rows.map((b: ScorecardBucket) => {
+        const dol = scorecardMoney(b.pnl);
+        return (
+          <div key={b.label} style={{ flex: "1 1 150px", minWidth: 140, border: "1.5px solid #DDD6FE", borderRadius: 12, padding: "8px 10px", background: "#FAF8FF" }}>
+            <div style={{ fontSize: 11, fontWeight: 800, color: "#64748B", letterSpacing: "0.04em", textTransform: "uppercase" }}>{b.label}</div>
+            <div style={{ fontSize: 15, fontWeight: 850, color: "#0F172A", marginTop: 2, fontVariantNumeric: "tabular-nums" }}>{(b.w || 0) + "–" + (b.l || 0)}{(b.pending ? " · " + b.pending + " pend" : "") + (dol ? " · " + dol : "")}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 function ScorecardBlock(): React.ReactElement {
   const [sc, setSc] = useState<Scorecard | null | undefined>(undefined);
@@ -5073,6 +5182,7 @@ function ScorecardBlock(): React.ReactElement {
   const heading = "Yesterday · " + w + "–" + l + (pending ? " · " + pending + " pending" : "") + (pnlStr ? " · " + pnlStr : "") + (sc.pnlPartial ? " (partial $)" : "");
   return (
     <Section heading={heading} caption={(sc.label || "Yesterday") + (sc.pnlNote ? " · " + sc.pnlNote : "") + (sc.updatedAt ? " · updated " + sc.updatedAt : "")}>
+      <ScorecardBreakdown sc={sc} />
       {(sc.picks || []).length === 0 ? <EmptyState title="No scanner picks yesterday" body="No Kalshi-linked scanner picks started yesterday in PT." /> : (
         <div style={{ display: "flex", flexDirection: "column", gap: 4, marginTop: 6 }}>
           {(sc.picks || []).map((row: ScorecardPick, i: number) => {

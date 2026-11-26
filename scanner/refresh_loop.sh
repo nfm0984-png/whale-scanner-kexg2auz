@@ -27,7 +27,7 @@ PY
 
 END_EPOCH=$(( $(date +%s) + ${FOLLOW_LOOP_SECS:-2880} ))
 
-outs=(data.json proven_picks.json scanner/history.json scanner/page_embed.json scanner/capper_history.json scanner/whale_windows.json scanner/tracked_cappers.json scanner/backfill.json scanner/proven_picks.json scanner/wallet_stats.json kalshi_display.json)
+outs=(data.json public_slate.json proven_picks.json scanner/history.json scanner/page_embed.json scanner/capper_history.json scanner/whale_windows.json scanner/tracked_cappers.json scanner/backfill.json scanner/proven_picks.json scanner/wallet_stats.json kalshi_display.json)
 
 should_stop() {
   python3 - <<'PY'
