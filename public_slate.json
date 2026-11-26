@@ -1,134 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795668891,
-  "updatedAt": "Wed Nov 25 \u00b7 8:54 PM PT",
+  "ts": 1795675236,
+  "updatedAt": "Wed Nov 25 \u00b7 10:40 PM PT",
   "picks": [
-    {
-      "ticker": "KXNBAGAME-26NOV25SASPOR-SAS",
-      "yesNo": "Yes",
-      "side": "Spurs",
-      "game": "Portland Trail Blazers vs San Antonio Spurs",
-      "startTs": 1795662000,
-      "bt": "moneyline",
-      "n": 3
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV25SASPOR-POR",
-      "yesNo": "Yes",
-      "side": "Trail Blazers",
-      "game": "Portland Trail Blazers vs San Antonio Spurs",
-      "startTs": 1795662000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV25SASPOR-SAS3",
-      "yesNo": "Yes",
-      "side": "San Antonio wins by over 2.5 points",
-      "game": "Portland Trail Blazers vs San Antonio Spurs",
-      "startTs": 1795662000,
-      "bt": "spread",
-      "n": 2
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV25SASPOR-SAS4",
-      "yesNo": "No",
-      "side": "Blazers +3.5",
-      "game": "Portland Trail Blazers vs San Antonio Spurs",
-      "startTs": 1795662000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBATOTAL-26NOV25SASPOR-227",
-      "yesNo": "No",
-      "side": "Under 226.5",
-      "game": "Portland Trail Blazers vs San Antonio Spurs",
-      "startTs": 1795662000,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV25SACGSW-GSW9",
-      "yesNo": "Yes",
-      "side": "Golden State wins by over 8.5 points",
-      "game": "Golden State Warriors vs Sacramento Kings",
-      "startTs": 1795662000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV25SACGSW-GSW6",
-      "yesNo": "Yes",
-      "side": "Golden State wins by over 5.5 points",
-      "game": "Golden State Warriors vs Sacramento Kings",
-      "startTs": 1795662000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV25SACGSW-GSW6",
-      "yesNo": "No",
-      "side": "Kings +5.5",
-      "game": "Golden State Warriors vs Sacramento Kings",
-      "startTs": 1795662000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV25SACGSW-GSW18",
-      "yesNo": "Yes",
-      "side": "Golden State wins by over 17.5 points",
-      "game": "Golden State Warriors vs Sacramento Kings",
-      "startTs": 1795662000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXLIGAMXGAME-26NOV25MONAME-MON",
-      "yesNo": "Yes",
-      "side": "CF Monterrey not to win",
-      "game": "Monterrey vs Am\u00e9rica",
-      "startTs": 1795662600,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXLIGAMXGAME-26NOV25MONAME-AME",
-      "yesNo": "Yes",
-      "side": "CF Am\u00e9rica not to win",
-      "game": "Monterrey vs Am\u00e9rica",
-      "startTs": 1795662600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXLIGAMXGAME-26NOV25MONAME-AME",
-      "yesNo": "Yes",
-      "side": "CF Am\u00e9rica to win",
-      "game": "Monterrey vs Am\u00e9rica",
-      "startTs": 1795662600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXLIGAMXGAME-26NOV25MONAME-TIE",
-      "yesNo": "No",
-      "side": "NO DRAW",
-      "game": "Monterrey vs Am\u00e9rica",
-      "startTs": 1795662600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXLIGAMXTOTAL-26NOV25MONAME-1",
-      "yesNo": "Yes",
-      "side": "Over 0.5",
-      "game": "Monterrey vs Am\u00e9rica",
-      "startTs": 1795662600,
-      "bt": "total",
-      "n": 1
-    },
     {
       "ticker": "KXCS2GAME-26NOV260100EFM80-M80",
       "yesNo": "Yes",
@@ -136,7 +10,7 @@
       "game": "Counter-Strike: M80 vs Eternal Fire",
       "startTs": 1795672800,
       "bt": "moneyline",
-      "n": 3
+      "n": 6
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
@@ -166,24 +40,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNHLTOTAL-26NOV25SJANA-7",
-      "yesNo": "No",
-      "side": "Under 6.5",
-      "game": "Anaheim Ducks vs San Jose Sharks",
-      "startTs": 1795662000,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV260600TLIMP-IMP",
-      "yesNo": "Yes",
-      "side": "Imperial",
-      "game": "Counter-Strike: Imperial vs Liquid",
-      "startTs": 1795690800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXCS2GAME-26NOV260100FAZEHERO-FAZE",
       "yesNo": "Yes",
       "side": "FaZe",
@@ -199,7 +55,7 @@
       "game": "Celta Vigo vs AFC Bournemouth",
       "startTs": 1795715100,
       "bt": "moneyline",
-      "n": 1
+      "n": 2
     },
     {
       "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
@@ -208,14 +64,23 @@
       "game": "Olympiacos vs AC Milan",
       "startTs": 1795715100,
       "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
+      "yesNo": "Yes",
+      "side": "Bears",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "moneyline",
       "n": 1
     },
     {
-      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
+      "ticker": "KXCS2GAME-26NOV260600TLIMP-IMP",
       "yesNo": "Yes",
-      "side": "Spurs",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
+      "side": "Imperial",
+      "game": "Counter-Strike: Imperial vs Liquid",
+      "startTs": 1795690800,
       "bt": "moneyline",
       "n": 1
     },
@@ -283,6 +148,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
+      "yesNo": "Yes",
+      "side": "Spurs",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXSERIEAGAME-26NOV29COMJUV-COM",
       "yesNo": "Yes",
       "side": "Como 1907 to win",
@@ -292,11 +166,11 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAMBGAME-26NOV25JVSTPAC-JVST",
+      "ticker": "KXEPLGAME-26NOV29EVELFC-LFC",
       "yesNo": "Yes",
-      "side": "Jacksonville State Gamecocks",
-      "game": "Jacksonville State Gamecocks vs Pacific Tigers",
-      "startTs": 1795665300,
+      "side": "Liverpool FC not to win",
+      "game": "Everton vs Liverpool",
+      "startTs": 1795953600,
       "bt": "moneyline",
       "n": 1
     }
