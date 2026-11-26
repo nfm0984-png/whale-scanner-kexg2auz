@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795729193,
-  "updatedAt": "Thu Nov 26 \u00b7 1:39 PM PT",
+  "ts": 1795729491,
+  "updatedAt": "Thu Nov 26 \u00b7 1:44 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26PHIDAL-DAL",
@@ -22,30 +22,12 @@
       "n": 1
     },
     {
-      "ticker": "KXUELGAME-26NOV26CRYRSO-CRY",
-      "yesNo": "No",
-      "side": "Crystal Palace FC not to win",
-      "game": "Crystal Palace vs Real Sociedad",
-      "startTs": 1795723200,
-      "bt": "moneyline",
-      "n": 3
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
       "yesNo": "Yes",
       "side": "Raptors",
       "game": "Toronto Raptors vs Brooklyn Nets",
       "startTs": 1795825800,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26FTCCEL-1",
-      "yesNo": "No",
-      "side": "Under 0.5",
-      "game": "Ferencv\u00e1rosi TC vs NK Celje - More Markets",
-      "startTs": 1795723200,
-      "bt": "total",
       "n": 1
     },
     {
@@ -112,15 +94,6 @@
       "n": 1
     },
     {
-      "ticker": "KXUELTOTAL-26NOV26OFIRSC-4",
-      "yesNo": "No",
-      "side": "Under 3.5",
-      "game": "OFI Crete vs Anderlecht",
-      "startTs": 1795723200,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
       "yesNo": "Yes",
       "side": "FC Barcelona to win",
@@ -153,15 +126,6 @@
       "side": "Hawks",
       "game": "Boston Celtics vs Atlanta Hawks",
       "startTs": 1795827600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAMBGAME-26NOV26TENNISU-ISU",
-      "yesNo": "Yes",
-      "side": "Iowa State Cyclones",
-      "game": "Iowa State Cyclones vs Tennessee Volunteers",
-      "startTs": 1795725000,
       "bt": "moneyline",
       "n": 1
     },
@@ -292,6 +256,15 @@
       "n": 1
     },
     {
+      "ticker": "KXUELTOTAL-26NOV26SUNJAG-3",
+      "yesNo": "No",
+      "side": "Under 2.5",
+      "game": "Sunderland vs Jagiellonia Bialystok",
+      "startTs": 1795723200,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27MILDET-DET",
       "yesNo": "Yes",
       "side": "Pistons",
@@ -315,6 +288,15 @@
       "side": "Nuggets",
       "game": "Utah Jazz vs Denver Nuggets",
       "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAMBGAME-26NOV26TENNISU-ISU",
+      "yesNo": "Yes",
+      "side": "Iowa State Cyclones",
+      "game": "Iowa State Cyclones vs Tennessee Volunteers",
+      "startTs": 1795725000,
       "bt": "moneyline",
       "n": 1
     }
