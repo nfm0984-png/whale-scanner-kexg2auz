@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795712561,
-  "updatedAt": "Thu Nov 26 \u00b7 9:02 AM PT",
+  "ts": 1795712861,
+  "updatedAt": "Thu Nov 26 \u00b7 9:07 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -40,6 +40,24 @@
       "n": 1
     },
     {
+      "ticker": "KXDOTA2MAP-26NOV261200TYGL-2-TY",
+      "yesNo": "Yes",
+      "side": "Team Yandex",
+      "game": "Team Yandex vs GamerLegion",
+      "startTs": 1795712400,
+      "bt": "moneyline",
+      "n": 4
+    },
+    {
+      "ticker": "KXDOTA2GAME-26NOV261200TYGL-GL",
+      "yesNo": "Yes",
+      "side": "GamerLegion",
+      "game": "Team Yandex vs GamerLegion",
+      "startTs": 1795712400,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
       "yesNo": "Yes",
       "side": "AFC Bournemouth to win",
@@ -73,24 +91,6 @@
       "game": "Celta Vigo vs AFC Bournemouth",
       "startTs": 1795715100,
       "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV261200TYGL-2-TY",
-      "yesNo": "Yes",
-      "side": "Team Yandex",
-      "game": "Team Yandex vs GamerLegion",
-      "startTs": 1795712400,
-      "bt": "moneyline",
-      "n": 4
-    },
-    {
-      "ticker": "KXDOTA2GAME-26NOV261200TYGL-GL",
-      "yesNo": "Yes",
-      "side": "GamerLegion",
-      "game": "Team Yandex vs GamerLegion",
-      "startTs": 1795712400,
-      "bt": "moneyline",
       "n": 1
     },
     {
@@ -279,15 +279,6 @@
       "side": "North Texas wins by over 3.5 points",
       "game": "UAB vs North Texas",
       "startTs": 1795899600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELSPREAD-26NOV26RBSARA-RBS3",
-      "yesNo": "No",
-      "side": "RB Salzburg +2.5",
-      "game": "RB Salzburg vs Ararat-Armenia",
-      "startTs": 1795715100,
       "bt": "spread",
       "n": 1
     },
