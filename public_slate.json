@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795718477,
-  "updatedAt": "Thu Nov 26 \u00b7 10:41 AM PT",
+  "ts": 1795718777,
+  "updatedAt": "Thu Nov 26 \u00b7 10:46 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -13,9 +13,9 @@
       "n": 3
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET7",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 6.5 points",
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET8",
+      "yesNo": "No",
+      "side": "Bears +7.5",
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "spread",
@@ -31,6 +31,24 @@
       "n": 1
     },
     {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET10",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 9.5 points",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET11",
+      "yesNo": "Yes",
+      "side": "Detroit wins by over 10.5 points",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXNFLTOTAL-26NOV26CHIDET-57",
       "yesNo": "Yes",
       "side": "Over 56.5",
@@ -38,6 +56,33 @@
       "startTs": 1795716000,
       "bt": "total",
       "n": 3
+    },
+    {
+      "ticker": "KXNFLTOTAL-26NOV26CHIDET-53",
+      "yesNo": "No",
+      "side": "Under 52.5",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLTOTAL-26NOV26CHIDET-53",
+      "yesNo": "Yes",
+      "side": "Over 52.5",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLTOTAL-26NOV26CHIDET-55",
+      "yesNo": "No",
+      "side": "Under 54.5",
+      "game": "Detroit Lions vs Chicago Bears",
+      "startTs": 1795716000,
+      "bt": "total",
+      "n": 1
     },
     {
       "ticker": "KXNFLTOTAL-26NOV26CHIDET-47",
@@ -58,15 +103,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLTOTAL-26NOV26CHIDET-53",
-      "yesNo": "Yes",
-      "side": "Over 52.5",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
       "yesNo": "No",
       "side": "Olympiak\u00f3s SFP not to win",
@@ -74,6 +110,24 @@
       "startTs": 1795715100,
       "bt": "moneyline",
       "n": 2
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
+      "yesNo": "Yes",
+      "side": "Olympiak\u00f3s SFP to win",
+      "game": "Olympiacos vs AC Milan",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26OLYACM-ACM",
+      "yesNo": "Yes",
+      "side": "AC Milan not to win",
+      "game": "Olympiacos vs AC Milan",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
