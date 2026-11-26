@@ -101611,7 +101611,11 @@
    "first_seen": 1795703670,
    "scans": 3,
    "first_score": 19,
-   "result": null
+   "result": "L",
+   "graded": 1795726864,
+   "ended": 1795726864,
+   "finalScore": "DET 35 \u2013 CHI 32",
+   "active": false
   },
   "0x9cd7d1a3e20dc76b141e4b4215092956d775ce8b9afdd92cad0b51f11e988b19:yes": {
    "tier": "top",
@@ -102996,7 +103000,11 @@
    "first_seen": 1795721255,
    "scans": 1,
    "first_score": 14,
-   "result": null
+   "result": "W",
+   "graded": 1795726864,
+   "ended": 1795726864,
+   "finalScore": "DET 35 \u2013 CHI 32",
+   "active": false
   },
   "0x7885ed491c04dadb54ae936ce0754a59c387ddd7ef71cba8177b415e561fe637:yes": {
    "tier": "biggest",

@@ -1,62 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795726746,
-  "updatedAt": "Thu Nov 26 \u00b7 12:59 PM PT",
+  "ts": 1795726922,
+  "updatedAt": "Thu Nov 26 \u00b7 1:02 PM PT",
   "picks": [
-    {
-      "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
-      "yesNo": "Yes",
-      "side": "Bears",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "moneyline",
-      "n": 4
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET7",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 6.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET6",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 5.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET10",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 9.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET8",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 7.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26CHIDET-DET11",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 10.5 points",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "spread",
-      "n": 1
-    },
     {
       "ticker": "KXNFLGAME-26NOV26PHIDAL-DAL",
       "yesNo": "Yes",
@@ -319,6 +265,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAMBGAME-26NOV26MIAMICH-MICH",
+      "yesNo": "Yes",
+      "side": "Michigan Wolverines",
+      "game": "Michigan Wolverines vs Miami Hurricanes",
+      "startTs": 1795725000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV28SACHAW-HAW14",
       "yesNo": "Yes",
       "side": "Hawai'i wins by over 13.5 points",
@@ -369,15 +324,6 @@
       "side": "Texans",
       "game": "Houston Texans vs Baltimore Ravens",
       "startTs": 1795975200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXITFMATCH-26NOV25LORPRI-PRI",
-      "yesNo": "Yes",
-      "side": "Salvador Price",
-      "game": "M15 Santa Cruz: Santiago Lora vs Salvador Price",
-      "startTs": 1795716038,
       "bt": "moneyline",
       "n": 1
     },
@@ -468,15 +414,6 @@
       "side": "Varvara Lepchenko",
       "game": "Varvara Lepchenko vs Sofia Costoulas",
       "startTs": 1795716300,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAMBGAME-26NOV26MIAMICH-MICH",
-      "yesNo": "Yes",
-      "side": "Michigan Wolverines",
-      "game": "Michigan Wolverines vs Miami Hurricanes",
-      "startTs": 1795725000,
       "bt": "moneyline",
       "n": 1
     }
