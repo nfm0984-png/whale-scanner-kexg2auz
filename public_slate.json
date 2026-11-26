@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795722469,
-  "updatedAt": "Thu Nov 26 \u00b7 11:47 AM PT",
+  "ts": 1795722864,
+  "updatedAt": "Thu Nov 26 \u00b7 11:54 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -58,15 +58,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLTOTAL-26NOV26CHIDET-57",
-      "yesNo": "Yes",
-      "side": "Over 56.5",
-      "game": "Detroit Lions vs Chicago Bears",
-      "startTs": 1795716000,
-      "bt": "total",
-      "n": 2
-    },
-    {
       "ticker": "KXNFLTOTAL-26NOV26CHIDET-53",
       "yesNo": "No",
       "side": "Under 52.5",
@@ -100,6 +91,33 @@
       "game": "Crystal Palace vs Real Sociedad",
       "startTs": 1795723200,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26CRYRSO-TIE",
+      "yesNo": "No",
+      "side": "NO DRAW",
+      "game": "Crystal Palace vs Real Sociedad",
+      "startTs": 1795723200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26CRYRSO-3",
+      "yesNo": "Yes",
+      "side": "Over 2.5",
+      "game": "Crystal Palace vs Real Sociedad",
+      "startTs": 1795723200,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELTOTAL-26NOV26CRYRSO-3",
+      "yesNo": "No",
+      "side": "Under 2.5",
+      "game": "Crystal Palace vs Real Sociedad",
+      "startTs": 1795723200,
+      "bt": "total",
       "n": 1
     },
     {
@@ -145,6 +163,15 @@
       "game": "Dallas Cowboys vs Philadelphia Eagles",
       "startTs": 1795728600,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
+      "yesNo": "Yes",
+      "side": "Juventus FC to win",
+      "game": "Juventus vs Omonia Nicosia",
+      "startTs": 1795723200,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -274,15 +301,6 @@
       "n": 1
     },
     {
-      "ticker": "KXUELGAME-26NOV26JUVOMO-JUV",
-      "yesNo": "Yes",
-      "side": "Juventus FC to win",
-      "game": "Juventus vs Omonia Nicosia",
-      "startTs": 1795723200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
       "yesNo": "Yes",
       "side": "Bologna FC 1909 to win",
@@ -306,6 +324,15 @@
       "side": "FC Barcelona to win",
       "game": "Deportivo vs Barcelona",
       "startTs": 1795965300,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXATPCHALLENGERMATCH-26NOV26NEFWIL-NEF",
+      "yesNo": "Yes",
+      "side": "Axel Nefve",
+      "game": "San Salvador: Axel Nefve vs Benjamin Willwerth",
+      "startTs": 1795718400,
       "bt": "moneyline",
       "n": 1
     },
@@ -387,6 +414,15 @@
       "side": "Texans",
       "game": "Houston Texans vs Baltimore Ravens",
       "startTs": 1795975200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26TSGSTU-TSG",
+      "yesNo": "Yes",
+      "side": "TSG 1899 Hoffenheim to win",
+      "game": "TSG Hoffenheim vs SK Sturm Graz",
+      "startTs": 1795723200,
       "bt": "moneyline",
       "n": 1
     },
