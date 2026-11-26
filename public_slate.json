@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795729491,
-  "updatedAt": "Thu Nov 26 \u00b7 1:44 PM PT",
+  "ts": 1795729787,
+  "updatedAt": "Thu Nov 26 \u00b7 1:49 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26PHIDAL-DAL",
@@ -22,11 +22,29 @@
       "n": 1
     },
     {
+      "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL7",
+      "yesNo": "Yes",
+      "side": "Dallas wins by over 6.5 points",
+      "game": "Dallas Cowboys vs Philadelphia Eagles",
+      "startTs": 1795728600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
       "yesNo": "Yes",
       "side": "Raptors",
       "game": "Toronto Raptors vs Brooklyn Nets",
       "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
+      "yesNo": "Yes",
+      "side": "Knicks",
+      "game": "New York Knicks vs Miami Heat",
+      "startTs": 1795824000,
       "bt": "moneyline",
       "n": 1
     },
@@ -47,15 +65,6 @@
       "startTs": 1795742400,
       "bt": "spread",
       "n": 2
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
-      "yesNo": "Yes",
-      "side": "Knicks",
-      "game": "New York Knicks vs Miami Heat",
-      "startTs": 1795824000,
-      "bt": "moneyline",
-      "n": 1
     },
     {
       "ticker": "KXNBAGAME-26NOV27PHIIND-PHI",
@@ -229,15 +238,6 @@
       "n": 1
     },
     {
-      "ticker": "KXUELGAME-26NOV26OLLSK-OL",
-      "yesNo": "Yes",
-      "side": "Olympique Lyonnais to win",
-      "game": "Olympique Lyonnais vs Lillestr\u00f8m SK",
-      "startTs": 1795723200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNCAAFSPREAD-26NOV27MSSTMISS-MISS18",
       "yesNo": "Yes",
       "side": "Ole Miss wins by over 17.5 points",
@@ -253,15 +253,6 @@
       "game": "Wyoming Cowboys vs UConn Huskies",
       "startTs": 1795885200,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26SUNJAG-3",
-      "yesNo": "No",
-      "side": "Under 2.5",
-      "game": "Sunderland vs Jagiellonia Bialystok",
-      "startTs": 1795723200,
-      "bt": "total",
       "n": 1
     },
     {
