@@ -1605,7 +1605,7 @@ function ActionBar() {
               <div style={{ marginTop: 4, color: "rgba(255,255,255,0.85)" }}>Checks live status, final results and ESPN win chances, logs W/L to the Journal, and drops games that have already started from Top 20, Upcoming, Fun, Polymarket, Player Props, Longshots and Biggest Bets (live games stay on Bets). Ended games are removed everywhere. No OrcaLayer calls.</div>
               {hasKey ? goBtn("refresh", busy ? "Working…" : "Run refresh") : keyBox}
               <a href={actionsWorkflowUrl()} target="_blank" rel="noreferrer" style={{ display: "inline-block", marginTop: 8, color: "#FFFFFF", fontWeight: 700 }}>Run scan on GitHub ↗</a>
-              <div style={{ marginTop: 8, color: "rgba(255,255,255,0.85)" }}>Last refresh {DATA.refreshedAt || "not yet"}.</div>
+              <div style={{ marginTop: 8, color: "rgba(255,255,255,0.85)" }}>Last refresh {DATA.refreshedAt || DATA.scannedAt || "not yet"}.</div>
             </div>
           )}
         </div>
@@ -1682,7 +1682,7 @@ function ShellSide() {
       <div className="ws-side-card" data-scan-status="1">
         <div style={{ fontSize: 14, fontWeight: 850, marginBottom: 4 }}>Scan status</div>
         <StatusRow label="Last scan" status={DATA.scannedAt || "—"} tone="ok" />
-        <StatusRow label="Last refresh" status={DATA.refreshedAt || "not yet"} tone="public" />
+        <StatusRow label="Last refresh" status={DATA.refreshedAt || DATA.scannedAt || "not yet"} tone="public" />
         <StatusRow label="Whales tracked" status={"Top " + (DATA.coverage && DATA.coverage.cappers ? DATA.coverage.cappers : "—")} tone="public" />
         <StatusRow label="Window" status={(DATA.settings && DATA.settings.windowH ? DATA.settings.windowH + " hours" : "—")} tone="muted" />
       </div>
@@ -1720,7 +1720,7 @@ function Hero(props: { top: number; fun: number; buys: number; bets: number; act
             <h1 className="ws-hero-title" style={{ fontSize: 34, fontWeight: 900, letterSpacing: "-0.03em", margin: "8px 0 0", lineHeight: 1.1 }}>Polymarket Scanner</h1>
             <div style={{ fontSize: 15, fontWeight: 600, color: "#94A3B8", marginTop: 6 }}>Kalshi whale picks, best first — public books and trade tape.</div>
             <div style={{ fontSize: 12, fontWeight: 650, color: "#94A3B8", marginTop: 6 }}>{"Top " + DATA.coverage.cappers + " all-time sports whales · next " + DATA.settings.windowH + " hours"}</div>
-            <div style={{ fontSize: 12, fontWeight: 650, color: "#94A3B8", marginTop: 2 }}>{"Scanned " + DATA.scannedAt + " · Refreshed " + (DATA.refreshedAt || "not yet")}</div>
+            <div style={{ fontSize: 12, fontWeight: 650, color: "#94A3B8", marginTop: 2 }}>{"Scanned " + DATA.scannedAt + " · Refreshed " + (DATA.refreshedAt || DATA.scannedAt || "not yet")}</div>
           </div>
           <div className="ws-hero-actions">
             <ActionBar />
@@ -1736,7 +1736,7 @@ function Hero(props: { top: number; fun: number; buys: number; bets: number; act
         </div>
       </header>
       <div className="ws-stats">
-        <DashStat label="Top picks" value={String(props.top)} sub="Best whale tickets" color="#2563EB" />
+        <DashStat label="Ranked picks" value={String(props.top)} sub="Open ranked tickets" color="#2563EB" />
         <DashStat label="Fun picks" value={String(props.fun)} sub="Longer shots" color="#0EA5E9" />
         <DashStat label="Recent buys" value={String(props.buys)} sub="Fresh tape" color="#6366F1" />
         <DashStat label="Sports bets" value={String(props.bets)} sub="Open books" color="#15803D" />
@@ -5053,29 +5053,30 @@ function moneyAbs(n: number): string {
   if (a >= 1000) return (a / 1000).toFixed(a >= 10000 ? 0 : 1).replace(/\.0$/, "") + "k";
   return String(Math.round(a));
 }
-function ScorecardBlock(): React.ReactElement | null {
-  const [sc, setSc] = useState<Scorecard | null>(null);
+function ScorecardBlock(): React.ReactElement {
+  const [sc, setSc] = useState<Scorecard | null | undefined>(undefined);
   useEffect(() => {
-    fetch("scorecard.json?t=" + Date.now()).then((r) => r.ok ? r.json() : null).then((d: Scorecard) => { if (d && (d.date || d.label)) setSc(d); }).catch(() => {});
+    fetch("scorecard.json?t=" + Date.now()).then((r) => r.ok ? r.json() : null).then((d: Scorecard) => { setSc(d && (d.date || d.label) ? d : null); }).catch(() => { setSc(null); });
   }, []);
-  if (!sc) return null;
+  if (sc === undefined) return <Section heading="Scorecard" caption="Loading yesterday’s scanner picks…"><Text>Loading…</Text></Section>;
+  if (!sc) return <EmptyState title="No scorecard yet" body="Yesterday’s scanner picks will show here after the daily scorecard job runs (about 6:35 AM PT)." />;
   const w = sc.w || 0, l = sc.l || 0, pending = sc.pending || 0;
   const pnl = sc.pnl;
-  const pnlStr = (pnl == null) ? "" : ((pnl >= 0 ? "+$" : "-$") + moneyAbs(pnl));
+  const pnlStr = (pnl == null || Math.abs(pnl) < 0.005) ? "" : ((pnl >= 0 ? "+$" : "-$") + moneyAbs(pnl));
   const heading = "Yesterday · " + w + "–" + l + (pending ? " · " + pending + " pending" : "") + (pnlStr ? " · " + pnlStr : "") + (sc.pnlPartial ? " (partial $)" : "");
   return (
     <Section heading={heading} caption={(sc.label || "Yesterday") + (sc.pnlNote ? " · " + sc.pnlNote : "") + (sc.updatedAt ? " · updated " + sc.updatedAt : "")}>
-      {(sc.picks || []).length === 0 ? <Text>No scanner picks started yesterday.</Text> : (
+      {(sc.picks || []).length === 0 ? <EmptyState title="No scanner picks yesterday" body="No Kalshi-linked scanner picks started yesterday in PT." /> : (
         <div style={{ display: "flex", flexDirection: "column", gap: 4, marginTop: 6 }}>
           {(sc.picks || []).map((row: ScorecardPick, i: number) => {
             const res = row.result || "pending";
             const title = row.label || row.q || row.ticker || row.capper || ("Pick " + (i + 1));
             const who = row.capper || row.side || "";
-            const dol = row.pnl == null ? "" : ((row.pnl >= 0 ? "+$" : "-$") + moneyAbs(row.pnl));
+            const dol = (row.pnl == null || Math.abs(row.pnl) < 0.005) ? "" : ((row.pnl >= 0 ? "+$" : "-$") + moneyAbs(row.pnl));
             const color = res === "W" ? "#047857" : res === "L" ? "#B91C1C" : "#64748B";
             return (
               <div key={i} style={{ display: "flex", justifyContent: "space-between", gap: 10, fontSize: 13, fontWeight: 700, color: "#0F172A" }}>
-                <span style={{ overflowWrap: "anywhere" }}><span style={{ color, fontWeight: 850, marginRight: 6 }}>{res}</span>{title}{who && title !== who ? " · " + who : ""}</span>
+                <span style={{ overflowWrap: "anywhere" }}><span style={{ color, fontWeight: 850, marginRight: 8 }}>{res + " "}</span>{title}{who && title !== who ? " · " + who : ""}</span>
                 {dol ? <span style={{ color, flex: "none", fontVariantNumeric: "tabular-nums" }}>{dol}</span> : null}
               </div>
             );
@@ -5084,6 +5085,9 @@ function ScorecardBlock(): React.ReactElement | null {
       )}
     </Section>
   );
+}
+function ScorecardTab(): React.ReactElement {
+  return <ScorecardBlock />;
 }
 
 function EliteTab(props: { now: number }) {
@@ -5095,13 +5099,10 @@ function EliteTab(props: { now: number }) {
     return <GameBlock key={c.id} u={{ id: c.id, picks }} now={props.now} stake="" noun="game" all={all} rankNo={i + 1} rec={c.rec} cappers={c.cappers} net={c.net} hideStake={true} />;
   };
   return (
-    <div>
-    <ScorecardBlock />
     <Section heading={"Ranked · " + L.total} caption="Best picks first · today in PT · after 7pm, + tomorrow">
       {L.total === 0 ? <EmptyState title="No ranked games right now" body={"No tracked capper has a $1,000+ pick with a Kalshi line right now. " + nextScanLabel(props.now) + "."} /> : null}
       {L.list.map((c: RankedCard, i: number) => render(c, i))}
     </Section>
-    </div>
   );
 }
 
@@ -6363,7 +6364,7 @@ export default function App() {
       const q = new URLSearchParams(window.location.search).get("tab") || "";
       if (q === "elite" || q === "ranked") return "elite";
       if (q === "golden" || q === "hot") return "hot";
-      if (q === "coming" || q === "cappers") return q;
+      if (q === "coming" || q === "cappers" || q === "scorecard") return q;
     } catch (e) { /* ignore */ }
     return "elite";
   });
@@ -6696,17 +6697,17 @@ export default function App() {
   );
   return (
     <Page title="Polymarket Scanner" summary="Kalshi whale picks, best first." record={tabRecord || undefined} caution={tabCaution || undefined}>
-      <Hero top={top.length} fun={fun.length} buys={BUY_LINES.length} bets={BET_LINES.length} active={activeTraders.length} value={openValue} />
+      <Hero top={eliteTabCount(now)} fun={fun.length} buys={BUY_LINES.length} bets={BET_LINES.length} active={activeTraders.length} value={openValue} />
 
       <div className="ws-tabs-flow" data-tab-bar="desktop">
         <div className="ws-tabs">
           <span className="ws-tabs-label">Today</span>
-          {[{ value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: eliteTabCount(now) }, { value: "hot", label: "Golden Picks", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }].map((t) => {
+          {[{ value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: eliteTabCount(now) }, { value: "hot", label: "Golden Picks", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }, { value: "scorecard", label: "Scorecard" }].map((t) => {
             const on = tab === t.value;
             return (
               <button key={t.value} type="button" onClick={() => { setTab(t.value); setSportFilter(""); }} style={{ flex: "0 0 auto", display: "inline-flex", alignItems: "center", gap: 7, padding: "8px 14px", borderRadius: 999, border: "0", background: on ? "#1D4ED8" : "transparent", color: on ? "#FFFFFF" : "#BFDBFE", fontWeight: 800, fontSize: 14, cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap", touchAction: "manipulation" }}>
                 {t.label}
-                <span style={{ display: "inline-block", marginLeft: 2, padding: "1px 7px", borderRadius: 999, background: on ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.08)", color: on ? "#FFFFFF" : "#93C5FD", fontSize: 12 }}>{t.count}</span>
+                {t.count != null ? <span style={{ display: "inline-block", marginLeft: 2, padding: "1px 7px", borderRadius: 999, background: on ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.08)", color: on ? "#FFFFFF" : "#93C5FD", fontSize: 12 }}>{t.count}</span> : null}
               </button>
             );
           })}
@@ -6812,6 +6813,7 @@ export default function App() {
       {tab === "coming" ? <ComingUpTab now={now} /> : null}
       {tab === "hot" ? <HotWeekTab now={now} /> : null}
       {tab === "pe" ? <PoliticsEconTab now={now} /> : null}
+      {tab === "scorecard" ? <ScorecardTab /> : null}
 
       {(
         <Section heading="More · bankroll, record, scan details" collapsible defaultOpen={false}>
@@ -6911,7 +6913,7 @@ export default function App() {
           <span style={{ fontSize: 11, fontWeight: 850, letterSpacing: "0.08em", textTransform: "uppercase", color: "#7C3AED", width: 38, flex: "none", lineHeight: "12px" }}>Today</span>
           <div style={{ flex: 1, minWidth: 0 }}>
             <PillTabs bare
-              options={[{ value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: eliteTabCount(now) }, { value: "hot", label: "Golden Picks", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }]}
+              options={[{ value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: eliteTabCount(now) }, { value: "hot", label: "Golden Picks", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }, { value: "scorecard", label: "Scorecard" }]}
               value={tab === "pe" ? "" : tab}
               onChange={(v: string) => { setTab(v); setSportFilter(""); }}
             />

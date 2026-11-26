@@ -9,6 +9,7 @@ ROOT = os.path.dirname(HERE)
 HIST = os.path.join(HERE, "history.json")
 OUT = os.path.join(ROOT, "scorecard.json")
 PT = ZoneInfo("America/Los_Angeles")
+FLAT_STAKE = 100  # copy-size unit; not the whale's invested size
 # "Thu Nov 12, 9:00 AM PT" or "Thu Nov 12, 9:00 AM"
 START_RE = re.compile(
     r"(?:^[A-Za-z]{3} )?([A-Za-z]{3}) (\d{1,2}),? (?:(\d{4}),? )?(\d{1,2}):(\d{2})\s*(AM|PM)",
@@ -47,11 +48,15 @@ def parse_start(s, year_hint):
 
 
 def _pnl(result, invested, kprice):
-    if result not in ("W", "L") or not isinstance(invested, (int, float)):
+    """Flat $100 at the Kalshi price. Missing price: $0 on a win is omitted; a loss is -$100."""
+    if result not in ("W", "L"):
         return None
     if isinstance(kprice, (int, float)) and 0 < kprice < 1:
-        return round(invested * (1.0 / kprice - 1.0), 2) if result == "W" else round(-invested, 2)
-    return round(-invested, 2) if result == "L" else None
+        units = (1.0 / kprice - 1.0) if result == "W" else -1.0
+        return round(FLAT_STAKE * units, 2)
+    if result == "L":
+        return round(-FLAT_STAKE, 2)
+    return None
 
 
 def yesterday_date(now=None):
@@ -126,7 +131,7 @@ def build(now=None):
         "pending": pending,
         "pnl": round(pnl, 2),
         "pnlPartial": (not pnl_known),
-        "pnlNote": "Dollar PnL from invested size at the Kalshi price when available; losses use stake",
+        "pnlNote": "Flat $100 at the Kalshi price (not whale size)",
         "picks": picks,
     }
 
