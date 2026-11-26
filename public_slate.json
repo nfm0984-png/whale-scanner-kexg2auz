@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795732500,
-  "updatedAt": "Thu Nov 26 \u00b7 2:35 PM PT",
+  "ts": 1795732912,
+  "updatedAt": "Thu Nov 26 \u00b7 2:41 PM PT",
   "picks": [
     {
       "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL9",
@@ -74,24 +74,6 @@
       "startTs": 1795728600,
       "bt": "total",
       "n": 2
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV26PHIDAL-51",
-      "yesNo": "No",
-      "side": "Under 50.5",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV26PHIDAL-47",
-      "yesNo": "No",
-      "side": "Under 46.5",
-      "game": "Dallas Cowboys vs Philadelphia Eagles",
-      "startTs": 1795728600,
-      "bt": "total",
-      "n": 1
     },
     {
       "ticker": "KXNFLTOTAL-26NOV26PHIDAL-45",
@@ -252,6 +234,15 @@
       "side": "FC Barcelona to win",
       "game": "Deportivo vs Barcelona",
       "startTs": 1795965300,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXATPCHALLENGERMATCH-26NOV25ANDDUR-DUR",
+      "yesNo": "Yes",
+      "side": "Diego Duran",
+      "game": "San Salvador: Lucas Da Silva vs Diego Duran",
+      "startTs": 1795725600,
       "bt": "moneyline",
       "n": 1
     },
