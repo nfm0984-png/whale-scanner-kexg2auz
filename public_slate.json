@@ -1,26 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795704828,
-  "updatedAt": "Thu Nov 26 \u00b7 6:53 AM PT",
+  "ts": 1795706871,
+  "updatedAt": "Thu Nov 26 \u00b7 7:27 AM PT",
   "picks": [
-    {
-      "ticker": "KXDOTA2MAP-26NOV260830LIQUID1WIN-2-1WIN",
-      "yesNo": "Yes",
-      "side": "1win",
-      "game": "1win vs Team Liquid",
-      "startTs": 1795699800,
-      "bt": "moneyline",
-      "n": 4
-    },
-    {
-      "ticker": "KXDOTA2GAME-26NOV260830LIQUID1WIN-1WIN",
-      "yesNo": "Yes",
-      "side": "1win",
-      "game": "1win vs Team Liquid",
-      "startTs": 1795699800,
-      "bt": "moneyline",
-      "n": 1
-    },
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
       "yesNo": "Yes",
@@ -28,7 +10,7 @@
       "game": "Detroit Lions vs Chicago Bears",
       "startTs": 1795716000,
       "bt": "moneyline",
-      "n": 1
+      "n": 2
     },
     {
       "ticker": "KXUELGAME-26NOV26RCCBOU-BOU",
@@ -76,15 +58,6 @@
       "n": 1
     },
     {
-      "ticker": "KXUELGAME-26NOV26VIKBEN-BEN",
-      "yesNo": "No",
-      "side": "Sport Lisboa e Benfica not to win",
-      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
       "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
       "yesNo": "Yes",
       "side": "Chiefs",
@@ -100,6 +73,24 @@
       "game": "Buffalo Bills vs Kansas City Chiefs",
       "startTs": 1795742400,
       "bt": "spread",
+      "n": 2
+    },
+    {
+      "ticker": "KXNFLTOTAL-26NOV26KCBUF-49",
+      "yesNo": "Yes",
+      "side": "Over 48.5",
+      "game": "Buffalo Bills vs Kansas City Chiefs",
+      "startTs": 1795742400,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26VIKBEN-BEN",
+      "yesNo": "No",
+      "side": "Sport Lisboa e Benfica not to win",
+      "game": "FC Viktoria Plze\u0148 vs Sport Lisboa e Benfica - More Markets",
+      "startTs": 1795715100,
+      "bt": "moneyline",
       "n": 2
     },
     {
@@ -266,7 +257,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV29EVELFC-LFC",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "Liverpool FC not to win",
       "game": "Everton vs Liverpool",
       "startTs": 1795953600,
