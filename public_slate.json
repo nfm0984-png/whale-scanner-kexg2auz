@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795714357,
-  "updatedAt": "Thu Nov 26 \u00b7 9:32 AM PT",
+  "ts": 1795714659,
+  "updatedAt": "Thu Nov 26 \u00b7 9:37 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26CHIDET-CHI",
@@ -85,21 +85,30 @@
       "n": 1
     },
     {
-      "ticker": "KXDOTA2MAP-26NOV261200TYGL-2-GL",
+      "ticker": "KXUELGAME-26NOV26OLYACM-ACM",
       "yesNo": "Yes",
-      "side": "GamerLegion",
-      "game": "Team Yandex vs GamerLegion",
-      "startTs": 1795712400,
+      "side": "AC Milan not to win",
+      "game": "Olympiacos vs AC Milan",
+      "startTs": 1795715100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
+      "yesNo": "No",
+      "side": "Olympiak\u00f3s SFP not to win",
+      "game": "Olympiacos vs AC Milan",
+      "startTs": 1795715100,
       "bt": "moneyline",
       "n": 2
     },
     {
-      "ticker": "KXDOTA2GAME-26NOV261200TYGL-GL",
-      "yesNo": "Yes",
-      "side": "GamerLegion",
-      "game": "Team Yandex vs GamerLegion",
-      "startTs": 1795712400,
-      "bt": "moneyline",
+      "ticker": "KXUELTOTAL-26NOV26OLYACM-3",
+      "yesNo": "No",
+      "side": "Under 2.5",
+      "game": "Olympiacos vs AC Milan",
+      "startTs": 1795715100,
+      "bt": "total",
       "n": 1
     },
     {
@@ -189,24 +198,6 @@
       "side": "Over 48.5",
       "game": "Buffalo Bills vs Kansas City Chiefs",
       "startTs": 1795742400,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELGAME-26NOV26OLYACM-OLY",
-      "yesNo": "No",
-      "side": "Olympiak\u00f3s SFP not to win",
-      "game": "Olympiacos vs AC Milan",
-      "startTs": 1795715100,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXUELTOTAL-26NOV26OLYACM-3",
-      "yesNo": "No",
-      "side": "Under 2.5",
-      "game": "Olympiacos vs AC Milan",
-      "startTs": 1795715100,
       "bt": "total",
       "n": 1
     },
