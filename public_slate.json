@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795759315,
-  "updatedAt": "Thu Nov 26 \u00b7 10:01 PM PT",
+  "ts": 1795760773,
+  "updatedAt": "Thu Nov 26 \u00b7 10:26 PM PT",
   "picks": [
     {
       "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
@@ -11,6 +11,24 @@
       "startTs": 1795777200,
       "bt": "moneyline",
       "n": 3
+    },
+    {
+      "ticker": "KXCS2MAP-26NOV270100HEROLVG-1-HERO",
+      "yesNo": "Yes",
+      "side": "Heroic",
+      "game": "Counter-Strike: Lynn Vision vs Heroic",
+      "startTs": 1795759200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV270100HEROLVG-HERO",
+      "yesNo": "Yes",
+      "side": "Heroic",
+      "game": "Counter-Strike: Lynn Vision vs Heroic",
+      "startTs": 1795759200,
+      "bt": "moneyline",
+      "n": 1
     },
     {
       "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
@@ -36,24 +54,6 @@
       "side": "Raptors",
       "game": "Toronto Raptors vs Brooklyn Nets",
       "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV270100HEROLVG-HERO",
-      "yesNo": "Yes",
-      "side": "Heroic",
-      "game": "Counter-Strike: Lynn Vision vs Heroic",
-      "startTs": 1795759200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2MAP-26NOV270100HEROLVG-1-HERO",
-      "yesNo": "Yes",
-      "side": "Heroic",
-      "game": "Counter-Strike: Lynn Vision vs Heroic",
-      "startTs": 1795759200,
       "bt": "moneyline",
       "n": 1
     },
@@ -122,7 +122,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-CFC",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "Chelsea FC not to win",
       "game": "Nottingham Forest FC vs Chelsea FC",
       "startTs": 1795809600,
@@ -244,15 +244,6 @@
       "game": "Appalachian State vs South Alabama",
       "startTs": 1795809600,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAMBGAME-26NOV26BAYGONZ-BAY",
-      "yesNo": "Yes",
-      "side": "Baylor Bears",
-      "game": "Gonzaga Bulldogs vs Baylor Bears",
-      "startTs": 1795755180,
-      "bt": "moneyline",
       "n": 1
     },
     {
