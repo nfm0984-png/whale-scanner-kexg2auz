@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795799967,
-  "updatedAt": "Fri Nov 27 \u00b7 9:19 AM PT",
+  "ts": 1795801186,
+  "updatedAt": "Fri Nov 27 \u00b7 9:39 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
@@ -94,6 +94,33 @@
       "n": 2
     },
     {
+      "ticker": "KXNBASPREAD-26NOV27MIANYK-NYK3",
+      "yesNo": "No",
+      "side": "Heat +2.5",
+      "game": "New York Knicks vs Miami Heat",
+      "startTs": 1795824000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 5
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-AUR",
+      "yesNo": "Yes",
+      "side": "Aurora",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-NFO",
       "yesNo": "Yes",
       "side": "Nottingham Forest FC not to win",
@@ -144,6 +171,24 @@
       "side": "Philadelphia wins by over 3.5 points",
       "game": "Indiana Pacers vs Philadelphia 76ers",
       "startTs": 1795825800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV27MSSTMISS-MISS18",
+      "yesNo": "Yes",
+      "side": "Ole Miss wins by over 17.5 points",
+      "game": "Mississippi State vs Ole Miss",
+      "startTs": 1795798800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV27MSSTMISS-MISS17",
+      "yesNo": "Yes",
+      "side": "Ole Miss wins by over 16.5 points",
+      "game": "Mississippi State vs Ole Miss",
+      "startTs": 1795798800,
       "bt": "spread",
       "n": 1
     },
@@ -238,6 +283,24 @@
       "n": 1
     },
     {
+      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
+      "yesNo": "Yes",
+      "side": "FUT Esports",
+      "game": "Counter-Strike: FUT Esports vs FlyQuest",
+      "startTs": 1795838400,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FLY",
+      "yesNo": "Yes",
+      "side": "FlyQuest",
+      "game": "Counter-Strike: FUT Esports vs FlyQuest",
+      "startTs": 1795838400,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXEERSTEDIVGAME-26NOV27AZOSS-TIE",
       "yesNo": "Yes",
       "side": "DRAW",
@@ -265,13 +328,13 @@
       "n": 3
     },
     {
-      "ticker": "KXNCAAFSPREAD-26NOV27MSSTMISS-MISS17",
+      "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-TIE",
       "yesNo": "Yes",
-      "side": "Ole Miss wins by over 16.5 points",
-      "game": "Mississippi State vs Ole Miss",
-      "startTs": 1795798800,
-      "bt": "spread",
-      "n": 1
+      "side": "DRAW",
+      "game": "Jong FC Utrecht vs Almere City FC",
+      "startTs": 1795806000,
+      "bt": "moneyline",
+      "n": 3
     },
     {
       "ticker": "KXLALIGAGAME-26NOV28RMAALA-RMA",
@@ -346,15 +409,6 @@
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
-      "yesNo": "Yes",
-      "side": "FUT Esports",
-      "game": "Counter-Strike: FUT Esports vs FlyQuest",
-      "startTs": 1795838400,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27MILDET-DET",
       "yesNo": "Yes",
       "side": "Pistons",
@@ -373,51 +427,6 @@
       "n": 1
     },
     {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-TIE",
-      "yesNo": "Yes",
-      "side": "DRAW",
-      "game": "Jong FC Utrecht vs Almere City FC",
-      "startTs": 1795806000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-ALM",
-      "yesNo": "Yes",
-      "side": "Almere City FC not to win",
-      "game": "Jong FC Utrecht vs Almere City FC",
-      "startTs": 1795806000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXEERSTEDIVGAME-26NOV27VENWAA-TIE",
-      "yesNo": "Yes",
-      "side": "DRAW",
-      "game": "VVV Venlo vs RKC Waalwijk",
-      "startTs": 1795806000,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28KSUISU-ISU5",
-      "yesNo": "No",
-      "side": "Nebraska Cornhuskers +4.5",
-      "game": "Iowa Hawkeyes vs Nebraska Cornhuskers",
-      "startTs": 1795799280,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
       "yesNo": "Yes",
       "side": "FC Barcelona to win",
@@ -432,6 +441,15 @@
       "side": "Clippers",
       "game": "LA Clippers vs New Orleans Pelicans",
       "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV272300LVGMGLZ-LVG",
+      "yesNo": "Yes",
+      "side": "Lynn Vision",
+      "game": "Counter-Strike: TheMongolz vs Lynn Vision",
+      "startTs": 1795838400,
       "bt": "moneyline",
       "n": 1
     },
@@ -490,6 +508,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFGAME-26NOV27TLSAUTSA-UTSA",
+      "yesNo": "Yes",
+      "side": "UTSA",
+      "game": "UTSA Roadrunners vs Tulsa Golden Hurricane",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNHLGAME-26NOV28EDMSEA-EDM",
       "yesNo": "Yes",
       "side": "Oilers",
@@ -499,129 +526,12 @@
       "n": 1
     },
     {
-      "ticker": "KXNBASPREAD-26NOV27ATLBOS-BOS10",
-      "yesNo": "Yes",
-      "side": "Boston wins by over 9.5 points",
-      "game": "Boston Celtics vs Atlanta Hawks",
-      "startTs": 1795827600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFTOTAL-26NOV28BCMIA-54",
-      "yesNo": "No",
-      "side": "Under 53.5",
-      "game": "Miami Hurricanes vs Boston College Eagles",
-      "startTs": 1795885200,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28CONNWYO-CONN5",
-      "yesNo": "No",
-      "side": "Wyoming Cowboys +4.5",
-      "game": "Wyoming Cowboys vs UConn Huskies",
-      "startTs": 1795885200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFGAME-26NOV28MICHOSU-OSU",
-      "yesNo": "Yes",
-      "side": "Ohio State",
-      "game": "Ohio State Buckeyes vs Michigan Wolverines",
-      "startTs": 1795885200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFTOTAL-26NOV28MICHOSU-38",
-      "yesNo": "Yes",
-      "side": "Over 37.5",
-      "game": "Ohio State Buckeyes vs Michigan Wolverines",
-      "startTs": 1795885200,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28CCARJMU-JMU18",
-      "yesNo": "No",
-      "side": "Coastal Carolina Chanticleers +17.5",
-      "game": "James Madison Dukes vs Coastal Carolina Chanticleers",
-      "startTs": 1795892400,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFTOTAL-26NOV28UCFCOLO-50",
-      "yesNo": "Yes",
-      "side": "Over 49.5",
-      "game": "Colorado Buffaloes vs UCF Knights",
-      "startTs": 1795892400,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28LIBMOSU-LIB18",
-      "yesNo": "No",
-      "side": "Missouri State Bears +17.5",
-      "game": "Missouri State Bears vs Liberty Flames",
-      "startTs": 1795892400,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28SCARCLEM-SCAR6",
-      "yesNo": "No",
-      "side": "South Carolina +5.5",
-      "game": "Spread: South Carolina (-5.5)",
-      "startTs": 1795896000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFGAME-26NOV28USCUCLA-USC",
-      "yesNo": "Yes",
-      "side": "USC",
-      "game": "UCLA Bruins vs USC Trojans",
-      "startTs": 1795897800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFGAME-26NOV28AUBALA-AUB",
-      "yesNo": "Yes",
-      "side": "Auburn",
-      "game": "Alabama Crimson Tide vs Auburn Tigers",
-      "startTs": 1795912200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFTOTAL-26NOV28PITTCAL-46",
-      "yesNo": "Yes",
-      "side": "Over 45.5",
-      "game": "California Golden Bears vs Pittsburgh Panthers",
-      "startTs": 1795912200,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXNCAAFSPREAD-26NOV28SACHAW-HAW14",
       "yesNo": "Yes",
       "side": "Hawai'i wins by over 13.5 points",
       "game": "Hawai'i Rainbow Warriors vs Sacramento State Hornets",
       "startTs": 1795924800,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-TIE",
-      "yesNo": "Yes",
-      "side": "DRAW",
-      "game": "Jong FC Utrecht vs Almere City FC",
-      "startTs": 1795806000,
-      "bt": "moneyline",
       "n": 1
     },
     {
@@ -661,6 +571,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFSPREAD-26NOV28KSUISU-ISU5",
+      "yesNo": "No",
+      "side": "Nebraska Cornhuskers +4.5",
+      "game": "Iowa Hawkeyes vs Nebraska Cornhuskers",
+      "startTs": 1795799280,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV27APPUSA-USA4",
       "yesNo": "No",
       "side": "State +3.5",
@@ -675,15 +594,6 @@
       "side": "Sabres",
       "game": "Buffalo Sabres vs Pittsburgh Penguins",
       "startTs": 1795827600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXEERSTEDIVGAME-26NOV27VENWAA-TIE",
-      "yesNo": "Yes",
-      "side": "DRAW",
-      "game": "Will VVV Venlo vs RKC Waalwijk end in a draw?",
-      "startTs": 1795816800,
       "bt": "moneyline",
       "n": 1
     },
@@ -757,15 +667,6 @@
       "game": "Tampa Bay Lightning vs Ottawa Senators",
       "startTs": 1795809600,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN4",
-      "yesNo": "No",
-      "side": "Steelers +3.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
       "n": 1
     },
     {
