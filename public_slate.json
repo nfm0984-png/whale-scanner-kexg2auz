@@ -1,8 +1,26 @@
 {
   "source": "whale",
-  "ts": 1795801927,
-  "updatedAt": "Fri Nov 27 \u00b7 9:52 AM PT",
+  "ts": 1795802234,
+  "updatedAt": "Fri Nov 27 \u00b7 9:57 AM PT",
   "picks": [
+    {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 7
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-AUR",
+      "yesNo": "Yes",
+      "side": "Aurora",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 1
+    },
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
       "yesNo": "Yes",
@@ -103,24 +121,6 @@
       "n": 1
     },
     {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
-      "bt": "moneyline",
-      "n": 5
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-AUR",
-      "yesNo": "Yes",
-      "side": "Aurora",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-NFO",
       "yesNo": "Yes",
       "side": "Nottingham Forest FC not to win",
@@ -163,7 +163,7 @@
       "game": "Indiana Pacers vs Philadelphia 76ers",
       "startTs": 1795825800,
       "bt": "moneyline",
-      "n": 1
+      "n": 2
     },
     {
       "ticker": "KXNBASPREAD-26NOV27PHIIND-PHI4",
@@ -247,22 +247,13 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFGAME-26NOV27NEBIOWA-IOWA",
+      "ticker": "KXNHLGAME-26NOV27TORBOS-TOR",
       "yesNo": "Yes",
-      "side": "Iowa",
-      "game": "Iowa Hawkeyes vs Nebraska Cornhuskers",
-      "startTs": 1795799280,
+      "side": "Maple Leafs",
+      "game": "Boston Bruins vs Toronto Maple Leafs",
+      "startTs": 1795802400,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28KSUISU-ISU5",
-      "yesNo": "No",
-      "side": "Nebraska Cornhuskers +4.5",
-      "game": "Iowa Hawkeyes vs Nebraska Cornhuskers",
-      "startTs": 1795799280,
-      "bt": "spread",
-      "n": 1
+      "n": 3
     },
     {
       "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
@@ -275,7 +266,7 @@
     },
     {
       "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "Levante UD not to win",
       "game": "Levante UD vs Real Racing Club",
       "startTs": 1795809600,
@@ -299,6 +290,15 @@
       "startTs": 1795809600,
       "bt": "total",
       "n": 1
+    },
+    {
+      "ticker": "KXEERSTEDIVGAME-26NOV27VENWAA-TIE",
+      "yesNo": "Yes",
+      "side": "DRAW",
+      "game": "VVV Venlo vs RKC Waalwijk",
+      "startTs": 1795806000,
+      "bt": "moneyline",
+      "n": 4
     },
     {
       "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
@@ -337,13 +337,13 @@
       "n": 3
     },
     {
-      "ticker": "KXNHLGAME-26NOV27TORBOS-TOR",
-      "yesNo": "Yes",
-      "side": "Maple Leafs",
-      "game": "Boston Bruins vs Toronto Maple Leafs",
-      "startTs": 1795802400,
-      "bt": "moneyline",
-      "n": 2
+      "ticker": "KXNCAAFSPREAD-26NOV28KSUISU-ISU5",
+      "yesNo": "No",
+      "side": "Nebraska Cornhuskers +4.5",
+      "game": "Iowa Hawkeyes vs Nebraska Cornhuskers",
+      "startTs": 1795799280,
+      "bt": "spread",
+      "n": 1
     },
     {
       "ticker": "KXEERSTEDIVGAME-26NOV27DORVIT-TIE",
@@ -441,6 +441,24 @@
       "side": "Nuggets",
       "game": "Utah Jazz vs Denver Nuggets",
       "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFGAME-26NOV27NEBIOWA-IOWA",
+      "yesNo": "Yes",
+      "side": "Iowa",
+      "game": "Iowa Hawkeyes vs Nebraska Cornhuskers",
+      "startTs": 1795799280,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFGAME-26NOV27NEBIOWA-NEB",
+      "yesNo": "Yes",
+      "side": "Nebraska",
+      "game": "Iowa Hawkeyes vs Nebraska Cornhuskers",
+      "startTs": 1795799280,
       "bt": "moneyline",
       "n": 1
     },
@@ -544,15 +562,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFGAME-26NOV27NEBIOWA-NEB",
-      "yesNo": "Yes",
-      "side": "Nebraska",
-      "game": "Iowa Hawkeyes vs Nebraska Cornhuskers",
-      "startTs": 1795799280,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNCAAFSPREAD-26NOV28SACHAW-HAW14",
       "yesNo": "Yes",
       "side": "Hawai'i wins by over 13.5 points",
@@ -590,7 +599,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Manchester United FC not to win",
       "game": "Manchester United FC vs Brentford FC",
       "startTs": 1795878000,
@@ -635,7 +644,7 @@
     },
     {
       "ticker": "KXBUNDESLIGAGAME-26NOV27SVWBMG-SVW",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "SV Werder Bremen not to win",
       "game": "Werder Bremen vs Borussia M\u00f6nchengladbach",
       "startTs": 1795807800,
