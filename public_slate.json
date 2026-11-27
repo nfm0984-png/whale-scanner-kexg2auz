@@ -1,17 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795756106,
-  "updatedAt": "Thu Nov 26 \u00b7 9:08 PM PT",
+  "ts": 1795756413,
+  "updatedAt": "Thu Nov 26 \u00b7 9:13 PM PT",
   "picks": [
-    {
-      "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
-      "yesNo": "Yes",
-      "side": "M80",
-      "game": "Counter-Strike: M80 vs 100 Thieves",
-      "startTs": 1795777200,
-      "bt": "moneyline",
-      "n": 3
-    },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
       "yesNo": "Yes",
@@ -38,6 +29,15 @@
       "startTs": 1795809600,
       "bt": "total",
       "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
+      "yesNo": "Yes",
+      "side": "M80",
+      "game": "Counter-Strike: M80 vs 100 Thieves",
+      "startTs": 1795777200,
+      "bt": "moneyline",
+      "n": 3
     },
     {
       "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
@@ -100,6 +100,24 @@
       "game": "Utah Jazz vs Denver Nuggets",
       "startTs": 1795833000,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXEPLGAME-26NOV27NFOCFC-NFO",
+      "yesNo": "Yes",
+      "side": "Nottingham Forest FC to win",
+      "game": "Nottingham Forest FC vs Chelsea FC",
+      "startTs": 1795809600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXEPLGAME-26NOV27NFOCFC-CFC",
+      "yesNo": "Yes",
+      "side": "Chelsea FC not to win",
+      "game": "Nottingham Forest FC vs Chelsea FC",
+      "startTs": 1795809600,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -226,6 +244,15 @@
       "game": "Appalachian State vs South Alabama",
       "startTs": 1795809600,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAMBGAME-26NOV26BAYGONZ-BAY",
+      "yesNo": "Yes",
+      "side": "Baylor Bears",
+      "game": "Gonzaga Bulldogs vs Baylor Bears",
+      "startTs": 1795755180,
+      "bt": "moneyline",
       "n": 1
     },
     {
