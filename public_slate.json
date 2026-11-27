@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795755216,
-  "updatedAt": "Thu Nov 26 \u00b7 8:53 PM PT",
+  "ts": 1795755509,
+  "updatedAt": "Thu Nov 26 \u00b7 8:58 PM PT",
   "picks": [
     {
       "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
@@ -11,15 +11,6 @@
       "startTs": 1795777200,
       "bt": "moneyline",
       "n": 3
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
-      "yesNo": "Yes",
-      "side": "Raptors",
-      "game": "Toronto Raptors vs Brooklyn Nets",
-      "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
@@ -46,6 +37,15 @@
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
+      "yesNo": "Yes",
+      "side": "Raptors",
+      "game": "Toronto Raptors vs Brooklyn Nets",
+      "startTs": 1795825800,
+      "bt": "moneyline",
       "n": 1
     },
     {
