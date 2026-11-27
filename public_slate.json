@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795812459,
-  "updatedAt": "Fri Nov 27 \u00b7 12:47 PM PT",
+  "ts": 1795812751,
+  "updatedAt": "Fri Nov 27 \u00b7 12:52 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-DEN",
@@ -11,15 +11,6 @@
       "startTs": 1795809600,
       "bt": "moneyline",
       "n": 4
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-PIT7",
-      "yesNo": "No",
-      "side": "Broncos +6.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
@@ -454,6 +445,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFSPREAD-26NOV27APPUSA-USA4",
+      "yesNo": "No",
+      "side": "State +3.5",
+      "game": "Appalachian State vs South Alabama",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXBUNDESLIGAGAME-26NOV27SVWBMG-SVW",
       "yesNo": "Yes",
       "side": "SV Werder Bremen to win",
@@ -544,6 +544,15 @@
       "n": 2
     },
     {
+      "ticker": "KXNHLTOTAL-26NOV28SJCOL-7",
+      "yesNo": "No",
+      "side": "Under 6.5",
+      "game": "San Jose Sharks vs Vegas Golden Knights",
+      "startTs": 1795813200,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXNFLGAME-26NOV29SEASF-SF",
       "yesNo": "Yes",
       "side": "49ers",
@@ -608,7 +617,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "Manchester United FC not to win",
       "game": "Manchester United FC vs Brentford FC",
       "startTs": 1795878000,
@@ -622,15 +631,6 @@
       "game": "Nashville Predators vs Utah Mammoth",
       "startTs": 1795802400,
       "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV27APPUSA-USA4",
-      "yesNo": "No",
-      "side": "State +3.5",
-      "game": "Appalachian State vs South Alabama",
-      "startTs": 1795809600,
-      "bt": "spread",
       "n": 1
     },
     {
@@ -657,6 +657,15 @@
       "side": "Rockets",
       "game": "Houston Rockets vs Philadelphia 76ers",
       "startTs": 1795915800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXEERSTEDIVGAME-26NOV27AJAHER-HER",
+      "yesNo": "Yes",
+      "side": "Heracles Almelo to win",
+      "game": "Jong Ajax Amsterdam vs Heracles Almelo",
+      "startTs": 1795806000,
       "bt": "moneyline",
       "n": 1
     },
