@@ -270,6 +270,25 @@ try:
         print('orca proven rest: added %d of %d remaining Proven wallets with open sports positions' % (_prov_added, len(_prov_rest)), flush=True)
 except Exception as _e:
     print('orca proven rest failed:', _e, flush=True)
+
+# Noel Nov 27: always scan pinned sports cappers + the last Top 100 roster.
+try:
+    import top_cappers as _tc
+    _tc.ensure_pinned_resolved()
+    _pin_added = 0
+    _already = set(cappers)
+    for _w in list(_tc.pinned_wallets()) + [c.get('wallet') for c in (_tc.load_store().get('cappers') or [])]:
+        w = (_w or '').lower()
+        if not w or w in _already:
+            continue
+        cappers[w] = dict(wallet=w, name=None, rank=len(cappers) + 1, rankAll=None, rank30=None, poolSrc='pinned-top100', pnl30=None)
+        _already.add(w)
+        _pin_added += 1
+    if _pin_added:
+        print('top 100 / pinned: added %d wallets to this scan' % _pin_added, flush=True)
+except Exception as _e:
+    print('top 100 / pinned attach failed:', _e, flush=True)
+
 # Cheap secondary: 30-day PnL/rank for wallets that appear on the 30-day leaderboard (a few calls, not per-wallet).
 PNL30 = {}
 for off in range(0, 2000, 500):
@@ -1211,7 +1230,16 @@ def strength_of(s):
     if kind == 'spread' and not (n >= 3 and share >= 0.65) and word == 'Go big':
         word = 'Normal'
     return word
+_TOP100_W = set()
+try:
+    import top_cappers as _tc_rank
+    _TOP100_W = set(_tc_rank.pinned_wallets())
+    _TOP100_W.update((c.get('wallet') or '').lower() for c in (_tc_rank.load_store().get('cappers') or []))
+except Exception:
+    _TOP100_W = set()
+
 def annotate(s):
+
     s['used_price'] = used_price(s)
     s['price_band'] = price_band(s['used_price'])
     s['one_sided_share'] = one_share(s)
@@ -1267,19 +1295,23 @@ def rank_key(s):
         net, cnt = (s.get('net') or 0), len(s['backers'])
     tier = _ch_rank.vet_tier(s.get('backers') or [], _QMAP, _lg(s)) if (_QMAP and _ch_rank) else 1
     s['vet_tier'] = tier
-    proven_n = 0; lens_n = 0
+    proven_n = 0; lens_n = 0; top100_n = 0
     for b in (s.get('backers') or []):
         oc = b.get('orca') or (cappers.get((b.get('wallet') or '').lower()) or {}).get('orca') or {}
         if oc.get('proven') or b.get('skill'):
             proven_n += 1
         if oc.get('proven') or oc.get('smart') or oc.get('copyable') or oc.get('niche'):
             lens_n += 1
+        bw = (b.get('wallet') or '').lower()
+        if bw and bw in _TOP100_W:
+            top100_n += 1
     s['orcaProven'] = proven_n
     s['consensus'] = proven_n >= 2
     s['orcaLens'] = lens_n
+    s['top100Backers'] = top100_n
     # Vetting first (Noel, Nov 14): picks with a vetted 10+ sample backer, then vetted small sample, then unvetted.
     # Nov 24: 2+ Orca Proven cappers (consensus) and Copyable/Niche/Smart lenses bump the pick next.
-    return (tier, band, -int(s['consensus']), -lens_n, -backer_quality(s), -net, -(s.get('one_sided_share') or 0), -cnt, best_rank(s), -(s.get('score') or 0))
+    return (tier, band, -int(s['consensus']), -int(s.get('top100Backers') or 0), -lens_n, -backer_quality(s), -net, -(s.get('one_sided_share') or 0), -cnt, best_rank(s), -(s.get('score') or 0))
 for s in signals: annotate(s)
 signals.sort(key=rank_key)
 ONK = [s for s in signals if s['kalshi'].get('status') == 'ok']
@@ -1475,17 +1507,35 @@ for r_ in emb['bets']:
 import capper_history as _ch
 _ch_store = _ch.update_store(emb, hist)
 emb['capperHistory'] = _ch.page_payload(emb, hist, _ch_store)
+# Floor / 36h open positions first so Golden Picks can use the full Kalshi-matched set (not just 9 recent buys).
+try:
+    import coming_up as _cu
+    import floor_positions as _fp
+    _fl_rows, _fl_ok = _fp.build_rows(emb.get('capperHistory') or {}, NOW)
+except Exception as _e:
+    print('floor positions failed:', _e)
+    _cu = None
+    _fp = None
+    _fl_rows, _fl_ok = [], set()
 try:
     import proven as _pv
-    emb['provenPicks'] = _pv.build(emb, _ch_store)
+    # Restrict Golden to the 36-hour window (live grace 3h, upcoming 36h).
+    _golden_rows = []
+    for _r in _fl_rows or []:
+        _ts = _r.get('startTs')
+        if _ts is None or (NOW - 3 * 3600 <= _ts <= NOW + 36 * 3600):
+            _golden_rows.append(_r)
+    emb['provenPicks'] = _pv.build(emb, _ch_store, window_rows=_golden_rows)
 except Exception as _e:
     print('proven picks failed:', _e)
 try:
-    import coming_up as _cu
+    if _cu is None:
+        import coming_up as _cu
+    if _fp is None:
+        import floor_positions as _fp
+        _fl_rows, _fl_ok = _fp.build_rows(emb.get('capperHistory') or {}, NOW)
     # Noel Nov 17: every floor capper's open $500+ pre-game position (games up to 7 days out) is read straight from Polymarket and
     # matched to Kalshi with this file's own matcher; it replaces the scan-time LEAN_BETS rows for those cappers.
-    import floor_positions as _fp
-    _fl_rows, _fl_ok = _fp.build_rows(emb.get('capperHistory') or {}, NOW)
     _fl_w = set(_fp.floor_wallets(emb.get('capperHistory') or {}))
     _lean = [r_ for r_ in LEAN_BETS if (r_.get('wallet') or '').lower() not in _fl_ok] + _fl_rows
     CU_END = NOW + _fp.WINDOW_DAYS * 86400
@@ -1508,6 +1558,12 @@ try:
 
     emb['missing_picks'] = _fp.check_missing(_fl_rows, emb['comingUp'], NOW)
     emb['totalComingUp'] = len(emb['comingUp'])
+    try:
+        import top_cappers as _tc2
+        emb['topCappers'] = _tc2.build(emb.get('capperHistory') or {}, emb.get('orcaLenses') or {}, emb.get('provenPicks') or {}, now=NOW)
+    except Exception as _e:
+        print('top cappers failed:', _e)
+        emb['topCappers'] = {'updatedAt': '', 'count': 0, 'pinned': [], 'cappers': []}
     try:
         try:
             _prev_emb = json.load(open(os.path.join(HERE, 'page_embed.json')))

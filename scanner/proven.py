@@ -43,7 +43,7 @@ SPORT_GOOD_N = 30             # a pick can only be GOOD if the capper has 30+ gr
 
 def sport_bar_roi(c):
     return SPORT_BAR_ROI_VOL if ((c or {}).get('n') or 0) >= SPORT_BAR_VOL_N else SPORT_BAR_ROI
-HORIZON_H = 48
+HORIZON_H = 36  # Golden uses the 36-hour Kalshi-matched window
 GOOD_LO, GOOD_HI = 0.45, 0.92
 OUT = os.path.join(HERE, 'proven_picks.json')
 OUT_ROOT = os.path.join(os.path.dirname(HERE), 'proven_picks.json')
@@ -180,7 +180,68 @@ def _iso_ts(s):
     except Exception:
         return None
 
-def build(emb, store=None, write=True):
+
+def _norm_w(w):
+    return (w or "").strip().lower()
+
+
+def _window_row_to_pick(row):
+    """Convert a floor / coming-up lean bet into the fetch_open pick shape."""
+    if not row:
+        return None
+    cid = row.get("cid") or row.get("condition_id") or ""
+    side = (row.get("side") or "yes").lower()
+    if side not in ("yes", "no"):
+        side = "yes"
+    slug = row.get("slug") or ""
+    lg = row.get("league") or ""
+    return {
+        "pid": row.get("pid") or (str(cid) + ":" + side),
+        "cid": cid,
+        "side": side,
+        "title": row.get("q") or row.get("title") or row.get("market") or "",
+        "slug": slug,
+        "eventSlug": row.get("eventSlug") or row.get("event_slug") or slug,
+        "league": lg,
+        "outcome": row.get("outcome") or row.get("label") or "",
+        "opp": row.get("opp") or "",
+        "avg": row.get("avg") or row.get("avgEntry") or 0,
+        "now": row.get("now") or row.get("px"),
+        "cost": float(row.get("cost") or row.get("usd") or 0),
+        "endDate": row.get("endDate"),
+        "lastTs": row.get("lastTs") or row.get("last_event_at"),
+        "firstTs": row.get("firstTs") or row.get("first_entry_at"),
+        "startTs": row.get("startTs"),
+        "kalshi": row.get("kalshi") if isinstance(row.get("kalshi"), dict) else None,
+        "src": "window",
+    }
+
+
+def _golden_targets(caps, elite_ok, pinned):
+    """Elite + Proven + pinned sports cappers who feed Golden Picks."""
+    pin = set(_norm_w(w) for w in (pinned or []))
+    out = {}
+    for c in caps or []:
+        w = _norm_w(c.get("wallet"))
+        if not w:
+            continue
+        is_elite = w in elite_ok
+        is_pin = w in pin or c.get("pinned")
+        is_proven = bool(c.get("proven") or c.get("trackedReason") == "Proven")
+        if c.get("badge") == "Cooling" and not is_pin:
+            continue
+        if (c.get("mm") or c.get("oneOff")) and not is_pin:
+            continue
+        if is_elite or is_pin or is_proven:
+            rec = dict(c)
+            rec["wallet"] = w
+            rec["_goldenSrc"] = "elite" if is_elite else ("pinned" if is_pin else "proven")
+            out[w] = rec
+    return out
+
+
+def build(emb, store=None, write=True, window_rows=None):
+
     store = store or ch.load()
     caps = ch.summarize(store, (emb or {}).get('traders') or [], ch.current_ids_from_embed(emb or {}))
     elite, near = [], []
@@ -191,29 +252,58 @@ def build(emb, store=None, write=True):
         elif (c.get('cn') or 0) >= 10 and (c.get('croi') or 0) > 0 and (c.get('cw') or 0) > (c.get('cl') or 0):
             near.append({'wallet': c['wallet'], 'name': c.get('name'), 'why': why, 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi')})
     elite.sort(key=lambda c: -elite_rank_score(c))
+    try:
+        import top_cappers as _tc
+        pinned = _tc.pinned_wallets()
+    except Exception:
+        pinned = []
+    elite_ok = { (c.get('wallet') or '').lower() for c in elite }
+    targets = _golden_targets(caps, elite_ok, pinned)
     # scanner picks by id (Kalshi match, game time, teams)
     by_pid = {}
     for k in LISTS:
         for p in (emb or {}).get(k) or []:
             if p.get('id'):
                 by_pid.setdefault(p['id'], p)
+    tlist = list(targets.values())
     with ThreadPoolExecutor(max_workers=6) as ex:
-        opens = dict(zip([c['wallet'] for c in elite], ex.map(lambda c: bf.fetch_open(c['wallet']), elite)))
+        opens = dict(zip([c['wallet'] for c in tlist], ex.map(lambda c: bf.fetch_open(c['wallet']), tlist)))
+    # Merge the already-matched 36h floor / Coming Up position set (not just recent buys).
+    for row in window_rows or []:
+        w = _norm_w(row.get('wallet'))
+        if not w or w not in targets:
+            # still take pinned / proven / elite even if they slipped the map
+            if w and w in {*(elite_ok), *[_norm_w(x) for x in pinned]}:
+                pass
+            else:
+                continue
+        pick = _window_row_to_pick(row)
+        if not pick or (pick.get('cost') or 0) < 0:
+            continue
+        opens.setdefault(w, [])
+        pids = {p.get('pid') for p in opens[w]}
+        if pick['pid'] not in pids:
+            opens[w].append(pick)
     now = time.time()
     today = dt.datetime.fromtimestamp(now, PT).date()
+    horizon_end = now + HORIZON_H * 3600
     rows, ev_slugs = [], set()
-    for c in elite:
+    for c in tlist:
         ps = opens.get(c['wallet']) or []
         cids = {}
         for p in ps:
             cids.setdefault(p['cid'], set()).add(p['side'])
         for p in ps:
+            ts = p.get('startTs')
             d = bf.slug_date(p['eventSlug'] or p['slug'])
             try:
-                dd = dt.date.fromisoformat(d)
+                dd = dt.date.fromisoformat(d) if d else None
             except Exception:
-                continue
-            if dd < today - dt.timedelta(days=1) or dd > today + dt.timedelta(days=2):
+                dd = None
+            if ts:
+                if ts < now - 3 * 3600 or ts > horizon_end:
+                    continue
+            elif dd is None or dd < today - dt.timedelta(days=1) or dd > today + dt.timedelta(hours=HORIZON_H // 24 + 1):
                 continue
             p['_c'] = c
             p['hedged'] = len(cids.get(p['cid']) or ()) > 1
@@ -308,10 +398,10 @@ def build(emb, store=None, write=True):
         mult = round(p['cost'] / med, 2) if med else None
         # A pick only appears if this capper clears the sport bar in THIS sport.
         sport_bar_ok = (srec.get('n') or 0) >= SPORT_BAR_N and srec.get('roi') is not None and srec['roi'] >= sport_bar_roi(c)
-        if not sport_bar_ok:
-            continue
+        # Cross-sport Elite / Proven / Pinned opens stay on Golden as OK instead of being dropped.
         losing_sport = (srec.get('n') or 0) >= ch.SPORT_MIN_N and srec.get('roi') is not None and srec['roi'] < 0
         winning_sport = sport_bar_ok and srec['w'] > srec['l']
+        cross_sport = not sport_bar_ok
         small = p['cost'] < ELITE_MIN_BET or (mult is not None and mult < 0.5) or ch.conviction_of(c, p['cost']) == 'T'
         kp = (k or {}).get('price')
         reasons = []
@@ -333,7 +423,9 @@ def build(emb, store=None, write=True):
             verdict = 'OK'
             if mult is not None and mult < 1:
                 reasons.append('%.1fx usual (under 1x)' % mult)
-            if not winning_sport:
+            if cross_sport:
+                reasons.append('cross-sport (OK)')
+            elif not winning_sport:
                 reasons.append('thin record in ' + sport)
             if kp is not None and not (GOOD_LO <= kp <= GOOD_HI):
                 reasons.append('Kalshi %d¢ outside 45-92¢' % round(kp * 100))
@@ -362,6 +454,10 @@ def build(emb, store=None, write=True):
             'cost': round(p['cost']), 'avg': p['avg'], 'now': p.get('now'), 'usual': med, 'mult': mult,
             'kalshi': k, 'sportRec': srec, 'f14': c.get('f14'), 'rec': [c.get('cw'), c.get('cl')], 'roi': c.get('croi'),
             'badge': c.get('badge'), 'verdict': verdict, 'why': reasons, 'smallSample': False, 'cn': c.get('cn'),
+            'pinned': bool(c.get('pinned') or c.get('_goldenSrc') == 'pinned'),
+            'proven': bool(c.get('proven') or c.get('_goldenSrc') == 'proven'),
+            'elite': bool(c.get('_goldenSrc') == 'elite' or (c.get('wallet') or '').lower() in elite_ok),
+            'crossSport': bool(cross_sport),
             'inTop': p['pid'] in {x.get('id') for x in (emb or {}).get('signals') or []},
             'firstTs': first_ts, 'lastTs': _ts(p.get('lastTs')), 'stale': stale,
             'slip': None if slip is None else round(slip, 1),

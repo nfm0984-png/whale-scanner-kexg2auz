@@ -1132,7 +1132,9 @@ def recent_streak(c, now=None):
         return False
     age = age_days(c, now)
     bn = _big(c).get('n') or 0
-    thin = (age is None or age < ELIG_MIN_AGE_DAYS or bn < ELIG_MIN_BIG_N)
+    # 30+ graded big bets is enough of a record even on a younger account (ax2026:
+    # 135 big bets / +21% ROI in 30 days is not a short-history heater).
+    thin = bn < ELIG_MIN_BIG_N or age is None
     month_heavy = month is not None and month > STREAK_MONTH_SHARE * allp
     year_eq = year is not None and year >= STREAK_YEAR_EQ * allp
     if thin and month_heavy:
@@ -1162,14 +1164,19 @@ def eligibility(c, now=None):
     if c.get('oneOff'):
         why.append('one-off (' + (c.get('oneOffWhy') or 'profit concentrated in a few bets') + ')')
     age = age_days(c, now)
-    if age is None:
-        why.append('account age unknown')
-    elif age < ELIG_MIN_AGE_DAYS:
-        why.append('account younger than 60 days')
     b = _big(c)
     bn = b.get('n') or 0
     broi = b.get('roi')
     bprofit = b.get('profit')
+    established = (
+        bn >= ELIG_MIN_BIG_N
+        and broi is not None and broi >= ELIG_MIN_BIG_ROI
+        and bprofit is not None and bprofit >= ELIG_MIN_BIG_PROFIT
+    )
+    if age is None and not established:
+        why.append('account age unknown')
+    elif age is not None and age < ELIG_MIN_AGE_DAYS and not established:
+        why.append('account younger than 60 days')
     if bn < ELIG_MIN_BIG_N:
         why.append('under 30 graded big bets')
     if bprofit is None or bprofit <= 0:

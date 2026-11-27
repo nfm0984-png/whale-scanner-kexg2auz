@@ -219,13 +219,27 @@ def _locate_fallback(ns, info, kal, cid, event_slug, g, ts):
 
 
 def floor_wallets(capper_history):
-    """Cappers with a positive profit that are not Cooling, market makers or one-off records: {wallet: capper record}."""
+    """Cappers with a positive profit that are not Cooling, market makers or one-off records: {wallet: capper record}.
+
+    Noel-pinned sports cappers are always included so Golden / Coming Up can see their 36h opens.
+    """
     import coming_up as cu
+    try:
+        import top_cappers as tc
+        pinned = set(tc.pinned_wallets())
+    except Exception:
+        pinned = set()
     out = {}
+    byw = {}
     for c in (capper_history or {}).get('cappers') or []:
         w = (c.get('wallet') or '').lower()
+        if w:
+            byw[w] = c
         if w and c.get('badge') != 'Cooling' and cu.is_hot_or_elite(c, set()):
             out[w] = c
+    for w in pinned:
+        if w and w not in out:
+            out[w] = byw.get(w) or {'wallet': w, 'name': w[:10], 'pinned': True, 'profit': 1}
     return out
 
 

@@ -18,7 +18,7 @@ interface CapperHistory { minSample: number; updatedAt?: string; cappers: Capper
 interface ProvenRow { smallSample?: boolean; cn?: number | null; pid: string; wallet: string; name: string; league: string; sport: string; game: string; market: string; pick: string; opp: string; slug: string; startTs: number | null; start: string; cost: number; avg: number; now: number | null; usual: number | null; mult: number | null; kalshi: { action: string; price: number | null; ticker: string; contract?: string | null; src?: string; live?: boolean; yesAsk?: number | null; noAsk?: number | null; marketTitle?: string | null; eventTitle?: string | null; oppTicker?: string | null; oppContract?: string | null; oppAction?: string | null; oppPrice?: number | null } | null; sportRec: { w: number; l: number; n: number; roi: number | null }; f14?: { w: number; l: number; n: number; roi: number | null }; rec: number[]; roi: number | null; badge?: string; verdict: string; why: string[]; hedged?: boolean; inTop?: boolean; group?: ProvenRow[]; firstTs?: number | null; lastTs?: number | null; stale?: boolean; slip?: number | null }
 interface ProvenData { updatedAt: string; updatedTs: number; rule: string; splitGames?: string[]; elite: { wallet: string; name: string; rec: number[]; roi: number | null; wr?: number | null; sports?: { sport: string; w: number; l: number; n: number; roi: number }[]; f14?: { w: number; l: number; n: number; roi: number | null }; badge?: string; usual?: number | null; open?: number }[]; nearMiss?: { wallet: string; name: string; why: string[]; rec: number[]; roi: number | null }[]; picks: ProvenRow[]; counts: Record<string, number> }
 interface ComingBacker { wallet?: string; name: string; cost: number; avg?: number | null; lastTs?: number | null; buysOk?: boolean | null; buyTs?: number | null; buy3h?: number | null; buy24h?: number | null; sport?: string; sw?: number; sl?: number; sn?: number; sroi?: number | null; roi?: number | null; wr?: number | null; elite?: boolean }
-interface ComingSide { firstTs?: number | null; px?: number | null; id: string; side: string; label: string; kPrice: number | null; avgEntry: number | null; slip: number | null; action?: string | null; contract?: string | null; ticker?: string | null; marketTitle?: string | null; eventTitle?: string | null; yesAsk?: number | null; noAsk?: number | null; yesSubTitle?: string | null; noSubTitle?: string | null; oppTicker?: string | null; oppContract?: string | null; oppAction?: string | null; oppPrice?: number | null; cappers: number; usd: number; names?: string[]; backers?: ComingBacker[]; lastTs?: number | null }
+interface ComingSide { firstTs?: number | null; px?: number | null; id: string; side: string; label: string; kPrice: number | null; avgEntry: number | null; slip: number | null; shortPrice?: boolean; action?: string | null; contract?: string | null; ticker?: string | null; marketTitle?: string | null; eventTitle?: string | null; yesAsk?: number | null; noAsk?: number | null; yesSubTitle?: string | null; noSubTitle?: string | null; oppTicker?: string | null; oppContract?: string | null; oppAction?: string | null; oppPrice?: number | null; cappers: number; usd: number; names?: string[]; backers?: ComingBacker[]; lastTs?: number | null }
 interface ComingMarket { id: string; kind: string; q?: string; sides: ComingSide[] }
 interface ComingGame { id: string; game: string; league: string; startTs: number; start: string; capperCount?: number; capperRoi?: number | null; state?: string | null; phase?: string | null; markets: ComingMarket[] }
 interface Scan { ts: number; signals: number; fun: number; poly?: number; glue?: number; props?: number; longshots?: number; biggest?: number; upcoming?: number; calls: number; cappers?: number; bets?: number; buys?: number; wallets?: number }
@@ -145,6 +145,7 @@ const LAST20_MIN_WINS = 6;
 const LAST20_MIN_N = 6;
 const SPORT_SAMPLE_N = 5;
 const MIN_PAYOUT = 1.2;
+const MIN_PAYOUT_SHORT = 1.10; // 83-91¢ proven favorites shown with a Short Price badge
 function capperFormOk(wallet?: string | null): boolean {
   const r = last20Of(wallet);
   if (!r || !r.n) return true;
@@ -167,13 +168,25 @@ function capperSportOk(wallet?: string | null, league?: string | null): boolean 
 function capperShownOk(wallet: string | undefined, now: number, lastMap?: Record<string, number>, league?: string | null): boolean {
   return capperQualityOk(wallet, now, lastMap) && capperFormOk(wallet) && capperSportOk(wallet, league);
 }
+function pickPayoutValue(p: { payout?: number | null; view?: { price?: number | null }; kPrice?: number | null; price?: number | null; px?: number | null } | number | null | undefined): number | null {
+  if (p == null) return null;
+  if (typeof p === "number") return (p > 0 && p < 1) ? (1 / p) : (p >= 1 ? p : null);
+  if (p.payout != null && p.payout > 0) return p.payout;
+  const px = (p.view && p.view.price != null) ? p.view.price : (p.kPrice != null ? p.kPrice : (p.price != null ? p.price : (p.px != null ? p.px : null)));
+  if (px == null || !(px > 0 && px < 1)) return null;
+  return 1 / px;
+}
 function pickPayoutOk(p: { payout?: number | null; view?: { price?: number | null }; kPrice?: number | null; price?: number | null; px?: number | null; kind?: string } | null | undefined): boolean {
   if (!p) return true;
   if (p.kind && p.kind !== "sports") return true;
-  if (p.payout != null && p.payout > 0) return p.payout >= MIN_PAYOUT;
-  const px = (p.view && p.view.price != null) ? p.view.price : (p.kPrice != null ? p.kPrice : (p.price != null ? p.price : (p.px != null ? p.px : null)));
-  if (px == null || !(px > 0 && px < 1)) return true;
-  return (1 / px) >= MIN_PAYOUT;
+  const pay = pickPayoutValue(p);
+  if (pay == null) return true;
+  return pay >= MIN_PAYOUT_SHORT - 1e-12;
+}
+function isShortPrice(p: { payout?: number | null; view?: { price?: number | null }; kPrice?: number | null; price?: number | null; px?: number | null; shortPrice?: boolean } | number | null | undefined): boolean {
+  if (p && typeof p === "object" && p.shortPrice) return true;
+  const pay = pickPayoutValue(p as any);
+  return pay != null && pay >= MIN_PAYOUT_SHORT - 1e-12 && pay < MIN_PAYOUT - 1e-12;
 }
 
 const PROVEN: ProvenData | undefined = DATA.provenPicks;
@@ -3333,6 +3346,7 @@ function BuyCard(props: { l: Line; now: number; rank: number; bankroll: number; 
         <Chip bg={t.bg.subtle} color={t.text.secondary}>{kindWord(l.kind)}</Chip>
         <Chip bg={live ? RED : t.bg.subtle} color={live ? "#FFFFFF" : t.text.primary}>{live ? "LIVE" : until(l.startTs || 0, now, l.start)}</Chip>
         {band === "best" ? <Chip bg={GREEN} color="#FFFFFF">pays 1.2–1.5x</Chip> : null}
+        {isShortPrice(l as any) ? <Chip bg={AMBER} color="#FFFFFF">Short Price</Chip> : null}
         {l.hedged ? <Chip bg={AMBER} color="#FFFFFF">Hedged</Chip> : null}
         {fol ? <Chip bg={BRAND} color="#FFFFFF">★ Following</Chip> : null}
         <CopyId id={pickIdOf({ id: l.q + "|" + l.label, q: l.q, label: l.label, slug: "" } as Pick)} />
@@ -3898,6 +3912,7 @@ function PickCard(props: { p: Pick; fun: boolean; poly?: boolean; longshot?: boo
           {info.split ? <Chip bg={AMBER} color="#FFFFFF">Split</Chip> : null}
           {info.pricier ? <Chip bg={AMBER} color="#FFFFFF">Pricier</Chip> : null}
           {info.band === "best" ? <Chip bg={GREEN} color="#FFFFFF">pays 1.2–1.5x</Chip> : null}
+          {isShortPrice(info as any) ? <Chip bg={AMBER} color="#FFFFFF">Short Price</Chip> : null}
           <Chip bg={t.bg.subtle} color={t.text.primary}>{p.league}</Chip>
           <Chip bg={t.bg.subtle} color={t.text.secondary}>{kindWord(p.kind)}</Chip>
           <Chip bg={live ? RED : t.bg.subtle} color={live ? "#FFFFFF" : t.text.primary}><Icon name="clock" color={live ? "#FFFFFF" : t.text.secondary} size={12} />{live ? "LIVE" : until(p.startTs, now, p.game && p.game.start)}</Chip>
@@ -6473,6 +6488,60 @@ function KalshiBuyButton(props: { view: KalshiView; size?: number; openLink?: bo
     </div>
   );
 }
+
+interface TopCapperRow {
+  rank?: number; wallet?: string; name?: string; username?: string; tags?: string[];
+  pinned?: boolean; elite?: boolean; proven?: boolean; smart?: boolean;
+  w?: number; l?: number; n?: number; wr?: number | null; roi?: number | null; pnl?: number | null;
+  sport?: string; open?: number; profile?: string; orca?: string;
+}
+function topCappersData(): { updatedAt?: string; count?: number; pinned?: TopCapperRow[]; cappers?: TopCapperRow[] } {
+  return ((DATA as any).topCappers || { cappers: [], pinned: [], count: 0 }) as any;
+}
+function TopCapperTag(props: { label: string }) {
+  const color = props.label === "Pinned" ? "#1D4ED8" : props.label === "Elite" ? GREEN : props.label === "Orca Proven" ? "#7C3AED" : props.label === "Smart" ? "#0EA5E9" : AMBER;
+  return <Chip bg={color} color="#FFFFFF">{props.label}</Chip>;
+}
+function TopCappersLog() {
+  const t = useGrokTheme();
+  const data = topCappersData();
+  const rows = (data.cappers || []).slice();
+  return (
+    <Section heading={"Cappers · " + rows.length} caption="Top 100 Sports Cappers Log · pinned first · veterans (30+ graded) above tiny samples · ranked by sports ROI and profit">
+      {!rows.length ? <Text>The Top 100 list will fill in on the next full scan.</Text> : null}
+      {rows.map((c: TopCapperRow, i: number) => {
+        const wr = c.wr != null ? (Math.round(c.wr * 10) / 10) + "%" : "—";
+        const roi = c.roi != null ? ((c.roi >= 0 ? "+" : "") + (Math.round(c.roi * 10) / 10) + "%") : "—";
+        const rec = (c.w || 0) + (c.l || 0) ? ((c.w || 0) + "–" + (c.l || 0)) : "—";
+        const pnl = c.pnl == null ? "—" : ((c.pnl >= 0 ? "+" : "") + (Math.abs(c.pnl) >= 1000 ? (c.pnl >= 0 ? "+" : "−") + (Math.round(Math.abs(c.pnl) / 100) / 10) + "k" : String(Math.round(c.pnl))));
+        const poly = c.profile || (c.username ? ("https://polymarket.com/@" + c.username) : (c.wallet ? ("https://orcalayer.com/wallet/" + c.wallet) : ""));
+        const orca = c.orca || (c.wallet ? ("https://orcalayer.com/wallet/" + c.wallet) : "");
+        return (
+          <div key={c.wallet || String(i)} data-top-capper={c.wallet} style={{ background: t.bg.card, border: "1px solid " + t.border.default, borderRadius: 16, padding: "12px 14px", margin: "0 0 10px" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
+              <Chip bg={BRAND} color="#FFFFFF">{"#" + (c.rank || (i + 1))}</Chip>
+              <div style={{ fontSize: 17, fontWeight: 850, color: t.text.primary }}>{c.name || c.username || (c.wallet || "").slice(0, 10)}</div>
+              {(c.tags || []).map((tag: string) => <TopCapperTag key={tag} label={tag} />)}
+            </div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 8, fontSize: 13, fontWeight: 700, color: t.text.secondary }}>
+              <span>{"Record " + rec}</span>
+              <span>{"Win rate " + wr}</span>
+              <span>{"ROI " + roi}</span>
+              <span>{"PnL " + pnl}</span>
+              {c.sport ? <span>{"Sport " + c.sport}</span> : null}
+              <span>{(c.open || 0) === 1 ? "1 open pick" : (c.open || 0) + " open picks"}</span>
+            </div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 8 }}>
+              {poly ? <a href={poly} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, fontWeight: 800, color: BRAND }}>Polymarket</a> : null}
+              {orca ? <a href={orca} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, fontWeight: 800, color: BRAND }}>OrcaLayer</a> : null}
+            </div>
+          </div>
+        );
+      })}
+    </Section>
+  );
+}
+
 function CappersRanked(props: { now: number }) {
   const t = useGrokTheme();
   const slate = openSlateGames(false, props.now, undefined, false);
@@ -6523,6 +6592,7 @@ function CappersRanked(props: { now: number }) {
                     {live ? <Chip bg={RED} color="#FFFFFF">LIVE</Chip> : null}
                     <Chip bg={BRAND} color="#FFFFFF">{row.game.league}</Chip>
                     <Chip bg={t.bg.subtle} color={t.text.primary}>{row.game.start || ptTime(row.game.startTs)}</Chip>
+                    {isShortPrice(row.side) ? <Chip bg={AMBER} color="#FFFFFF">Short Price</Chip> : null}
                   </div>
                   <div style={{ fontSize: 17, lineHeight: "22px", fontWeight: 850, margin: "6px 0 8px", overflowWrap: "anywhere" }}>{row.game.game}</div>
                   <KalshiGreenBox view={view} compact={true} />
@@ -6980,7 +7050,7 @@ export default function App() {
       <div className="ws-tabs-flow" data-tab-bar="desktop">
         <div className="ws-tabs">
           <span className="ws-tabs-label">Today</span>
-          {[{ value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: comingUpTabCount(now) }, { value: "hot", label: "Golden Picks", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }, { value: "scorecard", label: "Scorecard" }].map((t) => {
+          {[{ value: "hot", label: "Golden Picks", count: hotTabCount(now) }, { value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: comingUpTabCount(now) }, { value: "cappers", label: "Cappers", count: ((DATA as any).topCappers && (DATA as any).topCappers.cappers ? (DATA as any).topCappers.cappers.length : capRows.length) }, { value: "scorecard", label: "Scorecard" }].map((t) => {
             const on = tab === t.value;
             return (
               <button key={t.value} type="button" onClick={() => { setTab(t.value); setSportFilter(""); }} style={{ flex: "0 0 auto", display: "inline-flex", alignItems: "center", gap: 7, padding: "8px 14px", borderRadius: 999, border: "0", background: on ? "#1D4ED8" : "transparent", color: on ? "#FFFFFF" : "#BFDBFE", fontWeight: 800, fontSize: 14, cursor: "pointer", fontFamily: "inherit", whiteSpace: "nowrap", touchAction: "manipulation" }}>
@@ -7060,7 +7130,9 @@ export default function App() {
       ) : null}
 
       {tab === "cappers" ? (
-        <Section heading={"Cappers · " + capRows.length}>
+        <div>
+        <TopCappersLog />
+        <Section heading={"All tracked cappers · " + capRows.length}>
           <CappersRanked now={now} />
           <PECappersList now={now} />
           <details data-kalshi-in-cappers="1" style={{ margin: "6px 0 12px" }}><summary style={{ cursor: "pointer", fontWeight: 800, fontSize: 15, color: BRAND }}>{"Kalshi cappers · " + ((kalshiCappersData().cappers || []).length)}</summary><KalshiCappersTab now={now} /></details>
@@ -7085,6 +7157,7 @@ export default function App() {
           {capRows.length > capLimit ? <Button label={"Show more cappers (" + (capRows.length - capLimit) + " left)"} onClick={() => setCapLimit(capLimit + 25)} /> : null}
           </details>
         </Section>
+        </div>
       ) : null}
 
       {tab === "elite" ? <EliteTab now={now} /> : null}
@@ -7191,7 +7264,7 @@ export default function App() {
           <span style={{ fontSize: 11, fontWeight: 850, letterSpacing: "0.08em", textTransform: "uppercase", color: "#7C3AED", width: 38, flex: "none", lineHeight: "12px" }}>Today</span>
           <div style={{ flex: 1, minWidth: 0 }}>
             <PillTabs bare
-              options={[{ value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: comingUpTabCount(now) }, { value: "hot", label: "Golden Picks", count: hotTabCount(now) }, { value: "cappers", label: "Cappers", count: capRows.length }, { value: "scorecard", label: "Scorecard" }]}
+              options={[{ value: "hot", label: "Golden Picks", count: hotTabCount(now) }, { value: "elite", label: "Ranked", count: eliteTabCount(now) }, { value: "coming", label: "Coming Up", count: comingUpTabCount(now) }, { value: "cappers", label: "Cappers", count: ((DATA as any).topCappers && (DATA as any).topCappers.cappers ? (DATA as any).topCappers.cappers.length : capRows.length) }, { value: "scorecard", label: "Scorecard" }]}
               value={tab === "pe" ? "" : tab}
               onChange={(v: string) => { setTab(v); setSportFilter(""); }}
             />

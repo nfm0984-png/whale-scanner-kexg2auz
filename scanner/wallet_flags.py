@@ -16,6 +16,10 @@ UA = {'User-Agent': 'whale-scanner/1.0', 'Accept': 'application/json'}
 MM_TRADE_COUNT = 100000     # individual fills; elites max ~29k, primm ~20k; RN1/swisstony are millions
 MM_MARKETS = 10000          # distinct markets; elites max ~4.4k, primm ~4.2k
 MM_MAKER_REBATE = 50000     # USD; elites max ~$10.5k
+# Huge directional sports books can earn a large rebate just from volume (gmpm2: $105k rebate
+# on $132M volume, 99% sports buys, Orca market_maker=False). Only treat rebate as an MM
+# signal when it is also a meaningful share of volume, like a liquidity provider.
+MM_MAKER_REBATE_SHARE = 0.002  # 0.20% of volume
 MM_FEE_REFUND = 100000      # USD; primm ~$29k, PowerSupplyUnit ~$72k; swisstony/RN1 are millions
 MM_HEDGE_N = 20             # open hedged positions
 MM_HEDGE_MIN = 8
@@ -139,7 +143,12 @@ def mm_why(st, roi=None, hedged=None, loaded=None):
         reasons.append('%s trades' % _num(fills))
     if mkts >= MM_MARKETS:
         reasons.append('%s markets' % _num(mkts))
-    if maker >= MM_MAKER_REBATE:
+    vol = st.get('volume') or 0
+    try:
+        share = (float(maker) / float(vol)) if vol else None
+    except (TypeError, ValueError):
+        share = None
+    if maker >= MM_MAKER_REBATE and (share is None or share >= MM_MAKER_REBATE_SHARE):
         reasons.append('$%s maker rebate' % _num(maker))
     if refund >= MM_FEE_REFUND:
         reasons.append('$%s fee refunds' % _num(refund))
@@ -166,12 +175,17 @@ def oneoff_why(st):
             share = float(big) / float(pnl)
     except (TypeError, ValueError):
         share = None
-    if share is not None and share > ONEOFF_BIGGEST:
-        return 'biggest win is %.0f%% of lifetime profit' % (share * 100)
     try:
         n = int(mkts) if mkts is not None else None
     except (TypeError, ValueError):
         n = None
+    if share is not None and share > ONEOFF_BIGGEST:
+        # Keep the 40% jackpot gate for thin books. A veteran sports book (dozens+
+        # markets) can have one large win without being a one-off; still flag a
+        # true jackpot (>=80% of lifetime profit) even on a deep book.
+        thin = n is None or n <= max(ONEOFF_THIN_MARKETS, 40)
+        if thin or share >= 0.80:
+            return 'biggest win is %.0f%% of lifetime profit' % (share * 100)
     if n is not None and n <= ONEOFF_FEW_MARKETS:
         return 'only %d markets (profit is in a handful of bets)' % n
     return None

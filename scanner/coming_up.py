@@ -112,8 +112,18 @@ def elite_wallets(proven):
 
 def is_hot_or_elite(c, elite):
     """Noel Nov 18: every tracked capper with a positive profit feeds Coming Up / All Picks (not only the proven floor).
-    Market makers, one-off records and Cooling cappers stay out."""
-    if not c or c.get('mm') or c.get('oneOff') or c.get('badge') == 'Cooling':
+    Market makers, one-off records and Cooling cappers stay out. Pinned sports cappers always stay in."""
+    if not c:
+        return False
+    if c.get('pinned'):
+        return True
+    try:
+        import top_cappers as tc
+        if (c.get('wallet') or '').lower() in set(tc.pinned_wallets()):
+            return True
+    except Exception:
+        pass
+    if c.get('mm') or c.get('oneOff') or c.get('badge') == 'Cooling':
         return False
     return (c.get('profit') or 0) > 0
 
@@ -566,6 +576,7 @@ LAST20_MIN_WINS = 6
 LAST20_MIN_N = 6
 SPORT_MIN_N = 5
 MIN_PAYOUT = 1.2
+MIN_PAYOUT_SHORT = 1.10  # 83-91¢ proven favorites shown with a Short Price badge
 
 _SPORT_ALIAS = {
     "CFB": "NCAAF", "NCAAF": "NCAAF", "CBB": "NCAAB", "CWBB": "NCAAB", "NCAAB": "NCAAB",
@@ -636,15 +647,28 @@ def capper_shown_ok(rec, now, backer=None, stats=None, league=None):
     return True
 
 
-def pick_payout_ok(side):
+def _payout_of(side):
     if not side:
-        return True
+        return None
     px = side.get("kPrice")
     if px is None:
         px = side.get("px") or side.get("price")
     if not isinstance(px, (int, float)) or not (0 < px < 1):
+        return None
+    return 1.0 / px
+
+def pick_payout_ok(side):
+    """Keep 1.10x+ (83-91¢ is Short Price). Hide heavier favorites under 1.10x."""
+    if not side:
         return True
-    return (1.0 / px) >= MIN_PAYOUT - 1e-12
+    pay = _payout_of(side)
+    if pay is None:
+        return True
+    return pay >= MIN_PAYOUT_SHORT - 1e-12
+
+def is_short_price(side):
+    pay = _payout_of(side)
+    return pay is not None and (MIN_PAYOUT_SHORT - 1e-12) <= pay < (MIN_PAYOUT - 1e-12)
 
 
 def filter_quality_games(games, capper_history, now, log=print):
@@ -673,6 +697,7 @@ def filter_quality_games(games, capper_history, now, log=print):
                 s["cappers"] = len(keep)
                 s["usd"] = round(sum(b.get("cost") or 0 for b in keep))
                 s["names"] = [b.get("name") for b in keep]
+                s["shortPrice"] = bool(is_short_price(s))
                 sides.append(s)
             if not sides:
                 continue
