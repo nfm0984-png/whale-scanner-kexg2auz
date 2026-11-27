@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795813058,
-  "updatedAt": "Fri Nov 27 \u00b7 12:57 PM PT",
+  "ts": 1795813346,
+  "updatedAt": "Fri Nov 27 \u00b7 1:02 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-DEN",
@@ -130,15 +130,6 @@
       "n": 1
     },
     {
-      "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
-      "yesNo": "Yes",
-      "side": "Bologna FC 1909 to win",
-      "game": "Venezia vs Bologna",
-      "startTs": 1795808700,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
       "yesNo": "Yes",
       "side": "Spurs",
@@ -173,6 +164,15 @@
       "startTs": 1795833000,
       "bt": "total",
       "n": 1
+    },
+    {
+      "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
+      "yesNo": "Yes",
+      "side": "Bologna FC 1909 to win",
+      "game": "Venezia vs Bologna",
+      "startTs": 1795808700,
+      "bt": "moneyline",
+      "n": 2
     },
     {
       "ticker": "KXNBAGAME-26NOV27DALPHX-PHX",
@@ -263,6 +263,33 @@
       "startTs": 1795806000,
       "bt": "moneyline",
       "n": 4
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27MILDET-MIL",
+      "yesNo": "Yes",
+      "side": "Bucks",
+      "game": "Detroit Pistons vs Milwaukee Bucks",
+      "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27MILDET-DET",
+      "yesNo": "Yes",
+      "side": "Pistons",
+      "game": "Detroit Pistons vs Milwaukee Bucks",
+      "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27MILDET-DET11",
+      "yesNo": "No",
+      "side": "Bucks +10.5",
+      "game": "Detroit Pistons vs Milwaukee Bucks",
+      "startTs": 1795825800,
+      "bt": "spread",
+      "n": 1
     },
     {
       "ticker": "KXNBAGAME-26NOV27ATLBOS-BOS",
@@ -409,33 +436,6 @@
       "n": 2
     },
     {
-      "ticker": "KXNBAGAME-26NOV27MILDET-DET",
-      "yesNo": "Yes",
-      "side": "Pistons",
-      "game": "Detroit Pistons vs Milwaukee Bucks",
-      "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27MILDET-DET11",
-      "yesNo": "No",
-      "side": "Bucks +10.5",
-      "game": "Detroit Pistons vs Milwaukee Bucks",
-      "startTs": 1795825800,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXWTACHALLENGERMATCH-26NOV27LEPSAM-SAM",
-      "yesNo": "Yes",
-      "side": "Laura Samson",
-      "game": "Laura Samson vs Varvara Lepchenko",
-      "startTs": 1795802700,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNHLGAME-26NOV27OTTTB-TB",
       "yesNo": "Yes",
       "side": "Lightning",
@@ -459,15 +459,6 @@
       "side": "Texas St. wins by over 10.5 points",
       "game": "Texas vs Texas A&M",
       "startTs": 1795825800,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV27APPUSA-USA4",
-      "yesNo": "No",
-      "side": "State +3.5",
-      "game": "Appalachian State vs South Alabama",
-      "startTs": 1795809600,
       "bt": "spread",
       "n": 1
     },
@@ -625,6 +616,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFSPREAD-26NOV27APPUSA-USA4",
+      "yesNo": "No",
+      "side": "State +3.5",
+      "game": "Appalachian State vs South Alabama",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXNHLGAME-26NOV27PITBUF-BUF",
       "yesNo": "Yes",
       "side": "Sabres",
@@ -703,15 +703,6 @@
       "game": "Wyoming Cowboys vs UConn Huskies",
       "startTs": 1795885200,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNHLGAME-26NOV28WPGNJ-NJ",
-      "yesNo": "Yes",
-      "side": "Devils",
-      "game": "New Jersey Devils vs Calgary Flames",
-      "startTs": 1795802400,
-      "bt": "moneyline",
       "n": 1
     }
   ]
