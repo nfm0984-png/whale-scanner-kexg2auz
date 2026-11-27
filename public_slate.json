@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795739224,
-  "updatedAt": "Thu Nov 26 \u00b7 4:27 PM PT",
+  "ts": 1795739400,
+  "updatedAt": "Thu Nov 26 \u00b7 4:30 PM PT",
   "picks": [
     {
       "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL15",
@@ -297,6 +297,15 @@
       "side": "Nuggets",
       "game": "Utah Jazz vs Denver Nuggets",
       "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAMBGAME-26NOV26PITTDEP-DEP",
+      "yesNo": "Yes",
+      "side": "DePaul Blue Demons",
+      "game": "Pittsburgh Panthers vs DePaul Blue Demons",
+      "startTs": 1795737600,
       "bt": "moneyline",
       "n": 1
     }
