@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795799501,
-  "updatedAt": "Fri Nov 27 \u00b7 9:11 AM PT",
+  "ts": 1795799807,
+  "updatedAt": "Fri Nov 27 \u00b7 9:16 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
@@ -130,6 +130,24 @@
       "n": 1
     },
     {
+      "ticker": "KXNBAGAME-26NOV27PHIIND-PHI",
+      "yesNo": "Yes",
+      "side": "76ers",
+      "game": "Indiana Pacers vs Philadelphia 76ers",
+      "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27PHIIND-PHI4",
+      "yesNo": "Yes",
+      "side": "Philadelphia wins by over 3.5 points",
+      "game": "Indiana Pacers vs Philadelphia 76ers",
+      "startTs": 1795825800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
       "yesNo": "Yes",
       "side": "Bologna FC 1909 to win",
@@ -181,42 +199,6 @@
       "game": "Columbus Crew vs Inter Miami CF",
       "startTs": 1795827600,
       "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27PHIIND-PHI",
-      "yesNo": "Yes",
-      "side": "76ers",
-      "game": "Indiana Pacers vs Philadelphia 76ers",
-      "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27PHIIND-PHI4",
-      "yesNo": "Yes",
-      "side": "Philadelphia wins by over 3.5 points",
-      "game": "Indiana Pacers vs Philadelphia 76ers",
-      "startTs": 1795825800,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFGAME-26NOV27TOLOHIO-TOL",
-      "yesNo": "Yes",
-      "side": "Toledo",
-      "game": "Ohio Bobcats vs Toledo Rockets",
-      "startTs": 1795798800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV27TOLOHIO-TOL4",
-      "yesNo": "Yes",
-      "side": "Toledo wins by over 3.5 points",
-      "game": "Ohio Bobcats vs Toledo Rockets",
-      "startTs": 1795798800,
-      "bt": "spread",
       "n": 1
     },
     {
@@ -355,6 +337,15 @@
       "n": 1
     },
     {
+      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
+      "yesNo": "Yes",
+      "side": "FUT Esports",
+      "game": "Counter-Strike: FUT Esports vs FlyQuest",
+      "startTs": 1795838400,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27MILDET-DET",
       "yesNo": "Yes",
       "side": "Pistons",
@@ -400,6 +391,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFGAME-26NOV27TLSAUTSA-UTSA",
+      "yesNo": "Yes",
+      "side": "UTSA",
+      "game": "UTSA Roadrunners vs Tulsa Golden Hurricane",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXEERSTEDIVGAME-26NOV27VENWAA-TIE",
       "yesNo": "Yes",
       "side": "DRAW",
@@ -432,15 +432,6 @@
       "side": "Clippers",
       "game": "LA Clippers vs New Orleans Pelicans",
       "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
-      "yesNo": "Yes",
-      "side": "FUT Esports",
-      "game": "Counter-Strike: FUT Esports vs FlyQuest",
-      "startTs": 1795838400,
       "bt": "moneyline",
       "n": 1
     },
