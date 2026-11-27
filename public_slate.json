@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795751088,
-  "updatedAt": "Thu Nov 26 \u00b7 7:44 PM PT",
+  "ts": 1795751503,
+  "updatedAt": "Thu Nov 26 \u00b7 7:51 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26KCBUF-BUF",
@@ -29,6 +29,15 @@
       "startTs": 1795742400,
       "bt": "spread",
       "n": 1
+    },
+    {
+      "ticker": "KXNFLTOTAL-26NOV26KCBUF-49",
+      "yesNo": "Yes",
+      "side": "Over 48.5",
+      "game": "Buffalo Bills vs Kansas City Chiefs",
+      "startTs": 1795742400,
+      "bt": "total",
+      "n": 2
     },
     {
       "ticker": "KXNFLTOTAL-26NOV26KCBUF-45",
