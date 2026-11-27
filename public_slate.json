@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795801637,
-  "updatedAt": "Fri Nov 27 \u00b7 9:47 AM PT",
+  "ts": 1795801927,
+  "updatedAt": "Fri Nov 27 \u00b7 9:52 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
@@ -110,6 +110,15 @@
       "startTs": 1795798800,
       "bt": "moneyline",
       "n": 5
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-AUR",
+      "yesNo": "Yes",
+      "side": "Aurora",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 2
     },
     {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-NFO",
@@ -292,6 +301,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
+      "yesNo": "Yes",
+      "side": "Spurs",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
       "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
       "yesNo": "Yes",
       "side": "FUT Esports",
@@ -373,6 +391,15 @@
       "n": 2
     },
     {
+      "ticker": "KXNBAGAME-26NOV27ATLBOS-BOS",
+      "yesNo": "Yes",
+      "side": "Celtics",
+      "game": "Boston Celtics vs Atlanta Hawks",
+      "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNBASPREAD-26NOV27MEMMIN-MIN5",
       "yesNo": "Yes",
       "side": "Minnesota wins by over 4.5 points",
@@ -400,24 +427,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNBAGAME-26NOV27ATLBOS-BOS",
-      "yesNo": "Yes",
-      "side": "Celtics",
-      "game": "Boston Celtics vs Atlanta Hawks",
-      "startTs": 1795827600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
-      "yesNo": "Yes",
-      "side": "Spurs",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27MILDET-DET",
       "yesNo": "Yes",
       "side": "Pistons",
@@ -432,15 +441,6 @@
       "side": "Nuggets",
       "game": "Utah Jazz vs Denver Nuggets",
       "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFGAME-26NOV27TLSAUTSA-UTSA",
-      "yesNo": "Yes",
-      "side": "UTSA",
-      "game": "UTSA Roadrunners vs Tulsa Golden Hurricane",
-      "startTs": 1795798800,
       "bt": "moneyline",
       "n": 1
     },
@@ -635,7 +635,7 @@
     },
     {
       "ticker": "KXBUNDESLIGAGAME-26NOV27SVWBMG-SVW",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "SV Werder Bremen not to win",
       "game": "Werder Bremen vs Borussia M\u00f6nchengladbach",
       "startTs": 1795807800,
