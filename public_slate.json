@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795803856,
-  "updatedAt": "Fri Nov 27 \u00b7 10:24 AM PT",
+  "ts": 1795804152,
+  "updatedAt": "Fri Nov 27 \u00b7 10:29 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
@@ -113,7 +113,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-NFO",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Nottingham Forest FC not to win",
       "game": "Nottingham Forest FC vs Chelsea FC",
       "startTs": 1795809600,
@@ -131,7 +131,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-CFC",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Chelsea FC not to win",
       "game": "Nottingham Forest FC vs Chelsea FC",
       "startTs": 1795809600,
@@ -176,7 +176,7 @@
     },
     {
       "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Bologna FC 1909 not to win",
       "game": "Venezia vs Bologna",
       "startTs": 1795808700,
@@ -238,6 +238,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFSPREAD-26NOV28KSUISU-ISU5",
+      "yesNo": "No",
+      "side": "Nebraska Cornhuskers +4.5",
+      "game": "Iowa Hawkeyes vs Nebraska Cornhuskers",
+      "startTs": 1795799280,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
       "yesNo": "Yes",
       "side": "Levante UD to win",
@@ -272,15 +281,6 @@
       "startTs": 1795809600,
       "bt": "total",
       "n": 1
-    },
-    {
-      "ticker": "KXEERSTEDIVGAME-26NOV27VENWAA-TIE",
-      "yesNo": "Yes",
-      "side": "DRAW",
-      "game": "VVV Venlo vs RKC Waalwijk",
-      "startTs": 1795806000,
-      "bt": "moneyline",
-      "n": 4
     },
     {
       "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
@@ -328,15 +328,6 @@
       "n": 3
     },
     {
-      "ticker": "KXNCAAFSPREAD-26NOV28KSUISU-ISU5",
-      "yesNo": "No",
-      "side": "Nebraska Cornhuskers +4.5",
-      "game": "Iowa Hawkeyes vs Nebraska Cornhuskers",
-      "startTs": 1795799280,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXEERSTEDIVGAME-26NOV27DORVIT-TIE",
       "yesNo": "Yes",
       "side": "DRAW",
@@ -350,6 +341,15 @@
       "yesNo": "Yes",
       "side": "DRAW",
       "game": "Jong FC Utrecht vs Almere City FC",
+      "startTs": 1795806000,
+      "bt": "moneyline",
+      "n": 3
+    },
+    {
+      "ticker": "KXEERSTEDIVGAME-26NOV27VENWAA-TIE",
+      "yesNo": "Yes",
+      "side": "DRAW",
+      "game": "VVV Venlo vs RKC Waalwijk",
       "startTs": 1795806000,
       "bt": "moneyline",
       "n": 3
@@ -616,6 +616,15 @@
       "n": 1
     },
     {
+      "ticker": "KXLALIGA2GAME-26NOV27LEGSAB-LEG",
+      "yesNo": "No",
+      "side": "CD Legan\u00e9s not to win",
+      "game": "Legan\u00e9s vs CD Sabadell",
+      "startTs": 1795807800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
       "yesNo": "No",
       "side": "Manchester United FC not to win",
@@ -639,6 +648,15 @@
       "side": "Sabres",
       "game": "Buffalo Sabres vs Pittsburgh Penguins",
       "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXEERSTEDIVGAME-26NOV27VENWAA-TIE",
+      "yesNo": "Yes",
+      "side": "DRAW",
+      "game": "VVV Venlo vs RKC Waalwijk",
+      "startTs": 1795806000,
       "bt": "moneyline",
       "n": 1
     },
@@ -702,6 +720,15 @@
       "side": "DRAW",
       "game": "FC Emmen vs Helmond Sport",
       "startTs": 1795879800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXITFMATCH-26NOV27VALDEK-DEK",
+      "yesNo": "Yes",
+      "side": "Michiel De Krom",
+      "game": "M15 Santa Cruz: Rocco Valente vs Michiel De Krom",
+      "startTs": 1795795952,
       "bt": "moneyline",
       "n": 1
     },
