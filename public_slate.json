@@ -1,26 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795752994,
-  "updatedAt": "Thu Nov 26 \u00b7 8:16 PM PT",
+  "ts": 1795754014,
+  "updatedAt": "Thu Nov 26 \u00b7 8:33 PM PT",
   "picks": [
-    {
-      "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
-      "yesNo": "Yes",
-      "side": "Chiefs",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "moneyline",
-      "n": 4
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26KCBUF-BUF3",
-      "yesNo": "No",
-      "side": "Chiefs +2.5",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "spread",
-      "n": 3
-    },
     {
       "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
       "yesNo": "Yes",
@@ -29,6 +11,15 @@
       "startTs": 1795777200,
       "bt": "moneyline",
       "n": 3
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
+      "yesNo": "Yes",
+      "side": "Raptors",
+      "game": "Toronto Raptors vs Brooklyn Nets",
+      "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
@@ -54,60 +45,6 @@
       "side": "Over 34.5",
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
-      "yesNo": "Yes",
-      "side": "Raptors",
-      "game": "Toronto Raptors vs Brooklyn Nets",
-      "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLGAME-26NOV26KCBUF-BUF",
-      "yesNo": "Yes",
-      "side": "Bills",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
-      "yesNo": "Yes",
-      "side": "Chiefs",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26KCBUF-BUF8",
-      "yesNo": "Yes",
-      "side": "Buffalo wins by over 7.5 points",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV26KCBUF-45",
-      "yesNo": "Yes",
-      "side": "Over 44.5",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV26KCBUF-49",
-      "yesNo": "Yes",
-      "side": "Over 48.5",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
       "bt": "total",
       "n": 1
     },
@@ -297,15 +234,6 @@
       "side": "Wyoming Cowboys +3.5",
       "game": "Wyoming Cowboys vs UConn Huskies",
       "startTs": 1795885200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU21",
-      "yesNo": "No",
-      "side": "TCU Horned Frogs +20.5",
-      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
-      "startTs": 1795741200,
       "bt": "spread",
       "n": 1
     },
