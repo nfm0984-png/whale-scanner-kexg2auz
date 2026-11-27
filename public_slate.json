@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795798896,
-  "updatedAt": "Fri Nov 27 \u00b7 9:01 AM PT",
+  "ts": 1795799184,
+  "updatedAt": "Fri Nov 27 \u00b7 9:06 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
@@ -211,21 +211,48 @@
       "n": 1
     },
     {
+      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
+      "yesNo": "Yes",
+      "side": "Levante UD to win",
+      "game": "Levante UD vs Real Racing Club",
+      "startTs": 1795809600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
+      "yesNo": "Yes",
+      "side": "Levante UD not to win",
+      "game": "Levante UD vs Real Racing Club",
+      "startTs": 1795809600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-TIE",
+      "yesNo": "No",
+      "side": "NO DRAW",
+      "game": "Levante UD vs Real Racing Club",
+      "startTs": 1795809600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXLALIGATOTAL-26NOV27LEVSAN-4",
+      "yesNo": "Yes",
+      "side": "Over 3.5",
+      "game": "Levante UD vs Real Racing Club",
+      "startTs": 1795809600,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFGAME-26NOV27TOLOHIO-TOL",
       "yesNo": "Yes",
       "side": "Toledo",
       "game": "Ohio Bobcats vs Toledo Rockets",
       "startTs": 1795798800,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV27TOLOHIO-TOL4",
-      "yesNo": "Yes",
-      "side": "Toledo wins by over 3.5 points",
-      "game": "Ohio Bobcats vs Toledo Rockets",
-      "startTs": 1795798800,
-      "bt": "spread",
       "n": 1
     },
     {
@@ -263,42 +290,6 @@
       "startTs": 1795806000,
       "bt": "moneyline",
       "n": 3
-    },
-    {
-      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
-      "yesNo": "Yes",
-      "side": "Levante UD to win",
-      "game": "Levante UD vs Real Racing Club",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
-      "yesNo": "Yes",
-      "side": "Levante UD not to win",
-      "game": "Levante UD vs Real Racing Club",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-TIE",
-      "yesNo": "No",
-      "side": "NO DRAW",
-      "game": "Levante UD vs Real Racing Club",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXLALIGATOTAL-26NOV27LEVSAN-4",
-      "yesNo": "Yes",
-      "side": "Over 3.5",
-      "game": "Levante UD vs Real Racing Club",
-      "startTs": 1795809600,
-      "bt": "total",
-      "n": 1
     },
     {
       "ticker": "KXLALIGAGAME-26NOV28RMAALA-RMA",
@@ -382,15 +373,6 @@
       "n": 1
     },
     {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-AUR",
-      "yesNo": "Yes",
-      "side": "Aurora",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
-      "bt": "moneyline",
-      "n": 3
-    },
-    {
       "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-TIE",
       "yesNo": "Yes",
       "side": "DRAW",
@@ -472,6 +454,15 @@
       "n": 1
     },
     {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNFLGAME-26NOV29SEASF-SF",
       "yesNo": "Yes",
       "side": "49ers",
@@ -496,6 +487,15 @@
       "game": "West Virginia vs Utah",
       "startTs": 1795831200,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNHLGAME-26NOV28EDMSEA-EDM",
+      "yesNo": "Yes",
+      "side": "Oilers",
+      "game": "Edmonton Oilers vs Seattle Kraken",
+      "startTs": 1795827600,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -774,15 +774,6 @@
       "side": "Devils",
       "game": "New Jersey Devils vs Calgary Flames",
       "startTs": 1795802400,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
       "bt": "moneyline",
       "n": 1
     }
