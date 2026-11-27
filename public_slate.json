@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795796088,
-  "updatedAt": "Fri Nov 27 \u00b7 8:14 AM PT",
+  "ts": 1795797093,
+  "updatedAt": "Fri Nov 27 \u00b7 8:31 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
@@ -67,6 +67,24 @@
       "n": 1
     },
     {
+      "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
+      "yesNo": "Yes",
+      "side": "Knicks",
+      "game": "New York Knicks vs Miami Heat",
+      "startTs": 1795824000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27MIANYK-NYK4",
+      "yesNo": "Yes",
+      "side": "New York wins by over 3.5 points",
+      "game": "New York Knicks vs Miami Heat",
+      "startTs": 1795824000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-NFO",
       "yesNo": "Yes",
       "side": "Nottingham Forest FC not to win",
@@ -103,6 +121,24 @@
       "n": 1
     },
     {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 3
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV27MSSTMISS-MISS18",
       "yesNo": "Yes",
       "side": "Ole Miss wins by over 17.5 points",
@@ -130,24 +166,6 @@
       "n": 2
     },
     {
-      "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
-      "yesNo": "Yes",
-      "side": "Knicks",
-      "game": "New York Knicks vs Miami Heat",
-      "startTs": 1795824000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27MIANYK-NYK4",
-      "yesNo": "Yes",
-      "side": "New York wins by over 3.5 points",
-      "game": "New York Knicks vs Miami Heat",
-      "startTs": 1795824000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
       "yesNo": "Yes",
       "side": "Bologna FC 1909 to win",
@@ -158,7 +176,7 @@
     },
     {
       "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "Bologna FC 1909 not to win",
       "game": "Venezia vs Bologna",
       "startTs": 1795808700,
@@ -202,24 +220,6 @@
       "n": 1
     },
     {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXEERSTEDIVGAME-26NOV27AZOSS-TIE",
       "yesNo": "Yes",
       "side": "DRAW",
@@ -238,19 +238,28 @@
       "n": 2
     },
     {
+      "ticker": "KXNCAAFGAME-26NOV27TOLOHIO-TOL",
+      "yesNo": "Yes",
+      "side": "Toledo",
+      "game": "Ohio Bobcats vs Toledo Rockets",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV27TOLOHIO-TOL4",
+      "yesNo": "Yes",
+      "side": "Toledo wins by over 3.5 points",
+      "game": "Ohio Bobcats vs Toledo Rockets",
+      "startTs": 1795798800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXEERSTEDIVGAME-26NOV27DORVIT-TIE",
       "yesNo": "Yes",
       "side": "DRAW",
       "game": "FC Dordrecht vs Vitesse Arnhem",
-      "startTs": 1795806000,
-      "bt": "moneyline",
-      "n": 3
-    },
-    {
-      "ticker": "KXEERSTEDIVGAME-26NOV27VENWAA-TIE",
-      "yesNo": "Yes",
-      "side": "DRAW",
-      "game": "VVV Venlo vs RKC Waalwijk",
       "startTs": 1795806000,
       "bt": "moneyline",
       "n": 3
@@ -373,15 +382,6 @@
       "n": 1
     },
     {
-      "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-ALM",
-      "yesNo": "No",
-      "side": "Almere City FC not to win",
-      "game": "Jong FC Utrecht vs Almere City FC",
-      "startTs": 1795806000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-TIE",
       "yesNo": "Yes",
       "side": "DRAW",
@@ -389,6 +389,24 @@
       "startTs": 1795806000,
       "bt": "moneyline",
       "n": 1
+    },
+    {
+      "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-ALM",
+      "yesNo": "Yes",
+      "side": "Almere City FC not to win",
+      "game": "Jong FC Utrecht vs Almere City FC",
+      "startTs": 1795806000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXEERSTEDIVGAME-26NOV27VENWAA-TIE",
+      "yesNo": "Yes",
+      "side": "DRAW",
+      "game": "VVV Venlo vs RKC Waalwijk",
+      "startTs": 1795806000,
+      "bt": "moneyline",
+      "n": 2
     },
     {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
@@ -580,21 +598,12 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFGAME-26NOV27TOLOHIO-TOL",
+      "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-TIE",
       "yesNo": "Yes",
-      "side": "Toledo",
-      "game": "Ohio Bobcats vs Toledo Rockets",
-      "startTs": 1795798800,
+      "side": "DRAW",
+      "game": "Jong FC Utrecht vs Almere City FC",
+      "startTs": 1795806000,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV27TOLOHIO-TOL4",
-      "yesNo": "Yes",
-      "side": "Toledo wins by over 3.5 points",
-      "game": "Ohio Bobcats vs Toledo Rockets",
-      "startTs": 1795798800,
-      "bt": "spread",
       "n": 1
     },
     {
@@ -635,7 +644,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "Manchester United FC not to win",
       "game": "Manchester United FC vs Brentford FC",
       "startTs": 1795878000,
@@ -661,20 +670,20 @@
       "n": 1
     },
     {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-AUR",
+      "ticker": "KXNHLGAME-26NOV27PITBUF-BUF",
       "yesNo": "Yes",
-      "side": "Aurora",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
+      "side": "Sabres",
+      "game": "Buffalo Sabres vs Pittsburgh Penguins",
+      "startTs": 1795827600,
       "bt": "moneyline",
       "n": 1
     },
     {
-      "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-TIE",
+      "ticker": "KXEERSTEDIVGAME-26NOV27VENWAA-TIE",
       "yesNo": "Yes",
       "side": "DRAW",
-      "game": "Jong FC Utrecht vs Almere City FC",
-      "startTs": 1795806000,
+      "game": "Will VVV Venlo vs RKC Waalwijk end in a draw?",
+      "startTs": 1795816800,
       "bt": "moneyline",
       "n": 1
     },
@@ -689,7 +698,7 @@
     },
     {
       "ticker": "KXBUNDESLIGAGAME-26NOV27SVWBMG-SVW",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "SV Werder Bremen not to win",
       "game": "Werder Bremen vs Borussia M\u00f6nchengladbach",
       "startTs": 1795807800,
