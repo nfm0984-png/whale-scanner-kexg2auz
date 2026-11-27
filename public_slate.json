@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795754611,
-  "updatedAt": "Thu Nov 26 \u00b7 8:43 PM PT",
+  "ts": 1795754908,
+  "updatedAt": "Thu Nov 26 \u00b7 8:48 PM PT",
   "picks": [
     {
       "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
@@ -112,6 +112,24 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFSPREAD-26NOV27MSSTMISS-MISS17",
+      "yesNo": "Yes",
+      "side": "Ole Miss wins by over 16.5 points",
+      "game": "Mississippi State vs Ole Miss",
+      "startTs": 1795798800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV27MSSTMISS-MISS18",
+      "yesNo": "Yes",
+      "side": "Ole Miss wins by over 17.5 points",
+      "game": "Mississippi State vs Ole Miss",
+      "startTs": 1795798800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
       "yesNo": "Yes",
       "side": "FC Barcelona to win",
@@ -217,15 +235,6 @@
       "game": "Indianapolis Colts vs New York Giants",
       "startTs": 1795975200,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV27MSSTMISS-MISS18",
-      "yesNo": "Yes",
-      "side": "Ole Miss wins by over 17.5 points",
-      "game": "Mississippi State vs Ole Miss",
-      "startTs": 1795798800,
-      "bt": "spread",
       "n": 1
     },
     {
