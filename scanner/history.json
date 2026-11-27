@@ -107217,7 +107217,11 @@
    "first_seen": 1795769896,
    "scans": 5,
    "first_score": 37,
-   "result": null
+   "result": "W",
+   "graded": 1795815496,
+   "ended": 1795815496,
+   "finalScore": "SVW 3 \u2013 BMG 3",
+   "active": false
   },
   "0xfc00bbaeb49038668ef4b959233bb4ef40a3c88b2b6de25ce253cfcdc6718d98:no": {
    "tier": "poly",
@@ -109447,7 +109451,10 @@
    "first_seen": 1795807470,
    "scans": 2,
    "first_score": 16,
-   "result": null
+   "result": null,
+   "ended": 1795815496,
+   "finalScore": "BRE 1 \u2013 PAR 0",
+   "active": false
   },
   "0x50277250902e11b8aec45afd9593c80070e4cb92d8726925644ebf40bf6ed656:no": {
    "tier": "poly",

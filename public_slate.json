@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795815114,
-  "updatedAt": "Fri Nov 27 \u00b7 1:31 PM PT",
+  "ts": 1795815569,
+  "updatedAt": "Fri Nov 27 \u00b7 1:39 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-DEN",
@@ -110,15 +110,6 @@
       "startTs": 1795825800,
       "bt": "spread",
       "n": 1
-    },
-    {
-      "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
-      "yesNo": "Yes",
-      "side": "Bologna FC 1909 to win",
-      "game": "Venezia vs Bologna",
-      "startTs": 1795808700,
-      "bt": "moneyline",
-      "n": 3
     },
     {
       "ticker": "KXNBASPREAD-26NOV27MEMMIN-MIN5",
@@ -355,24 +346,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNHLGAME-26NOV27OTTTB-TB",
-      "yesNo": "Yes",
-      "side": "Lightning",
-      "game": "Tampa Bay Lightning vs Ottawa Senators",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXNHLTOTAL-26NOV27OTTTB-6",
-      "yesNo": "Yes",
-      "side": "Over 5.5",
-      "game": "Tampa Bay Lightning vs Ottawa Senators",
-      "startTs": 1795809600,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
       "yesNo": "Yes",
       "side": "FUT Esports",
@@ -387,6 +360,24 @@
       "side": "FlyQuest",
       "game": "Counter-Strike: FUT Esports vs FlyQuest",
       "startTs": 1795838400,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV280100IMPAST-AST",
+      "yesNo": "Yes",
+      "side": "Astralis",
+      "game": "Counter-Strike: Astralis vs Imperial",
+      "startTs": 1795845600,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV280100IMPAST-IMP",
+      "yesNo": "Yes",
+      "side": "Imperial",
+      "game": "Counter-Strike: Astralis vs Imperial",
+      "startTs": 1795845600,
       "bt": "moneyline",
       "n": 1
     },
@@ -481,29 +472,20 @@
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV280100IMPAST-AST",
-      "yesNo": "Yes",
-      "side": "Astralis",
-      "game": "Counter-Strike: Astralis vs Imperial",
-      "startTs": 1795845600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280100IMPAST-IMP",
-      "yesNo": "Yes",
-      "side": "Imperial",
-      "game": "Counter-Strike: Astralis vs Imperial",
-      "startTs": 1795845600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNCAAFSPREAD-26NOV28TXSTUSU-TXST11",
       "yesNo": "Yes",
       "side": "Texas St. wins by over 10.5 points",
       "game": "Texas vs Texas A&M",
       "startTs": 1795825800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV27APPUSA-USA4",
+      "yesNo": "No",
+      "side": "State +3.5",
+      "game": "Appalachian State vs South Alabama",
+      "startTs": 1795809600,
       "bt": "spread",
       "n": 1
     },
@@ -589,15 +571,6 @@
       "n": 1
     },
     {
-      "ticker": "KXWTACHALLENGERMATCH-26NOV27MARCAR-MAR",
-      "yesNo": "Yes",
-      "side": "Guiomar Maristany",
-      "game": "Maria Lourdes Carle vs Guiomar Maristany Zuleta De Reales",
-      "startTs": 1795808100,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXLALIGAGAME-26NOV30ESPGET-ESP",
       "yesNo": "Yes",
       "side": "RCD Espanyol de Barcelona to win",
@@ -608,20 +581,11 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Manchester United FC not to win",
       "game": "Manchester United FC vs Brentford FC",
       "startTs": 1795878000,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV27APPUSA-USA4",
-      "yesNo": "No",
-      "side": "State +3.5",
-      "game": "Appalachian State vs South Alabama",
-      "startTs": 1795809600,
-      "bt": "spread",
       "n": 1
     },
     {
@@ -694,24 +658,6 @@
       "game": "Wyoming Cowboys vs UConn Huskies",
       "startTs": 1795885200,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXLIGAPORTUGALGAME-26NOV27CSMCDN-CDN",
-      "yesNo": "Yes",
-      "side": "CD Nacional to win",
-      "game": "Maritimo vs C.D. Nacional",
-      "startTs": 1795810500,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXATPCHALLENGERMATCH-26NOV27LAOLI-LA",
-      "yesNo": "Yes",
-      "side": "Juan Manuel La Serna",
-      "game": "Florianopolis: Juan Manuel La Serna vs Genaro Alberto Olivieri",
-      "startTs": 1795808700,
-      "bt": "moneyline",
       "n": 1
     }
   ]
