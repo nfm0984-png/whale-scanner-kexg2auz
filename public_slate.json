@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795811256,
-  "updatedAt": "Fri Nov 27 \u00b7 12:27 PM PT",
+  "ts": 1795811549,
+  "updatedAt": "Fri Nov 27 \u00b7 12:32 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-DEN",
@@ -11,6 +11,15 @@
       "startTs": 1795809600,
       "bt": "moneyline",
       "n": 4
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN8",
+      "yesNo": "No",
+      "side": "Steelers +7.5",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
@@ -175,15 +184,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNHLGAME-26NOV27DETCBJ-DET",
-      "yesNo": "Yes",
-      "side": "Red Wings",
-      "game": "Columbus Blue Jackets vs Detroit Red Wings",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 4
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
       "yesNo": "Yes",
       "side": "Spurs",
@@ -205,15 +205,6 @@
       "ticker": "KXNHLGAME-26NOV27FLAWSH-FLA",
       "yesNo": "Yes",
       "side": "Panthers",
-      "game": "Washington Capitals vs Florida Panthers",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNHLGAME-26NOV27FLAWSH-WSH",
-      "yesNo": "Yes",
-      "side": "Capitals",
       "game": "Washington Capitals vs Florida Panthers",
       "startTs": 1795809600,
       "bt": "moneyline",
@@ -415,6 +406,15 @@
       "game": "Utah Jazz vs Denver Nuggets",
       "startTs": 1795833000,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNHLTOTAL-26NOV27DETCBJ-6",
+      "yesNo": "No",
+      "side": "Under 5.5",
+      "game": "Columbus Blue Jackets vs Detroit Red Wings",
+      "startTs": 1795809600,
+      "bt": "total",
       "n": 1
     },
     {
