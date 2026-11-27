@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795797093,
-  "updatedAt": "Fri Nov 27 \u00b7 8:31 AM PT",
+  "ts": 1795797391,
+  "updatedAt": "Fri Nov 27 \u00b7 8:36 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
@@ -127,7 +127,16 @@
       "game": "Aurora vs PARIVISION",
       "startTs": 1795798800,
       "bt": "moneyline",
-      "n": 3
+      "n": 2
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-AUR",
+      "yesNo": "Yes",
+      "side": "Aurora",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 1
     },
     {
       "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-PARI",
@@ -757,6 +766,15 @@
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
       "n": 1
     },
     {
