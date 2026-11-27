@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795758031,
-  "updatedAt": "Thu Nov 26 \u00b7 9:40 PM PT",
+  "ts": 1795759315,
+  "updatedAt": "Thu Nov 26 \u00b7 10:01 PM PT",
   "picks": [
     {
       "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
@@ -40,16 +40,16 @@
       "n": 1
     },
     {
-      "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
+      "ticker": "KXCS2GAME-26NOV270100HEROLVG-HERO",
       "yesNo": "Yes",
-      "side": "Deportivo Alav\u00e9s not to win",
-      "game": "Real Madrid vs Alav\u00e9s",
-      "startTs": 1795896000,
+      "side": "Heroic",
+      "game": "Counter-Strike: Lynn Vision vs Heroic",
+      "startTs": 1795759200,
       "bt": "moneyline",
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV270100HEROLVG-HERO",
+      "ticker": "KXCS2MAP-26NOV270100HEROLVG-1-HERO",
       "yesNo": "Yes",
       "side": "Heroic",
       "game": "Counter-Strike: Lynn Vision vs Heroic",
@@ -72,6 +72,24 @@
       "side": "Hawks",
       "game": "Boston Celtics vs Atlanta Hawks",
       "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27ATLBOS-BOS10",
+      "yesNo": "No",
+      "side": "Hawks +9.5",
+      "game": "Boston Celtics vs Atlanta Hawks",
+      "startTs": 1795827600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
+      "yesNo": "Yes",
+      "side": "Deportivo Alav\u00e9s not to win",
+      "game": "Real Madrid vs Alav\u00e9s",
+      "startTs": 1795896000,
       "bt": "moneyline",
       "n": 1
     },
@@ -104,7 +122,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-CFC",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Chelsea FC not to win",
       "game": "Nottingham Forest FC vs Chelsea FC",
       "startTs": 1795809600,
