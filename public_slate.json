@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795813346,
-  "updatedAt": "Fri Nov 27 \u00b7 1:02 PM PT",
+  "ts": 1795813654,
+  "updatedAt": "Fri Nov 27 \u00b7 1:07 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-DEN",
@@ -130,6 +130,15 @@
       "n": 1
     },
     {
+      "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
+      "yesNo": "Yes",
+      "side": "Bologna FC 1909 to win",
+      "game": "Venezia vs Bologna",
+      "startTs": 1795808700,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
       "yesNo": "Yes",
       "side": "Spurs",
@@ -164,15 +173,6 @@
       "startTs": 1795833000,
       "bt": "total",
       "n": 1
-    },
-    {
-      "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
-      "yesNo": "Yes",
-      "side": "Bologna FC 1909 to win",
-      "game": "Venezia vs Bologna",
-      "startTs": 1795808700,
-      "bt": "moneyline",
-      "n": 2
     },
     {
       "ticker": "KXNBAGAME-26NOV27DALPHX-PHX",
@@ -225,33 +225,6 @@
       "side": "Over 3.5",
       "game": "Columbus Crew vs Inter Miami CF",
       "startTs": 1795827600,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
-      "yesNo": "Yes",
-      "side": "Levante UD not to win",
-      "game": "Levante UD vs Real Racing Club - More Markets",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-TIE",
-      "yesNo": "No",
-      "side": "NO DRAW",
-      "game": "Levante UD vs Real Racing Club - More Markets",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXLALIGATOTAL-26NOV27LEVSAN-4",
-      "yesNo": "Yes",
-      "side": "Over 3.5",
-      "game": "Levante UD vs Real Racing Club - More Markets",
-      "startTs": 1795809600,
       "bt": "total",
       "n": 1
     },
@@ -371,6 +344,24 @@
       "startTs": 1795806000,
       "bt": "moneyline",
       "n": 3
+    },
+    {
+      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
+      "yesNo": "Yes",
+      "side": "Levante UD not to win",
+      "game": "Levante UD vs Real Racing Club - More Markets",
+      "startTs": 1795809600,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXLALIGATOTAL-26NOV27LEVSAN-4",
+      "yesNo": "Yes",
+      "side": "Over 3.5",
+      "game": "Levante UD vs Real Racing Club - More Markets",
+      "startTs": 1795809600,
+      "bt": "total",
+      "n": 1
     },
     {
       "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-TIE",
@@ -616,15 +607,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFSPREAD-26NOV27APPUSA-USA4",
-      "yesNo": "No",
-      "side": "State +3.5",
-      "game": "Appalachian State vs South Alabama",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXNHLGAME-26NOV27PITBUF-BUF",
       "yesNo": "Yes",
       "side": "Sabres",
@@ -648,6 +630,15 @@
       "side": "Rockets",
       "game": "Houston Rockets vs Philadelphia 76ers",
       "startTs": 1795915800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAMBGAME-26NOV27MEMWAKE-MEM",
+      "yesNo": "Yes",
+      "side": "Memphis Tigers",
+      "game": "Wake Forest Demon Deacons vs Memphis Tigers",
+      "startTs": 1795804200,
       "bt": "moneyline",
       "n": 1
     },
