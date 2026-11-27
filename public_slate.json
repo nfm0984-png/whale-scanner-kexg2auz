@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795740478,
-  "updatedAt": "Thu Nov 26 \u00b7 4:47 PM PT",
+  "ts": 1795744330,
+  "updatedAt": "Thu Nov 26 \u00b7 5:52 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
@@ -10,7 +10,16 @@
       "game": "Buffalo Bills vs Kansas City Chiefs",
       "startTs": 1795742400,
       "bt": "moneyline",
-      "n": 1
+      "n": 3
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV26KCBUF-BUF",
+      "yesNo": "Yes",
+      "side": "Bills",
+      "game": "Buffalo Bills vs Kansas City Chiefs",
+      "startTs": 1795742400,
+      "bt": "moneyline",
+      "n": 2
     },
     {
       "ticker": "KXNFLSPREAD-26NOV26KCBUF-BUF3",
@@ -20,6 +29,15 @@
       "startTs": 1795742400,
       "bt": "spread",
       "n": 2
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26KCBUF-BUF4",
+      "yesNo": "No",
+      "side": "Chiefs +3.5",
+      "game": "Buffalo Bills vs Kansas City Chiefs",
+      "startTs": 1795742400,
+      "bt": "spread",
+      "n": 1
     },
     {
       "ticker": "KXNFLTOTAL-26NOV26KCBUF-49",
@@ -36,24 +54,6 @@
       "side": "Raptors",
       "game": "Toronto Raptors vs Brooklyn Nets",
       "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXATPCHALLENGERMATCH-26NOV26LEGPOL-LEG",
-      "yesNo": "Yes",
-      "side": "Timo Legout",
-      "game": "San Salvador: Timo Legout vs Karl Poling",
-      "startTs": 1795734600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXATPCHALLENGERMATCH-26NOV26LEGPOL-POL",
-      "yesNo": "Yes",
-      "side": "Karl Poling",
-      "game": "San Salvador: Timo Legout vs Karl Poling",
-      "startTs": 1795734600,
       "bt": "moneyline",
       "n": 1
     },
@@ -76,11 +76,47 @@
       "n": 1
     },
     {
+      "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
+      "yesNo": "Yes",
+      "side": "M80",
+      "game": "Counter-Strike: M80 vs 100 Thieves",
+      "startTs": 1795777200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
       "yesNo": "Yes",
       "side": "Knicks",
       "game": "New York Knicks vs Miami Heat",
       "startTs": 1795824000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27ATLBOS-BOS",
+      "yesNo": "Yes",
+      "side": "Celtics",
+      "game": "Boston Celtics vs Atlanta Hawks",
+      "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27ATLBOS-ATL",
+      "yesNo": "Yes",
+      "side": "Hawks",
+      "game": "Boston Celtics vs Atlanta Hawks",
+      "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
+      "yesNo": "Yes",
+      "side": "Bologna FC 1909 to win",
+      "game": "Venezia vs Bologna",
+      "startTs": 1795808700,
       "bt": "moneyline",
       "n": 1
     },
@@ -94,15 +130,6 @@
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
-      "yesNo": "Yes",
-      "side": "M80",
-      "game": "Counter-Strike: M80 vs 100 Thieves",
-      "startTs": 1795777200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNFLGAME-26NOV29NYGIND-NYG",
       "yesNo": "Yes",
       "side": "Giants",
@@ -110,15 +137,6 @@
       "startTs": 1795975200,
       "bt": "moneyline",
       "n": 2
-    },
-    {
-      "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
-      "yesNo": "Yes",
-      "side": "Bologna FC 1909 to win",
-      "game": "Venezia vs Bologna",
-      "startTs": 1795808700,
-      "bt": "moneyline",
-      "n": 1
     },
     {
       "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
@@ -139,30 +157,21 @@
       "n": 1
     },
     {
-      "ticker": "KXBRASILEIROGAME-26NOV26SPACR-SPA",
+      "ticker": "KXLIGAMXGAME-26NOV26PACCDG-PAC",
       "yesNo": "Yes",
-      "side": "S\u00e3o Paulo FC to win",
-      "game": "S\u00e3o Paulo FC vs Clube do Remo",
-      "startTs": 1795734000,
+      "side": "CF Pachuca not to win",
+      "game": "Pachuca vs Guadalajara",
+      "startTs": 1795741200,
       "bt": "moneyline",
       "n": 1
     },
     {
-      "ticker": "KXNBAGAME-26NOV27ATLBOS-BOS",
-      "yesNo": "Yes",
-      "side": "Celtics",
-      "game": "Boston Celtics vs Atlanta Hawks",
-      "startTs": 1795827600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27ATLBOS-ATL",
-      "yesNo": "Yes",
-      "side": "Hawks",
-      "game": "Boston Celtics vs Atlanta Hawks",
-      "startTs": 1795827600,
-      "bt": "moneyline",
+      "ticker": "KXLIGAMXTOTAL-26NOV26PACCDG-3",
+      "yesNo": "No",
+      "side": "Under 2.5",
+      "game": "Pachuca vs Guadalajara",
+      "startTs": 1795741200,
+      "bt": "total",
       "n": 1
     },
     {
@@ -229,11 +238,11 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAMBGAME-26NOV26TCUCREI-CREI",
+      "ticker": "KXBUNDESLIGAGAME-26NOV27SVWBMG-SVW",
       "yesNo": "Yes",
-      "side": "Creighton Bluejays",
-      "game": "Creighton Bluejays vs TCU Horned Frogs",
-      "startTs": 1795734000,
+      "side": "SV Werder Bremen not to win",
+      "game": "Werder Bremen vs Borussia M\u00f6nchengladbach",
+      "startTs": 1795807800,
       "bt": "moneyline",
       "n": 1
     },
@@ -297,6 +306,15 @@
       "side": "Nuggets",
       "game": "Utah Jazz vs Denver Nuggets",
       "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAMBGAME-26NOV26PITTDEP-DEP",
+      "yesNo": "Yes",
+      "side": "DePaul Blue Demons",
+      "game": "Pittsburgh Panthers vs DePaul Blue Demons",
+      "startTs": 1795737600,
       "bt": "moneyline",
       "n": 1
     }
