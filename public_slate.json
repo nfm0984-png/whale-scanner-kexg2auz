@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795795793,
-  "updatedAt": "Fri Nov 27 \u00b7 8:09 AM PT",
+  "ts": 1795796088,
+  "updatedAt": "Fri Nov 27 \u00b7 8:14 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
@@ -50,6 +50,15 @@
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN7",
+      "yesNo": "No",
+      "side": "Steelers +6.5",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN7",
       "yesNo": "Yes",
       "side": "Denver wins by over 6.5 points",
       "game": "Pittsburgh Steelers vs Denver Broncos",
@@ -59,7 +68,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-NFO",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "Nottingham Forest FC not to win",
       "game": "Nottingham Forest FC vs Chelsea FC",
       "startTs": 1795809600,
@@ -77,7 +86,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-CFC",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "Chelsea FC not to win",
       "game": "Nottingham Forest FC vs Chelsea FC",
       "startTs": 1795809600,
@@ -193,6 +202,24 @@
       "n": 1
     },
     {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXEERSTEDIVGAME-26NOV27AZOSS-TIE",
       "yesNo": "Yes",
       "side": "DRAW",
@@ -239,7 +266,7 @@
     },
     {
       "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "Levante UD not to win",
       "game": "Levante UD vs Real Racing Club",
       "startTs": 1795809600,
@@ -347,7 +374,7 @@
     },
     {
       "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-ALM",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Almere City FC not to win",
       "game": "Jong FC Utrecht vs Almere City FC",
       "startTs": 1795806000,
@@ -360,24 +387,6 @@
       "side": "DRAW",
       "game": "Jong FC Utrecht vs Almere City FC",
       "startTs": 1795806000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-AUR",
-      "yesNo": "Yes",
-      "side": "Aurora",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
       "bt": "moneyline",
       "n": 1
     },
@@ -398,6 +407,15 @@
       "startTs": 1795833000,
       "bt": "moneyline",
       "n": 1
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV29NYGIND-NYG",
+      "yesNo": "Yes",
+      "side": "Giants",
+      "game": "Indianapolis Colts vs New York Giants",
+      "startTs": 1795975200,
+      "bt": "moneyline",
+      "n": 2
     },
     {
       "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
@@ -643,6 +661,15 @@
       "n": 1
     },
     {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-AUR",
+      "yesNo": "Yes",
+      "side": "Aurora",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-TIE",
       "yesNo": "Yes",
       "side": "DRAW",
@@ -679,15 +706,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLGAME-26NOV29NYGIND-NYG",
-      "yesNo": "Yes",
-      "side": "Giants",
-      "game": "Indianapolis Colts vs New York Giants",
-      "startTs": 1795975200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNFLGAME-26NOV29NOCIN-CIN",
       "yesNo": "Yes",
       "side": "Bengals",
@@ -711,15 +729,6 @@
       "side": "DRAW",
       "game": "FC Emmen vs Helmond Sport",
       "startTs": 1795879800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLGAME-26NOV29NYGIND-NYG",
-      "yesNo": "Yes",
-      "side": "Giants",
-      "game": "Indianapolis Colts vs New York Giants",
-      "startTs": 1795975200,
       "bt": "moneyline",
       "n": 1
     },
