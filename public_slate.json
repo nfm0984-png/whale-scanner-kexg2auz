@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795794594,
-  "updatedAt": "Fri Nov 27 \u00b7 7:49 AM PT",
+  "ts": 1795794889,
+  "updatedAt": "Fri Nov 27 \u00b7 7:54 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-DEN",
@@ -43,6 +43,15 @@
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
       "yesNo": "Yes",
       "side": "Denver wins by over 4.5 points",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN7",
+      "yesNo": "Yes",
+      "side": "Denver wins by over 6.5 points",
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "spread",
@@ -344,15 +353,6 @@
       "startTs": 1795806000,
       "bt": "moneyline",
       "n": 2
-    },
-    {
-      "ticker": "KXATPCHALLENGERMATCH-26NOV27MARJUS-JUS",
-      "yesNo": "Yes",
-      "side": "Guido Justo",
-      "game": "Florianopolis: Igor Ribeiro Marcondes vs Guido Justo",
-      "startTs": 1795784700,
-      "bt": "moneyline",
-      "n": 1
     },
     {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
