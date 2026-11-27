@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795761780,
-  "updatedAt": "Thu Nov 26 \u00b7 10:43 PM PT",
+  "ts": 1795761970,
+  "updatedAt": "Thu Nov 26 \u00b7 10:46 PM PT",
   "picks": [
     {
       "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
@@ -11,24 +11,6 @@
       "startTs": 1795777200,
       "bt": "moneyline",
       "n": 3
-    },
-    {
-      "ticker": "KXCS2MAP-26NOV270100HEROLVG-1-HERO",
-      "yesNo": "Yes",
-      "side": "Heroic",
-      "game": "Counter-Strike: Lynn Vision vs Heroic",
-      "startTs": 1795759200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV270100HEROLVG-HERO",
-      "yesNo": "Yes",
-      "side": "Heroic",
-      "game": "Counter-Strike: Lynn Vision vs Heroic",
-      "startTs": 1795759200,
-      "bt": "moneyline",
-      "n": 1
     },
     {
       "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
@@ -94,6 +76,15 @@
       "n": 1
     },
     {
+      "ticker": "KXCS2GAME-26NOV270100HEROLVG-HERO",
+      "yesNo": "Yes",
+      "side": "Heroic",
+      "game": "Counter-Strike: Lynn Vision vs Heroic",
+      "startTs": 1795759200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
       "yesNo": "Yes",
       "side": "Nuggets",
@@ -122,7 +113,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-CFC",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "Chelsea FC not to win",
       "game": "Nottingham Forest FC vs Chelsea FC",
       "startTs": 1795809600,
