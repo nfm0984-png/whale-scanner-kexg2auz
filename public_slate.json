@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795815569,
-  "updatedAt": "Fri Nov 27 \u00b7 1:39 PM PT",
+  "ts": 1795815864,
+  "updatedAt": "Fri Nov 27 \u00b7 1:44 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-DEN",
@@ -11,6 +11,15 @@
       "startTs": 1795809600,
       "bt": "moneyline",
       "n": 5
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-PIT11",
+      "yesNo": "Yes",
+      "side": "Pittsburgh wins by over 10.5 points",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-PIT7",
@@ -391,33 +400,6 @@
       "n": 3
     },
     {
-      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
-      "yesNo": "Yes",
-      "side": "Levante UD to win",
-      "game": "Levante UD vs Real Racing Club",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-TIE",
-      "yesNo": "No",
-      "side": "NO DRAW",
-      "game": "Levante UD vs Real Racing Club",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXLALIGATOTAL-26NOV27LEVSAN-4",
-      "yesNo": "Yes",
-      "side": "Over 3.5",
-      "game": "Levante UD vs Real Racing Club",
-      "startTs": 1795809600,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXNHLTOTAL-26NOV28SJCOL-7",
       "yesNo": "No",
       "side": "Under 6.5",
@@ -477,15 +459,6 @@
       "side": "Texas St. wins by over 10.5 points",
       "game": "Texas vs Texas A&M",
       "startTs": 1795825800,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV27APPUSA-USA4",
-      "yesNo": "No",
-      "side": "State +3.5",
-      "game": "Appalachian State vs South Alabama",
-      "startTs": 1795809600,
       "bt": "spread",
       "n": 1
     },
@@ -571,6 +544,15 @@
       "n": 1
     },
     {
+      "ticker": "KXWTACHALLENGERMATCH-26NOV27MARCAR-MAR",
+      "yesNo": "Yes",
+      "side": "Guiomar Maristany",
+      "game": "Maria Lourdes Carle vs Guiomar Maristany Zuleta De Reales",
+      "startTs": 1795808100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV30ESPGET-ESP",
       "yesNo": "Yes",
       "side": "RCD Espanyol de Barcelona to win",
@@ -586,6 +568,15 @@
       "game": "Manchester United FC vs Brentford FC",
       "startTs": 1795878000,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNHLTOTAL-26NOV27OTTTB-6",
+      "yesNo": "Yes",
+      "side": "Over 5.5",
+      "game": "Tampa Bay Lightning vs Ottawa Senators",
+      "startTs": 1795809600,
+      "bt": "total",
       "n": 1
     },
     {
