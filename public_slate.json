@@ -1,8 +1,17 @@
 {
   "source": "whale",
-  "ts": 1795766744,
-  "updatedAt": "Fri Nov 27 \u00b7 12:05 AM PT",
+  "ts": 1795768319,
+  "updatedAt": "Fri Nov 27 \u00b7 12:31 AM PT",
   "picks": [
+    {
+      "ticker": "KXCS2GAME-26NOV270330WCIMP-IMP",
+      "yesNo": "Yes",
+      "side": "Imperial",
+      "game": "Counter-Strike: Imperial vs Wildcard",
+      "startTs": 1795768200,
+      "bt": "moneyline",
+      "n": 2
+    },
     {
       "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
       "yesNo": "Yes",
@@ -28,6 +37,15 @@
       "game": "Toronto Raptors vs Brooklyn Nets",
       "startTs": 1795825800,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27BKNTOR-TOR8",
+      "yesNo": "Yes",
+      "side": "Toronto wins by over 7.5 points",
+      "game": "Toronto Raptors vs Brooklyn Nets",
+      "startTs": 1795825800,
+      "bt": "spread",
       "n": 1
     },
     {
@@ -85,15 +103,6 @@
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV270330WCIMP-IMP",
-      "yesNo": "Yes",
-      "side": "Imperial",
-      "game": "Counter-Strike: Imperial vs Wildcard",
-      "startTs": 1795768200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-NFO",
       "yesNo": "Yes",
       "side": "Nottingham Forest FC to win",
@@ -104,7 +113,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-CFC",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "Chelsea FC not to win",
       "game": "Nottingham Forest FC vs Chelsea FC",
       "startTs": 1795809600,
@@ -225,6 +234,15 @@
       "side": "SV Werder Bremen not to win",
       "game": "Werder Bremen vs Borussia M\u00f6nchengladbach",
       "startTs": 1795807800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXITFMATCH-26NOV27SURMUK-MUK",
+      "yesNo": "Yes",
+      "side": "Sasikumar Mukund",
+      "game": "M25 Bhopal: Manish Sureshkumar vs Sasikumar Mukund",
+      "startTs": 1795762295,
       "bt": "moneyline",
       "n": 1
     },
