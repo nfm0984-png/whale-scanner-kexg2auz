@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795815864,
-  "updatedAt": "Fri Nov 27 \u00b7 1:44 PM PT",
+  "ts": 1795816162,
+  "updatedAt": "Fri Nov 27 \u00b7 1:49 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-DEN",
@@ -13,36 +13,9 @@
       "n": 5
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-PIT11",
-      "yesNo": "Yes",
-      "side": "Pittsburgh wins by over 10.5 points",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-PIT7",
       "yesNo": "No",
       "side": "Broncos +6.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
-      "yesNo": "Yes",
-      "side": "Denver wins by over 4.5 points",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN7",
-      "yesNo": "Yes",
-      "side": "Denver wins by over 6.5 points",
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "spread",
@@ -436,15 +409,6 @@
       "n": 2
     },
     {
-      "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
-      "yesNo": "Yes",
-      "side": "Deportivo Alav\u00e9s not to win",
-      "game": "Real Madrid vs Alav\u00e9s",
-      "startTs": 1795896000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
       "yesNo": "Yes",
       "side": "Nuggets",
@@ -544,21 +508,21 @@
       "n": 1
     },
     {
-      "ticker": "KXWTACHALLENGERMATCH-26NOV27MARCAR-MAR",
-      "yesNo": "Yes",
-      "side": "Guiomar Maristany",
-      "game": "Maria Lourdes Carle vs Guiomar Maristany Zuleta De Reales",
-      "startTs": 1795808100,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXLALIGAGAME-26NOV30ESPGET-ESP",
       "yesNo": "Yes",
       "side": "RCD Espanyol de Barcelona to win",
       "game": "Deportivo vs Barcelona",
       "startTs": 1795965300,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXLALIGATOTAL-26NOV27LEVSAN-4",
+      "yesNo": "Yes",
+      "side": "Over 3.5",
+      "game": "Levante UD vs Real Racing Club - More Markets",
+      "startTs": 1795809600,
+      "bt": "total",
       "n": 1
     },
     {
