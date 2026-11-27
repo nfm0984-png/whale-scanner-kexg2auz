@@ -1,8 +1,17 @@
 {
   "source": "whale",
-  "ts": 1795762582,
-  "updatedAt": "Thu Nov 26 \u00b7 10:56 PM PT",
+  "ts": 1795762869,
+  "updatedAt": "Thu Nov 26 \u00b7 11:01 PM PT",
   "picks": [
+    {
+      "ticker": "KXCS2GAME-26NOV270100HEROLVG-HERO",
+      "yesNo": "Yes",
+      "side": "Heroic",
+      "game": "Counter-Strike: Lynn Vision vs Heroic",
+      "startTs": 1795759200,
+      "bt": "moneyline",
+      "n": 3
+    },
     {
       "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
       "yesNo": "Yes",
@@ -36,15 +45,6 @@
       "side": "Raptors",
       "game": "Toronto Raptors vs Brooklyn Nets",
       "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV270100HEROLVG-HERO",
-      "yesNo": "Yes",
-      "side": "Heroic",
-      "game": "Counter-Strike: Lynn Vision vs Heroic",
-      "startTs": 1795759200,
       "bt": "moneyline",
       "n": 1
     },
