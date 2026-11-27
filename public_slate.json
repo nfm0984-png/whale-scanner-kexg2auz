@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795798282,
-  "updatedAt": "Fri Nov 27 \u00b7 8:51 AM PT",
+  "ts": 1795798596,
+  "updatedAt": "Fri Nov 27 \u00b7 8:56 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
@@ -130,6 +130,33 @@
       "n": 1
     },
     {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-AUR",
+      "yesNo": "Yes",
+      "side": "Aurora",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 3
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV27MSSTMISS-MISS18",
       "yesNo": "Yes",
       "side": "Ole Miss wins by over 17.5 points",
@@ -171,24 +198,6 @@
       "side": "Bologna FC 1909 not to win",
       "game": "Venezia vs Bologna",
       "startTs": 1795808700,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-AUR",
-      "yesNo": "Yes",
-      "side": "Aurora",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
-      "bt": "moneyline",
-      "n": 3
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
       "bt": "moneyline",
       "n": 1
     },
@@ -373,6 +382,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNBAGAME-26NOV27ATLBOS-BOS",
+      "yesNo": "Yes",
+      "side": "Celtics",
+      "game": "Boston Celtics vs Atlanta Hawks",
+      "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
       "yesNo": "Yes",
       "side": "Spurs",
@@ -387,15 +405,6 @@
       "side": "Pistons",
       "game": "Detroit Pistons vs Milwaukee Bucks",
       "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27ATLBOS-BOS",
-      "yesNo": "Yes",
-      "side": "Celtics",
-      "game": "Boston Celtics vs Atlanta Hawks",
-      "startTs": 1795827600,
       "bt": "moneyline",
       "n": 1
     },
@@ -479,15 +488,6 @@
       "startTs": 1795833000,
       "bt": "moneyline",
       "n": 1
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
-      "bt": "moneyline",
-      "n": 2
     },
     {
       "ticker": "KXNFLGAME-26NOV29SEASF-SF",
