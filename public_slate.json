@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795752397,
-  "updatedAt": "Thu Nov 26 \u00b7 8:06 PM PT",
+  "ts": 1795752695,
+  "updatedAt": "Thu Nov 26 \u00b7 8:11 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26KCBUF-BUF",
@@ -13,15 +13,6 @@
       "n": 3
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV26KCBUF-BUF8",
-      "yesNo": "Yes",
-      "side": "Buffalo wins by over 7.5 points",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
       "yesNo": "Yes",
       "side": "M80",
@@ -29,15 +20,6 @@
       "startTs": 1795777200,
       "bt": "moneyline",
       "n": 3
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
-      "yesNo": "Yes",
-      "side": "Raptors",
-      "game": "Toronto Raptors vs Brooklyn Nets",
-      "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
@@ -64,6 +46,60 @@
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV26KCBUF-BUF",
+      "yesNo": "Yes",
+      "side": "Bills",
+      "game": "Buffalo Bills vs Kansas City Chiefs",
+      "startTs": 1795742400,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
+      "yesNo": "Yes",
+      "side": "Chiefs",
+      "game": "Buffalo Bills vs Kansas City Chiefs",
+      "startTs": 1795742400,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26KCBUF-BUF8",
+      "yesNo": "Yes",
+      "side": "Buffalo wins by over 7.5 points",
+      "game": "Buffalo Bills vs Kansas City Chiefs",
+      "startTs": 1795742400,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLTOTAL-26NOV26KCBUF-45",
+      "yesNo": "Yes",
+      "side": "Over 44.5",
+      "game": "Buffalo Bills vs Kansas City Chiefs",
+      "startTs": 1795742400,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLTOTAL-26NOV26KCBUF-49",
+      "yesNo": "Yes",
+      "side": "Over 48.5",
+      "game": "Buffalo Bills vs Kansas City Chiefs",
+      "startTs": 1795742400,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
+      "yesNo": "Yes",
+      "side": "Raptors",
+      "game": "Toronto Raptors vs Brooklyn Nets",
+      "startTs": 1795825800,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -139,33 +175,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
-      "yesNo": "Yes",
-      "side": "Chiefs",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV26KCBUF-45",
-      "yesNo": "Yes",
-      "side": "Over 44.5",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV26KCBUF-49",
-      "yesNo": "Yes",
-      "side": "Over 48.5",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXCS2GAME-26NOV270100HEROLVG-HERO",
       "yesNo": "Yes",
       "side": "Heroic",
@@ -198,15 +207,6 @@
       "side": "Spurs",
       "game": "San Antonio Spurs vs Los Angeles Lakers",
       "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXATPCHALLENGERMATCH-26NOV26IMAJOR-IMA",
-      "yesNo": "Yes",
-      "side": "Masamichi Imamura",
-      "game": "Yokohama: Masamichi Imamura vs David Jorda Sanchis",
-      "startTs": 1795749600,
       "bt": "moneyline",
       "n": 1
     },
