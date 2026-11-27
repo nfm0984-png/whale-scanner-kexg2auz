@@ -1,15 +1,24 @@
 {
   "source": "whale",
-  "ts": 1795752695,
-  "updatedAt": "Thu Nov 26 \u00b7 8:11 PM PT",
+  "ts": 1795752994,
+  "updatedAt": "Thu Nov 26 \u00b7 8:16 PM PT",
   "picks": [
     {
-      "ticker": "KXNFLGAME-26NOV26KCBUF-BUF",
+      "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
       "yesNo": "Yes",
-      "side": "Bills",
+      "side": "Chiefs",
       "game": "Buffalo Bills vs Kansas City Chiefs",
       "startTs": 1795742400,
       "bt": "moneyline",
+      "n": 4
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV26KCBUF-BUF3",
+      "yesNo": "No",
+      "side": "Chiefs +2.5",
+      "game": "Buffalo Bills vs Kansas City Chiefs",
+      "startTs": 1795742400,
+      "bt": "spread",
       "n": 3
     },
     {
@@ -49,13 +58,22 @@
       "n": 1
     },
     {
+      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
+      "yesNo": "Yes",
+      "side": "Raptors",
+      "game": "Toronto Raptors vs Brooklyn Nets",
+      "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNFLGAME-26NOV26KCBUF-BUF",
       "yesNo": "Yes",
       "side": "Bills",
       "game": "Buffalo Bills vs Kansas City Chiefs",
       "startTs": 1795742400,
       "bt": "moneyline",
-      "n": 1
+      "n": 2
     },
     {
       "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
@@ -91,15 +109,6 @@
       "game": "Buffalo Bills vs Kansas City Chiefs",
       "startTs": 1795742400,
       "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
-      "yesNo": "Yes",
-      "side": "Raptors",
-      "game": "Toronto Raptors vs Brooklyn Nets",
-      "startTs": 1795825800,
-      "bt": "moneyline",
       "n": 1
     },
     {
@@ -315,6 +324,15 @@
       "side": "Como 1907 to win",
       "game": "Como vs Juventus",
       "startTs": 1795981500,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXATPCHALLENGERMATCH-26NOV26IMAJOR-IMA",
+      "yesNo": "Yes",
+      "side": "Masamichi Imamura",
+      "game": "Yokohama: Masamichi Imamura vs David Jorda Sanchis",
+      "startTs": 1795749600,
       "bt": "moneyline",
       "n": 1
     }
