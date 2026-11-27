@@ -1,8 +1,26 @@
 {
   "source": "whale",
-  "ts": 1795803136,
-  "updatedAt": "Fri Nov 27 \u00b7 10:12 AM PT",
+  "ts": 1795803438,
+  "updatedAt": "Fri Nov 27 \u00b7 10:17 AM PT",
   "picks": [
+    {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 7
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-AUR",
+      "yesNo": "Yes",
+      "side": "Aurora",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 1
+    },
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
       "yesNo": "Yes",
@@ -274,20 +292,20 @@
       "n": 1
     },
     {
+      "ticker": "KXEERSTEDIVGAME-26NOV27VENWAA-TIE",
+      "yesNo": "Yes",
+      "side": "DRAW",
+      "game": "VVV Venlo vs RKC Waalwijk",
+      "startTs": 1795806000,
+      "bt": "moneyline",
+      "n": 4
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
       "yesNo": "Yes",
       "side": "Spurs",
       "game": "San Antonio Spurs vs Los Angeles Lakers",
       "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-AUR",
-      "yesNo": "Yes",
-      "side": "Aurora",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
       "bt": "moneyline",
       "n": 2
     },
@@ -341,15 +359,6 @@
       "yesNo": "Yes",
       "side": "DRAW",
       "game": "Jong FC Utrecht vs Almere City FC",
-      "startTs": 1795806000,
-      "bt": "moneyline",
-      "n": 3
-    },
-    {
-      "ticker": "KXEERSTEDIVGAME-26NOV27VENWAA-TIE",
-      "yesNo": "Yes",
-      "side": "DRAW",
-      "game": "VVV Venlo vs RKC Waalwijk",
       "startTs": 1795806000,
       "bt": "moneyline",
       "n": 3
@@ -617,7 +626,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Manchester United FC not to win",
       "game": "Manchester United FC vs Brentford FC",
       "startTs": 1795878000,
@@ -639,15 +648,6 @@
       "side": "Sabres",
       "game": "Buffalo Sabres vs Pittsburgh Penguins",
       "startTs": 1795827600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXEERSTEDIVGAME-26NOV27VENWAA-TIE",
-      "yesNo": "Yes",
-      "side": "DRAW",
-      "game": "VVV Venlo vs RKC Waalwijk",
-      "startTs": 1795806000,
       "bt": "moneyline",
       "n": 1
     },
@@ -711,6 +711,15 @@
       "side": "DRAW",
       "game": "FC Emmen vs Helmond Sport",
       "startTs": 1795879800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXITFMATCH-26NOV27VALDEK-DEK",
+      "yesNo": "Yes",
+      "side": "Michiel De Krom",
+      "game": "M15 Santa Cruz: Rocco Valente vs Michiel De Krom",
+      "startTs": 1795795952,
       "bt": "moneyline",
       "n": 1
     },
