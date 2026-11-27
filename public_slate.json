@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795809506,
-  "updatedAt": "Fri Nov 27 \u00b7 11:58 AM PT",
+  "ts": 1795809810,
+  "updatedAt": "Fri Nov 27 \u00b7 12:03 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
@@ -112,42 +112,6 @@
       "n": 1
     },
     {
-      "ticker": "KXEPLGAME-26NOV27NFOCFC-CFC",
-      "yesNo": "No",
-      "side": "Chelsea FC not to win",
-      "game": "Nottingham Forest FC vs Chelsea FC",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXEPLGAME-26NOV27NFOCFC-NFO",
-      "yesNo": "No",
-      "side": "Nottingham Forest FC not to win",
-      "game": "Nottingham Forest FC vs Chelsea FC",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 3
-    },
-    {
-      "ticker": "KXEPLGAME-26NOV27NFOCFC-NFO",
-      "yesNo": "Yes",
-      "side": "Nottingham Forest FC to win",
-      "game": "Nottingham Forest FC vs Chelsea FC",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXEPLGAME-26NOV27NFOCFC-TIE",
-      "yesNo": "No",
-      "side": "NO DRAW",
-      "game": "Nottingham Forest FC vs Chelsea FC",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27GSWPOR-POR",
       "yesNo": "Yes",
       "side": "Trail Blazers",
@@ -166,6 +130,33 @@
       "n": 1
     },
     {
+      "ticker": "KXEPLGAME-26NOV27NFOCFC-CFC",
+      "yesNo": "No",
+      "side": "Chelsea FC not to win",
+      "game": "Nottingham Forest FC vs Chelsea FC",
+      "startTs": 1795809600,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXEPLGAME-26NOV27NFOCFC-NFO",
+      "yesNo": "No",
+      "side": "Nottingham Forest FC not to win",
+      "game": "Nottingham Forest FC vs Chelsea FC",
+      "startTs": 1795809600,
+      "bt": "moneyline",
+      "n": 3
+    },
+    {
+      "ticker": "KXEPLGAME-26NOV27NFOCFC-TIE",
+      "yesNo": "No",
+      "side": "NO DRAW",
+      "game": "Nottingham Forest FC vs Chelsea FC",
+      "startTs": 1795809600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27PHIIND-PHI",
       "yesNo": "Yes",
       "side": "76ers",
@@ -181,24 +172,6 @@
       "game": "Indiana Pacers vs Philadelphia 76ers",
       "startTs": 1795825800,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
-      "yesNo": "Yes",
-      "side": "Bologna FC 1909 to win",
-      "game": "Venezia vs Bologna",
-      "startTs": 1795808700,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
-      "yesNo": "No",
-      "side": "Bologna FC 1909 not to win",
-      "game": "Venezia vs Bologna",
-      "startTs": 1795808700,
-      "bt": "moneyline",
       "n": 1
     },
     {
@@ -301,22 +274,13 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFGAME-26NOV27TOLOHIO-TOL",
+      "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
       "yesNo": "Yes",
-      "side": "Toledo",
-      "game": "Ohio Bobcats vs Toledo Rockets",
-      "startTs": 1795798800,
+      "side": "Bologna FC 1909 to win",
+      "game": "Venezia vs Bologna",
+      "startTs": 1795808700,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV27TOLOHIO-TOL4",
-      "yesNo": "Yes",
-      "side": "Toledo wins by over 3.5 points",
-      "game": "Ohio Bobcats vs Toledo Rockets",
-      "startTs": 1795798800,
-      "bt": "spread",
-      "n": 1
+      "n": 2
     },
     {
       "ticker": "KXNCAAFGAME-26NOV27MINNWIS-WIS",
@@ -416,6 +380,24 @@
       "startTs": 1795806000,
       "bt": "moneyline",
       "n": 3
+    },
+    {
+      "ticker": "KXNCAAFGAME-26NOV27TOLOHIO-TOL",
+      "yesNo": "Yes",
+      "side": "Toledo",
+      "game": "Ohio Bobcats vs Toledo Rockets",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV27TOLOHIO-TOL4",
+      "yesNo": "Yes",
+      "side": "Toledo wins by over 3.5 points",
+      "game": "Ohio Bobcats vs Toledo Rockets",
+      "startTs": 1795798800,
+      "bt": "spread",
+      "n": 1
     },
     {
       "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-TIE",
@@ -652,6 +634,15 @@
       "n": 1
     },
     {
+      "ticker": "KXLALIGA2GAME-26NOV27LEGSAB-LEG",
+      "yesNo": "No",
+      "side": "CD Legan\u00e9s not to win",
+      "game": "Legan\u00e9s vs CD Sabadell",
+      "startTs": 1795807800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
       "yesNo": "No",
       "side": "Manchester United FC not to win",
@@ -747,15 +738,6 @@
       "side": "DRAW",
       "game": "FC Emmen vs Helmond Sport",
       "startTs": 1795879800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXVALORANTMAP-26NOV271330LAMBAR-2-BAR",
-      "yesNo": "Yes",
-      "side": "Bar\u00e7a eSports",
-      "game": "Bar\u00e7a eSports vs la Masia",
-      "startTs": 1795804200,
       "bt": "moneyline",
       "n": 1
     },
