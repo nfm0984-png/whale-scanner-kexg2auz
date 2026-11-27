@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795811865,
-  "updatedAt": "Fri Nov 27 \u00b7 12:37 PM PT",
+  "ts": 1795812152,
+  "updatedAt": "Fri Nov 27 \u00b7 12:42 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-DEN",
@@ -11,15 +11,6 @@
       "startTs": 1795809600,
       "bt": "moneyline",
       "n": 4
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-PIT7",
-      "yesNo": "No",
-      "side": "Broncos +6.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
@@ -151,25 +142,16 @@
       "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
       "yesNo": "Yes",
       "side": "Levante UD not to win",
-      "game": "Levante UD vs Real Racing Club",
+      "game": "Levante UD vs Real Racing Club - More Markets",
       "startTs": 1795809600,
       "bt": "moneyline",
       "n": 2
     },
     {
-      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
-      "yesNo": "Yes",
-      "side": "Levante UD to win",
-      "game": "Levante UD vs Real Racing Club",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXLALIGAGAME-26NOV27LEVSAN-TIE",
       "yesNo": "No",
       "side": "NO DRAW",
-      "game": "Levante UD vs Real Racing Club",
+      "game": "Levante UD vs Real Racing Club - More Markets",
       "startTs": 1795809600,
       "bt": "moneyline",
       "n": 1
@@ -178,7 +160,7 @@
       "ticker": "KXLALIGATOTAL-26NOV27LEVSAN-4",
       "yesNo": "Yes",
       "side": "Over 3.5",
-      "game": "Levante UD vs Real Racing Club",
+      "game": "Levante UD vs Real Racing Club - More Markets",
       "startTs": 1795809600,
       "bt": "total",
       "n": 1
@@ -364,15 +346,6 @@
       "n": 3
     },
     {
-      "ticker": "KXNCAAFSPREAD-26NOV27TOLOHIO-TOL4",
-      "yesNo": "Yes",
-      "side": "Toledo wins by over 3.5 points",
-      "game": "Ohio Bobcats vs Toledo Rockets",
-      "startTs": 1795798800,
-      "bt": "spread",
-      "n": 2
-    },
-    {
       "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-TIE",
       "yesNo": "Yes",
       "side": "DRAW",
@@ -517,6 +490,24 @@
       "n": 1
     },
     {
+      "ticker": "KXLALIGA2GAME-26NOV27LEGSAB-LEG",
+      "yesNo": "Yes",
+      "side": "CD Legan\u00e9s not to win",
+      "game": "Legan\u00e9s vs CD Sabadell",
+      "startTs": 1795807800,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXLALIGA2TOTAL-26NOV27LEGSAB-2",
+      "yesNo": "No",
+      "side": "Under 1.5",
+      "game": "Legan\u00e9s vs CD Sabadell",
+      "startTs": 1795807800,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
       "yesNo": "Yes",
       "side": "FC Barcelona to win",
@@ -617,7 +608,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Manchester United FC not to win",
       "game": "Manchester United FC vs Brentford FC",
       "startTs": 1795878000,
@@ -724,30 +715,12 @@
       "n": 1
     },
     {
-      "ticker": "KXWTACHALLENGERMATCH-26NOV27LEPSAM-SAM",
-      "yesNo": "Yes",
-      "side": "Laura Samson",
-      "game": "Laura Samson vs Varvara Lepchenko",
-      "startTs": 1795802700,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNCAAFSPREAD-26NOV28CONNWYO-CONN4",
       "yesNo": "No",
       "side": "Wyoming Cowboys +3.5",
       "game": "Wyoming Cowboys vs UConn Huskies",
       "startTs": 1795885200,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV271300EVEG1-G1",
-      "yesNo": "Yes",
-      "side": "GenOne",
-      "game": "Counter-Strike: GenOne vs evermore",
-      "startTs": 1795802400,
-      "bt": "moneyline",
       "n": 1
     },
     {
