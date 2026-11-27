@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795752092,
-  "updatedAt": "Thu Nov 26 \u00b7 8:01 PM PT",
+  "ts": 1795752397,
+  "updatedAt": "Thu Nov 26 \u00b7 8:06 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26KCBUF-BUF",
@@ -10,24 +10,6 @@
       "game": "Buffalo Bills vs Kansas City Chiefs",
       "startTs": 1795742400,
       "bt": "moneyline",
-      "n": 3
-    },
-    {
-      "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
-      "yesNo": "Yes",
-      "side": "Chiefs",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "moneyline",
-      "n": 3
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26KCBUF-BUF3",
-      "yesNo": "No",
-      "side": "Chiefs +2.5",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "spread",
       "n": 3
     },
     {
@@ -184,6 +166,15 @@
       "n": 1
     },
     {
+      "ticker": "KXCS2GAME-26NOV270100HEROLVG-HERO",
+      "yesNo": "Yes",
+      "side": "Heroic",
+      "game": "Counter-Strike: Lynn Vision vs Heroic",
+      "startTs": 1795759200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27MILDET-DET",
       "yesNo": "Yes",
       "side": "Pistons",
@@ -207,6 +198,15 @@
       "side": "Spurs",
       "game": "San Antonio Spurs vs Los Angeles Lakers",
       "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXATPCHALLENGERMATCH-26NOV26IMAJOR-IMA",
+      "yesNo": "Yes",
+      "side": "Masamichi Imamura",
+      "game": "Yokohama: Masamichi Imamura vs David Jorda Sanchis",
+      "startTs": 1795749600,
       "bt": "moneyline",
       "n": 1
     },
