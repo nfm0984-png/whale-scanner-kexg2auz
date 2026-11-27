@@ -1,35 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795756708,
-  "updatedAt": "Thu Nov 26 \u00b7 9:18 PM PT",
+  "ts": 1795758031,
+  "updatedAt": "Thu Nov 26 \u00b7 9:40 PM PT",
   "picks": [
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
-      "yesNo": "Yes",
-      "side": "Denver wins by over 5.5 points",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
-      "yesNo": "Yes",
-      "side": "Denver wins by over 4.5 points",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV27DENPIT-35",
-      "yesNo": "Yes",
-      "side": "Over 34.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "total",
-      "n": 1
-    },
     {
       "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
       "yesNo": "Yes",
@@ -38,15 +11,6 @@
       "startTs": 1795777200,
       "bt": "moneyline",
       "n": 3
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
-      "yesNo": "Yes",
-      "side": "Raptors",
-      "game": "Toronto Raptors vs Brooklyn Nets",
-      "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
     },
     {
       "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
@@ -58,11 +22,38 @@
       "n": 1
     },
     {
+      "ticker": "KXNBASPREAD-26NOV27MIANYK-NYK4",
+      "yesNo": "Yes",
+      "side": "New York wins by over 3.5 points",
+      "game": "New York Knicks vs Miami Heat",
+      "startTs": 1795824000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
+      "yesNo": "Yes",
+      "side": "Raptors",
+      "game": "Toronto Raptors vs Brooklyn Nets",
+      "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
       "yesNo": "Yes",
       "side": "Deportivo Alav\u00e9s not to win",
       "game": "Real Madrid vs Alav\u00e9s",
       "startTs": 1795896000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV270100HEROLVG-HERO",
+      "yesNo": "Yes",
+      "side": "Heroic",
+      "game": "Counter-Strike: Lynn Vision vs Heroic",
+      "startTs": 1795759200,
       "bt": "moneyline",
       "n": 1
     },
@@ -153,15 +144,6 @@
       "side": "FC Barcelona to win",
       "game": "Deportivo vs Barcelona",
       "startTs": 1795965300,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV270100HEROLVG-HERO",
-      "yesNo": "Yes",
-      "side": "Heroic",
-      "game": "Counter-Strike: Lynn Vision vs Heroic",
-      "startTs": 1795759200,
       "bt": "moneyline",
       "n": 1
     },
@@ -265,15 +247,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLGAME-26NOV29NYGIND-NYG",
-      "yesNo": "Yes",
-      "side": "Giants",
-      "game": "Indianapolis Colts vs New York Giants",
-      "startTs": 1795975200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNCAAFSPREAD-26NOV28CONNWYO-CONN4",
       "yesNo": "No",
       "side": "Wyoming Cowboys +3.5",
@@ -283,20 +256,20 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFSPREAD-26NOV27BUFFAKR-BUFF8",
-      "yesNo": "Yes",
-      "side": "Buffalo wins by over 7.5 points",
-      "game": "Akron Zips vs Buffalo Bulls",
-      "startTs": 1795798800,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXSERIEAGAME-26NOV29COMJUV-COM",
       "yesNo": "Yes",
       "side": "Como 1907 to win",
       "game": "Como vs Juventus",
       "startTs": 1795981500,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV29NYGIND-NYG",
+      "yesNo": "Yes",
+      "side": "Giants",
+      "game": "Indianapolis Colts vs New York Giants",
+      "startTs": 1795975200,
       "bt": "moneyline",
       "n": 1
     }
