@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795819633,
-  "updatedAt": "Fri Nov 27 \u00b7 2:47 PM PT",
+  "ts": 1795819941,
+  "updatedAt": "Fri Nov 27 \u00b7 2:52 PM PT",
   "picks": [
     {
       "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
@@ -76,24 +76,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNBASPREAD-26NOV27MEMMIN-MIN5",
-      "yesNo": "Yes",
-      "side": "Minnesota wins by over 4.5 points",
-      "game": "Minnesota Timberwolves vs Memphis Grizzlies",
-      "startTs": 1795829400,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBATOTAL-26NOV27MEMMIN-220",
-      "yesNo": "Yes",
-      "side": "Over 219.5",
-      "game": "Minnesota Timberwolves vs Memphis Grizzlies",
-      "startTs": 1795829400,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXMLSTOTAL-26NOV27CLBMIA-4",
       "yesNo": "No",
       "side": "Under 3.5",
@@ -108,6 +90,24 @@
       "side": "Over 3.5",
       "game": "Columbus Crew vs Inter Miami CF",
       "startTs": 1795827600,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27MEMMIN-MIN5",
+      "yesNo": "Yes",
+      "side": "Minnesota wins by over 4.5 points",
+      "game": "Minnesota Timberwolves vs Memphis Grizzlies",
+      "startTs": 1795829400,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBATOTAL-26NOV27MEMMIN-220",
+      "yesNo": "Yes",
+      "side": "Over 219.5",
+      "game": "Minnesota Timberwolves vs Memphis Grizzlies",
+      "startTs": 1795829400,
       "bt": "total",
       "n": 1
     },
@@ -247,33 +247,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-PIT21",
-      "yesNo": "No",
-      "side": "Broncos +20.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-PIT15",
-      "yesNo": "No",
-      "side": "Broncos +14.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV27DENPIT-39",
-      "yesNo": "Yes",
-      "side": "Over 38.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27DALPHX-PHX",
       "yesNo": "Yes",
       "side": "Suns",
@@ -289,6 +262,24 @@
       "game": "Phoenix Suns vs Dallas Mavericks",
       "startTs": 1795831200,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-PIT21",
+      "yesNo": "No",
+      "side": "Broncos +20.5",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLTOTAL-26NOV27DENPIT-39",
+      "yesNo": "Yes",
+      "side": "Over 38.5",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "total",
       "n": 1
     },
     {
@@ -427,6 +418,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNHLGAME-26NOV28EDMSEA-EDM",
+      "yesNo": "Yes",
+      "side": "Oilers",
+      "game": "Edmonton Oilers vs Seattle Kraken",
+      "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
       "yesNo": "Yes",
       "side": "FC Barcelona to win",
@@ -441,15 +441,6 @@
       "side": "G2",
       "game": "Counter-Strike: G2 vs Liquid",
       "startTs": 1795842000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNHLGAME-26NOV28EDMSEA-EDM",
-      "yesNo": "Yes",
-      "side": "Oilers",
-      "game": "Edmonton Oilers vs Seattle Kraken",
-      "startTs": 1795827600,
       "bt": "moneyline",
       "n": 1
     },
