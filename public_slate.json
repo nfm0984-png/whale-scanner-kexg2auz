@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795751503,
-  "updatedAt": "Thu Nov 26 \u00b7 7:51 PM PT",
+  "ts": 1795751805,
+  "updatedAt": "Thu Nov 26 \u00b7 7:56 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV26KCBUF-BUF",
@@ -31,15 +31,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLTOTAL-26NOV26KCBUF-49",
-      "yesNo": "Yes",
-      "side": "Over 48.5",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "total",
-      "n": 2
-    },
-    {
       "ticker": "KXNFLTOTAL-26NOV26KCBUF-45",
       "yesNo": "Yes",
       "side": "Over 44.5",
@@ -56,15 +47,6 @@
       "startTs": 1795777200,
       "bt": "moneyline",
       "n": 3
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
-      "yesNo": "Yes",
-      "side": "Raptors",
-      "game": "Toronto Raptors vs Brooklyn Nets",
-      "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
@@ -91,6 +73,15 @@
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
+      "yesNo": "Yes",
+      "side": "Raptors",
+      "game": "Toronto Raptors vs Brooklyn Nets",
+      "startTs": 1795825800,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -148,15 +139,6 @@
       "n": 1
     },
     {
-      "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
-      "yesNo": "Yes",
-      "side": "Bologna FC 1909 to win",
-      "game": "Venezia vs Bologna",
-      "startTs": 1795808700,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27PHIIND-PHI",
       "yesNo": "Yes",
       "side": "76ers",
@@ -164,15 +146,6 @@
       "startTs": 1795825800,
       "bt": "moneyline",
       "n": 1
-    },
-    {
-      "ticker": "KXNFLGAME-26NOV29NYGIND-NYG",
-      "yesNo": "Yes",
-      "side": "Giants",
-      "game": "Indianapolis Colts vs New York Giants",
-      "startTs": 1795975200,
-      "bt": "moneyline",
-      "n": 2
     },
     {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
@@ -265,12 +238,21 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLGAME-26NOV29BALHOU-HOU",
+      "ticker": "KXNFLGAME-26NOV29NYGIND-NYG",
       "yesNo": "Yes",
-      "side": "Texans",
-      "game": "Houston Texans vs Baltimore Ravens",
+      "side": "Giants",
+      "game": "Indianapolis Colts vs New York Giants",
       "startTs": 1795975200,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLTOTAL-26NOV26KCBUF-49",
+      "yesNo": "Yes",
+      "side": "Over 48.5",
+      "game": "Buffalo Bills vs Kansas City Chiefs",
+      "startTs": 1795742400,
+      "bt": "total",
       "n": 1
     },
     {
