@@ -1,17 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795810947,
-  "updatedAt": "Fri Nov 27 \u00b7 12:22 PM PT",
+  "ts": 1795811256,
+  "updatedAt": "Fri Nov 27 \u00b7 12:27 PM PT",
   "picks": [
-    {
-      "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
-      "yesNo": "Yes",
-      "side": "Steelers",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 4
-    },
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-DEN",
       "yesNo": "Yes",
@@ -19,39 +10,12 @@
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "moneyline",
-      "n": 3
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
-      "yesNo": "No",
-      "side": "Steelers +5.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 2
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
-      "yesNo": "No",
-      "side": "Steelers +4.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 2
+      "n": 4
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
       "yesNo": "Yes",
       "side": "Denver wins by over 4.5 points",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN7",
-      "yesNo": "No",
-      "side": "Steelers +6.5",
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "spread",
@@ -121,6 +85,15 @@
       "n": 1
     },
     {
+      "ticker": "KXEPLGAME-26NOV27NFOCFC-NFO",
+      "yesNo": "Yes",
+      "side": "Nottingham Forest FC not to win",
+      "game": "Nottingham Forest FC vs Chelsea FC",
+      "startTs": 1795809600,
+      "bt": "moneyline",
+      "n": 3
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27PHIIND-PHI",
       "yesNo": "Yes",
       "side": "76ers",
@@ -137,15 +110,6 @@
       "startTs": 1795825800,
       "bt": "spread",
       "n": 1
-    },
-    {
-      "ticker": "KXEPLGAME-26NOV27NFOCFC-NFO",
-      "yesNo": "Yes",
-      "side": "Nottingham Forest FC not to win",
-      "game": "Nottingham Forest FC vs Chelsea FC",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 3
     },
     {
       "ticker": "KXNBASPREAD-26NOV27MEMMIN-MIN5",
@@ -173,6 +137,42 @@
       "startTs": 1795808700,
       "bt": "moneyline",
       "n": 2
+    },
+    {
+      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
+      "yesNo": "Yes",
+      "side": "Levante UD not to win",
+      "game": "Levante UD vs Real Racing Club",
+      "startTs": 1795809600,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
+      "yesNo": "Yes",
+      "side": "Levante UD to win",
+      "game": "Levante UD vs Real Racing Club",
+      "startTs": 1795809600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-TIE",
+      "yesNo": "No",
+      "side": "NO DRAW",
+      "game": "Levante UD vs Real Racing Club",
+      "startTs": 1795809600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXLALIGATOTAL-26NOV27LEVSAN-4",
+      "yesNo": "Yes",
+      "side": "Over 3.5",
+      "game": "Levante UD vs Real Racing Club",
+      "startTs": 1795809600,
+      "bt": "total",
+      "n": 1
     },
     {
       "ticker": "KXNHLGAME-26NOV27DETCBJ-DET",
@@ -265,42 +265,6 @@
       "n": 1
     },
     {
-      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
-      "yesNo": "Yes",
-      "side": "Levante UD to win",
-      "game": "Levante UD vs Real Racing Club",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
-      "yesNo": "Yes",
-      "side": "Levante UD not to win",
-      "game": "Levante UD vs Real Racing Club",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXLALIGAGAME-26NOV27LEVSAN-TIE",
-      "yesNo": "No",
-      "side": "NO DRAW",
-      "game": "Levante UD vs Real Racing Club",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXLALIGATOTAL-26NOV27LEVSAN-4",
-      "yesNo": "Yes",
-      "side": "Over 3.5",
-      "game": "Levante UD vs Real Racing Club",
-      "startTs": 1795809600,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXEERSTEDIVGAME-26NOV27VENWAA-TIE",
       "yesNo": "Yes",
       "side": "DRAW",
@@ -325,15 +289,6 @@
       "game": "Boston Celtics vs Atlanta Hawks",
       "startTs": 1795827600,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXWTACHALLENGERMATCH-26NOV27LEPSAM-SAM",
-      "yesNo": "Yes",
-      "side": "Laura Samson",
-      "game": "Laura Samson vs Varvara Lepchenko",
-      "startTs": 1795802700,
-      "bt": "moneyline",
       "n": 1
     },
     {
@@ -432,6 +387,15 @@
       "side": "Pistons",
       "game": "Detroit Pistons vs Milwaukee Bucks",
       "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXWTACHALLENGERMATCH-26NOV27LEPSAM-SAM",
+      "yesNo": "Yes",
+      "side": "Laura Samson",
+      "game": "Laura Samson vs Varvara Lepchenko",
+      "startTs": 1795802700,
       "bt": "moneyline",
       "n": 1
     },
