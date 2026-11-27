@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795810103,
-  "updatedAt": "Fri Nov 27 \u00b7 12:08 PM PT",
+  "ts": 1795810412,
+  "updatedAt": "Fri Nov 27 \u00b7 12:13 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
@@ -19,16 +19,7 @@
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
-      "yesNo": "No",
-      "side": "Steelers +5.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 2
+      "n": 3
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN7",
@@ -247,6 +238,24 @@
       "n": 1
     },
     {
+      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
+      "yesNo": "Yes",
+      "side": "Spurs",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBATOTAL-26NOV27LALSAS-227",
+      "yesNo": "No",
+      "side": "Under 226.5",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFGAME-26NOV27MINNWIS-WIS",
       "yesNo": "Yes",
       "side": "Wisconsin",
@@ -307,15 +316,6 @@
       "game": "Boston Celtics vs Atlanta Hawks",
       "startTs": 1795827600,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
-      "yesNo": "Yes",
-      "side": "Spurs",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "moneyline",
       "n": 1
     },
     {
@@ -436,6 +436,15 @@
       "n": 1
     },
     {
+      "ticker": "KXWTACHALLENGERMATCH-26NOV27LEPSAM-SAM",
+      "yesNo": "Yes",
+      "side": "Laura Samson",
+      "game": "Laura Samson vs Varvara Lepchenko",
+      "startTs": 1795802700,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNHLGAME-26NOV27OTTTB-TB",
       "yesNo": "Yes",
       "side": "Lightning",
@@ -451,6 +460,15 @@
       "game": "Utah Jazz vs Denver Nuggets",
       "startTs": 1795833000,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV27APPUSA-USA4",
+      "yesNo": "No",
+      "side": "State +3.5",
+      "game": "Appalachian State vs South Alabama",
+      "startTs": 1795809600,
+      "bt": "spread",
       "n": 1
     },
     {
@@ -598,15 +616,6 @@
       "n": 1
     },
     {
-      "ticker": "KXLALIGA2GAME-26NOV27LEGSAB-LEG",
-      "yesNo": "Yes",
-      "side": "CD Legan\u00e9s not to win",
-      "game": "Legan\u00e9s vs CD Sabadell",
-      "startTs": 1795807800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
       "yesNo": "No",
       "side": "Manchester United FC not to win",
@@ -622,15 +631,6 @@
       "game": "Nashville Predators vs Utah Mammoth",
       "startTs": 1795802400,
       "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV27APPUSA-USA4",
-      "yesNo": "No",
-      "side": "State +3.5",
-      "game": "Appalachian State vs South Alabama",
-      "startTs": 1795809600,
-      "bt": "spread",
       "n": 1
     },
     {
