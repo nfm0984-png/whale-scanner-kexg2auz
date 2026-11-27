@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795797690,
-  "updatedAt": "Fri Nov 27 \u00b7 8:41 AM PT",
+  "ts": 1795797998,
+  "updatedAt": "Fri Nov 27 \u00b7 8:46 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
@@ -127,7 +127,7 @@
       "game": "Aurora vs PARIVISION",
       "startTs": 1795798800,
       "bt": "moneyline",
-      "n": 3
+      "n": 2
     },
     {
       "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-PARI",
@@ -176,7 +176,7 @@
     },
     {
       "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Bologna FC 1909 not to win",
       "game": "Venezia vs Bologna",
       "startTs": 1795808700,
@@ -400,6 +400,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFGAME-26NOV27MINNWIS-WIS",
+      "yesNo": "Yes",
+      "side": "Wisconsin",
+      "game": "Wisconsin Badgers vs Minnesota Golden Gophers",
+      "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXEERSTEDIVGAME-26NOV27VENWAA-TIE",
       "yesNo": "Yes",
       "side": "DRAW",
@@ -461,6 +470,15 @@
       "startTs": 1795833000,
       "bt": "moneyline",
       "n": 1
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 2
     },
     {
       "ticker": "KXNFLGAME-26NOV29SEASF-SF",
@@ -625,15 +643,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFGAME-26NOV27MINNWIS-WIS",
-      "yesNo": "Yes",
-      "side": "Wisconsin",
-      "game": "Wisconsin Badgers vs Minnesota Golden Gophers",
-      "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNCAAFSPREAD-26NOV28UABUNT-UNT4",
       "yesNo": "Yes",
       "side": "North Texas wins by over 3.5 points",
@@ -766,15 +775,6 @@
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
-      "bt": "moneyline",
       "n": 1
     },
     {
