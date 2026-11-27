@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795738324,
-  "updatedAt": "Thu Nov 26 \u00b7 4:12 PM PT",
+  "ts": 1795738625,
+  "updatedAt": "Thu Nov 26 \u00b7 4:17 PM PT",
   "picks": [
     {
       "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL15",
@@ -49,6 +49,24 @@
       "n": 2
     },
     {
+      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU15",
+      "yesNo": "Yes",
+      "side": "Texas Tech wins by over 14.5 points",
+      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
+      "startTs": 1795741200,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU14",
+      "yesNo": "Yes",
+      "side": "Texas Tech wins by over 13.5 points",
+      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
+      "startTs": 1795741200,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
       "yesNo": "Yes",
       "side": "Raptors",
@@ -73,24 +91,6 @@
       "game": "San Salvador: Timo Legout vs Karl Poling",
       "startTs": 1795734600,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU15",
-      "yesNo": "Yes",
-      "side": "Texas Tech wins by over 14.5 points",
-      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
-      "startTs": 1795741200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU14",
-      "yesNo": "Yes",
-      "side": "Texas Tech wins by over 13.5 points",
-      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
-      "startTs": 1795741200,
-      "bt": "spread",
       "n": 1
     },
     {
@@ -126,6 +126,15 @@
       "side": "Bologna FC 1909 to win",
       "game": "Venezia vs Bologna",
       "startTs": 1795808700,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
+      "yesNo": "Yes",
+      "side": "Deportivo Alav\u00e9s not to win",
+      "game": "Real Madrid vs Alav\u00e9s",
+      "startTs": 1795896000,
       "bt": "moneyline",
       "n": 1
     },
