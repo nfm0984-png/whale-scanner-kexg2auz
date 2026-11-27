@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795816755,
-  "updatedAt": "Fri Nov 27 \u00b7 1:59 PM PT",
+  "ts": 1795817061,
+  "updatedAt": "Fri Nov 27 \u00b7 2:04 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-DEN",
@@ -11,6 +11,15 @@
       "startTs": 1795809600,
       "bt": "moneyline",
       "n": 5
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-PIT15",
+      "yesNo": "No",
+      "side": "Broncos +14.5",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-PIT7",
@@ -265,15 +274,6 @@
       "n": 1
     },
     {
-      "ticker": "KXEERSTEDIVGAME-26NOV27VENWAA-TIE",
-      "yesNo": "Yes",
-      "side": "DRAW",
-      "game": "VVV Venlo vs RKC Waalwijk",
-      "startTs": 1795806000,
-      "bt": "moneyline",
-      "n": 4
-    },
-    {
       "ticker": "KXNFLGAME-26NOV29SEASF-SF",
       "yesNo": "Yes",
       "side": "49ers",
@@ -364,15 +364,6 @@
       "n": 1
     },
     {
-      "ticker": "KXEERSTEDIVGAME-26NOV27AZOSS-TIE",
-      "yesNo": "Yes",
-      "side": "DRAW",
-      "game": "Jong AZ Alkmaar vs TOP Oss",
-      "startTs": 1795806000,
-      "bt": "moneyline",
-      "n": 3
-    },
-    {
       "ticker": "KXNHLTOTAL-26NOV28SJCOL-7",
       "yesNo": "No",
       "side": "Under 6.5",
@@ -407,6 +398,15 @@
       "startTs": 1795896000,
       "bt": "moneyline",
       "n": 2
+    },
+    {
+      "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
+      "yesNo": "Yes",
+      "side": "Deportivo Alav\u00e9s not to win",
+      "game": "Real Madrid vs Alav\u00e9s",
+      "startTs": 1795896000,
+      "bt": "moneyline",
+      "n": 1
     },
     {
       "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
