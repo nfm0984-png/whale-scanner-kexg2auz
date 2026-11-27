@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795798596,
-  "updatedAt": "Fri Nov 27 \u00b7 8:56 AM PT",
+  "ts": 1795798896,
+  "updatedAt": "Fri Nov 27 \u00b7 9:01 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
@@ -22,15 +22,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
-      "yesNo": "No",
-      "side": "Steelers +5.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
       "yesNo": "No",
       "side": "Steelers +4.5",
@@ -43,6 +34,15 @@
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
       "yesNo": "Yes",
       "side": "Denver wins by over 4.5 points",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
+      "yesNo": "No",
+      "side": "Steelers +5.5",
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "spread",
@@ -91,7 +91,7 @@
       "game": "New York Knicks vs Miami Heat",
       "startTs": 1795824000,
       "bt": "spread",
-      "n": 1
+      "n": 2
     },
     {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-NFO",
@@ -126,33 +126,6 @@
       "side": "NO DRAW",
       "game": "Nottingham Forest FC vs Chelsea FC",
       "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-AUR",
-      "yesNo": "Yes",
-      "side": "Aurora",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
-      "bt": "moneyline",
-      "n": 3
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
       "bt": "moneyline",
       "n": 1
     },
@@ -238,6 +211,24 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFGAME-26NOV27TOLOHIO-TOL",
+      "yesNo": "Yes",
+      "side": "Toledo",
+      "game": "Ohio Bobcats vs Toledo Rockets",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV27TOLOHIO-TOL4",
+      "yesNo": "Yes",
+      "side": "Toledo wins by over 3.5 points",
+      "game": "Ohio Bobcats vs Toledo Rockets",
+      "startTs": 1795798800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXEERSTEDIVGAME-26NOV27AZOSS-TIE",
       "yesNo": "Yes",
       "side": "DRAW",
@@ -263,24 +254,6 @@
       "startTs": 1795802400,
       "bt": "moneyline",
       "n": 2
-    },
-    {
-      "ticker": "KXNCAAFGAME-26NOV27TOLOHIO-TOL",
-      "yesNo": "Yes",
-      "side": "Toledo",
-      "game": "Ohio Bobcats vs Toledo Rockets",
-      "startTs": 1795798800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV27TOLOHIO-TOL4",
-      "yesNo": "Yes",
-      "side": "Toledo wins by over 3.5 points",
-      "game": "Ohio Bobcats vs Toledo Rockets",
-      "startTs": 1795798800,
-      "bt": "spread",
-      "n": 1
     },
     {
       "ticker": "KXEERSTEDIVGAME-26NOV27DORVIT-TIE",
@@ -407,6 +380,15 @@
       "startTs": 1795825800,
       "bt": "moneyline",
       "n": 1
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-1-AUR",
+      "yesNo": "Yes",
+      "side": "Aurora",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 3
     },
     {
       "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-TIE",
@@ -792,6 +774,15 @@
       "side": "Devils",
       "game": "New Jersey Devils vs Calgary Flames",
       "startTs": 1795802400,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "Aurora vs PARIVISION",
+      "startTs": 1795798800,
       "bt": "moneyline",
       "n": 1
     }
