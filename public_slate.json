@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795819941,
-  "updatedAt": "Fri Nov 27 \u00b7 2:52 PM PT",
+  "ts": 1795820243,
+  "updatedAt": "Fri Nov 27 \u00b7 2:57 PM PT",
   "picks": [
     {
       "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
@@ -265,24 +265,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-PIT21",
-      "yesNo": "No",
-      "side": "Broncos +20.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV27DENPIT-39",
-      "yesNo": "Yes",
-      "side": "Over 38.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXCS2GAME-26NOV280100IMPAST-AST",
       "yesNo": "Yes",
       "side": "Astralis",
@@ -427,6 +409,15 @@
       "n": 1
     },
     {
+      "ticker": "KXWTACHALLENGERMATCH-26NOV27HERRIE-HER",
+      "yesNo": "Yes",
+      "side": "Alicia Herrero Linana",
+      "game": "Julia Riera vs Alicia Herrero Linana",
+      "startTs": 1795817100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
       "yesNo": "Yes",
       "side": "FC Barcelona to win",
@@ -469,15 +460,6 @@
       "game": "UAB vs North Texas",
       "startTs": 1795899600,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXWTACHALLENGERMATCH-26NOV27HERRIE-HER",
-      "yesNo": "Yes",
-      "side": "Alicia Herrero Linana",
-      "game": "Julia Riera vs Alicia Herrero Linana",
-      "startTs": 1795817100,
-      "bt": "moneyline",
       "n": 1
     },
     {
