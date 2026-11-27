@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795820243,
-  "updatedAt": "Fri Nov 27 \u00b7 2:57 PM PT",
+  "ts": 1795820531,
+  "updatedAt": "Fri Nov 27 \u00b7 3:02 PM PT",
   "picks": [
     {
       "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
@@ -73,6 +73,15 @@
       "game": "Indiana Pacers vs Philadelphia 76ers",
       "startTs": 1795825800,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBATOTAL-26NOV27PHIIND-229",
+      "yesNo": "Yes",
+      "side": "Over 228.5",
+      "game": "Indiana Pacers vs Philadelphia 76ers",
+      "startTs": 1795825800,
+      "bt": "total",
       "n": 1
     },
     {
