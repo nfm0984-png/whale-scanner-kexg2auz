@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795801186,
-  "updatedAt": "Fri Nov 27 \u00b7 9:39 AM PT",
+  "ts": 1795801637,
+  "updatedAt": "Fri Nov 27 \u00b7 9:47 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
@@ -110,15 +110,6 @@
       "startTs": 1795798800,
       "bt": "moneyline",
       "n": 5
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV271200PARIAUR-2-AUR",
-      "yesNo": "Yes",
-      "side": "Aurora",
-      "game": "Aurora vs PARIVISION",
-      "startTs": 1795798800,
-      "bt": "moneyline",
-      "n": 1
     },
     {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-NFO",
@@ -247,6 +238,24 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFGAME-26NOV27NEBIOWA-IOWA",
+      "yesNo": "Yes",
+      "side": "Iowa",
+      "game": "Iowa Hawkeyes vs Nebraska Cornhuskers",
+      "startTs": 1795799280,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV28KSUISU-ISU5",
+      "yesNo": "No",
+      "side": "Nebraska Cornhuskers +4.5",
+      "game": "Iowa Hawkeyes vs Nebraska Cornhuskers",
+      "startTs": 1795799280,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
       "yesNo": "Yes",
       "side": "Levante UD to win",
@@ -257,7 +266,7 @@
     },
     {
       "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Levante UD not to win",
       "game": "Levante UD vs Real Racing Club",
       "startTs": 1795809600,
@@ -427,6 +436,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFGAME-26NOV27TLSAUTSA-UTSA",
+      "yesNo": "Yes",
+      "side": "UTSA",
+      "game": "UTSA Roadrunners vs Tulsa Golden Hurricane",
+      "startTs": 1795798800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
       "yesNo": "Yes",
       "side": "FC Barcelona to win",
@@ -508,20 +526,29 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFGAME-26NOV27TLSAUTSA-UTSA",
-      "yesNo": "Yes",
-      "side": "UTSA",
-      "game": "UTSA Roadrunners vs Tulsa Golden Hurricane",
-      "startTs": 1795798800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNHLGAME-26NOV28EDMSEA-EDM",
       "yesNo": "Yes",
       "side": "Oilers",
       "game": "Edmonton Oilers vs Seattle Kraken",
       "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27ATLBOS-BOS10",
+      "yesNo": "Yes",
+      "side": "Boston wins by over 9.5 points",
+      "game": "Boston Celtics vs Atlanta Hawks",
+      "startTs": 1795827600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFGAME-26NOV27NEBIOWA-NEB",
+      "yesNo": "Yes",
+      "side": "Nebraska",
+      "game": "Iowa Hawkeyes vs Nebraska Cornhuskers",
+      "startTs": 1795799280,
       "bt": "moneyline",
       "n": 1
     },
@@ -568,15 +595,6 @@
       "game": "Manchester United FC vs Brentford FC",
       "startTs": 1795878000,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28KSUISU-ISU5",
-      "yesNo": "No",
-      "side": "Nebraska Cornhuskers +4.5",
-      "game": "Iowa Hawkeyes vs Nebraska Cornhuskers",
-      "startTs": 1795799280,
-      "bt": "spread",
       "n": 1
     },
     {
@@ -667,6 +685,15 @@
       "game": "Tampa Bay Lightning vs Ottawa Senators",
       "startTs": 1795809600,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN4",
+      "yesNo": "No",
+      "side": "Steelers +3.5",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "spread",
       "n": 1
     },
     {
