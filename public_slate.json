@@ -1,17 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795763649,
-  "updatedAt": "Thu Nov 26 \u00b7 11:14 PM PT",
+  "ts": 1795766744,
+  "updatedAt": "Fri Nov 27 \u00b7 12:05 AM PT",
   "picks": [
-    {
-      "ticker": "KXCS2GAME-26NOV270100HEROLVG-HERO",
-      "yesNo": "Yes",
-      "side": "Heroic",
-      "game": "Counter-Strike: Lynn Vision vs Heroic",
-      "startTs": 1795759200,
-      "bt": "moneyline",
-      "n": 3
-    },
     {
       "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
       "yesNo": "Yes",
@@ -28,15 +19,6 @@
       "game": "New York Knicks vs Miami Heat",
       "startTs": 1795824000,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27MIANYK-NYK4",
-      "yesNo": "Yes",
-      "side": "New York wins by over 3.5 points",
-      "game": "New York Knicks vs Miami Heat",
-      "startTs": 1795824000,
-      "bt": "spread",
       "n": 1
     },
     {
@@ -67,11 +49,11 @@
       "n": 1
     },
     {
-      "ticker": "KXNBASPREAD-26NOV27ATLBOS-BOS10",
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
       "yesNo": "No",
-      "side": "Hawks +9.5",
-      "game": "Boston Celtics vs Atlanta Hawks",
-      "startTs": 1795827600,
+      "side": "Steelers +4.5",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
       "bt": "spread",
       "n": 1
     },
@@ -103,6 +85,15 @@
       "n": 1
     },
     {
+      "ticker": "KXCS2GAME-26NOV270330WCIMP-IMP",
+      "yesNo": "Yes",
+      "side": "Imperial",
+      "game": "Counter-Strike: Imperial vs Wildcard",
+      "startTs": 1795768200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-NFO",
       "yesNo": "Yes",
       "side": "Nottingham Forest FC to win",
@@ -113,7 +104,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-CFC",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Chelsea FC not to win",
       "game": "Nottingham Forest FC vs Chelsea FC",
       "startTs": 1795809600,
@@ -133,15 +124,6 @@
       "ticker": "KXNCAAFSPREAD-26NOV27MSSTMISS-MISS17",
       "yesNo": "Yes",
       "side": "Ole Miss wins by over 16.5 points",
-      "game": "Mississippi State vs Ole Miss",
-      "startTs": 1795798800,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV27MSSTMISS-MISS18",
-      "yesNo": "Yes",
-      "side": "Ole Miss wins by over 17.5 points",
       "game": "Mississippi State vs Ole Miss",
       "startTs": 1795798800,
       "bt": "spread",
@@ -239,20 +221,11 @@
     },
     {
       "ticker": "KXBUNDESLIGAGAME-26NOV27SVWBMG-SVW",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "SV Werder Bremen not to win",
       "game": "Werder Bremen vs Borussia M\u00f6nchengladbach",
       "startTs": 1795807800,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28CONNWYO-CONN4",
-      "yesNo": "No",
-      "side": "Wyoming Cowboys +3.5",
-      "game": "Wyoming Cowboys vs UConn Huskies",
-      "startTs": 1795885200,
-      "bt": "spread",
       "n": 1
     },
     {
