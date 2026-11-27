@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795819502,
-  "updatedAt": "Fri Nov 27 \u00b7 2:45 PM PT",
+  "ts": 1795819633,
+  "updatedAt": "Fri Nov 27 \u00b7 2:47 PM PT",
   "picks": [
     {
       "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
@@ -292,33 +292,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNHLGAME-26NOV27NYRCHI-NYR",
-      "yesNo": "Yes",
-      "side": "Rangers",
-      "game": "Chicago Blackhawks vs New York Rangers",
-      "startTs": 1795818600,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXNHLGAME-26NOV27NYRCHI-CHI",
-      "yesNo": "Yes",
-      "side": "Blackhawks",
-      "game": "Chicago Blackhawks vs New York Rangers",
-      "startTs": 1795818600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNHLTOTAL-26NOV27NYRCHI-6",
-      "yesNo": "No",
-      "side": "Under 5.5",
-      "game": "Chicago Blackhawks vs New York Rangers",
-      "startTs": 1795818600,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXCS2GAME-26NOV280100IMPAST-AST",
       "yesNo": "Yes",
       "side": "Astralis",
@@ -361,6 +334,24 @@
       "game": "Manchester United FC vs Brentford FC",
       "startTs": 1795878000,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNHLGAME-26NOV27NYRCHI-NYR",
+      "yesNo": "Yes",
+      "side": "Rangers",
+      "game": "Chicago Blackhawks vs New York Rangers",
+      "startTs": 1795818600,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXNHLTOTAL-26NOV27NYRCHI-6",
+      "yesNo": "No",
+      "side": "Under 5.5",
+      "game": "Chicago Blackhawks vs New York Rangers",
+      "startTs": 1795818600,
+      "bt": "total",
       "n": 1
     },
     {
@@ -436,15 +427,6 @@
       "n": 1
     },
     {
-      "ticker": "KXWTACHALLENGERMATCH-26NOV27HERRIE-HER",
-      "yesNo": "Yes",
-      "side": "Alicia Herrero Linana",
-      "game": "Julia Riera vs Alicia Herrero Linana",
-      "startTs": 1795817100,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
       "yesNo": "Yes",
       "side": "FC Barcelona to win",
@@ -499,6 +481,15 @@
       "n": 1
     },
     {
+      "ticker": "KXWTACHALLENGERMATCH-26NOV27HERRIE-HER",
+      "yesNo": "Yes",
+      "side": "Alicia Herrero Linana",
+      "game": "Julia Riera vs Alicia Herrero Linana",
+      "startTs": 1795817100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXWTACHALLENGERMATCH-26NOV27HERRIE-RIE",
       "yesNo": "Yes",
       "side": "Julia Riera",
@@ -523,6 +514,15 @@
       "game": "Fluminense vs Cruzeiro",
       "startTs": 1795820400,
       "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV27APPUSA-USA4",
+      "yesNo": "No",
+      "side": "State +3.5",
+      "game": "Appalachian State vs South Alabama",
+      "startTs": 1795809600,
+      "bt": "spread",
       "n": 1
     },
     {
