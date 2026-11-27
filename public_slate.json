@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795816467,
-  "updatedAt": "Fri Nov 27 \u00b7 1:54 PM PT",
+  "ts": 1795816755,
+  "updatedAt": "Fri Nov 27 \u00b7 1:59 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-DEN",
@@ -11,15 +11,6 @@
       "startTs": 1795809600,
       "bt": "moneyline",
       "n": 5
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-PIT15",
-      "yesNo": "No",
-      "side": "Broncos +14.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
     },
     {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-PIT7",
@@ -625,11 +616,11 @@
       "n": 1
     },
     {
-      "ticker": "KXLALIGATOTAL-26NOV27LEVSAN-4",
-      "yesNo": "No",
-      "side": "Under 3.5",
-      "game": "Levante UD vs Real Racing Club - More Markets",
-      "startTs": 1795809600,
+      "ticker": "KXLIGAPORTUGALTOTAL-26NOV27CSMCDN-3",
+      "yesNo": "Yes",
+      "side": "Over 2.5",
+      "game": "CS Mar\u00edtimo vs CD Nacional - More Markets",
+      "startTs": 1795810500,
       "bt": "total",
       "n": 1
     }
