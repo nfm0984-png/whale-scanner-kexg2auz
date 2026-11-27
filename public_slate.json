@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795810412,
-  "updatedAt": "Fri Nov 27 \u00b7 12:13 PM PT",
+  "ts": 1795810720,
+  "updatedAt": "Fri Nov 27 \u00b7 12:18 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
@@ -22,6 +22,33 @@
       "n": 3
     },
     {
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN6",
+      "yesNo": "No",
+      "side": "Steelers +5.5",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 2
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
+      "yesNo": "No",
+      "side": "Steelers +4.5",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
+      "yesNo": "Yes",
+      "side": "Denver wins by over 4.5 points",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN7",
       "yesNo": "No",
       "side": "Steelers +6.5",
@@ -34,15 +61,6 @@
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN7",
       "yesNo": "Yes",
       "side": "Denver wins by over 6.5 points",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
-      "yesNo": "Yes",
-      "side": "Denver wins by over 4.5 points",
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "spread",
@@ -122,30 +140,12 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV27NFOCFC-NFO",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "Nottingham Forest FC not to win",
       "game": "Nottingham Forest FC vs Chelsea FC",
       "startTs": 1795809600,
       "bt": "moneyline",
       "n": 3
-    },
-    {
-      "ticker": "KXNHLGAME-26NOV27DETCBJ-DET",
-      "yesNo": "Yes",
-      "side": "Red Wings",
-      "game": "Columbus Blue Jackets vs Detroit Red Wings",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 4
-    },
-    {
-      "ticker": "KXNHLTOTAL-26NOV27DETCBJ-6",
-      "yesNo": "No",
-      "side": "Under 5.5",
-      "game": "Columbus Blue Jackets vs Detroit Red Wings",
-      "startTs": 1795809600,
-      "bt": "total",
-      "n": 1
     },
     {
       "ticker": "KXNBASPREAD-26NOV27MEMMIN-MIN5",
@@ -175,35 +175,8 @@
       "n": 2
     },
     {
-      "ticker": "KXNHLGAME-26NOV27FLAWSH-FLA",
-      "yesNo": "Yes",
-      "side": "Panthers",
-      "game": "Washington Capitals vs Florida Panthers",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNHLGAME-26NOV27FLAWSH-WSH",
-      "yesNo": "Yes",
-      "side": "Capitals",
-      "game": "Washington Capitals vs Florida Panthers",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNHLTOTAL-26NOV27FLAWSH-7",
-      "yesNo": "Yes",
-      "side": "Over 6.5",
-      "game": "Washington Capitals vs Florida Panthers",
-      "startTs": 1795809600,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXLALIGAGAME-26NOV27LEVSAN-LEV",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "Levante UD not to win",
       "game": "Levante UD vs Real Racing Club",
       "startTs": 1795809600,
@@ -238,6 +211,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNHLGAME-26NOV27DETCBJ-DET",
+      "yesNo": "Yes",
+      "side": "Red Wings",
+      "game": "Columbus Blue Jackets vs Detroit Red Wings",
+      "startTs": 1795809600,
+      "bt": "moneyline",
+      "n": 4
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
       "yesNo": "Yes",
       "side": "Spurs",
@@ -252,6 +234,33 @@
       "side": "Under 226.5",
       "game": "San Antonio Spurs vs Los Angeles Lakers",
       "startTs": 1795833000,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNHLGAME-26NOV27FLAWSH-FLA",
+      "yesNo": "Yes",
+      "side": "Panthers",
+      "game": "Washington Capitals vs Florida Panthers",
+      "startTs": 1795809600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNHLGAME-26NOV27FLAWSH-WSH",
+      "yesNo": "Yes",
+      "side": "Capitals",
+      "game": "Washington Capitals vs Florida Panthers",
+      "startTs": 1795809600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNHLTOTAL-26NOV27FLAWSH-7",
+      "yesNo": "Yes",
+      "side": "Over 6.5",
+      "game": "Washington Capitals vs Florida Panthers",
+      "startTs": 1795809600,
       "bt": "total",
       "n": 1
     },
@@ -382,24 +391,6 @@
       "n": 2
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
-      "yesNo": "No",
-      "side": "Steelers +4.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 2
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN4",
-      "yesNo": "No",
-      "side": "Steelers +3.5",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXLALIGAGAME-26NOV28RMAALA-RMA",
       "yesNo": "Yes",
       "side": "Real Madrid CF to win",
@@ -506,6 +497,24 @@
       "startTs": 1795849200,
       "bt": "moneyline",
       "n": 2
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
+      "yesNo": "No",
+      "side": "Steelers +4.5",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN4",
+      "yesNo": "No",
+      "side": "Steelers +3.5",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 1
     },
     {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
@@ -661,15 +670,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNHLGAME-26NOV27VANPHI-PHI",
-      "yesNo": "Yes",
-      "side": "Flyers",
-      "game": "Philadelphia Flyers vs Vancouver Canucks",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNHLGAME-26NOV27NYRCHI-NYR",
       "yesNo": "Yes",
       "side": "Rangers",
@@ -692,6 +692,15 @@
       "yesNo": "Yes",
       "side": "Texans",
       "game": "Houston Texans vs Baltimore Ravens",
+      "startTs": 1795975200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV29TENJAC-JAC",
+      "yesNo": "Yes",
+      "side": "Jaguars",
+      "game": "Jacksonville Jaguars vs Tennessee Titans",
       "startTs": 1795975200,
       "bt": "moneyline",
       "n": 1
