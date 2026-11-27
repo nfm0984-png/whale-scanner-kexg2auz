@@ -107379,7 +107379,11 @@
    "first_seen": 1795792849,
    "scans": 5,
    "first_score": 44,
-   "result": null
+   "result": "L",
+   "graded": 1795823886,
+   "ended": 1795823886,
+   "finalScore": "MIN 3 \u2013 COL 4",
+   "active": false
   },
   "0x382cee6eee9258261e4cc2256a5f77c5807b136cb379db807c2a1a03af626503:no": {
    "tier": "top",
@@ -107638,7 +107642,10 @@
    "first_seen": 1795792849,
    "scans": 4,
    "first_score": 29,
-   "result": null
+   "result": null,
+   "ended": 1795823886,
+   "finalScore": "MEM 31 \u2013 TEM 35",
+   "active": false
   },
   "0xed75b4afd4e94aeee0e9ed17bdb5b973353e9254be53096310403e5812814b51:no": {
    "tier": "poly",
@@ -109316,7 +109323,10 @@
    "first_seen": 1795807470,
    "scans": 3,
    "first_score": 28,
-   "result": null
+   "result": null,
+   "ended": 1795823886,
+   "finalScore": "MEM 31 \u2013 TEM 35",
+   "active": false
   },
   "0xe1f9468cae6e2865eff8ef7d5a1f29f7c7117291959df1036e682bdd1efbb011:yes": {
    "tier": "poly",
@@ -109767,7 +109777,10 @@
    "first_seen": 1795814251,
    "scans": 2,
    "first_score": 35,
-   "result": null
+   "result": null,
+   "ended": 1795823886,
+   "finalScore": "MEM 31 \u2013 TEM 35",
+   "active": false
   },
   "0x4c7724853a9317b8444e1cce9c7c53dc5be2c8e45aaf880d09a62807c84609d3:yes": {
    "tier": "top",
@@ -110637,7 +110650,11 @@
    "first_seen": 1795818020,
    "scans": 1,
    "first_score": 48,
-   "result": null
+   "result": "L",
+   "graded": 1795823886,
+   "ended": 1795823886,
+   "finalScore": "MEM 31 \u2013 TEM 35",
+   "active": false
   },
   "0x6490af5989e1e70a82691dc3ab463a71149d93a6a60afb1979b1bfd669b2cc96:yes": {
    "tier": "glue",
