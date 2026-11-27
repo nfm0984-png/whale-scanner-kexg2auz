@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795817652,
-  "updatedAt": "Fri Nov 27 \u00b7 2:14 PM PT",
+  "ts": 1795818872,
+  "updatedAt": "Fri Nov 27 \u00b7 2:34 PM PT",
   "picks": [
     {
       "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
@@ -73,6 +73,33 @@
       "game": "Indiana Pacers vs Philadelphia 76ers",
       "startTs": 1795825800,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-PIT15",
+      "yesNo": "No",
+      "side": "Broncos +14.5",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-PIT7",
+      "yesNo": "No",
+      "side": "Broncos +6.5",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLTOTAL-26NOV27DENPIT-39",
+      "yesNo": "No",
+      "side": "Under 38.5",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "total",
       "n": 1
     },
     {
@@ -238,21 +265,30 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLGAME-26NOV29SEASF-SF",
+      "ticker": "KXNHLGAME-26NOV27NYRCHI-NYR",
       "yesNo": "Yes",
-      "side": "49ers",
-      "game": "San Francisco 49ers vs Seattle Seahawks",
-      "startTs": 1795987500,
+      "side": "Rangers",
+      "game": "Chicago Blackhawks vs New York Rangers",
+      "startTs": 1795818600,
       "bt": "moneyline",
       "n": 2
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV29SEASF-SF3",
+      "ticker": "KXNHLGAME-26NOV27NYRCHI-CHI",
+      "yesNo": "Yes",
+      "side": "Blackhawks",
+      "game": "Chicago Blackhawks vs New York Rangers",
+      "startTs": 1795818600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNHLTOTAL-26NOV27NYRCHI-6",
       "yesNo": "No",
-      "side": "Seahawks +2.5",
-      "game": "San Francisco 49ers vs Seattle Seahawks",
-      "startTs": 1795987500,
-      "bt": "spread",
+      "side": "Under 5.5",
+      "game": "Chicago Blackhawks vs New York Rangers",
+      "startTs": 1795818600,
+      "bt": "total",
       "n": 1
     },
     {
@@ -292,24 +328,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNHLTOTAL-26NOV28SJCOL-7",
-      "yesNo": "No",
-      "side": "Under 6.5",
-      "game": "San Jose Sharks vs Vegas Golden Knights",
-      "startTs": 1795813200,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNHLTOTAL-26NOV28SJCOL-6",
-      "yesNo": "Yes",
-      "side": "Over 5.5",
-      "game": "San Jose Sharks vs Vegas Golden Knights",
-      "startTs": 1795813200,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
       "yesNo": "Yes",
       "side": "FUT Esports",
@@ -328,11 +346,38 @@
       "n": 1
     },
     {
+      "ticker": "KXNHLGAME-26NOV27FLAWSH-FLA",
+      "yesNo": "Yes",
+      "side": "Panthers",
+      "game": "Washington Capitals vs Florida Panthers",
+      "startTs": 1795809600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNHLTOTAL-26NOV27FLAWSH-7",
+      "yesNo": "Yes",
+      "side": "Over 6.5",
+      "game": "Washington Capitals vs Florida Panthers",
+      "startTs": 1795809600,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXCS2GAME-26NOV280000TLG2-G2",
       "yesNo": "Yes",
       "side": "G2",
       "game": "Counter-Strike: G2 vs Liquid",
       "startTs": 1795842000,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV29SEASF-SF",
+      "yesNo": "Yes",
+      "side": "49ers",
+      "game": "San Francisco 49ers vs Seattle Seahawks",
+      "startTs": 1795987500,
       "bt": "moneyline",
       "n": 2
     },
@@ -352,24 +397,6 @@
       "game": "Real Madrid vs Alav\u00e9s",
       "startTs": 1795896000,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNHLGAME-26NOV27FLAWSH-WSH",
-      "yesNo": "Yes",
-      "side": "Capitals",
-      "game": "Washington Capitals vs Florida Panthers",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNHLTOTAL-26NOV27FLAWSH-7",
-      "yesNo": "Yes",
-      "side": "Over 6.5",
-      "game": "Washington Capitals vs Florida Panthers",
-      "startTs": 1795809600,
-      "bt": "total",
       "n": 1
     },
     {
@@ -400,21 +427,12 @@
       "n": 2
     },
     {
-      "ticker": "KXNHLGAME-26NOV27NYRCHI-NYR",
+      "ticker": "KXWTACHALLENGERMATCH-26NOV27HERRIE-HER",
       "yesNo": "Yes",
-      "side": "Rangers",
-      "game": "Chicago Blackhawks vs New York Rangers",
-      "startTs": 1795818600,
+      "side": "Alicia Herrero Linana",
+      "game": "Julia Riera vs Alicia Herrero Linana",
+      "startTs": 1795817100,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNHLTOTAL-26NOV27NYRCHI-6",
-      "yesNo": "No",
-      "side": "Under 5.5",
-      "game": "Chicago Blackhawks vs New York Rangers",
-      "startTs": 1795818600,
-      "bt": "total",
       "n": 1
     },
     {
@@ -445,28 +463,28 @@
       "n": 2
     },
     {
-      "ticker": "KXNCAAFSPREAD-26NOV28TXSTUSU-USU14",
-      "yesNo": "Yes",
-      "side": "Utah St. wins by over 13.5 points",
-      "game": "West Virginia vs Utah",
-      "startTs": 1795831200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28TXSTUSU-USU15",
-      "yesNo": "Yes",
-      "side": "Utah St. wins by over 14.5 points",
-      "game": "West Virginia vs Utah",
-      "startTs": 1795831200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXNHLGAME-26NOV28EDMSEA-EDM",
       "yesNo": "Yes",
       "side": "Oilers",
       "game": "Edmonton Oilers vs Seattle Kraken",
+      "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNHLTOTAL-26NOV27LAANA-10",
+      "yesNo": "No",
+      "side": "Under 9.5",
+      "game": "Anaheim Ducks vs Los Angeles Kings",
+      "startTs": 1795813200,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNHLGAME-26NOV27PITBUF-BUF",
+      "yesNo": "Yes",
+      "side": "Sabres",
+      "game": "Buffalo Sabres vs Pittsburgh Penguins",
       "startTs": 1795827600,
       "bt": "moneyline",
       "n": 1
@@ -490,15 +508,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNHLTOTAL-26NOV27LAANA-10",
-      "yesNo": "No",
-      "side": "Under 9.5",
-      "game": "Anaheim Ducks vs Los Angeles Kings",
-      "startTs": 1795813200,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXLALIGAGAME-26NOV30ESPGET-ESP",
       "yesNo": "Yes",
       "side": "RCD Espanyol de Barcelona to win",
@@ -508,20 +517,20 @@
       "n": 1
     },
     {
-      "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
-      "yesNo": "No",
-      "side": "Manchester United FC not to win",
-      "game": "Manchester United FC vs Brentford FC",
-      "startTs": 1795878000,
-      "bt": "moneyline",
+      "ticker": "KXBRASILEIROTOTAL-26NOV27FLUCRU-3",
+      "yesNo": "Yes",
+      "side": "Over 2.5",
+      "game": "Fluminense vs Cruzeiro",
+      "startTs": 1795820400,
+      "bt": "total",
       "n": 1
     },
     {
-      "ticker": "KXNHLGAME-26NOV27PITBUF-BUF",
+      "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
       "yesNo": "Yes",
-      "side": "Sabres",
-      "game": "Buffalo Sabres vs Pittsburgh Penguins",
-      "startTs": 1795827600,
+      "side": "Manchester United FC not to win",
+      "game": "Manchester United FC vs Brentford FC",
+      "startTs": 1795878000,
       "bt": "moneyline",
       "n": 1
     },
