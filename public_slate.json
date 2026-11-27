@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795762272,
-  "updatedAt": "Thu Nov 26 \u00b7 10:51 PM PT",
+  "ts": 1795762582,
+  "updatedAt": "Thu Nov 26 \u00b7 10:56 PM PT",
   "picks": [
     {
       "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
@@ -40,6 +40,15 @@
       "n": 1
     },
     {
+      "ticker": "KXCS2GAME-26NOV270100HEROLVG-HERO",
+      "yesNo": "Yes",
+      "side": "Heroic",
+      "game": "Counter-Strike: Lynn Vision vs Heroic",
+      "startTs": 1795759200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27ATLBOS-BOS",
       "yesNo": "Yes",
       "side": "Celtics",
@@ -72,15 +81,6 @@
       "side": "Deportivo Alav\u00e9s not to win",
       "game": "Real Madrid vs Alav\u00e9s",
       "startTs": 1795896000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV270100HEROLVG-HERO",
-      "yesNo": "Yes",
-      "side": "Heroic",
-      "game": "Counter-Strike: Lynn Vision vs Heroic",
-      "startTs": 1795759200,
       "bt": "moneyline",
       "n": 1
     },
