@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795799807,
-  "updatedAt": "Fri Nov 27 \u00b7 9:16 AM PT",
+  "ts": 1795799967,
+  "updatedAt": "Fri Nov 27 \u00b7 9:19 AM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
@@ -265,6 +265,15 @@
       "n": 3
     },
     {
+      "ticker": "KXNCAAFSPREAD-26NOV27MSSTMISS-MISS17",
+      "yesNo": "Yes",
+      "side": "Ole Miss wins by over 16.5 points",
+      "game": "Mississippi State vs Ole Miss",
+      "startTs": 1795798800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV28RMAALA-RMA",
       "yesNo": "Yes",
       "side": "Real Madrid CF to win",
@@ -387,15 +396,6 @@
       "side": "Almere City FC not to win",
       "game": "Jong FC Utrecht vs Almere City FC",
       "startTs": 1795806000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFGAME-26NOV27TLSAUTSA-UTSA",
-      "yesNo": "Yes",
-      "side": "UTSA",
-      "game": "UTSA Roadrunners vs Tulsa Golden Hurricane",
-      "startTs": 1795798800,
       "bt": "moneyline",
       "n": 1
     },
