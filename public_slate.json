@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795817061,
-  "updatedAt": "Fri Nov 27 \u00b7 2:04 PM PT",
+  "ts": 1795817362,
+  "updatedAt": "Fri Nov 27 \u00b7 2:09 PM PT",
   "picks": [
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-DEN",
@@ -25,6 +25,15 @@
       "ticker": "KXNFLSPREAD-26NOV27DENPIT-PIT7",
       "yesNo": "No",
       "side": "Broncos +6.5",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLSPREAD-26NOV27DENPIT-DEN5",
+      "yesNo": "Yes",
+      "side": "Denver wins by over 4.5 points",
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "spread",
@@ -238,6 +247,24 @@
       "n": 1
     },
     {
+      "ticker": "KXCS2GAME-26NOV280100IMPAST-AST",
+      "yesNo": "Yes",
+      "side": "Astralis",
+      "game": "Counter-Strike: Astralis vs Imperial",
+      "startTs": 1795845600,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV280100IMPAST-IMP",
+      "yesNo": "Yes",
+      "side": "Imperial",
+      "game": "Counter-Strike: Astralis vs Imperial",
+      "startTs": 1795845600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFGAME-26NOV27MINNWIS-WIS",
       "yesNo": "Yes",
       "side": "Wisconsin",
@@ -346,24 +373,6 @@
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV280100IMPAST-AST",
-      "yesNo": "Yes",
-      "side": "Astralis",
-      "game": "Counter-Strike: Astralis vs Imperial",
-      "startTs": 1795845600,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280100IMPAST-IMP",
-      "yesNo": "Yes",
-      "side": "Imperial",
-      "game": "Counter-Strike: Astralis vs Imperial",
-      "startTs": 1795845600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNHLTOTAL-26NOV28SJCOL-7",
       "yesNo": "No",
       "side": "Under 6.5",
@@ -398,15 +407,6 @@
       "startTs": 1795896000,
       "bt": "moneyline",
       "n": 2
-    },
-    {
-      "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
-      "yesNo": "Yes",
-      "side": "Deportivo Alav\u00e9s not to win",
-      "game": "Real Madrid vs Alav\u00e9s",
-      "startTs": 1795896000,
-      "bt": "moneyline",
-      "n": 1
     },
     {
       "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
