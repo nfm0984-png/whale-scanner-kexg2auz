@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795738625,
-  "updatedAt": "Thu Nov 26 \u00b7 4:17 PM PT",
+  "ts": 1795738921,
+  "updatedAt": "Thu Nov 26 \u00b7 4:22 PM PT",
   "picks": [
     {
       "ticker": "KXNFLSPREAD-26NOV26PHIDAL-DAL15",
@@ -225,6 +225,15 @@
       "side": "Clippers",
       "game": "LA Clippers vs New Orleans Pelicans",
       "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXBRASILEIROGAME-26NOV26SPACR-SPA",
+      "yesNo": "Yes",
+      "side": "S\u00e3o Paulo FC to win",
+      "game": "S\u00e3o Paulo FC vs Clube do Remo",
+      "startTs": 1795734000,
       "bt": "moneyline",
       "n": 1
     },
