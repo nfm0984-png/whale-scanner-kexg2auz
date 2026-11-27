@@ -1,21 +1,21 @@
 {
   "source": "whale",
-  "ts": 1795794889,
-  "updatedAt": "Fri Nov 27 \u00b7 7:54 AM PT",
+  "ts": 1795795200,
+  "updatedAt": "Fri Nov 27 \u00b7 8:00 AM PT",
   "picks": [
-    {
-      "ticker": "KXNFLGAME-26NOV27DENPIT-DEN",
-      "yesNo": "Yes",
-      "side": "Broncos",
-      "game": "Pittsburgh Steelers vs Denver Broncos",
-      "startTs": 1795809600,
-      "bt": "moneyline",
-      "n": 2
-    },
     {
       "ticker": "KXNFLGAME-26NOV27DENPIT-PIT",
       "yesNo": "Yes",
       "side": "Steelers",
+      "game": "Pittsburgh Steelers vs Denver Broncos",
+      "startTs": 1795809600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV27DENPIT-DEN",
+      "yesNo": "Yes",
+      "side": "Broncos",
       "game": "Pittsburgh Steelers vs Denver Broncos",
       "startTs": 1795809600,
       "bt": "moneyline",
@@ -193,6 +193,24 @@
       "n": 1
     },
     {
+      "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-TIE",
+      "yesNo": "Yes",
+      "side": "DRAW",
+      "game": "Jong FC Utrecht vs Almere City FC",
+      "startTs": 1795806000,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-ALM",
+      "yesNo": "No",
+      "side": "Almere City FC not to win",
+      "game": "Jong FC Utrecht vs Almere City FC",
+      "startTs": 1795806000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXEERSTEDIVGAME-26NOV27AZOSS-TIE",
       "yesNo": "Yes",
       "side": "DRAW",
@@ -346,13 +364,13 @@
       "n": 1
     },
     {
-      "ticker": "KXEERSTEDIVGAME-26NOV27UTRALM-TIE",
+      "ticker": "KXATPCHALLENGERMATCH-26NOV27MARJUS-JUS",
       "yesNo": "Yes",
-      "side": "DRAW",
-      "game": "Jong FC Utrecht vs Almere City FC",
-      "startTs": 1795806000,
+      "side": "Guido Justo",
+      "game": "Florianopolis: Igor Ribeiro Marcondes vs Guido Justo",
+      "startTs": 1795784700,
       "bt": "moneyline",
-      "n": 2
+      "n": 1
     },
     {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
@@ -635,7 +653,7 @@
     },
     {
       "ticker": "KXBUNDESLIGAGAME-26NOV27SVWBMG-SVW",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "SV Werder Bremen not to win",
       "game": "Werder Bremen vs Borussia M\u00f6nchengladbach",
       "startTs": 1795807800,
