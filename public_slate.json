@@ -1,8 +1,17 @@
 {
   "source": "whale",
-  "ts": 1795745575,
-  "updatedAt": "Thu Nov 26 \u00b7 6:12 PM PT",
+  "ts": 1795751088,
+  "updatedAt": "Thu Nov 26 \u00b7 7:44 PM PT",
   "picks": [
+    {
+      "ticker": "KXNFLGAME-26NOV26KCBUF-BUF",
+      "yesNo": "Yes",
+      "side": "Bills",
+      "game": "Buffalo Bills vs Kansas City Chiefs",
+      "startTs": 1795742400,
+      "bt": "moneyline",
+      "n": 2
+    },
     {
       "ticker": "KXNFLGAME-26NOV26KCBUF-KC",
       "yesNo": "Yes",
@@ -10,34 +19,16 @@
       "game": "Buffalo Bills vs Kansas City Chiefs",
       "startTs": 1795742400,
       "bt": "moneyline",
-      "n": 4
+      "n": 1
     },
     {
-      "ticker": "KXNFLSPREAD-26NOV26KCBUF-BUF3",
-      "yesNo": "No",
-      "side": "Chiefs +2.5",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "spread",
-      "n": 3
-    },
-    {
-      "ticker": "KXNFLSPREAD-26NOV26KCBUF-BUF4",
-      "yesNo": "No",
-      "side": "Chiefs +3.5",
+      "ticker": "KXNFLSPREAD-26NOV26KCBUF-BUF8",
+      "yesNo": "Yes",
+      "side": "Buffalo wins by over 7.5 points",
       "game": "Buffalo Bills vs Kansas City Chiefs",
       "startTs": 1795742400,
       "bt": "spread",
       "n": 1
-    },
-    {
-      "ticker": "KXNFLTOTAL-26NOV26KCBUF-49",
-      "yesNo": "Yes",
-      "side": "Over 48.5",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "total",
-      "n": 2
     },
     {
       "ticker": "KXNFLTOTAL-26NOV26KCBUF-45",
@@ -49,13 +40,13 @@
       "n": 1
     },
     {
-      "ticker": "KXNFLTOTAL-26NOV26KCBUF-51",
+      "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
       "yesNo": "Yes",
-      "side": "Over 50.5",
-      "game": "Buffalo Bills vs Kansas City Chiefs",
-      "startTs": 1795742400,
-      "bt": "total",
-      "n": 1
+      "side": "M80",
+      "game": "Counter-Strike: M80 vs 100 Thieves",
+      "startTs": 1795777200,
+      "bt": "moneyline",
+      "n": 3
     },
     {
       "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
@@ -94,15 +85,6 @@
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV270600100TM80-M80",
-      "yesNo": "Yes",
-      "side": "M80",
-      "game": "Counter-Strike: M80 vs 100 Thieves",
-      "startTs": 1795777200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
       "yesNo": "Yes",
       "side": "Knicks",
@@ -112,75 +94,12 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU15",
+      "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
       "yesNo": "Yes",
-      "side": "Texas Tech wins by over 14.5 points",
-      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
-      "startTs": 1795741200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU14",
-      "yesNo": "Yes",
-      "side": "Texas Tech wins by over 13.5 points",
-      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
-      "startTs": 1795741200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU3",
-      "yesNo": "No",
-      "side": "TCU Horned Frogs +2.5",
-      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
-      "startTs": 1795741200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU4",
-      "yesNo": "No",
-      "side": "TCU Horned Frogs +3.5",
-      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
-      "startTs": 1795741200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU2",
-      "yesNo": "No",
-      "side": "TCU Horned Frogs +1.5",
-      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
-      "startTs": 1795741200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TCU4",
-      "yesNo": "Yes",
-      "side": "TCU wins by over 3.5 points",
-      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
-      "startTs": 1795741200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TCU3",
-      "yesNo": "Yes",
-      "side": "TCU wins by over 2.5 points",
-      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
-      "startTs": 1795741200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TCU2",
-      "yesNo": "Yes",
-      "side": "TCU wins by over 1.5 points",
-      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
-      "startTs": 1795741200,
-      "bt": "spread",
+      "side": "Deportivo Alav\u00e9s not to win",
+      "game": "Real Madrid vs Alav\u00e9s",
+      "startTs": 1795896000,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -202,22 +121,22 @@
       "n": 1
     },
     {
-      "ticker": "KXLIGAMXGAME-26NOV26PACCDG-PAC",
+      "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
       "yesNo": "Yes",
-      "side": "CF Pachuca not to win",
-      "game": "Pachuca vs Guadalajara",
-      "startTs": 1795741200,
+      "side": "Nuggets",
+      "game": "Utah Jazz vs Denver Nuggets",
+      "startTs": 1795833000,
       "bt": "moneyline",
       "n": 1
     },
     {
-      "ticker": "KXLIGAMXTOTAL-26NOV26PACCDG-3",
-      "yesNo": "No",
-      "side": "Under 2.5",
-      "game": "Pachuca vs Guadalajara",
-      "startTs": 1795741200,
-      "bt": "total",
-      "n": 2
+      "ticker": "KXNBASPREAD-26NOV27DENUTA-DEN10",
+      "yesNo": "Yes",
+      "side": "Denver wins by over 9.5 points",
+      "game": "Utah Jazz vs Denver Nuggets",
+      "startTs": 1795833000,
+      "bt": "spread",
+      "n": 1
     },
     {
       "ticker": "KXSERIEAGAME-26NOV27VENBFC-BFC",
@@ -247,15 +166,6 @@
       "n": 2
     },
     {
-      "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
-      "yesNo": "Yes",
-      "side": "Deportivo Alav\u00e9s not to win",
-      "game": "Real Madrid vs Alav\u00e9s",
-      "startTs": 1795896000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
       "yesNo": "Yes",
       "side": "FC Barcelona to win",
@@ -270,6 +180,24 @@
       "side": "Pistons",
       "game": "Detroit Pistons vs Milwaukee Bucks",
       "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27GSWPOR-POR",
+      "yesNo": "Yes",
+      "side": "Trail Blazers",
+      "game": "Portland Trail Blazers vs Golden State Warriors",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
+      "yesNo": "Yes",
+      "side": "Spurs",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
       "bt": "moneyline",
       "n": 1
     },
@@ -319,15 +247,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNBAGAME-26NOV27NOPLAC-LAC",
-      "yesNo": "Yes",
-      "side": "Clippers",
-      "game": "LA Clippers vs New Orleans Pelicans",
-      "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXBUNDESLIGAGAME-26NOV27SVWBMG-SVW",
       "yesNo": "Yes",
       "side": "SV Werder Bremen not to win",
@@ -364,6 +283,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFSPREAD-26NOV26TCUTTU-TTU21",
+      "yesNo": "No",
+      "side": "TCU Horned Frogs +20.5",
+      "game": "Texas Tech Red Raiders vs TCU Horned Frogs",
+      "startTs": 1795741200,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV27BUFFAKR-BUFF8",
       "yesNo": "Yes",
       "side": "Buffalo wins by over 7.5 points",
@@ -378,42 +306,6 @@
       "side": "Como 1907 to win",
       "game": "Como vs Juventus",
       "startTs": 1795981500,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27GSWPOR-POR",
-      "yesNo": "Yes",
-      "side": "Trail Blazers",
-      "game": "Portland Trail Blazers vs Golden State Warriors",
-      "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
-      "yesNo": "Yes",
-      "side": "Spurs",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
-      "yesNo": "Yes",
-      "side": "Nuggets",
-      "game": "Utah Jazz vs Denver Nuggets",
-      "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAMBGAME-26NOV26PITTDEP-DEP",
-      "yesNo": "Yes",
-      "side": "DePaul Blue Demons",
-      "game": "Pittsburgh Panthers vs DePaul Blue Demons",
-      "startTs": 1795737600,
       "bt": "moneyline",
       "n": 1
     }
