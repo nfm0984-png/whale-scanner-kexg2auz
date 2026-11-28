@@ -5334,56 +5334,13 @@ function staleHiddenNote(n: number): string {
 function pricedOutHiddenNote(n: number): string {
   return n ? (n + " priced-out pick" + (n === 1 ? "" : "s") + " hidden") : "";
 }
-// t1146: Golden Picks / Ranked / Coming Up only show picks that pass the Best Double's per-pick
-// quality gates (same capper month/year/sport data the Double uses). The Double tab is unchanged.
-interface GateStats { before: number; after: number; reasons: Record<string, number> }
-const GATE_LABEL: Record<string, string> = {
-  no_price: "no Kalshi price",
-  short_favorite: "priced 90¢ or more",
-  longshot: "priced under 40¢",
-  stale: "line moved more than 6¢ since the capper bet",
-  fun_size: "fun-size bet for the capper",
-  opp_stronger: "stronger cappers on the other side",
-  no_qualifying_capper: "no capper who is up this month and this year, proven in the sport, and High confidence (or 2+ cappers on it)",
-};
-function pickGateWhy(p: UPick, all: UPick[]): string | null {
-  if (p.kind !== "sports") return null;
-  const px = p.view && p.view.price != null ? (p.view.price as number) : null;
-  if (px == null) return "no_price";
-  const net = netOf(p, all);
-  const backers: DoubleBacker[] = (p.backers || []).map((b: UBacker) => {
-    const per = whaleMonthYear(b.wallet);
-    return { name: b.name, wallet: b.wallet, cost: b.cost, size: sizeOf(b.wallet, b.cost, b.avg, p.key, b.size), monthPnl: per.month, yearPnl: per.year, sport: whaleSportFor(b.wallet, p.league) };
-  });
-  const row: DoubleRow = { id: p.key, gameId: p.gameId, label: p.big, game: p.sub, league: p.league, price: px, entry: pickAvgEntry(p), startTs: p.startTs, backers, ownScore: net.own.score, oppScore: net.opp.score };
-  return doubleSkip(row);
-}
-function gatePicks(picks: UPick[], all: UPick[]): { picks: UPick[]; gate: GateStats } {
-  const reasons: Record<string, number> = {};
-  let before = 0;
-  const out = picks.filter((p: UPick) => {
-    if (p.kind !== "sports") return true;
-    before += 1;
-    const why = pickGateWhy(p, all);
-    if (why) { reasons[why] = (reasons[why] || 0) + 1; return false; }
-    return true;
-  });
-  return { picks: out, gate: { before, after: out.filter((p: UPick) => p.kind === "sports").length, reasons } };
-}
-function gateEmptyBody(g: GateStats | undefined, what: string): string {
-  if (!g || !g.before) return "";
-  const top = Object.keys(g.reasons).sort((a, b) => g.reasons[b] - g.reasons[a]).map((k: string) => g.reasons[k] + " " + (GATE_LABEL[k] || k));
-  return g.before + " pick" + (g.before === 1 ? "" : "s") + " " + what + ", but none pass the Double-grade quality gates. Filtered out: " + top.join(" · ") + ". ";
-}
-function hideBoardPicks(all: UPick[], now?: number): { picks: UPick[]; split: number; stale: number; pricedOut: number; gate: GateStats } {
+function hideBoardPicks(all: UPick[], now?: number): { picks: UPick[]; split: number; stale: number; pricedOut: number } {
   const hid = hideSplitPicks(all, now);
   const st = hideStalePicks(hid.picks);
-  const gp = gatePicks(st.picks, all);
-  return { picks: gp.picks, split: hid.hidden, stale: st.stale, pricedOut: st.pricedOut, gate: gp.gate };
+  return { picks: st.picks, split: hid.hidden, stale: st.stale, pricedOut: st.pricedOut };
 }
-function boardHiddenNotes(h: { split: number; stale: number; pricedOut: number; gate?: GateStats }): string {
-  const gN = h.gate ? h.gate.before - h.gate.after : 0;
-  return [splitHiddenNote(h.split), staleHiddenNote(h.stale), pricedOutHiddenNote(h.pricedOut), gN ? (gN + " below Double grade hidden") : ""].filter(Boolean).join(" · ");
+function boardHiddenNotes(h: { split: number; stale: number; pricedOut: number }): string {
+  return [splitHiddenNote(h.split), staleHiddenNote(h.stale), pricedOutHiddenNote(h.pricedOut)].filter(Boolean).join(" · ");
 }
 function rankedLists(all: UPick[]): { list: RankedCard[]; top: RankedCard[]; others: RankedCard[]; small: RankedCard[]; contested: RankedCard[]; total: number } {
   // One list of every qualifying game, best to worst. No top-15 cap. A side whose best capper
@@ -5393,7 +5350,7 @@ function rankedLists(all: UPick[]): { list: RankedCard[]; top: RankedCard[]; oth
   const orcaBoost = (c: RankedCard) => sideOrcaStats(c.main.backers);
   // Ranked: keep every pick. Long-term dollar PnL and leaderboard rank first, veterans above newbies. Last-20 dollar PnL (not raw W-L) is only a tiebreaker.
   const provenOf = (c: RankedCard) => (sideOrcaStats(c.main.backers).proven > 0 ? 1 : 0);
-  const cards = rankedCards(all).slice().sort((a: RankedCard, b: RankedCard) => (provenOf(b) - provenOf(a)) || cardHistoryCmp(a, b) || (Number(isFadingPick(a.main)) - Number(isFadingPick(b.main))) || (Number(b.hasElite) - Number(a.hasElite)) || (Number(orcaBoost(b).consensus) - Number(orcaBoost(a).consensus)) || (orcaBoost(b).lens - orcaBoost(a).lens) || rankCmp(a, b));
+  const cards = rankedCards(all).slice().sort((a: RankedCard, b: RankedCard) => (Number(dgPass(b.main, all)) - Number(dgPass(a.main, all))) || (provenOf(b) - provenOf(a)) || cardHistoryCmp(a, b) || (Number(isFadingPick(a.main)) - Number(isFadingPick(b.main))) || (Number(b.hasElite) - Number(a.hasElite)) || (Number(orcaBoost(b).consensus) - Number(orcaBoost(a).consensus)) || (orcaBoost(b).lens - orcaBoost(a).lens) || rankCmp(a, b));
   const contested = cards.filter((c: RankedCard) => c.contested);
   return { list: cards, top: cards, others: [], small: [], contested, total: cards.length };
 }
@@ -5614,6 +5571,65 @@ function bestDoubleOf(now: number): BestDouble {
   });
   return selectBestDouble(rows);
 }
+// t1146b: Double research on EVERY pick card (Golden / Ranked / Coming Up). Nothing is hidden by it;
+// the Double tab is untouched. Picks that pass every check get a 🎯 Double-grade badge and sort first.
+interface DGCheck { ok: boolean | null; text: string }
+interface DGInfo { pass: boolean; live: boolean; checks: DGCheck[] }
+function dgMoney(n: number): string { return (n >= 0 ? "+" : "-") + kMoney(Math.abs(n)); }
+function dgBackerScore(b: DoubleBacker, several: boolean): number {
+  return (doubleUp(b) ? 4 : 0) + (b.monthPnl != null && b.monthPnl > 0 ? 1 : 0) + (b.yearPnl != null && b.yearPnl > 0 ? 1 : 0) + (doubleProven(b) ? 2 : 0) + ((b.size && b.size.tag === "high") || several ? 1 : 0) - (b.size && b.size.tag === "fun" ? 1 : 0);
+}
+function dgInfoOf(p: UPick, all: UPick[]): DGInfo | null {
+  if (p.kind !== "sports") return null;
+  const px = p.view && p.view.price != null ? (p.view.price as number) : null;
+  const net = netOf(p, all);
+  const backers: DoubleBacker[] = (p.backers || []).map((b: UBacker) => {
+    const per = whaleMonthYear(b.wallet);
+    return { name: b.name, wallet: b.wallet, cost: b.cost, size: sizeOf(b.wallet, b.cost, b.avg, p.key, b.size), monthPnl: per.month, yearPnl: per.year, sport: whaleSportFor(b.wallet, p.league) };
+  });
+  const row: DoubleRow = { id: p.key, gameId: p.gameId, label: p.big, game: p.sub, league: p.league, price: px as number, entry: pickAvgEntry(p), startTs: p.startTs, backers, ownScore: net.own.score, oppScore: net.opp.score };
+  const several = backers.length >= 2;
+  const quals = doubleQualifiers(row);
+  const best: DoubleBacker | undefined = quals[0] || backers.slice().sort((a, b) => dgBackerScore(b, several) - dgBackerScore(a, several))[0];
+  const checks: DGCheck[] = [];
+  const nm = best ? best.name : "Capper";
+  const mOk = !!best && best.monthPnl != null && best.monthPnl > 0;
+  checks.push({ ok: mOk, text: best && best.monthPnl != null ? (nm + (mOk ? " is up this month " : " is not up this month ") + "(" + dgMoney(best.monthPnl) + ")") : "No monthly P&L for this capper" });
+  const yOk = !!best && best.yearPnl != null && best.yearPnl > 0;
+  checks.push({ ok: yOk, text: best && best.yearPnl != null ? ((yOk ? "Up this year " : "Not up this year ") + "(" + dgMoney(best.yearPnl) + ")") : "No yearly P&L for this capper" });
+  const sr = best && best.sport;
+  const pOk = !!best && doubleProven(best);
+  checks.push({ ok: pOk, text: sr ? ((pOk ? "Proven in " : "Not proven in ") + (sr.name || p.league) + ": " + sr.n + " bets, " + sr.w + "–" + sr.l) : "No 5+ bet record in " + (p.league || "this sport") + " yet" });
+  const high = backers.find((b) => b.size && b.size.tag === "high");
+  const fun = doubleFunSize(row);
+  if (high) checks.push({ ok: true, text: high.name + " is betting " + (high.size && high.size.mult != null ? high.size.mult.toFixed(1) + "x" : "well above") + " their usual size" });
+  else if (several) checks.push({ ok: true, text: backers.length + " cappers are on this pick" });
+  else if (fun) checks.push({ ok: false, text: "Fun-size bet for this capper" });
+  else { const mu = best && best.size && best.size.mult != null ? best.size.mult.toFixed(1) + "x" : null; checks.push({ ok: false, text: "Not High confidence" + (mu ? " (" + mu + " their usual size)" : " (no size history)") + ", 1 capper" }); }
+  if (px == null) checks.push({ ok: false, text: "No Kalshi price" });
+  else checks.push({ ok: px >= DOUBLE_MIN_PX && px < DOUBLE_SHORT_PX, text: "Price " + Math.round(px * 100) + "¢" + (px < DOUBLE_MIN_PX ? " is under 40¢ (longshot)" : px >= DOUBLE_SHORT_PX ? " is 90¢ or more (little juice)" : " is inside the 40–89¢ band") });
+  const sl = doubleSlip(px, row.entry);
+  checks.push(sl == null ? { ok: null, text: "Entry price unknown, line move not measured" } : { ok: sl <= DOUBLE_STALE, text: "Line moved " + (sl > 0 ? "+" : "") + sl + "¢ since the cappers bought" + (sl > DOUBLE_STALE ? " (over the 6¢ limit)" : "") });
+  const own = row.ownScore || 0, opp = row.oppScore || 0;
+  checks.push(opp > own ? { ok: false, text: "Stronger cappers are on the other side" } : { ok: true, text: opp > 0 ? "Other side has money, but weaker cappers" : "Nobody notable on the other side" });
+  const live = !!p.live || (p.startTs > 0 && p.startTs <= Math.floor(Date.now() / 1000));
+  return { pass: doubleSkip(row) === null && !live, live, checks };
+}
+function dgPass(p: UPick, all: UPick[]): boolean { const d = dgInfoOf(p, all); return !!(d && d.pass); }
+function dgUnitPass(u: { picks: UPick[] }, all: UPick[]): boolean { const m = bestPickFirst(u.picks, all)[0]; return !!m && dgPass(m, all); }
+function DGChecklist(props: { p: UPick; all?: UPick[] }) {
+  if (!props.all) return null;
+  const dg = dgInfoOf(props.p, props.all);
+  if (!dg) return null;
+  const passed = dg.checks.filter((c: DGCheck) => c.ok === true).length;
+  const counted = dg.checks.filter((c: DGCheck) => c.ok !== null).length;
+  return (
+    <div data-dg-check="1" data-dg-pass={dg.pass ? "1" : "0"} style={{ margin: "8px 0 4px", padding: "8px 10px", borderRadius: 12, background: dg.pass ? "#F5F3FF" : "#FAFAFA", border: "1.5px solid " + (dg.pass ? "#6D28D9" : "#E4E4E7") }}>
+      <div style={{ fontSize: 12, fontWeight: 850, color: dg.pass ? "#4C1D95" : "#52525B", marginBottom: 3 }}>{(dg.pass ? "🎯 Double-grade · " : "Double check · ") + passed + "/" + counted + " pass" + (dg.live ? " · already started" : "")}</div>
+      {dg.checks.map((c: DGCheck, i: number) => <div key={i} style={{ fontSize: 12, lineHeight: "16px", fontWeight: 650, color: c.ok === false ? "#B91C1C" : c.ok === true ? "#166534" : "#71717A" }}>{(c.ok === true ? "✓ " : c.ok === false ? "✗ " : "– ") + c.text}</div>)}
+    </div>
+  );
+}
 function bestDoubleCount(now: number): number { const d = bestDoubleOf(now); return d.legs && d.legs.length === 2 ? 2 : 0; }
 function DoubleLegCard(props: { leg: DoubleLeg; now: number; full?: boolean }) {
   const t = useGrokTheme();
@@ -5695,9 +5711,9 @@ function EliteTab(props: { now: number }) {
   return (
     <>
       <BestDoublePanel now={props.now} variant="banner" />
-      <Section heading={"Ranked · " + L.total} caption={"Best picks first · Orca Proven first · today in PT · after 7pm, + tomorrow" + (hideNote ? " · " + hideNote : "")}>
+      <Section heading={"Ranked · " + L.total + " · " + L.list.filter((c: RankedCard) => dgPass(c.main, all)).length + " 🎯 Double-grade"} caption={"🎯 Double-grade first · Best picks first · Orca Proven first · today in PT · after 7pm, + tomorrow" + (hideNote ? " · " + hideNote : "")}>
       {hideNote ? <div data-splits-hidden="1" style={{ fontSize: 13, fontWeight: 700, color: "#B45309", margin: "0 2px 8px" }}>{hideNote}</div> : null}
-      {L.total === 0 ? <EmptyState title={hid.gate.before ? "Nothing passes the quality gates right now" : "No ranked games right now"} body={(hid.gate.before ? gateEmptyBody(hid.gate, "today with a Kalshi line") : "No tracked capper has a $1,000+ pick with a Kalshi line right now. ") + nextScanLabel(props.now) + "."} /> : null}
+      {L.total === 0 ? <EmptyState title="No ranked games right now" body={"No tracked capper has a $1,000+ pick with a Kalshi line right now. " + nextScanLabel(props.now) + "."} /> : null}
       {L.list.map((c: RankedCard, i: number) => render(c, i))}
       </Section>
     </>
@@ -5946,21 +5962,16 @@ function goldenHitOk(p: UPick, all: UPick[]): boolean {
   }
   return true;
 }
-function goldenPicksRaw(now: number): UPick[] {
+function goldenPicks(now: number): UPick[] {
   const all = allTabPicks(now);
   return all.filter((p: UPick) => !p.live && p.startTs > now && goldenHitOk(p, all));
-}
-function goldenGate(now: number): { picks: UPick[]; gate: GateStats } {
-  return gatePicks(goldenPicksRaw(now), allTabPicks(now));
-}
-function goldenPicks(now: number): UPick[] {
-  return goldenGate(now).picks;
 }
 function goldenUnits(now: number): { id: string; picks: UPick[] }[] {
   const picks = goldenPicks(now).slice().sort((a: UPick, b: UPick) => ((b.view.price || 0) - (a.view.price || 0)) || (a.startTs - b.startTs));
   const units = orderUnits(picks, "start");
+  const allP = allTabPicks(now);
   units.forEach((u) => u.picks.sort((a: UPick, b: UPick) => ((b.view.price || 0) - (a.view.price || 0)) || (a.startTs - b.startTs)));
-  units.sort((a, b) => ((b.picks[0].view.price || 0) - (a.picks[0].view.price || 0)) || (a.picks[0].startTs - b.picks[0].startTs));
+  units.sort((a, b) => (Number(dgPass(b.picks[0], allP)) - Number(dgPass(a.picks[0], allP))) || ((b.picks[0].view.price || 0) - (a.picks[0].view.price || 0)) || (a.picks[0].startTs - b.picks[0].startTs));
   return units;
 }
 function hotUnits(now: number): { id: string; picks: UPick[] }[] { return goldenUnits(now); }
@@ -5968,15 +5979,14 @@ function hotTabCount(now: number): number { return goldenUnits(now).length; }
 function HotWeekTab(props: { now: number }) {
   const all = allTabPicks(props.now);
   const units = goldenUnits(props.now);
-  const gg = goldenGate(props.now);
   const gameN = units.length;
   const pays = units.map((u) => kalshiPayout(u.picks[0])).filter((x) => x < 99);
   const payNote = pays.length ? (Math.min.apply(null, pays) + "–" + Math.max.apply(null, pays) + "x") : "";
   return (
     <>
       <BestDoublePanel now={props.now} variant="banner" />
-      <Section heading={"Golden Picks · " + gameN} caption={"Most likely to hit · Double-grade only · today in PT · after 7pm, + tomorrow" + (payNote ? " · " + payNote : "")}>
-      {units.length === 0 ? <EmptyState title="No Golden picks right now" body={(gg.gate.before ? gateEmptyBody(gg.gate, "fit Golden (pre-game favorite 55–85¢ from an elite-record capper)") : "No elite-record capper has an open pre-game favorite (Kalshi 55–85¢, payout 1.8x or less) right now. ") + nextScanLabel(props.now) + "."} /> : <UnitList units={units} all={all} now={props.now} stake="$2–4" noun="game" showStart showHit rankOf={(id: string) => { const i = units.findIndex((u) => u.id === id); return i >= 0 ? i + 1 : undefined; }} />}
+      <Section heading={"Golden Picks · " + gameN + " · " + units.filter((u) => dgPass(u.picks[0], all)).length + " 🎯 Double-grade"} caption={"🎯 Double-grade first · Most likely to hit · today in PT · after 7pm, + tomorrow" + (payNote ? " · " + payNote : "")}>
+      {units.length === 0 ? <EmptyState title="No Golden picks right now" body={"No elite-record capper has an open pre-game favorite (Kalshi 55–85¢, payout 1.8x or less) right now. " + nextScanLabel(props.now) + "."} /> : <UnitList units={units} all={all} now={props.now} stake="$2–4" noun="game" showStart showHit rankOf={(id: string) => { const i = units.findIndex((u) => u.id === id); return i >= 0 ? i + 1 : undefined; }} />}
       </Section>
     </>
   );
@@ -6464,7 +6474,7 @@ function SportBreakdown(props: { wallet: string; league?: string | null }) {
     </div>
   );
 }
-function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNode; sourceTags?: boolean; opp?: UPick[]; stakeLine?: string; rankNo?: number; net?: NetInfo; hideStake?: boolean; hidePricePills?: boolean }) {
+function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNode; sourceTags?: boolean; opp?: UPick[]; stakeLine?: string; rankNo?: number; net?: NetInfo; hideStake?: boolean; hidePricePills?: boolean; all?: UPick[] }) {
   const t = useGrokTheme();
   const p = props.p;
   const v = p.view;
@@ -6534,6 +6544,7 @@ function UCard(props: { p: UPick; now: number; stake: string; moreRow?: ReactNod
             </div>
           ))}
         </details>
+        <DGChecklist p={p} all={props.all} />
       </div>
     </div>
   );
@@ -6629,7 +6640,7 @@ function GameBlock(props: { u: { id: string; picks: UPick[] }; now: number; stak
   return (
     <div data-game-block={props.u.id} data-contested={contested ? "1" : undefined} style={contested ? { border: "2.5px solid #EA580C", borderRadius: 20, padding: "4px 8px 6px", background: "#FFF7ED", margin: "8px 0 12px" } : undefined}>
       {props.showStart || props.rankNo || props.showHit ? <GameHeader p={main} now={props.now} rankNo={props.rankNo} rec={props.rec} cappers={props.cappers} net={net} hitLabel={props.showHit ? hitLabelOf(main) : null} /> : null}
-      <UCard p={main} opp={props.all ? oppositeOf(main, props.all) : undefined} now={props.now} stake={props.hideStake ? "" : props.stake} hideStake={props.hideStake} hidePricePills={props.hideStake} net={net} moreRow={rest.length ? <MoreBetsRow noun={props.noun} n={rest.length} open={open} onToggle={() => setOpen(!open)} /> : undefined} />
+      <UCard p={main} all={props.all} opp={props.all ? oppositeOf(main, props.all) : undefined} now={props.now} stake={props.hideStake ? "" : props.stake} hideStake={props.hideStake} hidePricePills={props.hideStake} net={net} moreRow={rest.length ? <MoreBetsRow noun={props.noun} n={rest.length} open={open} onToggle={() => setOpen(!open)} /> : undefined} />
       {open && rest.length ? (
         <div data-game-more="1" style={{ marginLeft: 10, paddingLeft: 8, borderLeft: "3px solid " + BRAND, marginBottom: 10 }}>
           {groups.map((g) => (
@@ -6731,7 +6742,7 @@ function TodayCard(props: { all: UPick[]; now: number }) {
         <div style={{ fontSize: 13, fontWeight: 650, opacity: 0.9, marginTop: 4 }}>{"One pick per game, taken from uncontested Ranked games (best net score first). Safer payouts (1.8x or less) first, nothing paying 3x or more. Contested games — ones with heavy opposition — are left off this card." + (freshN ? " " + freshN + " fresh." : "")}</div>
       </div>
       {card.picks.length === 0 ? <EmptyState title="No picks fit the card right now" body={"Nothing upcoming pays under 3x with tracked cappers on the same side. The Ranked games are below. " + nextScanLabel(props.now) + "."} /> : card.picks.map((c: CardPick, i: number) => (
-        <UCard key={"card-" + c.p.key} p={c.p} opp={oppositeOf(c.p, props.all)} now={props.now} stake={"$" + c.stake} stakeLine={"$" + c.stake + " · total $" + card.total + " of $" + CARD_BUDGET} rankNo={i + 1} net={netOf(c.p, props.all)} />
+        <UCard key={"card-" + c.p.key} p={c.p} all={props.all} opp={oppositeOf(c.p, props.all)} now={props.now} stake={"$" + c.stake} stakeLine={"$" + c.stake + " · total $" + card.total + " of $" + CARD_BUDGET} rankNo={i + 1} net={netOf(c.p, props.all)} />
       ))}
       <div style={{ fontSize: 12, fontWeight: 650, color: t.text.tertiary, margin: "2px 2px 0" }}>{"Suggested stakes only. Nothing is placed for you."}</div>
     </div>
@@ -6750,8 +6761,9 @@ function CombinedList(props: { now: number; mode: "rank" | "start" }) {
   const liveN = picks.filter((p: UPick) => p.live).length;
   const start = props.mode === "start";
   // Pure schedule: games that already started first, then upcoming, soonest to latest.
-  const liveUnits = start ? units.filter((u) => u.picks[0].kind === "sports" && u.picks[0].live) : [];
-  const upUnits = start ? units.filter((u) => !(u.picks[0].kind === "sports" && u.picks[0].live)) : units;
+  const dgFirst = (a: { picks: UPick[] }, b: { picks: UPick[] }) => Number(dgUnitPass(b, picks)) - Number(dgUnitPass(a, picks));
+  const liveUnits = start ? units.filter((u) => u.picks[0].kind === "sports" && u.picks[0].live).sort(dgFirst) : [];
+  const upUnits = start ? units.filter((u) => !(u.picks[0].kind === "sports" && u.picks[0].live)).sort(dgFirst) : units;
   const upPickN = upUnits.reduce((n: number, u) => n + u.picks.length, 0);
   const rankFn = (id: string) => rankOf[id];
   const head = (attr: string, text: string) => <div data-all-today={attr === "up" ? "1" : undefined} data-live-head={attr === "live" ? "1" : undefined} style={{ fontSize: 22, fontWeight: 900, margin: "10px 2px 2px" }}>{text}</div>;
@@ -6759,7 +6771,8 @@ function CombinedList(props: { now: number; mode: "rank" | "start" }) {
     <div data-combined-list={props.mode}>
       <div data-combined-summary="1" style={{ fontSize: 14, fontWeight: 750, color: "#52525B", margin: "2px 2px 12px" }}>{picks.length + " picks · " + units.length + " games · " + Object.keys(cappers).length + " cappers" + (liveN ? " · " + liveN + " live" : "")}</div>
       {splitNote ? <div data-splits-hidden="1" style={{ fontSize: 13, fontWeight: 700, color: "#B45309", margin: "0 2px 8px" }}>{splitNote}</div> : null}
-      {picks.length === 0 ? <EmptyState title={hid.gate.before ? "Nothing passes the quality gates right now" : "No picks from tracked cappers yet"} body={(hid.gate.before ? gateEmptyBody(hid.gate, "on the slate") : "Nothing open from tracked cappers right now. ") + nextScanLabel(props.now) + "."} /> : null}
+      {picks.length === 0 ? <EmptyState title="No picks from tracked cappers yet" body={"Nothing open from tracked cappers right now. " + nextScanLabel(props.now) + "."} /> : null}
+      {start ? <div data-dg-count="1" style={{ fontSize: 13, fontWeight: 750, color: "#4C1D95", margin: "0 2px 6px" }}>{"🎯 " + units.filter((u) => dgUnitPass(u, picks)).length + " Double-grade game(s) shown first. Every card shows its Double check."}</div> : null}
       {start && liveUnits.length ? head("live", "Already started (" + liveUnits.length + ")") : null}
       {start && liveUnits.length ? <UnitList units={liveUnits} all={picks} now={props.now} stake="$2–4" noun="game" showStart rankOf={rankFn} /> : null}
       {start && picks.length ? head("up", "Upcoming (" + upPickN + ")") : null}
