@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795831462,
-  "updatedAt": "Fri Nov 27 \u00b7 6:04 PM PT",
+  "ts": 1795832767,
+  "updatedAt": "Fri Nov 27 \u00b7 6:26 PM PT",
   "picks": [
     {
       "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
@@ -10,7 +10,7 @@
       "game": "New York Knicks vs Miami Heat",
       "startTs": 1795824000,
       "bt": "moneyline",
-      "n": 3
+      "n": 4
     },
     {
       "ticker": "KXNBASPREAD-26NOV27MIANYK-NYK4",
@@ -31,15 +31,6 @@
       "n": 3
     },
     {
-      "ticker": "KXNBASPREAD-26NOV27MIANYK-MIA12",
-      "yesNo": "Yes",
-      "side": "Miami wins by over 11.5 points",
-      "game": "New York Knicks vs Miami Heat",
-      "startTs": 1795824000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXNBATOTAL-26NOV27MIANYK-212",
       "yesNo": "No",
       "side": "Under 211.5",
@@ -58,48 +49,48 @@
       "n": 1
     },
     {
-      "ticker": "KXNBATOTAL-26NOV27MIANYK-218",
-      "yesNo": "No",
-      "side": "Under 217.5",
-      "game": "New York Knicks vs Miami Heat",
-      "startTs": 1795824000,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27PHIIND-IND",
+      "ticker": "KXNBAGAME-26NOV27DALPHX-DAL",
       "yesNo": "Yes",
-      "side": "Pacers",
-      "game": "Indiana Pacers vs Philadelphia 76ers",
-      "startTs": 1795825800,
+      "side": "Mavericks",
+      "game": "Phoenix Suns vs Dallas Mavericks",
+      "startTs": 1795831200,
       "bt": "moneyline",
       "n": 1
     },
     {
-      "ticker": "KXNBASPREAD-26NOV27PHIIND-PHI4",
-      "yesNo": "No",
-      "side": "Pacers +3.5",
-      "game": "Indiana Pacers vs Philadelphia 76ers",
-      "startTs": 1795825800,
+      "ticker": "KXNBAGAME-26NOV27DALPHX-PHX",
+      "yesNo": "Yes",
+      "side": "Suns",
+      "game": "Phoenix Suns vs Dallas Mavericks",
+      "startTs": 1795831200,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27DALPHX-PHX3",
+      "yesNo": "Yes",
+      "side": "Phoenix wins by over 2.5 points",
+      "game": "Phoenix Suns vs Dallas Mavericks",
+      "startTs": 1795831200,
       "bt": "spread",
       "n": 1
     },
     {
-      "ticker": "KXNBATOTAL-26NOV27PHIIND-229",
+      "ticker": "KXNBASPREAD-26NOV27DALPHX-PHX4",
       "yesNo": "Yes",
-      "side": "Over 228.5",
-      "game": "Indiana Pacers vs Philadelphia 76ers",
-      "startTs": 1795825800,
-      "bt": "total",
-      "n": 4
+      "side": "Phoenix wins by over 3.5 points",
+      "game": "Phoenix Suns vs Dallas Mavericks",
+      "startTs": 1795831200,
+      "bt": "spread",
+      "n": 1
     },
     {
-      "ticker": "KXNBATOTAL-26NOV27PHIIND-213",
-      "yesNo": "No",
-      "side": "Under 212.5",
-      "game": "Indiana Pacers vs Philadelphia 76ers",
-      "startTs": 1795825800,
-      "bt": "total",
+      "ticker": "KXNBASPREAD-26NOV27DALPHX-PHX2",
+      "yesNo": "Yes",
+      "side": "Phoenix wins by over 1.5 points",
+      "game": "Phoenix Suns vs Dallas Mavericks",
+      "startTs": 1795831200,
+      "bt": "spread",
       "n": 1
     },
     {
@@ -166,60 +157,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNBAGAME-26NOV27DALPHX-DAL",
-      "yesNo": "Yes",
-      "side": "Mavericks",
-      "game": "Phoenix Suns vs Dallas Mavericks",
-      "startTs": 1795831200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27DALPHX-PHX3",
-      "yesNo": "No",
-      "side": "Mavericks +2.5",
-      "game": "Phoenix Suns vs Dallas Mavericks",
-      "startTs": 1795831200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27DALPHX-PHX3",
-      "yesNo": "Yes",
-      "side": "Phoenix wins by over 2.5 points",
-      "game": "Phoenix Suns vs Dallas Mavericks",
-      "startTs": 1795831200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27BKNTOR-BKN",
-      "yesNo": "Yes",
-      "side": "Nets",
-      "game": "Toronto Raptors vs Brooklyn Nets",
-      "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27BKNTOR-TOR10",
-      "yesNo": "No",
-      "side": "Nets +9.5",
-      "game": "Toronto Raptors vs Brooklyn Nets",
-      "startTs": 1795825800,
-      "bt": "spread",
-      "n": 3
-    },
-    {
-      "ticker": "KXNBATOTAL-26NOV27BKNTOR-221",
-      "yesNo": "No",
-      "side": "Under 220.5",
-      "game": "Toronto Raptors vs Brooklyn Nets",
-      "startTs": 1795825800,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
       "yesNo": "Yes",
       "side": "Manchester United FC to win",
@@ -230,7 +167,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Manchester United FC not to win",
       "game": "Manchester United FC vs Brentford FC",
       "startTs": 1795878000,
@@ -239,12 +176,75 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-BRE",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Brentford FC not to win",
       "game": "Manchester United FC vs Brentford FC",
       "startTs": 1795878000,
       "bt": "moneyline",
       "n": 2
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
+      "yesNo": "Yes",
+      "side": "Nuggets",
+      "game": "Utah Jazz vs Denver Nuggets",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27DENUTA-DEN11",
+      "yesNo": "No",
+      "side": "Jazz +10.5",
+      "game": "Utah Jazz vs Denver Nuggets",
+      "startTs": 1795833000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBATOTAL-26NOV27DENUTA-235",
+      "yesNo": "No",
+      "side": "Under 234.5",
+      "game": "Utah Jazz vs Denver Nuggets",
+      "startTs": 1795833000,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFGAME-26NOV28UABUNT-UNT",
+      "yesNo": "Yes",
+      "side": "Texas",
+      "game": "Texas vs Texas A&M",
+      "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV28TXSTUSU-TXST11",
+      "yesNo": "Yes",
+      "side": "Texas St. wins by over 10.5 points",
+      "game": "Texas vs Texas A&M",
+      "startTs": 1795825800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV28TXSTUSU-TXST15",
+      "yesNo": "Yes",
+      "side": "Texas St. wins by over 14.5 points",
+      "game": "Texas vs Texas A&M",
+      "startTs": 1795825800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV28TXSTUSU-TXST17",
+      "yesNo": "Yes",
+      "side": "Texas St. wins by over 16.5 points",
+      "game": "Texas vs Texas A&M",
+      "startTs": 1795825800,
+      "bt": "spread",
+      "n": 1
     },
     {
       "ticker": "KXMLSGAME-26NOV27CLBMIA-MIA",
@@ -289,6 +289,123 @@
       "game": "Columbus Crew vs Inter Miami CF",
       "startTs": 1795827600,
       "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27NOPLAC-NOP",
+      "yesNo": "Yes",
+      "side": "Pelicans",
+      "game": "LA Clippers vs New Orleans Pelicans",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27NOPLAC-LAC",
+      "yesNo": "Yes",
+      "side": "Clippers",
+      "game": "LA Clippers vs New Orleans Pelicans",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27MILDET-MIL",
+      "yesNo": "Yes",
+      "side": "Bucks",
+      "game": "Detroit Pistons vs Milwaukee Bucks",
+      "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27MILDET-DET9",
+      "yesNo": "No",
+      "side": "Bucks +8.5",
+      "game": "Detroit Pistons vs Milwaukee Bucks",
+      "startTs": 1795825800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27MILDET-DET11",
+      "yesNo": "No",
+      "side": "Bucks +10.5",
+      "game": "Detroit Pistons vs Milwaukee Bucks",
+      "startTs": 1795825800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27MILDET-DET12",
+      "yesNo": "No",
+      "side": "Bucks +11.5",
+      "game": "Detroit Pistons vs Milwaukee Bucks",
+      "startTs": 1795825800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBATOTAL-26NOV27MILDET-219",
+      "yesNo": "Yes",
+      "side": "Over 218.5",
+      "game": "Detroit Pistons vs Milwaukee Bucks",
+      "startTs": 1795825800,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27BKNTOR-TOR10",
+      "yesNo": "No",
+      "side": "Nets +9.5",
+      "game": "Toronto Raptors vs Brooklyn Nets",
+      "startTs": 1795825800,
+      "bt": "spread",
+      "n": 3
+    },
+    {
+      "ticker": "KXNBATOTAL-26NOV27BKNTOR-221",
+      "yesNo": "No",
+      "side": "Under 220.5",
+      "game": "Toronto Raptors vs Brooklyn Nets",
+      "startTs": 1795825800,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
+      "yesNo": "Yes",
+      "side": "FUT Esports",
+      "game": "Counter-Strike: FUT Esports vs FlyQuest",
+      "startTs": 1795838400,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FLY",
+      "yesNo": "Yes",
+      "side": "FlyQuest",
+      "game": "Counter-Strike: FUT Esports vs FlyQuest",
+      "startTs": 1795838400,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV280100IMPAST-AST",
+      "yesNo": "Yes",
+      "side": "Astralis",
+      "game": "Counter-Strike: Astralis vs Imperial",
+      "startTs": 1795845600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV280100IMPAST-IMP",
+      "yesNo": "Yes",
+      "side": "Imperial",
+      "game": "Counter-Strike: Astralis vs Imperial",
+      "startTs": 1795845600,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -337,159 +454,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNBATOTAL-26NOV27MEMMIN-220",
-      "yesNo": "Yes",
-      "side": "Over 219.5",
-      "game": "Minnesota Timberwolves vs Memphis Grizzlies",
-      "startTs": 1795829400,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFGAME-26NOV28UABUNT-UNT",
-      "yesNo": "Yes",
-      "side": "Texas",
-      "game": "Texas vs Texas A&M",
-      "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28TXSTUSU-TXST11",
-      "yesNo": "Yes",
-      "side": "Texas St. wins by over 10.5 points",
-      "game": "Texas vs Texas A&M",
-      "startTs": 1795825800,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28TXSTUSU-TXST15",
-      "yesNo": "Yes",
-      "side": "Texas St. wins by over 14.5 points",
-      "game": "Texas vs Texas A&M",
-      "startTs": 1795825800,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
-      "yesNo": "Yes",
-      "side": "Nuggets",
-      "game": "Utah Jazz vs Denver Nuggets",
-      "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27DENUTA-DEN11",
-      "yesNo": "No",
-      "side": "Jazz +10.5",
-      "game": "Utah Jazz vs Denver Nuggets",
-      "startTs": 1795833000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
-      "yesNo": "Yes",
-      "side": "FUT Esports",
-      "game": "Counter-Strike: FUT Esports vs FlyQuest",
-      "startTs": 1795838400,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FLY",
-      "yesNo": "Yes",
-      "side": "FlyQuest",
-      "game": "Counter-Strike: FUT Esports vs FlyQuest",
-      "startTs": 1795838400,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27MILDET-MIL",
-      "yesNo": "Yes",
-      "side": "Bucks",
-      "game": "Detroit Pistons vs Milwaukee Bucks",
-      "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27MILDET-DET",
-      "yesNo": "Yes",
-      "side": "Pistons",
-      "game": "Detroit Pistons vs Milwaukee Bucks",
-      "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27MILDET-DET11",
-      "yesNo": "Yes",
-      "side": "Detroit wins by over 10.5 points",
-      "game": "Detroit Pistons vs Milwaukee Bucks",
-      "startTs": 1795825800,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBATOTAL-26NOV27MILDET-219",
-      "yesNo": "Yes",
-      "side": "Over 218.5",
-      "game": "Detroit Pistons vs Milwaukee Bucks",
-      "startTs": 1795825800,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27ATLBOS-BOS10",
-      "yesNo": "No",
-      "side": "Hawks +9.5",
-      "game": "Boston Celtics vs Atlanta Hawks",
-      "startTs": 1795827600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27ATLBOS-BOS9",
-      "yesNo": "No",
-      "side": "Hawks +8.5",
-      "game": "Boston Celtics vs Atlanta Hawks",
-      "startTs": 1795827600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27ATLBOS-BOS18",
-      "yesNo": "No",
-      "side": "Hawks +17.5",
-      "game": "Boston Celtics vs Atlanta Hawks",
-      "startTs": 1795827600,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280100IMPAST-AST",
-      "yesNo": "Yes",
-      "side": "Astralis",
-      "game": "Counter-Strike: Astralis vs Imperial",
-      "startTs": 1795845600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280100IMPAST-IMP",
-      "yesNo": "Yes",
-      "side": "Imperial",
-      "game": "Counter-Strike: Astralis vs Imperial",
-      "startTs": 1795845600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNHLGAME-26NOV28EDMSEA-EDM",
       "yesNo": "Yes",
       "side": "Oilers",
@@ -508,6 +472,15 @@
       "n": 2
     },
     {
+      "ticker": "KXNHLGAME-26NOV27PITBUF-BUF",
+      "yesNo": "Yes",
+      "side": "Sabres",
+      "game": "Buffalo Sabres vs Pittsburgh Penguins",
+      "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV28RMAALA-RMA",
       "yesNo": "Yes",
       "side": "Real Madrid CF to win",
@@ -515,15 +488,6 @@
       "startTs": 1795896000,
       "bt": "moneyline",
       "n": 2
-    },
-    {
-      "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
-      "yesNo": "Yes",
-      "side": "Deportivo Alav\u00e9s not to win",
-      "game": "Real Madrid vs Alav\u00e9s",
-      "startTs": 1795896000,
-      "bt": "moneyline",
-      "n": 1
     },
     {
       "ticker": "KXCS2GAME-26NOV280000EFONE-ONE",
@@ -544,29 +508,11 @@
       "n": 1
     },
     {
-      "ticker": "KXNHLGAME-26NOV27PITBUF-BUF",
-      "yesNo": "Yes",
-      "side": "Sabres",
-      "game": "Buffalo Sabres vs Pittsburgh Penguins",
-      "startTs": 1795827600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNFLGAME-26NOV29TENJAC-JAC",
       "yesNo": "Yes",
       "side": "Jaguars",
       "game": "Jacksonville Jaguars vs Tennessee Titans",
       "startTs": 1795975200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27NOPLAC-NOP",
-      "yesNo": "Yes",
-      "side": "Pelicans",
-      "game": "LA Clippers vs New Orleans Pelicans",
-      "startTs": 1795833000,
       "bt": "moneyline",
       "n": 1
     },
@@ -598,12 +544,21 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFTOTAL-26NOV27WVUUTAH-66",
+      "ticker": "KXNBASPREAD-26NOV27ATLBOS-BOS10",
       "yesNo": "No",
-      "side": "Under 65.5",
-      "game": "Utah Utes vs West Virginia Mountaineers",
-      "startTs": 1795831200,
-      "bt": "total",
+      "side": "Hawks +9.5",
+      "game": "Boston Celtics vs Atlanta Hawks",
+      "startTs": 1795827600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27ATLBOS-BOS9",
+      "yesNo": "No",
+      "side": "Hawks +8.5",
+      "game": "Boston Celtics vs Atlanta Hawks",
+      "startTs": 1795827600,
+      "bt": "spread",
       "n": 1
     },
     {
@@ -634,11 +589,38 @@
       "n": 1
     },
     {
+      "ticker": "KXMLSGAME-26NOV27RSLVAN-RSL",
+      "yesNo": "Yes",
+      "side": "Real Salt Lake to win",
+      "game": "Real Salt Lake vs Vancouver Whitecaps",
+      "startTs": 1795834800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXMLSGAME-26NOV27RSLVAN-VAN",
+      "yesNo": "Yes",
+      "side": "Vancouver Whitecaps FC not to win",
+      "game": "Real Salt Lake vs Vancouver Whitecaps",
+      "startTs": 1795834800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV28UABUNT-UNT4",
       "yesNo": "Yes",
       "side": "North Texas wins by over 3.5 points",
       "game": "UAB vs North Texas",
       "startTs": 1795899600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27PHIIND-PHI4",
+      "yesNo": "No",
+      "side": "Pacers +3.5",
+      "game": "Indiana Pacers vs Philadelphia 76ers",
+      "startTs": 1795825800,
       "bt": "spread",
       "n": 1
     },
