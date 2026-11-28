@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795841037,
-  "updatedAt": "Fri Nov 27 \u00b7 8:43 PM PT",
+  "ts": 1795841348,
+  "updatedAt": "Fri Nov 27 \u00b7 8:49 PM PT",
   "picks": [
     {
       "ticker": "KXNBAGAME-26NOV27LALSAS-LAL",
@@ -31,21 +31,21 @@
       "n": 2
     },
     {
-      "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
+      "ticker": "KXNBAGAME-26NOV27NOPLAC-NOP",
       "yesNo": "Yes",
-      "side": "Nuggets",
-      "game": "Utah Jazz vs Denver Nuggets",
+      "side": "Pelicans",
+      "game": "LA Clippers vs New Orleans Pelicans",
       "startTs": 1795833000,
       "bt": "moneyline",
-      "n": 1
+      "n": 2
     },
     {
-      "ticker": "KXNBAGAME-26NOV27DENUTA-UTA",
-      "yesNo": "Yes",
-      "side": "Jazz",
-      "game": "Utah Jazz vs Denver Nuggets",
+      "ticker": "KXNBASPREAD-26NOV27NOPLAC-NOP5",
+      "yesNo": "No",
+      "side": "Clippers +4.5",
+      "game": "LA Clippers vs New Orleans Pelicans",
       "startTs": 1795833000,
-      "bt": "moneyline",
+      "bt": "spread",
       "n": 1
     },
     {
@@ -76,22 +76,31 @@
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
+      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FLY",
       "yesNo": "Yes",
-      "side": "FUT Esports",
+      "side": "FlyQuest",
       "game": "Counter-Strike: FUT Esports vs FlyQuest",
       "startTs": 1795838400,
       "bt": "moneyline",
       "n": 2
     },
     {
-      "ticker": "KXNBASPREAD-26NOV27NOPLAC-NOP5",
-      "yesNo": "No",
-      "side": "Clippers +4.5",
-      "game": "LA Clippers vs New Orleans Pelicans",
-      "startTs": 1795833000,
-      "bt": "spread",
+      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
+      "yesNo": "Yes",
+      "side": "FUT Esports",
+      "game": "Counter-Strike: FUT Esports vs FlyQuest",
+      "startTs": 1795838400,
+      "bt": "moneyline",
       "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV272300LVGMGLZ-LVG",
+      "yesNo": "Yes",
+      "side": "Lynn Vision",
+      "game": "Counter-Strike: TheMongolz vs Lynn Vision",
+      "startTs": 1795838400,
+      "bt": "moneyline",
+      "n": 3
     },
     {
       "ticker": "KXNFLGAME-26NOV29SEASF-SF",
@@ -193,12 +202,12 @@
       "n": 1
     },
     {
-      "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
-      "yesNo": "Yes",
-      "side": "Nuggets",
+      "ticker": "KXNBASPREAD-26NOV27DENUTA-DEN11",
+      "yesNo": "No",
+      "side": "Jazz +10.5",
       "game": "Utah Jazz vs Denver Nuggets",
       "startTs": 1795833000,
-      "bt": "moneyline",
+      "bt": "spread",
       "n": 1
     },
     {
@@ -334,6 +343,15 @@
       "game": "FC Seoul vs Daejeon Hana Citizen FC",
       "startTs": 1795842000,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV27WVUUTAH-UTAH25",
+      "yesNo": "No",
+      "side": "West Virginia +24.5",
+      "game": "Utah Utes vs West Virginia Mountaineers",
+      "startTs": 1795831200,
+      "bt": "spread",
       "n": 1
     },
     {
