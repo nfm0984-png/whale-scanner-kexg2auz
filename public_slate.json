@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795876034,
-  "updatedAt": "Sat Nov 28 \u00b7 6:27 AM PT",
+  "ts": 1795876341,
+  "updatedAt": "Sat Nov 28 \u00b7 6:32 AM PT",
   "picks": [
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -31,13 +31,13 @@
       "n": 1
     },
     {
-      "ticker": "KXBUNDESLIGATOTAL-26NOV28HSVBMU-4",
+      "ticker": "KXCS2GAME-26NOV280730PVFLY-FLY",
       "yesNo": "Yes",
-      "side": "Over 3.5",
-      "game": "Hamburger SV vs FC Bayern M\u00fcnchen - More Markets",
-      "startTs": 1795876200,
-      "bt": "total",
-      "n": 3
+      "side": "FlyQuest",
+      "game": "Counter-Strike: FlyQuest vs PVISION",
+      "startTs": 1795869000,
+      "bt": "moneyline",
+      "n": 2
     },
     {
       "ticker": "KXCS2GAME-26NOV280730PVFLY-PV",
@@ -46,16 +46,16 @@
       "game": "Counter-Strike: FlyQuest vs PVISION",
       "startTs": 1795869000,
       "bt": "moneyline",
-      "n": 4
+      "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV280730PVFLY-FLY",
+      "ticker": "KXBUNDESLIGATOTAL-26NOV28HSVBMU-4",
       "yesNo": "Yes",
-      "side": "FlyQuest",
-      "game": "Counter-Strike: FlyQuest vs PVISION",
-      "startTs": 1795869000,
-      "bt": "moneyline",
-      "n": 1
+      "side": "Over 3.5",
+      "game": "Hamburger SV vs FC Bayern M\u00fcnchen - More Markets",
+      "startTs": 1795876200,
+      "bt": "total",
+      "n": 3
     },
     {
       "ticker": "KXLALIGAGAME-26NOV28RMAALA-RMA",
@@ -139,24 +139,6 @@
       "n": 1
     },
     {
-      "ticker": "KXSERIEAGAME-26NOV28FROPAR-FRO",
-      "yesNo": "No",
-      "side": "Frosinone Calcio not to win",
-      "game": "Frosinone vs Parma",
-      "startTs": 1795874400,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXSERIEATOTAL-26NOV28FROPAR-4",
-      "yesNo": "Yes",
-      "side": "Over 3.5",
-      "game": "Frosinone vs Parma",
-      "startTs": 1795874400,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXSERIEAGAME-26NOV28TORLAZ-LAZ",
       "yesNo": "Yes",
       "side": "SS Lazio to win",
@@ -217,6 +199,15 @@
       "game": "South Carolina vs Clemson",
       "startTs": 1795896000,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXSERIEATOTAL-26NOV28FROPAR-4",
+      "yesNo": "Yes",
+      "side": "Over 3.5",
+      "game": "Frosinone vs Parma",
+      "startTs": 1795874400,
+      "bt": "total",
       "n": 1
     },
     {
