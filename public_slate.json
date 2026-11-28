@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795824307,
-  "updatedAt": "Fri Nov 27 \u00b7 4:05 PM PT",
+  "ts": 1795824576,
+  "updatedAt": "Fri Nov 27 \u00b7 4:09 PM PT",
   "picks": [
     {
       "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
@@ -37,7 +37,7 @@
       "game": "New York Knicks vs Miami Heat",
       "startTs": 1795824000,
       "bt": "spread",
-      "n": 1
+      "n": 2
     },
     {
       "ticker": "KXNBASPREAD-26NOV27MIANYK-NYK3",
@@ -58,6 +58,15 @@
       "n": 4
     },
     {
+      "ticker": "KXNBATOTAL-26NOV27MIANYK-224",
+      "yesNo": "No",
+      "side": "Under 223.5",
+      "game": "New York Knicks vs Miami Heat",
+      "startTs": 1795824000,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27PHIIND-PHI",
       "yesNo": "Yes",
       "side": "76ers",
@@ -68,17 +77,17 @@
     },
     {
       "ticker": "KXNBASPREAD-26NOV27PHIIND-PHI4",
-      "yesNo": "Yes",
-      "side": "Philadelphia wins by over 3.5 points",
+      "yesNo": "No",
+      "side": "Pacers +3.5",
       "game": "Indiana Pacers vs Philadelphia 76ers",
       "startTs": 1795825800,
       "bt": "spread",
       "n": 1
     },
     {
-      "ticker": "KXNBASPREAD-26NOV27PHIIND-PHI4",
+      "ticker": "KXNBASPREAD-26NOV27PHIIND-PHI5",
       "yesNo": "No",
-      "side": "Pacers +3.5",
+      "side": "Pacers +4.5",
       "game": "Indiana Pacers vs Philadelphia 76ers",
       "startTs": 1795825800,
       "bt": "spread",
@@ -112,6 +121,60 @@
       "n": 1
     },
     {
+      "ticker": "KXMLSGAME-26NOV27CLBMIA-MIA",
+      "yesNo": "Yes",
+      "side": "Inter Miami CF to win",
+      "game": "Columbus Crew vs Inter Miami CF",
+      "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXMLSGAME-26NOV27CLBMIA-MIA",
+      "yesNo": "Yes",
+      "side": "Inter Miami CF not to win",
+      "game": "Columbus Crew vs Inter Miami CF",
+      "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXMLSGAME-26NOV27CLBMIA-CLB",
+      "yesNo": "Yes",
+      "side": "Columbus Crew not to win",
+      "game": "Columbus Crew vs Inter Miami CF",
+      "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXMLSGAME-26NOV27CLBMIA-CLB",
+      "yesNo": "Yes",
+      "side": "Columbus Crew to win",
+      "game": "Columbus Crew vs Inter Miami CF",
+      "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXMLSTOTAL-26NOV27CLBMIA-4",
+      "yesNo": "No",
+      "side": "Under 3.5",
+      "game": "Columbus Crew vs Inter Miami CF",
+      "startTs": 1795827600,
+      "bt": "total",
+      "n": 3
+    },
+    {
+      "ticker": "KXMLSTOTAL-26NOV27CLBMIA-4",
+      "yesNo": "Yes",
+      "side": "Over 3.5",
+      "game": "Columbus Crew vs Inter Miami CF",
+      "startTs": 1795827600,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXNBASPREAD-26NOV27MEMMIN-MIN3",
       "yesNo": "Yes",
       "side": "Minnesota wins by over 2.5 points",
@@ -135,24 +198,6 @@
       "side": "Over 219.5",
       "game": "Minnesota Timberwolves vs Memphis Grizzlies",
       "startTs": 1795829400,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXMLSTOTAL-26NOV27CLBMIA-4",
-      "yesNo": "No",
-      "side": "Under 3.5",
-      "game": "Columbus Crew vs Inter Miami CF",
-      "startTs": 1795827600,
-      "bt": "total",
-      "n": 2
-    },
-    {
-      "ticker": "KXMLSTOTAL-26NOV27CLBMIA-4",
-      "yesNo": "Yes",
-      "side": "Over 3.5",
-      "game": "Columbus Crew vs Inter Miami CF",
-      "startTs": 1795827600,
       "bt": "total",
       "n": 1
     },
@@ -220,33 +265,6 @@
       "n": 2
     },
     {
-      "ticker": "KXNCAAFGAME-26NOV27MINNWIS-MINN",
-      "yesNo": "Yes",
-      "side": "Minnesota",
-      "game": "Wisconsin Badgers vs Minnesota Golden Gophers",
-      "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFGAME-26NOV27MINNWIS-WIS",
-      "yesNo": "Yes",
-      "side": "Wisconsin",
-      "game": "Wisconsin Badgers vs Minnesota Golden Gophers",
-      "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV27MINNWIS-WIS10",
-      "yesNo": "No",
-      "side": "Minnesota Golden Gophers +9.5",
-      "game": "Wisconsin Badgers vs Minnesota Golden Gophers",
-      "startTs": 1795825800,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27MILDET-MIL",
       "yesNo": "Yes",
       "side": "Bucks",
@@ -278,6 +296,42 @@
       "yesNo": "No",
       "side": "Bucks +10.5",
       "game": "Detroit Pistons vs Milwaukee Bucks",
+      "startTs": 1795825800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBATOTAL-26NOV27MILDET-219",
+      "yesNo": "Yes",
+      "side": "Over 218.5",
+      "game": "Detroit Pistons vs Milwaukee Bucks",
+      "startTs": 1795825800,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFGAME-26NOV27MINNWIS-MINN",
+      "yesNo": "Yes",
+      "side": "Minnesota",
+      "game": "Wisconsin Badgers vs Minnesota Golden Gophers",
+      "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFGAME-26NOV27MINNWIS-WIS",
+      "yesNo": "Yes",
+      "side": "Wisconsin",
+      "game": "Wisconsin Badgers vs Minnesota Golden Gophers",
+      "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV27MINNWIS-WIS10",
+      "yesNo": "No",
+      "side": "Minnesota Golden Gophers +9.5",
+      "game": "Wisconsin Badgers vs Minnesota Golden Gophers",
       "startTs": 1795825800,
       "bt": "spread",
       "n": 1
@@ -364,6 +418,24 @@
       "n": 1
     },
     {
+      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
+      "yesNo": "Yes",
+      "side": "Raptors",
+      "game": "Toronto Raptors vs Brooklyn Nets",
+      "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBATOTAL-26NOV27BKNTOR-219",
+      "yesNo": "Yes",
+      "side": "Over 218.5",
+      "game": "Toronto Raptors vs Brooklyn Nets",
+      "startTs": 1795825800,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXCS2GAME-26NOV280100IMPAST-AST",
       "yesNo": "Yes",
       "side": "Astralis",
@@ -388,24 +460,6 @@
       "game": "Texas vs Texas A&M",
       "startTs": 1795825800,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNHLGAME-26NOV27NYRCHI-NYR",
-      "yesNo": "Yes",
-      "side": "Rangers",
-      "game": "Chicago Blackhawks vs New York Rangers",
-      "startTs": 1795818600,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXNHLTOTAL-26NOV27NYRCHI-6",
-      "yesNo": "No",
-      "side": "Under 5.5",
-      "game": "Chicago Blackhawks vs New York Rangers",
-      "startTs": 1795818600,
-      "bt": "total",
       "n": 1
     },
     {
@@ -481,6 +535,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNHLGAME-26NOV27NYRCHI-NYR",
+      "yesNo": "Yes",
+      "side": "Rangers",
+      "game": "Chicago Blackhawks vs New York Rangers",
+      "startTs": 1795818600,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
       "yesNo": "Yes",
       "side": "FC Barcelona to win",
@@ -532,6 +595,15 @@
       "game": "Deportivo vs Barcelona",
       "startTs": 1795965300,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXBRASILEIROTOTAL-26NOV27FLUCRU-3",
+      "yesNo": "Yes",
+      "side": "Over 2.5",
+      "game": "Fluminense vs Cruzeiro",
+      "startTs": 1795820400,
+      "bt": "total",
       "n": 1
     },
     {
