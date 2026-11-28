@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795876933,
-  "updatedAt": "Sat Nov 28 \u00b7 6:42 AM PT",
+  "ts": 1795877243,
+  "updatedAt": "Sat Nov 28 \u00b7 6:47 AM PT",
   "picks": [
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -26,6 +26,24 @@
       "yesNo": "Yes",
       "side": "Brentford FC not to win",
       "game": "Manchester United FC vs Brentford FC",
+      "startTs": 1795878000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXDOTA2GAME-26NOV281000PARI1WIN-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "1win vs PARIVISION",
+      "startTs": 1795878000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV281000PARI1WIN-1-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "1win vs PARIVISION",
       "startTs": 1795878000,
       "bt": "moneyline",
       "n": 1
@@ -67,45 +85,18 @@
       "n": 3
     },
     {
-      "ticker": "KXDOTA2GAME-26NOV281000PARI1WIN-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "1win vs PARIVISION",
-      "startTs": 1795878000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280730PVFLY-FLY",
-      "yesNo": "Yes",
-      "side": "FlyQuest",
-      "game": "Counter-Strike: FlyQuest vs PVISION",
-      "startTs": 1795869000,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXNFLGAME-26NOV29SEASF-SF",
-      "yesNo": "Yes",
-      "side": "49ers",
-      "game": "San Francisco 49ers vs Seattle Seahawks",
-      "startTs": 1795987500,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXEPLGAME-26NOV28LEECOV-LEE",
+      "ticker": "KXEPLGAME-26NOV28LEECOV-COV",
       "yesNo": "No",
-      "side": "Leeds United FC not to win",
+      "side": "Coventry City FC not to win",
       "game": "Leeds United vs Coventry City",
       "startTs": 1795878000,
       "bt": "moneyline",
       "n": 1
     },
     {
-      "ticker": "KXEPLGAME-26NOV28LEECOV-COV",
+      "ticker": "KXEPLGAME-26NOV28LEECOV-LEE",
       "yesNo": "No",
-      "side": "Coventry City FC not to win",
+      "side": "Leeds United FC not to win",
       "game": "Leeds United vs Coventry City",
       "startTs": 1795878000,
       "bt": "moneyline",
@@ -118,15 +109,6 @@
       "game": "Leeds United vs Coventry City",
       "startTs": 1795878000,
       "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFGAME-26NOV28USCUCLA-USC",
-      "yesNo": "Yes",
-      "side": "USC",
-      "game": "UCLA Bruins vs USC Trojans",
-      "startTs": 1795897800,
-      "bt": "moneyline",
       "n": 1
     },
     {
@@ -157,20 +139,20 @@
       "n": 1
     },
     {
-      "ticker": "KXNHLTOTAL-26NOV28TORPIT-7",
+      "ticker": "KXNFLGAME-26NOV29SEASF-SF",
       "yesNo": "Yes",
-      "side": "Over 6.5",
-      "game": "Pittsburgh Penguins vs Toronto Maple Leafs",
-      "startTs": 1795910400,
-      "bt": "total",
-      "n": 1
+      "side": "49ers",
+      "game": "San Francisco 49ers vs Seattle Seahawks",
+      "startTs": 1795987500,
+      "bt": "moneyline",
+      "n": 2
     },
     {
-      "ticker": "KXNFLGAME-26NOV29TENJAC-JAC",
+      "ticker": "KXNCAAFGAME-26NOV28USCUCLA-USC",
       "yesNo": "Yes",
-      "side": "Jaguars",
-      "game": "Jacksonville Jaguars vs Tennessee Titans",
-      "startTs": 1795975200,
+      "side": "USC",
+      "game": "UCLA Bruins vs USC Trojans",
+      "startTs": 1795897800,
       "bt": "moneyline",
       "n": 1
     },
@@ -193,11 +175,47 @@
       "n": 1
     },
     {
+      "ticker": "KXNHLTOTAL-26NOV28TORPIT-7",
+      "yesNo": "Yes",
+      "side": "Over 6.5",
+      "game": "Pittsburgh Penguins vs Toronto Maple Leafs",
+      "startTs": 1795910400,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLGAME-26NOV29TENJAC-JAC",
+      "yesNo": "Yes",
+      "side": "Jaguars",
+      "game": "Jacksonville Jaguars vs Tennessee Titans",
+      "startTs": 1795975200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV28ELCATM-ATM",
       "yesNo": "No",
       "side": "Club Atl\u00e9tico de Madrid not to win",
       "game": "Elche CF vs Club Atl\u00e9tico de Madrid",
       "startTs": 1795887000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXBUNDESLIGAGAME-26NOV28KOESVE-KOE",
+      "yesNo": "No",
+      "side": "1. FC K\u00f6ln not to win",
+      "game": "FC Cologne vs SV Elversberg",
+      "startTs": 1795876200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXBUNDESLIGAGAME-26NOV28KOESVE-KOE",
+      "yesNo": "Yes",
+      "side": "1. FC K\u00f6ln to win",
+      "game": "FC Cologne vs SV Elversberg",
+      "startTs": 1795876200,
       "bt": "moneyline",
       "n": 1
     },
@@ -382,11 +400,11 @@
       "n": 1
     },
     {
-      "ticker": "KXBUNDESLIGAGAME-26NOV28KOESVE-KOE",
-      "yesNo": "No",
-      "side": "1. FC K\u00f6ln not to win",
-      "game": "FC Cologne vs SV Elversberg",
-      "startTs": 1795876200,
+      "ticker": "KXLIGAMXGAME-26NOV28AMEMON-AME",
+      "yesNo": "Yes",
+      "side": "CF Am\u00e9rica to win",
+      "game": "Am\u00e9rica vs Monterrey",
+      "startTs": 1795921800,
       "bt": "moneyline",
       "n": 1
     },
