@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795842052,
-  "updatedAt": "Fri Nov 27 \u00b7 9:00 PM PT",
+  "ts": 1795842235,
+  "updatedAt": "Fri Nov 27 \u00b7 9:03 PM PT",
   "picks": [
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -85,6 +85,15 @@
       "n": 1
     },
     {
+      "ticker": "KXCS2GAME-26NOV272300NIPNEMI-NEMI",
+      "yesNo": "Yes",
+      "side": "Nemiga",
+      "game": "Counter-Strike: Nemiga vs NIP",
+      "startTs": 1795838400,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
       "ticker": "KXNCAAFGAME-26NOV28USCUCLA-USC",
       "yesNo": "Yes",
       "side": "USC",
@@ -112,39 +121,12 @@
       "n": 2
     },
     {
-      "ticker": "KXNBASPREAD-26NOV27LALSAS-SAS7",
-      "yesNo": "No",
-      "side": "Lakers +6.5",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXNFLGAME-26NOV29TENJAC-JAC",
       "yesNo": "Yes",
       "side": "Jaguars",
       "game": "Jacksonville Jaguars vs Tennessee Titans",
       "startTs": 1795975200,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27GSWPOR-POR23",
-      "yesNo": "Yes",
-      "side": "Portland wins by over 22.5 points",
-      "game": "Portland Trail Blazers vs Golden State Warriors",
-      "startTs": 1795833000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBATOTAL-26NOV27GSWPOR-210",
-      "yesNo": "Yes",
-      "side": "Over 209.5",
-      "game": "Portland Trail Blazers vs Golden State Warriors",
-      "startTs": 1795833000,
-      "bt": "total",
       "n": 1
     },
     {
@@ -181,6 +163,33 @@
       "game": "Wyoming Cowboys vs UConn Huskies",
       "startTs": 1795885200,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFGAME-26NOV28MICHOSU-OSU",
+      "yesNo": "Yes",
+      "side": "Ohio State",
+      "game": "Ohio State Buckeyes vs Michigan Wolverines",
+      "startTs": 1795885200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFGAME-26NOV28KUOKST-OKST",
+      "yesNo": "Yes",
+      "side": "Oklahoma State",
+      "game": "Iowa State Cyclones vs Kansas State Wildcats",
+      "startTs": 1795892400,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFGAME-26NOV28SCARCLEM-SCAR",
+      "yesNo": "Yes",
+      "side": "South Carolina",
+      "game": "Clemson Tigers vs South Carolina Gamecocks",
+      "startTs": 1795896000,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -238,10 +247,19 @@
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV272300LVGMGLZ-LVG",
+      "ticker": "KXJLEAGUEGAME-26NOV28SHIURD-URD",
+      "yesNo": "No",
+      "side": "Urawa Red Diamonds not to win",
+      "game": "Shimizu S-Pulse vs Urawa Red Diamonds",
+      "startTs": 1795842000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
       "yesNo": "Yes",
-      "side": "Lynn Vision",
-      "game": "Counter-Strike: TheMongolz vs Lynn Vision",
+      "side": "FUT Esports",
+      "game": "Counter-Strike: FUT Esports vs FlyQuest",
       "startTs": 1795838400,
       "bt": "moneyline",
       "n": 1
@@ -294,7 +312,7 @@
     {
       "ticker": "KXNCAAFSPREAD-26NOV27WVUUTAH-UTAH24",
       "yesNo": "No",
-      "side": "West Virginia +23.5",
+      "side": "West Virginia Mountaineers +23.5",
       "game": "Utah Utes vs West Virginia Mountaineers",
       "startTs": 1795831200,
       "bt": "spread",
@@ -303,19 +321,10 @@
     {
       "ticker": "KXNCAAFSPREAD-26NOV27WVUUTAH-UTAH25",
       "yesNo": "No",
-      "side": "West Virginia +24.5",
+      "side": "West Virginia Mountaineers +24.5",
       "game": "Utah Utes vs West Virginia Mountaineers",
       "startTs": 1795831200,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFTOTAL-26NOV27WVUUTAH-70",
-      "yesNo": "No",
-      "side": "Under 69.5",
-      "game": "Utah Utes vs West Virginia Mountaineers",
-      "startTs": 1795831200,
-      "bt": "total",
       "n": 1
     },
     {
@@ -328,8 +337,17 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFTOTAL-26NOV27WVUUTAH-70",
+      "yesNo": "No",
+      "side": "Under 69.5",
+      "game": "Utah Utes vs West Virginia Mountaineers",
+      "startTs": 1795831200,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXEPLGAME-26NOV28LEECOV-LEE",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Leeds United FC not to win",
       "game": "Leeds United vs Coventry City",
       "startTs": 1795878000,

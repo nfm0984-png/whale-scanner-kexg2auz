@@ -108355,7 +108355,11 @@
    "first_seen": 1795800096,
    "scans": 2,
    "first_score": 15,
-   "result": null
+   "result": "W",
+   "graded": 1795842194,
+   "ended": 1795842194,
+   "finalScore": "",
+   "active": false
   },
   "0xc737a342a77e801497ad180b50741a1de46646e44fda94f12cb3a71011991053:no": {
    "tier": "fun",
@@ -108514,7 +108518,10 @@
    "first_seen": 1795800096,
    "scans": 5,
    "first_score": 25,
-   "result": null
+   "result": null,
+   "ended": 1795842194,
+   "finalScore": "LAC 104 \u2013 NO 105",
+   "active": false
   },
   "0x2a51b7a1b7f141d4faac9f7b699f9a47c3ef2c97a3bb37ea4f504093d38b4ef5:no": {
    "tier": "poly",
@@ -112072,7 +112079,11 @@
    "first_seen": 1795831846,
    "scans": 2,
    "first_score": 48,
-   "result": null
+   "result": "L",
+   "graded": 1795842194,
+   "ended": 1795842194,
+   "finalScore": "LAC 104 \u2013 NO 105",
+   "active": false
   },
   "0xcd3fb5773208a0d6193acfabedfbb6240a65fdfc0f79e42e3a07ee889faff68b:no": {
    "tier": "fun",
@@ -112500,7 +112511,11 @@
    "first_seen": 1795831846,
    "scans": 2,
    "first_score": 40,
-   "result": null
+   "result": "W",
+   "graded": 1795842194,
+   "ended": 1795842194,
+   "finalScore": "LAC 104 \u2013 NO 105",
+   "active": false
   },
   "0x10f340d1f9ba3bbd5b3cb2feda2781286a8eb3e9b718220179067299e35135c3:yes": {
    "tier": "fun",
