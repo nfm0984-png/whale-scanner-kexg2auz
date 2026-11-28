@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795878435,
-  "updatedAt": "Sat Nov 28 \u00b7 7:07 AM PT",
+  "ts": 1795878621,
+  "updatedAt": "Sat Nov 28 \u00b7 7:10 AM PT",
   "picks": [
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -76,6 +76,33 @@
       "n": 3
     },
     {
+      "ticker": "KXEPLGAME-26NOV28LEECOV-COV",
+      "yesNo": "No",
+      "side": "Coventry City FC not to win",
+      "game": "Leeds United vs Coventry City",
+      "startTs": 1795878000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXEPLGAME-26NOV28LEECOV-LEE",
+      "yesNo": "No",
+      "side": "Leeds United FC not to win",
+      "game": "Leeds United vs Coventry City",
+      "startTs": 1795878000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXEPLTOTAL-26NOV28LEECOV-4",
+      "yesNo": "No",
+      "side": "Under 3.5",
+      "game": "Leeds United vs Coventry City",
+      "startTs": 1795878000,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXSERIEAGAME-26NOV28TORLAZ-LAZ",
       "yesNo": "Yes",
       "side": "SS Lazio to win",
@@ -110,24 +137,6 @@
       "startTs": 1795987500,
       "bt": "moneyline",
       "n": 2
-    },
-    {
-      "ticker": "KXEPLGAME-26NOV28LEECOV-COV",
-      "yesNo": "No",
-      "side": "Coventry City FC not to win",
-      "game": "Leeds United vs Coventry City",
-      "startTs": 1795878000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXEPLGAME-26NOV28LEECOV-LEE",
-      "yesNo": "No",
-      "side": "Leeds United FC not to win",
-      "game": "Leeds United vs Coventry City",
-      "startTs": 1795878000,
-      "bt": "moneyline",
-      "n": 1
     },
     {
       "ticker": "KXNCAAFSPREAD-26NOV28CMUBALL-CMU4",
@@ -234,24 +243,6 @@
       "side": "Club Atl\u00e9tico de Madrid not to win",
       "game": "Elche CF vs Club Atl\u00e9tico de Madrid",
       "startTs": 1795887000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXBUNDESLIGAGAME-26NOV28KOESVE-KOE",
-      "yesNo": "Yes",
-      "side": "1. FC K\u00f6ln not to win",
-      "game": "FC Cologne vs SV Elversberg",
-      "startTs": 1795876200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXBUNDESLIGAGAME-26NOV28KOESVE-KOE",
-      "yesNo": "Yes",
-      "side": "1. FC K\u00f6ln to win",
-      "game": "FC Cologne vs SV Elversberg",
-      "startTs": 1795876200,
       "bt": "moneyline",
       "n": 1
     },
@@ -415,15 +406,6 @@
       "game": "Florida Panthers vs Tampa Bay Lightning",
       "startTs": 1795906800,
       "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXEFLCHAMPIONSHIPGAME-26NOV28WREPOR-WRE",
-      "yesNo": "Yes",
-      "side": "Wrexham AFC to win",
-      "game": "Wrexham AFC vs Portsmouth FC",
-      "startTs": 1795878000,
-      "bt": "moneyline",
       "n": 1
     },
     {
