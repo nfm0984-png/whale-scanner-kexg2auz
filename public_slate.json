@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795875845,
-  "updatedAt": "Sat Nov 28 \u00b7 6:24 AM PT",
+  "ts": 1795876034,
+  "updatedAt": "Sat Nov 28 \u00b7 6:27 AM PT",
   "picks": [
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -31,13 +31,31 @@
       "n": 1
     },
     {
+      "ticker": "KXBUNDESLIGATOTAL-26NOV28HSVBMU-4",
+      "yesNo": "Yes",
+      "side": "Over 3.5",
+      "game": "Hamburger SV vs FC Bayern M\u00fcnchen - More Markets",
+      "startTs": 1795876200,
+      "bt": "total",
+      "n": 3
+    },
+    {
       "ticker": "KXCS2GAME-26NOV280730PVFLY-PV",
       "yesNo": "Yes",
       "side": "PVISION",
       "game": "Counter-Strike: FlyQuest vs PVISION",
       "startTs": 1795869000,
       "bt": "moneyline",
-      "n": 5
+      "n": 4
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV280730PVFLY-FLY",
+      "yesNo": "Yes",
+      "side": "FlyQuest",
+      "game": "Counter-Strike: FlyQuest vs PVISION",
+      "startTs": 1795869000,
+      "bt": "moneyline",
+      "n": 1
     },
     {
       "ticker": "KXLALIGAGAME-26NOV28RMAALA-RMA",
@@ -65,15 +83,6 @@
       "startTs": 1795896000,
       "bt": "spread",
       "n": 1
-    },
-    {
-      "ticker": "KXBUNDESLIGATOTAL-26NOV28HSVBMU-4",
-      "yesNo": "Yes",
-      "side": "Over 3.5",
-      "game": "Hamburger SV vs FC Bayern M\u00fcnchen - More Markets",
-      "startTs": 1795876200,
-      "bt": "total",
-      "n": 3
     },
     {
       "ticker": "KXNFLGAME-26NOV29SEASF-SF",
@@ -112,6 +121,15 @@
       "n": 1
     },
     {
+      "ticker": "KXDOTA2GAME-26NOV281000PARI1WIN-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "1win vs PARIVISION",
+      "startTs": 1795878000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFGAME-26NOV28USCUCLA-USC",
       "yesNo": "Yes",
       "side": "USC",
@@ -122,7 +140,7 @@
     },
     {
       "ticker": "KXSERIEAGAME-26NOV28FROPAR-FRO",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Frosinone Calcio not to win",
       "game": "Frosinone vs Parma",
       "startTs": 1795874400,
@@ -163,15 +181,6 @@
       "game": "Torino vs Lazio",
       "startTs": 1795885200,
       "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXDOTA2GAME-26NOV281000PARI1WIN-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "1win vs PARIVISION",
-      "startTs": 1795878000,
-      "bt": "moneyline",
       "n": 1
     },
     {
@@ -316,6 +325,15 @@
       "game": "Iowa State Cyclones vs Kansas State Wildcats",
       "startTs": 1795892400,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV28UTEPNIU-NIU5",
+      "yesNo": "Yes",
+      "side": "Northern Illinois wins by over 4.5 points",
+      "game": "UTEP vs Northern Illinois",
+      "startTs": 1795897800,
+      "bt": "spread",
       "n": 1
     },
     {
