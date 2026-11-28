@@ -1,35 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795840746,
-  "updatedAt": "Fri Nov 27 \u00b7 8:39 PM PT",
+  "ts": 1795841037,
+  "updatedAt": "Fri Nov 27 \u00b7 8:43 PM PT",
   "picks": [
-    {
-      "ticker": "KXNBAGAME-26NOV27GSWPOR-GSW",
-      "yesNo": "Yes",
-      "side": "Warriors",
-      "game": "Portland Trail Blazers vs Golden State Warriors",
-      "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27GSWPOR-POR10",
-      "yesNo": "No",
-      "side": "Warriors +9.5",
-      "game": "Portland Trail Blazers vs Golden State Warriors",
-      "startTs": 1795833000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27GSWPOR-POR23",
-      "yesNo": "Yes",
-      "side": "Portland wins by over 22.5 points",
-      "game": "Portland Trail Blazers vs Golden State Warriors",
-      "startTs": 1795833000,
-      "bt": "spread",
-      "n": 1
-    },
     {
       "ticker": "KXNBAGAME-26NOV27LALSAS-LAL",
       "yesNo": "Yes",
@@ -67,20 +40,11 @@
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
+      "ticker": "KXNBAGAME-26NOV27DENUTA-UTA",
       "yesNo": "Yes",
-      "side": "FUT Esports",
-      "game": "Counter-Strike: FUT Esports vs FlyQuest",
-      "startTs": 1795838400,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FLY",
-      "yesNo": "Yes",
-      "side": "FlyQuest",
-      "game": "Counter-Strike: FUT Esports vs FlyQuest",
-      "startTs": 1795838400,
+      "side": "Jazz",
+      "game": "Utah Jazz vs Denver Nuggets",
+      "startTs": 1795833000,
       "bt": "moneyline",
       "n": 1
     },
@@ -112,13 +76,22 @@
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV272300LVGMGLZ-LVG",
+      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
       "yesNo": "Yes",
-      "side": "Lynn Vision",
-      "game": "Counter-Strike: TheMongolz vs Lynn Vision",
+      "side": "FUT Esports",
+      "game": "Counter-Strike: FUT Esports vs FlyQuest",
       "startTs": 1795838400,
       "bt": "moneyline",
-      "n": 4
+      "n": 2
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27NOPLAC-NOP5",
+      "yesNo": "No",
+      "side": "Clippers +4.5",
+      "game": "LA Clippers vs New Orleans Pelicans",
+      "startTs": 1795833000,
+      "bt": "spread",
+      "n": 1
     },
     {
       "ticker": "KXNFLGAME-26NOV29SEASF-SF",
