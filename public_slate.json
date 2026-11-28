@@ -1,62 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795842545,
-  "updatedAt": "Fri Nov 27 \u00b7 9:09 PM PT",
+  "ts": 1795842834,
+  "updatedAt": "Fri Nov 27 \u00b7 9:13 PM PT",
   "picks": [
-    {
-      "ticker": "KXNBAGAME-26NOV27LALSAS-LAL",
-      "yesNo": "Yes",
-      "side": "Lakers",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 3
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
-      "yesNo": "Yes",
-      "side": "Spurs",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27LALSAS-SAS6",
-      "yesNo": "Yes",
-      "side": "San Antonio wins by over 5.5 points",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "spread",
-      "n": 2
-    },
-    {
-      "ticker": "KXNBATOTAL-26NOV27LALSAS-227",
-      "yesNo": "Yes",
-      "side": "Over 226.5",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280100IMPAST-AST",
-      "yesNo": "Yes",
-      "side": "Astralis",
-      "game": "Counter-Strike: Astralis vs Imperial",
-      "startTs": 1795845600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280100IMPAST-IMP",
-      "yesNo": "Yes",
-      "side": "Imperial",
-      "game": "Counter-Strike: Astralis vs Imperial",
-      "startTs": 1795845600,
-      "bt": "moneyline",
-      "n": 1
-    },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
       "yesNo": "Yes",
@@ -130,6 +76,15 @@
       "n": 2
     },
     {
+      "ticker": "KXCS2GAME-26NOV280100IMPAST-IMP",
+      "yesNo": "Yes",
+      "side": "Imperial",
+      "game": "Counter-Strike: Astralis vs Imperial",
+      "startTs": 1795845600,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
       "ticker": "KXNCAAFGAME-26NOV28USCUCLA-USC",
       "yesNo": "Yes",
       "side": "USC",
@@ -164,6 +119,15 @@
       "startTs": 1795975200,
       "bt": "moneyline",
       "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27LALSAS-SAS6",
+      "yesNo": "Yes",
+      "side": "San Antonio wins by over 5.5 points",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
+      "bt": "spread",
+      "n": 2
     },
     {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
@@ -374,7 +338,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV28LEECOV-LEE",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "Leeds United FC not to win",
       "game": "Leeds United vs Coventry City",
       "startTs": 1795878000,
