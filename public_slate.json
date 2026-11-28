@@ -1,35 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795850324,
-  "updatedAt": "Fri Nov 27 \u00b7 11:18 PM PT",
+  "ts": 1795851897,
+  "updatedAt": "Fri Nov 27 \u00b7 11:44 PM PT",
   "picks": [
-    {
-      "ticker": "KXCS2GAME-26NOV280100PRVNAVI-NAVI",
-      "yesNo": "Yes",
-      "side": "Natus Vincere",
-      "game": "Counter-Strike: Natus Vincere vs PARIVISION",
-      "startTs": 1795845600,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280200100TMIBR-MIBR",
-      "yesNo": "Yes",
-      "side": "MIBR",
-      "game": "Counter-Strike: MIBR vs 100 Thieves",
-      "startTs": 1795849200,
-      "bt": "moneyline",
-      "n": 3
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280200100TMIBR-100T",
-      "yesNo": "Yes",
-      "side": "100 Thieves",
-      "game": "Counter-Strike: MIBR vs 100 Thieves",
-      "startTs": 1795849200,
-      "bt": "moneyline",
-      "n": 1
-    },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
       "yesNo": "Yes",
@@ -94,6 +67,15 @@
       "n": 2
     },
     {
+      "ticker": "KXCS2GAME-26NOV280200100TMIBR-MIBR",
+      "yesNo": "Yes",
+      "side": "MIBR",
+      "game": "Counter-Strike: MIBR vs 100 Thieves",
+      "startTs": 1795849200,
+      "bt": "moneyline",
+      "n": 3
+    },
+    {
       "ticker": "KXNCAAFGAME-26NOV28USCUCLA-USC",
       "yesNo": "Yes",
       "side": "USC",
@@ -121,6 +103,15 @@
       "n": 1
     },
     {
+      "ticker": "KXJLEAGUEGAME-26NOV28REYSAN-REY",
+      "yesNo": "Yes",
+      "side": "Kashiwa Reysol not to win",
+      "game": "Kashiwa Reysol vs Sanfrecce Hiroshima",
+      "startTs": 1795849200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
       "yesNo": "Yes",
       "side": "FC Barcelona to win",
@@ -135,6 +126,24 @@
       "side": "Texans",
       "game": "Houston Texans vs Baltimore Ravens",
       "startTs": 1795975200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV280100PRVNAVI-NAVI",
+      "yesNo": "Yes",
+      "side": "Natus Vincere",
+      "game": "Counter-Strike: Natus Vincere vs PARIVISION",
+      "startTs": 1795845600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV280100PRVNAVI-PRV",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "Counter-Strike: Natus Vincere vs PARIVISION",
+      "startTs": 1795845600,
       "bt": "moneyline",
       "n": 1
     },
@@ -154,6 +163,15 @@
       "game": "Wyoming Cowboys vs UConn Huskies",
       "startTs": 1795885200,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV28INDCHI-IND",
+      "yesNo": "Yes",
+      "side": "Pacers",
+      "game": "Chicago Bulls vs Indiana Pacers",
+      "startTs": 1795914000,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -208,6 +226,15 @@
       "game": "Arizona Wildcats vs Arizona State Sun Devils",
       "startTs": 1795917600,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXBUNDESLIGA2TOTAL-26NOV28BSCKSC-4",
+      "yesNo": "Yes",
+      "side": "Over 3.5",
+      "game": "Hertha Berlin vs Karlsruher SC",
+      "startTs": 1795867200,
+      "bt": "total",
       "n": 1
     },
     {
