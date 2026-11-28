@@ -1,8 +1,53 @@
 {
   "source": "whale",
-  "ts": 1795837981,
-  "updatedAt": "Fri Nov 27 \u00b7 7:53 PM PT",
+  "ts": 1795838268,
+  "updatedAt": "Fri Nov 27 \u00b7 7:57 PM PT",
   "picks": [
+    {
+      "ticker": "KXNBAGAME-26NOV27DALPHX-DAL",
+      "yesNo": "Yes",
+      "side": "Mavericks",
+      "game": "Phoenix Suns vs Dallas Mavericks",
+      "startTs": 1795831200,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27DALPHX-PHX3",
+      "yesNo": "No",
+      "side": "Mavericks +2.5",
+      "game": "Phoenix Suns vs Dallas Mavericks",
+      "startTs": 1795831200,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
+      "yesNo": "Yes",
+      "side": "Nuggets",
+      "game": "Utah Jazz vs Denver Nuggets",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27DENUTA-UTA",
+      "yesNo": "Yes",
+      "side": "Jazz",
+      "game": "Utah Jazz vs Denver Nuggets",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBATOTAL-26NOV27DENUTA-235",
+      "yesNo": "No",
+      "side": "Under 234.5",
+      "game": "Utah Jazz vs Denver Nuggets",
+      "startTs": 1795833000,
+      "bt": "total",
+      "n": 1
+    },
     {
       "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
       "yesNo": "Yes",
@@ -76,24 +121,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
-      "yesNo": "Yes",
-      "side": "Nuggets",
-      "game": "Utah Jazz vs Denver Nuggets",
-      "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27NOPLAC-NOP5",
-      "yesNo": "No",
-      "side": "Clippers +4.5",
-      "game": "LA Clippers vs New Orleans Pelicans",
-      "startTs": 1795833000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXCS2GAME-26NOV272300LVGMGLZ-MGLZ",
       "yesNo": "Yes",
       "side": "TheMongolz",
@@ -108,6 +135,15 @@
       "side": "Lynn Vision",
       "game": "Counter-Strike: TheMongolz vs Lynn Vision",
       "startTs": 1795838400,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27NOPLAC-LAC",
+      "yesNo": "Yes",
+      "side": "Clippers",
+      "game": "LA Clippers vs New Orleans Pelicans",
+      "startTs": 1795833000,
       "bt": "moneyline",
       "n": 1
     },
@@ -172,42 +208,6 @@
       "game": "Texas vs Texas A&M",
       "startTs": 1795825800,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27MEMMIN-MIN2",
-      "yesNo": "Yes",
-      "side": "Minnesota wins by over 1.5 points",
-      "game": "Minnesota Timberwolves vs Memphis Grizzlies",
-      "startTs": 1795829400,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27MEMMIN-MIN3",
-      "yesNo": "Yes",
-      "side": "Minnesota wins by over 2.5 points",
-      "game": "Minnesota Timberwolves vs Memphis Grizzlies",
-      "startTs": 1795829400,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27MEMMIN-MIN4",
-      "yesNo": "Yes",
-      "side": "Minnesota wins by over 3.5 points",
-      "game": "Minnesota Timberwolves vs Memphis Grizzlies",
-      "startTs": 1795829400,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBATOTAL-26NOV27MEMMIN-220",
-      "yesNo": "Yes",
-      "side": "Over 219.5",
-      "game": "Minnesota Timberwolves vs Memphis Grizzlies",
-      "startTs": 1795829400,
-      "bt": "total",
       "n": 1
     },
     {
@@ -328,15 +328,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFSPREAD-26NOV27MINNWIS-WIS10",
-      "yesNo": "No",
-      "side": "Minnesota Golden Gophers +9.5",
-      "game": "Wisconsin Badgers vs Minnesota Golden Gophers",
-      "startTs": 1795825800,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXNCAAFSPREAD-26NOV28SACHAW-HAW14",
       "yesNo": "Yes",
       "side": "Hawai'i wins by over 13.5 points",
@@ -355,19 +346,19 @@
       "n": 1
     },
     {
-      "ticker": "KXMLSGAME-26NOV27RSLVAN-RSL",
-      "yesNo": "Yes",
-      "side": "Real Salt Lake to win",
-      "game": "Real Salt Lake vs Vancouver Whitecaps",
+      "ticker": "KXMLSGAME-26NOV27RSLVAN-VAN",
+      "yesNo": "No",
+      "side": "Vancouver Whitecaps FC not to win",
+      "game": "Real Salt Lake vs Vancouver Whitecaps FC",
       "startTs": 1795834800,
       "bt": "moneyline",
       "n": 1
     },
     {
-      "ticker": "KXMLSGAME-26NOV27RSLVAN-VAN",
+      "ticker": "KXMLSGAME-26NOV27RSLVAN-RSL",
       "yesNo": "Yes",
-      "side": "Vancouver Whitecaps FC not to win",
-      "game": "Real Salt Lake vs Vancouver Whitecaps",
+      "side": "Real Salt Lake to win",
+      "game": "Real Salt Lake vs Vancouver Whitecaps FC",
       "startTs": 1795834800,
       "bt": "moneyline",
       "n": 1

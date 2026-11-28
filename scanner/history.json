@@ -108284,7 +108284,11 @@
    "first_seen": 1795800096,
    "scans": 6,
    "first_score": 35,
-   "result": null
+   "result": "L",
+   "graded": 1795838191,
+   "ended": 1795838191,
+   "finalScore": "BUF 3 \u2013 PIT 6",
+   "active": false
   },
   "0xe499f22bd66f74aa706930665eab2f43947e862c6db717d3e2b523fd16f5e1d5:yes": {
    "tier": "fun",
@@ -110591,7 +110595,10 @@
    "first_seen": 1795814251,
    "scans": 5,
    "first_score": 29,
-   "result": null
+   "result": null,
+   "ended": 1795838191,
+   "finalScore": "WIS 28 \u2013 MINN 5",
+   "active": false
   },
   "0x7b0f60cecade0567aa420bb54283104b134d73571529c23c5f4c33cecb20657f:no": {
    "tier": "top",
@@ -111394,7 +111401,10 @@
    "first_seen": 1795830256,
    "scans": 3,
    "first_score": 49,
-   "result": null
+   "result": null,
+   "ended": 1795838191,
+   "finalScore": "WIS 28 \u2013 MINN 5",
+   "active": false
   },
   "0xc372791e2181c9e762cb119eb86dc82a25bb622ce6fc873fe10ec64ec2b0ecb4:no": {
    "tier": "biggest",
@@ -111489,7 +111499,10 @@
    "first_seen": 1795830256,
    "scans": 3,
    "first_score": 45,
-   "result": null
+   "result": null,
+   "ended": 1795838191,
+   "finalScore": "WIS 28 \u2013 MINN 5",
+   "active": false
   },
   "0xc737a342a77e801497ad180b50741a1de46646e44fda94f12cb3a71011991053:yes": {
    "tier": "biggest",
@@ -111546,7 +111559,11 @@
    "first_seen": 1795830256,
    "scans": 3,
    "first_score": 52,
-   "result": null
+   "result": "L",
+   "graded": 1795838191,
+   "ended": 1795838191,
+   "finalScore": "MIN 109 \u2013 MEM 114",
+   "active": false
   },
   "0xeffbb29aa61f98e344c1a0ddb009a7667dc8439fe95ccb25de398c8796ca23e5:yes": {
    "tier": "biggest",
@@ -111565,7 +111582,11 @@
    "first_seen": 1795830256,
    "scans": 3,
    "first_score": 49,
-   "result": null
+   "result": "L",
+   "graded": 1795838191,
+   "ended": 1795838191,
+   "finalScore": "MIN 109 \u2013 MEM 114",
+   "active": false
   },
   "0xc372791e2181c9e762cb119eb86dc82a25bb622ce6fc873fe10ec64ec2b0ecb4:yes": {
    "tier": "glue",
@@ -112081,7 +112102,11 @@
    "first_seen": 1795831846,
    "scans": 2,
    "first_score": 25,
-   "result": null
+   "result": "W",
+   "graded": 1795838191,
+   "ended": 1795838191,
+   "finalScore": "WIS 28 \u2013 MINN 5",
+   "active": false
   },
   "0x5e019b9acc3739ee3f9c91dd288405be0a5cd38d5813acb7c02e9cd1e0aeef4e:no": {
    "tier": "fun",
@@ -112100,7 +112125,10 @@
    "first_seen": 1795831846,
    "scans": 2,
    "first_score": 23,
-   "result": null
+   "result": null,
+   "ended": 1795838191,
+   "finalScore": "MIN 109 \u2013 MEM 114",
+   "active": false
   },
   "0x890e298ffc738f856adcf999a52c3e9b05bfb10ca1d059eaa8c5cae0dc463bb2:no": {
    "tier": "poly",
@@ -112559,7 +112587,11 @@
    "first_seen": 1795835834,
    "scans": 1,
    "first_score": 19,
-   "result": null
+   "result": "W",
+   "graded": 1795838191,
+   "ended": 1795838191,
+   "finalScore": "MIN 109 \u2013 MEM 114",
+   "active": false
   },
   "0xe87204181f02f910d64bb8fec3ec3b017b1c1dd622a2ce5c181d1b84d851f239:yes": {
    "tier": "fun",
@@ -112654,7 +112686,11 @@
    "first_seen": 1795835834,
    "scans": 1,
    "first_score": 31,
-   "result": null
+   "result": "W",
+   "graded": 1795838191,
+   "ended": 1795838191,
+   "finalScore": "MIN 109 \u2013 MEM 114",
+   "active": false
   },
   "0x6bae01970da57d5b0c81dab9933142fd5fd7e0dc1d9ed7921bc8dd6a5790246d:no": {
    "tier": "poly",
@@ -112768,7 +112804,11 @@
    "first_seen": 1795835834,
    "scans": 1,
    "first_score": 22,
-   "result": null
+   "result": "L",
+   "graded": 1795838191,
+   "ended": 1795838191,
+   "finalScore": "MIN 109 \u2013 MEM 114",
+   "active": false
   },
   "0x5e019b9acc3739ee3f9c91dd288405be0a5cd38d5813acb7c02e9cd1e0aeef4e:yes": {
    "tier": "biggest",
@@ -112787,7 +112827,10 @@
    "first_seen": 1795835834,
    "scans": 1,
    "first_score": 29,
-   "result": null
+   "result": null,
+   "ended": 1795838191,
+   "finalScore": "MIN 109 \u2013 MEM 114",
+   "active": false
   },
   "0x4af70d0d3cf99e621de921675d7548c04d4af48d064d0e0731a7a181217156c7:no": {
    "tier": "biggest",
