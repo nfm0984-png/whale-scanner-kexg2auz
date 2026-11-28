@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795878143,
-  "updatedAt": "Sat Nov 28 \u00b7 7:02 AM PT",
+  "ts": 1795878435,
+  "updatedAt": "Sat Nov 28 \u00b7 7:07 AM PT",
   "picks": [
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -67,33 +67,6 @@
       "n": 1
     },
     {
-      "ticker": "KXEPLGAME-26NOV28LEECOV-COV",
-      "yesNo": "No",
-      "side": "Coventry City FC not to win",
-      "game": "Leeds United vs Coventry City",
-      "startTs": 1795878000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXEPLGAME-26NOV28LEECOV-LEE",
-      "yesNo": "No",
-      "side": "Leeds United FC not to win",
-      "game": "Leeds United vs Coventry City",
-      "startTs": 1795878000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXEPLTOTAL-26NOV28LEECOV-3",
-      "yesNo": "No",
-      "side": "Under 2.5",
-      "game": "Leeds United vs Coventry City",
-      "startTs": 1795878000,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXDOTA2MAP-26NOV281000PARI1WIN-1-1WIN",
       "yesNo": "Yes",
       "side": "1win",
@@ -137,6 +110,69 @@
       "startTs": 1795987500,
       "bt": "moneyline",
       "n": 2
+    },
+    {
+      "ticker": "KXEPLGAME-26NOV28LEECOV-COV",
+      "yesNo": "No",
+      "side": "Coventry City FC not to win",
+      "game": "Leeds United vs Coventry City",
+      "startTs": 1795878000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXEPLGAME-26NOV28LEECOV-LEE",
+      "yesNo": "No",
+      "side": "Leeds United FC not to win",
+      "game": "Leeds United vs Coventry City",
+      "startTs": 1795878000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV28CMUBALL-CMU4",
+      "yesNo": "Yes",
+      "side": "Central Michigan wins by over 3.5 points",
+      "game": "Central Michigan vs Ball State",
+      "startTs": 1795885200,
+      "bt": "spread",
+      "n": 2
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV28CMUBALL-CMU4",
+      "yesNo": "No",
+      "side": "State +3.5",
+      "game": "Central Michigan vs Ball State",
+      "startTs": 1795885200,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV28SMUSTAN-SMU8",
+      "yesNo": "No",
+      "side": "Stanford Cardinal +7.5",
+      "game": "Stanford Cardinal vs SMU Mustangs",
+      "startTs": 1795897800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFTOTAL-26NOV28SMUSTAN-62",
+      "yesNo": "No",
+      "side": "Under 61.5",
+      "game": "Stanford Cardinal vs SMU Mustangs",
+      "startTs": 1795897800,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFTOTAL-26NOV28SMUSTAN-60",
+      "yesNo": "No",
+      "side": "Under 59.5",
+      "game": "Stanford Cardinal vs SMU Mustangs",
+      "startTs": 1795897800,
+      "bt": "total",
+      "n": 1
     },
     {
       "ticker": "KXNCAAFGAME-26NOV28USCUCLA-USC",
@@ -194,7 +230,7 @@
     },
     {
       "ticker": "KXLALIGAGAME-26NOV28ELCATM-ATM",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Club Atl\u00e9tico de Madrid not to win",
       "game": "Elche CF vs Club Atl\u00e9tico de Madrid",
       "startTs": 1795887000,
@@ -203,7 +239,7 @@
     },
     {
       "ticker": "KXBUNDESLIGAGAME-26NOV28KOESVE-KOE",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "1. FC K\u00f6ln not to win",
       "game": "FC Cologne vs SV Elversberg",
       "startTs": 1795876200,
@@ -302,7 +338,7 @@
     },
     {
       "ticker": "KXMLSGAME-26NOV28HOUSJ-SJ",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "San Jose Earthquakes not to win",
       "game": "Houston Dynamo FC vs San Jose Earthquakes",
       "startTs": 1795894200,
@@ -382,21 +418,21 @@
       "n": 1
     },
     {
-      "ticker": "KXELITESERIENTOTAL-26NOV28BOGKFU-5",
-      "yesNo": "No",
-      "side": "Under 4.5",
-      "game": "FK Bod\u00f8/Glimt vs KFUM-Kameratene Oslo - More Markets",
-      "startTs": 1795878000,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXEFLCHAMPIONSHIPGAME-26NOV28WREPOR-WRE",
       "yesNo": "Yes",
       "side": "Wrexham AFC to win",
       "game": "Wrexham AFC vs Portsmouth FC",
       "startTs": 1795878000,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXELITESERIENTOTAL-26NOV28BOGKFU-5",
+      "yesNo": "No",
+      "side": "Under 4.5",
+      "game": "FK Bod\u00f8/Glimt vs KFUM-Kameratene Oslo - More Markets",
+      "startTs": 1795878000,
+      "bt": "total",
       "n": 1
     },
     {
@@ -544,15 +580,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFSPREAD-26NOV28CMUBALL-CMU4",
-      "yesNo": "Yes",
-      "side": "Central Michigan wins by over 3.5 points",
-      "game": "Central Michigan vs Ball State",
-      "startTs": 1795885200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXNCAAFTOTAL-26NOV28LSUARK-50",
       "yesNo": "Yes",
       "side": "Over 49.5",
@@ -604,15 +631,6 @@
       "game": "Counter-Strike: Prestige vs HAVU",
       "startTs": 1795888800,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28SMUSTAN-SMU8",
-      "yesNo": "No",
-      "side": "Stanford Cardinal +7.5",
-      "game": "Stanford Cardinal vs SMU Mustangs",
-      "startTs": 1795897800,
-      "bt": "spread",
       "n": 1
     },
     {
