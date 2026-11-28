@@ -1,8 +1,62 @@
 {
   "source": "whale",
-  "ts": 1795842235,
-  "updatedAt": "Fri Nov 27 \u00b7 9:03 PM PT",
+  "ts": 1795842545,
+  "updatedAt": "Fri Nov 27 \u00b7 9:09 PM PT",
   "picks": [
+    {
+      "ticker": "KXNBAGAME-26NOV27LALSAS-LAL",
+      "yesNo": "Yes",
+      "side": "Lakers",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 3
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
+      "yesNo": "Yes",
+      "side": "Spurs",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27LALSAS-SAS6",
+      "yesNo": "Yes",
+      "side": "San Antonio wins by over 5.5 points",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
+      "bt": "spread",
+      "n": 2
+    },
+    {
+      "ticker": "KXNBATOTAL-26NOV27LALSAS-227",
+      "yesNo": "Yes",
+      "side": "Over 226.5",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV280100IMPAST-AST",
+      "yesNo": "Yes",
+      "side": "Astralis",
+      "game": "Counter-Strike: Astralis vs Imperial",
+      "startTs": 1795845600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV280100IMPAST-IMP",
+      "yesNo": "Yes",
+      "side": "Imperial",
+      "game": "Counter-Strike: Astralis vs Imperial",
+      "startTs": 1795845600,
+      "bt": "moneyline",
+      "n": 1
+    },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
       "yesNo": "Yes",
@@ -31,21 +85,30 @@
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV280100IMPAST-IMP",
+      "ticker": "KXLALIGAGAME-26NOV28RMAALA-RMA",
       "yesNo": "Yes",
-      "side": "Imperial",
-      "game": "Counter-Strike: Astralis vs Imperial",
-      "startTs": 1795845600,
+      "side": "Real Madrid CF to win",
+      "game": "Real Madrid CF vs Deportivo Alav\u00e9s",
+      "startTs": 1795896000,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
+      "yesNo": "Yes",
+      "side": "Deportivo Alav\u00e9s not to win",
+      "game": "Real Madrid CF vs Deportivo Alav\u00e9s",
+      "startTs": 1795896000,
       "bt": "moneyline",
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV280100IMPAST-AST",
-      "yesNo": "Yes",
-      "side": "Astralis",
-      "game": "Counter-Strike: Astralis vs Imperial",
-      "startTs": 1795845600,
-      "bt": "moneyline",
+      "ticker": "KXLALIGASPREAD-26NOV28RMAALA-RMA3",
+      "yesNo": "No",
+      "side": "Markets +2.5",
+      "game": "Real Madrid CF vs Deportivo Alav\u00e9s",
+      "startTs": 1795896000,
+      "bt": "spread",
       "n": 1
     },
     {
@@ -56,33 +119,6 @@
       "startTs": 1795987500,
       "bt": "moneyline",
       "n": 2
-    },
-    {
-      "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
-      "yesNo": "Yes",
-      "side": "Deportivo Alav\u00e9s not to win",
-      "game": "Real Madrid vs Alav\u00e9s",
-      "startTs": 1795896000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXLALIGAGAME-26NOV28RMAALA-RMA",
-      "yesNo": "Yes",
-      "side": "Real Madrid CF to win",
-      "game": "Real Madrid vs Alav\u00e9s",
-      "startTs": 1795896000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXLALIGASPREAD-26NOV28RMAALA-RMA3",
-      "yesNo": "No",
-      "side": "Markets +2.5",
-      "game": "Real Madrid vs Alav\u00e9s",
-      "startTs": 1795896000,
-      "bt": "spread",
-      "n": 1
     },
     {
       "ticker": "KXCS2GAME-26NOV272300NIPNEMI-NEMI",
@@ -238,30 +274,21 @@
       "n": 1
     },
     {
+      "ticker": "KXMLSGAME-26NOV27RSLVAN-VAN",
+      "yesNo": "No",
+      "side": "Vancouver Whitecaps FC not to win",
+      "game": "Real Salt Lake vs Vancouver Whitecaps FC",
+      "startTs": 1795834800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV28UABUNT-UNT4",
       "yesNo": "Yes",
       "side": "North Texas wins by over 3.5 points",
       "game": "UAB vs North Texas",
       "startTs": 1795899600,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXJLEAGUEGAME-26NOV28SHIURD-URD",
-      "yesNo": "No",
-      "side": "Urawa Red Diamonds not to win",
-      "game": "Shimizu S-Pulse vs Urawa Red Diamonds",
-      "startTs": 1795842000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
-      "yesNo": "Yes",
-      "side": "FUT Esports",
-      "game": "Counter-Strike: FUT Esports vs FlyQuest",
-      "startTs": 1795838400,
-      "bt": "moneyline",
       "n": 1
     },
     {

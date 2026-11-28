@@ -103741,7 +103741,11 @@
    "first_seen": 1795727824,
    "scans": 18,
    "first_score": 22,
-   "result": null
+   "result": "W",
+   "graded": 1795842495,
+   "ended": 1795842495,
+   "finalScore": "POR 116 \u2013 GS 94",
+   "active": false
   },
   "0x5b02f2c2b494e63a9f90b5cef04591f221230845b94d514040c61dbd7e3f27f9:yes": {
    "tier": "fun",
@@ -110268,7 +110272,10 @@
    "first_seen": 1795814251,
    "scans": 4,
    "first_score": 28,
-   "result": null
+   "result": null,
+   "ended": 1795842495,
+   "finalScore": "POR 116 \u2013 GS 94",
+   "active": false
   },
   "0x85761ed11a7ef42eb6126a38d08c7adec5e65ca3883be47a1421dee5f5e10cfa:yes": {
    "tier": "fun",
@@ -112572,7 +112579,10 @@
    "first_seen": 1795835834,
    "scans": 1,
    "first_score": 30,
-   "result": null
+   "result": null,
+   "ended": 1795842495,
+   "finalScore": "POR 116 \u2013 GS 94",
+   "active": false
   },
   "0x4af70d0d3cf99e621de921675d7548c04d4af48d064d0e0731a7a181217156c7:yes": {
    "tier": "fun",
