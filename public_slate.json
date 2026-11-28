@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795876341,
-  "updatedAt": "Sat Nov 28 \u00b7 6:32 AM PT",
+  "ts": 1795876642,
+  "updatedAt": "Sat Nov 28 \u00b7 6:37 AM PT",
   "picks": [
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -10,7 +10,7 @@
       "game": "Manchester United FC vs Brentford FC",
       "startTs": 1795878000,
       "bt": "moneyline",
-      "n": 3
+      "n": 4
     },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -29,33 +29,6 @@
       "startTs": 1795878000,
       "bt": "moneyline",
       "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280730PVFLY-FLY",
-      "yesNo": "Yes",
-      "side": "FlyQuest",
-      "game": "Counter-Strike: FlyQuest vs PVISION",
-      "startTs": 1795869000,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280730PVFLY-PV",
-      "yesNo": "Yes",
-      "side": "PVISION",
-      "game": "Counter-Strike: FlyQuest vs PVISION",
-      "startTs": 1795869000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXBUNDESLIGATOTAL-26NOV28HSVBMU-4",
-      "yesNo": "Yes",
-      "side": "Over 3.5",
-      "game": "Hamburger SV vs FC Bayern M\u00fcnchen - More Markets",
-      "startTs": 1795876200,
-      "bt": "total",
-      "n": 3
     },
     {
       "ticker": "KXLALIGAGAME-26NOV28RMAALA-RMA",
@@ -83,6 +56,33 @@
       "startTs": 1795896000,
       "bt": "spread",
       "n": 1
+    },
+    {
+      "ticker": "KXBUNDESLIGATOTAL-26NOV28HSVBMU-4",
+      "yesNo": "Yes",
+      "side": "Over 3.5",
+      "game": "Hamburger SV vs FC Bayern M\u00fcnchen - More Markets",
+      "startTs": 1795876200,
+      "bt": "total",
+      "n": 3
+    },
+    {
+      "ticker": "KXDOTA2GAME-26NOV281000PARI1WIN-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "1win vs PARIVISION",
+      "startTs": 1795878000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV280730PVFLY-FLY",
+      "yesNo": "Yes",
+      "side": "FlyQuest",
+      "game": "Counter-Strike: FlyQuest vs PVISION",
+      "startTs": 1795869000,
+      "bt": "moneyline",
+      "n": 2
     },
     {
       "ticker": "KXNFLGAME-26NOV29SEASF-SF",
@@ -118,15 +118,6 @@
       "game": "Leeds United vs Coventry City",
       "startTs": 1795878000,
       "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXDOTA2GAME-26NOV281000PARI1WIN-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "1win vs PARIVISION",
-      "startTs": 1795878000,
-      "bt": "moneyline",
       "n": 1
     },
     {
@@ -199,6 +190,15 @@
       "game": "South Carolina vs Clemson",
       "startTs": 1795896000,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXLALIGAGAME-26NOV28ELCATM-ATM",
+      "yesNo": "No",
+      "side": "Club Atl\u00e9tico de Madrid not to win",
+      "game": "Elche CF vs Club Atl\u00e9tico de Madrid",
+      "startTs": 1795887000,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -589,6 +589,15 @@
       "n": 1
     },
     {
+      "ticker": "KXSUPERLIGTOTAL-26NOV28SAMGEN-5",
+      "yesNo": "No",
+      "side": "Under 4.5",
+      "game": "Samsunspor vs Genclerbirligi",
+      "startTs": 1795870800,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV28SMUSTAN-SMU8",
       "yesNo": "No",
       "side": "Stanford Cardinal +7.5",
@@ -598,20 +607,20 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFTOTAL-26NOV28JVSTDEL-58",
+      "yesNo": "Yes",
+      "side": "Over 57.5",
+      "game": "Delaware Blue Hens vs Jacksonville State Gamecocks",
+      "startTs": 1795897800,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXNBAGAME-26NOV29ATLNYK-NYK",
       "yesNo": "Yes",
       "side": "Knicks",
       "game": "New York Knicks vs Atlanta Hawks",
       "startTs": 1795993200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXLALIGAGAME-26NOV28ELCATM-ATM",
-      "yesNo": "No",
-      "side": "Club Atl\u00e9tico de Madrid not to win",
-      "game": "Elche CF vs Club Atl\u00e9tico de Madrid",
-      "startTs": 1795887000,
       "bt": "moneyline",
       "n": 1
     },
