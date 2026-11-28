@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795840244,
-  "updatedAt": "Fri Nov 27 \u00b7 8:30 PM PT",
+  "ts": 1795840444,
+  "updatedAt": "Fri Nov 27 \u00b7 8:34 PM PT",
   "picks": [
     {
       "ticker": "KXNBAGAME-26NOV27LALSAS-LAL",
@@ -11,15 +11,6 @@
       "startTs": 1795833000,
       "bt": "moneyline",
       "n": 4
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
-      "yesNo": "Yes",
-      "side": "Spurs",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 1
     },
     {
       "ticker": "KXNBASPREAD-26NOV27LALSAS-SAS6",
@@ -64,24 +55,6 @@
       "game": "Utah Jazz vs Denver Nuggets",
       "startTs": 1795833000,
       "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27DENUTA-UTA",
-      "yesNo": "Yes",
-      "side": "Jazz",
-      "game": "Utah Jazz vs Denver Nuggets",
-      "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27NOPLAC-NOP",
-      "yesNo": "Yes",
-      "side": "Pelicans",
-      "game": "LA Clippers vs New Orleans Pelicans",
-      "startTs": 1795833000,
-      "bt": "moneyline",
       "n": 1
     },
     {
@@ -94,22 +67,22 @@
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV272300LVGMGLZ-MGLZ",
+      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
       "yesNo": "Yes",
-      "side": "TheMongolz",
-      "game": "Counter-Strike: TheMongolz vs Lynn Vision",
+      "side": "FUT Esports",
+      "game": "Counter-Strike: FUT Esports vs FlyQuest",
       "startTs": 1795838400,
       "bt": "moneyline",
-      "n": 2
+      "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV272300LVGMGLZ-LVG",
+      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FLY",
       "yesNo": "Yes",
-      "side": "Lynn Vision",
-      "game": "Counter-Strike: TheMongolz vs Lynn Vision",
+      "side": "FlyQuest",
+      "game": "Counter-Strike: FUT Esports vs FlyQuest",
       "startTs": 1795838400,
       "bt": "moneyline",
-      "n": 3
+      "n": 1
     },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -139,6 +112,15 @@
       "n": 1
     },
     {
+      "ticker": "KXCS2GAME-26NOV272300LVGMGLZ-LVG",
+      "yesNo": "Yes",
+      "side": "Lynn Vision",
+      "game": "Counter-Strike: TheMongolz vs Lynn Vision",
+      "startTs": 1795838400,
+      "bt": "moneyline",
+      "n": 4
+    },
+    {
       "ticker": "KXNFLGAME-26NOV29SEASF-SF",
       "yesNo": "Yes",
       "side": "49ers",
@@ -146,51 +128,6 @@
       "startTs": 1795987500,
       "bt": "moneyline",
       "n": 2
-    },
-    {
-      "ticker": "KXNCAAFGAME-26NOV28UABUNT-UNT",
-      "yesNo": "Yes",
-      "side": "Texas",
-      "game": "Texas vs Texas A&M",
-      "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28TXSTUSU-TXST11",
-      "yesNo": "Yes",
-      "side": "Texas St. wins by over 10.5 points",
-      "game": "Texas vs Texas A&M",
-      "startTs": 1795825800,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28TXSTUSU-TXST11",
-      "yesNo": "No",
-      "side": "Texas A&M +10.5",
-      "game": "Texas vs Texas A&M",
-      "startTs": 1795825800,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28TXSTUSU-TXST15",
-      "yesNo": "Yes",
-      "side": "Texas St. wins by over 14.5 points",
-      "game": "Texas vs Texas A&M",
-      "startTs": 1795825800,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28TXSTUSU-TXST17",
-      "yesNo": "Yes",
-      "side": "Texas St. wins by over 16.5 points",
-      "game": "Texas vs Texas A&M",
-      "startTs": 1795825800,
-      "bt": "spread",
-      "n": 1
     },
     {
       "ticker": "KXCS2GAME-26NOV280100IMPAST-IMP",
@@ -212,6 +149,15 @@
     },
     {
       "ticker": "KXNBASPREAD-26NOV27DALPHX-PHX3",
+      "yesNo": "No",
+      "side": "Mavericks +2.5",
+      "game": "Phoenix Suns vs Dallas Mavericks",
+      "startTs": 1795831200,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27DALPHX-PHX3",
       "yesNo": "Yes",
       "side": "Phoenix wins by over 2.5 points",
       "game": "Phoenix Suns vs Dallas Mavericks",
@@ -226,15 +172,6 @@
       "game": "Phoenix Suns vs Dallas Mavericks",
       "startTs": 1795831200,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
-      "yesNo": "Yes",
-      "side": "FUT Esports",
-      "game": "Counter-Strike: FUT Esports vs FlyQuest",
-      "startTs": 1795838400,
-      "bt": "moneyline",
       "n": 1
     },
     {
@@ -279,6 +216,15 @@
       "side": "Jaguars",
       "game": "Jacksonville Jaguars vs Tennessee Titans",
       "startTs": 1795975200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
+      "yesNo": "Yes",
+      "side": "Nuggets",
+      "game": "Utah Jazz vs Denver Nuggets",
+      "startTs": 1795833000,
       "bt": "moneyline",
       "n": 1
     },
@@ -356,7 +302,7 @@
     },
     {
       "ticker": "KXMLSGAME-26NOV27RSLVAN-VAN",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Vancouver Whitecaps FC not to win",
       "game": "Real Salt Lake vs Vancouver Whitecaps FC",
       "startTs": 1795834800,
@@ -419,7 +365,7 @@
     },
     {
       "ticker": "KXKLEAGUEGAME-26NOV28SEODAJ-SEO",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "FC Seoul not to win",
       "game": "FC Seoul vs Daejeon Hana Citizen FC",
       "startTs": 1795842000,
