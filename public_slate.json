@@ -1,11 +1,20 @@
 {
   "source": "whale",
-  "ts": 1795842834,
-  "updatedAt": "Fri Nov 27 \u00b7 9:13 PM PT",
+  "ts": 1795844150,
+  "updatedAt": "Fri Nov 27 \u00b7 9:35 PM PT",
   "picks": [
     {
-      "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
+      "ticker": "KXCS2GAME-26NOV272300NIPNEMI-NEMI",
       "yesNo": "Yes",
+      "side": "Nemiga",
+      "game": "Counter-Strike: Nemiga vs NIP",
+      "startTs": 1795838400,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
+      "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
+      "yesNo": "No",
       "side": "Manchester United FC not to win",
       "game": "Manchester United FC vs Brentford FC",
       "startTs": 1795878000,
@@ -23,7 +32,7 @@
     },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-BRE",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Brentford FC not to win",
       "game": "Manchester United FC vs Brentford FC",
       "startTs": 1795878000,
@@ -63,15 +72,6 @@
       "side": "49ers",
       "game": "San Francisco 49ers vs Seattle Seahawks",
       "startTs": 1795987500,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV272300NIPNEMI-NEMI",
-      "yesNo": "Yes",
-      "side": "Nemiga",
-      "game": "Counter-Strike: Nemiga vs NIP",
-      "startTs": 1795838400,
       "bt": "moneyline",
       "n": 2
     },
@@ -121,15 +121,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNBASPREAD-26NOV27LALSAS-SAS6",
-      "yesNo": "Yes",
-      "side": "San Antonio wins by over 5.5 points",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "spread",
-      "n": 2
-    },
-    {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
       "yesNo": "Yes",
       "side": "FC Barcelona to win",
@@ -157,12 +148,30 @@
       "n": 1
     },
     {
+      "ticker": "KXNBAGAME-26NOV28PHIHOU-PHI",
+      "yesNo": "Yes",
+      "side": "76ers",
+      "game": "Houston Rockets vs Philadelphia 76ers",
+      "startTs": 1795915800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV28CONNWYO-CONN4",
       "yesNo": "No",
       "side": "Wyoming Cowboys +3.5",
       "game": "Wyoming Cowboys vs UConn Huskies",
       "startTs": 1795885200,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXATPCHALLENGERMATCH-26NOV27IMAUCH-IMA",
+      "yesNo": "Yes",
+      "side": "Masamichi Imamura",
+      "game": "Yokohama: Masamichi Imamura vs Kaichi Uchida",
+      "startTs": 1795840800,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -220,15 +229,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFSPREAD-26NOV28SACHAW-HAW14",
-      "yesNo": "Yes",
-      "side": "Hawai'i wins by over 13.5 points",
-      "game": "Hawai'i Rainbow Warriors vs Sacramento State Hornets",
-      "startTs": 1795924800,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXLALIGAGAME-26NOV30ESPGET-ESP",
       "yesNo": "Yes",
       "side": "RCD Espanyol de Barcelona to win",
@@ -238,12 +238,12 @@
       "n": 1
     },
     {
-      "ticker": "KXMLSGAME-26NOV27RSLVAN-VAN",
-      "yesNo": "No",
-      "side": "Vancouver Whitecaps FC not to win",
-      "game": "Real Salt Lake vs Vancouver Whitecaps FC",
-      "startTs": 1795834800,
-      "bt": "moneyline",
+      "ticker": "KXNCAAFSPREAD-26NOV28SACHAW-HAW14",
+      "yesNo": "Yes",
+      "side": "Hawai'i wins by over 13.5 points",
+      "game": "Hawai'i Rainbow Warriors vs Sacramento State Hornets",
+      "startTs": 1795924800,
+      "bt": "spread",
       "n": 1
     },
     {
@@ -283,17 +283,8 @@
       "n": 1
     },
     {
-      "ticker": "KXEERSTEDIVGAME-26NOV28EMMHEL-TIE",
-      "yesNo": "Yes",
-      "side": "DRAW",
-      "game": "FC Emmen vs Helmond Sport",
-      "startTs": 1795879800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXKLEAGUEGAME-26NOV28SEODAJ-SEO",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "FC Seoul not to win",
       "game": "FC Seoul vs Daejeon Hana Citizen FC",
       "startTs": 1795842000,
@@ -301,47 +292,20 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFSPREAD-26NOV27WVUUTAH-UTAH24",
-      "yesNo": "No",
-      "side": "West Virginia Mountaineers +23.5",
-      "game": "Utah Utes vs West Virginia Mountaineers",
-      "startTs": 1795831200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV27WVUUTAH-UTAH25",
-      "yesNo": "No",
-      "side": "West Virginia Mountaineers +24.5",
-      "game": "Utah Utes vs West Virginia Mountaineers",
-      "startTs": 1795831200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFTOTAL-26NOV27WVUUTAH-66",
-      "yesNo": "No",
-      "side": "Under 65.5",
-      "game": "Utah Utes vs West Virginia Mountaineers",
-      "startTs": 1795831200,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFTOTAL-26NOV27WVUUTAH-70",
-      "yesNo": "No",
-      "side": "Under 69.5",
-      "game": "Utah Utes vs West Virginia Mountaineers",
-      "startTs": 1795831200,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXEPLGAME-26NOV28LEECOV-LEE",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Leeds United FC not to win",
       "game": "Leeds United vs Coventry City",
       "startTs": 1795878000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXLALIGAGAME-26NOV28ELCATM-ATM",
+      "yesNo": "Yes",
+      "side": "Club Atl\u00e9tico de Madrid not to win",
+      "game": "Elche CF vs Club Atl\u00e9tico de Madrid",
+      "startTs": 1795887000,
       "bt": "moneyline",
       "n": 1
     },
