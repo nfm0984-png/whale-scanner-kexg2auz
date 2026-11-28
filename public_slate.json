@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795837379,
-  "updatedAt": "Fri Nov 27 \u00b7 7:42 PM PT",
+  "ts": 1795837667,
+  "updatedAt": "Fri Nov 27 \u00b7 7:47 PM PT",
   "picks": [
     {
       "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
@@ -148,24 +148,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNHLGAME-26NOV28EDMSEA-EDM",
-      "yesNo": "Yes",
-      "side": "Oilers",
-      "game": "Edmonton Oilers vs Seattle Kraken",
-      "startTs": 1795827600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNHLGAME-26NOV28EDMSEA-SEA",
-      "yesNo": "Yes",
-      "side": "Kraken",
-      "game": "Edmonton Oilers vs Seattle Kraken",
-      "startTs": 1795827600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNCAAFGAME-26NOV28UABUNT-UNT",
       "yesNo": "Yes",
       "side": "Texas",
@@ -229,15 +211,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNBATOTAL-26NOV27MEMMIN-220",
-      "yesNo": "Yes",
-      "side": "Over 219.5",
-      "game": "Minnesota Timberwolves vs Memphis Grizzlies",
-      "startTs": 1795829400,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXNFLGAME-26NOV29SEASF-SF",
       "yesNo": "Yes",
       "side": "49ers",
@@ -279,6 +252,24 @@
       "side": "Real Madrid CF to win",
       "game": "Real Madrid vs Alav\u00e9s",
       "startTs": 1795896000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNHLGAME-26NOV28EDMSEA-EDM",
+      "yesNo": "Yes",
+      "side": "Oilers",
+      "game": "Edmonton Oilers vs Seattle Kraken",
+      "startTs": 1795827600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNHLGAME-26NOV28EDMSEA-SEA",
+      "yesNo": "Yes",
+      "side": "Kraken",
+      "game": "Edmonton Oilers vs Seattle Kraken",
+      "startTs": 1795827600,
       "bt": "moneyline",
       "n": 1
     },
@@ -382,19 +373,19 @@
       "n": 1
     },
     {
-      "ticker": "KXMLSGAME-26NOV27RSLVAN-RSL",
+      "ticker": "KXMLSGAME-26NOV27RSLVAN-VAN",
       "yesNo": "Yes",
-      "side": "Real Salt Lake to win",
-      "game": "Real Salt Lake vs Vancouver Whitecaps",
+      "side": "Vancouver Whitecaps FC not to win",
+      "game": "Real Salt Lake vs Vancouver Whitecaps FC",
       "startTs": 1795834800,
       "bt": "moneyline",
       "n": 1
     },
     {
-      "ticker": "KXMLSGAME-26NOV27RSLVAN-VAN",
-      "yesNo": "No",
-      "side": "Vancouver Whitecaps FC not to win",
-      "game": "Real Salt Lake vs Vancouver Whitecaps",
+      "ticker": "KXMLSGAME-26NOV27RSLVAN-RSL",
+      "yesNo": "Yes",
+      "side": "Real Salt Lake to win",
+      "game": "Real Salt Lake vs Vancouver Whitecaps FC",
       "startTs": 1795834800,
       "bt": "moneyline",
       "n": 1
@@ -472,6 +463,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFSPREAD-26NOV27WVUUTAH-UTAH22",
+      "yesNo": "No",
+      "side": "West Virginia +21.5",
+      "game": "Utah Utes vs West Virginia Mountaineers",
+      "startTs": 1795831200,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV27WVUUTAH-UTAH25",
       "yesNo": "No",
       "side": "West Virginia +24.5",
@@ -481,18 +481,18 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFTOTAL-26NOV27WVUUTAH-66",
+      "ticker": "KXNCAAFTOTAL-26NOV27WVUUTAH-70",
       "yesNo": "No",
-      "side": "Under 65.5",
+      "side": "Under 69.5",
       "game": "Utah Utes vs West Virginia Mountaineers",
       "startTs": 1795831200,
       "bt": "total",
       "n": 1
     },
     {
-      "ticker": "KXNCAAFTOTAL-26NOV27WVUUTAH-70",
+      "ticker": "KXNCAAFTOTAL-26NOV27WVUUTAH-66",
       "yesNo": "No",
-      "side": "Under 69.5",
+      "side": "Under 65.5",
       "game": "Utah Utes vs West Virginia Mountaineers",
       "startTs": 1795831200,
       "bt": "total",
