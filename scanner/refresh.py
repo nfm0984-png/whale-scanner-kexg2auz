@@ -538,6 +538,17 @@ else:
     except Exception as _e:
         print('kalshiCappers failed:', _e, flush=True)
         emb.setdefault('kalshiCappers', {'cappers': [], 'coverage': {}, 'blocklist': ['Wiseandstrong']})
+try:
+    import bet_size as _bsz
+    _bsz.annotate_payload(emb)
+
+    try:
+        import best_double as _bd
+        emb["bestDouble"] = _bd.build_from_whale_payload(emb) or _bd.empty_state()
+    except Exception as _e:
+        print("bestDouble failed:", _e, flush=True)
+except Exception as _e:
+    print('bet size labels failed:', _e, flush=True)
 json.dump(emb, open(os.path.join(HERE, 'page_embed.json'), 'w'), separators=(',', ':'))
 subprocess.run([sys.executable, os.path.join(HERE, 'compact.py')])
 print(f"{('light refreshed' if LIGHT else 'refreshed')} {pt(NOW)}: {len(emb['signals'])} top + {len(emb['fun'])} fun + {len(emb['poly'])} poly + {len(emb.get('glue') or [])} glue + {len(emb.get('props') or [])} props + {len(emb.get('longshots') or [])} longshots + {len(emb.get('biggest') or [])} biggest + {len(emb.get('upcoming') or [])} upcoming + {len(emb.get('comingUp') or [])} coming-up, ESPN games matched {n_espn}, times/opponents filled {n_filled}, Kalshi checks {n_k}, started/ended removed (top/fun/poly/glue/props/longshots/biggest/upcoming/bets/buys) {removed}, OrcaLayer calls 0")

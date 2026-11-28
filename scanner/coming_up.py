@@ -821,6 +821,11 @@ def build(lean_bets, capper_history, now, win_end, proven=None, hot_override=Non
         games = filter_quality_games(games, capper_history, now)
     except Exception as _e:
         print('quality filter failed:', _e)
+    try:
+        import bet_size as _bs
+        games = _bs.annotate_coming_games(games, capper_history)
+    except Exception as _e:
+        print('bet size labels failed:', _e)
     return games
 
 
@@ -1256,6 +1261,11 @@ def refresh(games, now, win_end, kalshi_now=None, capper_history=None):
         out = filter_quality_games(out, capper_history or {}, now)
     except Exception as _e:
         print('quality filter failed:', _e)
+    try:
+        import bet_size as _bs
+        out = _bs.annotate_coming_games(out, capper_history or {})
+    except Exception as _e:
+        print('bet size labels failed:', _e)
     return out
 
 
