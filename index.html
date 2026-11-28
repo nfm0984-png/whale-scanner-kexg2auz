@@ -136,8 +136,8 @@ function bootApp(data, kalshi) {
     document.getElementById("root").innerHTML = '<div id="boot">Loading whale picks…</div>';
   }
   var t = Date.now();
-  return loadScript("config.js?v=ec2ff8f460&t=" + t).catch(function () {}).then(function () {
-    return loadScript("app.js?v=ec2ff8f460&t=" + Date.now());
+  return loadScript("config.js?v=6a14a8bb18&t=" + t).catch(function () {}).then(function () {
+    return loadScript("app.js?v=6a14a8bb18&t=" + Date.now());
   });
 }
 function fetchJson(name) {

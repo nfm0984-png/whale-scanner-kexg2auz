@@ -467,3 +467,54 @@ def build_from_kalshi_payload(payload, now=None):
         _apply_opp_scores(group)
         rows.extend(group)
     return select_double(rows) or empty_state()
+
+
+# ---------------------------------------------------------------------------
+# t1146: Double-grade gate summary for Golden / Ranked / Coming Up (log only).
+# The site applies the same per-pick gates client-side; this logs before/after
+# counts and the top reasons in each scan's Actions log. No fallbacks here: the
+# Polymarket data already carries month/year P&L and per-sport records.
+def gate_summary_whale(payload, now=None):
+    import time as _time
+    now = now if now is not None else (payload.get("ts") or _time.time())
+    ch = payload.get("capperHistory") or {}
+    cmap = {(c.get("wallet") or "").lower(): c for c in (ch.get("cappers") or []) if c.get("wallet")}
+    fam_map = ch.get("sportFamilyMap") or {}
+    recs = ch.get("capperSportRecords") or {}
+    before = after = 0
+    reasons = {}
+    passed = []
+    for g in payload.get("comingUp") or []:
+        if not isinstance(g, dict):
+            continue
+        league = g.get("league") or ""
+        live = bool((g.get("startTs") or 0) and g.get("startTs") <= now)
+        fam = fam_map.get(league) or fam_map.get(str(league).upper()) or fam_map.get(str(league).lower())
+        for m in g.get("markets") or []:
+            group = []
+            for s in m.get("sides") or []:
+                px = s.get("kPrice") if s.get("kPrice") is not None else s.get("px")
+                backers = []
+                for b in s.get("backers") or []:
+                    w = (b.get("wallet") or "").lower()
+                    rec = cmap.get(w) or {}
+                    win = rec.get("win") or {}
+                    bb = dict(b)
+                    bb["monthPnl"] = (win.get("month") or {}).get("pnl")
+                    bb["yearPnl"] = (win.get("year") or {}).get("pnl")
+                    bb["sport"] = _sport_lookup(recs.get(w) or rec.get("sports") or {}, league, fam)
+                    backers.append(bb)
+                group.append({"label": s.get("label") or "", "price": px, "entry": s.get("avgEntry"), "backers": backers, "live": live})
+            _apply_opp_scores(group)
+            for r in group:
+                if not r["backers"]:
+                    continue
+                before += 1
+                why = why_skip(r)
+                if why:
+                    reasons[why] = reasons.get(why, 0) + 1
+                    continue
+                after += 1
+                stake = sum(float(b.get("cost") or b.get("usd") or 0) for b in r["backers"])
+                passed.append("%s @%s $%d%s" % (r["label"], int(round(float(r["price"] or 0) * 100)), stake, " LIVE" if r["live"] else ""))
+    return {"before": before, "after": after, "reasons": reasons, "passed": passed[:20]}

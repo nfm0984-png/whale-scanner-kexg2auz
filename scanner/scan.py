@@ -1615,6 +1615,10 @@ try:
     try:
         import best_double as _bd
         emb["bestDouble"] = _bd.build_from_whale_payload(emb) or _bd.empty_state()
+        try:
+            print("quality gate (Golden/Ranked/Coming Up):", json.dumps(_bd.gate_summary_whale(emb)), flush=True)
+        except Exception as _e:
+            print("quality gate summary failed:", _e, flush=True)
     except Exception as _e:
         print("bestDouble failed:", _e, flush=True)
 except Exception as _e:
