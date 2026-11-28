@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795849410,
-  "updatedAt": "Fri Nov 27 \u00b7 11:03 PM PT",
+  "ts": 1795849724,
+  "updatedAt": "Fri Nov 27 \u00b7 11:08 PM PT",
   "picks": [
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -67,6 +67,15 @@
       "n": 2
     },
     {
+      "ticker": "KXCS2GAME-26NOV280200100TMIBR-MIBR",
+      "yesNo": "Yes",
+      "side": "MIBR",
+      "game": "Counter-Strike: MIBR vs 100 Thieves",
+      "startTs": 1795849200,
+      "bt": "moneyline",
+      "n": 3
+    },
+    {
       "ticker": "KXNCAAFGAME-26NOV28USCUCLA-USC",
       "yesNo": "Yes",
       "side": "USC",
@@ -74,15 +83,6 @@
       "startTs": 1795897800,
       "bt": "moneyline",
       "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280200100TMIBR-MIBR",
-      "yesNo": "Yes",
-      "side": "MIBR",
-      "game": "Counter-Strike: MIBR vs 100 Thieves",
-      "startTs": 1795849200,
-      "bt": "moneyline",
-      "n": 2
     },
     {
       "ticker": "KXNFLGAME-26NOV29TENJAC-JAC",
@@ -136,6 +136,15 @@
       "game": "Wyoming Cowboys vs UConn Huskies",
       "startTs": 1795885200,
       "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV280100PRVNAVI-PRV",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "Counter-Strike: Natus Vincere vs PARIVISION",
+      "startTs": 1795845600,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -360,15 +369,6 @@
       "side": "Bengals",
       "game": "Cincinnati Bengals vs New Orleans Saints",
       "startTs": 1795975200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXKLEAGUEGAME-26NOV28SEODAJ-SEO",
-      "yesNo": "Yes",
-      "side": "FC Seoul not to win",
-      "game": "FC Seoul",
-      "startTs": 1795852800,
       "bt": "moneyline",
       "n": 1
     },
