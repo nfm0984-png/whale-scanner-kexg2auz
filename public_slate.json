@@ -1,8 +1,17 @@
 {
   "source": "whale",
-  "ts": 1795849724,
-  "updatedAt": "Fri Nov 27 \u00b7 11:08 PM PT",
+  "ts": 1795850008,
+  "updatedAt": "Fri Nov 27 \u00b7 11:13 PM PT",
   "picks": [
+    {
+      "ticker": "KXCS2GAME-26NOV280100PRVNAVI-NAVI",
+      "yesNo": "Yes",
+      "side": "Natus Vincere",
+      "game": "Counter-Strike: Natus Vincere vs PARIVISION",
+      "startTs": 1795845600,
+      "bt": "moneyline",
+      "n": 2
+    },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
       "yesNo": "Yes",
@@ -136,15 +145,6 @@
       "game": "Wyoming Cowboys vs UConn Huskies",
       "startTs": 1795885200,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280100PRVNAVI-PRV",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "Counter-Strike: Natus Vincere vs PARIVISION",
-      "startTs": 1795845600,
-      "bt": "moneyline",
       "n": 1
     },
     {
