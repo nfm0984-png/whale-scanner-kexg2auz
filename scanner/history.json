@@ -102443,7 +102443,11 @@
    "first_seen": 1795721255,
    "scans": 21,
    "first_score": 21,
-   "result": null
+   "result": "W",
+   "graded": 1795841595,
+   "ended": 1795841595,
+   "finalScore": "UTAH 107 \u2013 DEN 120",
+   "active": false
   },
   "0xf7f7c650d71360a49712b3b88482e4d2c437e5d00946fcde13322c55070472cd:yes": {
    "tier": "top",
@@ -108488,7 +108492,10 @@
    "first_seen": 1795800096,
    "scans": 7,
    "first_score": 28,
-   "result": null
+   "result": null,
+   "ended": 1795841595,
+   "finalScore": "UTAH 107 \u2013 DEN 120",
+   "active": false
   },
   "0x1d81abd18bb23cbd31cc121088251e52f9a9483a7b2607c3571d7d0f2f48ff4f:yes": {
    "tier": "poly",
@@ -108607,7 +108614,10 @@
    "first_seen": 1795800096,
    "scans": 7,
    "first_score": 21,
-   "result": null
+   "result": null,
+   "ended": 1795841595,
+   "finalScore": "UTAH 107 \u2013 DEN 120",
+   "active": false
   },
   "0x870c970f4eb7e087cebc69107af53bf233470a7fd0b0bce88ceb6c6862866c35:yes": {
    "tier": "poly",
@@ -112649,7 +112659,11 @@
    "first_seen": 1795835834,
    "scans": 1,
    "first_score": 26,
-   "result": null
+   "result": "L",
+   "graded": 1795841595,
+   "ended": 1795841595,
+   "finalScore": "UTAH 107 \u2013 DEN 120",
+   "active": false
   },
   "0x67a2fdf54fcff29d0da00ed21c5a2a3e9a07c894a1352d25be59355612502482:no": {
    "tier": "fun",
@@ -112732,7 +112746,10 @@
    "first_seen": 1795835834,
    "scans": 1,
    "first_score": 31,
-   "result": null
+   "result": null,
+   "ended": 1795841595,
+   "finalScore": "UTAH 107 \u2013 DEN 120",
+   "active": false
   },
   "0xbe7c227c4fb48cf0d4ec2fe27fa9aa26d719aa681cb49abc417a892ecb45a097:no": {
    "tier": "poly",
