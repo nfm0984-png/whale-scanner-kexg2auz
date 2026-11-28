@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795848016,
-  "updatedAt": "Fri Nov 27 \u00b7 10:40 PM PT",
+  "ts": 1795848526,
+  "updatedAt": "Fri Nov 27 \u00b7 10:48 PM PT",
   "picks": [
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -220,6 +220,105 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAFGAME-26NOV28MICHOSU-OSU",
+      "yesNo": "Yes",
+      "side": "Ohio State",
+      "game": "Ohio State Buckeyes vs Michigan Wolverines",
+      "startTs": 1795885200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFTOTAL-26NOV28MICHOSU-38",
+      "yesNo": "Yes",
+      "side": "Over 37.5",
+      "game": "Ohio State Buckeyes vs Michigan Wolverines",
+      "startTs": 1795885200,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV28CONNWYO-CONN5",
+      "yesNo": "No",
+      "side": "Wyoming Cowboys +4.5",
+      "game": "Wyoming Cowboys vs UConn Huskies",
+      "startTs": 1795885200,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFTOTAL-26NOV28BCMIA-54",
+      "yesNo": "No",
+      "side": "Under 53.5",
+      "game": "Miami Hurricanes vs Boston College Eagles",
+      "startTs": 1795885200,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV28USMODU-ODU7",
+      "yesNo": "No",
+      "side": "Southern Miss Golden Eagles +6.5",
+      "game": "Old Dominion Monarchs vs Southern Miss Golden Eagles",
+      "startTs": 1795888800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV28CCARJMU-JMU18",
+      "yesNo": "No",
+      "side": "Coastal Carolina Chanticleers +17.5",
+      "game": "James Madison Dukes vs Coastal Carolina Chanticleers",
+      "startTs": 1795892400,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFSPREAD-26NOV28LIBMOSU-LIB18",
+      "yesNo": "No",
+      "side": "Missouri State Bears +17.5",
+      "game": "Missouri State Bears vs Liberty Flames",
+      "startTs": 1795892400,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFTOTAL-26NOV28UCFCOLO-50",
+      "yesNo": "Yes",
+      "side": "Over 49.5",
+      "game": "Colorado Buffaloes vs UCF Knights",
+      "startTs": 1795892400,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFGAME-26NOV28USCUCLA-USC",
+      "yesNo": "Yes",
+      "side": "USC",
+      "game": "UCLA Bruins vs USC Trojans",
+      "startTs": 1795897800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFGAME-26NOV28AUBALA-AUB",
+      "yesNo": "Yes",
+      "side": "Auburn",
+      "game": "Alabama Crimson Tide vs Auburn Tigers",
+      "startTs": 1795912200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNCAAFTOTAL-26NOV28PITTCAL-46",
+      "yesNo": "Yes",
+      "side": "Over 45.5",
+      "game": "California Golden Bears vs Pittsburgh Panthers",
+      "startTs": 1795912200,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV28SACHAW-HAW14",
       "yesNo": "Yes",
       "side": "Hawai'i wins by over 13.5 points",
@@ -256,12 +355,12 @@
       "n": 1
     },
     {
-      "ticker": "KXKLEAGUEGAME-26NOV28SEODAJ-SEO",
-      "yesNo": "No",
-      "side": "FC Seoul not to win",
-      "game": "FC Seoul vs Daejeon Hana Citizen FC",
+      "ticker": "KXKLEAGUESPREAD-26NOV28SEODAJ-SEO2",
+      "yesNo": "Yes",
+      "side": "FC Seoul wins by over 1.5",
+      "game": "FC Seoul vs Daejeon Hana Citizen FC - More Markets",
       "startTs": 1795842000,
-      "bt": "moneyline",
+      "bt": "spread",
       "n": 1
     },
     {
@@ -275,11 +374,20 @@
     },
     {
       "ticker": "KXLALIGAGAME-26NOV28ELCATM-ATM",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "Club Atl\u00e9tico de Madrid not to win",
       "game": "Elche CF vs Club Atl\u00e9tico de Madrid",
       "startTs": 1795887000,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNFLTOTAL-26NOV29BALHOU-47",
+      "yesNo": "No",
+      "side": "Under 46.5",
+      "game": "Houston Texans vs Baltimore Ravens",
+      "startTs": 1795975200,
+      "bt": "total",
       "n": 1
     },
     {
@@ -288,6 +396,15 @@
       "side": "Como 1907 to win",
       "game": "Como vs Juventus",
       "startTs": 1795981500,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV280100PRVNAVI-PRV",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "Counter-Strike: Natus Vincere vs PARIVISION",
+      "startTs": 1795845600,
       "bt": "moneyline",
       "n": 1
     }
