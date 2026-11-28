@@ -1,26 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795846718,
-  "updatedAt": "Fri Nov 27 \u00b7 10:18 PM PT",
+  "ts": 1795848016,
+  "updatedAt": "Fri Nov 27 \u00b7 10:40 PM PT",
   "picks": [
-    {
-      "ticker": "KXCS2GAME-26NOV280000TLG2-G2",
-      "yesNo": "Yes",
-      "side": "G2",
-      "game": "Counter-Strike: G2 vs Liquid",
-      "startTs": 1795842000,
-      "bt": "moneyline",
-      "n": 6
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280000TLG2-TL",
-      "yesNo": "Yes",
-      "side": "Liquid",
-      "game": "Counter-Strike: G2 vs Liquid",
-      "startTs": 1795842000,
-      "bt": "moneyline",
-      "n": 1
-    },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
       "yesNo": "Yes",
@@ -49,28 +31,28 @@
       "n": 1
     },
     {
-      "ticker": "KXLALIGAGAME-26NOV28RMAALA-RMA",
-      "yesNo": "Yes",
-      "side": "Real Madrid CF to win",
-      "game": "Real Madrid CF vs Deportivo Alav\u00e9s",
-      "startTs": 1795896000,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
       "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
       "yesNo": "Yes",
       "side": "Deportivo Alav\u00e9s not to win",
-      "game": "Real Madrid CF vs Deportivo Alav\u00e9s",
+      "game": "Real Madrid vs Alav\u00e9s",
       "startTs": 1795896000,
       "bt": "moneyline",
       "n": 1
     },
     {
+      "ticker": "KXLALIGAGAME-26NOV28RMAALA-RMA",
+      "yesNo": "Yes",
+      "side": "Real Madrid CF to win",
+      "game": "Real Madrid vs Alav\u00e9s",
+      "startTs": 1795896000,
+      "bt": "moneyline",
+      "n": 2
+    },
+    {
       "ticker": "KXLALIGASPREAD-26NOV28RMAALA-RMA3",
       "yesNo": "No",
       "side": "Markets +2.5",
-      "game": "Real Madrid CF vs Deportivo Alav\u00e9s",
+      "game": "Real Madrid vs Alav\u00e9s",
       "startTs": 1795896000,
       "bt": "spread",
       "n": 1
@@ -112,13 +94,13 @@
       "n": 1
     },
     {
-      "ticker": "KXATPCHALLENGERMATCH-26NOV27IMAUCH-IMA",
+      "ticker": "KXCS2GAME-26NOV280000TLG2-TL",
       "yesNo": "Yes",
-      "side": "Masamichi Imamura",
-      "game": "Yokohama: Masamichi Imamura vs Kaichi Uchida",
-      "startTs": 1795840800,
+      "side": "Liquid",
+      "game": "Counter-Strike: G2 vs Liquid",
+      "startTs": 1795842000,
       "bt": "moneyline",
-      "n": 2
+      "n": 1
     },
     {
       "ticker": "KXLALIGAGAME-26NOV29DEPBAR-BAR",
@@ -229,111 +211,12 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFGAME-26NOV28MICHOSU-OSU",
+      "ticker": "KXNCAAFSPREAD-26NOV28UABUNT-UNT4",
       "yesNo": "Yes",
-      "side": "Ohio State",
-      "game": "Ohio State Buckeyes vs Michigan Wolverines",
-      "startTs": 1795885200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFTOTAL-26NOV28MICHOSU-38",
-      "yesNo": "Yes",
-      "side": "Over 37.5",
-      "game": "Ohio State Buckeyes vs Michigan Wolverines",
-      "startTs": 1795885200,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28CONNWYO-CONN5",
-      "yesNo": "No",
-      "side": "Wyoming Cowboys +4.5",
-      "game": "Wyoming Cowboys vs UConn Huskies",
-      "startTs": 1795885200,
+      "side": "North Texas wins by over 3.5 points",
+      "game": "UAB vs North Texas",
+      "startTs": 1795899600,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFTOTAL-26NOV28BCMIA-54",
-      "yesNo": "No",
-      "side": "Under 53.5",
-      "game": "Miami Hurricanes vs Boston College Eagles",
-      "startTs": 1795885200,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28USMODU-ODU7",
-      "yesNo": "No",
-      "side": "Southern Miss Golden Eagles +6.5",
-      "game": "Old Dominion Monarchs vs Southern Miss Golden Eagles",
-      "startTs": 1795888800,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28CCARJMU-JMU18",
-      "yesNo": "No",
-      "side": "Coastal Carolina Chanticleers +17.5",
-      "game": "James Madison Dukes vs Coastal Carolina Chanticleers",
-      "startTs": 1795892400,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28LIBMOSU-LIB18",
-      "yesNo": "No",
-      "side": "Missouri State Bears +17.5",
-      "game": "Missouri State Bears vs Liberty Flames",
-      "startTs": 1795892400,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFTOTAL-26NOV28UCFCOLO-50",
-      "yesNo": "Yes",
-      "side": "Over 49.5",
-      "game": "Colorado Buffaloes vs UCF Knights",
-      "startTs": 1795892400,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFSPREAD-26NOV28SCARCLEM-SCAR6",
-      "yesNo": "No",
-      "side": "Clemson Tigers +5.5",
-      "game": "Clemson Tigers vs South Carolina Gamecocks",
-      "startTs": 1795896000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFGAME-26NOV28USCUCLA-USC",
-      "yesNo": "Yes",
-      "side": "USC",
-      "game": "UCLA Bruins vs USC Trojans",
-      "startTs": 1795897800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFGAME-26NOV28AUBALA-AUB",
-      "yesNo": "Yes",
-      "side": "Auburn",
-      "game": "Alabama Crimson Tide vs Auburn Tigers",
-      "startTs": 1795912200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNCAAFTOTAL-26NOV28PITTCAL-46",
-      "yesNo": "Yes",
-      "side": "Over 45.5",
-      "game": "California Golden Bears vs Pittsburgh Panthers",
-      "startTs": 1795912200,
-      "bt": "total",
       "n": 1
     },
     {
@@ -346,12 +229,12 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFSPREAD-26NOV28UABUNT-UNT4",
+      "ticker": "KXCS2GAME-26NOV280400LEOFORZER-LEO",
       "yesNo": "Yes",
-      "side": "North Texas wins by over 3.5 points",
-      "game": "UAB vs North Texas",
-      "startTs": 1795899600,
-      "bt": "spread",
+      "side": "Leo Team",
+      "game": "Counter-Strike: FORZE Reload vs Leo Team",
+      "startTs": 1795856400,
+      "bt": "moneyline",
       "n": 1
     },
     {
@@ -392,7 +275,7 @@
     },
     {
       "ticker": "KXLALIGAGAME-26NOV28ELCATM-ATM",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "Club Atl\u00e9tico de Madrid not to win",
       "game": "Elche CF vs Club Atl\u00e9tico de Madrid",
       "startTs": 1795887000,
@@ -405,15 +288,6 @@
       "side": "Como 1907 to win",
       "game": "Como vs Juventus",
       "startTs": 1795981500,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280100PRVNAVI-PRV",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "Counter-Strike: Natus Vincere vs PARIVISION",
-      "startTs": 1795845600,
       "bt": "moneyline",
       "n": 1
     }
