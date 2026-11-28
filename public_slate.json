@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795844616,
-  "updatedAt": "Fri Nov 27 \u00b7 9:43 PM PT",
+  "ts": 1795844904,
+  "updatedAt": "Fri Nov 27 \u00b7 9:48 PM PT",
   "picks": [
     {
       "ticker": "KXCS2GAME-26NOV272300NIPNEMI-NEMI",
@@ -13,13 +13,13 @@
       "n": 2
     },
     {
-      "ticker": "KXCS2GAME-26NOV272300NIPNEMI-NIP",
+      "ticker": "KXCS2GAME-26NOV280100IMPAST-IMP",
       "yesNo": "Yes",
-      "side": "NIP",
-      "game": "Counter-Strike: Nemiga vs NIP",
-      "startTs": 1795838400,
+      "side": "Imperial",
+      "game": "Counter-Strike: Astralis vs Imperial",
+      "startTs": 1795845600,
       "bt": "moneyline",
-      "n": 3
+      "n": 2
     },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -74,15 +74,6 @@
       "startTs": 1795896000,
       "bt": "spread",
       "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280100IMPAST-IMP",
-      "yesNo": "Yes",
-      "side": "Imperial",
-      "game": "Counter-Strike: Astralis vs Imperial",
-      "startTs": 1795845600,
-      "bt": "moneyline",
-      "n": 2
     },
     {
       "ticker": "KXNFLGAME-26NOV29SEASF-SF",
