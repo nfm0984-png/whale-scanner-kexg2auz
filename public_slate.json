@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795852501,
-  "updatedAt": "Fri Nov 27 \u00b7 11:55 PM PT",
+  "ts": 1795852833,
+  "updatedAt": "Sat Nov 28 \u00b7 12:00 AM PT",
   "picks": [
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -58,6 +58,15 @@
       "n": 1
     },
     {
+      "ticker": "KXCS2GAME-26NOV280200100TMIBR-MIBR",
+      "yesNo": "Yes",
+      "side": "MIBR",
+      "game": "Counter-Strike: MIBR vs 100 Thieves",
+      "startTs": 1795849200,
+      "bt": "moneyline",
+      "n": 3
+    },
+    {
       "ticker": "KXNFLGAME-26NOV29SEASF-SF",
       "yesNo": "Yes",
       "side": "49ers",
@@ -67,13 +76,13 @@
       "n": 2
     },
     {
-      "ticker": "KXCS2GAME-26NOV280200100TMIBR-MIBR",
+      "ticker": "KXCS2GAME-26NOV280100PRVNAVI-PRV",
       "yesNo": "Yes",
-      "side": "MIBR",
-      "game": "Counter-Strike: MIBR vs 100 Thieves",
-      "startTs": 1795849200,
+      "side": "PARIVISION",
+      "game": "Counter-Strike: Natus Vincere vs PARIVISION",
+      "startTs": 1795845600,
       "bt": "moneyline",
-      "n": 3
+      "n": 1
     },
     {
       "ticker": "KXNCAAFGAME-26NOV28USCUCLA-USC",
@@ -103,21 +112,21 @@
       "n": 1
     },
     {
-      "ticker": "KXNHLTOTAL-26NOV28TORPIT-7",
-      "yesNo": "Yes",
-      "side": "Over 6.5",
-      "game": "Pittsburgh Penguins vs Toronto Maple Leafs",
-      "startTs": 1795910400,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXJLEAGUEGAME-26NOV28REYSAN-REY",
       "yesNo": "Yes",
       "side": "Kashiwa Reysol not to win",
       "game": "Kashiwa Reysol vs Sanfrecce Hiroshima",
       "startTs": 1795849200,
       "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNHLTOTAL-26NOV28TORPIT-7",
+      "yesNo": "Yes",
+      "side": "Over 6.5",
+      "game": "Pittsburgh Penguins vs Toronto Maple Leafs",
+      "startTs": 1795910400,
+      "bt": "total",
       "n": 1
     },
     {
@@ -135,24 +144,6 @@
       "side": "Texans",
       "game": "Houston Texans vs Baltimore Ravens",
       "startTs": 1795975200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280100PRVNAVI-NAVI",
-      "yesNo": "Yes",
-      "side": "Natus Vincere",
-      "game": "Counter-Strike: Natus Vincere vs PARIVISION",
-      "startTs": 1795845600,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280100PRVNAVI-PRV",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "Counter-Strike: Natus Vincere vs PARIVISION",
-      "startTs": 1795845600,
       "bt": "moneyline",
       "n": 1
     },
