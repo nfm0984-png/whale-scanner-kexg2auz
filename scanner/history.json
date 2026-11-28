@@ -107582,7 +107582,10 @@
    "first_seen": 1795792849,
    "scans": 6,
    "first_score": 24,
-   "result": null
+   "result": null,
+   "ended": 1795838792,
+   "finalScore": "TA&M 6 \u2013 TEX 16",
+   "active": false
   },
   "0xc4bd358b38d6f0996d1d38c1152eb43b301aa831bbc16518d2d00c92ea84a817:yes": {
    "tier": "fun",
@@ -111244,7 +111247,11 @@
    "first_seen": 1795830256,
    "scans": 3,
    "first_score": 50,
-   "result": null
+   "result": "L",
+   "graded": 1795838792,
+   "ended": 1795838792,
+   "finalScore": "TA&M 6 \u2013 TEX 16",
+   "active": false
   },
   "0x55ec449bcd43d6e8c1956d00f4adef4572c178c3abfcc90bb428781d73d38e42:yes": {
    "tier": "fun",

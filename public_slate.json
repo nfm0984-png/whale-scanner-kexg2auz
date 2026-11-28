@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795838585,
-  "updatedAt": "Fri Nov 27 \u00b7 8:03 PM PT",
+  "ts": 1795838867,
+  "updatedAt": "Fri Nov 27 \u00b7 8:07 PM PT",
   "picks": [
     {
       "ticker": "KXNBAGAME-26NOV27DALPHX-DAL",
@@ -22,15 +22,6 @@
       "n": 1
     },
     {
-      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
-      "yesNo": "Yes",
-      "side": "Spurs",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27LALSAS-LAL",
       "yesNo": "Yes",
       "side": "Lakers",
@@ -38,6 +29,15 @@
       "startTs": 1795833000,
       "bt": "moneyline",
       "n": 2
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
+      "yesNo": "Yes",
+      "side": "Spurs",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
     },
     {
       "ticker": "KXNBASPREAD-26NOV27LALSAS-SAS6",
@@ -49,15 +49,6 @@
       "n": 2
     },
     {
-      "ticker": "KXNBASPREAD-26NOV27LALSAS-LAL6",
-      "yesNo": "No",
-      "side": "Spurs +5.5",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXNBATOTAL-26NOV27LALSAS-227",
       "yesNo": "Yes",
       "side": "Over 226.5",
@@ -67,12 +58,30 @@
       "n": 1
     },
     {
-      "ticker": "KXNBATOTAL-26NOV27LALSAS-213",
-      "yesNo": "No",
-      "side": "Under 212.5",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "ticker": "KXNBAGAME-26NOV27GSWPOR-GSW",
+      "yesNo": "Yes",
+      "side": "Warriors",
+      "game": "Portland Trail Blazers vs Golden State Warriors",
       "startTs": 1795833000,
-      "bt": "total",
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27GSWPOR-POR23",
+      "yesNo": "Yes",
+      "side": "Portland wins by over 22.5 points",
+      "game": "Portland Trail Blazers vs Golden State Warriors",
+      "startTs": 1795833000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27GSWPOR-POR10",
+      "yesNo": "No",
+      "side": "Warriors +9.5",
+      "game": "Portland Trail Blazers vs Golden State Warriors",
+      "startTs": 1795833000,
+      "bt": "spread",
       "n": 1
     },
     {
@@ -85,30 +94,12 @@
       "n": 2
     },
     {
-      "ticker": "KXNBATOTAL-26NOV27DENUTA-235",
-      "yesNo": "No",
-      "side": "Under 234.5",
-      "game": "Utah Jazz vs Denver Nuggets",
-      "startTs": 1795833000,
-      "bt": "total",
-      "n": 1
-    },
-    {
       "ticker": "KXNBAGAME-26NOV27NOPLAC-LAC",
       "yesNo": "Yes",
       "side": "Clippers",
       "game": "LA Clippers vs New Orleans Pelicans",
       "startTs": 1795833000,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27NOPLAC-NOP5",
-      "yesNo": "No",
-      "side": "Clippers +4.5",
-      "game": "LA Clippers vs New Orleans Pelicans",
-      "startTs": 1795833000,
-      "bt": "spread",
       "n": 1
     },
     {
@@ -127,7 +118,7 @@
       "game": "Counter-Strike: TheMongolz vs Lynn Vision",
       "startTs": 1795838400,
       "bt": "moneyline",
-      "n": 2
+      "n": 1
     },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -153,6 +144,24 @@
       "side": "Brentford FC not to win",
       "game": "Manchester United FC vs Brentford FC",
       "startTs": 1795878000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
+      "yesNo": "Yes",
+      "side": "FUT Esports",
+      "game": "Counter-Strike: FUT Esports vs FlyQuest",
+      "startTs": 1795838400,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FLY",
+      "yesNo": "Yes",
+      "side": "FlyQuest",
+      "game": "Counter-Strike: FUT Esports vs FlyQuest",
+      "startTs": 1795838400,
       "bt": "moneyline",
       "n": 1
     },
@@ -208,15 +217,6 @@
       "game": "Texas vs Texas A&M",
       "startTs": 1795825800,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
-      "yesNo": "Yes",
-      "side": "FUT Esports",
-      "game": "Counter-Strike: FUT Esports vs FlyQuest",
-      "startTs": 1795838400,
-      "bt": "moneyline",
       "n": 1
     },
     {
@@ -409,6 +409,15 @@
       "n": 1
     },
     {
+      "ticker": "KXKLEAGUEGAME-26NOV28SEODAJ-SEO",
+      "yesNo": "Yes",
+      "side": "FC Seoul not to win",
+      "game": "FC Seoul vs Daejeon Hana Citizen FC",
+      "startTs": 1795842000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV27WVUUTAH-UTAH24",
       "yesNo": "No",
       "side": "West Virginia +23.5",
@@ -418,18 +427,18 @@
       "n": 1
     },
     {
-      "ticker": "KXNCAAFSPREAD-26NOV27WVUUTAH-UTAH22",
+      "ticker": "KXNCAAFSPREAD-26NOV27WVUUTAH-UTAH25",
       "yesNo": "No",
-      "side": "West Virginia +21.5",
+      "side": "West Virginia +24.5",
       "game": "Utah Utes vs West Virginia Mountaineers",
       "startTs": 1795831200,
       "bt": "spread",
       "n": 1
     },
     {
-      "ticker": "KXNCAAFSPREAD-26NOV27WVUUTAH-UTAH25",
+      "ticker": "KXNCAAFSPREAD-26NOV27WVUUTAH-UTAH22",
       "yesNo": "No",
-      "side": "West Virginia +24.5",
+      "side": "West Virginia +21.5",
       "game": "Utah Utes vs West Virginia Mountaineers",
       "startTs": 1795831200,
       "bt": "spread",
