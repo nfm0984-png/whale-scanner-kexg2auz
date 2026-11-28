@@ -1,35 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795877534,
-  "updatedAt": "Sat Nov 28 \u00b7 6:52 AM PT",
+  "ts": 1795877842,
+  "updatedAt": "Sat Nov 28 \u00b7 6:57 AM PT",
   "picks": [
-    {
-      "ticker": "KXDOTA2MAP-26NOV281000PARI1WIN-1-1WIN",
-      "yesNo": "Yes",
-      "side": "1win",
-      "game": "1win vs PARIVISION",
-      "startTs": 1795878000,
-      "bt": "moneyline",
-      "n": 3
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV281000PARI1WIN-1-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "1win vs PARIVISION",
-      "startTs": 1795878000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXDOTA2GAME-26NOV281000PARI1WIN-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "1win vs PARIVISION",
-      "startTs": 1795878000,
-      "bt": "moneyline",
-      "n": 1
-    },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
       "yesNo": "Yes",
@@ -58,6 +31,24 @@
       "n": 1
     },
     {
+      "ticker": "KXDOTA2GAME-26NOV281000PARI1WIN-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "1win vs PARIVISION",
+      "startTs": 1795878000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV281000PARI1WIN-1-1WIN",
+      "yesNo": "Yes",
+      "side": "1win",
+      "game": "1win vs PARIVISION",
+      "startTs": 1795878000,
+      "bt": "moneyline",
+      "n": 3
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV28RMAALA-RMA",
       "yesNo": "Yes",
       "side": "Real Madrid CF to win",
@@ -65,15 +56,6 @@
       "startTs": 1795896000,
       "bt": "moneyline",
       "n": 2
-    },
-    {
-      "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
-      "yesNo": "Yes",
-      "side": "Deportivo Alav\u00e9s not to win",
-      "game": "Real Madrid vs Alav\u00e9s",
-      "startTs": 1795896000,
-      "bt": "moneyline",
-      "n": 1
     },
     {
       "ticker": "KXLALIGASPREAD-26NOV28RMAALA-RMA3",
@@ -378,6 +360,15 @@
       "side": "Arizona State",
       "game": "Arizona Wildcats vs Arizona State Sun Devils",
       "startTs": 1795917600,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXITFWMATCH-26NOV28YANMIN-MIN",
+      "yesNo": "Yes",
+      "side": "Greet Minnen",
+      "game": "W75 Trnava: Elizara Yaneva vs Greet Minnen",
+      "startTs": 1795872215,
       "bt": "moneyline",
       "n": 1
     },
