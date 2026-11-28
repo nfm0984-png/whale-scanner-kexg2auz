@@ -1,8 +1,35 @@
 {
   "source": "whale",
-  "ts": 1795877243,
-  "updatedAt": "Sat Nov 28 \u00b7 6:47 AM PT",
+  "ts": 1795877534,
+  "updatedAt": "Sat Nov 28 \u00b7 6:52 AM PT",
   "picks": [
+    {
+      "ticker": "KXDOTA2MAP-26NOV281000PARI1WIN-1-1WIN",
+      "yesNo": "Yes",
+      "side": "1win",
+      "game": "1win vs PARIVISION",
+      "startTs": 1795878000,
+      "bt": "moneyline",
+      "n": 3
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV281000PARI1WIN-1-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "1win vs PARIVISION",
+      "startTs": 1795878000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXDOTA2GAME-26NOV281000PARI1WIN-PARI",
+      "yesNo": "Yes",
+      "side": "PARIVISION",
+      "game": "1win vs PARIVISION",
+      "startTs": 1795878000,
+      "bt": "moneyline",
+      "n": 1
+    },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
       "yesNo": "Yes",
@@ -26,24 +53,6 @@
       "yesNo": "Yes",
       "side": "Brentford FC not to win",
       "game": "Manchester United FC vs Brentford FC",
-      "startTs": 1795878000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXDOTA2GAME-26NOV281000PARI1WIN-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "1win vs PARIVISION",
-      "startTs": 1795878000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV281000PARI1WIN-1-PARI",
-      "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "1win vs PARIVISION",
       "startTs": 1795878000,
       "bt": "moneyline",
       "n": 1
@@ -193,6 +202,15 @@
       "n": 1
     },
     {
+      "ticker": "KXSERIEAGAME-26NOV28INTGEN-INT",
+      "yesNo": "Yes",
+      "side": "FC Internazionale Milano to win",
+      "game": "Internazionale vs Genoa",
+      "startTs": 1795895100,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV28ELCATM-ATM",
       "yesNo": "No",
       "side": "Club Atl\u00e9tico de Madrid not to win",
@@ -252,15 +270,6 @@
       "side": "Texans",
       "game": "Houston Texans vs Baltimore Ravens",
       "startTs": 1795975200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXLALIGAGAME-26NOV28RBBRVC-RBB",
-      "yesNo": "Yes",
-      "side": "Real Betis Balompi\u00e9 to win",
-      "game": "Real Betis vs Rayo Vallecano",
-      "startTs": 1795870800,
       "bt": "moneyline",
       "n": 1
     },
