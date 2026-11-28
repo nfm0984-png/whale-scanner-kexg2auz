@@ -1,17 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795823967,
-  "updatedAt": "Fri Nov 27 \u00b7 3:59 PM PT",
+  "ts": 1795824307,
+  "updatedAt": "Fri Nov 27 \u00b7 4:05 PM PT",
   "picks": [
-    {
-      "ticker": "KXNBAGAME-26NOV27MIANYK-MIA",
-      "yesNo": "Yes",
-      "side": "Heat",
-      "game": "New York Knicks vs Miami Heat",
-      "startTs": 1795824000,
-      "bt": "moneyline",
-      "n": 1
-    },
     {
       "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
       "yesNo": "Yes",
@@ -20,6 +11,15 @@
       "startTs": 1795824000,
       "bt": "moneyline",
       "n": 3
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27MIANYK-MIA",
+      "yesNo": "Yes",
+      "side": "Heat",
+      "game": "New York Knicks vs Miami Heat",
+      "startTs": 1795824000,
+      "bt": "moneyline",
+      "n": 1
     },
     {
       "ticker": "KXNBASPREAD-26NOV27MIANYK-NYK4",
@@ -70,6 +70,15 @@
       "ticker": "KXNBASPREAD-26NOV27PHIIND-PHI4",
       "yesNo": "Yes",
       "side": "Philadelphia wins by over 3.5 points",
+      "game": "Indiana Pacers vs Philadelphia 76ers",
+      "startTs": 1795825800,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27PHIIND-PHI4",
+      "yesNo": "No",
+      "side": "Pacers +3.5",
       "game": "Indiana Pacers vs Philadelphia 76ers",
       "startTs": 1795825800,
       "bt": "spread",
@@ -445,6 +454,24 @@
       "n": 1
     },
     {
+      "ticker": "KXNBASPREAD-26NOV27MIANYK-NYK4",
+      "yesNo": "No",
+      "side": "Heat +3.5",
+      "game": "New York Knicks vs Miami Heat",
+      "startTs": 1795824000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27MIANYK-NYK3",
+      "yesNo": "No",
+      "side": "Heat +2.5",
+      "game": "New York Knicks vs Miami Heat",
+      "startTs": 1795824000,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
       "yesNo": "Yes",
       "side": "Nuggets",
@@ -469,24 +496,6 @@
       "game": "Counter-Strike: G2 vs Liquid",
       "startTs": 1795842000,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27MIANYK-NYK4",
-      "yesNo": "No",
-      "side": "Heat +3.5",
-      "game": "New York Knicks vs Miami Heat",
-      "startTs": 1795824000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27MIANYK-NYK3",
-      "yesNo": "No",
-      "side": "Heat +2.5",
-      "game": "New York Knicks vs Miami Heat",
-      "startTs": 1795824000,
-      "bt": "spread",
       "n": 1
     },
     {
@@ -522,15 +531,6 @@
       "side": "RCD Espanyol de Barcelona to win",
       "game": "Deportivo vs Barcelona",
       "startTs": 1795965300,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNHLGAME-26NOV28ANALA-LA",
-      "yesNo": "Yes",
-      "side": "Kings",
-      "game": "Anaheim Ducks vs Los Angeles Kings",
-      "startTs": 1795813200,
       "bt": "moneyline",
       "n": 1
     },
