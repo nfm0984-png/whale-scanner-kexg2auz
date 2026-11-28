@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795846100,
-  "updatedAt": "Fri Nov 27 \u00b7 10:08 PM PT",
+  "ts": 1795846415,
+  "updatedAt": "Fri Nov 27 \u00b7 10:13 PM PT",
   "picks": [
     {
       "ticker": "KXCS2GAME-26NOV280000TLG2-G2",
@@ -10,7 +10,25 @@
       "game": "Counter-Strike: G2 vs Liquid",
       "startTs": 1795842000,
       "bt": "moneyline",
-      "n": 5
+      "n": 6
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV280000TLG2-TL",
+      "yesNo": "Yes",
+      "side": "Liquid",
+      "game": "Counter-Strike: G2 vs Liquid",
+      "startTs": 1795842000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV280000EFONE-ONE",
+      "yesNo": "Yes",
+      "side": "THE ONE",
+      "game": "Counter-Strike: THE ONE vs Eternal Fire",
+      "startTs": 1795842000,
+      "bt": "moneyline",
+      "n": 2
     },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -65,15 +83,6 @@
       "startTs": 1795896000,
       "bt": "spread",
       "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280000EFONE-ONE",
-      "yesNo": "Yes",
-      "side": "THE ONE",
-      "game": "Counter-Strike: THE ONE vs Eternal Fire",
-      "startTs": 1795842000,
-      "bt": "moneyline",
-      "n": 2
     },
     {
       "ticker": "KXNFLGAME-26NOV29SEASF-SF",
@@ -355,15 +364,6 @@
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV280400LEOFORZER-LEO",
-      "yesNo": "Yes",
-      "side": "Leo Team",
-      "game": "Counter-Strike: FORZE Reload vs Leo Team",
-      "startTs": 1795856400,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNFLGAME-26NOV29NYGIND-NYG",
       "yesNo": "Yes",
       "side": "Giants",
@@ -383,7 +383,7 @@
     },
     {
       "ticker": "KXKLEAGUEGAME-26NOV28SEODAJ-SEO",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "FC Seoul not to win",
       "game": "FC Seoul vs Daejeon Hana Citizen FC",
       "startTs": 1795842000,
