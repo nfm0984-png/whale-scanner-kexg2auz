@@ -1,26 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795840444,
-  "updatedAt": "Fri Nov 27 \u00b7 8:34 PM PT",
+  "ts": 1795840746,
+  "updatedAt": "Fri Nov 27 \u00b7 8:39 PM PT",
   "picks": [
-    {
-      "ticker": "KXNBAGAME-26NOV27LALSAS-LAL",
-      "yesNo": "Yes",
-      "side": "Lakers",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "moneyline",
-      "n": 4
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27LALSAS-SAS6",
-      "yesNo": "Yes",
-      "side": "San Antonio wins by over 5.5 points",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "spread",
-      "n": 2
-    },
     {
       "ticker": "KXNBAGAME-26NOV27GSWPOR-GSW",
       "yesNo": "Yes",
@@ -49,6 +31,33 @@
       "n": 1
     },
     {
+      "ticker": "KXNBAGAME-26NOV27LALSAS-LAL",
+      "yesNo": "Yes",
+      "side": "Lakers",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 3
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
+      "yesNo": "Yes",
+      "side": "Spurs",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27LALSAS-SAS6",
+      "yesNo": "Yes",
+      "side": "San Antonio wins by over 5.5 points",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
+      "bt": "spread",
+      "n": 2
+    },
+    {
       "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
       "yesNo": "Yes",
       "side": "Nuggets",
@@ -58,22 +67,13 @@
       "n": 1
     },
     {
-      "ticker": "KXNBASPREAD-26NOV27NOPLAC-NOP5",
-      "yesNo": "No",
-      "side": "Clippers +4.5",
-      "game": "LA Clippers vs New Orleans Pelicans",
-      "startTs": 1795833000,
-      "bt": "spread",
-      "n": 1
-    },
-    {
       "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
       "yesNo": "Yes",
       "side": "FUT Esports",
       "game": "Counter-Strike: FUT Esports vs FlyQuest",
       "startTs": 1795838400,
       "bt": "moneyline",
-      "n": 1
+      "n": 2
     },
     {
       "ticker": "KXCS2GAME-26NOV272300FLYFUT-FLY",
@@ -148,29 +148,29 @@
       "n": 1
     },
     {
-      "ticker": "KXNBASPREAD-26NOV27DALPHX-PHX3",
+      "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
+      "yesNo": "Yes",
+      "side": "Deportivo Alav\u00e9s not to win",
+      "game": "Real Madrid vs Alav\u00e9s",
+      "startTs": 1795896000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXLALIGAGAME-26NOV28RMAALA-RMA",
+      "yesNo": "Yes",
+      "side": "Real Madrid CF to win",
+      "game": "Real Madrid vs Alav\u00e9s",
+      "startTs": 1795896000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXLALIGASPREAD-26NOV28RMAALA-RMA3",
       "yesNo": "No",
-      "side": "Mavericks +2.5",
-      "game": "Phoenix Suns vs Dallas Mavericks",
-      "startTs": 1795831200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27DALPHX-PHX3",
-      "yesNo": "Yes",
-      "side": "Phoenix wins by over 2.5 points",
-      "game": "Phoenix Suns vs Dallas Mavericks",
-      "startTs": 1795831200,
-      "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27DALPHX-PHX2",
-      "yesNo": "Yes",
-      "side": "Phoenix wins by over 1.5 points",
-      "game": "Phoenix Suns vs Dallas Mavericks",
-      "startTs": 1795831200,
+      "side": "Markets +2.5",
+      "game": "Real Madrid vs Alav\u00e9s",
+      "startTs": 1795896000,
       "bt": "spread",
       "n": 1
     },
@@ -193,20 +193,20 @@
       "n": 2
     },
     {
-      "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
+      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
       "yesNo": "Yes",
-      "side": "Deportivo Alav\u00e9s not to win",
-      "game": "Real Madrid vs Alav\u00e9s",
-      "startTs": 1795896000,
+      "side": "Spurs",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
       "bt": "moneyline",
       "n": 1
     },
     {
-      "ticker": "KXLALIGAGAME-26NOV28RMAALA-RMA",
+      "ticker": "KXNBAGAME-26NOV27LALSAS-LAL",
       "yesNo": "Yes",
-      "side": "Real Madrid CF to win",
-      "game": "Real Madrid vs Alav\u00e9s",
-      "startTs": 1795896000,
+      "side": "Lakers",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
       "bt": "moneyline",
       "n": 1
     },
@@ -262,15 +262,6 @@
       "game": "Wyoming Cowboys vs UConn Huskies",
       "startTs": 1795885200,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
-      "yesNo": "Yes",
-      "side": "Spurs",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "moneyline",
       "n": 1
     },
     {
@@ -365,7 +356,7 @@
     },
     {
       "ticker": "KXKLEAGUEGAME-26NOV28SEODAJ-SEO",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "FC Seoul not to win",
       "game": "FC Seoul vs Daejeon Hana Citizen FC",
       "startTs": 1795842000,
