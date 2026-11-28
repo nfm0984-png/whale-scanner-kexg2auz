@@ -1,26 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795844904,
-  "updatedAt": "Fri Nov 27 \u00b7 9:48 PM PT",
+  "ts": 1795845216,
+  "updatedAt": "Fri Nov 27 \u00b7 9:53 PM PT",
   "picks": [
-    {
-      "ticker": "KXCS2GAME-26NOV272300NIPNEMI-NEMI",
-      "yesNo": "Yes",
-      "side": "Nemiga",
-      "game": "Counter-Strike: Nemiga vs NIP",
-      "startTs": 1795838400,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280100IMPAST-IMP",
-      "yesNo": "Yes",
-      "side": "Imperial",
-      "game": "Counter-Strike: Astralis vs Imperial",
-      "startTs": 1795845600,
-      "bt": "moneyline",
-      "n": 2
-    },
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
       "yesNo": "Yes",
@@ -74,6 +56,15 @@
       "startTs": 1795896000,
       "bt": "spread",
       "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV280100IMPAST-IMP",
+      "yesNo": "Yes",
+      "side": "Imperial",
+      "game": "Counter-Strike: Astralis vs Imperial",
+      "startTs": 1795845600,
+      "bt": "moneyline",
+      "n": 3
     },
     {
       "ticker": "KXNFLGAME-26NOV29SEASF-SF",
@@ -392,7 +383,7 @@
     },
     {
       "ticker": "KXKLEAGUEGAME-26NOV28SEODAJ-SEO",
-      "yesNo": "Yes",
+      "yesNo": "No",
       "side": "FC Seoul not to win",
       "game": "FC Seoul vs Daejeon Hana Citizen FC",
       "startTs": 1795842000,
