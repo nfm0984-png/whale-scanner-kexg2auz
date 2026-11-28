@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795845507,
-  "updatedAt": "Fri Nov 27 \u00b7 9:58 PM PT",
+  "ts": 1795845823,
+  "updatedAt": "Fri Nov 27 \u00b7 10:03 PM PT",
   "picks": [
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -58,15 +58,6 @@
       "n": 1
     },
     {
-      "ticker": "KXCS2GAME-26NOV280100IMPAST-IMP",
-      "yesNo": "Yes",
-      "side": "Imperial",
-      "game": "Counter-Strike: Astralis vs Imperial",
-      "startTs": 1795845600,
-      "bt": "moneyline",
-      "n": 4
-    },
-    {
       "ticker": "KXNFLGAME-26NOV29SEASF-SF",
       "yesNo": "Yes",
       "side": "49ers",
@@ -83,6 +74,15 @@
       "startTs": 1795897800,
       "bt": "moneyline",
       "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV280000TLG2-G2",
+      "yesNo": "Yes",
+      "side": "G2",
+      "game": "Counter-Strike: G2 vs Liquid",
+      "startTs": 1795842000,
+      "bt": "moneyline",
+      "n": 2
     },
     {
       "ticker": "KXCS2GAME-26NOV280000EFONE-ONE",
@@ -126,15 +126,6 @@
       "side": "Texans",
       "game": "Houston Texans vs Baltimore Ravens",
       "startTs": 1795975200,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV280000TLG2-G2",
-      "yesNo": "Yes",
-      "side": "G2",
-      "game": "Counter-Strike: G2 vs Liquid",
-      "startTs": 1795842000,
       "bt": "moneyline",
       "n": 1
     },
@@ -216,6 +207,15 @@
       "side": "RCD Espanyol de Barcelona to win",
       "game": "Deportivo vs Barcelona",
       "startTs": 1795965300,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXBUNDESLIGAGAME-26NOV29BVBLEV-BVB",
+      "yesNo": "Yes",
+      "side": "BV Borussia 09 Dortmund to win",
+      "game": "Borussia Dortmund vs Bayer Leverkusen",
+      "startTs": 1795977000,
       "bt": "moneyline",
       "n": 1
     },
@@ -374,7 +374,7 @@
     },
     {
       "ticker": "KXKLEAGUEGAME-26NOV28SEODAJ-SEO",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "FC Seoul not to win",
       "game": "FC Seoul vs Daejeon Hana Citizen FC",
       "startTs": 1795842000,
