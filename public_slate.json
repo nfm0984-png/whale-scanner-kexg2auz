@@ -1,26 +1,8 @@
 {
   "source": "whale",
-  "ts": 1795839466,
-  "updatedAt": "Fri Nov 27 \u00b7 8:17 PM PT",
+  "ts": 1795839775,
+  "updatedAt": "Fri Nov 27 \u00b7 8:22 PM PT",
   "picks": [
-    {
-      "ticker": "KXNBAGAME-26NOV27DALPHX-DAL",
-      "yesNo": "Yes",
-      "side": "Mavericks",
-      "game": "Phoenix Suns vs Dallas Mavericks",
-      "startTs": 1795831200,
-      "bt": "moneyline",
-      "n": 2
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27DALPHX-PHX9",
-      "yesNo": "Yes",
-      "side": "Phoenix wins by over 8.5 points",
-      "game": "Phoenix Suns vs Dallas Mavericks",
-      "startTs": 1795831200,
-      "bt": "spread",
-      "n": 1
-    },
     {
       "ticker": "KXNBAGAME-26NOV27DENUTA-DEN",
       "yesNo": "Yes",
@@ -40,12 +22,48 @@
       "n": 1
     },
     {
-      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
-      "yesNo": "Yes",
-      "side": "Spurs",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "ticker": "KXNBATOTAL-26NOV27DENUTA-235",
+      "yesNo": "No",
+      "side": "Under 234.5",
+      "game": "Utah Jazz vs Denver Nuggets",
       "startTs": 1795833000,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27DALPHX-PHX",
+      "yesNo": "Yes",
+      "side": "Suns",
+      "game": "Phoenix Suns vs Dallas Mavericks",
+      "startTs": 1795831200,
       "bt": "moneyline",
+      "n": 3
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27DALPHX-PHX4",
+      "yesNo": "Yes",
+      "side": "Phoenix wins by over 3.5 points",
+      "game": "Phoenix Suns vs Dallas Mavericks",
+      "startTs": 1795831200,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27DALPHX-PHX3",
+      "yesNo": "Yes",
+      "side": "Phoenix wins by over 2.5 points",
+      "game": "Phoenix Suns vs Dallas Mavericks",
+      "startTs": 1795831200,
+      "bt": "spread",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27DALPHX-PHX2",
+      "yesNo": "Yes",
+      "side": "Phoenix wins by over 1.5 points",
+      "game": "Phoenix Suns vs Dallas Mavericks",
+      "startTs": 1795831200,
+      "bt": "spread",
       "n": 1
     },
     {
@@ -58,6 +76,15 @@
       "n": 2
     },
     {
+      "ticker": "KXNBAGAME-26NOV27LALSAS-SAS",
+      "yesNo": "Yes",
+      "side": "Spurs",
+      "game": "San Antonio Spurs vs Los Angeles Lakers",
+      "startTs": 1795833000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNBASPREAD-26NOV27LALSAS-SAS6",
       "yesNo": "Yes",
       "side": "San Antonio wins by over 5.5 points",
@@ -67,31 +94,22 @@
       "n": 2
     },
     {
-      "ticker": "KXNBATOTAL-26NOV27LALSAS-227",
+      "ticker": "KXCS2GAME-26NOV272300LVGMGLZ-MGLZ",
       "yesNo": "Yes",
-      "side": "Over 226.5",
-      "game": "San Antonio Spurs vs Los Angeles Lakers",
-      "startTs": 1795833000,
-      "bt": "total",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
-      "yesNo": "Yes",
-      "side": "FUT Esports",
-      "game": "Counter-Strike: FUT Esports vs FlyQuest",
-      "startTs": 1795838400,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FLY",
-      "yesNo": "Yes",
-      "side": "FlyQuest",
-      "game": "Counter-Strike: FUT Esports vs FlyQuest",
+      "side": "TheMongolz",
+      "game": "Counter-Strike: TheMongolz vs Lynn Vision",
       "startTs": 1795838400,
       "bt": "moneyline",
       "n": 2
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV272300LVGMGLZ-LVG",
+      "yesNo": "Yes",
+      "side": "Lynn Vision",
+      "game": "Counter-Strike: TheMongolz vs Lynn Vision",
+      "startTs": 1795838400,
+      "bt": "moneyline",
+      "n": 3
     },
     {
       "ticker": "KXNBAGAME-26NOV27NOPLAC-NOP",
@@ -126,6 +144,24 @@
       "side": "Brentford FC not to win",
       "game": "Manchester United FC vs Brentford FC",
       "startTs": 1795878000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FUT",
+      "yesNo": "Yes",
+      "side": "FUT Esports",
+      "game": "Counter-Strike: FUT Esports vs FlyQuest",
+      "startTs": 1795838400,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FLY",
+      "yesNo": "Yes",
+      "side": "FlyQuest",
+      "game": "Counter-Strike: FUT Esports vs FlyQuest",
+      "startTs": 1795838400,
       "bt": "moneyline",
       "n": 1
     },
@@ -182,15 +218,6 @@
       "startTs": 1795825800,
       "bt": "spread",
       "n": 1
-    },
-    {
-      "ticker": "KXCS2GAME-26NOV272300LVGMGLZ-LVG",
-      "yesNo": "Yes",
-      "side": "Lynn Vision",
-      "game": "Counter-Strike: TheMongolz vs Lynn Vision",
-      "startTs": 1795838400,
-      "bt": "moneyline",
-      "n": 3
     },
     {
       "ticker": "KXCS2GAME-26NOV280000EFONE-ONE",
@@ -319,6 +346,15 @@
       "n": 1
     },
     {
+      "ticker": "KXCS2GAME-26NOV272300FLYFUT-FLY",
+      "yesNo": "Yes",
+      "side": "FlyQuest",
+      "game": "Counter-Strike: FUT Esports vs FlyQuest",
+      "startTs": 1795838400,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXNCAAFSPREAD-26NOV28SACHAW-HAW14",
       "yesNo": "Yes",
       "side": "Hawai'i wins by over 13.5 points",
@@ -410,7 +446,7 @@
     },
     {
       "ticker": "KXKLEAGUEGAME-26NOV28SEODAJ-SEO",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "FC Seoul not to win",
       "game": "FC Seoul vs Daejeon Hana Citizen FC",
       "startTs": 1795842000,
