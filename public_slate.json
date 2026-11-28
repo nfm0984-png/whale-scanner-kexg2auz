@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795824769,
-  "updatedAt": "Fri Nov 27 \u00b7 4:12 PM PT",
+  "ts": 1795825023,
+  "updatedAt": "Fri Nov 27 \u00b7 4:17 PM PT",
   "picks": [
     {
       "ticker": "KXNBAGAME-26NOV27MIANYK-NYK",
@@ -13,27 +13,9 @@
       "n": 3
     },
     {
-      "ticker": "KXNBAGAME-26NOV27MIANYK-MIA",
-      "yesNo": "Yes",
-      "side": "Heat",
-      "game": "New York Knicks vs Miami Heat",
-      "startTs": 1795824000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNBASPREAD-26NOV27MIANYK-NYK4",
       "yesNo": "Yes",
       "side": "New York wins by over 3.5 points",
-      "game": "New York Knicks vs Miami Heat",
-      "startTs": 1795824000,
-      "bt": "spread",
-      "n": 2
-    },
-    {
-      "ticker": "KXNBASPREAD-26NOV27MIANYK-NYK4",
-      "yesNo": "No",
-      "side": "Heat +3.5",
       "game": "New York Knicks vs Miami Heat",
       "startTs": 1795824000,
       "bt": "spread",
@@ -101,6 +83,15 @@
       "startTs": 1795825800,
       "bt": "total",
       "n": 2
+    },
+    {
+      "ticker": "KXNBATOTAL-26NOV27PHIIND-229",
+      "yesNo": "No",
+      "side": "Under 228.5",
+      "game": "Indiana Pacers vs Philadelphia 76ers",
+      "startTs": 1795825800,
+      "bt": "total",
+      "n": 1
     },
     {
       "ticker": "KXNBAGAME-26NOV27GSWPOR-POR",
@@ -198,6 +189,33 @@
       "side": "Over 219.5",
       "game": "Minnesota Timberwolves vs Memphis Grizzlies",
       "startTs": 1795829400,
+      "bt": "total",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
+      "yesNo": "Yes",
+      "side": "Raptors",
+      "game": "Toronto Raptors vs Brooklyn Nets",
+      "startTs": 1795825800,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXNBASPREAD-26NOV27BKNTOR-TOR10",
+      "yesNo": "No",
+      "side": "Nets +9.5",
+      "game": "Toronto Raptors vs Brooklyn Nets",
+      "startTs": 1795825800,
+      "bt": "spread",
+      "n": 3
+    },
+    {
+      "ticker": "KXNBATOTAL-26NOV27BKNTOR-219",
+      "yesNo": "Yes",
+      "side": "Over 218.5",
+      "game": "Toronto Raptors vs Brooklyn Nets",
+      "startTs": 1795825800,
       "bt": "total",
       "n": 1
     },
@@ -415,24 +433,6 @@
       "game": "Phoenix Suns vs Dallas Mavericks",
       "startTs": 1795831200,
       "bt": "spread",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBAGAME-26NOV27BKNTOR-TOR",
-      "yesNo": "Yes",
-      "side": "Raptors",
-      "game": "Toronto Raptors vs Brooklyn Nets",
-      "startTs": 1795825800,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXNBATOTAL-26NOV27BKNTOR-219",
-      "yesNo": "Yes",
-      "side": "Over 218.5",
-      "game": "Toronto Raptors vs Brooklyn Nets",
-      "startTs": 1795825800,
-      "bt": "total",
       "n": 1
     },
     {
