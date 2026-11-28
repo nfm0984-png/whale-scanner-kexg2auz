@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795877842,
-  "updatedAt": "Sat Nov 28 \u00b7 6:57 AM PT",
+  "ts": 1795878143,
+  "updatedAt": "Sat Nov 28 \u00b7 7:02 AM PT",
   "picks": [
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -31,21 +31,12 @@
       "n": 1
     },
     {
-      "ticker": "KXDOTA2GAME-26NOV281000PARI1WIN-PARI",
+      "ticker": "KXBUNDESLIGATOTAL-26NOV28HSVBMU-4",
       "yesNo": "Yes",
-      "side": "PARIVISION",
-      "game": "1win vs PARIVISION",
-      "startTs": 1795878000,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXDOTA2MAP-26NOV281000PARI1WIN-1-1WIN",
-      "yesNo": "Yes",
-      "side": "1win",
-      "game": "1win vs PARIVISION",
-      "startTs": 1795878000,
-      "bt": "moneyline",
+      "side": "Over 3.5",
+      "game": "Hamburger SV vs FC Bayern M\u00fcnchen - More Markets",
+      "startTs": 1795876200,
+      "bt": "total",
       "n": 3
     },
     {
@@ -58,6 +49,15 @@
       "n": 2
     },
     {
+      "ticker": "KXLALIGAGAME-26NOV28RMAALA-ALA",
+      "yesNo": "Yes",
+      "side": "Deportivo Alav\u00e9s not to win",
+      "game": "Real Madrid vs Alav\u00e9s",
+      "startTs": 1795896000,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGASPREAD-26NOV28RMAALA-RMA3",
       "yesNo": "No",
       "side": "Markets +2.5",
@@ -65,15 +65,6 @@
       "startTs": 1795896000,
       "bt": "spread",
       "n": 1
-    },
-    {
-      "ticker": "KXBUNDESLIGATOTAL-26NOV28HSVBMU-4",
-      "yesNo": "Yes",
-      "side": "Over 3.5",
-      "game": "Hamburger SV vs FC Bayern M\u00fcnchen - More Markets",
-      "startTs": 1795876200,
-      "bt": "total",
-      "n": 3
     },
     {
       "ticker": "KXEPLGAME-26NOV28LEECOV-COV",
@@ -101,6 +92,15 @@
       "startTs": 1795878000,
       "bt": "total",
       "n": 1
+    },
+    {
+      "ticker": "KXDOTA2MAP-26NOV281000PARI1WIN-1-1WIN",
+      "yesNo": "Yes",
+      "side": "1win",
+      "game": "1win vs PARIVISION",
+      "startTs": 1795878000,
+      "bt": "moneyline",
+      "n": 3
     },
     {
       "ticker": "KXSERIEAGAME-26NOV28TORLAZ-LAZ",
@@ -194,7 +194,7 @@
     },
     {
       "ticker": "KXLALIGAGAME-26NOV28ELCATM-ATM",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "Club Atl\u00e9tico de Madrid not to win",
       "game": "Elche CF vs Club Atl\u00e9tico de Madrid",
       "startTs": 1795887000,
@@ -302,7 +302,7 @@
     },
     {
       "ticker": "KXMLSGAME-26NOV28HOUSJ-SJ",
-      "yesNo": "No",
+      "yesNo": "Yes",
       "side": "San Jose Earthquakes not to win",
       "game": "Houston Dynamo FC vs San Jose Earthquakes",
       "startTs": 1795894200,
