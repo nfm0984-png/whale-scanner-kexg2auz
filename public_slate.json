@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795848526,
-  "updatedAt": "Fri Nov 27 \u00b7 10:48 PM PT",
+  "ts": 1795848816,
+  "updatedAt": "Fri Nov 27 \u00b7 10:53 PM PT",
   "picks": [
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -193,6 +193,15 @@
       "n": 1
     },
     {
+      "ticker": "KXSERIEATOTAL-26NOV28TORLAZ-3",
+      "yesNo": "No",
+      "side": "Under 2.5",
+      "game": "Torino vs Lazio",
+      "startTs": 1795885200,
+      "bt": "total",
+      "n": 1
+    },
+    {
       "ticker": "KXLALIGAGAME-26NOV30ESPGET-ESP",
       "yesNo": "Yes",
       "side": "RCD Espanyol de Barcelona to win",
@@ -351,6 +360,15 @@
       "side": "Bengals",
       "game": "Cincinnati Bengals vs New Orleans Saints",
       "startTs": 1795975200,
+      "bt": "moneyline",
+      "n": 1
+    },
+    {
+      "ticker": "KXKLEAGUEGAME-26NOV28SEODAJ-SEO",
+      "yesNo": "Yes",
+      "side": "FC Seoul not to win",
+      "game": "FC Seoul",
+      "startTs": 1795852800,
       "bt": "moneyline",
       "n": 1
     },
