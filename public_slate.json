@@ -1,7 +1,7 @@
 {
   "source": "whale",
-  "ts": 1795876642,
-  "updatedAt": "Sat Nov 28 \u00b7 6:37 AM PT",
+  "ts": 1795876933,
+  "updatedAt": "Sat Nov 28 \u00b7 6:42 AM PT",
   "picks": [
     {
       "ticker": "KXEPLGAME-26NOV28MUNBRE-MUN",
@@ -355,15 +355,6 @@
       "n": 1
     },
     {
-      "ticker": "KXITFWMATCH-26NOV28YANMIN-YAN",
-      "yesNo": "Yes",
-      "side": "Elizara Yaneva",
-      "game": "W75 Trnava: Elizara Yaneva vs Greet Minnen",
-      "startTs": 1795872215,
-      "bt": "moneyline",
-      "n": 1
-    },
-    {
       "ticker": "KXNHLTOTAL-26NOV28TBFLA-6",
       "yesNo": "Yes",
       "side": "Over 5.5",
@@ -562,6 +553,15 @@
       "n": 1
     },
     {
+      "ticker": "KXNCAAMBSPREAD-26NOV28DELSTON-DEL7",
+      "yesNo": "Yes",
+      "side": "Delaware wins by over 6.5 points",
+      "game": "Stony Brook Seawolves vs Delaware Blue Hens",
+      "startTs": 1795899600,
+      "bt": "spread",
+      "n": 1
+    },
+    {
       "ticker": "KXNFLGAME-26NOV29NYGIND-NYG",
       "yesNo": "Yes",
       "side": "Giants",
@@ -586,15 +586,6 @@
       "game": "Counter-Strike: Prestige vs HAVU",
       "startTs": 1795888800,
       "bt": "moneyline",
-      "n": 1
-    },
-    {
-      "ticker": "KXSUPERLIGTOTAL-26NOV28SAMGEN-5",
-      "yesNo": "No",
-      "side": "Under 4.5",
-      "game": "Samsunspor vs Genclerbirligi",
-      "startTs": 1795870800,
-      "bt": "total",
       "n": 1
     },
     {
